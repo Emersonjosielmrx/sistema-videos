@@ -27,47 +27,47 @@
   impacto maiores, de lado, fontes e cores por personagem.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Cortes (Shorts de parceiro) — 18/11 03:54
+# Brief do melhorador central — Cortes (Shorts de parceiro) — 18/11 07:54
 
-Vídeos nos últimos 7 dias: 804 | elegíveis (receberam o lote do feed): 312 | NÃO elegíveis: 8 | sem medida ainda: 484
-% assistido mediano (só elegíveis): 50.6 | views 48 h mediana: 877.0 | QA com problema: 1 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 793 | elegíveis (receberam o lote do feed): 285 | NÃO elegíveis: 7 | sem medida ainda: 501
+% assistido mediano (só elegíveis): 50.6 | views 48 h mediana: 927.0 | QA com problema: 1 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
-- Esporte Noturno: n 53, elegíveis 34, % assistido 69.7, views48 1427
+- Esporte Noturno: n 50, elegíveis 31, % assistido 66.7, views48 1482.0
 - DicasFinanceirasDaIA: n 53, elegíveis 25, % assistido 50.7, views48 1323
-- HistoriasEmFrames: n 42, elegíveis 23, % assistido 61.5, views48 1171
-- CenaReact: n 57, elegíveis 25, % assistido 53.9, views48 1159.0
+- CenaReact: n 61, elegíveis 25, % assistido 53.9, views48 1159.0
+- HistoriasEmFrames: n 44, elegíveis 22, % assistido 61.2, views48 1158.0
 - Inovare Manhwa eng: n 3, elegíveis 3, % assistido 45.2, views48 1096
 - AssistIA Investimentos: n 27, elegíveis 7, % assistido 45.3, views48 1078
+- Inovare: n 79, elegíveis 20, % assistido 67.7, views48 1026.5
 - @CodigoInteligente-n7j: n 25, elegíveis 14, % assistido 49.0, views48 996
-- Inovare: n 84, elegíveis 28, % assistido 58.7, views48 965.5
 - InventoReact: n 14, elegíveis 6, % assistido 50.6, views48 964
 - Manhwa Noturno: n 9, elegíveis 9, % assistido 42.6, views48 855.0
-- Imóvel em Foco: n 28, elegíveis 9, % assistido 37.6, views48 534
-- Clínica Lucrativa IA: n 25, elegíveis 10, % assistido 54.0, views48 526
-- inovaremanhwabr: n 40, elegíveis 16, % assistido 48.5, views48 450.0
-- YouTube inovaremanhwaverseviet: n 7, elegíveis 6, % assistido 44.5, views48 205
-- Lei e Lucro: n 19, elegíveis 8, % assistido 42.4, views48 100.0
-- Filme Noturno: n 35, elegíveis 16, % assistido 30.3, views48 96.5
-- Anime Noturno: n 13, elegíveis 3, % assistido 47.8, views48 80
-- Vendas que Escalam: n 23, elegíveis 9, % assistido 50.7, views48 69.0
-- Bilionário Noturno: n 13, elegíveis 2, % assistido 22.1, views48 63
-- Bicho Noturno: n 36, elegíveis 9, % assistido 73.9, views48 11
+- Imóvel em Foco: n 31, elegíveis 9, % assistido 37.6, views48 534
+- Clínica Lucrativa IA: n 27, elegíveis 10, % assistido 54.0, views48 526
+- inovaremanhwabr: n 42, elegíveis 16, % assistido 48.5, views48 450.0
+- YouTube inovaremanhwaverseviet: n 6, elegíveis 5, % assistido 42.6, views48 228.0
+- Lei e Lucro: n 20, elegíveis 8, % assistido 42.4, views48 104
+- Filme Noturno: n 32, elegíveis 13, % assistido 31.5, views48 98
+- Anime Noturno: n 14, elegíveis 3, % assistido 47.8, views48 80
+- Vendas que Escalam: n 24, elegíveis 9, % assistido 50.7, views48 69.0
+- Bilionário Noturno: n 14, elegíveis 2, % assistido 22.1, views48 63
+- Animescomia: n 33, elegíveis 13, % assistido 19.2, views48 15
 - ManhwaReact-ia: n 18, elegíveis 9, % assistido 34.4, views48 10
-- Animescomia: n 36, elegíveis 16, % assistido 16.2, views48 9.0
-- CartuchoReact: n 36, elegíveis 16, % assistido 10.0, views48 6.0
-- Empresário Inteligente IA: n 20, elegíveis 4, % assistido 25.4, views48 2
-- Inovaremanhwaversethai: n 5, elegíveis 0, % assistido None, views48 0.0
-- Dorama Noturno: n 26, elegíveis 0, % assistido None, views48 None
-- Curiosidades Noturnas: n 32, elegíveis 4, % assistido 20.1, views48 None
-- YouTube inovaremanhwaverseind: n 5, elegíveis 0, % assistido None, views48 0
+- CartuchoReact: n 33, elegíveis 13, % assistido 0, views48 6
+- Empresário Inteligente IA: n 21, elegíveis 4, % assistido 25.4, views48 2
+- Bicho Noturno: n 33, elegíveis 7, % assistido 73.9, views48 None
+- YouTube inovaremanhwaverseind: n 3, elegíveis 0, % assistido None, views48 0
 - ForjaReact: n 14, elegíveis 1, % assistido 0, views48 0.0
+- Inovaremanhwaversethai: n 3, elegíveis 0, % assistido None, views48 0.0
+- Dorama Noturno: n 24, elegíveis 0, % assistido None, views48 None
+- Curiosidades Noturnas: n 30, elegíveis 1, % assistido 0, views48 None
 - Game Noturno: n 6, elegíveis 0, % assistido None, views48 None
 
 ## Os que mais renderam (copiar a estrutura, não o texto)
 - WYgbuhD5K8E HistoriasEmFrames: views48 20792, % assistido 105.76, continuaram 75.75 — 
 - RpPEqGIB5As CenaReact: views48 19342, % assistido 67.76, continuaram 77.67 — 
-- Okv4q7oH9ZQ HistoriasEmFrames: views48 17766, % assistido 91.77, continuaram 81.48 — 
+- -Fyd3kUwUXk DicasFinanceirasDaIA: views48 9957, % assistido 87.48, continuaram 68.78 — 
 
 ## QA (defeito objetivo, sem IA)
 - 8rIMC2GRC3g: ffprobe não leu a duração
@@ -83,7 +83,7 @@ Vídeos nos últimos 7 dias: 804 | elegíveis (receberam o lote do feed): 312 | 
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-18T03:22: youtube 33/39, tiktok 44/58, instagram 44/53, flow 16/234, fotos 0/4 | MORTOS: youtube bichonoturno, youtube doramanoturno, youtube filmenoturno, youtube manhwanoturno, youtube manhwareact, youtube dentrodascoisas3d, instagram crmchatwoot.ia, instagram emersoncunha2737, flow seebotsia, flow emersonjosiel2032@pc2, flow aulacomia@x200ma, flow canalanimescomia@x200ma
+## SEM NAVEGADOR (HTTP) — saúde em 11-18T07:25: youtube 25/39, tiktok 43/58, instagram 44/53, flow 16/234, fotos 0/4 | MORTOS: youtube cartuchoreact, youtube curiosidadesnoturnas, youtube doramanoturno, youtube esportenoturno, youtube filmenoturno, youtube historiasemframes, youtube inovare_eng, youtube manhwareact, youtube comedianoturna, youtube clinicalucrativaia, youtube empresariointeligenteia, youtube imovelemfoco
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
 Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @inovaremanhwaverse2 (6), Tiktok @emersonjosiel2031 (7), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0), Tiktok @solarmundo195 (0), Tiktok @empressinovare (0), Tiktok @filmescomia00 (0)

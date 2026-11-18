@@ -117,9 +117,10 @@ curto; em tarefa longa de agente trava. Gemini 3.8 acertou mas precisou de 30 tu
 | olx ia() + PROMPT de avaliação (6 anúncios) | 14/17, 1 falha, 35 s | gemini-fila 17/17, 4 s · Sonnet 16/17 | não entra |
 | bancada de código curto (hibridos_real) | **37/37** | 3.8 22/37 | único em que ganhou |
 
-**Conclusão:** em texto curto com JSON e prazo, o Hydrogen sonar é pior e 6–9× mais lento que o Gemini 3-flash/3.8
-(gasta o teto pensando e devolve vazio/cortado). Só vale para conserto de código curto. Não foi posto na frente de
-nenhuma fila de projeto.
+**Conclusão:** em texto curto com JSON e prazo, o Hydrogen sonar é pior que o Gemini 3-flash/3.8 (gasta o teto
+pensando e devolve vazio/cortado). Ganhou só em conserto de código → posto NA FRENTE do Gemini (Gemini assume se ele
+não entregar) nas filas de código: postador caixa_codigo, recapd caixa_gemini e melhorador_longo (reservas de código),
+implementador do melhorador central (atrás do Argon e do Sonnet).
 
 ### 03/11 17:15 — PESQUISADOR DE MELHORIAS — Busca GitHub (`area_voz_rapida`: Argon vs Claude Sonnet vs Gemini Pro vs Opus)
 Mesmo pedido (`rodadas\2026-11-03_1205\pedidos\area_voz_rapida.md`, com 69 repositórios em `ja_conhecidos.txt` proibidos de repetir) enviado em paralelo para `argon-pesquisa`, `sonnet-ajudante`, `gemini-pro-pesquisa` e `opus-ajudante`. Conferido na API do GitHub (`pesquisador.py comparar` -> `placar.json` e `JUNTO.md`):

@@ -1,4 +1,4 @@
-# Teste gradual de formatos e vozes — 18/11 02:17
+# Teste gradual de formatos e vozes — 18/11 05:16
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
@@ -6,7 +6,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| voz:cintilante_she_ra_flavia_saddy | promovido | 49 | 0 | 0 | 39 | 25 | 19.0/28 | 0.67 | 28 | 48% (13) | 48/0 | 0 |
+| voz:cintilante_she_ra_flavia_saddy | promovido | 50 | 0 | 0 | 39 | 25 | 19.0/28 | 0.67 | 28 | 48% (13) | 49/0 | 0 |
 | voz:moana | testando | 13 | 0 | 0 | 6 | 6 | 18.0/28 | 0.63 | 510 | 40% (5) | 13/0 | 0 |
 | voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 2 | 8.5/15 | 0.56 | 2114 | 53% (2) | 9/0 | 0 |
 | voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 8.0/12 | 0.64 | 1091 | 36% (1) | 1/0 | 0 |
@@ -30,7 +30,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | formato:chaves_quico | testando | 7 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 3/0 | 0 |
 | formato:fofoca | testando | 8 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 4/0 | 0 |
 | voz:cell | testando | 3 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1204 | 45% (2) | 3/0 | 0 |
-| voz:homem_de_ferro_tony_stark | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2113 | 60% (2) | 2/0 | 0 |
+| voz:homem_de_ferro_tony_stark | testando | 3 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2113 | 60% (2) | 3/0 | 0 |
 | voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 53% (1) | 2/0 | 0 |
 | voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2007 | 48% (2) | 2/0 | 0 |
@@ -51,6 +51,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | formato:transmissao | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | formato:trio_chaves | testando | 3 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:anya_forger | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | 61% (1) | 1/0 | 0 |
+| voz:ashe_overwatch | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:barba_branca | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:chopper | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:emilia | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
@@ -63,7 +64,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:mei_overwatch | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:muzan | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:pan_dbz | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
-| voz:ram | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
+| voz:ram | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:rem | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:shadow_cid | testando | 2 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 2/0 | 0 |
 | voz:sukuna | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |

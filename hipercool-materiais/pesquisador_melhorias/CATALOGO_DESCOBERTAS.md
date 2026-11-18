@@ -6415,3 +6415,114 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0407.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 04:42 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0426.md`
+
+- [INÉDITO] github.com/lesterppo/hermes-gem-cli-rs — ★0, push 2026-10-26, MIT — Rust port of hermes-gem-cli: Gemini Gem CLI via WebAPI (no API key, fast) — chat, Gem chat, multi-turn, image generation, deep research, Gem
+- [INÉDITO] github.com/SinanTufekci/agent-intern — ★33, push 2026-11-16, MIT — Give Claude Code or Antigravity an intern: drive Gemini (Antigravity), Codex, Copilot, Cursor and opencode as sub-agents, plus experimental 
+
+## 2026-11-18 05:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0507.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 05:28 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_webgl_frame_a_frame__sonnet_0522.md`
+
+- [INÉDITO] github.com/RaliqID/hookline — ★0, push 2026-09-22, MIT — Rewatch — AI attention-signal console for YouTube: find the most re-watched moments with retention signals plus Gemini analysis, then render
+- [INÉDITO] github.com/IngridSlytherin/video-creator — ★2, push 2026-11-17, MIT — Free YouTube video generator (Shorts and long videos): trending topic radar, scripts with Claude Code, neural voice-over, Pexels footage, ca
+
+## 2026-11-18 05:36 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_0531.md`
+
+- [INÉDITO] github.com/tk256ailab/fbx2vrma-converter — ★68, push 2026-02-23, MIT — Convert FBX animation files to VRMA format
+
+## 2026-11-18 05:45 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_parallax_camera_paths__sonnet_0541.md`
+
+- [INÉDITO] github.com/mert5961/SceneShift — ★0, push 2026-11-05, MIT — Any photo becomes a living 2.5D scene in the browser: in-browser depth (WebGPU) + GLSL ray-marched parallax. Next.js, three.js.
+
+## 2026-11-18 05:50 — cenas Three.js leves para CPU (sem sombras, PBR simples, baixo MSAA) (`area_three_cpu_budget`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_three_cpu_budget__sonnet_0546.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 06:11 — reprodutibilidade de float e shader entre drivers (`area_three_threshold_determinism`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_three_threshold_determinism__sonnet_0606.md`
+
+- [INÉDITO] github.com/chenhz01/render-diff-harness — ★0, push 2026-10-15, Apache-2.0 — Deterministic regression gate for HTML video renders - frame-hash diff with fail-closed baselines
+
+## 2026-11-18 06:20 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_eres2net_licenca__sonnet_0616.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 06:32 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0626.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 06:40 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0636.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 06:52 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0646.md`
+
+- [INÉDITO] github.com/pangpang888/image-story-assembly-hardening — ★0, push 2026-09-18, MIT — Agent Skill: scale-only failure modes and acceptance criteria for assembling long (>=5 min / >=40 shots) image-story videos with ffmpeg - fi
+
+## 2026-11-18 07:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0656.md`
+
+- [INÉDITO] github.com/DATGMAC/panelforge — ★0, push 2026-07-08, MIT — Manga/manhwa panel segmentation + reading-order numbering — tiny specialized U-Net, no pretrained backbone
+
+## 2026-11-18 07:12 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0706.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 07:25 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0718.md`
+
+- [INÉDITO] github.com/PhantomAnas/Slideshow-Maker — ★0, push 2026-11-04, MIT — Photos or image URLs to polished slideshow videos: Ken Burns, transitions, blur fill, logo, end card, music. PySide6 + FFmpeg.
+- [INÉDITO] github.com/trancongtien406/ai-shorts-pipeline — ★0, push 2026-11-14, MIT — Topic → faceless vertical short (YouTube Shorts/TikTok): LLM script, free edge-tts voice, Ken Burns motion, word-by-word captions, FFmpeg re
+
+## 2026-11-18 07:32 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0726.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 07:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0736.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 07:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0746.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 08:06 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0801.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

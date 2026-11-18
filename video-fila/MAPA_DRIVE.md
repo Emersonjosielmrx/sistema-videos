@@ -1,6 +1,6 @@
 # Mapa do Google Drive (mapa_drive.py)
 
-Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos, 818.3 GB.
+Atualizado 18/11/2026 05:04. Remoto `manhwa-drive:videos-backup`: 20762 arquivos, 819.0 GB.
 
 ## Como pegar algo de volta à mão
 
@@ -277,16 +277,17 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `comentarios/3_instagram/2026-11-08_BAXwfa6dotU` | 2 | 0.03 | 2026-11-15 |  |
 | `comentarios/3_instagram/2026-11-10_GELV2m0u4Sc` | 2 | 0.03 | 2026-11-16 |  |
 | `hipercool` | 3290 | 42.74 | 2026-11-02 |  |
-| `hipercool-materiais` | 956 | 29.07 | 2026-11-17 |  |
+| `hipercool-materiais` | 965 | 29.27 | 2026-11-17 |  |
 | `hipercool-materiais/amostras_voz` | 156 | 2.74 | 2026-10-22 | sobras de treino/teste de voz já encerrados (pesos do Kaggle, dataset v3, fidelidade, referências). Volta: hipercool-materiais\bin\amostras_drive.py trazer <caminho>. Lista arquivo a arquivo: _NO_DRIVE.md em cada pasta. |
 | `hipercool-materiais/amostras_voz/clone2` | 54 | 0.68 | 2026-10-22 |  |
 | `hipercool-materiais/amostras_voz/dataset_v3` | 4 | 0.30 | 2026-10-22 |  |
 | `hipercool-materiais/amostras_voz/kaggle_conversor` | 6 | 0.19 | 2026-10-22 |  |
 | `hipercool-materiais/amostras_voz/kaggle_piloto` | 1 | 0.67 | 2026-10-22 |  |
 | `hipercool-materiais/amostras_voz/referencias` | 90 | 0.61 | 2026-10-21 |  |
-| `hipercool-materiais/anime` | 628 | 15.19 | 2026-11-17 | vídeos-fonte do anime já usados (source.*) e vídeos de trabalho de pastas paradas. Volta sozinho quando o recap pede: fontes_drive.trazer. |
+| `hipercool-materiais/anime` | 637 | 15.39 | 2026-11-17 | vídeos-fonte do anime já usados (source.*) e vídeos de trabalho de pastas paradas. Volta sozinho quando o recap pede: fontes_drive.trazer. |
 | `hipercool-materiais/anime/-lHLzPYY1Z0_This_lone_T_Rex_has_been_trapped_on_an_i` | 13 | 0.05 | 2026-10-28 |  |
 | `hipercool-materiais/anime/-mZS5ienrKI_Can_you_eat_moldy_bread___Shorts` | 1 | 0.02 | 2026-11-12 |  |
+| `hipercool-materiais/anime/-sbNcAedVhc_Earth_Has_Been_a_Snowball__with_Ice_Even` | 1 | 0.03 | 2026-11-17 |  |
 | `hipercool-materiais/anime/0Rot61IPdJo_O_mistério_dos_braços_curtos_do_T_Rex` | 1 | 0.03 | 2026-11-12 |  |
 | `hipercool-materiais/anime/13u6RY_rZxI_FISH_TO_CATCH_IN_AUGUST__fishing__fishin` | 1 | 0.03 | 2026-11-13 |  |
 | `hipercool-materiais/anime/1fVG-hmTKK0_Part_25__The_UNTOUCHABLE_Boss_Lives` | 1 | 0.03 | 2026-11-07 |  |
@@ -325,6 +326,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/_ILtP-kPqGE_Mãe_e_filho_renasceram_em_uma_novela_rom` | 1 | 0.04 | 2026-11-14 |  |
 | `hipercool-materiais/anime/_oC2cR4GjyU_35__Of_People_Earning_Over__250_000_Are` | 1 | 0.02 | 2026-11-17 |  |
 | `hipercool-materiais/anime/_SEXzecXu1U_The_intriguing_case_of_Steve_Carter__tru` | 1 | 0.02 | 2026-11-15 |  |
+| `hipercool-materiais/anime/_Uun3NXFsvI_WHY_DOES_NO_ONE_RESPECT_KISHIRIKA___mush` | 2 | 0.03 | 2026-11-17 |  |
 | `hipercool-materiais/anime/_yja9QcO4cg_scene__clips__viral__fyp__foryou` | 1 | 0.00 | 2026-10-23 |  |
 | `hipercool-materiais/anime/_ZRgBUWs6xA_TGAR11_está_em_um_momento_desafiador__At` | 1 | 0.02 | 2026-11-14 |  |
 | `hipercool-materiais/anime/aI4uQcYFA7w_O_CEO_ficou_obcecado_pela_mulher__dorama` | 2 | 0.03 | 2026-11-12 |  |
@@ -354,6 +356,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/dMljp27xvjQ_4_Cursos_gratuitos_e_online_que_podem_mu` | 1 | 0.02 | 2026-11-13 |  |
 | `hipercool-materiais/anime/dnBxCfltZ2o_O_Caranguejo_Eremita_e_o_sonho_da_casa_n` | 1 | 0.02 | 2026-11-12 |  |
 | `hipercool-materiais/anime/Dqu6VM68yQI_A_invenção_SECRETA_da_Soul_Society_____s` | 1 | 0.02 | 2026-11-17 |  |
+| `hipercool-materiais/anime/dQYaEHSBDE4_He_tried_to_run_away_from_the_protagonis` | 2 | 0.06 | 2026-11-17 |  |
 | `hipercool-materiais/anime/DtmVXStweKE_Speed_bumps_SHORTS` | 1 | 0.03 | 2026-11-13 |  |
 | `hipercool-materiais/anime/Dtuo50ITV14_Quem_é_Anjo_a_única_feiticeira_jujutsu_c` | 2 | 0.01 | 2026-11-16 |  |
 | `hipercool-materiais/anime/dVt9ZLZqMlY_Corinthians_e_Juventude_de_Óculos__Viral` | 1 | 0.03 | 2026-11-12 |  |
@@ -482,6 +485,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/rtRbsRS3ymk_A_garota_descobriu_que_os_tios_venderam` | 5 | 0.17 | 2026-11-17 |  |
 | `hipercool-materiais/anime/rVacUCRJQxg_Every_Time_He_Spent_Money__It_Returned_1` | 1 | 0.06 | 2026-10-19 |  |
 | `hipercool-materiais/anime/Rx4TaSvRB7A_A_regra_mais_louca_de_Maradona_que_poder` | 1 | 0.03 | 2026-11-13 |  |
+| `hipercool-materiais/anime/s3YfQuHRUxk_He_discovered_that_the_lake_was_alive_an` | 1 | 0.03 | 2026-11-17 |  |
 | `hipercool-materiais/anime/s959Dy0kino_THIS_PINK_LURE_IS_IRRESISTIBLE_____trair` | 1 | 0.01 | 2026-11-12 |  |
 | `hipercool-materiais/anime/sEHwXgqbiEs_Nicolas_Cage_s_Forbidden_Dinosaur__curio` | 1 | 0.04 | 2026-11-10 |  |
 | `hipercool-materiais/anime/SFd5HPfHFTs_OS_PEIXES_MAIS_IMPORTANTES_DO_RIO__peixe` | 1 | 0.02 | 2026-11-14 |  |
@@ -511,6 +515,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/w6Op8Bc2VAk_Lisa_Always_Cares_For_Her_Unnies_____lis` | 1 | 0.02 | 2026-11-15 |  |
 | `hipercool-materiais/anime/W7o0hzjbZ60_Tentei_ajudar_ele_mais_fui_humilhado__re` | 3 | 0.10 | 2026-11-05 |  |
 | `hipercool-materiais/anime/W8K95uDcVBQ_MEI_Minute__Everything_about_scams_surro` | 1 | 0.01 | 2026-11-17 |  |
+| `hipercool-materiais/anime/WdJE81jhV6k_His_boss_is_a_monster_at_work__but_the_r` | 1 | 0.03 | 2026-11-17 |  |
 | `hipercool-materiais/anime/wGn5GUL9VxA_He_DIED_and_TURNED_INTO_MOLD_in_Anothe` | 17 | 0.12 | 2026-10-17 |  |
 | `hipercool-materiais/anime/wLMraW8j8Bc_reverse_culture_shock_syndrome_shorts` | 1 | 0.02 | 2026-11-15 |  |
 | `hipercool-materiais/anime/wuM2h6zXjG0_international_one_hit_wonder_singers` | 1 | 0.04 | 2026-11-12 |  |
@@ -521,6 +526,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/wxOI3MqNkH0_In_this_school_colors_were_forbidden_but` | 32 | 0.28 | 2026-10-19 |  |
 | `hipercool-materiais/anime/WyS4TjZv4h0_Incredible_Primitive_Fishing_Hooks__fish` | 1 | 0.02 | 2026-11-13 |  |
 | `hipercool-materiais/anime/wYsrT7sLWPo_scene__fyp__foryou__viral__clips` | 3 | 0.08 | 2026-11-10 |  |
+| `hipercool-materiais/anime/X-Mk1AaLcHU_The_Nine_Tailed_FIRE_FOX_vs__The_DRAGON` | 1 | 0.01 | 2026-11-17 |  |
 | `hipercool-materiais/anime/Xdm2FcP9_xg_The_CEO_Discovers_the_Truth_After_the_We` | 1 | 0.03 | 2026-11-13 |  |
 | `hipercool-materiais/anime/XfUX9V0RzxU_The_nine_banded_armadillo_can_get_pregna` | 1 | 0.01 | 2026-11-12 |  |
 | `hipercool-materiais/anime/XJIwmtAiHgc_Assisti_a_série_MC_DALESTE___MATARAM_O_P` | 1 | 0.02 | 2026-11-13 |  |
@@ -532,6 +538,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `hipercool-materiais/anime/y32QQ4b63e0_Qual_será_o_futuro_do_SNEL11__Veja_o_que` | 1 | 0.04 | 2026-11-12 |  |
 | `hipercool-materiais/anime/yCUYYdhUnhk_Ghost_ATTACKS_Dog__Shorts` | 2 | 0.00 | 2026-11-16 |  |
 | `hipercool-materiais/anime/YDaBWskB_aE_He_asked_the_system_for_a_TREASURE_and_g` | 1 | 0.01 | 2026-11-10 |  |
+| `hipercool-materiais/anime/yFOg0aHg8UM_O_Que_Acontece_Quando_a_Cobra_Troca_De_P` | 1 | 0.01 | 2026-11-17 |  |
 | `hipercool-materiais/anime/YK3BgNs5w0Y_AMORAS_VERDES_NO_ANZOL__pescador__pescA` | 1 | 0.02 | 2026-11-16 |  |
 | `hipercool-materiais/anime/yQPH9HHVsuE_A_garota_entrou_na_casa_do_CEO_para_fugi` | 2 | 0.06 | 2026-11-10 |  |
 | `hipercool-materiais/anime/YszfNU_gFFQ_SHE_NEEDS_TO_FIND_A_HUSBAND` | 4 | 0.06 | 2026-11-14 |  |
@@ -668,8 +675,8 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `ms-energy/reels_globo` | 3 | 0.02 | 2026-11-01 | MS Energy (cliente): postados. |
 | `ms-energy/shorts_veo` | 9 | 0.05 | 2026-11-01 | MS Energy (cliente): postados. |
 | `ms-energy/shorts_veo_barrados` | 2 | 0.01 | 2026-10-22 | MS Energy (cliente): postados. |
-| `parceiro` | 5049 | 92.85 | 2026-11-18 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
-| `parceiro/1_youtube` | 651 | 7.13 | 2026-11-10 | etapa: já saiu no YouTube (falta TikTok/Instagram) (catálogo/etapas do postador) |
+| `parceiro` | 5068 | 93.34 | 2026-11-18 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
+| `parceiro/1_youtube` | 647 | 7.10 | 2026-11-10 | etapa: já saiu no YouTube (falta TikTok/Instagram) (catálogo/etapas do postador) |
 | `parceiro/1_youtube/a-alma-da-filha-foi-encontrar-sua-mãe-ceo_cap1_20261019` | 2 | 0.02 | 2026-10-22 |  |
 | `parceiro/1_youtube/a-cursed-girl-and-her-protector-pig_cap1_20261018_id` | 2 | 0.04 | 2026-10-19 |  |
 | `parceiro/1_youtube/a-namorada-de-infância_cap1_20261020` | 2 | 0.03 | 2026-10-22 |  |
@@ -967,7 +974,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/1_youtube/sem-obra-d8c24f_cap1_20261029` | 2 | 0.01 | 2026-10-29 |  |
 | `parceiro/1_youtube/sem-obra-da47f7_cap1_20261028` | 2 | 0.01 | 2026-10-29 |  |
 | `parceiro/1_youtube/sem-obra-daf7b9_cap1_20261025` | 2 | 0.04 | 2026-10-25 |  |
-| `parceiro/1_youtube/sem-obra-db4c0f_cap1_20261028` | 2 | 0.01 | 2026-10-29 |  |
 | `parceiro/1_youtube/sem-obra-dd7587_cap1_20261029` | 2 | 0.01 | 2026-10-29 |  |
 | `parceiro/1_youtube/sem-obra-de0c48_cap1_20261105` | 2 | 0.02 | 2026-11-06 |  |
 | `parceiro/1_youtube/sem-obra-dec017_cap1_20261104` | 2 | 0.03 | 2026-11-04 |  |
@@ -992,7 +998,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/1_youtube/sem-obra-f26108_cap1_20261025` | 2 | 0.02 | 2026-10-31 |  |
 | `parceiro/1_youtube/sem-obra-f4861c_cap1_20261026` | 1 | 0.01 | 2026-10-26 |  |
 | `parceiro/1_youtube/sem-obra-f4a685_cap1_20261028` | 2 | 0.01 | 2026-10-30 |  |
-| `parceiro/1_youtube/sem-obra-f4ac41_cap1_20261105` | 2 | 0.02 | 2026-11-06 |  |
 | `parceiro/1_youtube/sem-obra-f775b2_cap1_20261024` | 2 | 0.01 | 2026-10-24 |  |
 | `parceiro/1_youtube/sem-obra-f8a2e5_cap1_20261026` | 1 | 0.01 | 2026-10-26 |  |
 | `parceiro/1_youtube/sem-obra-f8dbc6_cap1_20261027` | 2 | 0.03 | 2026-10-28 |  |
@@ -1015,7 +1020,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/1_youtube/was-kicked-out_cap1_20261019` | 2 | 0.02 | 2026-10-22 |  |
 | `parceiro/1_youtube/was-struck-black_cap1_20261018` | 2 | 0.03 | 2026-10-19 |  |
 | `parceiro/1_youtube/xo-kitty_cap1_20261031` | 1 | 0.02 | 2026-10-31 |  |
-| `parceiro/2_tiktok` | 1243 | 17.71 | 2026-11-16 | etapa: já saiu no YouTube e no TikTok (catálogo/etapas do postador) |
+| `parceiro/2_tiktok` | 1255 | 17.99 | 2026-11-16 | etapa: já saiu no YouTube e no TikTok (catálogo/etapas do postador) |
 | `parceiro/2_tiktok/a-costly-mistake_cap1_20261018` | 2 | 0.01 | 2026-10-18 |  |
 | `parceiro/2_tiktok/a-cursed-girl-and-her-protector-pig_cap1_20261018` | 2 | 0.03 | 2026-10-22 |  |
 | `parceiro/2_tiktok/a-cursed-girl-and-her-protector-pig_cap1_20261018_hi` | 2 | 0.03 | 2026-10-19 |  |
@@ -1210,6 +1215,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/onmyou-kaiten-rebirth_cap1_20261030` | 2 | 0.03 | 2026-10-31 |  |
 | `parceiro/2_tiktok/oshi-no-ko_cap1_20261019` | 2 | 0.02 | 2026-10-19 |  |
 | `parceiro/2_tiktok/oshi-no-ko_cap1_20261021` | 2 | 0.01 | 2026-10-22 |  |
+| `parceiro/2_tiktok/parede-de-gelo-2_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/2_tiktok/part-confessed-most_cap1_20261019` | 2 | 0.03 | 2026-10-20 |  |
 | `parceiro/2_tiktok/part-her-love_cap1_20261018_id` | 2 | 0.02 | 2026-10-19 |  |
 | `parceiro/2_tiktok/part-her-love_cap1_20261018_th` | 2 | 0.02 | 2026-10-19 |  |
@@ -1346,6 +1352,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-433a40_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/2_tiktok/sem-obra-43e95b_cap1_20261030` | 2 | 0.01 | 2026-10-31 |  |
 | `parceiro/2_tiktok/sem-obra-447ab1_cap1_20261031` | 2 | 0.02 | 2026-11-02 |  |
+| `parceiro/2_tiktok/sem-obra-45771c_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/2_tiktok/sem-obra-464036_cap1_20261104` | 2 | 0.03 | 2026-11-09 |  |
 | `parceiro/2_tiktok/sem-obra-480ddb_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/2_tiktok/sem-obra-484856_cap1_20261104` | 2 | 0.02 | 2026-11-06 |  |
@@ -1372,6 +1379,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-55f89e_cap1_20261108` | 2 | 0.02 | 2026-11-10 |  |
 | `parceiro/2_tiktok/sem-obra-589192_cap1_20261104` | 2 | 0.05 | 2026-11-05 |  |
 | `parceiro/2_tiktok/sem-obra-599022_cap1_20261105` | 2 | 0.02 | 2026-11-07 |  |
+| `parceiro/2_tiktok/sem-obra-599628_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/2_tiktok/sem-obra-5a011d_cap1_20261030` | 2 | 0.01 | 2026-10-31 |  |
 | `parceiro/2_tiktok/sem-obra-5a05f2_cap1_20261107` | 2 | 0.04 | 2026-11-08 |  |
 | `parceiro/2_tiktok/sem-obra-5a40ac_cap1_20261028` | 2 | 0.02 | 2026-10-31 |  |
@@ -1428,6 +1436,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-719ae1_cap1_20261110` | 1 | 0.04 | 2026-11-10 |  |
 | `parceiro/2_tiktok/sem-obra-744e8f_cap1_20261029` | 2 | 0.02 | 2026-10-30 |  |
 | `parceiro/2_tiktok/sem-obra-765d30_cap1_20261112` | 1 | 0.03 | 2026-11-12 |  |
+| `parceiro/2_tiktok/sem-obra-765e50_cap1_20261116` | 1 | 0.02 | 2026-11-16 |  |
 | `parceiro/2_tiktok/sem-obra-76fab9_cap1_20261029` | 2 | 0.03 | 2026-10-30 |  |
 | `parceiro/2_tiktok/sem-obra-774d58_cap1_20261114` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/2_tiktok/sem-obra-78432c_cap1_20261101` | 2 | 0.02 | 2026-11-02 |  |
@@ -1455,6 +1464,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-832d68_cap1_20261104` | 2 | 0.04 | 2026-11-05 |  |
 | `parceiro/2_tiktok/sem-obra-83d7ff_cap1_20261114` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/2_tiktok/sem-obra-85566a_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
+| `parceiro/2_tiktok/sem-obra-86bbbc_cap1_20261114` | 1 | 0.04 | 2026-11-14 |  |
 | `parceiro/2_tiktok/sem-obra-872c90_cap1_20261030` | 2 | 0.02 | 2026-10-31 |  |
 | `parceiro/2_tiktok/sem-obra-87d24f_cap1_20261101` | 2 | 0.01 | 2026-11-05 |  |
 | `parceiro/2_tiktok/sem-obra-889173_cap1_20261106` | 2 | 0.05 | 2026-11-10 |  |
@@ -1534,6 +1544,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-b6ef26_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/2_tiktok/sem-obra-b6fd25_cap1_20261031` | 2 | 0.01 | 2026-11-01 |  |
 | `parceiro/2_tiktok/sem-obra-b7cafb_cap1_20261029` | 2 | 0.02 | 2026-10-30 |  |
+| `parceiro/2_tiktok/sem-obra-ba0f5b_cap1_20261116` | 1 | 0.01 | 2026-11-16 |  |
 | `parceiro/2_tiktok/sem-obra-bb7283_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/2_tiktok/sem-obra-bbd9fe_cap1_20261105` | 2 | 0.03 | 2026-11-06 |  |
 | `parceiro/2_tiktok/sem-obra-bc25f7_cap1_20261113` | 1 | 0.04 | 2026-11-13 |  |
@@ -1546,6 +1557,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-bf97b9_cap1_20261107` | 2 | 0.05 | 2026-11-08 |  |
 | `parceiro/2_tiktok/sem-obra-c25e0f_cap1_20261030` | 2 | 0.02 | 2026-10-31 |  |
 | `parceiro/2_tiktok/sem-obra-c297e0_cap1_20261116` | 1 | 0.01 | 2026-11-16 |  |
+| `parceiro/2_tiktok/sem-obra-c2cd1a_cap1_20261112` | 1 | 0.05 | 2026-11-13 |  |
 | `parceiro/2_tiktok/sem-obra-c317fb_cap1_20261106` | 2 | 0.03 | 2026-11-08 |  |
 | `parceiro/2_tiktok/sem-obra-c47b02_cap1_20261109` | 1 | 0.02 | 2026-11-09 |  |
 | `parceiro/2_tiktok/sem-obra-c49dc4_cap1_20261030` | 2 | 0.01 | 2026-11-01 |  |
@@ -1581,6 +1593,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-da85ed_cap1_20261105` | 2 | 0.04 | 2026-11-07 |  |
 | `parceiro/2_tiktok/sem-obra-da9ca5_cap1_20261109` | 1 | 0.03 | 2026-11-09 |  |
 | `parceiro/2_tiktok/sem-obra-db1ac3_cap1_20261105` | 2 | 0.02 | 2026-11-07 |  |
+| `parceiro/2_tiktok/sem-obra-db4c0f_cap1_20261028` | 2 | 0.01 | 2026-10-29 |  |
 | `parceiro/2_tiktok/sem-obra-dbb9ba_cap1_20261106` | 2 | 0.01 | 2026-11-09 |  |
 | `parceiro/2_tiktok/sem-obra-dbd438_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/2_tiktok/sem-obra-dc6f15_cap1_20261109` | 1 | 0.01 | 2026-11-09 |  |
@@ -1619,6 +1632,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-efbaa3_cap1_20261024` | 1 | 0.03 | 2026-10-24 |  |
 | `parceiro/2_tiktok/sem-obra-efbaa3_cap1_20261024_hi` | 2 | 0.03 | 2026-10-25 |  |
 | `parceiro/2_tiktok/sem-obra-f01928_cap1_20261106` | 2 | 0.03 | 2026-11-08 |  |
+| `parceiro/2_tiktok/sem-obra-f0b962_cap1_20261106` | 1 | 0.03 | 2026-11-06 |  |
 | `parceiro/2_tiktok/sem-obra-f0fe02_cap1_20261025` | 2 | 0.01 | 2026-10-31 |  |
 | `parceiro/2_tiktok/sem-obra-f13243_cap1_20261028` | 2 | 0.02 | 2026-10-29 |  |
 | `parceiro/2_tiktok/sem-obra-f13946_cap1_20261104` | 2 | 0.04 | 2026-11-06 |  |
@@ -1631,6 +1645,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/sem-obra-f3de4f_cap1_20261027` | 2 | 0.02 | 2026-10-28 |  |
 | `parceiro/2_tiktok/sem-obra-f46f78_cap1_20261104` | 2 | 0.03 | 2026-11-09 |  |
 | `parceiro/2_tiktok/sem-obra-f4966d_cap1_20261115` | 1 | 0.03 | 2026-11-15 |  |
+| `parceiro/2_tiktok/sem-obra-f4ac41_cap1_20261105` | 2 | 0.02 | 2026-11-06 |  |
 | `parceiro/2_tiktok/sem-obra-f4b18c_cap1_20261110` | 1 | 0.04 | 2026-11-10 |  |
 | `parceiro/2_tiktok/sem-obra-f58b41_cap1_20261031` | 2 | 0.01 | 2026-11-02 |  |
 | `parceiro/2_tiktok/sem-obra-f5d835_cap1_20261024` | 1 | 0.01 | 2026-10-24 |  |
@@ -1725,7 +1740,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/2_tiktok/your-girlfriend-was-an-obsessive-dragon_cap1_20261105` | 2 | 0.06 | 2026-11-06 |  |
 | `parceiro/2_tiktok/zombie-ant-fungus_cap1_20261020` | 2 | 0.02 | 2026-10-22 |  |
 | `parceiro/2_tiktok/zumbis-na-minha-namorada_cap1_20261018` | 2 | 0.03 | 2026-10-18 |  |
-| `parceiro/3_instagram` | 812 | 10.55 | 2026-11-17 | etapa: já saiu em todas as redes (catálogo/etapas do postador) |
+| `parceiro/3_instagram` | 813 | 10.59 | 2026-11-17 | etapa: já saiu em todas as redes (catálogo/etapas do postador) |
 | `parceiro/3_instagram/a-garota-fingia-de-louca_cap1_20261026` | 2 | 0.01 | 2026-10-26 |  |
 | `parceiro/3_instagram/a-garota-gato-foi-demitida_cap1_20261104` | 2 | 0.02 | 2026-11-04 |  |
 | `parceiro/3_instagram/african-lungfish_cap1_20261018` | 2 | 0.02 | 2026-10-22 |  |
@@ -1958,6 +1973,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/3_instagram/sem-obra-7b5f1a_cap1_20261106` | 2 | 0.03 | 2026-11-08 |  |
 | `parceiro/3_instagram/sem-obra-7cff03_cap1_20261031` | 2 | 0.02 | 2026-11-04 |  |
 | `parceiro/3_instagram/sem-obra-7df2f7_cap1_20261029` | 2 | 0.01 | 2026-11-01 |  |
+| `parceiro/3_instagram/sem-obra-7e3171_cap1_20261105` | 1 | 0.04 | 2026-11-05 |  |
 | `parceiro/3_instagram/sem-obra-827f9f_cap1_20261103` | 2 | 0.02 | 2026-11-04 |  |
 | `parceiro/3_instagram/sem-obra-82ac32_cap1_20261107` | 2 | 0.02 | 2026-11-09 |  |
 | `parceiro/3_instagram/sem-obra-831ea4_cap1_20261030` | 2 | 0.02 | 2026-11-02 |  |
@@ -2141,7 +2157,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/3_instagram/why-dont-you-wash-raw-chicken_cap1_20261105` | 2 | 0.03 | 2026-11-08 |  |
 | `parceiro/3_instagram/your-name_cap1_20261031` | 2 | 0.01 | 2026-11-05 |  |
 | `parceiro/3_instagram/zangetsu_cap1_20261102` | 2 | 0.01 | 2026-11-04 |  |
-| `parceiro/_postados_lote_1011` | 795 | 21.30 | 2026-11-17 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
+| `parceiro/_postados_lote_1011` | 803 | 21.50 | 2026-11-17 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
 | `parceiro/_postados_lote_1011/999-aura-moments-in-football_cap1_20261109` | 1 | 0.02 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/a-noiva-dele-virou-boneca-do-nada_cap1_20261108` | 1 | 0.06 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/and_cap1_20261107` | 1 | 0.01 | 2026-11-08 |  |
@@ -2225,7 +2241,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/one_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/ore-wa-seikan_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/parasyte_cap1_20261110` | 1 | 0.02 | 2026-11-10 |  |
-| `parceiro/_postados_lote_1011/parede-de-gelo-2_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/parede-de-gelo_cap1_20261112` | 1 | 0.04 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/parede_cap1_20261108` | 1 | 0.03 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/quando-uma-lenda-escolhe-o-dinheiro_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
@@ -2254,6 +2269,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-04f343_cap1_20261114` | 1 | 0.03 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-055973_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-058ccd_cap1_20261112_en` | 1 | 0.01 | 2026-11-12 |  |
+| `parceiro/_postados_lote_1011/sem-obra-06bc5f_cap1_20261113` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-07604f_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-07f8d3_cap1_20261107` | 1 | 0.05 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/sem-obra-080910_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
@@ -2281,6 +2297,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-0e7934_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-0e8cf1_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-0e9022_cap1_20261109` | 1 | 0.04 | 2026-11-09 |  |
+| `parceiro/_postados_lote_1011/sem-obra-0eb0d0_cap1_20261116` | 1 | 0.02 | 2026-11-16 |  |
 | `parceiro/_postados_lote_1011/sem-obra-0ec440_cap1_20261106` | 1 | 0.04 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/sem-obra-0eea7c_cap1_20261106` | 1 | 0.05 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/sem-obra-0f0071_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
@@ -2297,6 +2314,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-10bcb9_cap1_20261107` | 1 | 0.03 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/sem-obra-111d5d_cap1_20261113` | 1 | 0.02 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-111e6f_cap1_20261107` | 1 | 0.03 | 2026-11-07 |  |
+| `parceiro/_postados_lote_1011/sem-obra-112326_cap1_20261115` | 1 | 0.04 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-1174e1_cap1_20261110` | 1 | 0.02 | 2026-11-10 |  |
 | `parceiro/_postados_lote_1011/sem-obra-119c24_cap1_20261114` | 1 | 0.06 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-11c3b7_cap1_20261104` | 1 | 0.06 | 2026-11-04 |  |
@@ -2327,6 +2345,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-19bfa5_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-19cdd5_cap1_20261112` | 1 | 0.01 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-1a4e1d_cap1_20261106` | 1 | 0.03 | 2026-11-06 |  |
+| `parceiro/_postados_lote_1011/sem-obra-1a9da9_cap1_20261114` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-1afdf9_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-1b054f_cap1_20261107` | 1 | 0.08 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-1b35a0_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
@@ -2403,6 +2422,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-36800d_cap1_20261109` | 1 | 0.02 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/sem-obra-36914e_cap1_20261109` | 1 | 0.02 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/sem-obra-37a96e_cap1_20261106` | 1 | 0.03 | 2026-11-06 |  |
+| `parceiro/_postados_lote_1011/sem-obra-37bc51_cap1_20261111` | 1 | 0.07 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-384a93_cap1_20261111_th` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-38f336_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-3946a6_cap1_20261113` | 1 | 0.02 | 2026-11-13 |  |
@@ -2427,7 +2447,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-41acbf_cap1_20261115` | 1 | 0.05 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-448397_cap1_20261105` | 1 | 0.04 | 2026-11-05 |  |
 | `parceiro/_postados_lote_1011/sem-obra-455091_cap1_20261110` | 1 | 0.03 | 2026-11-11 |  |
-| `parceiro/_postados_lote_1011/sem-obra-45771c_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-458a3a_cap1_20261105` | 1 | 0.02 | 2026-11-05 |  |
 | `parceiro/_postados_lote_1011/sem-obra-458a59_cap1_20261115` | 1 | 0.03 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-461215_cap1_20261110` | 1 | 0.01 | 2026-11-10 |  |
@@ -2477,7 +2496,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-58d8af_cap1_20261110` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-592efa_cap1_20261110` | 1 | 0.07 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-594fae_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
-| `parceiro/_postados_lote_1011/sem-obra-599628_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-59e205_cap1_20261114` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-5af67e_cap1_20261112` | 1 | 0.03 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-5b6dc2_cap1_20261108` | 1 | 0.04 | 2026-11-08 |  |
@@ -2539,7 +2557,6 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-7448cb_cap1_20261114` | 1 | 0.01 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-74929e_cap1_20261108` | 1 | 0.04 | 2026-11-17 |  |
 | `parceiro/_postados_lote_1011/sem-obra-74b6bc_cap1_20261112` | 1 | 0.01 | 2026-11-15 |  |
-| `parceiro/_postados_lote_1011/sem-obra-765e50_cap1_20261116` | 1 | 0.02 | 2026-11-16 |  |
 | `parceiro/_postados_lote_1011/sem-obra-76b090_cap1_20261113` | 1 | 0.02 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-76c1d4_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7795a2_cap1_20261107` | 1 | 0.03 | 2026-11-07 |  |
@@ -2556,13 +2573,13 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-7ac9f6_cap1_20261109` | 1 | 0.05 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7b1ee2_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7b9be9_cap1_20261109` | 1 | 0.02 | 2026-11-09 |  |
-| `parceiro/_postados_lote_1011/sem-obra-7e3171_cap1_20261105` | 1 | 0.04 | 2026-11-05 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7e8671_cap1_20261113` | 1 | 0.02 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7eb7d9_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7eced1_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7f1f91_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7f473a_cap1_20261110` | 1 | 0.05 | 2026-11-10 |  |
 | `parceiro/_postados_lote_1011/sem-obra-7fd556_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
+| `parceiro/_postados_lote_1011/sem-obra-804e31_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-810b1c_cap1_20261106` | 1 | 0.05 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/sem-obra-81177b_cap1_20261107` | 1 | 0.04 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/sem-obra-813500_cap1_20261113` | 1 | 0.03 | 2026-11-14 |  |
@@ -2583,9 +2600,9 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-856a22_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-859268_cap1_20261031` | 1 | 0.01 | 2026-10-31 |  |
 | `parceiro/_postados_lote_1011/sem-obra-85be3f_cap1_20261106` | 1 | 0.05 | 2026-11-06 |  |
+| `parceiro/_postados_lote_1011/sem-obra-861c02_cap1_20261117` | 1 | 0.02 | 2026-11-17 |  |
 | `parceiro/_postados_lote_1011/sem-obra-8629c5_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-8646be_cap1_20261110` | 1 | 0.04 | 2026-11-10 |  |
-| `parceiro/_postados_lote_1011/sem-obra-86bbbc_cap1_20261114` | 1 | 0.04 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-86c863_cap1_20261106` | 1 | 0.03 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/sem-obra-877bf3_cap1_20261111` | 1 | 0.06 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-877d1e_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
@@ -2710,6 +2727,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-b81614_cap1_20261110` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-b83eb0_cap1_20261105` | 1 | 0.04 | 2026-11-05 |  |
 | `parceiro/_postados_lote_1011/sem-obra-b9c582_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
+| `parceiro/_postados_lote_1011/sem-obra-ba2e1d_cap1_20261107` | 1 | 0.05 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-baf3d8_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-bb316b_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-bb3ddb_cap1_20261107` | 1 | 0.05 | 2026-11-08 |  |
@@ -2729,10 +2747,10 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-c06056_cap1_20261111` | 1 | 0.03 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c06c35_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c11b82_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
+| `parceiro/_postados_lote_1011/sem-obra-c18f32_cap1_20261117` | 1 | 0.02 | 2026-11-17 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c19108_cap1_20261113` | 1 | 0.01 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c1b53e_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c1c22e_cap1_20261105` | 1 | 0.04 | 2026-11-05 |  |
-| `parceiro/_postados_lote_1011/sem-obra-c2cd1a_cap1_20261112` | 1 | 0.05 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c36536_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c4abbd_cap1_20261106` | 1 | 0.02 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c4c0a5_cap1_20261106` | 1 | 0.04 | 2026-11-06 |  |
@@ -2740,6 +2758,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-c5f76a_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c65e1c_cap1_20261105` | 1 | 0.03 | 2026-11-05 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c681e5_cap1_20261106` | 1 | 0.02 | 2026-11-06 |  |
+| `parceiro/_postados_lote_1011/sem-obra-c6d81e_cap1_20261115` | 1 | 0.02 | 2026-11-15 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c741ac_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c9058c_cap1_20261111` | 1 | 0.01 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-c99ade_cap1_20261112_th` | 1 | 0.01 | 2026-11-12 |  |
@@ -2768,6 +2787,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-d201b7_cap1_20261109` | 1 | 0.01 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/sem-obra-d235db_cap1_20261108` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-d2c279_cap1_20261110` | 1 | 0.01 | 2026-11-10 |  |
+| `parceiro/_postados_lote_1011/sem-obra-d31f52_cap1_20261114` | 1 | 0.02 | 2026-11-14 |  |
 | `parceiro/_postados_lote_1011/sem-obra-d328ae_cap1_20261108` | 1 | 0.04 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-d4148f_cap1_20261113` | 1 | 0.01 | 2026-11-13 |  |
 | `parceiro/_postados_lote_1011/sem-obra-d458e8_cap1_20261112` | 1 | 0.03 | 2026-11-12 |  |
@@ -2828,6 +2848,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-eb0ced_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-ec33c3_cap1_20261110` | 1 | 0.03 | 2026-11-10 |  |
 | `parceiro/_postados_lote_1011/sem-obra-ec501f_cap1_20261112` | 1 | 0.01 | 2026-11-12 |  |
+| `parceiro/_postados_lote_1011/sem-obra-ec611f_cap1_20261111` | 1 | 0.05 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-eca09d_cap1_20261107` | 1 | 0.06 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/sem-obra-ecce33_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
 | `parceiro/_postados_lote_1011/sem-obra-ecf9c5_cap1_20261110` | 1 | 0.02 | 2026-11-11 |  |
@@ -2843,7 +2864,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-eeb56d_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-ef4f37_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-f09ce2_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
-| `parceiro/_postados_lote_1011/sem-obra-f0b962_cap1_20261106` | 1 | 0.03 | 2026-11-06 |  |
+| `parceiro/_postados_lote_1011/sem-obra-f1c405_cap1_20261117` | 1 | 0.05 | 2026-11-17 |  |
 | `parceiro/_postados_lote_1011/sem-obra-f227aa_cap1_20261107` | 1 | 0.01 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/sem-obra-f2aa2d_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-f2dea0_cap1_20261112` | 1 | 0.02 | 2026-11-13 |  |
@@ -2889,6 +2910,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/sem-obra-fd0cb7_cap1_20261110` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-fd15e8_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
 | `parceiro/_postados_lote_1011/sem-obra-fd165a_cap1_20261111` | 1 | 0.04 | 2026-11-12 |  |
+| `parceiro/_postados_lote_1011/sem-obra-fd67c3_cap1_20261116` | 1 | 0.02 | 2026-11-16 |  |
 | `parceiro/_postados_lote_1011/sem-obra-fd7563_cap1_20261109` | 1 | 0.01 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/sem-obra-fda53b_cap1_20261109` | 1 | 0.02 | 2026-11-10 |  |
 | `parceiro/_postados_lote_1011/sem-obra-fe2fb2_cap1_20261114` | 1 | 0.04 | 2026-11-14 |  |
@@ -2931,12 +2953,14 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_postados_lote_1011/um-lugar-silencioso_cap1_20261109` | 1 | 0.01 | 2026-11-09 |  |
 | `parceiro/_postados_lote_1011/unexplainable-situations-in-nature_cap1_20261107` | 1 | 0.02 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/what-the-popemobile-looks-like-inside_cap1_20261107` | 1 | 0.02 | 2026-11-08 |  |
+| `parceiro/_postados_lote_1011/when-the-lights-go-out_cap1_20261117` | 1 | 0.01 | 2026-11-17 |  |
 | `parceiro/_postados_lote_1011/why-do-they-do-this_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/why-do-you-get-goosebumps_cap1_20261107` | 1 | 0.01 | 2026-11-07 |  |
 | `parceiro/_postados_lote_1011/why-do_cap1_20261108` | 1 | 0.03 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/why-is-homemade-ice-white-in-the-middle_cap1_20261105` | 1 | 0.02 | 2026-11-06 |  |
 | `parceiro/_postados_lote_1011/why-is-this-armadillo-acting-like-this_cap1_20261108` | 1 | 0.02 | 2026-11-08 |  |
 | `parceiro/_postados_lote_1011/yasuke_cap1_20261110` | 1 | 0.03 | 2026-11-10 |  |
+| `parceiro/_postados_lote_1011/ypê_cap1_20261114` | 1 | 0.04 | 2026-11-14 |  |
 | `parceiro/_reserva_1112` | 1232 | 33.06 | 2026-11-18 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
 | `parceiro/_reserva_1112/a-escola-inteira-me-chama-de-namorada-do-galã-do-campus_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_reserva_1112/a-garota-doava-os-órgãos_cap1_20261112` | 1 | 0.02 | 2026-11-12 |  |
@@ -4205,7 +4229,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/_segurados_1211/sem-obra-f1e8a0_cap1_20261111` | 1 | 0.04 | 2026-11-11 |  |
 | `parceiro/_segurados_1211/this-baby-is-sketchy-anime_cap1_20261107` | 1 | 0.05 | 2026-11-07 |  |
 | `parceiro/_segurados_1211/tottenham_cap1_20261111` | 1 | 0.02 | 2026-11-11 |  |
-| `parceiro/nao-usados` | 282 | 2.08 | 2026-11-15 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
+| `parceiro/nao-usados` | 284 | 2.08 | 2026-11-15 | Shorts do recap de parceiros (postar.json fica no PC; sai 3 dias depois de público no YouTube). |
 | `parceiro/nao-usados/a-cursed-girl-and-her-protector-pig_cap1_20261018_en` | 3 | 0.03 | 2026-10-31 |  |
 | `parceiro/nao-usados/always-tell-the-truth_cap1_20261107` | 3 | 0.02 | 2026-11-08 |  |
 | `parceiro/nao-usados/felix-is-the-villain-in-wreck-it-ralph_cap1_20261107` | 2 | 0.00 | 2026-11-11 |  |
@@ -4269,6 +4293,7 @@ Atualizado 18/11/2026 02:43. Remoto `manhwa-drive:videos-backup`: 20734 arquivos
 | `parceiro/nao-usados/sem-obra-8c1536_cap1_20261108` | 3 | 0.02 | 2026-11-09 |  |
 | `parceiro/nao-usados/sem-obra-8c510e_cap1_20261112_hi` | 2 | 0.06 | 2026-11-14 |  |
 | `parceiro/nao-usados/sem-obra-8cfd10_cap1_20261028` | 3 | 0.03 | 2026-10-28 |  |
+| `parceiro/nao-usados/sem-obra-8f57f2_cap1_20261114` | 2 | 0.00 | 2026-11-15 |  |
 | `parceiro/nao-usados/sem-obra-90ecb3_cap1_20261112` | 1 | 0.01 | 2026-11-12 |  |
 | `parceiro/nao-usados/sem-obra-910da9_cap1_20261112` | 1 | 0.03 | 2026-11-12 |  |
 | `parceiro/nao-usados/sem-obra-918e98_cap1_20261028` | 3 | 0.01 | 2026-10-28 |  |

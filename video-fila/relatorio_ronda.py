@@ -385,6 +385,12 @@ def sec_kaggle():
     if peds:  # 13/11 dona: tabela
         out += ["", "| % | Situação | Vídeo |", "|---:|---|---|"]
         out += [f"| {p['pct']}% | {p['situacao'][:45]} | {p['titulo'][:70]} |" for p in peds]
+        # 18/11: 9 longos "na fila 0%" por horas pareciam travados — é a regra da dona de 16/11 (conta de curto não
+        # pega longo: KAGGLE_CURTO_EMPRESTA_LONGO na central). RONDA_NOTA_LONGO=0 tira a nota.
+        if os.environ.get("RONDA_NOTA_LONGO", "1") != "0" and all(p.get("pct", 0) == 0 for p in peds):
+            out.append(f"- ℹ️ Longos na fila esperando de propósito: regra de 16/11 \"só Shorts até ter mais contas\" "
+                       f"(hoje {st.get('verificadas', '?')} verificadas; liberar = KAGGLE_CURTO_EMPRESTA_LONGO=1 na central, "
+                       f"decisão da dona)")
         out.append("")
     try:
         r = subprocess.run(["ssh", "-o", "ConnectTimeout=15", "-o", "BatchMode=yes", "hermes-prod",
@@ -489,7 +495,12 @@ def sec_vigia_melhorador():
                + f" | {len(novos)} eventos desde a última")
     ult = [d for d in casos if d.get("passo") in ("consertou", "conserto", "falso", "dona", "falhou")][-3:]
     for d in ult:
-        out.append(f"  - {d['em'][11:16]} {d.get('categoria')}: {d.get('passo')} — {str(d.get('resumo', ''))[:110]}")
+        # 18/11: resumo do modelo vinha com quebras de linha/markdown e "vazava" no relatório. Agora numa linha só.
+        # RONDA_RESUMO_1LINHA=0 volta ao antigo.
+        res = str(d.get("resumo", ""))
+        if os.environ.get("RONDA_RESUMO_1LINHA", "1") != "0":
+            res = re.sub(r"\s+", " ", res.replace("**", "").replace("`", "")).strip()
+        out.append(f"  - {d['em'][11:16]} {d.get('categoria')}: {d.get('passo')} — {res[:110]}")
     va = sorted((BASE / "logs").glob("vigia_agente_*.log"))
     if va:
         txt = va[-1].read_text(encoding="utf-8", errors="ignore")
@@ -855,6 +866,18 @@ def sec_3d():
             pass
     out.append(f"- Hoje: {feitos} prontos, {falhas} falharam | total: {len(vids)} Shorts 3D, "
                f"{sum(1 for _, v, _ in vids if v)} postados")
+    # 18/11: "0 postados" escondia que a rede já tinha reservado os 3D (12:07/19:04/21:41) — mostra a agenda da rede.
+    # RONDA_3D_AGENDA=0 tira.
+    if os.environ.get("RONDA_3D_AGENDA", "1") != "0":
+        try:
+            lr = Path(rf"D:\manhwa-react\logs\rede_{agora:%Y%m%d}.log").read_text(encoding="utf-8", errors="ignore")
+            m = re.findall(r"reservados sobem mais perto do horario: (.*)", lr)
+            if m:
+                ag = sorted(re.findall(r"Dentro das Coisas 3D (\d\d/\d\d \d\d:\d\d)", m[-1]))
+                if ag:
+                    out.append(f"- 📅 Agendados pela rede (sobem perto do horário): {', '.join(ag)}")
+        except OSError:
+            pass
     if vids:
         out += ["", "| Short | Canal | Link | Views |", "|---|---|---|---:|"]
         for nome, vid, canal in sorted(vids, key=lambda t: (not t[1], t[0])):

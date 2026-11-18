@@ -433,3 +433,12 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
 - CONSERTO PROPOSTO: Nenhum. A fila automática está rodando normalmente nos ciclos configurados de 20 minutos.
 - Estado: NADA A FAZER
+
+## 20261118_0520 — Verificação de rotina: aviso conhecido sobre métricas de vídeos removidos e timeouts pontuais no YouTube Studio
+- Motivo: Alerta em fila_postagem.log indicando que métricas de vídeos marcados como mortos/travados pelo YouTube (CvmJXTdsi5Y, DTY8QccBZlo, 0_xhfd-3-Vo) não foram lidas por estarem removidos/travados, além de timeouts pontuais de 30s no carregamento do YouTube Studio (rjYeGPhugb4, 1qhYVZkEHpA).
+- O que achei (com trecho de log):
+  - [04:49:21] métricas CvmJXTdsi5Y: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-05 (a dona libera apagando a linha em contas_travadas.json))' ...})
+  - [04:56:49 / 05:01:04] métricas rjYeGPhugb4 / 1qhYVZkEHpA: não leu ({'metricas': 'aviso: TimeoutError: Locator.inner_text: Timeout 30000ms exceeded...'})
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Verificação dos logs e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. O comportamento de pular vídeos marcados como mortos/travados em contas_travadas.json e o tratamento de timeout pontual em coletas do YouTube Studio já ocorrem de forma autônoma pelo mecanismo de métricas.
+- Estado: NADA A FAZER

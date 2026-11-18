@@ -18683,5 +18683,135 @@
     "arquivado": false,
     "descricao": "Google Antigravity OAuth account pool + unified OpenAI-compatible gateway: refresh auto, kuota live, external providers, web dashboard. Pure",
     "data": "2026-11-18"
+  },
+  "lesterppo/hermes-gem-cli-rs": {
+    "ok": true,
+    "nome": "lesterppo/hermes-gem-cli-rs",
+    "estrelas": 0,
+    "push": "2026-10-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Rust port of hermes-gem-cli: Gemini Gem CLI via WebAPI (no API key, fast) — chat, Gem chat, multi-turn, image generation, deep research, Gem",
+    "data": "2026-11-18"
+  },
+  "sinantufekci/agent-intern": {
+    "ok": true,
+    "nome": "SinanTufekci/agent-intern",
+    "estrelas": 33,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Give Claude Code or Antigravity an intern: drive Gemini (Antigravity), Codex, Copilot, Cursor and opencode as sub-agents, plus experimental ",
+    "data": "2026-11-18"
+  },
+  "mushisenpai/comic-manga-narrator": {
+    "ok": true,
+    "nome": "MushiSenpai/comic-manga-narrator",
+    "estrelas": 0,
+    "push": "2026-07-12",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Turns comic/manga pages into dramatized narrated videos — panel detection, cloned character voices, Ken Burns + 2.5D parallax. Runs fully lo",
+    "data": "2026-11-18"
+  },
+  "raliqid/hookline": {
+    "ok": true,
+    "nome": "RaliqID/hookline",
+    "estrelas": 0,
+    "push": "2026-09-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Rewatch — AI attention-signal console for YouTube: find the most re-watched moments with retention signals plus Gemini analysis, then render",
+    "data": "2026-11-18"
+  },
+  "ingridslytherin/video-creator": {
+    "ok": true,
+    "nome": "IngridSlytherin/video-creator",
+    "estrelas": 2,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free YouTube video generator (Shorts and long videos): trending topic radar, scripts with Claude Code, neural voice-over, Pexels footage, ca",
+    "data": "2026-11-18"
+  },
+  "ffunch/vrm-avatar-maker": {
+    "ok": true,
+    "nome": "ffunch/vrm-avatar-maker",
+    "estrelas": 4,
+    "push": "2026-11-17",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Make a realistic VRM 1.0 avatar in your browser: body, face, hair, clothes, then download. All assets CC0, code MIT, runs fully client-side.",
+    "data": "2026-11-18"
+  },
+  "tk256ailab/fbx2vrma-converter": {
+    "ok": true,
+    "nome": "tk256ailab/fbx2vrma-converter",
+    "estrelas": 68,
+    "push": "2026-02-23",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert FBX animation files to VRMA format",
+    "data": "2026-11-18"
+  },
+  "mert5961/sceneshift": {
+    "ok": true,
+    "nome": "mert5961/SceneShift",
+    "estrelas": 0,
+    "push": "2026-11-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Any photo becomes a living 2.5D scene in the browser: in-browser depth (WebGPU) + GLSL ray-marched parallax. Next.js, three.js.",
+    "data": "2026-11-18"
+  },
+  "chenhz01/render-diff-harness": {
+    "ok": true,
+    "nome": "chenhz01/render-diff-harness",
+    "estrelas": 0,
+    "push": "2026-10-15",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Deterministic regression gate for HTML video renders - frame-hash diff with fail-closed baselines",
+    "data": "2026-11-18"
+  },
+  "pangpang888/image-story-assembly-hardening": {
+    "ok": true,
+    "nome": "pangpang888/image-story-assembly-hardening",
+    "estrelas": 0,
+    "push": "2026-09-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Agent Skill: scale-only failure modes and acceptance criteria for assembling long (>=5 min / >=40 shots) image-story videos with ffmpeg - fi",
+    "data": "2026-11-18"
+  },
+  "datgmac/panelforge": {
+    "ok": true,
+    "nome": "DATGMAC/panelforge",
+    "estrelas": 0,
+    "push": "2026-07-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Manga/manhwa panel segmentation + reading-order numbering — tiny specialized U-Net, no pretrained backbone",
+    "data": "2026-11-18"
+  },
+  "phantomanas/slideshow-maker": {
+    "ok": true,
+    "nome": "PhantomAnas/Slideshow-Maker",
+    "estrelas": 0,
+    "push": "2026-11-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Photos or image URLs to polished slideshow videos: Ken Burns, transitions, blur fill, logo, end card, music. PySide6 + FFmpeg.",
+    "data": "2026-11-18"
+  },
+  "trancongtien406/ai-shorts-pipeline": {
+    "ok": true,
+    "nome": "trancongtien406/ai-shorts-pipeline",
+    "estrelas": 0,
+    "push": "2026-11-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Topic → faceless vertical short (YouTube Shorts/TikTok): LLM script, free edge-tts voice, Ken Burns motion, word-by-word captions, FFmpeg re",
+    "data": "2026-11-18"
   }
 }

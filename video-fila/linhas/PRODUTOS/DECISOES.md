@@ -3,6 +3,7 @@
 Formato: data | o que mudou | por quê | prova | como desfazer. [GRANDE] = muda o que o público vê/ouve ou a produção.
 Histórico detalhado antes de 26/10 18h: `D:\postador-de-videos\docs\PRODUTO_PROFISSIONAL.md` (tabela "Rodadas de melhoria").
 
+- 18/11 07:21 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_tres_veo_final = 0.3 | O problema é de formato e se repete: três cenas seguidas (cerca de 27 s) com o dono falando no mesmo plano e sem nenhuma tela do produto. Ba | modelo cc-sobra
 - 18/11 01:13 | [MELHORADOR ensaio — NÃO aplicado] ideia_codigo  = Balão de WhatsApp simulado (com selo 'Simulação') que entra na cena do dono quando a fala diz 'agenda / confirma / reagenda', ou conversa cliente → resposta da  | O que falta nas cenas do dono é um elemento se mexendo junto com a fala, algo que nenhum botão atual entrega. Os quadros 5-7 só trocam as 3  | modelo cw/claude-sonnet-5-5
 - 17/11 23:49 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_tres_veo_final = 0.4 | O vídeo inteiro ficou no mesmo plano do dono (cenas 0–3, ~24 s) sem tela do produto, e teve a pior nota do crmchatwoot.ia (5,62, movimento 4 | modelo cw/claude-sonnet-5-5
 - 17/11 23:49 | [MELHORADOR ensaio — NÃO aplicado] regra_editor  = Na cena de abertura com o dono, a legenda karaokê nunca fica sobre o rosto (queixo/barba): suba o enquadramento ou compacte o cartão de pergunta, ou desça a leg | A legenda cobriu o queixo/barba do apresentador nos quadros 1–2 da cena 0, porque o enquadramento foi rebaixado para caber o cartão de pergu | modelo cw/claude-sonnet-5-5

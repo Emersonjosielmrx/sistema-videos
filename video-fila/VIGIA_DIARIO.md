@@ -282,3 +282,13 @@ STATUS: OK
 - Causa provável: Travamento transitório por concorrência de I/O no alimentador do recap longo (já recuperado) e uso intenso de armazenamento pela fila de render e pilhas de vídeos em D:.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o reinício automático do alimentador ocorreu com sucesso e a regra proíbe remoção de arquivos ou limpeza de disco por conta própria).
 - Estado: NADA A FAZER
+## 20261118_0517 — Recap longo ativo no PC1 (pilha 14/14) e PC2 pausado por falhas no parceiro
+- Motivo / O que achei: O log de  mostra o alimentador rodando normalmente (), enquanto  indica pausa no PC2 devido a falhas consecutivas em shorts (). Memória RAM livre em torno de 5.7 GB (acima do limite crítico de 3 GB).
+- Causa provável: Funcionamento normal do ciclo de preenchimento do recap longo, com pausa de proteção no parceiro do PC2.
+- CONSERTO PROPOSTO: Nenhum. O sistema está operando dentro dos parâmetros de controle e proteções automáticas.
+- Estado: NADA A FAZER
+## 20261118_0517 — Recap longo ativo no PC1 (pilha 14/14) e PC2 pausado por falhas no parceiro
+- Motivo / O que achei: O log de `encher_pilha.log` mostra o alimentador rodando normalmente (`pilha: pedindo 1 fonte(s)... pilha 14/14`), enquanto `alimentar_pc2.log` indica pausa no PC2 devido a falhas consecutivas em shorts (`PC2 pausado (3 Shorts seguidos falharam)`). Memória RAM livre em torno de 5.7 GB (acima do limite crítico de 3 GB).
+- Causa provável: Funcionamento normal do ciclo de preenchimento do recap longo, com pausa de proteção no parceiro do PC2.
+- CONSERTO PROPOSTO: Nenhum. O sistema está operando dentro dos parâmetros de controle e proteções automáticas.
+- Estado: NADA A FAZER

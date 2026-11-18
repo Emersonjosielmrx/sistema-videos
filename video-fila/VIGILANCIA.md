@@ -1,12 +1,11 @@
-# Vigilância 24 h — 2026-11-18T03:50:37
+# Vigilância 24 h — 2026-11-18T08:00:39
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (2)
-- tiktok: mesmo erro 5x em 6 h
+## Alarmes desta volta (1)
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (24)
+## Casos abertos (26)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (cw/claude-sonnet-5-5)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
@@ -31,9 +30,10 @@
 - [consertar] instagram: 10 posts até 20:30, normal ~44 (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] tiktok: mesmo erro 5x em 6 h (-)
+- [consertar] instagram: 5 posts até 04:20, normal ~12 (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [sem_mudanca] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
 - [falso] instagram: 10 posts até 08:20, normal ~21 — - / -
 - [falso] longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade — - / -
 - [falso] instagram: 10 posts até 14:30, normal ~34 — - / -
@@ -48,6 +48,7 @@
 - [sem_mudanca] longo Tv828JN1ZcM_He_Can_Upgrade_Anything_to_Its_Max_Level saiu com problema de qualidade — cw/claude-sonnet-5-5 / -
 - [sem_mudanca] _parceiro_20261114.log: mesmo erro 5x — cw/claude-sonnet-5-5 / -
 - [sem_mudanca] _parceiro_20261114.log: mesmo erro 5x — cw/claude-sonnet-5-5 / -
+- [falso] tiktok: mesmo erro 5x em 6 h — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 29 casos, nota 7% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0), qualidade-longo: 0/1 (voltou 0)

@@ -998,6 +998,22 @@ def subir(pg, channel_id, video, titulo, descricao, tags, privacy, alvo, sinteti
     if not pg.locator("#privacy-radios").first.is_visible():
         _shot(pg, "erro_visibilidade")
         raise Falha("erro", "não cheguei no passo Visibilidade")
+    # 18/11 (Filme Noturno: 4 falhas seguidas 03:07–04:25, print "Opção desativada enquanto preparamos seu vídeo"):
+    # o passo Visibilidade abre com a caixa das opções VAZIA até o YouTube preparar o vídeo, e o clique em Agendar
+    # estourava 30 s. Agora espera as opções aparecerem (até YT_ESPERA_VISIB_S, padrão 180 s). 0 desliga.
+    espera_vis = int(os.environ.get("YT_ESPERA_VISIB_S", "180"))
+    if espera_vis > 0:
+        t_vis = time.time()
+        while time.time() - t_vis < espera_vis:
+            try:
+                if pg.locator("#privacy-radios [name=PUBLIC], #second-container-expand-button").first.is_visible(
+                        timeout=3000):
+                    break
+            except Exception:  # noqa: BLE001
+                pass
+            pg.wait_for_timeout(5000)
+        if time.time() - t_vis > 5:
+            log(f"  passo Visibilidade: esperei {round(time.time() - t_vis)} s as opções aparecerem")
 
     if alvo:
         _agendar(pg, alvo, lang)

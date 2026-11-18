@@ -1223,3 +1223,6 @@
 - 2026-11-18 00:30 | propor | OK | CONSERTO PEDIDO PELA VIGILÂNCIA. PROBLEMA: longo Tv828JN1ZcM_He_Can_Upgrade_Anything_to_Its_Max_Level saiu com problema  → [20261118_000512_2095.md](20261118_000512_2095.md)
 - 2026-11-18 00:47 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261118_004106_8246.md](20261118_004106_8246.md)
 - 2026-11-18 02:22 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): tiktok: mesmo erro 5x em 6 h EVIDÊNCIA: logs\tiktok_20261118.log: NAO CONFIRMADO: → [20261118_022047_bf92.md](20261118_022047_bf92.md)
+- 2026-11-18 04:22 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): instagram: 5 posts até 04:20, normal ~12 EVIDÊNCIA: ledger/logs de instagram: hoj → [20261118_042039_63a5.md](20261118_042039_63a5.md)
+- 2026-11-18 06:15 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): tiktok: mesmo erro 5x em 6 h EVIDÊNCIA: logs\tiktok_20261118.log: abrir Chrome: f → [20261118_061037_b1e9.md](20261118_061037_b1e9.md)
+- 2026-11-18 06:53 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261118_065041_c6d4.md](20261118_065041_c6d4.md)

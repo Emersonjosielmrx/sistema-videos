@@ -1,0 +1,30 @@
+{
+ "conta": "jornalcomia",
+ "marca": "Jornal com IA",
+ "capa": "Como a IA aprende com seus erros?",
+ "slides": [
+  {
+   "titulo": "Tentativa e erro digital",
+   "texto": "Os sistemas de inteligência artificial testam milhares de caminhos diferentes em segundos, descartando as opções que produzem resultados incorretos durante o treinamento."
+  },
+  {
+   "titulo": "Ajuste de conexões internas",
+   "texto": "Quando a resposta está errada, os algoritmos alteram o peso das suas conexões neurais para não repetir a falha nas tentativas seguintes."
+  },
+  {
+   "titulo": "Recompensa por acertos",
+   "texto": "A máquina recebe pontuações virtuais a cada escolha correta, fortalecendo os comportamentos virtuais que levam à solução mais eficiente."
+  },
+  {
+   "titulo": "Melhoria contínua e rápida",
+   "texto": "Com bilhões de repetições automáticas, o sistema aperfeiçoa suas respostas até alcançar um alto nível de precisão na tarefa esperada."
+  }
+ ],
+ "legenda": "Entender o processo de aprendizado da tecnologia ajuda a compreender o futuro da computação.\nSalve este post para consultar quando quiser lembrar como os algoritmos evoluem.",
+ "gerado_em": "2026-11-18T07:54:11",
+ "postado": {
+  "como": "reel de slides",
+  "msg": "http",
+  "em": "2026-11-18T07:55:28"
+ }
+}

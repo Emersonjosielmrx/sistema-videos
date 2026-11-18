@@ -2113,3 +2113,33 @@
 - prova: Notas de movimento citam 15.6%, 12.2%, 15.7%, 14.3% e 19.5% como 'abaixo do limiar' ora de 4%, ora de 20%. Nota inconsistente, não é prova de cena estática (nenhuma cena abaixo de 5%).
 - onde: prompt/rubrica do júri de movimento em cortes_juri.
 - como testar: Fixar um único limiar (ex.: parada < 5%) na rubrica, reavaliar o lote de hoje e ver se as notas de movimento convergem.
+
+## 18/11 04:44 PROPOSTA [CERTEZA] Conferir 'PRIMEIROO TAMBAC' na legenda do Short sem-obra-37bc51_cap1_20261111 (cw/claude-sonnet-5-5)
+- prova: Júri, q02.jpg: legenda 'PRIMEIROO TAMBAC' com letra duplicada, nota de retenção 6.0 (grave). Como a legenda é o texto do roteiro, precisa conferir no roteiro.txt se o erro está lá (digitação/transcrição de 'tambaqui') ou se a quebra da legenda gerou a letra extra. É 1 Short só, então não vira regra.
+- onde: roteiro.txt do Short sem-obra-37bc51_cap1_20261111; se o roteiro estiver certo, a função que monta a legenda palavra a palavra (concatenação de tokens)
+- como testar: Abrir roteiro.txt e procurar 'PRIMEIROO'/'tambac'. Se aparecer em outro Short do dia, aí sim virar regra de roteiro; senão, só corrigir esse Short.
+
+## 18/11 04:44 PROPOSTA [GOSTO] Palavra repetida na legenda ('GRITAR GRITAR') em sem-obra-cf3d7f_cap1_20261112 (cw/claude-sonnet-5-5)
+- prova: Júri, q18.jpg e q17.jpg: 'GRITAR GRITAR' e 'QUE SÓ' repetidos. O júri vê quadros soltos e pode estar juntando pedaços de legenda (lição de 28/10), então não é prova até conferir.
+- onde: Gerador da legenda palavra a palavra (deduplicação de tokens consecutivos iguais) e roteiro.txt do Short
+- como testar: Comparar roteiro.txt com a legenda renderizada; se o roteiro tem 'gritar' uma vez e a legenda duas, é bug de pipeline com duplicação de token. Rodar a folha de quadros em 3 Shorts para medir a frequência antes de agir.
+
+## 18/11 05:55 PROPOSTA [CERTEZA] Título/tarja do topo cortado ou encavalado com card e legenda nos primeiros segundos (cc-sobra)
+- prova: 3 Shorts deste lote: sem-obra-5cd8d4_cap1_20261114 q01 (júri, grave: texto da tarja do topo cortado e sobreposto ao texto da fonte); sem-obra-4b93fd_cap1_20261115 q04 (card '[ STATUS ] MISSÃO VISÃO' por cima do título fixo 'MISSÃO VISÃO VALORES'); sem-obra-8c9a6a_cap1_20261112 q03 ('JAMES WEBB' no topo disputando com 'NO/ESPAÇO'). O mesmo defeito já foi visto em 16/11 (PROPOSTAS.md, linha 1863: 'FOGUEIRA' e 'DRAGÕES NO CÉU' cortados).
+- onde: Gerador do título/tarja do topo e dos cards HUD/STATUS no render dos CORTES (camada de overlays do topo); conferir também se o card evita a caixa do título.
+- como testar: Antes de mexer, rodar D:\tmp\folha_topo.py no quadro de 1,5 s de TODOS os Shorts de 14 a 18/11 e contar quantos têm título cortado na borda ou card por cima do título. Se for >= 10%, fazer o card nunca cruzar a caixa do título (empurrar o card para baixo dela ou pular o card) e conferir as letras dentro de x=60..1020. Depois, renderizar de novo 5cd8d4 e 4b93fd e comparar as folhas.
+
+## 18/11 05:55 PROPOSTA [CERTEZA] Palavra da legenda sobre olhos e nariz em Short de apresentador (talking head) (cc-sobra)
+- prova: sem-obra-555c4a_cap1_20261114: q02 ('TEGAR/FUNDO' sobre os olhos, grave), q06 ('INADIMPLÊNCIA' sobre os olhos) e q16 ('RENDIMENTO' sobre nariz e boca). É 1 Short neste lote, mas o mesmo defeito está em PROPOSTAS de 15/11 (10:28, 11:51 e 13:03), então é recorrente entre lotes. O júri também viu uma 'tarja preta translúcida' nos óculos em q02: conferir no log de 555c4a se houve [hardsub] lido; se não houve, essa tarja não deveria existir.
+- onde: fx_subtitles (posição Y da legenda palavra a palavra e _render_impacto_png) + detecção de hardsub/delogo no anime_auto para esse Short.
+- como testar: Detectar o rosto em 6 quadros. Se a caixa da legenda cruzar o rosto, descer a legenda para logo abaixo do queixo, dentro de y<=1580. Renderizar 555c4a de novo e conferir q02/q06/q16 na folha de quadros. Ler no log a linha '[hardsub] n/6' para decidir se a tarja nos óculos é defeito.
+
+## 18/11 07:05 PROPOSTA [CERTEZA] Desligar o card '📍 LOCAL MUNDO' que a palavra 'mundo' dispara no roteiro (cc-sobra)
+- prova: Neste lote: sem-obra-066c24 q03 ('LOCAL' no topo, o júri leu como erro de edição) e sem-obra-7830a6 q13 ('LOCAL MUNDO' com pino no topo). Antes: bleach_cap1_20261115 (cobriu o título e o @), bleach_cap1_20261117 q07, adventure-time_cap1_20261111 q10 (sobre a boca do Jake), darwin-jihen_cap1_20261104 (sobre o @animescomia), sem-obra-59de6e q05 e a TRAVA do 7869fa em 05/11. Já foi proposto em 11/11 17:40, 17/11 03:16 e 17/11 18:09, e ninguém aplicou. A regra de roteiro de 13/11 contra 'LOCAL MUN' não resolveu, então o card vem do código e não do texto.
+- onde: Função que monta os cards/stickers de palavra-chave sobre o vídeo, provavelmente o detector de 'lugar' que vira card com ícone de pino. Achar com grep '📍' e 'LOCAL' nos .py de D:\video-fila (esta sessão não tem permissão de leitura fora de linhas\CORTES). Correção: tirar o tipo LOCAL do mapa de cards, ou exigir um nome próprio de lugar e nunca palavras genéricas ('mundo', 'local', 'aqui'). Card nunca pode ir na faixa do título/@ do topo.
+- como testar: Renderizar de novo sem-obra-066c24 e sem-obra-7830a6 e conferir q03 e q13 sem o card. Depois rodar D:\tmp\folha_topo.py nos Shorts do dia e procurar 'LOCAL' com OCR nos quadros de 1 em 1 s (o card aparece no meio do Short, não no 1,5 s). Meta: 0 ocorrências em 20 Shorts.
+
+## 18/11 07:05 PROPOSTA [CERTEZA] Guardar na trava do júri o card 'LOCAL' como texto de erro (cc-sobra)
+- prova: O júri viu o card em 7 Shorts de 04/11 a 17/11, mas só travou 1 (7869fa). É o mesmo caso da lição de 28/10: o júri vê o defeito de texto e ninguém age.
+- onde: cortes_juri._trava_texto_erro: incluir na lista de padrões o texto 'LOCAL MUNDO' / 'LOCAL MUND' / sticker 'LOCAL' que o júri descreve.
+- como testar: Passar de novo o juri.json do bleach_cap1_20261115 e do adventure-time_cap1_20261111 pela trava e confirmar que os 2 seriam segurados. Passar um juri.json limpo (sem-obra-d99606) e confirmar que ele não é segurado.

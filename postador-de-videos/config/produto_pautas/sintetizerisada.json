@@ -90,6 +90,76 @@
    "ideia": "Ficar sobrecarregado respondendo dezenas de mensagens repetitivas acaba com agendamentos automáticos com IA direto no WhatsApp.",
    "pergunta_cliente": "Como me livro de passar o dia inteiro digitando horário vago no WhatsApp?",
    "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "fim_duplo_agendamento",
+   "tipo": "como_funciona",
+   "ideia": "A IA gerencia os horários no WhatsApp sem conflito e sem duplo agendamento entre clientes que pedem o mesmo intervalo.",
+   "pergunta_cliente": "Dois clientes correm o risco de marcar o mesmo horário juntos?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "domingo_sem_interrupcao",
+   "tipo": "caso_de_uso",
+   "ideia": "No seu dia de folga no domingo, a IA agenda, confirma e reagenda sozinha direto no WhatsApp sem interromper seu descanso.",
+   "pergunta_cliente": "Posso me desconectar no final de semana sem perder agendamentos?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "duvida_remarcacao_direta",
+   "tipo": "pergunta_frequente",
+   "ideia": "Para quem tem receio de confusão na troca de horários, a IA reagenda sozinha direto no WhatsApp sem gerar conflito.",
+   "pergunta_cliente": "Se a pessoa quiser mudar o dia, ela faz isso direto pela conversa?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "cliente_desiste_tarde",
+   "tipo": "dor",
+   "ideia": "Mensagens de cancelamento chegam de madrugada e a IA reagenda sozinha no WhatsApp para preencher o espaço sem conflito.",
+   "pergunta_cliente": "O que acontece quando o cliente avisa em cima da hora que não vai?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "sem_instalacao_complexa",
+   "tipo": "objecao",
+   "ideia": "Pensar que o cliente precisa baixar aplicativos cai por terra, pois a IA agenda, confirma e reagenda sozinha direto no WhatsApp.",
+   "pergunta_cliente": "O meu público precisa instalar algum aplicativo novo?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "conflito_de_horarios_duvida",
+   "tipo": "pergunta_frequente",
+   "ideia": "Quem atende horários concorridos conta com a IA que agenda sem conflito e sem duplo agendamento direto no WhatsApp.",
+   "pergunta_cliente": "O sistema impede que duas pessoas ocupem a mesma vaga?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "reagendamento_sem_atrito",
+   "tipo": "como_funciona",
+   "ideia": "O cliente solicita novo dia no WhatsApp e a IA reagenda sozinha sem conflito e sem duplo agendamento de forma automática.",
+   "pergunta_cliente": "O processo de remarcar é fácil para o cliente final?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "funciona_mesmo_sem_atendente",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dúvidas sobre precisar de alguém no computador são respondidas pelo fato da IA agendar, confirmar e reagendar sozinha direto no WhatsApp.",
+   "pergunta_cliente": "Preciso ter alguém monitorando o computador o tempo todo?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "antes_depois_falhas_caderno",
+   "tipo": "antes_depois",
+   "ideia": "Antes o controle manual gerava marcações sobrepostas, depois a IA passou a marcar horários sem conflito e sem duplo agendamento.",
+   "pergunta_cliente": "Minhas falhas manuais de marcação vão parar de acontecer?",
+   "criada": "2026-11-18T08:01:33"
+  },
+  {
+   "id": "passo_a_passo_confirmacao",
+   "tipo": "como_funciona",
+   "ideia": "Com agendamentos automáticos com IA, a própria ferramenta agenda e confirma sozinha direto no WhatsApp do cliente.",
+   "pergunta_cliente": "A confirmação da presença é feita automaticamente pelo sistema?",
+   "criada": "2026-11-18T08:01:33"
   }
  ]
 }

@@ -129,146 +129,147 @@
  ],
  "historico_notas": [
   {
-   "video": "video.mp4",
-   "conta": "inovarecom.ia",
-   "formato": "dono_e_cena_veo+editor",
-   "nota": 7.62,
+   "video": "disparoemmassa_ia_20261117_083738.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 7.5,
    "notas": {
     "legibilidade": 10.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261117_101728.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
     "movimento": 4.0,
     "roteiro_marca": 10.0,
-    "diretor": 6.5
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261117_122241.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "inovarecom.ia",
-   "formato": "dono_e_cena_veo+editor",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261117_154653.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261117_165404.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final+editor",
    "nota": 6.75,
    "notas": {
     "legibilidade": 7.0,
-    "movimento": 5.0,
-    "roteiro_marca": 9.0,
-    "diretor": 6.0
-   }
-  },
-  {
-   "video": "futebolcom_ia2_20261115_184500.mp4",
-   "conta": "futebolcom.ia2",
-   "formato": "dono_abre_fecha",
-   "nota": 5.33,
-   "notas": {
-    "legibilidade": 6.0,
-    "movimento": 5.0,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "futebolcom.ia2",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 6.38,
-   "notas": {
-    "legibilidade": 6.0,
-    "movimento": 5.0,
-    "roteiro_marca": 9.0,
-    "diretor": 5.5
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "futebolcom.ia2",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 6.88,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 5.5,
-    "roteiro_marca": 9.0,
-    "diretor": 6.0
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "futebolcom.ia2",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 7.5,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 7.0,
-    "roteiro_marca": 10.0,
-    "diretor": 6.0
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "futebolcom.ia2",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 7.25,
-   "notas": {
-    "legibilidade": 7.0,
     "movimento": 6.0,
-    "roteiro_marca": 10.0,
+    "roteiro_marca": 8.0,
     "diretor": 6.0
    }
   },
   {
-   "video": "sintetizerisada_20261115_223919.mp4",
-   "conta": "sintetizerisada",
-   "formato": "dono_tres_veo_final",
-   "nota": 5.95,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 4.0,
-    "roteiro_marca": 7.0,
-    "diretor": 5.8
-   }
-  },
-  {
    "video": "video.mp4",
-   "conta": "sintetizerisada",
+   "conta": "crmchatwoot.ia",
    "formato": "dono_tres_veo_final+editor",
-   "nota": 6.25,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 4.0,
-    "roteiro_marca": 9.0,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "disparoemmassa_ia_20261116_020642.mp4",
-   "conta": "disparoemmassa.ia",
-   "formato": "dono_abre_fecha",
-   "nota": 6.12,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 5.0,
-    "roteiro_marca": 7.0,
-    "diretor": 5.5
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "disparoemmassa.ia",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 7.75,
+   "nota": 7.25,
    "notas": {
     "legibilidade": 9.0,
     "movimento": 6.0,
-    "roteiro_marca": 10.0,
-    "diretor": 6.0
+    "roteiro_marca": 7.0,
+    "diretor": 7.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261118_050532.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 5.0,
+    "diretor": 5.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "disparoemmassa.ia",
+   "conta": "futebolcom.ia2",
    "formato": "dono_abre_fecha+editor",
    "nota": 6.0,
    "notas": {
     "legibilidade": 6.0,
     "movimento": 6.0,
-    "roteiro_marca": 6.0,
-    "diretor": 6.0
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
    }
   }
  ],
@@ -297,15 +298,15 @@
  },
  "placar_formatos": {
   "dono_uma_cena": [
-   8,
-   3
+   9,
+   4
   ],
   "dono_abre_fecha": [
-   8,
+   10,
    0
   ],
   "dono_mesma_foto": [
-   6,
+   7,
    0
   ],
   "dono_e_cena_veo": [
@@ -321,7 +322,7 @@
    1
   ],
   "dono_tres_veo_final": [
-   3,
+   5,
    0
   ],
   "quatro_veo": [
@@ -333,7 +334,7 @@
    0
   ],
   "sem_dono": [
-   20,
+   21,
    7
   ]
  },

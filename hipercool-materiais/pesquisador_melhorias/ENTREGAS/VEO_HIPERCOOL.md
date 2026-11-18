@@ -221,3 +221,36 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-17 23:59 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2351.md`
 - [INÉDITO] github.com/LeoRToro/depth-parallax-pipeline — ★0, push 2026-06-14, MIT — Camera-moving-around-a-static-object video from N real photos, no generative video model - optical-flow morph + depth-map parallax (Depth An
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 05:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0507.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 05:36 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_0531.md`
+- [INÉDITO] github.com/tk256ailab/fbx2vrma-converter — ★68, push 2026-02-23, MIT — Convert FBX animation files to VRMA format
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 06:32 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0626.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 06:40 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0636.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 06:52 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0646.md`
+- [INÉDITO] github.com/pangpang888/image-story-assembly-hardening — ★0, push 2026-09-18, MIT — Agent Skill: scale-only failure modes and acceptance criteria for assembling long (>=5 min / >=40 shots) image-story videos with ffmpeg - fi
+
+## [ ] PENDENTE — 2026-11-18 07:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0656.md`
+- [INÉDITO] github.com/DATGMAC/panelforge — ★0, push 2026-07-08, MIT — Manga/manhwa panel segmentation + reading-order numbering — tiny specialized U-Net, no pretrained backbone
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 07:12 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0706.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 07:25 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0718.md`
+- [INÉDITO] github.com/PhantomAnas/Slideshow-Maker — ★0, push 2026-11-04, MIT — Photos or image URLs to polished slideshow videos: Ken Burns, transitions, blur fill, logo, end card, music. PySide6 + FFmpeg.
+- [INÉDITO] github.com/trancongtien406/ai-shorts-pipeline — ★0, push 2026-11-14, MIT — Topic → faceless vertical short (YouTube Shorts/TikTok): LLM script, free edge-tts voice, Ken Burns motion, word-by-word captions, FFmpeg re

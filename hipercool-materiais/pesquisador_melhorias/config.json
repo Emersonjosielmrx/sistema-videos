@@ -24875,6 +24875,62 @@
         "formas de achar via yt-dlp os recaps de anime/manhwa com mais views em canais de qualquer porte (views por inscrito, idade do vídeo)"
       ],
       "origem": "area_gemini_web_sessao_cookie__sonnet_0356.md 2026-11-18"
+    },
+    {
+      "id": "playlist_proxima",
+      "nome": "Playlists e fim de vídeo que levam ao próximo",
+      "subtemas": [
+        "técnicas em Python/yt-dlp de ordenar séries, telas finais e \"próximo vídeo\" para canal novo"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0426.md 2026-11-18"
+    },
+    {
+      "id": "ordem_leitura_paineis",
+      "nome": "Ordem de leitura de painéis",
+      "subtemas": [
+        "achar projetos pequenos que ordenam painéis de mangá (direita para a esquerda) e de webtoon (rolagem) por geometria, para evitar cortes fora de ordem nos recaps"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0507.md 2026-11-18"
+    },
+    {
+      "id": "ritmo_corte_painel",
+      "nome": "Duração de cada painel pela fala",
+      "subtemas": [
+        "achar truques para definir quanto tempo cada painel fica na tela a partir da duração da fala e do tamanho do texto, e para parar de repetir o mesmo movimento"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0507.md 2026-11-18"
+    },
+    {
+      "id": "render_segmentos",
+      "nome": "Render em segmentos e paralelo em PC fraco e Android",
+      "subtemas": [
+        "scripts Python + FFmpeg que renderizam cenas separadas e depois juntam, retomam após queda e liberam disco ao fim"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0646.md 2026-11-18"
+    },
+    {
+      "id": "capas_primeiros30s",
+      "nome": "Capas e gancho dos primeiros 30 s",
+      "subtemas": [
+        "repositórios pequenos que analisam retenção dos 30 s iniciais e geram capa a partir de painel, em Python + ffmpeg, sem modelo novo"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0718.md 2026-11-18"
+    },
+    {
+      "id": "render_android_termux",
+      "nome": "Render em celular Android",
+      "subtemas": [
+        "receitas de ffmpeg e Python no Termux para filas de render em paralelo, e como liberar disco"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0718.md 2026-11-18"
+    },
+    {
+      "id": "playlist_serie_proxima",
+      "nome": "Playlists e séries que levam ao próximo vídeo",
+      "subtemas": [
+        "scripts Python/yt-dlp que montam ordem de playlist e \"próximo vídeo\" em fim de tela"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0746.md 2026-11-18"
     }
   ],
   "projetos": [
