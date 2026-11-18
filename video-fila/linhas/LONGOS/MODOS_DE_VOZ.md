@@ -43,8 +43,8 @@ No p3 o clima NÃO troca mais a base (antes tensão/épico forçavam Francisca e
 
 O que a sincronização automática NÃO leva (feito à mão em 18/11; máquina nova precisa repetir):
 - pacote `piper-tts==1.8.0` (`--no-deps`) no `venv_vozes`; no STI também `kokoro-onnx==0.6.1`;
-- `models\piper\pt_BR-cadu-medium.onnx` (+ `.json`) e `amostras_voz6-10-18_vozes_clonadas\_bases_piper.wav`;
-- `tom_3_piper.txt` em cada `models
+- `models\piper\pt_BR-cadu-medium.onnx` (+ `.json`) e `amostras_voz\2026-10-18_vozes_clonadas\_bases\3_piper.wav`;
+- `tom_3_piper.txt` em cada `models\rvc\vozes\<voz>` (o `tom_fixo` cria sozinho no Windows se a amostra existir).
 vcozes\<voz>` (o `tom_fixo` cria sozinho no Windows se a amostra existir).
 Voz nova no Drive: rodar `voz_clonada.tom_fixo(voz, "3_piper")` e subir o `tom_3_piper.txt` junto.
 Backups: `anime_tts.py.bak_20261118_*`, `voz_clonada.py.bak_*`, `voz_clonada_nuvem.py.bak_*`, `sti_short.sh.bak_*`;
