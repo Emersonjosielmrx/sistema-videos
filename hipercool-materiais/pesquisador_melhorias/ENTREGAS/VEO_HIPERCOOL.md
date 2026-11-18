@@ -287,3 +287,15 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 14:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1406.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 17:12 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatares_stop__sonnet_1706.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 17:24 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1716.md`
+- [INÉDITO] github.com/0xnirlin/photo-slideshow-maker — ★0, push 2026-10-31, MIT — Turn a folder of photos into an MP4 slideshow with Ken Burns motion, crossfades, a title and music, using ffmpeg.
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 17:34 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1727.md`
+- (todos os itens desta pesquisa foram reprovados)

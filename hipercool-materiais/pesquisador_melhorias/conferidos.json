@@ -19043,5 +19043,75 @@
     "arquivado": false,
     "descricao": "A browser-based tool for posing VRM avatars (bone rotation/position, expressions, camera, background) and saving the result.",
     "data": "2026-11-18"
+  },
+  "mzlogin/awesome-adb": {
+    "ok": true,
+    "nome": "mzlogin/awesome-adb",
+    "estrelas": 12556,
+    "push": "2026-09-29",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "ADB Usage Complete / ADB 用法大全",
+    "data": "2026-11-18"
+  },
+  "0xnirlin/photo-slideshow-maker": {
+    "ok": true,
+    "nome": "0xnirlin/photo-slideshow-maker",
+    "estrelas": 0,
+    "push": "2026-10-31",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn a folder of photos into an MP4 slideshow with Ken Burns motion, crossfades, a title and music, using ffmpeg.",
+    "data": "2026-11-18"
+  },
+  "ionglavan1801/ken-burns-montage": {
+    "ok": true,
+    "nome": "IonGlavan1801/ken-burns-montage",
+    "estrelas": 0,
+    "push": "2026-10-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Python + ffmpeg CLI: still images to a 9:16 Ken Burns montage with burned-in SRT captions and voice-over audio. Headless, no GUI editor.",
+    "data": "2026-11-18"
+  },
+  "jacob-bd/notebooklm-mcp-cli": {
+    "ok": true,
+    "nome": "jacob-bd/gemini-notebook-mcp-cli",
+    "estrelas": 6537,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Programmatic access to Gemini Notebook - via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.",
+    "data": "2026-11-18"
+  },
+  "mp3wizard/notebooklm-mcp-cli": {
+    "ok": true,
+    "nome": "mp3wizard/notebooklm-mcp-cli",
+    "estrelas": 4,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "NotebookLM MCP CLI - Access NotebookLM via Claude with security fixes and FastMCP 1.0 compatibility",
+    "data": "2026-11-18"
+  },
+  "dmitriyraspel/shortspublisherservice": {
+    "ok": true,
+    "nome": "dmitriyraspel/ShortsPublisherService",
+    "estrelas": 0,
+    "push": "2026-11-02",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Service for publishing videos",
+    "data": "2026-11-18"
+  },
+  "xx-zxxz/farm-console": {
+    "ok": true,
+    "nome": "xx-zxxz/farm-console",
+    "estrelas": 0,
+    "push": "2026-10-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android adb farm panel: keep-alive watchdog, battery and thermal visibility, remote controls - python stdlib only",
+    "data": "2026-11-18"
   }
 }

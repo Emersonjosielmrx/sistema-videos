@@ -442,3 +442,9 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Verificação dos logs e registro no diário.
 - CONSERTO PROPOSTO: Nenhum. O comportamento de pular vídeos marcados como mortos/travados em contas_travadas.json e o tratamento de timeout pontual em coletas do YouTube Studio já ocorrem de forma autônoma pelo mecanismo de métricas.
 - Estado: NADA A FAZER
+## 20261118_1740 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): Os arquivos `fila_ciclo.log` e `fila_postagem.log` registram execução contínua e normal dos ciclos a cada 20 minutos (ex: `[17:27:01]   Shorts em pt: canal parado, sai já` e checagens periódicas de janela no disco D:). Processos em Python/pythonw ativos e respondendo normalmente.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. A fila automática está rodando normalmente nos ciclos de 20 minutos.
+- Estado: NADA A FAZER

@@ -1,16 +1,24 @@
 {
-  "funcionando": true,
-  "previsao_avisada": null,
-  "teste_falhou_em": null,
+  "funcionando": false,
+  "previsao_avisada": "2026-11-18T20:47",
+  "teste_falhou_em": "2026-11-18T19:35:01.657008",
   "leitura": {
-    "em": "2026-11-18T16:25:28",
+    "em": "2026-11-18T20:34:57",
     "contas": 29,
-    "prontas": 1,
+    "prontas": 0,
     "voltas": [
-      "2026-11-18T16:31",
-      "2026-11-18T16:43"
+      "2026-11-18T20:47",
+      "2026-11-18T20:49",
+      "2026-11-18T20:58",
+      "2026-11-18T21:26",
+      "2026-11-18T21:41",
+      "2026-11-18T21:56",
+      "2026-11-18T21:57",
+      "2026-11-18T22:22",
+      "2026-11-18T22:25",
+      "2026-11-18T23:22"
     ],
     "exata": false,
-    "cookies_mortos": 24
+    "cookies_mortos": 20
   }
 }

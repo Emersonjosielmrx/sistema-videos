@@ -1,0 +1,152 @@
+{
+ "conta": "vpsblindada.ia",
+ "produto": "vps_infra",
+ "marca": "VPS Blindada",
+ "titulo": "Como manter seu sistema seguro na internet",
+ "legenda": "Coloque seu sistema na internet sem correr riscos desnecessários. Tenha sua VPS configurada com Traefik para gerenciar conexões com segurança.\n\nSaiba mais no link do perfil.\n\n👉 Chame no direct • link no perfil\n\n#vps #servidor #hospedagem #seguranca #tecnologia",
+ "roteiro": {
+  "gancho_tela": "Seu sistema seguro na web",
+  "pergunta_cliente": "Medo de colocar seu sistema online e sofrer invasões?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu tinha receio de expor meu sistema na internet sem proteção adequada nas conexões.",
+    "visual": "apresentador",
+    "prompt_en": "a focused Brazilian business owner wearing glasses in a modern tidy office, natural light, professional atmosphere",
+    "cenario_en": "standing in a modern tidy office with clean desks and soft daylight",
+    "real_tema": "segurança ao expor sistemas",
+    "destaques": [
+     "expor meu sistema",
+     "sem proteção adequada"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261118_135653_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A estrutura configurada com Traefik gerencia o tráfego e protege as conexões de forma segura.",
+    "visual": "apresentador",
+    "prompt_en": "a confident Brazilian man wearing glasses in a bright tidy technology workspace, subtle background",
+    "cenario_en": "standing in a bright well-lit corporate office beside a clean glass partition",
+    "real_tema": "gerenciamento com Traefik",
+    "destaques": [
+     "gerencia o tráfego",
+     "de forma segura"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Como protejo as conexões do meu sistema na web?"
+     },
+     {
+      "de": "empresa",
+      "texto": "O Traefik configurado na VPS gerencia todo o tráfego com proteção."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, sistema no ar sem dor de cabeça."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261118_135653_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261118_135653_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje meu sistema roda online com tranquilidade, tráfego protegido e servidor seguro para o negócio.",
+    "visual": "apresentador",
+    "prompt_en": "smiling Brazilian professional with glasses in a tidy contemporary workspace, cinematic lighting",
+    "cenario_en": "standing by a clean tidy desk in an organized modern office",
+    "real_tema": "estabilidade e tranquilidade",
+    "destaques": [
+     "roda online",
+     "servidor seguro"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261118_135653_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261118_135653_1.png"
+   }
+  ],
+  "legenda": "Coloque seu sistema na internet sem correr riscos desnecessários. Tenha sua VPS configurada com Traefik para gerenciar conexões com segurança.\n\nSaiba mais no link do perfil.",
+  "titulo": "Como manter seu sistema seguro na internet",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "traefik_seguranca_web",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 822,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\vpsblindada.ia_20261118_134310\\dono_3.mp4",
+ "duracao_s": 31.04,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-18T15:27:12",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.58,
+   "fala": "Medo de colocar seu sistema online e sofrer invasões?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.58,
+   "fim": 11.43,
+   "fala": "Eu tinha receio de expor meu sistema na internet sem proteção adequada nas conexões.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.43,
+   "fim": 19.26,
+   "fala": "A estrutura configurada com Traefik gerencia o tráfego e protege as conexões de forma segura.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 19.26,
+   "fim": 27.1,
+   "fala": "Hoje meu sistema roda online com tranquilidade, tráfego protegido e servidor seguro para o negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.1,
+   "fim": 31.04,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.62,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 6.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.5
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

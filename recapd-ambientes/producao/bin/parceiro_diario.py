@@ -1345,8 +1345,13 @@ def postar(args):
     dests = list(destinos(c).items())
     fila = [(cid, dst, True) for cid, dst in dests if any(faltas(cid, dst))] + [(cid, dst, False) for cid, dst in dests]
     parar = set()  # deu timeout/erro nesta rodada: não tenta de novo na 2ª passada
+    # 18/11: canal removido/travado (trava_conta) era descoberto só no envio — DEPOIS de trazer o vídeo do Drive
+    # (~2-4 min por canal morto, toda rodada: Esporte/Bicho/Game Noturno). Pula antes. PARCEIRO_PULA_TRAVADO=0 desliga.
+    travados = _canais_travados(c) if os.environ.get("PARCEIRO_PULA_TRAVADO", "1") != "0" else set()
+    if travados:
+        log(f"postagem: {len(travados)} canal(is) travado(s) pelo YouTube pulado(s) antes do Drive")
     for cid, dst, so_urgente in fila:
-        if cid in parar:
+        if cid in parar or cid in travados:
             continue
         nome = dst["nome"]
         if _em_cooldown_limite(cid):

@@ -11,6 +11,16 @@ Descobrir se o que derrubou os 12 canais (17/11) foi o **login em massa** (vári
 | emersonjosiel2043 | S20 | 3G (chip) | orgânica 3G |
 | emersonjosiel2052 | S20 Ultra | **Wi-Fi da casa** | **parâmetro** (mesmo celular/app, IP da casa) |
 
+| emersonjosiel2054 | A3 | 4G (chip Pague Menos, Wi-Fi off) | **teste de contágio**: aparelho com ~59 contas logadas (inclusive 4 Kaggle vivas) |
+
+**A3 = teste diferente (dona 18/11 16h):** o A3 tem várias contas antigas logadas. A ideia é usar SÓ a 2054 nele (criar
+canal, postar) e deixar as outras logadas, sem mexer nelas, para ver se uma conta nova usada no aparelho influencia o
+banimento das contas que já estavam lá. Cada celular tem a sua conta nova = cada um é um teste isolado (uma conta nova
+por aparelho, nunca duas).
+O que olhar no A3: (a) a 2054 é punida? (b) alguma das contas antigas do A3 é punida DEPOIS do uso da 2054 (comparar com
+as mesmas contas antes de 18/11)? Se (b) sim e nos outros aparelhos não → usar conta nova num celular com muitas contas
+põe as antigas em risco.
+
 Regras do teste (não quebrar, senão o resultado não vale):
 - Tudo da conta é feito **no próprio celular, pelo app do YouTube**: criar canal, foto, banner, descrição, postar.
   Nada pelo PC, nada pelo Chrome do cofre, nenhum robô de PC falando como essas contas.
@@ -60,4 +70,31 @@ vimos é que **logins em massa / simultâneos** é o que causa banimento. Deslog
 - 18/11 ~10:35: documentado. Contas criadas pela dona nos aparelhos. Falta: confirmar que cada aparelho só tem a conta
   dele, criar o canal pelo app, 1º post. Fato Chocante e Por Dentro (controle PC) com 1º Short agendado 11:05/11:10.
 - 18/11 10:45: 1º Short dos canais de controle (PC): Fato Chocante https://youtu.be/Em6oLFNG6yo (11:15), Por Dentro https://youtu.be/1Em7b7KE6WE (11:30, sem capa: telefone não verificado).
+- 18/11 15:19: canal da 2042 criado pelo app no A2 = **Curioso Demais** (@CuriosoDemais-l6p), sem captcha.
+  1º Short pronto (pássaro, parceiro sem-obra-105c05) com a @ antiga (@codigointeligente-n7j) trocada pela
+  @CuriosoDemais-l6p: `D:\tmp\teste_remoto\desktop\curioso_passaro.mp4` (script `D:\tmp\canal_phikhanh\trocar_marca.py`,
+  render no desktop). Não postado: A2 caiu do 3G/Tailscale às 16:00. postar_celular.py não serve no A2 (uiautomator
+  "null root node" com o YouTube aberto) → postar à mão por print+toque.
+- 18/11 16:05: S20 Ultra NÃO tem a 2052 no Android (só foi criada no Chrome) — falta "Adicionar conta". App do YouTube
+  abre com aviso "contestação negada (spam)" de canal antigo. Tela mudando sozinha (busca, notícias) = alguém/outro
+  processo usando → parei de mexer.
+- ⚠️ Shorts de parceiro levam queimada a @ de canal NOSSO antigo: os 1ºs posts do Fato Chocante e Por Dentro saíram com
+  @...noturno e @curiosidadesnoturnasbr — liga os canais novos à família antiga. Antes de postar parceiro em canal de
+  teste: trocar a @ (trocar_marca.py).
 - 18/11 15:05: A2 com toque fantasma — automação parada; a dona decide (criar o canal da 2042 na mão ou tentar depois).
+- 18/11 16:20 — **S20 (2043): conta RESTRITA pelo Google.** O app abre direto em "Não foi possível acessar um produto do
+  Google — conteste a restrição de acesso à conta emersonjosiel2043" (formulário de contestação). Nada preenchido; tela
+  deixada aberta. (Já nasceu punida? criada no 3G hoje — 1º dado do teste.)
+- 18/11 16:23 — **A3 (2054):** a conta existia só no Chrome; ao adicionar no Android (Configurações > Adicionar conta)
+  o Google pediu "Confirme que é você — Não sou um robô (reCAPTCHA)". PAREI (regra): tela deixada aberta no A3.
+- G20: não tem conta nova de teste (só as antigas 2026-2038). A2 (2042): fora do ar (3G caiu 16:00).
+- S20 Ultra (2052): só no Chrome, falta Adicionar conta no Android (dona confere).
+- 18/11 16:40 — S20 Ultra: a dona confirmou que a 2052 já está no aparelho → falta criar o canal e fazer o 1º post (depois).
+- 18/11 16:38 — S20 (2043): formulário de contestação refeito pela dona, parado no campo "URL do canal suspenso". Não há
+  registro de canal criado na 2043 (nem @ nem ID UC…): a restrição apareceu logo após a conta ser criada.
+- 18/11 ~17:00 — dona: a restrição do S20 (2043) era BUG; S20, A2 e A3 normais. (Correção: o formulário de contestação NÃO foi enviado.)
+- 18/11 17:50 — **A2 (2042) 1º Short postado pelo app**: Curioso Demais, "NINGUÉM ESPERAVA que esse PÁSSARO esconde esse SEGREDO! 😱", agendado 18/11 21:00, não é para crianças (aparece "Programado"). Canal UCGUq0XSFjae30caBuP8a5kQ.
+- 18/11 18:23 — **A3 (2054) canal criado pelo app: Fatos Ocultos** @FatosOcultos-x8j (UCe9gcknfH3e0caH4nR9nSGQ), sem captcha.
+- 18/11 18:32 — **S20 Ultra (2052) canal criado pelo app: Segredos Revelados** @SegredosRevelados-q8h (UCRLyr94K9_kBIrSLzjh-eOQ), sem captcha.
+- 18/11 18:26 — **S20 (2043): "Esse nome não pode ser usado no seu canal"** para 2 nomes diferentes ("Mundo Curioso" e "Curiosidades do Mundo"); o @mundocuriosobr-h8e foi aceito. 2 nomes comuns recusados = provável trava da conta (a mesma que mostrou a restrição antes), não o nome. PAREI; tela "How you'll appear" deixada aberta. 2º dado do teste: a 2043 (3G) é a única com problema.
+- Falta: 1º Short em Fatos Ocultos e Segredos Revelados (vídeo único com a @ trocada, horário nobre).

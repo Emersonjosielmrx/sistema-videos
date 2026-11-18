@@ -25067,6 +25067,110 @@
         "buscar ideias de escolher o painel mais forte para abrir o vídeo e a capa, em Python simples com CPU"
       ],
       "origem": "area_camera_3d_painel__sonnet_1406.md 2026-11-18"
+    },
+    {
+      "id": "upload_playlist_celular",
+      "nome": "Ponte Short→longo e playlist pelo app",
+      "subtemas": [
+        "como o app do YouTube expõe playlist/vídeo relacionado ao subir, sem API"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1617.md 2026-11-18"
+    },
+    {
+      "id": "wifi_adb_fila",
+      "nome": "Reconexão e fila de vários celulares",
+      "subtemas": [
+        "pareamento `adb pair`/mDNS e lock por serial em Python puro"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1617.md 2026-11-18"
+    },
+    {
+      "id": "termux_fila",
+      "nome": "Render no celular Android",
+      "subtemas": [
+        "projetos pequenos com ffmpeg no Termux que dividem fila de render entre PC e celulares, com travas por arquivo"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1636.md 2026-11-18"
+    },
+    {
+      "id": "yt_policy_nao_original",
+      "nome": "Política YouTube \"conteúdo não original\" 2025–2026",
+      "subtemas": [
+        "ler a página oficial de monetização e o blog.youtube sobre o que o YouTube exige como transformação em recap/compilação, com data e trecho literal"
+      ],
+      "origem": "area_avatares_stop__sonnet_1706.md 2026-11-18"
+    },
+    {
+      "id": "longo_por_pais",
+      "nome": "Vídeo longo em outras línguas",
+      "subtemas": [
+        "blogs e relatos de criadores sobre o que muda por país (título, duração, horário), com repositórios de tradução de roteiro por yt-dlp + LLM"
+      ],
+      "origem": "area_avatares_stop__sonnet_1706.md 2026-11-18"
+    },
+    {
+      "id": "termux_render_pipeline",
+      "nome": "Render em celular Android via Termux",
+      "subtemas": [
+        "scripts prontos de FFmpeg em fila no Termux, com uso de CPU e temperatura medidos, só repositórios com mais de 20 estrelas ou com número de benchmark"
+      ],
+      "origem": "area_avatares_stop__sonnet_1706.md 2026-11-18"
+    },
+    {
+      "id": "render_lote_pc_fraco",
+      "nome": "Render em lotes e disco em PC fraco",
+      "subtemas": [
+        "ffmpeg longo de 1 a 4 h em lotes/segmentos, concat sem reencode, limpeza de disco entre etapas, scripts curtos em Python"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1716.md 2026-11-18"
+    },
+    {
+      "id": "termux_android_render",
+      "nome": "FFmpeg em Android (Termux)",
+      "subtemas": [
+        "projetos pequenos que renderizam com ffmpeg no celular, fila de jobs via adb, limites de térmica e RAM"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1716.md 2026-11-18"
+    },
+    {
+      "id": "camera_estabilidade",
+      "nome": "Estabilidade de pan/zoom em FFmpeg",
+      "subtemas": [
+        "exemplos de `crop`/`zoompan` sem tremor em CPU fraca"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1727.md 2026-11-18"
+    },
+    {
+      "id": "yt_regras_app",
+      "nome": "Regras oficiais do YouTube sobre upload automatizado e uso de app em celular",
+      "subtemas": [
+        "Páginas em support.google.com/youtube sobre automação, contas e conteúdo reutilizado, com link e data"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1924.md 2026-11-18"
+    },
+    {
+      "id": "upload_idempotente",
+      "nome": "Confirmação de publicação e reenvio sem duplicar",
+      "subtemas": [
+        "Projetos pequenos que verificam no Studio, pelo navegador, se o vídeo realmente subiu antes de reenfileirar"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1924.md 2026-11-18"
+    },
+    {
+      "id": "regras_upload",
+      "nome": "Limites oficiais de upload do YouTube",
+      "subtemas": [
+        "ler a página oficial de support.google.com/youtube sobre limite diário de uploads, duração máxima de Short e verificação de canal, para saber quantos vídeos por dia cada canal novo aguenta (tema 8)"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1947.md 2026-11-18"
+    },
+    {
+      "id": "pos_upload",
+      "nome": "Conferir se o Short realmente publicou",
+      "subtemas": [
+        "forma de confirmar, pelo navegador ou pela leitura da tela, o status do vídeo (processando, publicado, limite diário) antes de seguir a fila (tema 5)"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1947.md 2026-11-18"
     }
   ],
   "projetos": [

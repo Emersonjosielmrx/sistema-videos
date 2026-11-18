@@ -1,0 +1,153 @@
+{
+ "conta": "fabricademarketing.ia",
+ "produto": "fabrica_conteudo",
+ "marca": "Fábrica de Marketing IA",
+ "titulo": "Da ideia à postagem automática sem agendamento manual",
+ "legenda": "Você não precisa parar o seu trabalho para subir arte e agendar legenda manualmente. ⚙️\nCom a Fábrica de Conteúdo, o processo vai da ideia à postagem automática, incluindo blog com SEO, podcast e resposta em comentários.\nConheça a solução no link no perfil. 🚀\n\n👉 Chame no direct • link no perfil\n\n#marketingdeconteudo #seo #blog #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Postagem sem trabalho manual",
+  "pergunta_cliente": "Cansado de parar tudo para subir arte e legenda na rede?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu interrompia meu atendimento para subir artes e agendar textos manualmente nas redes.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a modern, tidy, well lit Brazilian consulting office",
+    "real_tema": "Rotina interrompida por postagem manual",
+    "destaques": [
+     "interrompia meu atendimento",
+     "subir artes"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261118_175957_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Na Fábrica de Conteúdo, o fluxo vai da ideia inicial direto para a postagem final, sem intervenção manual.",
+    "visual": "veo",
+    "prompt_en": "a professional working calmly at a clean office desk in a small Brazilian business, warm cinematic light, seen from the side, no readable screens or logos",
+    "cenario_en": "",
+    "real_tema": "Fluxo da ideia até a postagem final automática",
+    "destaques": [
+     "da ideia inicial",
+     "postagem final"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Eu preciso baixar a arte e agendar o post na minha conta?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Não precisa. A automação faz o caminho completo, da ideia até a postagem automática."
+     },
+     {
+      "de": "cliente",
+      "texto": "E os outros formatos também entram nesse fluxo?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, o blog post com SEO, o podcast e o agente de respostas nos comentários."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora minha empresa publica sem depender da minha mão, enquanto eu cuido dos clientes.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a modern, tidy, well lit Brazilian consulting office",
+    "real_tema": "Empresário focado no atendimento com postagem automática",
+    "destaques": [
+     "minha empresa publica",
+     "cuido dos clientes"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261118_175957_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261118_175957_1.png"
+   }
+  ],
+  "legenda": "Você não precisa parar o seu trabalho para subir arte e agendar legenda manualmente. ⚙️\nCom a Fábrica de Conteúdo, o processo vai da ideia à postagem automática, incluindo blog com SEO, podcast e resposta em comentários.\nConheça a solução no link no perfil. 🚀",
+  "titulo": "Da ideia à postagem automática sem agendamento manual",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "duvida_full_post",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 119,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\fabricademarketing.ia_20261118_175745\\dono_3.mp4",
+ "duracao_s": 30.38,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-18T18:29:23",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.58,
+   "fala": "Cansado de parar tudo para subir arte e legenda na rede?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.58,
+   "fim": 11.88,
+   "fala": "Eu interrompia meu atendimento para subir artes e agendar textos manualmente nas redes.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.88,
+   "fim": 19.27,
+   "fala": "Na Fábrica de Conteúdo, o fluxo vai da ideia inicial direto para a postagem final, sem intervenção manual.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 19.27,
+   "fim": 26.44,
+   "fala": "Agora minha empresa publica sem depender da minha mão, enquanto eu cuido dos clientes.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 26.44,
+   "fim": 30.38,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.12,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 8.0,
+   "diretor": 5.5
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

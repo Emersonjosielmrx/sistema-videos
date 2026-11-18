@@ -317,3 +317,18 @@ STATUS: OK
 - Causa provável: Ciclo normal de operação, com pausas de proteção ativas para o PC2 devido a falhas de Shorts e espera de novas fontes externas.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o alimentador do recap longo e processos no PC1 estão rodando corretamente).
 - Estado: NADA A FAZER
+
+## 20261118_1737 — Recap longo: 14 de 14 GPUs sem conta verificada; contas verificadas 3 de 71
+- Motivo / O que achei (trecho de log): [18/11 11:55] Recap longo: 14 de 14 GPUs sem conta (sem conta livre/verificada); contas verificadas: 3 de 71 || alimentador rodando normal e processos ativos || PC2 pausado automaticamente por protecao de shorts. | Causa provável: As contas livres/verificadas estão temporariamente esgotadas ou aguardando renovação de cota nas plataformas de geração, exigindo o ciclo normal de recarga. | CONSERTO PROPOSTO: Nenhum — aguardar renovação de cota e ciclo automático das contas Kaggle/Veo. | O que fez: Modo só aviso, verificado logs, fila e processos, acionado Wise Memory Optimizer. 
+- Estado: NADA A FAZER
+## 20261118_1758 — Recap longo e alimentador do PC1 operando normalmente, PC2 pausado por falha no parceiro
+- Motivo / O que achei (trecho de log): `[18/11 17:57:11] pilha: nenhum baixador de fora deu sinal nos últimos 5 min — não peço nada agora` e `[18/11 17:58:17] parceiro: PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json)`. Memória RAM livre estável acima de 5 GB.
+- Causa provável: Funcionamento normal do ciclo de preenchimento do recap longo, com pausa de proteção no parceiro do PC2.
+- CONSERTO PROPOSTO: Nenhum. O sistema está operando dentro dos parâmetros de segurança.
+- Estado: NADA A FAZER
+
+## 20261118_1958 — Cobertura ffmpeg com TimeoutExpired e disco D com 6.51 GB livres
+- Motivo / O que achei: O log _parceiro_20261118.log registrou TimeoutExpired no ffmpeg ao fazer cobertura e o disco D: tem apenas 6.51 GB livres (abaixo do limite de 8 GB).
+- Causa provável: Lentidão no FFmpeg ou alta carga de I/O por pouco espaço no disco D:.
+- CONSERTO PROPOSTO: Aumentar o timeout do ffmpeg de cobertura em anime_auto.py / parceiro e liberar espaço no disco D.
+- Estado: REVISAR

@@ -2812,3 +2812,53 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - robos_desastrad_20261116_144035_intro.mp4
   - robos_desastrad_20261116_144035_prop.mp4
   - robos_desastrad_20261116_144035_punch.mp4
+
+## 2026-11-18 17:10 — 258 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (258 MB) — 46 arquivos:
+  - aulas_ia_20261117_042209_final.mp4
+  - aulas_ia_20261117_042209_imp.mp4
+  - aulas_ia_20261117_042209_intro.mp4
+  - aulas_ia_20261117_042209_prop.mp4
+  - aulas_ia_20261117_042209_punch.mp4
+  - corpo_humano_20261117_055019_punch.mp4
+  - fatos_bizarros_20261114_220244_final.mp4
+  - fatos_bizarros_20261114_220244_imp.mp4
+  - fatos_bizarros_20261114_220244_intro.mp4
+  - fatos_bizarros_20261114_220244_prop.mp4
+  - fatos_bizarros_20261114_220244_punch.mp4
+  - humor_de_ia_20261118_033353_final.mp4
+  - humor_de_ia_20261118_033353_imp.mp4
+  - humor_de_ia_20261118_033353_intro.mp4
+  - humor_de_ia_20261118_033353_prop.mp4
+  - humor_de_ia_20261118_033353_punch.mp4
+  - noticias_de_ia_20261117_135856_final.mp4
+  - noticias_de_ia_20261117_135856_imp.mp4
+  - noticias_de_ia_20261117_135856_intro.mp4
+  - noticias_de_ia_20261117_135856_prop.mp4
+  - noticias_de_ia_20261117_135856_punch.mp4
+  - recenas_ia_20261118_030607_final.mp4
+  - recenas_ia_20261118_030607_imp.mp4
+  - recenas_ia_20261118_030607_intro.mp4
+  - recenas_ia_20261118_030607_prop.mp4
+  - recenas_ia_20261118_030607_punch.mp4
+  - robos_desastrad_20261117_180642_final.mp4
+  - robos_desastrad_20261117_180642_imp.mp4
+  - robos_desastrad_20261117_180642_intro.mp4
+  - robos_desastrad_20261117_180642_prop.mp4
+  - robos_desastrad_20261117_180642_punch.mp4
+  - stand-up_ia_20261117_072141_final.mp4
+  - stand-up_ia_20261117_072141_imp.mp4
+  - stand-up_ia_20261117_072141_intro.mp4
+  - stand-up_ia_20261117_072141_prop.mp4
+  - stand-up_ia_20261117_072141_punch.mp4
+  - stand-up_ia_20261117_204125_final.mp4
+  - stand-up_ia_20261117_204125_imp.mp4
+  - stand-up_ia_20261117_204125_intro.mp4
+  - stand-up_ia_20261117_204125_prop.mp4
+  - stand-up_ia_20261117_204125_punch.mp4
+  - super_slow_ia_20261117_231104_final.mp4
+  - super_slow_ia_20261117_231104_imp.mp4
+  - super_slow_ia_20261117_231104_intro.mp4
+  - super_slow_ia_20261117_231104_prop.mp4
+  - super_slow_ia_20261117_231104_punch.mp4

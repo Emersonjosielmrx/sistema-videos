@@ -185,8 +185,17 @@ def _um(simular=False):
             # 17/11: círculo vicioso — sem Short na fila nenhuma conta de curto RODA, e sem conta rodando aqui a meta
             # caía pra 1: 14 contas curto vivas e ociosas esperando 1 Short por vez. Agora só cai se NÃO há conta de
             # curto VIVA no pool (linhas_curto vazio). ABASTECEDOR_EXIGE_RODANDO=1 volta ao antigo.
-            parado = _lk._curto_rodando() is False and (
+            rodando = _lk._curto_rodando()
+            parado = rodando is False and (
                 os.environ.get("ABASTECEDOR_EXIGE_RODANDO") == "1" or not linhas)
+            # 18/11: 29 extras jogados fora hoje ("extra do Kaggle sem vídeo do Kaggle — não renderiza no PC"), cada um
+            # depois de ~3 min de PC1 (baixar+transcrever+roteiro) e NENHUM pedido chegou à central (contas de curto em
+            # 401/descanso). Sem conta de curto rodando, no máximo 1 extra por vez (é ele que testa se uma conta sobe).
+            # ABASTECEDOR_UM_SEM_RODANDO=0 desliga.
+            if (rodando is False and not parado and os.environ.get("ABASTECEDOR_UM_SEM_RODANDO", "1") != "0"
+                    and meta > 1):
+                log(f"nenhuma conta de curto RODANDO no Kaggle ({len(linhas)} viva(s) no pool) — meta {meta} -> 1")
+                meta = 1
             if parado or _lk.kaggle_em_pausa():
                 if meta > sem:
                     log(f"nenhuma conta de curto rodando no Kaggle — meta {meta} -> {sem} (o extra renderizaria no PC1)")

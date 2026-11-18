@@ -6647,3 +6647,81 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1511.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 16:32 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1617.md`
+
+- [INÉDITO] github.com/mzlogin/awesome-adb — ★12556, push 2026-09-29, MIT — ADB Usage Complete / ADB 用法大全
+
+## 2026-11-18 16:46 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1636.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 16:59 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1651.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 17:12 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatares_stop__sonnet_1706.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 17:24 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1716.md`
+
+- [INÉDITO] github.com/0xnirlin/photo-slideshow-maker — ★0, push 2026-10-31, MIT — Turn a folder of photos into an MP4 slideshow with Ken Burns motion, crossfades, a title and music, using ffmpeg.
+
+## 2026-11-18 17:34 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1727.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 17:44 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1737.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 17:53 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1746.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 18:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1757.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 18:14 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1808.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 19:00 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1844.md`
+
+- [INÉDITO] github.com/mp3wizard/notebooklm-mcp-cli — ★4, push 2026-11-15, MIT — NotebookLM MCP CLI - Access NotebookLM via Claude with security fixes and FastMCP 1.0 compatibility
+
+## 2026-11-18 19:37 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1924.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 20:03 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1947.md`
+
+- [INÉDITO] github.com/xx-zxxz/farm-console — ★0, push 2026-10-26, MIT — Android adb farm panel: keep-alive watchdog, battery and thermal visibility, remote controls - python stdlib only
