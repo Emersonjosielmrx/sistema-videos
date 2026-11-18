@@ -1,11 +1,11 @@
-# Painel do Pesquisador automático (Sonnet 5.5 web) — 17/11 16:12
+# Painel do Pesquisador automático (Sonnet 5.5 web) — 17/11 20:07
 
 Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 min). Não editar à mão.
 
-- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **44/45** (MonitorSonnet 2026-11-17T16:04)
-- Rodando agora: nada
+- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **45/45** (MonitorSonnet 2026-11-17T20:04)
+- Rodando agora: area_camera_3d_painel desde 2026-11-17T20:07:00
 - Próxima pesquisa: assim que a atual terminar (+2 min), enquanto houver cota
-- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 27 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 0 — pasta `ENTREGAS\`
+- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 32 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 1 — pasta `ENTREGAS\`
 - Chats das linhas (o CobradorPesquisador manda os pendentes de hora em hora): CURTOS: claude-ff | LONGOS: claude-b3 | CAPAS: claude-b3 | VEO_HIPERCOOL: claude-ff
 - Cobrança por linha: **CURTOS** chat claude-ff FECHADO | **LONGOS** em dia | **CAPAS** em dia | **VEO_HIPERCOOL** em dia
 - Implantados pelos chats: **9** — `implantados.json`
@@ -19,18 +19,18 @@ Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 
 | 2026-11-14 | 107 | 55 | 0 | 0 | 52 | 8.3 | 19 | 18 |
 | 2026-11-15 | 104 | 44 | 0 | 2 | 58 | 8.0 | 10 | 10 |
 | 2026-11-16 | 104 | 69 | 7 | 0 | 28 | 6.0 | 28 | 27 |
-| 2026-11-17 | 65 | 50 | 2 | 0 | 13 | 7.4 | 57 | 56 |
+| 2026-11-17 | 83 | 64 | 2 | 0 | 17 | 7.2 | 66 | 65 |
 
 **Recomendação:** COTA: 2 pesquisa(s) hoje acabaram sem cota no meio — o motor espera a hora de volta das contas.
 
 Últimas pesquisas:
-- 2026-11-17T16:11:29 area_android_adb_automacao_upload: **sem_web** em 1.2 min, 0 novos (0 inéditos) — parou no passo 8 (4 ferramentas). com sobre agendar Shorts, limites diários de upload e verificação de canal Se quiser, rodo de novo agora com a primeira consulta de teste, para ver qual é o bloqueio antes de gastar as outras buscas.
-- 2026-11-17T15:42:49 area_android_adb_automacao_upload: **ok** em 24.1 min, 0 novos (0 inéditos)
-- 2026-11-17T15:27:21 area_android_adb_automacao_upload: **ok** em 7.8 min, 0 novos (0 inéditos)
-- 2026-11-17T14:36:36 area_android_adb_automacao_upload: **sem_cota_no_meio** em 17.0 min, 0 novos (0 inéditos) — parou no passo 10 (5 ferramentas). oltaram quase vazias. Vou tentar consultas mais curtas, com pausa entre elas. API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 1s) API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 1s) | próxima às 15:23 (volta da cota)
-- 2026-11-17T14:11:11 area_gemini_web_sessao_cookie: **sem_cota_no_meio** em 19.6 min, 0 novos (0 inéditos) — parou no passo 42 (14 ferramentas). o (HanaokaYuzu/Gemini-API), para extrair a técnica sem repetir o repositório. API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 2s) API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 2s) | próxima às 14:35 (volta da cota)
-- 2026-11-17T13:56:38 area_gemini_web_sessao_cookie: **ok** em 10.0 min, 0 novos (0 inéditos)
-- 2026-11-17T13:47:07 area_gemini_web_sessao_cookie: **ok** em 5.4 min, 0 novos (0 inéditos)
-- 2026-11-17T13:41:53 area_gemini_web_sessao_cookie: **sem_web** em 0.3 min, 0 novos (0 inéditos) — parou no passo 1 (0 ferramentas). as_yt_2026 | Regras oficiais do YouTube sobre conteúdo reutilizado e IA | ler as páginas em support.google.com/youtube e blog.youtube sobre monetização de conteúdo reaproveitado, com data e link exato
+- 2026-11-17T19:57:14 area_avatar_3d_comercial: **ok** em 5.6 min, 1 novos (1 inéditos)
+- 2026-11-17T19:48:09 area_android_adb_automacao_upload: **sem_web** em 1.6 min, 0 novos (0 inéditos) — parou no passo 4 (1 ferramentas). YouTube | hierarquia de telas do seletor de conta via uiautomator2, sem root adb_fila_celulares | Fila e travas multi-celular | trava por serial e reconexão Wi-Fi em lote, sem repetir IP entre contas
+- 2026-11-17T19:37:16 area_android_adb_automacao_upload: **erro** em 3.5 min, 0 novos (0 inéditos) — parou no passo 1 (0 ferramentas). API Error: No internet route — check your connection or VPN (EHOSTUNREACH) API Error: No internet route — check your connection or VPN (EHOSTUNREACH)
+- 2026-11-17T19:21:32 area_android_adb_automacao_upload: **ok** em 8.6 min, 0 novos (0 inéditos)
+- 2026-11-17T19:11:53 area_android_adb_automacao_upload: **ok** em 7.1 min, 0 novos (0 inéditos)
+- 2026-11-17T18:57:32 area_android_adb_automacao_upload: **ok** em 7.8 min, 1 novos (1 inéditos)
+- 2026-11-17T18:33:06 area_android_adb_automacao_upload: **ok** em 11.3 min, 2 novos (2 inéditos)
+- 2026-11-17T18:16:47 area_android_adb_automacao_upload: **ok** em 11.9 min, 0 novos (0 inéditos)
 
 Achados: `CATALOGO_DESCOBERTAS.md` | registro: `motor_registro.jsonl` | log: `motor_pesquisador.log`

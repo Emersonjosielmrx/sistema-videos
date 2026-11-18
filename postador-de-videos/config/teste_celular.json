@@ -1,0 +1,11 @@
+{
+ "_leia": "17/11 18h dona: teste pra saber se os 4 canais removidos hoje (CartuchoReact, ManhwaReact, InventoReact, Esporte Noturno) caíram pelos LOGINS nos celulares ou por POSTAR por eles. Estes canais (poucos inscritos, contas FORA do Kaggle, já logadas nos celulares) postam SÓ pelo celular; todos os outros postam SÓ pelo PC. Medir: se cair canal que só tem login no celular (e posta pelo PC) = o problema é o login; se cair só estes = é a postagem pelo app. Esvaziar 'canais' encerra o teste.",
+ "inicio": "2026-11-17",
+ "canais": [],
+ "canais_pausados": [
+  "inovare_eng",
+  "inovare_thai",
+  "forjareact"
+ ],
+ "_pausa": "17/11 19:35: PAUSADO — são 12 canais encerrados (todos tinham conta no G20); os 3 do teste também estão no G20 e postar por ele pode puxar a próxima onda. Só a dona religa."
+}

@@ -238,3 +238,37 @@ STATUS: OK
 - Estado: NADA A FAZER
 
 STATUS: OK
+## 20261117_1616 — Verificação do alimentador de parceiros (PC2 pausado) e monitor de saúde
+- Motivo / O que achei (trecho de log): limentar_pc2.log registra parceiro: PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json); nime_health_monitor.log aponta PermissionError: [WinError 32] em capar_shorts.log e ValueError: Invalid name '' em parceiro_postar.log.
+- Causa provável: Falhas consecutivas de processamento de Shorts no PC2 acionaram a proteção de pausa automática, além de concorrência de arquivos (WinError 32) e erro pontual de nome de canal no postador (ValueError: Invalid name '').
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar liberação ou verificação manual pelo operador, sem intervenção direta nos scripts ou estado de pausa).
+- Estado: PRECISA REVISÃO
+## 20261117_1716 — Alerta de SSLError temporário no discover_canal (@japafishinglife) e resiliência automática
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261117.log registrou aviso [discover_canal] API do site falhou em https://www.youtube.com/@japafishinglife/shorts (SSLError: HTTPSConnectionPool...). O sistema lidou com instabilidades de rede e seguiu postando Shorts com sucesso nas horas seguintes.
+- Causa provável: Instabilidade transitória de DNS/SSL na requisição HTTP com o YouTube, recuperada automaticamente por retry/listas em cache dos scripts subsequentes.
+- CONSERTO PROPOSTO: Nenhum (comportamento resiliente padrão do script, sem alteração necessária).
+- Estado: NADA A FAZER
+
+STATUS: OK
+## 20261117_1737 — Erro ValueError em parceiro_postar.log ao verificar política de envio
+- Motivo / O que achei (D:\recapd-ambientes\producao\logs\parceiro_postar.log): ValueError: Invalid name '' na função _chave_video em D:\postador-de-videos\bin\politica.py na linha 890 ao processar 
+.get("caminho") vazio ou inválido (Path("").with_name(...)).
+- Causa provável: O registro no ledger possui um campo caminho vazio ou nulo para algum vídeo antigo (como 	oy-story_cap1_20261102), fazendo com que pathlib.Path("") seja instanciado e falhe ao tentar substituir o sufixo.
+- CONSERTO PROPOSTO: Em D:\postador-de-videos\bin\politica.py (linha 889-892), verificar se o caminho não está vazio antes de chamar pathlib.Path(p), ou tratar o caso em que o caminho é vazio retornando string vazia ou o nome original. (Como o arquivo pertence a D:\postador-de-videos, vigiado por outra sessão, o ajuste deve ser feito lá).
+- Estado: PRECISA REVISÃO
+
+## 20261117_1742 — ValueError com caminho vazio em _chave_video (pelo painel)
+- Motivo / O que fiz (arquivos): Registros antigos do ledger (antes de 18/10) não têm campo 'caminho', causando ValueError ao tentar Path("").with_name("") na função _chave_video de D:\postador-de-videos\bin\politica.py:886-891. Adicionei proteção 'if not arquivo: return ""' no início da função para tratar caminho vazio/None. / Como conferi: teste com _chave_video(None) e _chave_video('') retornam '' sem erro; _chave_video(caminho_válido) funciona normalmente. / Como desfazer: botão "Desfazer" no painel (pedido 20261117_174212_d876)
+- Estado: RESOLVIDO
+## 20261117_1816 — Disco D: com 7.09 GB livres próximo ao limite mínimo de 8 GB
+- Motivo / O que achei: Disco D: com 7.09 GB livres (4.27% de 166.01 GB), abaixo do limite mínimo de 8 GB estabelecido para a produção. Processos como encher_pilha.log e alimentadores estão ativos e baixando materiais normalmente. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Acúmulo normal de materiais e arquivos temporários de trabalho na fila de render e workspaces.
+- CONSERTO PROPOSTO: Nenhum (o sistema de pilhas e os baixadores continuam funcionando, e o Wise Memory Optimizer gerencia a memória; limpeza agressiva não é permitida pelas regras do vigia).
+- Estado: NADA A FAZER
+
+
+## 20261117_1916 — recap longo: alimentador travado por ~50 min, já reiniciado automaticamente
+- Motivo / O que achei (trecho de log): Alimentador do recap longo travado por ~50 min sem dar a volta, já reiniciado automaticamente pelo sistema de vigilância geral.
+- Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera em JSON/API.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — travamento transitório já recuperado pelo reinício automático).
+- Estado: NADA A FAZER

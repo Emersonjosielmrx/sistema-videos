@@ -2008,3 +2008,13 @@
 - prova: love-after-world-domination q01: o gancho de 0-2 s é só 'RAPAZIADA', saudação de abertura. Isso viola a regra fixa 'dorama e filme: sem bordão/abertura do narrador'. Há só 1 Short no lote, então não vira alavanca agora. A regra 'comece direto no gancho' foi tirada de regras_roteiro em 13/11 e a lição de 26/10 diz que a regra de nicho tem de entrar também no bloco do narrador.
 - onde: Prompt do narrador de nicho (dorama/filme/manhwa) no gerador de roteiro; mais uma validação que descarta ou remove saudação na primeira frase antes da voz.
 - como testar: Listar os roteiro.txt dos últimos 7 dias dos canais de manhwa/dorama e contar quantos começam com saudação ('rapaziada', 'galera', 'salve'). Com 2 ou mais ocorrências, adicionar a regra a regras_roteiro no próximo lote.
+
+## 17/11 18:09 PROPOSTA [CERTEZA] Travar zona vertical da legenda dinâmica abaixo do rosto e acima de y=1580 (gemini-4-argon)
+- prova: Em sem-obra-5b4071_cap1_20261117 (q02 'DONO', q03 'PEGUEI') e sem-obra-919436_cap1_20261117 (q10 'MUNDO') a legenda palavra-a-palavra subiu sobre o rosto dos personagens; já em sem-obra-5b4071_cap1_20261117 (q13 'e ainda' / 'embaixo da mesa') e sem-obra-c2c852_cap1_20261117 (q13) elementos de texto desceram perto demais do limite inferior da zona segura.
+- onde: gerador de legendas / posicionamento ASS ou Remotion (cálculo de Y da legenda dinâmica e cards secundários)
+- como testar: Renderizar novamente sem-obra-5b4071_cap1_20261117 e sem-obra-919436_cap1_20261117 fixando a âncora Y da legenda na faixa inferior segura (ex.: y entre 1250 e 1520) e conferir nas folhas de quadros q02, q03, q10 e q13 se rostos ficam livres e textos acima de y=1580.
+
+## 17/11 18:09 PROPOSTA [CERTEZA] Validar faixa Y do delogo/hardsub na metade inferior e coibir stickers 'LOCAL MUNDO' cortados (gemini-4-argon)
+- prova: Em sem-obra-59de6e_cap1_20261117 (q06, q10, q12, q15) a legenda queimada em inglês ('She injured her an...', 'The members were worried', 'She asked other members to keep performing') ficou totalmente descoberta na borda inferior enquanto o filtro delogo borrou a perna da cantora no centro (q02), além de exibir sticker 'LOCAL MUND' cortado em q05.
+- onde: detector de hardsub (filtro de coordenadas Y da caixa de legenda) e camada de stickers/cards superiores
+- como testar: Rodar a detecção de hardsub em sem-obra-59de6e_cap1_20261117 restringindo a busca de legenda queimada à faixa inferior real do vídeo original e verificar na folha se o texto em inglês é coberto sem borrar o centro do palco.

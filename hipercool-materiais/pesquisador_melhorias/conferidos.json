@@ -18363,5 +18363,125 @@
     "arquivado": false,
     "descricao": "Universal command-line tool for managing iOS and Android devices, simulators, emulators and apps",
     "data": "2026-11-17"
+  },
+  "azrinaldi/gemini-stealth-bridge": {
+    "ok": true,
+    "nome": "azrinaldi/gemini-stealth-bridge",
+    "estrelas": 145,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Browserless Chrome uTLS + HTTP/2 OpenAI-compatible API daemon for Google Gemini Web (/v1/chat/completions & /v1/responses)",
+    "data": "2026-11-17"
+  },
+  "zhiyu1998/gemi2api-server": {
+    "ok": true,
+    "nome": "zhiyu1998/Gemi2Api-Server",
+    "estrelas": 403,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "HanaokaYuzu / Gemini-API 的服务端简单实现，仓库自动更新上游，支持gemini-4-argon、gemini-3.1-pro、gemini-4-hydrogen、gemini-3.5-flash-lite 等",
+    "data": "2026-11-17"
+  },
+  "bukowskireal/magpie-gemini-web": {
+    "ok": true,
+    "nome": "BUKOWSKIREAL/magpie-gemini-web",
+    "estrelas": 222,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Google AI Studio and Gemini Web provider for Magpie (Gemini 4 Carbon / Hydrogen / Argon, Nano Banana image generation, Deep Research), backe",
+    "data": "2026-11-17"
+  },
+  "mag1cfall/gemini-web2api": {
+    "ok": true,
+    "nome": "Mag1cFall/Gemini-Web2API",
+    "estrelas": 129,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "将 Google Gemini Web 转换为 OpenAI、Claude 和 Gemini 兼容 API",
+    "data": "2026-11-17"
+  },
+  "jianli9158/cpa-plugin-gemini-web2api": {
+    "ok": true,
+    "nome": "jianli9158/cpa-plugin-gemini-web2api",
+    "estrelas": 4,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini-Web2API native plugin for CLIProxyAPI (ported from Mag1cFall/Gemini-Web2API)",
+    "data": "2026-11-17"
+  },
+  "dinesh-1121/yt-uploader": {
+    "ok": true,
+    "nome": "DINESH-1121/YT-Uploader",
+    "estrelas": 0,
+    "push": "2026-10-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Android app for sharing Instagram Reels to YouTube Shorts",
+    "data": "2026-11-17"
+  },
+  "ilter2014/adb-qr": {
+    "ok": true,
+    "nome": "ilter2014/ADB-QR",
+    "estrelas": 1,
+    "push": "2026-10-28",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Windows-first CLI for Android ADB over Wi-Fi: generate pairing QR codes, discover mDNS services, pair devices, and manage wireless connectio",
+    "data": "2026-11-17"
+  },
+  "sharoobi/autowirelessdebuggingqr": {
+    "ok": true,
+    "nome": "sharoobi/AutoWirelessdebuggingQR",
+    "estrelas": 0,
+    "push": "2026-04-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": " ADB wireless debugging launcher that auto-detects ADB and Python, offers guided installs, opens QR pairing when needed, and reconnects Andr",
+    "data": "2026-11-17"
+  },
+  "aminmaskur88/youtube-reels": {
+    "ok": true,
+    "nome": "aminmaskur88/youtube-reels",
+    "estrelas": 0,
+    "push": "2026-10-09",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "YouTube to Facebook Reels Generator (Portrait 9:16) with Cinematic Blur, Template Frame, Auto-Split & Metadata for Facebook Reels",
+    "data": "2026-11-17"
+  },
+  "xtorimicz/social-bot": {
+    "ok": true,
+    "nome": "xToriMicz/social-bot",
+    "estrelas": 1,
+    "push": "2026-04-03",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Social Media Automation Bot — Facebook, YouTube, TikTok (Android Emulator + UIAutomator2)",
+    "data": "2026-11-17"
+  },
+  "liminode/speech-animation": {
+    "ok": true,
+    "nome": "LimiNode/speech-animation",
+    "estrelas": 0,
+    "push": "2026-10-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Engine-agnostic realtime speech animation for lip sync, visemes, and speech-driven facial cues.",
+    "data": "2026-11-17"
+  },
+  "philoso4er/why-this-sucks-autoedit": {
+    "ok": true,
+    "nome": "Philoso4er/why-this-sucks-autoedit",
+    "estrelas": 0,
+    "push": "2026-10-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free local auto-editor: stills + voiceover + captions -> Ken Burns, punch-ins, animated captions, music, SFX (ffmpeg + Python)",
+    "data": "2026-11-17"
   }
 }

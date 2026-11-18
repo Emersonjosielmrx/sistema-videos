@@ -1,0 +1,146 @@
+{
+ "conta": "fabricademarketing.ia",
+ "produto": "fabrica_conteudo",
+ "marca": "Fábrica de Marketing IA",
+ "titulo": "Respostas nos comentários enquanto você atende seus clientes",
+ "legenda": "Estava em atendimento e deixou comentários sem retorno nas suas publicações? 💬\nCom a Fábrica de Conteúdo, você conta com automação da ideia à postagem, blog com SEO, podcast e um agente de respostas para os comentários.\nConheça a solução pelo link no perfil. 🚀\n\n👉 Chame no direct • link no perfil\n\n#marketingdeconteudo #seo #blog #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Comentários sem resposta nos posts?",
+  "pergunta_cliente": "Como responder comentários nos posts enquanto estou atendendo clientes?",
+  "blocos": [
+   {
+    "rotulo": "A rotina",
+    "fala": "Quando estou atendendo um cliente na empresa, os comentários pedindo detalhes nas postagens ficavam esperando.",
+    "visual": "apresentador",
+    "prompt_en": "a clean and organized small Brazilian professional office, warm natural lighting, a business professional viewed from the side talking to a client, no readable text or screens, cinematic",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian consulting office",
+    "real_tema": "Dono ocupado atendendo clientes presenciais enquanto comentários nas redes sociais acumulam sem resposta",
+    "destaques": [
+     "atendendo um cliente",
+     "comentários pedindo detalhes"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261117_155048_1.png"
+   },
+   {
+    "rotulo": "O atendimento",
+    "fala": "Na Fábrica de Conteúdo, o agente de respostas atende os comentários enquanto o blog com SEO e o podcast rodam.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "Agente de respostas interagindo automaticamente nos comentários junto com automação de post, blog SEO e podcast",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Olá! Vi a postagem nova. Vocês fazem esse serviço para empresas da região?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Fazemos sim. Atendemos empresas com projetos personalizados para a sua necessidade."
+     },
+     {
+      "de": "cliente",
+      "texto": "Ótimo, como faço para explicar o que preciso?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Enviei uma mensagem para você com as informações para conversarmos melhor!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje eu sigo focado no meu trabalho e quem comenta recebe atenção com tudo automatizado.",
+    "visual": "apresentador",
+    "prompt_en": "a bright and tidy small Brazilian business reception desk, soft daylight, professional atmosphere, view from behind the desk, no text or logos",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian consulting office",
+    "real_tema": "Tranquilidade do empresário ao manter o atendimento aos comentários e a produção de conteúdo ativos",
+    "destaques": [
+     "focado no meu trabalho",
+     "tudo automatizado"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261117_155048_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261117_155048_1.png"
+   }
+  ],
+  "legenda": "Estava em atendimento e deixou comentários sem retorno nas suas publicações? 💬\nCom a Fábrica de Conteúdo, você conta com automação da ideia à postagem, blog com SEO, podcast e um agente de respostas para os comentários.\nConheça a solução pelo link no perfil. 🚀",
+  "titulo": "Respostas nos comentários enquanto você atende seus clientes",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "comentarios_sem_resposta",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 173,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\fabricademarketing.ia_20261117_154653\\dono_3.mp4",
+ "duracao_s": 32.78,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-17T16:09:30",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.28,
+   "fala": "Como responder comentários nos posts enquanto estou atendendo clientes?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.28,
+   "fim": 13.11,
+   "fala": "Quando estou atendendo um cliente na empresa, os comentários pedindo detalhes nas postagens ficavam esperando.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 13.11,
+   "fim": 21.0,
+   "fala": "Na Fábrica de Conteúdo, o agente de respostas atende os comentários enquanto o blog com SEO e o podcast rodam.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 21.0,
+   "fim": 28.83,
+   "fala": "Hoje eu sigo focado no meu trabalho e quem comenta recebe atenção com tudo automatizado.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.83,
+   "fim": 32.78,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 9,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

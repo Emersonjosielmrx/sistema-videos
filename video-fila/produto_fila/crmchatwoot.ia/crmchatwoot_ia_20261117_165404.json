@@ -1,0 +1,152 @@
+{
+ "conta": "crmchatwoot.ia",
+ "produto": "crm_chatwoot",
+ "marca": "CRM Chatwoot IA",
+ "titulo": "Chatwoot comum ou personalizado com IA?",
+ "legenda": "Uma estrutura pensada exatamente para a sua rotina comercial e suporte.\nTenha atendimento, tickets e histórico em um só lugar. Saiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Chatwoot comum ou com IA?",
+  "pergunta_cliente": "Perdendo controle dos atendimentos com ferramentas básicas?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Uma ferramenta padrão de mensagens não entende a rotina específica da sua empresa.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a bright, tidy modern Brazilian business office with warm natural light, professional atmosphere",
+    "real_tema": "",
+    "destaques": [
+     "ferramenta padrão",
+     "rotina específica"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261117_165835_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Nós adaptamos o sistema com inteligência artificial para o fluxo do seu negócio.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a clean, well-lit modern office desk in Brazil, tidy professional setting",
+    "real_tema": "",
+    "destaques": [
+     "adaptamos o sistema",
+     "inteligência artificial"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso de ajuda com meu pedido anterior."
+     },
+     {
+      "de": "empresa",
+      "texto": "Localizei seu histórico aqui. Já abri um chamado interno para resolver."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, muito obrigado pelo retorno rápido!"
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261117_165835_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261117_165835_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Sua equipe trabalha com muito mais clareza tendo tudo reunido no dia a dia.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a bright, tidy corporate office in Brazil, warm daylight, elegant minimalist decor",
+    "real_tema": "",
+    "destaques": [
+     "muito mais clareza",
+     "tudo reunido"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261117_165835_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261117_165835_1.png"
+   }
+  ],
+  "legenda": "Uma estrutura pensada exatamente para a sua rotina comercial e suporte.\nTenha atendimento, tickets e histórico em um só lugar. Saiba mais no link no perfil.",
+  "titulo": "Chatwoot comum ou personalizado com IA?",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "duvida_chatwoot_puro",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 267,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\crmchatwoot.ia_20261117_165404\\dono_3.mp4",
+ "duracao_s": 29.12,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-17T17:12:32",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.65,
+   "fala": "Perdendo controle dos atendimentos com ferramentas básicas?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.65,
+   "fim": 11.48,
+   "fala": "Uma ferramenta padrão de mensagens não entende a rotina específica da sua empresa.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.48,
+   "fim": 18.04,
+   "fala": "Nós adaptamos o sistema com inteligência artificial para o fluxo do seu negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 18.04,
+   "fim": 25.17,
+   "fala": "Sua equipe trabalha com muito mais clareza tendo tudo reunido no dia a dia.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 25.17,
+   "fim": 29.12,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.25,
+  "notas": {
+   "legibilidade": 9.0,
+   "movimento": 6.0,
+   "roteiro_marca": 7.0,
+   "diretor": 7.0
+  },
+  "graves": 2,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

@@ -1,12 +1,12 @@
-# Vigilância 24 h — 2026-11-17T16:00:43
+# Vigilância 24 h — 2026-11-17T20:00:42
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
 ## Alarmes desta volta (2)
-- instagram: 10 posts até 16:00, normal ~39
+- instagram: 10 posts até 20:00, normal ~44
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (31)
+## Casos abertos (32)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (-)
 - [consertar] canal clinicalucrativaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal empresariointeligenteia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -35,6 +35,7 @@
 - [consertar] _parceiro_20261116.log: mesmo erro 5x (-)
 - [consertar] _parceiro_20261116.log: mesmo erro 5x (-)
 - [consertar] instagram: 10 posts até 22:50, normal ~47 (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)

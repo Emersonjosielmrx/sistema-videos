@@ -1239,7 +1239,7 @@ def _para_fila_celular(slug, e, a, alvo, maiores_18, canal):
     celular de POSTADORES tem. Sai SEM o selo de IA (o app não marca) — é o teste da dona. Conta viva do Kaggle nunca.
     O ledger recebe o upload quando o celular postar (video_id 'celular:<serial>'). YT_CELULAR_PARTE=0 desliga."""
     try:
-        parte = float(os.environ.get("YT_CELULAR_PARTE", "0"))  # 17/11 16h: DESLIGADO (CartuchoReact removido; dona decide)
+        parte = float(os.environ.get("YT_CELULAR_PARTE", "0.5"))  # 17/11 17h dona: "use todos ao máximo"
     except ValueError:
         parte = 0.0
     if parte <= 0 or not e.get("email") or a.ensaio or maiores_18 or not alvo or a.privacy != "public":
@@ -1271,6 +1271,17 @@ def _para_fila_celular(slug, e, a, alvo, maiores_18, canal):
         return None
 
 
+TESTE_CELULAR = Path(__file__).resolve().parents[1] / "config" / "teste_celular.json"
+
+
+def _canais_teste_celular():
+    """Slugs que postam SÓ pelo celular (teste da dona 17/11). Arquivo ausente/vazio = ninguém."""
+    try:
+        return set(json.loads(TESTE_CELULAR.read_text(encoding="utf-8")).get("canais") or [])
+    except (OSError, ValueError):
+        return set()
+
+
 def _subir_celular(slug, e, a, alvo, maiores_18):
     """17/11 (dona: "faça tudo que falta"): ÚLTIMO recurso depois de HTTP e Chrome falharem — posta o Short pelo APP
     do YouTube de um celular que tenha a conta do canal (D:\\projeto celular sub controle\\postar_celular.py; G20 e A3).
@@ -1278,6 +1289,13 @@ def _subir_celular(slug, e, a, alvo, maiores_18):
     sem maiores de 18. Sem descrição/tags/capa/playlist (o app só põe título). Conta viva do Kaggle = recusada lá.
     Devolve 'celular:<serial>' (o app não mostra o ID do vídeo) ou None. YT_CELULAR=0 desliga."""
     if os.environ.get("YT_CELULAR", "0") == "0" or not e.get("email"):  # 17/11 16h: desligado até a dona liberar
+        return None
+    try:  # 17/11: conta VIVA do Kaggle nunca fala com o YouTube pela internet de casa (o celular está em casa)
+        if _cofre().saida_kaggle(e["email"]):
+            log(f"{slug}: conta viva do Kaggle — celular PROIBIDO (IP de casa)")
+            return None
+    except Exception as ex:  # noqa: BLE001 — na dúvida não posta pelo celular
+        log(f"{slug}: não conferi o Kaggle da conta ({type(ex).__name__}) — celular não")
         return None
     motivos = [n for n, v in (("sem horário", not alvo), ("ensaio", a.ensaio), ("maiores de 18", maiores_18),
                               (f"privacy={a.privacy}", a.privacy != "public"), ("sintético", a.sintetico),
@@ -1400,6 +1418,19 @@ def main():
         log(f"{slug}: vídeo vai restrito a maiores de 18")
 
     global REMOTO, FINAL_CLICADO, ARQUIVO_ENVIADO
+    # 17/11 18h dona ("pra testar se é pelos logins dos celulares ou por postar neles, pegar algumas contas com menos
+    # inscritos e postar pelos celulares; o resto posta só pelo PC"): canais em config\teste_celular.json postam SÓ pelo
+    # celular (sem cair no PC: senão o teste não separa as causas). Os outros nunca usam o celular (YT_CELULAR segue 0).
+    if not a.ensaio and slug in _canais_teste_celular():
+        os.environ["YT_CELULAR"] = "1"
+        cel = _subir_celular(slug, e, a, alvo, maiores_18)
+        if cel:
+            publish_at = politica.rfc3339(alvo) if alvo else None
+            politica.registrar_upload(canal, cel, a.video, publish_at, projeto=a.projeto, tipo=a.tipo)
+            print(f"AGENDADO: {cel}  (canal: {canal['nome'].strip()}, TESTE celular) → publica {publish_at}")
+            _fim("ok", cel)
+        _fim("erro", f"{slug}: canal do TESTE CELULAR — celular não postou; não vai pelo PC (tenta na próxima rodada)",
+             EXIT_FALHA)
     from playwright.sync_api import sync_playwright
 
     def _uma_vez(ev, proc):

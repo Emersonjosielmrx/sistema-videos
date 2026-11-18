@@ -885,10 +885,17 @@ INCERTOS = Path(__file__).resolve().parent.parent / "logs" / "envios_incertos.js
 
 def _chave_video(arquivo):
     """Pasta do vídeo (o arquivo quase sempre se chama video.mp4; a pasta é que identifica o Short)."""
-    p = Path(str(arquivo or ""))
-    if not p.name.lower().startswith("video"):
-        p = p.with_name(p.name.replace("_1080p.mp4", ".mp4"))  # o upscale (garantir_1080) grava <nome>_1080p.mp4
-    return str(p.parent if p.name.lower().startswith("video") else p).lower().rstrip("\\/")
+    if not arquivo:  # proteção: caminho vazio/None retorna "" logo
+        return ""
+    try:  # 17/11 (vigia: "ValueError: Invalid name ''" derrubava a postagem do parceiro): nunca levanta
+        p = Path(str(arquivo))
+        if not p.name:  # "D:\\", "." ou terminado em barra: sem nome de arquivo
+            return str(p).lower().rstrip("\\/")
+        if not p.name.lower().startswith("video") and p.name.endswith("_1080p.mp4"):
+            p = p.with_name(p.name.replace("_1080p.mp4", ".mp4"))  # o upscale (garantir_1080) grava <nome>_1080p.mp4
+        return str(p.parent if p.name.lower().startswith("video") else p).lower().rstrip("\\/")
+    except (ValueError, TypeError):
+        return ""
 
 
 def marcar_envio_incerto(canal, arquivo, motivo=""):
@@ -949,7 +956,7 @@ def ja_enviado_aqui(canal, arquivo, horas=72):
     if os.environ.get("POLITICA_TRAVA_REPETIDO", "1") == "0" or not arquivo:
         return None
     ch = _chave_video(arquivo)
-    if not ch or ch in ("", "."):
+    if not ch or ch in ("", ".") or len(ch.replace("\\", "/").strip("/").split("/")) < 3:  # sem pasta de verdade
         return None
     cid = canal.get("id")
     for r in _ler_ledger():

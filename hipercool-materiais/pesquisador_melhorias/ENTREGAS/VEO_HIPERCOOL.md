@@ -176,3 +176,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 20:37 — Recaps e resenhas com clipes (`area_regras_recap`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_regras_recap__sonnet_2031.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 16:38 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_1629.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 20:05 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_avatar_3d_comercial__sonnet_1957.md`
+- [INÉDITO] github.com/LimiNode/speech-animation — ★0, push 2026-10-22, MIT — Engine-agnostic realtime speech animation for lip sync, visemes, and speech-driven facial cues.

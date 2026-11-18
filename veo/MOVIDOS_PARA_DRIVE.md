@@ -2793,3 +2793,22 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - super_slow_ia_20261115_173107_intro.mp4
   - super_slow_ia_20261115_173107_prop.mp4
   - super_slow_ia_20261115_173107_punch.mp4
+
+## 2026-11-17 17:11 — 86 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (86 MB) — 15 arquivos:
+  - mitos_vs_verdad_20261114_185400_final.mp4
+  - mitos_vs_verdad_20261114_185400_imp.mp4
+  - mitos_vs_verdad_20261114_185400_intro.mp4
+  - mitos_vs_verdad_20261114_185400_prop.mp4
+  - mitos_vs_verdad_20261114_185400_punch.mp4
+  - mitos_vs_verdad_20261116_065211_final.mp4
+  - mitos_vs_verdad_20261116_065211_imp.mp4
+  - mitos_vs_verdad_20261116_065211_intro.mp4
+  - mitos_vs_verdad_20261116_065211_prop.mp4
+  - mitos_vs_verdad_20261116_065211_punch.mp4
+  - robos_desastrad_20261116_144035_final.mp4
+  - robos_desastrad_20261116_144035_imp.mp4
+  - robos_desastrad_20261116_144035_intro.mp4
+  - robos_desastrad_20261116_144035_prop.mp4
+  - robos_desastrad_20261116_144035_punch.mp4

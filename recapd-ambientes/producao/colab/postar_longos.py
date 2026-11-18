@@ -756,6 +756,14 @@ def rodada(ver=False):
                 # RASCUNHO lá — a rodada seguinte já ia mandar a MESMA fonte pro Animescomia (regra: vídeo único por
                 # canal). Longo com erro DEPOIS de subir os bytes fica preso ao canal onde subiu (est["presos"]).
                 presos = est.get("presos", {})
+                # 17/11 (InventoReact ENCERRADO pelo YouTube às 17:32 com o SO-icNCOO3E preso nele): preso a canal
+                # TRAVADO (encerrado/removido) nunca sobe — o poster recusa o canal e a trava do preso impede outro.
+                # Canal encerrado não tem rascunho nem vídeo: o longo fica livre pra outro canal. LONGO_SOLTA_MORTO=0 desliga.
+                if os.environ.get("LONGO_SOLTA_MORTO", "1") != "0":
+                    for _n, _p in list(presos.items()):
+                        if _canal_travado(_p.get("canal")):
+                            presos.pop(_n, None)
+                            log(f"  {_n[:40]}: estava preso a {_p.get('canal_nome')} (canal ENCERRADO) — solto pra outro canal")
                 cand = [i for i, (_, f, _d) in enumerate(fila) if _dono_serie(f.name, est) in (None, cred)
                         and (not _d.get("canal") or _d["canal"] == cred)
                         and presos.get(f.name, {}).get("canal", cred) == cred]
@@ -1187,6 +1195,30 @@ def _publico(vid):
         return True
     except Exception:  # noqa: BLE001
         return False
+
+
+_TRAVADO_CACHE = {}
+
+
+def _canal_travado(cred):
+    """True se o canal (cred id) está travado pelo YouTube (contas_travadas.json: removido/encerrado/strike...).
+    Mesma checagem do parceiro_diario._canais_travados. Falhou = False (não solta nada na dúvida)."""
+    if not cred:
+        return False
+    if cred in _TRAVADO_CACHE:
+        return _TRAVADO_CACHE[cred]
+    r = False
+    try:
+        if r"D:\postador-de-videos\bin" not in sys.path:
+            sys.path.append(r"D:\postador-de-videos\bin")
+        import trava_conta
+        import youtube_web_poster as ywp
+        slug, _e = ywp.entrada_do_cred(cred)
+        r = bool(slug and trava_conta.checar(slug))
+    except Exception:  # noqa: BLE001
+        r = False
+    _TRAVADO_CACHE[cred] = r
+    return r
 
 
 def ligar_pontes(ver=False):

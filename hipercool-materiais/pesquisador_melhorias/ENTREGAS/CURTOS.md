@@ -4030,3 +4030,54 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 16:07 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1542.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 16:23 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_eres2net_licenca__sonnet_1616.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 16:47 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_webgl_frame_a_frame__sonnet_1642.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 17:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1653.md`
+- [INÉDITO] github.com/azrinaldi/gemini-stealth-bridge — ★145, push 2026-11-13, MIT — Browserless Chrome uTLS + HTTP/2 OpenAI-compatible API daemon for Google Gemini Web (/v1/chat/completions & /v1/responses)
+- [INÉDITO] github.com/zhiyu1998/Gemi2Api-Server — ★403, push 2026-11-17, MIT — HanaokaYuzu / Gemini-API 的服务端简单实现，仓库自动更新上游，支持gemini-4-argon、gemini-3.1-pro、gemini-4-hydrogen、gemini-3.5-flash-lite 等
+
+## [ ] PENDENTE — 2026-11-17 17:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1706.md`
+- [INÉDITO] github.com/BUKOWSKIREAL/magpie-gemini-web — ★222, push 2026-11-17, MIT — Google AI Studio and Gemini Web provider for Magpie (Gemini 4 Carbon / Hydrogen / Argon, Nano Banana image generation, Deep Research), backe
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 17:29 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1721.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 17:58 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1737.md`
+- [INÉDITO] github.com/Mag1cFall/Gemini-Web2API — ★129, push 2026-11-17, MIT — 将 Google Gemini Web 转换为 OpenAI、Claude 和 Gemini 兼容 API
+- [INÉDITO] github.com/jianli9158/cpa-plugin-gemini-web2api — ★4, push 2026-11-17, MIT — Gemini-Web2API native plugin for CLIProxyAPI (ported from Mag1cFall/Gemini-Web2API)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 18:07 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1801.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 18:28 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1816.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 18:55 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1833.md`
+- [INÉDITO] github.com/ilter2014/ADB-QR — ★1, push 2026-10-28, MIT — Windows-first CLI for Android ADB over Wi-Fi: generate pairing QR codes, discover mDNS services, pair devices, and manage wireless connectio
+- [INÉDITO] github.com/sharoobi/AutoWirelessdebuggingQR — ★0, push 2026-04-22, MIT —  ADB wireless debugging launcher that auto-detects ADB and Python, offers guided installs, opens QR pairing when needed, and reconnects Andr
+
+## [ ] PENDENTE — 2026-11-17 19:06 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1857.md`
+- [INÉDITO] github.com/aminmaskur88/youtube-reels — ★0, push 2026-10-09, MIT — YouTube to Facebook Reels Generator (Portrait 9:16) with Cinematic Blur, Template Frame, Auto-Split & Metadata for Facebook Reels
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 19:19 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1911.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 19:30 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1921.md`
+- (todos os itens desta pesquisa foram reprovados)

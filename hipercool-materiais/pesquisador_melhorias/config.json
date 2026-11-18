@@ -24523,6 +24523,54 @@
         "limpeza automática pós-upload, espaço do Termux/Android, rotação de arquivos temporários"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_1542.md 2026-11-17"
+    },
+    {
+      "id": "cota_gemini_pt",
+      "nome": "Limites oficiais do app Gemini",
+      "subtemas": [
+        "Ler support.google.com/gemini sobre limites de imagem e vídeo, para planejar quantas capas e vídeos por conta por dia (não consegui abrir a página nesta rodada)"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1653.md 2026-11-17"
+    },
+    {
+      "id": "impressoes_canal_novo",
+      "nome": "Distribuição de canal novo e ponte Short→longo",
+      "subtemas": [
+        "Regras e dados oficiais do YouTube sobre impressões de canal novo e ligação de Shorts a longos"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1653.md 2026-11-17"
+    },
+    {
+      "id": "cookies_ytdlp",
+      "nome": "Renovação e validação de cookies do yt-dlp",
+      "subtemas": [
+        "repositórios e truques pequenos para manter os cookies do yt-dlp válidos no VPS e nos PCs, sem Chrome aberto, com checagem antes do lote"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1721.md 2026-11-17"
+    },
+    {
+      "id": "reconexao_adb",
+      "nome": "Reconexão Wi-Fi do adb por mDNS",
+      "subtemas": [
+        "scripts curtos que redescobrem a porta de `adb mdns services` e reconectam sozinhos"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1833.md 2026-11-17"
+    },
+    {
+      "id": "reels_fb_kwai",
+      "nome": "Reels/Facebook/Kwai a partir dos Shorts existentes",
+      "subtemas": [
+        "regras de formato (duração, proporção, zona segura) e como reaproveitar o mesmo corte sem parecer duplicado"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1857.md 2026-11-17"
+    },
+    {
+      "id": "regras_youtube_upload",
+      "nome": "Regras oficiais do YouTube sobre conteúdo reutilizado e automação",
+      "subtemas": [
+        "páginas de support.google.com sobre conteúdo reutilizado/inautêntico e limites de upload em contas novas"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1911.md 2026-11-17"
     }
   ],
   "projetos": [

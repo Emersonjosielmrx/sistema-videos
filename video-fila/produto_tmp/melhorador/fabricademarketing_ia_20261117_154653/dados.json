@@ -1,0 +1,383 @@
+{
+ "video": "fabricademarketing_ia_20261117_154653.mp4",
+ "conta": "fabricademarketing.ia",
+ "marca": "Fábrica de Marketing IA",
+ "titulo": "Respostas nos comentários enquanto você atende seus clientes",
+ "formato": "dono_abre_fecha",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.49
+   ],
+   [
+    1,
+    "dono",
+    10.3
+   ],
+   [
+    2,
+    "conversa",
+    5.45
+   ],
+   [
+    3,
+    "dono",
+    8.22
+   ],
+   [
+    4,
+    "cartao",
+    5.21
+   ]
+  ],
+  "graves": 9,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('Como responder comentários') está posicionada diretamente sobre o rosto do apresentador, cobrindo sua boca e queixo.",
+   "como_corrigir": "Reenquadrar o vídeo do apresentador para posicionar o rosto mais acima ou mover a legenda para a altura do peito (acima do limite de y=1580). Alternativamente, como o cartão superior já exibe a pergunta completa, desativar a legenda nesta cena inicial."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('nos posts enquanto') continua cobrindo a boca e a expressão labial do apresentador.",
+   "como_corrigir": "Ajustar o enquadramento do apresentador ou descer a posição da legenda para que não colida com o rosto do apresentador."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Dois textos brigando pela atenção: o cartão superior já exibe a pergunta completa em destaque ('Como responder comentários nos posts enquanto estou atendendo clientes?') enquanto a legenda karaokê repete simultaneamente o mesmo texto logo abaixo, gerando poluição e redundância visual.",
+   "como_corrigir": "Remover a legenda karaokê na cena 0, mantendo apenas o cartão de pergunta frequente como elemento textual condutor da abertura."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Legenda ausente durante fala ativa (9.20s). O apresentador continua falando o trecho intermediário ('um cliente na empresa, os comentários pedindo'), mas não há nenhuma legenda visível na tela, gerando um vácuo de leitura para usuários assistindo no mudo.",
+   "como_corrigir": "Corrigir a sincronização e os blocos de legenda na cena 1 para garantir a continuidade ininterrupta do texto entre 'Quando estou atendendo' (q04) e 'detalhes nas postagens' (q06)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Transição seca com efeito de jump-cut congelado da Cena 0 para a Cena 1. O apresentador está exatamente na mesma posição e enquadramento de câmera; apenas o cartão de pergunta desaparece e o retângulo rosa entra bruscamente por cima, denunciando corte seco sem mudança de plano.",
+   "como_corrigir": "Aplicar uma transição de saída no cartão de pergunta (slide-up ou fade rápido) e alterar a escala da câmera na Cena 1 com um punch-in zoom digital (10% a 15%) para dar dinamismo ao início do primeiro bloco."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada e ritmo arrastado por mais de 6 segundos. Os quadros q04, q05 e q06 mantêm o apresentador no mesmo plano médio estático, sem qualquer movimento de câmera, reframing ou apoio visual enquanto ele narra o problema dos comentários esperando.",
+   "como_corrigir": "Inserir motion graphics de apoio (ícones flutuantes de notificações de comentários se acumulando ou relógio de espera) e aplicar cortes de escala/punch-in nas palavras de ênfase para quebrar a estática da cabeça falante."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Layout descompensado na entrada da conversa. O primeiro balão de mensagem aparece posicionado na parte inferior do card do WhatsApp, deixando mais de 50% da área superior completamente vazia e estática.",
+   "como_corrigir": "Iniciar o fluxo da conversa no topo do container de chat com animação de entrada (slide-up suave + scale de 95% para 100% com fade-in), preenchendo o espaço de forma equilibrada."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Quebra de continuidade e ausência de animação de scroll no chat. As mensagens anteriores de q07 e q08 simplesmente desaparecem da tela em q09, deixando um enorme vazio no topo e jogando a nova mensagem no rodapé sem efeito de rolagem de conversa.",
+   "como_corrigir": "Implementar animação fluida de scroll vertical (as mensagens anteriores sobem suavemente abrindo espaço para a nova mensagem e o indicador de digitação), preservando o histórico visível como em um aplicativo real."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade e molde idêntico entre cenas. A Cena 3 repete exatamente o mesmo enquadramento, ângulo de câmera, iluminação e disposição de elementos da Cena 1, deixando o vídeo monótono por mais 6 segundos em plano único de cabeça falante.",
+   "como_corrigir": "Variar o ângulo ou escala da câmera (usar um close-up mais fechado no apresentador ou câmera lenta com push-in contínuo) e incluir elementos gráficos animados (ícones de engrenagens de automação, checklist ou selo de confirmação) ilustrando o 'tudo automatizado'."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final surge estático sem animação de entrada de elementos. O nome da marca, a proposta de valor e as informações de contato entram todos juntos em corte seco, sem transição ou kinetic typography.",
+   "como_corrigir": "Aplicar animação de entrada escalonada (stagger) para os blocos de texto (fade-in com subida suave de 20px no eixo Y) e fazer o botão de CTA surgir com leve escala elástica antes da chamada de ação."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Legenda ausente durante a fala contínua do apresentador.",
+   "como_corrigir": "Inserir legenda sincronizada para o trecho 'um cliente na empresa, os comentários pedindo'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Texto da simulação cita serviços genéricos ('projetos personalizados para empresas da região') sem conexão com a narração de agente de comentários, blog SEO e podcast.",
+   "como_corrigir": "Ajustar o diálogo simulado para refletir a resposta automática a comentários em posts e automação de conteúdo."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho não retém nos primeiros 2 segundos e transmite aspecto de slide amador: o cartão de pergunta está sobreposto diretamente na testa e cabelo do apresentador, a iluminação do vídeo está artificialmente escurecida por um filtro cinza opaco (contrastando bruscamente com a cena 1), há um filete rosa residual desajustado na base inferior do card, e a abertura se arrasta por mais de 4 segundos apenas com a leitura monótona da pergunta.",
+   "como_corrigir": "Ajustar o enquadramento da câmera com respiro superior (headroom) para que o card de pergunta fique posicionado sem cobrir a cabeça do apresentador; remover o overlay escurecido mantendo a exposição natural e limpa do ambiente desde o frame inicial; eliminar o traço rosa gráfico solto; e acelerar a dinâmica do gancho para no máximo 2 segundos com corte ágil e entonação de fala mais enérgica."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação do produto quebra a continuidade visual e não sustenta a narrativa: em vez de rolar suavemente para cima, as mensagens anteriores de q08 desaparecem do nada em q09 (deixando a maior parte do card vazia), e a cena é cortada abruptamente enquanto a mensagem do cliente ainda está pendente em 'digitando...', sem demonstrar a resposta da IA. Além disso, enquanto a locução cita que 'o blog com SEO e o podcast rodam', a tela exibe apenas o chat isolado sobre fundo escuro sem nenhuma representação desses dois pilares.",
+   "como_corrigir": "Corrigir a animação do chat para realizar scroll vertical contínuo das mensagens anteriores e mostrar a entrega da resposta automatizada antes da transição; enriquecer a composição inserindo ícones gráficos ou badges dinâmicos nas laterais indicando o blog de SEO e o podcast rodando em paralelo, comprovando visualmente a automação full post mencionada no áudio."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Acabamento de corte descuidado e monotonia de direção: a cena 3 repete exatamente o mesmo plano e distância focal da cena 1 sem nenhuma variação visual ou prova tangível de 'resultado', e o corte de saída em q12 congela o apresentador com ambos os olhos fechados e boca entreaberta no meio de um piscar, demonstrando falta de refino técnico de agência.",
+   "como_corrigir": "Aplicar um corte com zoom digital sutil (punch-in de 10% a 15%) ou sobreposição de dados/gráficos da automação para dinamizar a cena 3; aparar o ponto de corte alguns frames antes do piscar para que o apresentador termine com olhar firme e expressão confiante voltada para a lente."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "A legenda karaokê desaparece por completo da tela aos 9.2s enquanto o apresentador continua falando o trecho 'um cliente na empresa, os comentários pedindo', criando um vácuo de leitura que quebra a retenção de quem assiste sem som.",
+   "como_corrigir": "Ajustar a linha de tempo das legendas dinâmicas para preencher todo o bloco de fala da cena 1 sem lacunas vazias na barra inferior."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "O encerramento é estático e excessivamente longo: fica cerca de 5 segundos em um slide chapado apenas para uma fala de 2 segundos ('Chame a gente no direct'), derrubando a energia final do anúncio.",
+   "como_corrigir": "Reduzir o tempo de tela do cartão final para cerca de 2 a 2.5 segundos, ou manter o apresentador em tela dividida/canto apontando para o botão de direct para tornar a chamada para ação ativa e engajante."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "futebolcom_ia2_20261117_045510.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "sintetizerisada_20261117_061023.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261117_083738.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261117_101728.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261117_122241.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261117_154653.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261117_165404.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   9,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   4,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

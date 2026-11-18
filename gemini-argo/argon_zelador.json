@@ -1,12 +1,20 @@
 {
  "contas": 29,
- "prontas": 8,
- "cookies_mortos": 21,
- "sem_cota": 0,
- "bloqueadas": 0,
- "aguardando_oi": 3,
- "proxima_volta": null,
+ "prontas": 9,
+ "cookies_mortos": 17,
+ "sem_cota": 5,
+ "bloqueadas": 1,
+ "aguardando_oi": 7,
+ "proxima_volta": "2026-11-17T21:33",
  "ultimas_voltas": [
+  [
+   "2026-11-17T18:25",
+   "emersonjosiel2030"
+  ],
+  [
+   "2026-11-17T18:25",
+   "emersonjosiel2029"
+  ],
   [
    "2026-11-17T08:20",
    "comoseriasecomia"
@@ -24,50 +32,38 @@
    "emersonjosiel2033"
   ],
   [
-   "2026-11-17T05:36",
-   "emersonjosiel2030"
-  ],
-  [
    "2026-11-17T05:27",
    "fabricadeautomacoes0"
-  ],
-  [
-   "2026-11-17T04:55",
-   "emersonjosiel2029"
   ],
   [
    "2026-11-17T01:37",
    "inovaremanhwaverseing"
   ]
  ],
- "em": "2026-11-17T16:32:00",
- "duracao_s": 527,
- "conferidas": 3,
+ "em": "2026-11-17T20:43:54",
+ "duracao_s": 342,
+ "conferidas": 4,
  "mortas_vistas": [
   "emersonjosiel2029",
-  "emersonjosiel2030",
   "comoseriasecomia",
-  "inovaremanhwaverseesp",
-  "inovaremanhwaversethai",
+  "emersonjosiel2033",
   "solarmundo195",
   "aulasrevolution",
-  "inovaremultiatendimento",
   "filmescomia1",
   "msenergypara",
   "murilodoctor192",
+  "emersongenc",
   "emersongencshin",
   "empressinovare",
   "fabiovideoseducativos",
   "gameoftroneskingsroadbrasil",
   "vendeafiliados3",
   "en1653964",
-  "emersonjosiel2031",
   "entrevistacomia"
  ],
  "renovadas": [],
  "falhas_renovar": [
-  "fabricadeautomacoes0",
-  "inovarecap"
+  "emersonjosiel2031"
  ],
  "voltaram": [],
  "oi_sem_cota": []

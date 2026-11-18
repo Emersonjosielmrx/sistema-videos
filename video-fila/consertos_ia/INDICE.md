@@ -1205,3 +1205,6 @@
 - 2026-11-17 11:22 | aplicar | CONSERTEI | Conserte (achado pelo vigia): MemoryError no LEDGER_FILE devido à leitura integral do arquivo; refatorar _ler_ledger par → [20261117_111919_8499.md](20261117_111919_8499.md)
 - 2026-11-17 12:52 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261117_124037_2ec0.md](20261117_124037_2ec0.md)
 - 2026-11-17 14:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): instagram: 10 posts até 14:30, normal ~34 EVIDÊNCIA: ledger/logs de instagram: ho → [20261117_143038_4749.md](20261117_143038_4749.md)
+- 2026-11-17 17:42 | propor | PROPOSTA | Conserte (achado pelo vigia): Erro ValueError com caminho vazio no ledger de postagem em D:\postador-de-videos\bin\polit → [20261117_174021_9a4a.md](20261117_174021_9a4a.md)
+- 2026-11-17 17:43 | aplicar | CONSERTEI | Conserte (achado pelo vigia): Erro ValueError com caminho vazio no ledger de postagem em D:\postador-de-videos\bin\polit → [20261117_174212_d876.md](20261117_174212_d876.md)
+- 2026-11-17 18:42 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261117_184043_c631.md](20261117_184043_c631.md)
