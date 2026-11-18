@@ -85,6 +85,8 @@ def assets():
     # 02/11: transições em shader (realce_visual, outro chat) — os .glsl estavam só no PC: no Kaggle caía no xfade
     rc("sync", r"D:\hipercool-materiais\tools\gl-transitions",
        _destino(Path(r"D:\hipercool-materiais\tools\gl-transitions")))
+    # 18/11 (modo de voz p3): a 3ª base, Piper pt_BR cadu (~60 MB) — no Kaggle o voz_clonada_nuvem gera com ela
+    rc("sync", r"D:\hipercool-materiais\models\piper", _destino(Path(r"D:\hipercool-materiais\models\piper")))
 
 
 if __name__ == "__main__":

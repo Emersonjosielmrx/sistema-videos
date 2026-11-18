@@ -38,9 +38,17 @@ No p3 o clima NÃO troca mais a base (antes tensão/épico forçavam Francisca e
 | PC1 | p3 | |
 | Desktop (PC3) | p3 | teste de ponta a ponta: `versao_P6_p3_producao_real.mp4` |
 | PC2 | p3 | conferido com o `subst D: C:\` da produção |
-| STI | p0 (antigo) | tem `anime_tts.py` próprio adaptado para Linux — falta levar o p3 adaptando os caminhos |
-| Kaggle | p0/p1 (antigo) | etapa 2: Piper no ambiente + Kitten 2 com GPU |
-Backups: `anime_tts.py.bak_20261118_*` e `voz_clonada.py.bak_*` em cada máquina; no PC1, `voz_clonada.py.bak_18nov_piper`.
+| STI | p3 | teste de ponta a ponta pelo `voz_clonada_nuvem` (Linux). O STI nunca tinha usado Kokoro: instalado `kokoro-onnx==0.6.1` e ligado `KOKORO_NUVEM=1` no `sti_short.sh` |
+| Kaggle (longos e Shorts na GPU) | p3 a partir da próxima sessão | Piper instalado pelo `kaggle_trabalhador._preparar_applio` (central na hermes-prod); modelo do Piper no pacote (`montar_pacote.assets`); `tom_3_piper.txt` de 107 vozes no cache `colab_recap/vozes` |
+
+O que a sincronização automática NÃO leva (feito à mão em 18/11; máquina nova precisa repetir):
+- pacote `piper-tts==1.8.0` (`--no-deps`) no `venv_vozes`; no STI também `kokoro-onnx==0.6.1`;
+- `models\piper\pt_BR-cadu-medium.onnx` (+ `.json`) e `amostras_voz6-10-18_vozes_clonadas\_bases_piper.wav`;
+- `tom_3_piper.txt` em cada `models
+vcozes\<voz>` (o `tom_fixo` cria sozinho no Windows se a amostra existir).
+Voz nova no Drive: rodar `voz_clonada.tom_fixo(voz, "3_piper")` e subir o `tom_3_piper.txt` junto.
+Backups: `anime_tts.py.bak_20261118_*`, `voz_clonada.py.bak_*`, `voz_clonada_nuvem.py.bak_*`, `sti_short.sh.bak_*`;
+central: `kaggle_trabalhador.py.bak_20261118_0931_antes_piper`.
 
 ## Custo de tempo (voz, medido/estimado)
 - p3 sem Kitten nos PCs: ~igual ao de hoje. O Piper abre em ~20–45 s uma vez por processo e gera cada frase em ~0,6 s.

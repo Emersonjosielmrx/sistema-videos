@@ -78,6 +78,22 @@ def _base_kokoro(nome, texto, saida, velocidade, palavras):
     sf.write(str(saida), audio, sr)
 
 
+PIPER = Path(os.environ.get("RAIZ_WIN", "/kaggle/working/raiz")) / "D/hipercool-materiais/models/piper"
+_PIPERS = {}
+
+
+def _base_piper(texto, saida, velocidade, nome="cadu"):
+    """18/11 (dona: modo p3 = Kokoro/Francisca/Piper): a 3ª base, igual ao _base_tts('piper:...') do PC. O modelo
+    abre 1x por processo; length_scale é o inverso da velocidade."""
+    import wave
+    from piper import PiperVoice, SynthesisConfig
+    if nome not in _PIPERS:
+        _PIPERS[nome] = PiperVoice.load(str(PIPER / f"pt_BR-{nome}-medium.onnx"))
+    cfg = SynthesisConfig(length_scale=round(1.0 / max(0.6, min(1.6, velocidade)), 3))
+    with wave.open(str(saida), "wb") as w:
+        _PIPERS[nome].synthesize_wav(texto, w, syn_config=cfg)
+
+
 def lote(voz, lista):
     """26/10 (dona: "as vozes clonadas dos Cortes"): base Kokoro também — item sem 'entrada' gera o Kokoro aqui,
     com o tom da base certa (tom_1_kokoro / tom_2_edge_francisca), igual ao lote do PC."""
@@ -93,7 +109,10 @@ def lote(voz, lista):
     for i, it in enumerate(itens, 1):
         t0 = time.time()
         origem = it.get("entrada")
-        if not origem:
+        if not origem and it.get("motor") == "piper":  # 18/11: 3ª base do p3
+            origem = str(lista_dir / f"_piper_{i}.wav")
+            _base_piper(it["texto"], origem, it.get("velocidade", 1.0))
+        elif not origem:
             origem = str(lista_dir / f"_kokoro_{i}.wav")
             _base_kokoro(_KOKORO_VOZES_PT[i % len(_KOKORO_VOZES_PT)], it["texto"], origem,
                          it.get("velocidade", 1.0), it["saida"] + ".words.json")

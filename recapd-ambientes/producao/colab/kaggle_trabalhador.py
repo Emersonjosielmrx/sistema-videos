@@ -165,6 +165,13 @@ def preparar_applio():
             print(f"kokoro-onnx não instalou ({r.stderr[-200:]}) — base Kokoro cai pra Francisca", flush=True)
         else:
             os.environ["KOKORO_NUVEM"] = "1"  # o anime_tts só usa a base Kokoro com isto (o amb herda o os.environ)
+        # 18/11 (dona: modo de voz p3 = Kokoro/Francisca/Piper em longos e curtos): a 3ª base. --no-deps: só precisa
+        # do onnxruntime (já veio com o kokoro-onnx) e do pathvalidate; não mexe no torch do Applio. O anime_tts só usa
+        # o Piper se o import funcionar (_piper_pronto); falhou = o vídeo sai no p1, sem erro.
+        r = subprocess.run([str(APPLIO_VENV / "bin" / "pip"), "install", "-q", "--no-deps", "piper-tts==1.8.0",
+                            "pathvalidate"], capture_output=True, text=True, timeout=900)
+        if r.returncode != 0:
+            print(f"piper-tts não instalou ({r.stderr[-200:]}) — modo de voz cai pro p1", flush=True)
         patch =RAIZ / "D/hipercool-materiais/tools/applio/rvc/infer/pipeline.py"
         if patch.exists():
             shutil.copyfile(patch, APPLIO_DIR / "rvc" / "infer" / "pipeline.py")

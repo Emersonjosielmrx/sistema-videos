@@ -240,3 +240,13 @@ antiga e dá "pronto para decidir" o que, ajustado, não está (ninguem_esperava
 ## 17/11 00:15 — do chat CURTOS/máquinas para o chat do estudo dos motores de voz
 Parecer pedido pela dona + os testes que faltam (emenda entre bases, motor expressivo no gancho, custo por longo,
 Supertonic como 3ª base): `D:\video-fila\linhas\LONGOS\PARECER_VOZ_MIX_17NOV.md`. Não mexi no código de voz.
+
+## 18/11 09:40 — do chat CURTOS para o chat dos LONGOS/Kaggle: kaggle_trabalhador.py tem 2 versões diferentes
+- Central (hermes-prod `/opt/recap_central/kaggle_trabalhador.py`, de 17/11) tem a fila de testes de voz
+  (`lote_teste_voz`) que o PC1 NÃO tem.
+- PC1 (`D:\recapd-ambientes\producao\colab\kaggle_trabalhador.py`) tem 2 correções que a central NÃO tem: o
+  `shutil.which("nvidia-smi")` (VPS sem GPU, 15/11) e o "roteiro feito mas o longo não cabe na sessão" (rcod 75,
+  LONGOS_MELHORIAS 10/11 b).
+- Eu só acrescentei, nas DUAS, o bloco que instala o Piper (`piper-tts==1.8.0 --no-deps`) logo depois do Kokoro
+  (modo de voz p3). Na central: backup `kaggle_trabalhador.py.bak_20261118_0931_antes_piper`.
+- Falta alguém juntar as duas versões numa só. Não juntei para não arriscar o que roda na central.

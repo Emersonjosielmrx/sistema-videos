@@ -102,12 +102,32 @@ def _voz_modo():
     return m
 
 
+_PIPER_CACHE = {}
+
+
 def _piper_pronto():
-    if os.name != "nt":  # nuvem: o Piper vem pelo pacote quando o voz_clonada_nuvem souber gerar (ainda não)
-        return False
     voz = os.environ.get("VOZ_CLONADA")
+    if not voz:
+        return False
+    voz = Path(voz).name
+    if os.name != "nt":
+        # 18/11: nuvem (Kaggle) e STI — o voz_clonada_nuvem gera o Piper; precisa do modelo no pacote, do tom do
+        # narrador já calculado (tom_3_piper.txt, sobe junto com a voz) e do pacote piper no Python do clone
+        # mesmo caminho que o sitecustomize dá ao D:\ (Kaggle: /kaggle/working/raiz/D; STI: RAIZ_WIN=$HOME -> ~/D)
+        modelo = Path(os.environ.get("RAIZ_WIN", "/kaggle/working/raiz")) / "D/hipercool-materiais/models/piper/pt_BR-cadu-medium.onnx"
+        tom = VOZES_DIR / voz / "tom_3_piper.txt"
+        if not (modelo.exists() and tom.exists()):
+            return False
+        py = os.environ.get("VOZES_PY_NUVEM") or sys.executable
+        if py not in _PIPER_CACHE:
+            try:
+                _PIPER_CACHE[py] = subprocess.run([py, "-c", "import piper"], capture_output=True,
+                                                  timeout=60).returncode == 0
+            except Exception:  # noqa: BLE001
+                _PIPER_CACHE[py] = False
+        return _PIPER_CACHE[py]
     base_amostra = Path(r"D:\hipercool-materiais\amostras_voz\2026-10-18_vozes_clonadas\_bases\3_piper.wav")
-    return PIPER_OK.exists() and base_amostra.exists() and bool(voz) and (VOZES_DIR / voz / f"{voz}.pth").exists()
+    return PIPER_OK.exists() and base_amostra.exists() and (VOZES_DIR / voz / f"{voz}.pth").exists()
 
 
 def _base_p3(texto, indice, impactos, total):

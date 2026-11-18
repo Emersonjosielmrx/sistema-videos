@@ -17,6 +17,9 @@ export PARCEIRO_HANDLE="$HANDLE" PARCEIRO_CANAL="$CANAL" PARCEIRO_TIPO="$TIPO"
 # no Linux o clone de voz usa o caminho "nuvem" do anime_tts (voz_clonada_nuvem.py) com o Applio local
 export APPLIO_DIR="$HOME/hipercool-materiais/tools/applio" RAIZ_WIN="$HOME"
 export VOZES_PY_NUVEM="$HOME/hipercool-materiais/python/venv_vozes/bin/python"
+# 18/11 (modo de voz p3 = Kokoro/Francisca/Piper): o STI tinha os modelos do Kokoro mas não o kokoro_onnx, então nunca
+# usava Kokoro. Instalado (0.6.1, igual ao PC1) e ligado aqui. KOKORO_NUVEM=0 desliga.
+export KOKORO_NUVEM="${KOKORO_NUVEM:-1}"
 # 13/11: o STI desligava por calor (99-100 C com o Short usando os 4 nucleos). O Short fica em STI_NUCLEOS nucleos
 # (padrao 2: 0-1) e o ffmpeg em 2 threads; mais lento, mas a maquina nao cai. STI_NUCLEOS=4 volta ao antigo.
 # 13/11 21:50: "0-1" eram os 2 nucleos FISICOS inteiros (i5-2430M: pares 0,2 e 1,3) e a maquina ia a 100 C igual.
