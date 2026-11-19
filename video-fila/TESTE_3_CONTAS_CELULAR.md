@@ -98,3 +98,16 @@ vimos é que **logins em massa / simultâneos** é o que causa banimento. Deslog
 - 18/11 18:32 — **S20 Ultra (2052) canal criado pelo app: Segredos Revelados** @SegredosRevelados-q8h (UCRLyr94K9_kBIrSLzjh-eOQ), sem captcha.
 - 18/11 18:26 — **S20 (2043): "Esse nome não pode ser usado no seu canal"** para 2 nomes diferentes ("Mundo Curioso" e "Curiosidades do Mundo"); o @mundocuriosobr-h8e foi aceito. 2 nomes comuns recusados = provável trava da conta (a mesma que mostrou a restrição antes), não o nome. PAREI; tela "How you'll appear" deixada aberta. 2º dado do teste: a 2043 (3G) é a única com problema.
 - Falta: 1º Short em Fatos Ocultos e Segredos Revelados (vídeo único com a @ trocada, horário nobre).
+- 18/11 ~19:00 — a dona criou à mão o canal do S20 (2043): **Curiosidades do Mundo 3d** @mundocuriosobr-h8e.
+- 18/11 noite — **os 4 primeiros Shorts agendados, cada um pelo app do próprio celular**: Curioso Demais (A2) 21:00,
+  Fatos Ocultos (A3) 21:30, Curiosidades do Mundo 3d (S20) 21:45, Segredos Revelados (S20U) 22:00. Todos "não é para
+  crianças". 21:40: o do Curioso Demais já estava no ar com **257 views**.
+- ⚠️ vigia_celulares/celular_midia pegam os celulares do teste no meio do trabalho (o 16664 tomou o S20). Ao mexer no
+  celular: `pausado_<serial>.txt` (o `celular_canal\canal.py` já faz isso sozinho).
+- 18/11 21:30-21:55 — **artes do outro chat aplicadas pelo app** (`D:\manhwa-react\canais\<slug>`): Segredos Revelados
+  (S20U) foto + banner + descrição ✔; Curioso Demais (A2) foto + banner + descrição ✔. Fatos Ocultos (A3) **NÃO**:
+  o A3 está com o aviso do Google "Quer permitir que um app acesse seus dados? murilodoctor192 (conta antiga do A3),
+  dispositivo Linux, Italva-RJ — Sim, combinar número". É confirmação de identidade → PAREI, tela deixada aberta, a dona
+  decide. S20 (Mundo 3d) sem arte (o outro chat não fez).
+- Scripts de cada ação (foto, banner, descrição, digitar, print, pausar, postar Short): `D:\projeto celular sub
+  controle\celular_canal\LEIA_ME.md`. Banner pelo app precisa ir "preparado" (o editor dá zoom no 16:9): o canal.py faz.

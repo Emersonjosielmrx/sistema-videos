@@ -1,0 +1,270 @@
+{
+ "_nota": "19/11 dona escolheu estas vozes do site do Fish (biblioteca pública). No PC1: voz online direta (id). No Kaggle: referência PONTE gerada no site (referencia_fish.origem = site:<id>) até achar o áudio original — trocar depois pelo original. neymar = só canais de esporte.",
+ "ibere_thenorio": {
+  "id": "0889ee96fd82421b8ad9e126c4d73312",
+  "titulo": "Iberê Thenório (Manual do Mundo)",
+  "papel": "narrador"
+ },
+ "cid_moreira": {
+  "id": "85ecdf7683d64d0884d818971dbfddb4",
+  "titulo": "Cid Moreira Ai 01",
+  "papel": "narrador"
+ },
+ "gojo_satoru": {
+  "id": "2d7d220a6f44440da76a8b969318c19c",
+  "titulo": "Gojo",
+  "papel": "personagem"
+ },
+ "gojo_satoru_2": {
+  "id": "96a2c896ed7846848cdd83e484b23eb3",
+  "titulo": "Satoru Gojo",
+  "papel": "personagem"
+ },
+ "goku": {
+  "id": "dece2a4c7f8d476b8da3c3a6707298d4",
+  "titulo": "Goku",
+  "papel": "personagem"
+ },
+ "anya_forger": {
+  "id": "ffe41701970d4b339ef7906300716f99",
+  "titulo": "Anya",
+  "papel": "personagem"
+ },
+ "naruto": {
+  "id": "9b73610d862a45de97812ca27e079378",
+  "titulo": "naruto",
+  "papel": "personagem"
+ },
+ "sasuke": {
+  "id": "aedb06f6daa84a1db52c7479c7235910",
+  "titulo": "Sasuke",
+  "papel": "personagem"
+ },
+ "shinobu": {
+  "id": "ecb37eaae11944719577bf7d3877eebd",
+  "titulo": "Shinobu",
+  "papel": "personagem"
+ },
+ "megumi": {
+  "id": "59f817d7b8b64ed19b326cecbfe7e023",
+  "titulo": "Megumi",
+  "papel": "personagem"
+ },
+ "jarvis": {
+  "id": "a5b93aeddcc948c19ea04f0afe9d178c",
+  "titulo": "Jarvis (UCM) - Português Brasileiro",
+  "papel": "personagem"
+ },
+ "lula": {
+  "id": "a4ac1426e4a749839c86853ad613eebe",
+  "titulo": "Lula",
+  "papel": "personagem"
+ },
+ "capitao_nascimento": {
+  "id": "102bccca7dc64b6b8f8494c199c5d153",
+  "titulo": "Capitão Nascimento",
+  "papel": "personagem"
+ },
+ "bolsonaro": {
+  "id": "ed827b0532324b12803bb9344a3a607f",
+  "titulo": "Bolsonaro",
+  "papel": "personagem"
+ },
+ "rochelle": {
+  "id": "9ee7a9b2c5fc4eb8a5defd85f4ccbbcf",
+  "titulo": "Rochelle",
+  "papel": "personagem"
+ },
+ "neymar": {
+  "id": "2bd0cd1a49474aeab129894f4512e8a6",
+  "titulo": "Neymar",
+  "papel": "esporte"
+ },
+ "narrador_chris": {
+  "id": "4b215a58407c4def88e0892def6421b2",
+  "titulo": "NARRADOR DO TODO MUNDO ODEIA O CHRIS",
+  "papel": "narrador"
+ },
+ "sukuna": {
+  "id": "3a164c7d00b2437682042ebd01755521",
+  "titulo": "sukuna",
+  "papel": "personagem"
+ },
+ "galvao_bueno": {
+  "id": "7fe10a00249247aabb495bae57ac80e1",
+  "titulo": "Galvão Bueno",
+  "papel": "esporte"
+ },
+ "waldo_morais": {
+  "id": "04736e4d6a644abab81e601a7d2ae4b9",
+  "titulo": "Waldo Morais",
+  "papel": "narrador"
+ },
+ "vegeta": {
+  "id": "",
+  "titulo": "Vegeta (procurar id)",
+  "papel": "personagem"
+ },
+ "anya_forger_e500": {
+  "id": "ffe41701970d4b339ef7906300716f99",
+  "titulo": "Anya",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "asta": {
+  "id": "1aa25582a8364117b572ea35c7178e34",
+  "titulo": "Asta",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "asuka_langley_evangelion": {
+  "id": "c3ae7ed42adf4b18a696cf3cc1a2ad61",
+  "titulo": "Asuka",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "bob_esponja": {
+  "id": "01b057e7592b4b97a6963423f91f5e22",
+  "titulo": "Bob esponja ",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "bulma": {
+  "id": "145c9d4446fd45b3bb3108215882096d",
+  "titulo": "bulma br",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "buzz_lightyear": {
+  "id": "3d12f7ea5f8a44fa89cf8d644a2bf46a",
+  "titulo": "buzz",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "chapolin_colorado": {
+  "id": "cc02bbfdac7444a1b12aabf911e1b3f6",
+  "titulo": "Chapolin Colorado (Studios Maga)",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "chaves": {
+  "id": "1b33bafff1f148539bfb06344126b25a",
+  "titulo": "chaves",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "chaves_chapolin": {
+  "id": "1b33bafff1f148539bfb06344126b25a",
+  "titulo": "chaves",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "chiquinha": {
+  "id": "24c9079661624a228127bf7bb0d51637",
+  "titulo": "Chiquinha",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "chopper": {
+  "id": "8ee50ddaf2434b57b633925f6843f55d",
+  "titulo": "CHOPPER",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "dean_winchester": {
+  "id": "58cba51bbf174ada85e97b2fa2bc58e5",
+  "titulo": "Dean winchester ",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "faustao": {
+  "id": "9e5667e75bae431593556a220838832a",
+  "titulo": "Faustão animadão",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "luffy": {
+  "id": "dbe7bddfe9c04a72a4fd566206099ae4",
+  "titulo": "Luffy ",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "moana": {
+  "id": "de589451232a493990d6588fb36da09e",
+  "titulo": "MOANA",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "muzan": {
+  "id": "09f14264671c4a90bf232527f925fe4e",
+  "titulo": "Muzan",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "patolino": {
+  "id": "359bd63839734c4e97d41f4b91e520ea",
+  "titulo": "Patolino",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "pernalonga": {
+  "id": "56e5d3254c474a989317ebfdbd2d9fac",
+  "titulo": "pernalonga",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "pica_pau": {
+  "id": "5160b0e8ca854d7e94403b2500ee582b",
+  "titulo": "Pica-Pau",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "saitama": {
+  "id": "c5062a07fda44449a6241a037ecddd25",
+  "titulo": "Saitama",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "salsicha": {
+  "id": "1f0fdadf75d746f1addcac3a2b7de7bb",
+  "titulo": "Salsicha. ",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "shrek_bussunda": {
+  "id": "8ab2e1c1582b43e580fffc5d58432c88",
+  "titulo": "Shrek ai",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "sonic_manolo_rey": {
+  "id": "020ae7c097e644878745ae909ffaad15",
+  "titulo": "Sonic BR",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "subaru": {
+  "id": "dcdf62e32c654a0db92c010fcaeccdc8",
+  "titulo": "Subaru",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "trunks_crianca": {
+  "id": "b1ceb645395a444ca524c94c2115ae9e",
+  "titulo": "Trunks criança",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "wolverine_bardavid": {
+  "id": "68ad2d39df914dc88389b1d647470c1f",
+  "titulo": "Wolverine Sincero",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ },
+ "woody": {
+  "id": "97121d9b511845cc816fcd5f9389f656",
+  "titulo": "WOODY",
+  "papel": "personagem",
+  "origem_busca": "nome casado 19/11"
+ }
+}

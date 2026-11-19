@@ -736,7 +736,16 @@ def editar_sobre(pg, channel_id, texto, ensaio=False):
         return f"ensaio: descrição atual ({len(atual)} car.): {atual[:120]}"
     if atual == texto.strip():
         return "ja"
-    caixa.click()
+    # 19/11: canais novos (Imóvel, Empresário, Vendas) — caixa visível mas algo cobre e o click estoura 30 s
+    # (igual ao Publicar do branding em 15/11): Escape fecha o pop-up; se ainda bloquear, foco por JS
+    pg.keyboard.press("Escape")
+    pg.wait_for_timeout(1000)
+    try:
+        caixa.click(timeout=15000)
+    except Exception:  # noqa: BLE001
+        caixa.scroll_into_view_if_needed(timeout=10000)
+        caixa.evaluate("e => e.focus()")
+        caixa.click(force=True, timeout=15000)
     pg.keyboard.press("Control+A")
     pg.keyboard.press("Delete")
     pg.keyboard.insert_text(texto.strip())

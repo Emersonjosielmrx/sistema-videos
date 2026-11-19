@@ -19113,5 +19113,265 @@
     "arquivado": false,
     "descricao": "Android adb farm panel: keep-alive watchdog, battery and thermal visibility, remote controls - python stdlib only",
     "data": "2026-11-18"
+  },
+  "appium/appium-uiautomator2-driver": {
+    "ok": true,
+    "nome": "appium/appium-uiautomator2-driver",
+    "estrelas": 897,
+    "push": "2026-11-18",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Appium driver for black-box Android testing, based on UI Automator",
+    "data": "2026-11-18"
+  },
+  "kavabunga6/remote-device-farm": {
+    "ok": true,
+    "nome": "kavabunga6/remote-device-farm",
+    "estrelas": 1,
+    "push": "2026-11-17",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Self-hosted Android device farm with web control and mediated ADB",
+    "data": "2026-11-18"
+  },
+  "lzlzlzhh/phone-render-farm": {
+    "ok": true,
+    "nome": "lzlzlzhh/phone-render-farm",
+    "estrelas": 0,
+    "push": "2026-10-31",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Render JavaScript Canvas 2D animations into a PNG frame sequence and an MP4 — by using an Android phone’s browser as the renderer.",
+    "data": "2026-11-18"
+  },
+  "mafia999011-hue/money-clip": {
+    "ok": true,
+    "nome": "mafia999011-hue/money-clip",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Money Clip — Open-source AI video clipping engine (Opus Clip alternative). Turns long videos into viral 9:16 Shorts with voice-accurate subt",
+    "data": "2026-11-18"
+  },
+  "oyan2010/termux-yt-auto": {
+    "ok": true,
+    "nome": "oyan2010/termux-yt-auto",
+    "estrelas": 0,
+    "push": "2026-10-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated YouTube video creation and publishing engine with OAuth2 upload pipeline designed for Termux and Linux.",
+    "data": "2026-11-18"
+  },
+  "anonymous5-coder/adb-auto": {
+    "ok": true,
+    "nome": "anonymous5-coder/adb-auto",
+    "estrelas": 1,
+    "push": "2026-10-28",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "One-time No-WiFi auto-ADB setup via Termux. Automates wireless debugging pairing, port detection, and persistent localhost:5555 connection.",
+    "data": "2026-11-18"
+  },
+  "devicelab-dev/maestro-runner": {
+    "ok": true,
+    "nome": "devicelab-dev/maestro-runner",
+    "estrelas": 532,
+    "push": "2026-11-18",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Fast mobile UI test automation for Android, iOS, React Native, Flutter & Expo. Open-source Maestro alternative — 100% free, no features behi",
+    "data": "2026-11-18"
+  },
+  "edde746/tiktok-uploader": {
+    "ok": true,
+    "nome": "edde746/tiktok-uploader",
+    "estrelas": 47,
+    "push": "2022-11-29",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Programatically upload TikTok videos with ADB",
+    "data": "2026-11-18"
+  },
+  "frunoman/remote-android-controller": {
+    "ok": true,
+    "nome": "FruNoman/remote-android-controller",
+    "estrelas": 0,
+    "push": "2026-09-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Remote-control framework for driving an Android device's internals (Bluetooth, Wi-Fi, Location, ...) from a Java or Python host process, ove",
+    "data": "2026-11-18"
+  },
+  "gargvr/shorts-autopilot": {
+    "ok": true,
+    "nome": "gargvr/shorts-autopilot",
+    "estrelas": 4,
+    "push": "2026-07-23",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Self-hosted Python pipeline that discovers fresh long-form videos, cuts strong moments into captioned 9:16 Shorts, and uploads them to YouTu",
+    "data": "2026-11-18"
+  },
+  "dinip/yard": {
+    "ok": true,
+    "nome": "Dinip/yard",
+    "estrelas": 3,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "YARD - A device farm for real Android and iOS hardware",
+    "data": "2026-11-18"
+  },
+  "erdncyz/mercury-farm": {
+    "ok": true,
+    "nome": "erdncyz/mercury-farm",
+    "estrelas": 13,
+    "push": "2026-11-17",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Manage your Android, iOS, and Tizen devices from one browser workspace.",
+    "data": "2026-11-18"
+  },
+  "zebrunner/mcloud": {
+    "ok": true,
+    "nome": "zebrunner/mcloud",
+    "estrelas": 208,
+    "push": "2026-11-19",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Mobile farm ecosystem for Android and iOS devices",
+    "data": "2026-11-18"
+  },
+  "joungminsung/openphoneuse": {
+    "ok": true,
+    "nome": "joungminsung/OpenPhoneUse",
+    "estrelas": 26,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source Computer Use for Android: an AI agent that reads the screen, taps, types and switches apps for you. Works with ChatGPT, Claude, ",
+    "data": "2026-11-18"
+  },
+  "sirbonney/scrcpy-mirror-control": {
+    "ok": true,
+    "nome": "SirBonney/scrcpy-mirror-control",
+    "estrelas": 1104,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android Screen Mirroring and Control Workflow, Simplified",
+    "data": "2026-11-19"
+  },
+  "knifelemon/droidline": {
+    "ok": true,
+    "nome": "KnifeLemon/Droidline",
+    "estrelas": 552,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android automation from code. Test your apps on real phones, script the tasks you repeat, run a shelf of phones, or let an AI agent use one,",
+    "data": "2026-11-19"
+  },
+  "angelanick29/ytau": {
+    "ok": true,
+    "nome": "angelanick29/YTAU",
+    "estrelas": 0,
+    "push": "2026-05-22",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "An advanced Termux-based Python automation tool that auto-generates scripts, creates videos, and schedules multi-part (Landscape, Shorts, & ",
+    "data": "2026-11-19"
+  },
+  "cindulasai/tubeguard": {
+    "ok": true,
+    "nome": "cindulasai/tubeguard",
+    "estrelas": 0,
+    "push": "2026-06-29",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Fire TV YouTube watch-time quota daemon. Counts regular videos and Shorts as YouTube time, then blocks YouTube outside your schedule or afte",
+    "data": "2026-11-19"
+  },
+  "tsehla42/adb-wifi-connect": {
+    "ok": true,
+    "nome": "tsehla42/adb-wifi-connect",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Pair and connect Android devices over WiFi ADB — QR and code pairing, mDNS discovery, multi-device selection, watch daemon",
+    "data": "2026-11-19"
+  },
+  "luoshixin93-sudo/appium-parallel-runner": {
+    "ok": true,
+    "nome": "luoshixin93-sudo/appium-parallel-runner",
+    "estrelas": 0,
+    "push": "2026-07-14",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Python-based parallel Appium test runner for Android and iOS real devices — device farm management and CI/CD integration",
+    "data": "2026-11-19"
+  },
+  "allwin-antony/manhwaforge": {
+    "ok": true,
+    "nome": "allwin-antony/ManhwaForge",
+    "estrelas": 4,
+    "push": "2026-10-22",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated pipeline transforming manhwa and webtoon PDFs into cinematic AI recap videos with OCR, LLM narration, and TTS voiceover",
+    "data": "2026-11-19"
+  },
+  "nanoskript/vrm-rigify": {
+    "ok": true,
+    "nome": "nanoskript/vrm-rigify",
+    "estrelas": 131,
+    "push": "2026-07-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Generate Blender Rigify armatures for VRM models",
+    "data": "2026-11-19"
+  },
+  "bacteriajun/bvh-motion-retargeter": {
+    "ok": true,
+    "nome": "BacteriaJun/BVH-Motion-Retargeter",
+    "estrelas": 75,
+    "push": "2026-11-09",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Blender add-on for retargeting BVH motion to Mixamo, Unreal Engine 5, and VRM rigs with production-ready FBX export.",
+    "data": "2026-11-19"
+  },
+  "lptech22/vigen": {
+    "ok": true,
+    "nome": "lptech22/vigen",
+    "estrelas": 0,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Vigen — video generator by LPTech. Engine code-to-video 1080x1920 di Termux (Chromium + FFmpeg).",
+    "data": "2026-11-19"
+  },
+  "dsmereski/vidqa": {
+    "ok": true,
+    "nome": "DSmereski/vidqa",
+    "estrelas": 1,
+    "push": "2026-08-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "pip install vidqa-cli — local, deterministic video QA CLI + MCP for tests, CI, and agents: 28 commands — frame timing, golden-frame diff, fa",
+    "data": "2026-11-19"
+  },
+  "swayambhageria/frame-oracle": {
+    "ok": true,
+    "nome": "SwayamBhageria/frame-oracle",
+    "estrelas": 0,
+    "push": "2026-09-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Frame-exact regression gate for video exports: decode every frame back to its source frame and diff the export against the timeline (JSON or",
+    "data": "2026-11-19"
   }
 }

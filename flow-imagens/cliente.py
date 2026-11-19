@@ -120,6 +120,22 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
     feito = _gemini(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
     if feito:
         return feito
+    # 18/11 dona ("manter os celulares sempre ocupados"): o celular era o ÚLTIMO degrau e quase nunca recebia pedido
+    # (13 tentativas em 24 h). Agora, com celular LIVRE (sem trava/pausa) e pedido 9:16 sem referência, ele vem antes do
+    # Flow; ocupado ou falhou = segue pro Flow como antes. CELULAR_ANTES_FLOW=0 volta à ordem antiga.
+    if os.environ.get("CELULAR_ANTES_FLOW", "1") != "0" and not refs and formato_mais_proximo(formato) == "9:16":
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("celular_midia_livres", CELULAR)
+            cm = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(cm)
+            tem_livre = cm.ligado("imagem") and bool(cm.livres("imagem"))
+        except Exception:  # noqa: BLE001
+            tem_livre = False
+        if tem_livre:
+            feito = _celular(prompt, saida, "9:16", log, refs=refs)
+            if feito:
+                return feito
     if not disponivel():
         return _celular(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
     cmd = [str(PY), str(SCRIPT), prompt, str(saida), "--formato", formato_mais_proximo(formato),

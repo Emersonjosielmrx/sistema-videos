@@ -1,0 +1,375 @@
+{
+ "video": "sintetizerisada_20261118_075946.mp4",
+ "conta": "sintetizerisada",
+ "marca": "Agenda IA",
+ "titulo": "A IA precisa de aprovação manual para agendar?",
+ "formato": "dono_abre_fecha",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.12,
+  "notas": {
+   "legibilidade": 5.5,
+   "movimento": 4.0,
+   "roteiro_marca": 6.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.57
+   ],
+   [
+    1,
+    "dono",
+    9.06
+   ],
+   [
+    2,
+    "conversa",
+    5.43
+   ],
+   [
+    3,
+    "dono",
+    9.39
+   ],
+   [
+    4,
+    "cartao",
+    4.47
+   ]
+  ],
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Pouquíssimo contraste na legenda karaokê: o texto 'dia inteiro só' está em tom cinza-escuro/marrom sobre a camiseta preta do apresentador, sem o preenchimento branco das demais legendas e sem o destaque laranja na palavra ativa, ficando praticamente invisível no celular.",
+   "como_corrigir": "Restaurar o estilo padrão das legendas para este trecho: palavras inativas com preenchimento branco (#FFFFFF) e contorno preto, aplicando o destaque laranja com texto escuro na palavra falada no momento."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Legenda karaokê sobrepondo o queixo e a barba do apresentador. Como o apresentador foi posicionado mais abaixo para acomodar o card de pergunta no topo, a legenda permaneceu em y≈1420, colidindo diretamente com o rosto/barba.",
+   "como_corrigir": "Rebaixar a legenda para a altura do peito (em torno de y=1500 a 1530, respeitando o limite seguro de y=1580) ou reenquadrar a câmera/plano do apresentador para evitar invasão no rosto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Legenda fragmentando expressão: a locução 'ponta a ponta' foi truncada, exibindo na tela apenas 'a ponta' de forma isolada, o que perde o sentido semântico e prejudica a leitura dinâmica.",
+   "como_corrigir": "Reagrupar a minutagem das legendas para exibir a expressão completa ('ponta a ponta' ou 'processo ponta a ponta') em um único bloco de exibição."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Cena parada e ritmo arrastado no gancho inicial: o enquadramento do apresentador e o cartão com a pergunta permanecem completamente estáticos por mais de 4 segundos, sem nenhum movimento de câmera ou microanimação gráfica.",
+   "como_corrigir": "Aplicar um push-in digital lento e progressivo (zoom de 100% a 105%) e inserir o cartão de pergunta com animação elástica (pop-up/bounce) ou leve flutuação contínua para reter a atenção nos primeiros 3 segundos."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Transição seca e falta de variedade de enquadramento (mesmo molde): o corte da Cena 0 para a Cena 1 mantém rigorosamente a mesma distância focal, ângulo e posição do apresentador, gerando um jump-cut seco e visualmente monótono.",
+   "como_corrigir": "Alternar para um corte em plano mais fechado (punch-in para close-up) ou utilizar uma transição dinâmica (como whip pan ou zoom transitório) para marcar visualmente a virada de bloco."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Cena parada com ritmo arrastado: o apresentador fala por quase 5 segundos sem qualquer elemento de motion design ou apoio visual que ilustre o estresse da rotina presa e a validação manual de mensagens.",
+   "como_corrigir": "Inserir motion graphics de apoio (ícones de mensagens pipocando, relógio acelerado ou alertas de agenda cheia) acompanhados de leve movimento de câmera contínuo para dinamizar a narrativa."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Entrada abrupta de mensagem e layout estático com grande espaço vazio: o primeiro balão surge isolado rente à borda inferior do cartão de WhatsApp, deixando 70% da área útil superior vazia sem uma animação suave de rolagem.",
+   "como_corrigir": "Animar a entrada do balão com slide-up e fade a partir do topo ou centro do cartão, aplicando um efeito de scroll dinâmico e natural à medida que as novas mensagens forem disparadas."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade crítica e repetição do molde: a Cena 3 retorna ao mesmíssimo enquadramento estático do apresentador já utilizado nas Cenas 0 e 1, tornando o ritmo do vídeo excessivamente previsível e cansativo.",
+   "como_corrigir": "Modificar a escala do plano (enquadramento mais aproximado com leve movimento) ou sobrepor um B-roll animado demonstrando o sistema em operação enquanto o profissional foca no atendimento presencial."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cena final estática: a tela de encerramento fica congelada por quase 3 segundos, exibindo apenas um brilho no botão, sem animação de entrada sequencial para os textos da marca e o @ obrigatório.",
+   "como_corrigir": "Implementar entrada escalonada (staggered animation) com slide suave para o logo e informações, além de aplicar uma pulsação sutil (scale pulse) no botão de CTA para reforçar a chamada para ação."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Legenda com contraste quase nulo (texto escuro sobre camiseta preta) e omissão das palavras 'no estúdio o'.",
+   "como_corrigir": "Ajustar estilo da legenda para texto branco com destaque da marca e incluir as palavras faladas que foram omitidas."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Omissão do fechamento da frase 'de horário' na legenda final da cena.",
+   "como_corrigir": "Adicionar 'de horário' ao bloco da legenda sincronizado com a fala."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Legenda truncada exibindo apenas 'a ponta', omitindo 'o processo ponta' do áudio falado.",
+   "como_corrigir": "Corrigir a quebra da legenda para exibir a frase completa 'o processo ponta a ponta'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Salto na legenda entre q10 e q11 com omissão das palavras faladas 'fica inteira no'.",
+   "como_corrigir": "Inserir o trecho 'fica inteira no' na transição da legenda karaokê."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho inicial falha em prender a atenção nos 2 primeiros segundos: a tomada é 100% estática por mais de 4 segundos, com o apresentador em pose passiva e um cartão de pergunta excessivamente longo e burocrático ('Preciso parar meus atendimentos para aprovar cada horário marcado?'), além de o cartão ficar colado no topo da cabeça do interlocutor, sufocando o enquadramento.",
+   "como_corrigir": "Na Cena 0, dinamizar o scroll stop nos primeiros 1,5s: aplicar um punch-in digital (zoom de 10% a 15%) ou corte de aproximação, encurtar o texto da pergunta para uma dor direta e agressiva (ex.: 'Ainda interrompe atendimento pra agendar cliente?') e reposicionar o card com respiro acima da cabeça do apresentador."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Falha técnica grave de legibilidade e quebra de contraste na legenda karaokê: no trecho 'dia inteiro só', a fonte perdeu o preenchimento branco e ficou em cinza-escuro/preto sobre a camiseta preta do dono, sumindo completamente e quebrando o padrão de vídeo profissional para quem assiste no mudo.",
+   "como_corrigir": "Na Cena 1, corrigir a faixa de estilo da legenda na pós-produção para assegurar que todas as palavras inativas mantenham preenchimento branco com traçado/sombra escura sólida constante, garantindo contraste mínimo legível contra fundos e roupas escuras durante todo o vídeo."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Percepção amadora de 'slide de apresentação': o balão de simulação do WhatsApp fica flutuando solto no meio de um fundo escuro vazio com degradê plano, sem profundidade, sem moldura de smartphone e sem ambientação, parecendo um template estático de PowerPoint em vez da demonstração de um software de IA moderno e confiável.",
+   "como_corrigir": "Na Cena 2, embutir a interface de conversa em um mockup realista de smartphone (device frame moderno em perspectiva sutil) e substituir o fundo preto chapado por um desfoque suave (bokeh) do ambiente de estúdio/clínica, trazendo sofisticação e contexto corporativo para o produto."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "followupia_ia_20261118_114526.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.17,
+   "notas": {
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261118_134310.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261118_175745.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "quatro_veo",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261118_191756.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "quatro_veo",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261118_210725.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   10,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   5,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

@@ -1,0 +1,153 @@
+{
+ "conta": "crmchatwoot.ia",
+ "produto": "crm_chatwoot",
+ "marca": "CRM Chatwoot IA",
+ "titulo": "CRM com IA para negócio pequeno: é complicado?",
+ "legenda": "Seu negócio é pequeno e você tem receio de que um CRM com IA seja complicado? Ele é feito sob medida para a sua realidade, com atendimento, tickets e histórico dos clientes em um só lugar. Link no perfil. 💬\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "CRM com IA é complicado demais?",
+  "pergunta_cliente": "Meu negócio é pequeno, um CRM com IA não vai ser complicado demais?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu achava que CRM com inteligência artificial era coisa de empresa grande, mas hoje meu atendimento está organizado.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the tidy, well lit counter of a small Brazilian company office, professional and clean",
+    "real_tema": "dono de pequeno negócio que achava CRM complexo demais",
+    "destaques": [
+     "empresa grande",
+     "atendimento está organizado"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261118_191851_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Nós criamos um CRM sob medida a partir do Chatwoot, com atendimento, tickets e histórico de cada cliente em um só lugar.",
+    "visual": "veo",
+    "prompt_en": "a small Brazilian business team working calmly at a tidy desk, warm natural light, commercial cinematic photography, people seen from behind or from the side, no text or logos",
+    "cenario_en": "",
+    "real_tema": "CRM feito sob medida a partir do Chatwoot",
+    "destaques": [
+     "sob medida",
+     "um só lugar"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, fiz um pedido semana passada e tenho uma dúvida."
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Já encontrei seu histórico aqui. Como posso ajudar?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Quero trocar o endereço de entrega."
+     },
+     {
+      "de": "empresa",
+      "texto": "Certo. Abri um ticket e a equipe já cuida disso."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "O sistema se adapta ao meu jeito de trabalhar, e minha equipe atende com clareza, sem complicação.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a bright, tidy small Brazilian business office, well lit, professional",
+    "real_tema": "resultado: atendimento claro e sem complicação",
+    "destaques": [
+     "se adapta",
+     "sem complicação"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261118_191851_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_crmchatwoot.ia_20261118_191851_1.png"
+   }
+  ],
+  "legenda": "Seu negócio é pequeno e você tem receio de que um CRM com IA seja complicado? Ele é feito sob medida para a sua realidade, com atendimento, tickets e histórico dos clientes em um só lugar. Link no perfil. 💬",
+  "titulo": "CRM com IA para negócio pequeno: é complicado?",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "medo_complexidade_ia",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 39,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\crmchatwoot.ia_20261118_191756\\dono_3.mp4",
+ "duracao_s": 35.03,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-18T19:49:51",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 6.57,
+   "fala": "Meu negócio é pequeno, um CRM com IA não vai ser complicado demais?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 6.57,
+   "fim": 14.41,
+   "fala": "Eu achava que CRM com inteligência artificial era coisa de empresa grande, mas hoje meu atendimento está organizado.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 14.41,
+   "fim": 23.26,
+   "fala": "Nós criamos um CRM sob medida a partir do Chatwoot, com atendimento, tickets e histórico de cada cliente em um só lugar.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 23.26,
+   "fim": 31.09,
+   "fala": "O sistema se adapta ao meu jeito de trabalhar, e minha equipe atende com clareza, sem complicação.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 31.09,
+   "fim": 35.03,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.0
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

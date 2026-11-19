@@ -879,6 +879,21 @@ def _capa(pg, arquivo):
         entrada.wait_for(state="attached", timeout=15000)
         _escolher_arquivo(pg, entrada, p)
         pg.wait_for_timeout(4000)
+        # 18/11 (Dentro das Coisas 3D, 12 falhas hoje, 0 uploads na vida): canal sem telefone verificado abre o
+        # modal "Você precisa fazer a verificação única" POR CIMA do envio; ninguém fechava e o clique seguinte
+        # estourava 30 s. Fecha no "Cancelar" e sobe sem capa. YT_CAPA_FECHA_VERIFICACAO=0 desliga.
+        if os.environ.get("YT_CAPA_FECHA_VERIFICACAO", "1") != "0":
+            modal = pg.locator("tp-yt-paper-dialog:visible, ytcp-dialog:visible").filter(
+                has_text=re.compile(r"verifica[çc][ãa]o [úu]nica|one-time verification|verify", re.I)).last
+            try:
+                modal.wait_for(state="visible", timeout=3000)
+                _shot(pg, "capa_pede_verificacao")
+                modal.locator("ytcp-button, button").filter(
+                    has_text=re.compile(r"^\s*(cancelar|cancel)\s*$", re.I)).first.click(timeout=5000)
+                pg.wait_for_timeout(1000)
+                return "aviso: o canal pede a verificação única (telefone) para capa; fechei e sobe SEM capa"
+            except Exception:  # noqa: BLE001  (não apareceu)
+                pass
         txt = pg.locator("ytcp-video-custom-still-editor").first.inner_text(timeout=3000).lower()
         _shot(pg, "capa")
         if "verifi" in txt:

@@ -48,7 +48,35 @@ TELA_JSON = """ "e_o_produto": true/false (false se for peça, placa, fonte, sup
  "preco_real": número ou null (preço DESTE item segundo a descrição, se diferente do anúncio),
  "resumo": "1 frase com o que importa citando o vendedor" """
 
+CEL_JSON = """ "e_o_produto": true/false (false se for peça, tela avulsa, carcaça, capa, fone, carregador, lote, outro aparelho, iPhone),
+ "funciona": "sim" | "nao" | "incerto" (sim = liga, entra no sistema e a tela mostra imagem, mesmo rachada),
+ "marca_modelo": "ex.: Samsung Galaxy A21s, Motorola Moto G9 Play, Xiaomi Redmi Note 9" ou null,
+ "android": número da versão do Android dita no anúncio ou null,
+ "android_estimado": versão provável pelo modelo (a última que o modelo recebe) ou null,
+ "ram_gb": número ou null, "armazenamento_gb": número ou null,
+ "tela": "ok" | "rachada mas dá pra ver" | "manchas/linhas" | "inutilizável" | "nao_informado",
+ "touch": "ok" | "falhando" | "nao_informado",
+ "conta_google_bloqueada": true/false/null (FRP, "conta google presa", "bloqueado"),
+ "bateria": "ok" | "viciada/fraca" | "estufada" | "nao_informado",
+ "outros_defeitos": "câmera, som, carregamento, wi-fi, botão... ou vazio",
+ "preco_real": número ou null (preço DESTE celular pela descrição, se diferente),
+ "resumo": "1 frase com o que importa citando o vendedor" """
+
 PERFIS = {
+    "celular": {
+        "url": "https://www.olx.com.br/celulares?opst=2&sp=1&pe={teto}",
+        "teto": 270,
+        "o_que": "celular Android inteiro que funciona (tela rachada serve se der para ver)",
+        "lixo": r"iphone|apple|^\s*(capa|pel[íi]cula|fone|carregador|cabo|tela\b|display|frontal|bateria|tampa|"
+                r"carca[çc]a|placa|suporte|smartwatch|rel[óo]gio|tablet|kit\b|lote\b)|troco|troca\b",
+        "triagem_extra": "Descarte iPhone/Apple, tablets, relógios, peças (tela/frontal/placa), capas, fones, "
+                         "carregadores, lotes, 'troco', celulares de botão/flip sem Android.",
+        "json": CEL_JSON,
+        "contexto": "A compradora vai usar o celular ligado na tomada, controlado pelo PC (ADB por Wi-Fi, Termux, "
+                    "Tailscale). Precisa de Android 11 ou maior (depuração sem fio). Tela rachada, bateria fraca e "
+                    "câmera ruim não importam; touch tem que funcionar e não pode ter conta Google presa (FRP).",
+        "grupo": lambda v: v.get("android") or v.get("android_estimado"),
+    },
     "monitor": {
         "url": "https://www.olx.com.br/informatica/monitores?opst=2&sp=1&pe={teto}",
         "teto": 1500,

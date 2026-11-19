@@ -1,0 +1,146 @@
+{
+ "conta": "agentesdeia.ia",
+ "produto": "agente_tarefas",
+ "marca": "Agentes de IA",
+ "titulo": "Delegue a pesquisa a um agente IA",
+ "legenda": "Pesquisa, agendamento, follow-up: você delega tarefas reais a um agente IA e recebe a tarefa concluída. Mais tempo para o que importa no seu dia. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#produtividade #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Manhã inteira pesquisando?",
+  "pergunta_cliente": "Dá para receber a pesquisa pronta enquanto cuido do meu negócio?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu gastava a manhã inteira buscando informação na internet, e o resto do trabalho ficava parado esperando.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit small Brazilian office with a clean desk and a laptop",
+    "real_tema": "dono que perdia a manhã com pesquisa",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261118_210829_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Agora eu explico o que preciso ao Agente Pessoal IA, e ele pesquisa por mim.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit small Brazilian office with a clean desk and a laptop",
+    "real_tema": "delegar a pesquisa ao agente",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso de uma pesquisa sobre fornecedores para amanhã."
+     },
+     {
+      "de": "empresa",
+      "texto": "Certo! Já começo a pesquisa e te entrego pronta."
+     },
+     {
+      "de": "cliente",
+      "texto": "Ótimo. Vou cuidar de outras coisas enquanto isso."
+     },
+     {
+      "de": "empresa",
+      "texto": "Combinado. Quando terminar, te aviso aqui."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261118_210829_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261118_210829_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Eu recebo a tarefa concluída e uso a manhã para cuidar do que faz a empresa crescer.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting in a tidy, well lit small Brazilian office, smiling, with an organized desk",
+    "real_tema": "tarefa entregue e tempo livre",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261118_210829_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261118_210829_1.png"
+   }
+  ],
+  "legenda": "Pesquisa, agendamento, follow-up: você delega tarefas reais a um agente IA e recebe a tarefa concluída. Mais tempo para o que importa no seu dia. Link no perfil.",
+  "titulo": "Delegue a pesquisa a um agente IA",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "antes_depois_pesquisa",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 30,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\agentesdeia.ia_20261118_210725\\dono_3.mp4",
+ "duracao_s": 31.52,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-18T21:31:21",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.68,
+   "fala": "Dá para receber a pesquisa pronta enquanto cuido do meu negócio?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.68,
+   "fim": 12.51,
+   "fala": "Eu gastava a manhã inteira buscando informação na internet, e o resto do trabalho ficava parado esperando.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.51,
+   "fim": 19.74,
+   "fala": "Agora eu explico o que preciso ao Agente Pessoal IA, e ele pesquisa por mim.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 19.74,
+   "fim": 27.57,
+   "fala": "Eu recebo a tarefa concluída e uso a manhã para cuidar do que faz a empresa crescer.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.57,
+   "fim": 31.52,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.0,
+  "notas": {
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

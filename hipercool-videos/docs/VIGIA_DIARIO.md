@@ -448,3 +448,12 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
 - CONSERTO PROPOSTO: Nenhum. A fila automática está rodando normalmente nos ciclos de 20 minutos.
 - Estado: NADA A FAZER
+## 20261119_0236 — Verificação de rotina: avisos de métricas e vídeos removidos/travados pelo YouTube
+- Motivo: Alerta em fila_postagem.log indicando que métricas de vídeos marcados como mortos ou travados pelo YouTube (G4HNY5SB0TE, 2qpBQcj1PAA, pk5BXIC8394) não foram lidas, além de falhas/timeouts pontuais no YouTube Studio.
+- O que achei (com trecho de log):
+  - [01:15:57] métricas G4HNY5SB0TE: non leu ({'erro': 'morto: TRAVADO pelo YouTube...'})
+  - [01:16:44] métricas 2qpBQcj1PAA: non leu ({'erro': 'morto: TRAVADO pelo YouTube...'})
+  - [01:31:45] métricas pk5BXIC8394: non leu ({'erro': 'sem resposta em 900s'})
+- Causa provável: Vídeos removidos ou travados pelo YouTube em canais específicos e timeout temporário na coleta de analytics pelo YouTube Studio.
+- CONSERTO PROPOSTO: Nenhum. O comportamento é esperado para vídeos removidos/travados pelo YouTube e timeouts transientes de scraping no Studio; nenhum código ou estado deve ser alterado sem intervenção direta do dono nas contas travadas.
+- Estado: NADA A FAZER

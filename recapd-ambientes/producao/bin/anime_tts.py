@@ -406,6 +406,138 @@ aplicar_margem_final = _aplicar_margem_final
 proteger_cauda_bruto = _proteger_cauda_bruto
 
 
+def _fish_nuvem_pronto():
+    """19/11 dona ("a partir de agora o Fish vai ser o padrão; os longos são feitos no Kaggle"): Fish Speech na GPU
+    do Kaggle. Só onde o kaggle_trabalhador montou o ambiente (FISH_NUVEM=1 + FISH_VENV) e o narrador tem trecho
+    ORIGINAL de referência (referencia_fish.wav/.txt na pasta da voz). Sem isso = segue Kitten/p3 como antes."""
+    voz = os.environ.get("VOZ_CLONADA")
+    if os.name == "nt" or os.environ.get("FISH_NUVEM") != "1" or not voz or _OUTRA:
+        return False
+    pv = VOZES_DIR / Path(voz).name
+    return (pv / "referencia_fish.wav").exists() and (pv / "referencia_fish.txt").exists()
+
+
+def _acabamento_fish(out, voz):
+    """19/11 (análise das técnicas p/ o Fish): o Fish já vem com ritmo, respiração e entonação reais do narrador, então
+    humanizar/curva/climas/RVC ficam FORA (soam artificiais por cima ou tiram a voz do narrador). Entram só:
+    pos_processar (nivela -20 LUFS e corta cauda de silêncio — sem isso as frases mudam de volume) e o efeito próprio
+    da voz (cadastro do narrador). O sidecar .words.json não muda de tempo (pos_processar só corta o FIM)."""
+    try:
+        narracao_curva.pos_processar(out, 0.0)
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish] nivelar {Path(out).name} falhou ({e})")
+    try:
+        anime_formatos.aplicar_efeito_voz(voz, out)
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish] efeito da voz em {Path(out).name} falhou ({e})")
+
+
+def _narrar_fish_nuvem(lines, audio_dir, so=None):
+    """Narra pelo Fish Speech na GPU (bin/fish_nuvem.py, num processo só: o motor carrega 1x). Cada audio_i.wav que
+    sai fica pronto (sem RVC — o Fish já é a voz do narrador) e o laço do preparar_clone pula. Nunca levanta."""
+    if not _fish_nuvem_pronto():
+        return
+    try:
+        voz = os.environ["VOZ_CLONADA"]
+        pv = VOZES_DIR / Path(voz).name
+        itens = []
+        for i, line in enumerate(lines):
+            if so is not None and i not in so:
+                continue
+            out = Path(audio_dir) / f"audio_{i}.wav"
+            if out.exists() and out.stat().st_size > 500:
+                continue
+            texto = _seguro(line)
+            if texto.strip():
+                itens.append({"texto": texto, "saida": str(Path(audio_dir) / f"audio_{i}.fish_bruto.wav"), "i": i})
+        if not itens:
+            return
+        lista = Path(audio_dir) / "_fish_nuvem.json"
+        lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
+        t0 = time.time()
+        with open(Path(audio_dir) / "_fish_nuvem.log", "a", encoding="utf-8") as fh:
+            try:  # 19/11 (revisão): estourou o tempo = aproveita o que já saiu (não joga tudo fora)
+                subprocess.run([os.environ["FISH_VENV"], str(Path(__file__).with_name("fish_nuvem.py")), "lote",
+                                str(pv), str(lista)], stdout=fh, stderr=subprocess.STDOUT, timeout=3 * 3600)
+            except subprocess.TimeoutExpired:
+                logging.warning("[fish nuvem] passou de 3 h — uso as frases que já saíram")
+        feitos = []
+        for it in itens:
+            bruto = Path(it["saida"])
+            if not bruto.exists():
+                continue
+            out = Path(audio_dir) / f"audio_{it['i']}.wav"
+            r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(bruto), "-ac", "1", "-ar", "44100", str(out)],
+                               capture_output=True)
+            bruto.unlink(missing_ok=True)
+            if r.returncode != 0:  # 19/11 (revisão): wav truncado não pode passar por pronto no laço do p3
+                out.unlink(missing_ok=True)
+            if r.returncode == 0 and out.exists():
+                feitos.append(it["i"])
+                _acabamento_fish(out, voz)
+                if it["i"] == len(lines) - 1:
+                    _aplicar_margem_final(out)
+        if feitos:
+            (Path(audio_dir) / "_voz_online.json").write_text(json.dumps(
+                {"motor": "fish_nuvem", "frases": sorted(feitos), "total": len(itens)}), encoding="utf-8")
+        logging.info(f"[fish nuvem] {len(feitos)}/{len(itens)} frases em {time.time() - t0:.0f}s "
+                     f"(narrador {voz}); o resto no {_voz_modo()}")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish nuvem] falhou ({type(e).__name__}: {str(e)[:150]}) — tudo no {_voz_modo()}")
+
+
+def _narrar_online(lines, audio_dir, so=None):
+    """18/11 dona: "quando for Shorts, priorizar gerar o áudio online e aí monta; se não houver créditos usa o mesmo p3
+    com técnicas". VOZ_ONLINE=fish (ligado só no pedido de Short) -> narra pelo Fish Audio (voz do narrador do Chris,
+    comum/fish_audio/fish_lote.py, conta escolhida pelo creditos.json, IP fixo de cada conta). Cada audio_i.wav que
+    sai online fica pronto e o laço do preparar_clone pula (já pulava wav existente); o resto segue no p3. Nunca
+    levanta. Personagem com voz própria (mascote/falas) não passa aqui: só as frases desta chamada (so)."""
+    if os.environ.get("VOZ_ONLINE", "").strip().lower() != "fish" or _OUTRA:
+        return
+    try:
+        sys.path.insert(0, r"D:\hipercool-materiais\comum\fish_audio")
+        import fish_lote
+        # 19/11: QUEM fala. Narrador do vídeo (so=None, ou VOZ_CLONADA = narrador escolhido) -> voz do nicho (Chris /
+        # Neymar no esporte). Fala de PERSONAGEM (_falas_personagem / revezamento põe VOZ_CLONADA=<personagem>) -> a
+        # voz DELE no site (vozes_site.json); personagem sem voz no site = não narra online (segue no RVC dele) —
+        # antes a fala do Goku sairia na voz do narrador do Chris.
+        voz_site = None
+        quem = (os.environ.get("VOZ_CLONADA") or "").strip()
+        narrador = (os.environ.get("VOZ_ONLINE_NARRADOR") or "").strip()
+        if so is not None and quem and quem != narrador:
+            try:
+                mapa = json.loads(Path(r"D:\hipercool-materiais\comum\fish_audio\vozes_site.json").read_text(
+                    encoding="utf-8"))
+                voz_site = (mapa.get(Path(quem).name) or {}).get("id")
+            except (OSError, ValueError):
+                voz_site = None
+            if not voz_site:
+                return
+        ped = []
+        for i, line in enumerate(lines):
+            if so is not None and i not in so:
+                continue
+            out = Path(audio_dir) / f"audio_{i}.wav"
+            if out.exists() and out.stat().st_size > 500:
+                continue
+            texto = _seguro(line)
+            if texto.strip():
+                ped.append((i, texto, str(out)))
+        if not ped:
+            return
+        feitos = fish_lote.gerar(ped, log=lambda m: logging.info(m), voz=voz_site)
+        if feitos:
+            for i in feitos:  # nivela + efeito da voz; mesma cauda/margem das outras bases na última frase
+                _acabamento_fish(Path(audio_dir) / f"audio_{i}.wav", os.environ.get("VOZ_CLONADA") or "")
+                if i == len(lines) - 1:
+                    _aplicar_margem_final(Path(audio_dir) / f"audio_{i}.wav")
+            (Path(audio_dir) / "_voz_online.json").write_text(json.dumps(
+                {"motor": "fish", "frases": sorted(feitos), "total": len(ped)}), encoding="utf-8")
+        logging.info(f"[online] Fish: {len(feitos)}/{len(ped)} frases; o resto no {_voz_modo()}")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[online] Fish falhou ({type(e).__name__}: {str(e)[:120]}) — tudo no {_voz_modo()}")
+
+
 def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     """Narra TODAS as frases com a voz clonada antes da montagem (o loop do anime_segments acha os wavs prontos).
     Uma chamada só ao voz_clonada.py lote: o Applio carrega 1x (frase a frase era ~1 min de carga cada).
@@ -414,6 +546,11 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     _SEGUIDA.update(base=None, s=0.0, calma=None)  # 18/11: revezamento do p3 começa limpo em cada chamada
     perfil = _perfil_v2(voz)
     audio_dir = Path(audio_dir)
+    # 19/11 dona — ordem da voz: Fish Speech na GPU (Kaggle, narrador com trecho original) -> Fish online (Short no
+    # PC1, conta com crédito) -> o modo de sempre (Kitten no Kaggle / p3 com mistura nos PCs). Cada um só narra o que
+    # ainda não tem audio_i.wav; o que falhar segue para o próximo.
+    _narrar_fish_nuvem(lines, audio_dir, so)
+    _narrar_online(lines, audio_dir, so)
     bases = audio_dir / "_base_clone"
     bases.mkdir(parents=True, exist_ok=True)
     itens, depois, resumo = [], [], []
@@ -531,6 +668,11 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
         if "entrada" in it and Path(it["entrada"]).exists():
             _proteger_cauda_bruto(it["entrada"])
     if not itens:
+        # 19/11 (revisão): com o Fish narrando TUDO, itens fica vazio — antes saía aqui e pulava a abertura com o
+        # trecho ORIGINAL do personagem e o resumo. Agora só pula o lote do RVC e segue para o fim.
+        if any((audio_dir / f"audio_{i}.wav").exists() for i in range(len(lines))
+               if so is None or i in so):
+            _fechar_clone(lines, audio_dir, so, abertura, voz, resumo, itens, modo, perfil)
         return
     lista = bases / "lista.json"
     lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
@@ -575,6 +717,13 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
             climas_voz.aplicar_eco(out, eco)
         if idx == len(lines) - 1:
             _aplicar_margem_final(out)
+    _fechar_clone(lines, audio_dir, so, abertura, voz, resumo, itens, modo, perfil)
+
+
+def _fechar_clone(lines, audio_dir, so, abertura, voz, resumo, itens, modo, perfil):
+    """Fim do preparar_clone: margem final, abertura com o trecho ORIGINAL do personagem e o resumo. Separado em
+    19/11 para o caminho do Fish (que não passa pelo lote do RVC) também ter a abertura."""
+    audio_dir = Path(audio_dir)
     if lines and (so is None or (len(lines) - 1) in so):
         _aplicar_margem_final(audio_dir / f"audio_{len(lines) - 1}.wav")
     import anime_script  # dono 26/10: dorama/filme = o protagonista narra; a fala real do personagem quebraria isso

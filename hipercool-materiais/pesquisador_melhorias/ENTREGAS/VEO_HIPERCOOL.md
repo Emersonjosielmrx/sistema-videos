@@ -299,3 +299,20 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 17:34 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1727.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 02:35 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_0227.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 02:55 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_0251.md`
+- [INÉDITO] github.com/nanoskript/vrm-rigify — ★131, push 2026-07-22, MIT — Generate Blender Rigify armatures for VRM models
+- [INÉDITO] github.com/BacteriaJun/BVH-Motion-Retargeter — ★75, push 2026-11-09, MIT — Blender add-on for retargeting BVH motion to Mixamo, Unreal Engine 5, and VRM rigs with production-ready FBX export.
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 03:49 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatares_stop__sonnet_0346.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 04:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_0356.md`
+- (todos os itens desta pesquisa foram reprovados)

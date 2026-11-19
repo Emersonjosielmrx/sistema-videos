@@ -734,7 +734,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-04T17:08:12",
     "ultimo_sinal": {
-     "em": "2026-11-18T17:20:28",
+     "em": "2026-11-18T23:23:06",
      "tipo": "saude_morto",
      "maquina": "pc2"
     },
@@ -1054,7 +1054,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-18T13:18:13",
+     "em": "2026-11-19T01:34:34",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1815,11 +1815,11 @@
     "base": 90,
     "nivel": 0,
     "teto": 90,
-    "estado": "subindo",
+    "estado": "segurando",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-12T02:06:12",
+     "em": "2026-11-18T21:31:04",
      "tipo": "sessao_expirada",
      "maquina": "?"
     },
@@ -1833,6 +1833,11 @@
       "em": "2026-11-10T21:07:57",
       "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
       "teto": 90
+     },
+     {
+      "em": "2026-11-18T22:08:56",
+      "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
+      "teto": 90
      }
     ]
    },
@@ -1844,9 +1849,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-30T23:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-15T18:18:05",
-     "tipo": "saude_morto",
-     "maquina": "x200ma"
+     "em": "2026-11-18T21:31:04",
+     "tipo": "sessao_expirada",
+     "maquina": "?"
     },
     "historico": [
      {
@@ -1989,9 +1994,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-02T04:11:47",
     "ultimo_sinal": {
-     "em": "2026-11-10T07:20:27",
+     "em": "2026-11-19T02:25:53",
      "tipo": "saude_morto",
-     "maquina": "pc2"
+     "maquina": "x200ma"
     },
     "historico": [
      {
@@ -2524,7 +2529,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-18T15:18:29",
+     "em": "2026-11-19T01:34:34",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -3055,12 +3060,16 @@
    },
    "fakenews.ia4": {
     "base": 2,
-    "nivel": 6,
-    "teto": 8,
-    "estado": "subindo",
+    "nivel": 0,
+    "teto": 2,
+    "estado": "fora",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-08T02:07:58",
-    "ultimo_sinal": null,
+    "ultimo_sinal": {
+     "em": "2026-11-19T00:20:53",
+     "tipo": "conta_restrita",
+     "maquina": "pc1"
+    },
     "historico": [
      {
       "em": "2026-10-31T11:07:58",
@@ -3091,6 +3100,11 @@
       "em": "2026-11-08T02:07:58",
       "o_que": "36 h sem sinal: sobe 1 degrau (7 → 8)",
       "teto": 8
+     },
+     {
+      "em": "2026-11-19T01:08:58",
+      "o_que": "conta restrita/suspensa: FORA da rampa (teto volta à base)",
+      "teto": 2
      }
     ]
    },
@@ -4179,9 +4193,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-18T17:20:28",
+    "em": "2026-11-19T02:25:53",
     "tipo": "saude_morto",
-    "conta": "entrevistacomia"
+    "conta": "mundosolar1995"
    },
    "historico": [
     {

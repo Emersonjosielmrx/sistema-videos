@@ -466,6 +466,12 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
         anime_tts.preparar_clone(lines, audio_dir, impactos)
     else:
         lines = _falas_mascote(lines, originais, audio_dir)
+        # 19/11 dona ("Fish vai ser o padrão"): Short SEM voz clonada também tenta o Fish online antes do laço; o
+        # narrate() reusa o audio_i.wav que já existe (cache). Sem crédito/erro = narrate de sempre (Edge).
+        try:
+            anime_tts._narrar_online(lines, audio_dir)
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[segments] Fish online sem clone falhou ({type(e).__name__}) — narração normal")
     # 23/10: cor/nome de quem fala na legenda (só formato com 2+ vozes); falhou = legenda normal
     global ULTIMOS_FALANTES
     ULTIMOS_FALANTES, quem = None, None

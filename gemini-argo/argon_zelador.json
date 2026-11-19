@@ -1,11 +1,11 @@
 {
  "contas": 29,
  "prontas": 0,
- "cookies_mortos": 21,
- "sem_cota": 9,
- "bloqueadas": 0,
- "aguardando_oi": 19,
- "proxima_volta": "2026-11-18T20:49",
+ "cookies_mortos": 5,
+ "sem_cota": 25,
+ "bloqueadas": 1,
+ "aguardando_oi": 27,
+ "proxima_volta": "2026-11-19T04:53",
  "ultimas_voltas": [
   [
    "2026-11-18T17:43",
@@ -40,47 +40,24 @@
    "inovaremultiatendimento"
   ]
  ],
- "em": "2026-11-18T20:33:03",
- "duracao_s": 1186,
- "conferidas": 2,
+ "em": "2026-11-19T04:22:02",
+ "duracao_s": 839,
+ "conferidas": 6,
  "mortas_vistas": [
-  "emersonjosiel2029",
-  "comoseriasecomia",
+  "emersonjosiel2033",
+  "inovaremanhwaverseesp",
   "solarmundo195",
-  "inovaremanhwabr",
-  "inovaremanhwaverseing",
-  "aulacomia",
   "aulasrevolution",
-  "inovaremultiatendimento",
-  "filmescomia1",
-  "msenergypara",
-  "murilodoctor192",
-  "mentoriaiapro",
-  "e4487017",
-  "fabricadeautomacoes0",
-  "inovarecap",
-  "emersongenc",
-  "emersongencshin",
-  "empressinovare",
-  "fabiovideoseducativos",
-  "gameoftroneskingsroadbrasil",
-  "vendeafiliados3",
-  "en1653964",
-  "emersonjosiel2031",
-  "entrevistacomia"
+  "murilodoctor192"
  ],
- "renovadas": [
-  "comoseriasecomia",
-  "aulacomia"
- ],
+ "renovadas": [],
  "falhas_renovar": [
-  "emersonjosiel2029",
   "solarmundo195",
-  "inovaremanhwaverseing",
-  "aulasrevolution"
+  "aulasrevolution",
+  "murilodoctor192"
  ],
  "voltaram": [],
  "oi_sem_cota": [
-  "inovaremanhwaversethai"
+  "msenergypara"
  ]
 }

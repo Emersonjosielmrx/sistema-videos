@@ -2193,3 +2193,78 @@
 - prova: sem-obra-767d45_cap1 q11: trecho muito claro/quase estourado (movimento 6.0, grave). Só 1 Short, então só investigar se se repetir; pode ser a luz da própria fonte.
 - onde: transições/filtros de render (fade ou flash entre cenas)
 - como testar: Comparar quadro q11 do render com o trecho correspondente da fonte; se a fonte não estoura, é artefato do pipeline.
+
+## 18/11 22:08 PROPOSTA [CERTEZA] Trava de coerência entre a tomada e o assunto da locução (gemini-4-argon)
+- prova: sem-obra-f4d6f8_cap1_20261118, nota de história 2.0: q01-q03 mostram leitões assados enquanto a narração diz 'O tamanduá já foi parar no prato', e q04 mostra o tamanduá vivo durante a fala sobre preparo da carne. Só 1 Short no lote, mas o defeito é objetivo e bate com a regra 9 do APRENDIDO. Confirmar no roteiro.txt e no log de seleção de cenas antes de agir.
+- onde: Função que casa o trecho do roteiro com a cena de origem (seleção/corte de cenas) e o 'consumo' da fonte do Short sem-obra-f4d6f8; achar a função pelo log de cenas desse Short.
+- como testar: Reprocessar o f4d6f8 e conferir se as 3 primeiras tomadas passam a mostrar tamanduá/animal citado no roteiro. Depois contar, nos Shorts das últimas 24 h, quantos têm o substantivo principal do roteiro sem aparecer em nenhuma tomada. Só vale como padrão se passar de 1 Short.
+
+## 18/11 22:08 PROPOSTA [CERTEZA] Piso de margem inferior da legenda palavra a palavra (gemini-4-argon)
+- prova: f100c3 q02 ('DO QUE A' perto de y=1580), q03 ('SIM E UM' parcialmente fora da zona segura inferior), q12 e q17; 968058 q03 ('em muitas' no limite). Aparece em 2 Shorts do lote, sempre como defeito leve, e a regra 5 do APRENDIDO pede o mesmo.
+- onde: Cálculo da posição vertical da legenda no render (função que define o y da legenda dinâmica), checando a caixa das letras com contorno em 1080x1920 e não só a linha-base.
+- como testar: Medir em 20 Shorts do dia a distância entre a base da caixa das letras e y=1580 (folha do rodapé, D:\tmp\folha_topo.py adaptado). Se algum passar de 1580, subir o limite inferior alguns pixels e conferir de novo em 20 Shorts.
+
+## 18/11 22:08 PROPOSTA [GOSTO] Palavra de impacto fora do centro da ação, de lado (gemini-4-argon)
+- prova: de3ed9 q02 ('UMA' verde com fundo sólido no centro, competindo com o peixe), 968058 q02 ('GIGANTE' cobrindo a captura), f100c3 q01 (texto dinâmico mal posicionado no terço superior/médio). A dona já disse em 27/10 que prefere palavras de impacto maiores, de lado. Fazer só 1 mudança, em teste A/B pequeno.
+- onde: Regra de posicionamento horizontal e vertical das palavras de destaque da legenda palavra a palavra, no render.
+- como testar: Em um lote de teste, colocar as palavras de destaque no lado oposto ao ponto focal da cena (quando a visão o detectar) e comparar a nota de retenção e o % assistido contra o lote sem a mudança.
+
+## 18/11 22:08 PROPOSTA [GOSTO] Contorno mínimo nas cores secundárias da legenda, sem tirar as cores por personagem (gemini-4-argon)
+- prova: f4d6f8 q12 ('ESSA' apagada sobre a panela), de3ed9 q09 ('AZEDO' roxo sobre casaco escuro), 968058 q04 e q12 (verde e branco sobre grama e areia). Aparece em 3 Shorts, sempre leve. A dona gosta de cores por personagem, então a mudança é só no contraste do contorno e da sombra, não na paleta.
+- onde: Estilo do contorno e da sombra da legenda (cores por personagem), com piso de contraste do contorno contra o quadro atrás da palavra.
+- como testar: Calcular o contraste da cor da palavra contra a média do quadro atrás dela nos Shorts do dia. Onde ficar abaixo do piso, reforçar o contorno e comparar a nota de legibilidade.
+
+## 18/11 23:17 PROPOSTA [CERTEZA] Legenda palavra a palavra duplicada ou sobreposta na troca de cena (gemini-4-argon)
+- prova: 4349e8: q13 'ATACAR' grande sobre 'PRA ATACAR', q14 'princípio/duranto', q16 'principaimpmto durante'. b5f20f: q13 'NINGUÉM' repete o início da palavra na passagem da cena 4 para a 5. A regra 6 do APRENDIDO descreve o mesmo problema.
+- onde: Geração do .ass/legenda e montagem por cena (função que escreve os eventos de palavra e a palavra de impacto), provavelmente no módulo de legenda dos CORTES.
+- como testar: Abrir o .ass de 4349e8 e b5f20f e listar eventos Dialogue com tempos sobrepostos perto das trocas de cena. Se existirem, cortar o fim de cada palavra no início da seguinte e não desenhar a palavra de impacto junto com a linha normal da mesma palavra. Depois renderizar de novo e conferir os quadros q13 a q16.
+
+## 18/11 23:17 PROPOSTA [GOSTO] Palavra de impacto fora do centro e com contorno forte (gemini-4-argon)
+- prova: 968058 q02: 'GIGANTE' no centro cobre a captura e o peixe. 287472 q13: 'A GUAIVIRA' sobre pedras e água fica ilegível. 4349e8 q13: colisão com a linha de baixo. A dona prefere palavras de impacto maiores, de lado.
+- onde: Posicionamento da palavra de impacto na legenda (âncora e margem), junto com a regra 5 do APRENDIDO.
+- como testar: Ancorar a palavra de impacto no terço lateral ou inferior, fora do rosto e da ação, com contorno e sombra. Renderizar 3 Shorts antigos e comparar legibilidade e nota do júri. Medir em lote antes de ligar para todos.
+
+## 18/11 23:17 PROPOSTA [CERTEZA] Conferir a faixa da tarja em b5f20f antes de agir (gemini-4-argon)
+- prova: b5f20f q01/q03: o júri lê 'what's happe...' em inglês junto da tarja. É 1 Short só, de 12/11, então ainda não é padrão. Vale lembrar que o júri não vê o que está debaixo da tarja.
+- onde: Log do Short ('[hardsub] N/6') e posição da tarja na etapa de cobertura da legenda.
+- como testar: Ler o log de b5f20f. Se a visão leu legenda mas a tarja ficou fora da faixa dela, é erro de posição e só vira ação se aparecer em mais um Short. Se a visão não leu legenda, não é defeito.
+
+## 19/11 00:34 PROPOSTA [CERTEZA] Conferir se a tarja do b5f20f cobriu a legenda inglesa (log hardsub) (cw/claude-sonnet-5-5)
+- prova: sem-obra-b5f20f_cap1_20261112, q01 e q03: texto inglês 'what's happe...' visível logo abaixo da legenda amarela, nota de história 7.0 (grave). O Short é do dia 12/11, antes de algumas mudanças de tarja.
+- onde: log do Short (linha '[hardsub] só N/6') e a função que mede a caixa da legenda e posiciona a tarja (a de tarja/delogo em cortes_*)
+- como testar: Ler o log do b5f20f. Se disser 'só 0/6' ou a visão não leu a legenda, é defeito real: refazer a medida da caixa em resolução >= 720 px e comparar com a folha de quadros. Se a visão leu a legenda, a tarja está certa e o júri errou. Fazer a folha de quadros do topo e do rodapé em todos os Shorts com fonte em inglês do dia para ver se repete em >= 2.
+
+## 19/11 00:34 PROPOSTA [CERTEZA] Legenda palavra a palavra sobreposta ou truncada (4349e8) (cw/claude-sonnet-5-5)
+- prova: sem-obra-4349e8_cap1_20261118: q13 'ATACAR' grande sobre 'PRA ATACAR' (grave), q14 'princípio/duranto' e q16 'principaimpmto durante' (média). Na q13 do b5f20f o júri também viu 'NINGUÉM' repetido na transição de cena. São 2 Shorts com palavra repetida ou sobreposta na troca de grupo.
+- onde: renderizador da legenda palavra a palavra (agrupamento e troca de palavra ativa), checando se a palavra anterior é removida no instante em que a nova aparece
+- como testar: Conferir o roteiro.txt do 4349e8 para ver se 'princípio durante' é o texto do roteiro (se for, é regra de roteiro, não de legenda). Se o roteiro estiver certo, renderizar os 3 s em volta da q13 e da q16 quadro a quadro e ver se há dois estados de legenda ativos ao mesmo tempo.
+
+## 19/11 00:34 PROPOSTA [GOSTO] Gancho visual dos primeiros 1 a 1,5 s sem texto de impacto (cw/claude-sonnet-5-5)
+- prova: sem-obra-287472 q01 (retenção 7.0, sem texto de impacto no 1º segundo) e sem-obra-968058 q02 e q03 (retenção 7.0). Retenção 7.0 nos 4 Shorts do lote, mas os motivos citados são diferentes, então ainda não é um padrão único.
+- onde: regra de roteiro/título para o gancho (alavanca regras_roteiro) ou camada de texto de impacto no começo
+- como testar: Só mexer depois que um segundo lote repetir o mesmo motivo. Se repetir, testar 1 regra curta de roteiro por vez ('abra com uma frase de impacto de até 6 palavras sobre o conflito') e medir a nota de retenção.
+
+## 19/11 01:48 PROPOSTA [CERTEZA] Palavra de impacto: de lado, sem cobrir a ação e sem repetir a palavra que a legenda já mostra (gemini-4-argon)
+- prova: 968058_cap1_20261118 q02: 'GIGANTE' centralizado cobre a captura e o peixe no chão (retenção 7.0, média). 4349e8_cap1_20261118 q13: 'ATACAR' em amarelo grande sobre 'PRA ATACAR' logo abaixo (legibilidade 7.0, grave). A dona já disse em 27/10 que prefere palavras de impacto maiores, DE LADO, e o júri vê o contrário no centro. Também fere as regras 1 e 6 do APRENDIDO (rosto/ação livres, uma única palavra ativa por vez).
+- onde: Função que desenha a legenda palavra a palavra e posiciona a palavra de impacto (provável módulo de legenda/render do CORTES; confirmar o nome exato no código).
+- como testar: Renderizar de novo os 2 Shorts (968058 e 4349e8) e rodar a folha de quadros nos mesmos instantes (q02 e q13). Conferir 3 coisas: (1) a palavra de impacto fica no terço lateral e não cobre o ponto focal; (2) quando a palavra de impacto for igual a uma palavra da legenda ativa, ela não aparece duplicada na tela; (3) a legenda inferior continua dentro da zona segura. Depois olhar o júri do lote seguinte.
+
+## 19/11 01:48 PROPOSTA [CERTEZA] Confirmar no log se b5f20f_cap1_20261112 ficou com legenda inglesa à mostra (gemini-4-argon)
+- prova: O júri viu 'what's happe...' sob a tarja (q01 e q03, grave). Pelas lições, só vale se o log do Short disser '[hardsub] só 0/6'. O log não veio neste lote, então não é defeito provado.
+- onde: Log de produção do Short b5f20f_cap1_20261112 (linhas '[hardsub]') e a checagem de leitura da visão da legenda queimada.
+- como testar: Abrir o log. Se disser '0/6' ou '1/6', a tarja ficou sem cobrir a legenda real: abrir a folha de quadros e medir a caixa das letras em >= 720 px. Se a visão leu >= 2/6, descartar o apontamento do júri.
+
+## 19/11 02:55 PROPOSTA [CERTEZA] Palavra de impacto/tarja fora do rosto e da ação principal (gemini-4-argon)
+- prova: e53948 q02 (tarja amarela no rosto no gancho, grave) e q10; 526cf2 q01 'FIGURA' e q04 'RAPAZ' sobre boca/rosto (graves) e q11 tarja nos olhos; f3abb7 q13 cobre a frigideira. São 3 Shorts do lote. A preferência da dona é legenda de impacto 'de lado', não no centro do rosto.
+- onde: Render da legenda palavra a palavra / tarja de impacto (provável módulo da legenda ASS: Alignment/MarginV e a escolha de posição por palavra; confirmar com grep). Sem arquivo certo à mão, confirmar antes de editar.
+- como testar: Detectar a caixa do rosto (ou o ponto focal) no quadro da palavra e deslocar a palavra para o lado ou o terço inferior quando houver sobreposição, respeitando a zona segura. Re-renderizar e2 53948, 526cf2 e f3abb7 e conferir q02/q10, q01/q04/q11 e q13 numa folha de quadros. Controle: Shorts sem rosto não podem mudar.
+
+## 19/11 02:55 PROPOSTA [CERTEZA] Conferir legenda duplicada no 526cf2 (fonte queimada visível sob a legenda nossa) (gemini-4-argon)
+- prova: 526cf2 q01: júri vê faixa branca/escura na base sob a legenda amarela. Vale como defeito só se o log do Short mostrar que a visão não leu legenda ('[hardsub] só 0/6') ou se um quadro nítido mostrar texto da fonte fora da tarja. Só 1 Short, então ainda não é padrão.
+- onde: Log do Short 526cf2 (linha [hardsub]) e a função que mede a caixa das letras da legenda (faixa de visão, resolução ≥720 px)
+- como testar: Abrir o log e um quadro do 526cf2 em 720 px. Se a visão não leu a legenda ou a medida da caixa ficou menor que o texto, reprocessar com a medida corrigida e ver se a tarja cobre o tamanho exato. Se leu certo e a tarja cobriu, descartar como erro do júri (ele não vê sob a tarja).
+
+## 19/11 02:55 PROPOSTA [GOSTO] Cenas com movimento medido baixo (~11%) sem reenquadramento (gemini-4-argon)
+- prova: e53948 cena 5 (11.2%) e cena 6 (10.8%); db9a3a q08 21.7%. Mesma queixa em 2 Shorts, mas com notas de movimento 8–9, então é leve.
+- onde: Seleção/corte de cena e punch-in (provável cortes_cenas / montagem), com o limite de movimento por cena
+- como testar: Para cena com movimento <12%, aplicar zoom-in leve ou trocar a tomada por outra do mesmo trecho. Medir se o movimento mediano sobe sem piorar a nota de história. Fazer 1 teste por vez, depois da regra de gancho.

@@ -292,6 +292,10 @@ def _flow_hoje():
 
 
 def sec_serie():
+    # 19/11 dona: "medieval age não precisa mais estar no relatório, só quando tiver uma obra que eu quero assistir".
+    # Desligado por padrão; RONDA_SERIE=1 volta (série nova da dona = religar e trocar SERIE).
+    if os.environ.get("RONDA_SERIE", "0") != "1":
+        return []
     out = ["## 🔥 Medieval Age (série da dona)"]
     st = _status()
     pedidos = {p["titulo"][:4]: p for p in (st or {}).get("pedidos", [])}
@@ -876,6 +880,10 @@ def sec_3d():
                 ag = sorted(re.findall(r"Dentro das Coisas 3D (\d\d/\d\d \d\d:\d\d)", m[-1]))
                 if ag:
                     out.append(f"- 📅 Agendados pela rede (sobem perto do horário): {', '.join(ag)}")
+            # 18/11: "agendado 21:41" escondia 12 tentativas de upload falhas no dia (modal "verificação única")
+            falhas_up = re.findall(r"Dentro das Coisas 3D: hist:(\S+) nao subiu \(erro: ([^)]{0,60})", lr)
+            if falhas_up:
+                out.append(f"- ❌ Upload falhou hoje {len(falhas_up)}x (última: {falhas_up[-1][0]} — {falhas_up[-1][1]})")
         except OSError:
             pass
     if vids:

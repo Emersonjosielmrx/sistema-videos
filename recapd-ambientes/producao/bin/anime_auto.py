@@ -981,6 +981,18 @@ def fazer_short(cand, target_lines, dry_run, use_worker=False,
             env.update(VOZ_CLONADA=clone[0], VOZ_CLONADA_BASE=clone[1], VOZ_CLONADA_VERSAO="2",
                        VOZ_CLONADA_CONFIG=config_clone, VOZ_CLONADA_RESUMO=str(resumo_clone))
             logging.info(f"[auto|short] voz clonada: {clone[0]} ({clone[1]}, config {config_clone})")
+        # 18/11 dona: Short prioriza a narração ONLINE (Fish Audio, voz do narrador do Chris); sem crédito/erro cai
+        # sozinho no p3 (com clone) ou no Edge (sem clone). 19/11: vale para TODO Short (antes só os com clone — o
+        # canal de pesca saía no Edge puro). SHORTS_VOZ_ONLINE=0 desliga.
+        if os.environ.get("SHORTS_VOZ_ONLINE", "1") != "0":
+            env["VOZ_ONLINE"] = "fish"
+            env["VOZ_ONLINE_NARRADOR"] = clone[0] if clone else ""  # quem é narrador (o resto = personagem)
+            try:  # Chrome quente do Fish já abrindo enquanto o pipeline monta (a narração não espera ~40 s)
+                sys.path.insert(0, r"D:\hipercool-materiais\comum\fish_audio")
+                import fish_lote
+                fish_lote.preaquecer()
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[auto|short] preaquecer Fish falhou ({type(e).__name__}) — segue")
         vf = work / "final_anime_short.mp4"
         # 02/11 dona ("usar o Kaggle pra produzir em lotes os Shorts de corte — liberar RAM e CPU daqui pros Veo 3"):
         # com SHORTS_NO_KAGGLE=1 a RENDERIZAÇÃO (o que come CPU/RAM: TTS + clone + clipes + legenda) vai pra fila do

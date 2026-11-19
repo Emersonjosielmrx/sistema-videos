@@ -332,3 +332,33 @@ STATUS: OK
 - Causa provável: Lentidão no FFmpeg ou alta carga de I/O por pouco espaço no disco D:.
 - CONSERTO PROPOSTO: Aumentar o timeout do ffmpeg de cobertura em anime_auto.py / parceiro e liberar espaço no disco D.
 - Estado: REVISAR
+## 20261118_2018 — Vigia: Guarda do disco D (0.14 GB) e otimizador de memória ativo
+- Motivo / O que achei (trecho de log): D: com 0.14 GB livres, disparado backup_drive e cache do Chrome, apaguei 4 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo.
+- Causa provável: Acúmulo de arquivos de trabalho e cache no disco D.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar liberação automática de espaço pelo backup/sistema).
+- Estado: NADA A FAZER
+
+## 20261118_2218 — parceiro-render: rc=1 no Kaggle ao processar lote e falhas de malloc/timeout no Whisper local
+- Motivo / O que achei (trecho de log): _parceiro_20261118.log: RuntimeError: mkl_malloc: failed to allocate memory no Whisper local e rc=1 no Kaggle ao processar lotes, além de avisos HTTP 429 e SignIn do yt-dlp.
+- Causa provável: Contenção pontual de memória (MKL malloc) ao rodar whisper local sob alta carga de render e limite de chamadas/bloqueios do yt-dlp.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar liberação de recursos do Wise Memory Optimizer e rotação de IPs do ytdlp).
+- Estado: NADA A FAZER
+
+## 20261118_2355 — Recap longo aguardando cota nas GPUs e rotinas normais
+- Motivo / O que achei (trecho de log): melhorador_central.log mostra recap longo aguardando cota nas GPUs (rodízio normal) e rotinas de cortes rodando normalmente.
+- Causa provável: Uso regular de cotas nas contas do Veo e rodízio automático aguardando a próxima volta.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar liberação de cota pelo próprio rodízio do sistema).
+- Estado: NADA A FAZER
+STATUS: OK
+
+## 20261119_0023 — TikTok: Postador passava apelido em vez de e-mail ao cofre e recusava contas vivas do Kaggle (pelo painel)
+- Motivo: erro "Chrome ja estava aberto por outro projeto sem o proxy dela" repetido (mundosolar1995 em 17/11 05:11–07:39 e 18/11 03:08/03:21; aulasrevolution em 17/11 14:39). bin\postar_tiktok_auto.py:169 chamava cofre.saida_kaggle com o apelido; o cofre só reconhece o e-mail inteiro (cofre.py:158), devolvia None e caía na trava das linhas 171-174.
+- O que fiz (arquivos): só bin\postar_tiktok_auto.py linha 169: cofre.saida_kaggle(r["cofre"]) passou a cofre.saida_kaggle(cofre.conta(r["cofre"])[0]). Cofre.py não foi mexido.
+- Como conferi: sintaxe do arquivo OK; cofre.conta converte apelido em e-mail; saida_kaggle com apelido = None (defeito) e com e-mail = ponte do IP fixo de cada conta (mundosolar1995 e aulasrevolution). Ainda não vi uma rodada real do TikTok depois da mudança. fabricadeautomacoesia (banida, sem IP fixo) continua sendo recusada de propósito.
+- Como desfazer: botão "Desfazer" no painel (pedido 20261119_002316_8fa0)
+- Estado: PRECISA REVISÃO (falta conferir na próxima rodada do TikTok que mundosolar1995 e aulasrevolution postam agendado)
+## 20261119_0255 — Estoque sem novos candidatos / download falhou no parceiro-producao e proxy Groq fora
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\logs\parceiro_producao.log registrou [2026-11-19 02:39:56] estoque: nada reposto (8/8; sem candidato novo ou download falhou) e no log _parceiro_20261119.log: groq: proxy .webshare.io:80 fora (groq: ProxyError).
+- Causa provável: Instabilidade temporária no proxy Webshare e falta temporária de novos candidatos válidos na fonte de pesca/negócios.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar reconexão do proxy e nova varredura de candidatos).
+- Estado: NADA A FAZER

@@ -268,6 +268,11 @@ def rodar(simular=False):
         por_rend = os.environ.get("RAMPA_POR_RENDIMENTO", "1") != "0" and m.get("n", 0) >= 4
         forte = por_rend and m.get("mediana", 0) >= 300
         fraco = por_rend and m.get("mediana", 0) < 50
+        # 19/11 dona ("aumente o máximo que a escada permitir os canais restantes, sem se afogarem; temos muitos
+        # vídeos sobrando e poucos canais" — 13 canais removidos 17-18/11): canal LIBERADO não desce por render pouco
+        # (só desce no 'limite diário' do YouTube, em descer()). RAMPA_LIBERADO_NAO_DESCE=0 volta a descer.
+        if fraco and lib and os.environ.get("RAMPA_LIBERADO_NAO_DESCE", "1") != "0":
+            fraco = False
         if fraco:
             ult = c.get("ultima_mudanca")
             recente = False

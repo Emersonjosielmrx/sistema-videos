@@ -1,41 +1,45 @@
-"""Gera a narração de um vídeo INTEIRO no Fish Audio (online) — chamado pelo anime_tts.preparar_clone nos Shorts.
+"""Narração de um vídeo INTEIRO no Fish Audio (online) — chamado pelo anime_tts._narrar_online nos Shorts.
 Dona 18/11: "quando for Shorts, priorizar gerar o áudio online e aí monta; controle de créditos de cada conta usando
 uma por vez; se não houver créditos usa o mesmo p3 com técnicas".
 
-    from fish_lote import gerar
-    feitos = gerar([(i, texto, "D:/.../audio_i.wav"), ...], log=print)   # -> {i: wav} das frases que saíram
+A geração em si é do fish_http.gerar_frases (outro chat, 18/11): HTTP, 3 falas em paralelo, cache (texto repetido
+não paga de novo), troca de conta quando o crédito acaba e Chrome quente da fabrica_fish (porta 9397) só para o token
+do reCAPTCHA. Cada conta sai pelo IP fixo dela (fish_proxy). Roda no python da produção (não precisa do D:\\veo\\venv).
 
-- Escolhe a conta pelo creditos.json (sem abrir as outras); só lê a página de cobrança da conta escolhida se a
-  estimativa estiver velha (renovou/nunca leu).
-- Uma conta por vez, cada uma pela saída fixa dela (IP rnprmtfo próprio, nunca a casa).
-- Acabou o crédito no meio = troca de conta e continua; nenhuma conta serve = devolve o que fez (o resto vai pro p3).
-- Nunca levanta exceção: falha = devolve {} e a produção segue no p3.
+Este arquivo faz o que é da PRODUÇÃO:
+- trava: uma narração por vez neste PC (_em_uso.lock; o fish_http de linha de comando usa a mesma);
+- MP3 -> WAV mono 44,1 kHz (o que a montagem lê, igual às outras bases);
+- <wav>.words.json com o tempo REAL de cada palavra do roteiro (legenda cinética no tempo da fala);
+- nunca levanta: falhou = {} e o anime_tts segue no p3.
+
+    import fish_lote
+    feitos = fish_lote.gerar([(i, texto, "D:/.../audio_i.wav"), ...], log=print)   # -> {i: wav}
+    fish_lote.preaquecer()   # opcional, no começo do vídeo: o Chrome abre enquanto o resto é montado
 FISH_ONLINE=0 desliga tudo.
 """
-import os, re, subprocess, sys, time
+import json, os, re, subprocess, sys, time
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
-sys.path.insert(0, str(AQUI))
-sys.path.insert(0, r"D:\logins-google")
-import creditos  # noqa: E402
-
-VOZ = os.environ.get("FISH_VOZ", "4b215a58407c4def88e0892def6421b2")  # NARRADOR DO TODO MUNDO ODEIA O CHRIS
+if str(AQUI) not in sys.path:
+    sys.path.insert(0, str(AQUI))
+if r"D:\logins-google" not in sys.path:
+    sys.path.insert(0, r"D:\logins-google")
 FFMPEG = r"D:\hipercool-materiais\bin\ffmpeg.exe"
 MAX_CHARS = 480
-TRAVA = AQUI / "_em_uso.lock"  # uma geração por vez neste PC (uma conta por vez)
+TRAVA = AQUI / "_em_uso.lock"
 
 
-def _travar():
-    for _ in range(600):  # espera até 10 min outra geração terminar
+def _travar(prazo=600):
+    for _ in range(prazo):
         try:
             fd = os.open(str(TRAVA), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
             os.write(fd, str(os.getpid()).encode())
             os.close(fd)
             return True
         except FileExistsError:
-            try:  # trava velha (processo morto) > 30 min = solta
-                if time.time() - TRAVA.stat().st_mtime > 1800:
+            try:
+                if time.time() - TRAVA.stat().st_mtime > 1800:  # trava velha (processo morto)
                     TRAVA.unlink()
                     continue
             except OSError:
@@ -51,149 +55,111 @@ def _soltar():
         pass
 
 
-def _uma_conta(email, frases, log):
-    """Gera as frases nessa conta. Devolve (feitos {i: wav}, motivo_parada|None)."""
-    import cofre
-    import fish_audio as fa
-    feitos = {}
-    _, ip_n = fa.checar_conta(email)
-    pp = fa._subir_ponte(ip_n)
-    porta, proc = cofre.abrir(email, extra=(f"--proxy-server=127.0.0.1:{pp}",))
-    from playwright.sync_api import sync_playwright
+def preaquecer():
+    """Chame no começo do vídeo: a conta escolhida já vai abrindo o Chrome quente em segundo plano. Nunca levanta."""
+    if not disponivel():
+        return None
     try:
-        with sync_playwright() as p:
-            b = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}")
-            ctx = b.contexts[0]
-            pg = ctx.pages[0] if ctx.pages else ctx.new_page()
-            pg.set_viewport_size({"width": 1280, "height": 900})
-            reg = creditos.carregar().get(email, {})
-            if creditos.estimado(reg) is None:  # renovou/nunca leu: confere a cota antes
-                lido = creditos.ler_na_pagina(pg)
-                creditos.gravar_leitura(email, lido)
-                if lido is None:
-                    return feitos, "deslogada"
-                log(f"[fish] {email}: {lido[0]} créditos")
-            pg.goto(f"https://fish.audio/pt/app/text-to-speech/?modelId={VOZ}", wait_until="domcontentloaded",
-                    timeout=90000)
-            time.sleep(8)
-            if "/auth" in pg.url or "Iniciar sessão" in pg.inner_text("body")[:3000]:
-                creditos.marcar(email, logado=False, erro="deslogada")
-                return feitos, "deslogada"
+        import fish_http
+        return fish_http.preaquecer()
+    except Exception:  # noqa: BLE001
+        return None
 
-            def fechar_avisos():
-                for _ in range(2):
-                    pg.keyboard.press("Escape")
-                    time.sleep(0.3)
-                for sel in ("button[aria-label*='lose' i]", "button:has(svg.lucide-x)"):
-                    try:
-                        loc = pg.locator(sel)
-                        for k in range(loc.count()):
-                            if loc.nth(k).is_visible():
-                                loc.nth(k).click(timeout=1500)
-                                time.sleep(0.4)
-                    except Exception:  # noqa: BLE001
-                        pass
 
-            for i, texto, destino in frases:
-                est = creditos.estimado(creditos.carregar().get(email, {}))
-                if est is not None and est < len(texto) + 20:
-                    return feitos, "sem crédito"
-                fechar_avisos()
-                # 18/11: o sinal certo de "pronto" é a resposta audio/mpeg do armazenamento deles
-                # (r2.cloudflarestorage.com/fish-platform-data/task/...) — contar botões falha: o site troca os takes
-                chegou = []
-
-                def _ouvir(r):
-                    try:
-                        if "fish-platform-data/task" in r.url and "audio" in r.headers.get("content-type", ""):
-                            chegou.append(r.url)
-                    except Exception:  # noqa: BLE001
-                        pass
-                pg.on("response", _ouvir)
-                ed = pg.locator("[contenteditable='true'], textarea").first
-                ed.click()
-                pg.keyboard.press("Control+A")
-                pg.keyboard.press("Delete")
-                pg.keyboard.insert_text(texto)
-                t0 = time.time()
-                pg.get_by_text("Gerar fala", exact=False).first.click(timeout=15000)
-                for _ in range(360):
-                    time.sleep(0.5)
-                    if chegou:
-                        break
-                    if int(time.time() - t0) % 5 == 0:
-                        corpo = pg.inner_text("body").lower()
-                        if "créditos insuficientes" in corpo or "insufficient credit" in corpo:
-                            pg.remove_listener("response", _ouvir)
-                            creditos.marcar(email, restantes=0, gasto_desde_leitura=0)
-                            return feitos, "sem crédito"
-                pg.remove_listener("response", _ouvir)
-                if not chegou:
-                    return feitos, "não gerou (tempo esgotado)"
-                mp3 = Path(destino).with_suffix(".fish.mp3")
-                resp = ctx.request.get(chegou[0], timeout=60000)  # mesma sessão e mesmo IP da conta
-                if not resp.ok:
-                    return feitos, f"download falhou ({resp.status})"
-                mp3.write_bytes(resp.body())
-                # wav mono 44,1 kHz igual às outras bases (a montagem e a legenda leem wav)
-                r = subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(mp3), "-ac", "1", "-ar", "44100",
-                                    str(destino)], capture_output=True)
-                mp3.unlink(missing_ok=True)
-                if r.returncode or not Path(destino).exists():
-                    return feitos, "conversão falhou"
-                creditos.gastar(email, len(texto))
-                feitos[i] = destino
-                log(f"[fish] frase {i} ok em {time.time() - t0:.1f}s ({email})")
-    finally:
+def _palavras(feitos, textos, log):
+    """Sidecar <wav>.words.json [[ini, fim, palavra]] (formato do edge_tts_engine). Whisper 'small' na CPU (~1 s por
+    frase curta); as palavras são as do ROTEIRO, casadas por ordem com os tempos. Contagem diferente = sem sidecar
+    (a legenda estima pelo tamanho, como faz com o Kokoro sem tempos)."""
+    m = None
+    for tentativa in (1, 2):  # 19/11: RuntimeError de memória momentânea no PC1 — 1 nova tentativa, com menos threads
         try:
-            cofre.fechar(proc, nome=email)
-        except Exception:  # noqa: BLE001
-            pass
-    return feitos, None
+            import numpy as np, wave
+            from faster_whisper import WhisperModel
+            m = WhisperModel("small", device="cpu", compute_type="int8", cpu_threads=2 if tentativa == 2 else 4)
+            break
+        except Exception as e:  # noqa: BLE001
+            if tentativa == 2:
+                log(f"[fish] sem Whisper pros tempos das palavras ({type(e).__name__}) — legenda estimada")
+                return
+            time.sleep(10)
+    ok = 0
+    for i, wav in feitos.items():
+        try:
+            with wave.open(str(wav), "rb") as w:
+                sr = w.getframerate()
+                a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768.0
+            if sr != 16000:
+                idx = np.linspace(0, len(a) - 1, int(len(a) * 16000 / sr)).astype(np.int64)
+                a = a[idx]
+            segs = list(m.transcribe(a, language="pt", word_timestamps=True)[0])
+            tempos = [(float(x.start), float(max(x.end, x.start + 0.05))) for s in segs for x in (s.words or [])]
+            palavras = re.findall(r"\S+", textos[i])
+            if len(tempos) != len(palavras) or not tempos:
+                continue
+            Path(str(wav) + ".words.json").write_text(json.dumps(
+                [[round(t0, 3), round(t1, 3), p] for (t0, t1), p in zip(tempos, palavras)], ensure_ascii=False),
+                encoding="utf-8")
+            ok += 1
+        except Exception as e:  # noqa: BLE001
+            log(f"[fish] tempos da frase {i}: {type(e).__name__}")
+    log(f"[fish] tempos por palavra: {ok}/{len(feitos)} frases")
 
 
-def gerar(frases, log=print):
-    """frases = [(i, texto, destino_wav)]. Devolve {i: destino} das que saíram no Fish."""
-    if os.environ.get("FISH_ONLINE", "1") == "0":
+def disponivel():
+    """Só no PC que tem o cofre das contas e o registro de créditos (o PC1): as contas do pool saem pelas pontes
+    daqui. Outra máquina (PC2, desktop, Kaggle) nunca tenta — cai no p3 dela."""
+    return (os.environ.get("FISH_ONLINE", "1") != "0" and Path(r"D:\logins-google\cofre\contas.json").exists()
+            and (AQUI / "creditos.json").exists())
+
+
+def voz_do_nicho(nicho=None):
+    """19/11 dona: Neymar só em esporte; Iberê nas curiosidades; o resto o narrador do Chris (voz_por_nicho.json)."""
+    try:
+        m = json.loads((AQUI / "voz_por_nicho.json").read_text(encoding="utf-8"))
+        return m.get((nicho or "").strip().lower()) or m.get("padrao")
+    except (OSError, ValueError):
+        return None
+
+
+def gerar(frases, log=print, voz=None):
+    """frases = [(i, texto, destino_wav)]. Devolve {i: destino_wav} das que saíram no Fish. Nunca levanta.
+    voz = id da voz no site; sem voz = a do nicho do vídeo (NICHO_CLONE/PARCEIRO_TIPO) ou o narrador do Chris."""
+    if not disponivel():
         return {}
-    frases = [(i, t.strip(), d) for i, t, d in frases if t and t.strip() and len(t.strip()) <= MAX_CHARS]
+    if not voz:
+        voz = voz_do_nicho(os.environ.get("NICHO_CLONE") or os.environ.get("PARCEIRO_TIPO"))
+    frases = [(i, t.strip(), str(d)) for i, t, d in frases if t and t.strip() and len(t.strip()) <= MAX_CHARS]
     if not frases:
         return {}
     if not _travar():
-        log("[fish] outra geração ocupando há 10 min — sigo no p3")
+        log("[fish] outra narração ocupando há 10 min — sigo no p3")
         return {}
-    feitos, tentadas = {}, set()
+    t0 = time.time()
     try:
-        while True:
-            faltam = [f for f in frases if f[0] not in feitos]
-            if not faltam:
-                break
-            precisa = sum(len(t) for _, t, _ in faltam)
-            esc = creditos.escolher(min(precisa, 450), excluir=tentadas)
-            if not esc:
-                log(f"[fish] nenhuma conta com crédito — {len(faltam)} frase(s) vão pro p3")
-                break
-            email, _est = esc
-            tentadas.add(email)
-            try:
-                f2, motivo = _uma_conta(email, faltam, log)
-            except SystemExit as e:  # checar_conta recusou (Kaggle / fora do pool)
-                creditos.marcar(email, logado=False, erro=str(e)[:120])
-                continue
-            except Exception as e:  # noqa: BLE001
-                log(f"[fish] {email}: {type(e).__name__}: {str(e)[:150]}")
-                continue
-            feitos.update(f2)
-            if motivo:
-                log(f"[fish] {email}: {motivo} — próxima conta")
+        import fish_http
+        pedidos = [(i, t, str(Path(d).with_suffix(".fish.mp3"))) for i, t, d in frases]
+        mp3s = fish_http.gerar_frases(pedidos, voz=voz, log=log)
+        feitos = {}
+        destino = {i: d for i, _, d in frases}
+        for i, mp3 in mp3s.items():
+            wav = destino[i]
+            r = subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(mp3), "-ac", "1", "-ar", "44100", wav],
+                               capture_output=True, creationflags=0x08000000 if os.name == "nt" else 0)
+            Path(mp3).unlink(missing_ok=True)
+            if r.returncode == 0 and Path(wav).exists():
+                feitos[i] = wav
+        if feitos:
+            _palavras(feitos, {i: t for i, t, _ in frases}, log)
+        log(f"[fish] {len(feitos)}/{len(frases)} frases online em {time.time() - t0:.0f}s")
+        return feitos
+    except Exception as e:  # noqa: BLE001
+        log(f"[fish] falhou ({type(e).__name__}: {str(e)[:150]}) — sigo no p3")
+        return {}
     finally:
         _soltar()
-    log(f"[fish] {len(feitos)}/{len(frases)} frases online")
-    return feitos
 
 
 if __name__ == "__main__":  # teste: python fish_lote.py "frase 1" "frase 2"
     out = Path(r"D:\tmp\fish_lote_teste")
     out.mkdir(parents=True, exist_ok=True)
-    r = gerar([(k, t, str(out / f"audio_{k}.wav")) for k, t in enumerate(sys.argv[1:])])
-    print(r)
+    print(gerar([(k, t, str(out / f"audio_{k}.wav")) for k, t in enumerate(sys.argv[1:])]))

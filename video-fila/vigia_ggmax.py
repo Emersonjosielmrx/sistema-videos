@@ -63,9 +63,16 @@ def _abrir_chrome():
 
 
 def _pagina(pg, caminho):
-    pg.goto(SITE + caminho, wait_until="load", timeout=60000)
-    time.sleep(6)
-    t = pg.inner_text("body")
+    for tent in range(3):  # 18/11: timeout no body quando outro script usava o mesmo Chrome — tenta de novo
+        try:
+            pg.goto(SITE + caminho, wait_until="load", timeout=60000)
+            time.sleep(6)
+            t = pg.inner_text("body", timeout=45000)
+            break
+        except Exception:  # noqa: BLE001
+            if tent == 2:
+                raise
+            time.sleep(10)
     if "Identifique-se" in t or "Entrar com Google" in t:
         raise RuntimeError("deslogou do GGMax")
     return t

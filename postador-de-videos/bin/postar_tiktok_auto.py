@@ -166,7 +166,7 @@ def abrir_conta(conta, r, proxy_n=None):
         porta, proc = cofre.abrir(r["cofre"], extra=extra)
         # 15/11: conta VIVA do Kaggle — o cofre.abrir já fecha e reabre pela ponte um Chrome aberto sem ela; se devolveu
         # um Chrome já aberto, é porque ele ESTÁ na ponte do IP fixo: pode usar (antes recusava e a conta não postava)
-        if extra and not proc and cofre.saida_kaggle(r["cofre"]) and cofre._chrome_com_ponte(porta):
+        if extra and not proc and cofre.saida_kaggle(cofre.conta(r["cofre"])[0]) and cofre._chrome_com_ponte(porta):
             return porta, proc
         if extra and not proc:
             # aberto por outro projeto SEM o proxy desta conta: usar seria sair por outro IP

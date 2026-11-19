@@ -4315,3 +4315,91 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-18 20:03 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1947.md`
 - [INÉDITO] github.com/xx-zxxz/farm-console — ★0, push 2026-10-26, MIT — Android adb farm panel: keep-alive watchdog, battery and thermal visibility, remote controls - python stdlib only
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 20:17 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2006.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 20:36 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2022.md`
+- [INÉDITO] github.com/appium/appium-uiautomator2-driver — ★897, push 2026-11-18, Apache-2.0 — Appium driver for black-box Android testing, based on UI Automator
+- [INÉDITO] github.com/kavabunga6/remote-device-farm — ★1, push 2026-11-17, Apache-2.0 — Self-hosted Android device farm with web control and mediated ADB
+
+## [ ] PENDENTE — 2026-11-18 20:56 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2042.md`
+- [INÉDITO] github.com/lzlzlzhh/phone-render-farm — ★0, push 2026-10-31, MIT — Render JavaScript Canvas 2D animations into a PNG frame sequence and an MP4 — by using an Android phone’s browser as the renderer.
+- [INÉDITO] github.com/mafia999011-hue/money-clip — ★0, push 2026-11-18, MIT — Money Clip — Open-source AI video clipping engine (Opus Clip alternative). Turns long videos into viral 9:16 Shorts with voice-accurate subt
+
+## [ ] PENDENTE — 2026-11-18 21:20 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2102.md`
+- [INÉDITO] github.com/anonymous5-coder/adb-auto — ★1, push 2026-10-28, MIT — One-time No-WiFi auto-ADB setup via Termux. Automates wireless debugging pairing, port detection, and persistent localhost:5555 connection.
+- [INÉDITO] github.com/devicelab-dev/maestro-runner — ★532, push 2026-11-18, Apache-2.0 — Fast mobile UI test automation for Android, iOS, React Native, Flutter & Expo. Open-source Maestro alternative — 100% free, no features behi
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 21:31 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2121.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 21:57 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2148.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 22:18 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2202.md`
+- [INÉDITO] github.com/FruNoman/remote-android-controller — ★0, push 2026-09-21, MIT — Remote-control framework for driving an Android device's internals (Bluetooth, Wi-Fi, Location, ...) from a Java or Python host process, ove
+- [INÉDITO] github.com/gargvr/shorts-autopilot — ★4, push 2026-07-23, MIT — Self-hosted Python pipeline that discovers fresh long-form videos, cuts strong moments into captioned 9:16 Shorts, and uploads them to YouTu
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 22:29 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_2222.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 22:42 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_2236.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 23:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2301.md`
+- [INÉDITO] github.com/Dinip/yard — ★3, push 2026-11-18, MIT — YARD - A device farm for real Android and iOS hardware
+- [INÉDITO] github.com/erdncyz/mercury-farm — ★13, push 2026-11-17, Apache-2.0 — Manage your Android, iOS, and Tizen devices from one browser workspace.
+- [INÉDITO] github.com/zebrunner/mcloud — ★208, push 2026-11-19, Apache-2.0 — Mobile farm ecosystem for Android and iOS devices
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 23:21 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2317.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 23:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2326.md`
+- [INÉDITO] github.com/joungminsung/OpenPhoneUse — ★26, push 2026-11-19, MIT — Open-source Computer Use for Android: an AI agent that reads the screen, taps, types and switches apps for you. Works with ChatGPT, Claude, 
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 23:52 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2346.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 00:03 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_2356.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 01:50 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0130.md`
+- [INÉDITO] github.com/SirBonney/scrcpy-mirror-control — ★1104, push 2026-11-19, MIT — Android Screen Mirroring and Control Workflow, Simplified
+- [INÉDITO] github.com/KnifeLemon/Droidline — ★552, push 2026-11-03, MIT — Android automation from code. Test your apps on real phones, script the tasks you repeat, run a shelf of phones, or let an AI agent use one,
+
+## [ ] PENDENTE — 2026-11-19 02:49 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_webgl_frame_a_frame__sonnet_0241.md`
+- [INÉDITO] github.com/zenstory-ai/video-recap-skills — ★None, push ?, ver repo (fallback HTML) — Claude Code / Codex skills that turn a video into a Chinese narration recap (视频解说): scene detection, ASR, VLM, script, TTS, ffmpeg assembly,
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 03:06 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_parallax_camera_paths__sonnet_0301.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 03:27 — Chrome headless com ANGLE/Vulkan na T4 do Kaggle (Linux sem tela) (`area_three_gpu_t4_headless`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_three_gpu_t4_headless__sonnet_0321.md`
+- [INÉDITO] github.com/lptech22/vigen — ★0, push 2026-11-19, MIT — Vigen — video generator by LPTech. Engine code-to-video 1080x1920 di Termux (Chromium + FFmpeg).
+
+## [ ] PENDENTE — 2026-11-19 03:37 — reprodutibilidade de float e shader entre drivers (`area_three_threshold_determinism`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_three_threshold_determinism__sonnet_0331.md`
+- [INÉDITO] github.com/DSmereski/vidqa — ★1, push 2026-08-20, MIT — pip install vidqa-cli — local, deterministic video QA CLI + MCP for tests, CI, and agents: 28 commands — frame timing, golden-frame diff, fa
+- [INÉDITO] github.com/SwayamBhageria/frame-oracle — ★0, push 2026-09-17, MIT — Frame-exact regression gate for video exports: decode every frame back to its source frame and diff the export against the timeline (JSON or
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 03:43 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_eres2net_licenca__sonnet_0341.md`
+- (todos os itens desta pesquisa foram reprovados)

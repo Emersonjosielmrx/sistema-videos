@@ -25171,6 +25171,190 @@
         "forma de confirmar, pelo navegador ou pela leitura da tela, o status do vídeo (processando, publicado, limite diário) antes de seguir a fila (tema 5)"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_1947.md 2026-11-18"
+    },
+    {
+      "id": "yt_limite_diario",
+      "nome": "Limite diário de uploads por canal",
+      "subtemas": [
+        "Página oficial do YouTube sobre o limite diário e como aumentar (verificação do canal), para dimensionar a fila de postagem por canal"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2006.md 2026-11-18"
+    },
+    {
+      "id": "yt_shorts_regras",
+      "nome": "Regras de Short vs vídeo comum",
+      "subtemas": [
+        "Páginas oficiais sobre duração máxima de Short, proporção e como o YouTube classifica, para a ponte Short→longo"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2006.md 2026-11-18"
+    },
+    {
+      "id": "ffmpeg_celular_chunks",
+      "nome": "Render de ffmpeg em pedaços distribuídos em celulares Android ociosos (Termux)",
+      "subtemas": [
+        "ffmpeg termux, concat de segmentos, ganho medido de tempo por pedaço versus PC1"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2042.md 2026-11-18"
+    },
+    {
+      "id": "yt_regras_celular",
+      "nome": "Regras do YouTube para upload e agendamento de Shorts pelo app",
+      "subtemas": [
+        "páginas oficiais support.google.com/youtube sobre limites diários, agendamento no app e o que muda para Short versus vídeo longo"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2148.md 2026-11-18"
+    },
+    {
+      "id": "termux_ffmpeg_render",
+      "nome": "Render e upscale de Shorts direto no celular via Termux",
+      "subtemas": [
+        "ffmpeg` no Termux com `h264_mediacodec`, tempo de render de 720p para 1080p, calor e bateria, como usar os celulares como máquinas de render"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2148.md 2026-11-18"
+    },
+    {
+      "id": "recap_achar_mais_vistos",
+      "nome": "Achar recaps mais vistos",
+      "subtemas": [
+        "Projetos pequenos que listam os recaps de anime e manhwa com mais views por canal e por idioma"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2202.md 2026-11-18"
+    },
+    {
+      "id": "adb_conta_ativa",
+      "nome": "Conta ativa no app",
+      "subtemas": [
+        "trechos e repositórios de \"uiautomator dump\" para ler qual conta está logada no YouTube ou no Studio"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2317.md 2026-11-18"
+    },
+    {
+      "id": "adb_fila_paralela",
+      "nome": "Fila por aparelho",
+      "subtemas": [
+        "repositórios de lock por serial, reconexão `adb connect` e retry, com no máximo uma conta por IP"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2317.md 2026-11-18"
+    },
+    {
+      "id": "celular_termux_render",
+      "nome": "Render FFmpeg em Termux no celular",
+      "subtemas": [
+        "projetos pequenos que renderizam ou cortam vídeo no Android com ffmpeg do Termux (já vi só repositórios com 0 estrelas, nenhum aberto)"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2326.md 2026-11-18"
+    },
+    {
+      "id": "yt_app_fluxo_upload",
+      "nome": "Telas do app do YouTube para Short",
+      "subtemas": [
+        "relatos e issues sobre mudança de interface do app, para saber o que quebra o uiautomator2"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2326.md 2026-11-18"
+    },
+    {
+      "id": "regras_upload_app",
+      "nome": "Regras oficiais do app YouTube e do Studio para upload",
+      "subtemas": [
+        "Limites diários de envio, verificação de canal e o que muda entre app YouTube e app Studio, nas páginas support.google.com"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2346.md 2026-11-18"
+    },
+    {
+      "id": "checagem_pos_post",
+      "nome": "Conferência de visibilidade depois de programar",
+      "subtemas": [
+        "Como ler, sem API do Google, se o vídeo programado saiu ou ficou privado, e o que o Studio mostra em advertências"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2346.md 2026-11-18"
+    },
+    {
+      "id": "inautentico_ypp",
+      "nome": "Sinais de \"conteúdo inautêntico/em massa\" em canal de recap",
+      "subtemas": [
+        "páginas oficiais e relatos de criadores sobre desmonetização após julho/2025: o que os revisores pesam (tema principal, mais vistos, metadados, Sobre) e como diferenciar vídeos do mesmo canal"
+      ],
+      "origem": "area_yt_politica_conteudo_sintetico__sonnet_0028.md 2026-11-19"
+    },
+    {
+      "id": "c2pa_pre_post",
+      "nome": "C2PA e rótulo automático antes de postar",
+      "subtemas": [
+        "como o YouTube lê C2PA em vídeo de parceiro ou clipe gerado, e checagem simples com ffprobe ou c2patool antes do envio, sem GPU"
+      ],
+      "origem": "area_yt_politica_conteudo_sintetico__sonnet_0028.md 2026-11-19"
+    },
+    {
+      "id": "yt_revisao_canal",
+      "nome": "Auditoria dos vídeos mais vistos e de maior watch time por canal",
+      "subtemas": [
+        "Script que lista, por canal via navegador/OAuth leitura, os vídeos mais vistos e mais recentes, e confere neles os critérios de reutilizado e inautêntico"
+      ],
+      "origem": "area_yt_politica_conteudo_reutilizado__sonnet_0047.md 2026-11-19"
+    },
+    {
+      "id": "yt_proveniencia",
+      "nome": "Registro de proveniência por vídeo",
+      "subtemas": [
+        "Formato mínimo de ficha (roteiro, fonte, autorização, edição) gerada pelo pipeline e guardada com o render"
+      ],
+      "origem": "area_yt_politica_conteudo_reutilizado__sonnet_0047.md 2026-11-19"
+    },
+    {
+      "id": "yt_variacao_canal",
+      "nome": "Variação entre vídeos do mesmo canal",
+      "subtemas": [
+        "Medir semelhança de roteiro e estrutura entre vídeos consecutivos, para evitar a aparência de template"
+      ],
+      "origem": "area_yt_politica_conteudo_reutilizado__sonnet_0047.md 2026-11-19"
+    },
+    {
+      "id": "yt_shorts_longo",
+      "nome": "Ponte Short→longo e playlists",
+      "subtemas": [
+        "páginas oficiais e repositórios pequenos que ligam Short ao vídeo longo (vídeo relacionado, playlist de série), com ideia aplicável em Python/yt-dlp"
+      ],
+      "origem": "area_three_gpu_t4_headless__sonnet_0321.md 2026-11-19"
+    },
+    {
+      "id": "frames_duplicados",
+      "nome": "Frames duplicados ou congelados no render",
+      "subtemas": [
+        "buscar truques em Python + FFmpeg (mpdecimate, freezedetect) para pegar quadros repetidos nos shorts antes de postar"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0331.md 2026-11-19"
+    },
+    {
+      "id": "render_celular",
+      "nome": "Render no celular Android (Termux)",
+      "subtemas": [
+        "comparar a saída do ffmpeg no Termux com a do PC e liberar disco no celular"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0331.md 2026-11-19"
+    },
+    {
+      "id": "sem_buscas_p2p_titulos",
+      "nome": "Revisão dos 10 vídeos mais vistos e do \"Sobre\" por canal",
+      "subtemas": [
+        "Como auditar, só com yt-dlp e dados públicos, o que os revisores do YouTube olham primeiro (top vídeos, metadados, \"Sobre\"), em dezenas de canais"
+      ],
+      "origem": "area_avatares_stop__sonnet_0346.md 2026-11-19"
+    },
+    {
+      "id": "sem_repeticao_titulos",
+      "nome": "Variação de títulos e capas entre vídeos seguidos",
+      "subtemas": [
+        "Truques simples em Python (sem IA) para medir similaridade entre títulos e capas consecutivos e forçar variação"
+      ],
+      "origem": "area_avatares_stop__sonnet_0346.md 2026-11-19"
+    },
+    {
+      "id": "sem_politica_shorts_remix",
+      "nome": "Regras oficiais de remix e conteúdo reutilizado em Shorts",
+      "subtemas": [
+        "A página oficial de Shorts/remix e a de conteúdo reutilizado (blog.youtube e support.google.com), lendo a lista de exemplos que ficou cortada nesta rodada"
+      ],
+      "origem": "area_avatares_stop__sonnet_0346.md 2026-11-19"
     }
   ],
   "projetos": [

@@ -1,29 +1,28 @@
-# Resultados das variantes dos LONGOS — 18/11 19:39
+# Resultados das variantes dos LONGOS — 19/11 03:38
 
 Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fator (antes disso é ruído).
 
 | fator | variante | n | views/h (mediana) | % assistido (mediana) |
 |---|---|---|---|---|
-| cortes_resumo | A | 34 | 0.01 | 1.1 |
-| cortes_resumo | B | 37 | 0.02 | 1.0 |
+| cortes_resumo | A | 22 | 0.05 | 2.2 |
+| cortes_resumo | B | 26 | 0.19 | 0.7 |
 | **cortes_resumo** | **vence B** (views/h) | | | |
-| fala_rapida | A | 10 | 0.01 | 0.9 |
-| fala_rapida | B | 17 | 0.01 | 0.3 |
-| fala_rapida | C | 19 | 0.02 | 0.9 |
-| fala_rapida | D | 12 | 0.03 | 3.1 |
-| fala_rapida | E | 13 | 0.02 | 1.5 |
-| **fala_rapida** | **vence D** (views/h) | | | |
-| ganchos_15min | A | 20 | 0.02 | 1.1 |
-| ganchos_15min | B | 18 | 0.02 | 1.6 |
-| ganchos_15min | C | 33 | 0.02 | 1.0 |
-| **ganchos_15min** | **vence A** (views/h) | | | |
-| narradores_modo | com_terciarios | 5 | 0.01 | 1.3 |
-| narradores_modo | dupla | 7 | 0.02 | 0.1 |
-| narradores_modo | mistura_grande | 5 | 0.03 | 25.4 |
-| narradores_modo | primarios_secundarios | 13 | 0.02 | 0.4 |
-| narradores_modo | so_primarios | 24 | 0.01 | 2.0 |
-| narradores_modo | solo | 17 | 0.02 | 0.9 |
-| **narradores_modo** | **vence mistura_grande** (views/h) | | | |
-| titulo_triade | A | 32 | 0.01 | 2.0 |
-| titulo_triade | B | 39 | 0.02 | 0.8 |
-| **titulo_triade** | **vence B** (views/h) | | | |
+| fala_rapida | A | 9 | 0.06 | 0.6 |
+| fala_rapida | B | 13 | 0.03 | 0.9 |
+| fala_rapida | C | 10 | 0.03 | 2.2 |
+| fala_rapida | D | 8 | 0.09 | 0.5 |
+| fala_rapida | E | 8 | 0.36 | 2.7 |
+| **fala_rapida** | **vence E** (views/h) | | | |
+| ganchos_15min | A | 13 | 0.23 | 0.6 |
+| ganchos_15min | B | 13 | 0.38 | 2.6 |
+| ganchos_15min | C | 22 | 0.03 | 0.8 |
+| **ganchos_15min** | **vence B** (views/h) | | | |
+| narradores_modo | com_terciarios | 4 | 0.01 | 36.4 |
+| narradores_modo | dupla | 9 | 0.06 | 0.6 |
+| narradores_modo | mistura_grande | 3 | 0.23 | 11.4 |
+| narradores_modo | primarios_secundarios | 11 | 0.12 | 0.5 |
+| narradores_modo | so_primarios | 11 | 0.40 | 2.0 |
+| narradores_modo | solo | 10 | 0.12 | 0.7 |
+| titulo_triade | A | 21 | 0.09 | 0.6 |
+| titulo_triade | B | 27 | 0.07 | 1.9 |
+| **titulo_triade** | **vence A** (views/h) | | | |

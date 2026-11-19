@@ -33,8 +33,20 @@ def um(vid):
         return
     drive = json.loads((pasta / "nuvem.json").read_text(encoding="utf-8")).get("drive")
     TMP.mkdir(parents=True, exist_ok=True)
-    video = TMP / "video.mp4"
+    # 19/11: um arquivo POR OBRA — 2 lotes ao mesmo tempo apagavam/travavam o video.mp4 um do outro (WinError 32
+    # derrubou 5 obras de uma vez em 18/11 21:52)
+    video = TMP / f"video_{vid}.mp4"
     video.unlink(missing_ok=True)
+    livre = __import__("shutil").disk_usage(str(TMP)).free
+    # 19/11: 2VM8 tem 10,8 GB — o ffmpeg dos quadros estourou o disco com 3 lotes juntos. Precisa vídeo + 2 GB.
+    try:
+        tam = json.loads(subprocess.run([r"D:\tools\rclone.exe", "size", "--json", drive], capture_output=True,
+                                        text=True, timeout=120, creationflags=SEM_JANELA).stdout).get("bytes", 0)
+    except Exception:  # noqa: BLE001
+        tam = 3 * 1024 ** 3
+    if livre < tam + 2 * 1024 ** 3:
+        log(f"{vid}: pulado — vídeo {tam / 1024 ** 3:.1f} GB + 2 GB, e só {livre / 1024 ** 3:.1f} GB livres no D:")
+        return
     r = subprocess.run([r"D:\tools\rclone.exe", "copyto", drive, str(video)], capture_output=True, text=True,
                        creationflags=SEM_JANELA)
     if not video.exists():
@@ -43,7 +55,9 @@ def um(vid):
     try:
         # 04/11: KJ5F travou 8 h. Com o PC ocupado, 90 min não bastou para nenhuma obra -> 1 quadro a cada 6 s e no
         # máximo 4 h; passou do tempo = mata a ÁRVORE (o python do venv abre um filho que segurava o video.mp4)
-        p = subprocess.Popen([PY_IMG, str(AQUI / "banco_mulheres.py"), str(video), vid, "6"], stdout=subprocess.PIPE,
+        # 19/11: u7tN (vídeo longo) passou de 4 h com 1 quadro/6 s -> BANCO_PASSO=15 refaz com menos quadros
+        passo = __import__("os").environ.get("BANCO_PASSO", "6")
+        p = subprocess.Popen([PY_IMG, str(AQUI / "banco_mulheres.py"), str(video), vid, passo], stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace",
                              creationflags=SEM_JANELA,
                              env={**__import__("os").environ, "HF_HOME": r"D:\caches\huggingface"})

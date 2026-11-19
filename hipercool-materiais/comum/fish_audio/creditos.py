@@ -6,7 +6,8 @@ creditos.json:  {email: {"restantes": int, "lido_em": "AAAA-MM-DDTHH:MM", "renov
 - Cada geração desconta len(texto) (1 crédito por caractere, medido 18/11) -> o número fica certo sem abrir o site.
 - Leitura real (página de cobrança) só quando: nunca leu, passou do dia da renovação, ou a estimativa ficou baixa.
     python creditos.py                 # mostra o registro
-    python creditos.py ler <email>     # lê a página de cobrança dessa conta (abre o Chrome pela saída dela)
+    python creditos.py ler <email>     # saldo real dessa conta: HTTP com a sessão guardada (sessoes_fish), sem
+                                       # Chrome; só sem sessão guardada abre a página de cobrança
 """
 import json, re, sys, time
 from datetime import datetime
@@ -89,7 +90,20 @@ def gravar_leitura(email, lido):
 
 
 def ler(email):
-    """Abre a conta pela saída dela, lê a página de cobrança e grava."""
+    """Saldo REAL da conta. 1º por HTTP com a sessão guardada (sessoes_fish: sem Chrome, pela saída dela);
+    só se não houver sessão guardada (ou ela morreu) abre o Chrome e lê a página de cobrança."""
+    try:
+        import sessoes_fish
+        r = sessoes_fish.saldo(email)
+        if r is not None:
+            return r[0], r[1], int(carregar().get(email, {}).get("renova_dia") or 18)
+    except Exception:  # noqa: BLE001 — sessão morta / sem sessão: cai no Chrome
+        pass
+    return ler_pelo_chrome(email)
+
+
+def ler_pelo_chrome(email):
+    """Último recurso: abre a conta pela saída dela, lê a página de cobrança e grava."""
     import cofre
     import fish_audio as fa
     _, ip_n = fa.checar_conta(email)

@@ -196,6 +196,13 @@ def comentarios_pendentes(cfg, politica, yp, reg):
             # video ainda processando/privado: tenta de novo na proxima rodada (ate 3 dias). Mas 404 de VIDEO que o
             # oEmbed confirma fora do ar (removido/apagado) desiste na hora (AB-12, 16/10: wKiGkUQ6bBc repetia o 404
             # de hora em hora - "removido por ser muito longo").
+            # 18/11: InventoReact/ManhwaReact removidos em 17/11 (contas_travadas.json) levavam 3 chamadas de API por
+            # hora com 403 "authenticatedUserAccountSuspended" por até 3 dias. Conta suspensa = desiste na hora (nenhum
+            # robô toca conta travada). COMENTARIO_DESISTE_SUSPENSA=0 volta ao comportamento antigo.
+            if e.code == 403 and "suspended" in msg.lower() and os.environ.get("COMENTARIO_DESISTE_SUSPENSA", "1") != "0":
+                r["comentario"] = "erro: conta suspensa"
+                log(f"comentario: {r['canal']} {r['url']} conta SUSPENSA - desisti (não tenta mais)")
+                continue
             if e.code == 403 and "insufficient" in msg.lower() and not _fora_do_ar(r["video_id"]):
                 # 403 de PERMISSAO (a credencial da API nao pode comentar naquele canal - 16/10: 21x/dia nos 2 do Veo):
                 # nao e horario, nao adianta repetir. Passa para o navegador: postador\bin\extras_rede.py comenta e

@@ -277,6 +277,32 @@ def genero_da_voz(voz):
         return None
 
 
+def _vozes_com_fish():
+    """Vozes com referencia_fish.wav no Drive (colab_recap/vozes/<voz>/). Lista em config/vozes_com_fish.txt,
+    renovada pelo rclone a cada 6 h; falhou = usa a última (ou vazio = sem preferência)."""
+    import subprocess
+    import time
+    arq = Path(r"D:\recapd-ambientes\producao\config\vozes_com_fish.txt")
+    try:
+        velho = not arq.exists() or time.time() - arq.stat().st_mtime > 6 * 3600
+    except OSError:
+        velho = True
+    if velho:
+        try:
+            r = subprocess.run([r"D:\tools\rclone.exe", "lsf", "-R", "manhwa-drive:colab_recap/vozes", "--include",
+                                "*/referencia_fish.wav", "--files-only"], capture_output=True, text=True, timeout=90,
+                               creationflags=0x08000000 if os.name == "nt" else 0)
+            nomes = sorted({ln.split("/")[0] for ln in r.stdout.split() if "/" in ln})
+            if r.returncode == 0 and nomes:
+                arq.write_text("\n".join(nomes) + "\n", encoding="utf-8")
+        except Exception:  # noqa: BLE001
+            pass
+    try:
+        return {x.strip() for x in arq.read_text(encoding="utf-8").split() if x.strip()}
+    except OSError:
+        return set()
+
+
 def proxima(nicho=None, genero=None):
     """(narrador, base) do próximo Short com voz clonada, ou None. Entre os narradores que ENCAIXAM no nicho (nota >= 2
     em narradores_nichos.json; < 3 assim = nota >= 1) vai o de maior nota menos o uso: cada vídeo no nicho tira 0,6,
@@ -339,6 +365,17 @@ def proxima(nicho=None, genero=None):
         if len(bons) >= 3 and len(bons) < len(pool):
             ULTIMA_CORTADAS[:] = sorted({c["voz"] for c in pool} - {c["voz"] for c in bons})
             pool = bons
+
+    # 19/11 dona ("Fish é o padrão"): o Fish só narra quem tem referencia_fish no Drive — na noite de 19/11 o rodízio
+    # escolheu pedro_bial/sam_winchester/pato_donald_galvan (sem referência) e nenhum Short saiu no Fish. Com >= 3
+    # candidatos com referência, só eles entram. FISH_PREFERIR=0 desliga.
+    if os.environ.get("FISH_PREFERIR", "1") != "0":
+        com_ref = _vozes_com_fish()
+        fish_pool = [c for c in pool if c["voz"] in com_ref]
+        if len(fish_pool) < 3:  # nicho estreito (pesca): aceita quem encaixa menos, desde que tenha referência
+            fish_pool = [c for c in cands if c["voz"] in com_ref and c["fit"] >= 1]
+        if len(fish_pool) >= 3:
+            pool = fish_pool
 
     def nota(c):
         # 02/11: quem vai bem no ranking perde menos por uso (aparece mais); quem vai mal perde mais (aparece menos).

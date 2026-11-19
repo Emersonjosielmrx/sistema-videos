@@ -19,6 +19,7 @@ Por rodada (manhwareact.py rede):
 """
 import hashlib
 import json
+import os
 import random
 import re
 import shutil
@@ -77,6 +78,14 @@ REDE_PADRAO = {
 def _rc(cfg):
     out = dict(REDE_PADRAO)
     out.update(cfg.get("rede") or {})
+    # 19/11: os 2 canais do Veo (InventoReact/ManhwaReact) foram removidos 17/11 -> Veo parado. Canal travado sai da
+    # lista e entra o substituto vivo de tema parecido (tecnologia/como funciona). REDE_VEO_SUBSTITUTOS="" desliga.
+    subs = [x for x in os.environ.get("REDE_VEO_SUBSTITUTOS", "pordentro,fatochocante").split(",") if x]
+    trav = _travados()
+    vivos = [c for c in (out.get("canais_veo_limpo") or []) if c not in trav]
+    if subs and len(vivos) < len(out.get("canais_veo_limpo") or []):
+        vivos += [c for c in subs if c not in trav and c not in vivos][:len(out["canais_veo_limpo"]) - len(vivos)]
+    out["canais_veo_limpo"] = vivos
     return out
 
 
@@ -104,14 +113,30 @@ def _work(cfg, *partes):
 
 
 # ─────────────────────────── canais ─────────────────────────────────────────
+def _travados():
+    """19/11: slugs em contas_travadas.json (removido/strike/avisos). 17-18/11 o YouTube removeu 13 canais; a rede
+    seguia contando com eles (44 tentativas/dia no InventoReact/ManhwaReact = Veo parado e vagas perdidas).
+    REDE_PULA_TRAVADOS=0 desliga."""
+    if os.environ.get("REDE_PULA_TRAVADOS", "1") == "0":
+        return set()
+    try:
+        d = load_json(Path(r"D:\postador-de-videos\config\contas_travadas.json"))
+        return set(d) if isinstance(d, dict) else {x.get("slug") for x in d if isinstance(x, dict)}
+    except Exception:  # noqa: BLE001
+        return set()
+
+
 def canais(cfg, politica):
     """Canais ATIVOS da rede, com a credencial principal e os campos do padrao preenchidos."""
     mapa = politica.rede()
     padrao = mapa.get("padrao", {})
     creds = {c["id"]: c for c in politica.carregar_creds()}
     out = []
+    travados = _travados()
     for rc in mapa.get("canais", []):
         if rc.get("status") != "ativo":
+            continue
+        if rc.get("slug") in travados:  # 19/11: removido pelo YouTube = fora da rede (vagas vão pros vivos)
             continue
         cred = next((creds[i] for i in rc.get("creds", []) if i in creds), None)
         if not cred:

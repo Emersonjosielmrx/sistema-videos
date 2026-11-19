@@ -1,0 +1,154 @@
+{
+ "conta": "inovareclone",
+ "produto": "avatar_ia",
+ "marca": "Inovare Clone",
+ "titulo": "Avatar IA: seu avatar postando todo dia nas redes",
+ "legenda": "Montar cenário e regravar fala toma o tempo de quem tem um negócio para tocar. Com o Avatar IA, você tem a sua versão postando todo dia, com posturas automáticas e fala em português. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Seu avatar com IA todo dia",
+  "pergunta_cliente": "Vou me livrar de ter que montar cenário toda vez?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia horas arrumando cenário e refazendo falas. No fim, o conteúdo quase nunca saía no dia certo.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian office with a clean desk and soft natural light",
+    "real_tema": "dono cansado de montar cenário e regravar falas",
+    "destaques": [
+     "arrumando cenário",
+     "refazendo falas"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261119_002358_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Avatar IA é feito da sua própria pessoa. As posturas são automáticas e a fala é em português.",
+    "visual": "veo",
+    "prompt_en": "a Brazilian business owner seen from behind, working calmly at a tidy desk in a bright small office while a digital avatar of him speaks on a laptop screen, warm natural light, commercial photography, cinematic, no text, no logos",
+    "cenario_en": "",
+    "real_tema": "avatar IA gerando vídeo com posturas automáticas",
+    "destaques": [
+     "posturas são automáticas",
+     "fala é em português"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Vi seu vídeo de hoje. Você gravou de novo?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Quem apareceu foi meu avatar com IA."
+     },
+     {
+      "de": "cliente",
+      "texto": "Parecia você mesmo, falando em português."
+     },
+     {
+      "de": "empresa",
+      "texto": "É cem por cento meu, com posturas automáticas."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje meu avatar posta todo dia nas redes e eu não preciso montar cenário. Sigo cuidando do negócio.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit counter of a small Brazilian business, clean and professional",
+    "real_tema": "dono livre de montar cenário, com avatar postando todo dia",
+    "destaques": [
+     "avatar posta todo dia",
+     "não preciso montar cenário"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261119_002358_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261119_002358_1.png"
+   }
+  ],
+  "legenda": "Montar cenário e regravar fala toma o tempo de quem tem um negócio para tocar. Com o Avatar IA, você tem a sua versão postando todo dia, com posturas automáticas e fala em português. Link no perfil.",
+  "titulo": "Avatar IA: seu avatar postando todo dia nas redes",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "rotina_gravacao",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 18,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareclone_20261119_002327\\dono_3.mp4",
+ "duracao_s": 31.72,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-19T00:52:41",
+ "variante": "cinco_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "abertura",
+  "cartao"
+ ],
+ "veo_total": 5,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.08,
+   "fala": "Vou me livrar de ter que montar cenário toda vez?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.08,
+   "fim": 11.91,
+   "fala": "Eu perdia horas arrumando cenário e refazendo falas. No fim, o conteúdo quase nunca saía no dia certo.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.91,
+   "fim": 19.95,
+   "fala": "O Avatar IA é feito da sua própria pessoa. As posturas são automáticas e a fala é em português.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 19.95,
+   "fim": 27.78,
+   "fala": "Hoje meu avatar posta todo dia nas redes e eu não preciso montar cenário. Sigo cuidando do negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.78,
+   "fim": 31.72,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.5,
+  "notas": {
+   "legibilidade": 7.5,
+   "movimento": 5.5,
+   "roteiro_marca": 8.0,
+   "diretor": 5.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ }
+}
