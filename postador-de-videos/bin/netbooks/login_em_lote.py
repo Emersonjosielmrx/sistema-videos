@@ -73,6 +73,16 @@ def _nova_bloqueada(p, maquina):
     """True = conta nova que já entrou HOJE em outra máquina (a de hoje pode repetir/terminar)."""
     if _conta_kaggle(p):
         return True
+    # 19/11 dona (Por Dentro perdido): conta no período de conta NOVA (cofre nova_ate) fica só onde nasceu — o lote não
+    # leva pra NENHUMA máquina. LOTE_ACEITA_NOVA=1 desliga.
+    if os.environ.get("LOTE_ACEITA_NOVA") != "1":
+        try:
+            sys.path.insert(1, r"D:\logins-google")
+            import cofre as _cf
+            if _cf.eh_nova(p if "@" in p else f"{p}@gmail.com"):
+                return True
+        except Exception:  # noqa: BLE001
+            pass
     if p not in CONTAS_NOVAS:
         return False
     hoje = time.strftime("%Y-%m-%d")

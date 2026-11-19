@@ -25355,6 +25355,142 @@
         "A página oficial de Shorts/remix e a de conteúdo reutilizado (blog.youtube e support.google.com), lendo a lista de exemplos que ficou cortada nesta rodada"
       ],
       "origem": "area_avatares_stop__sonnet_0346.md 2026-11-19"
+    },
+    {
+      "id": "strike_agendados",
+      "nome": "Estado dos vídeos agendados após strike",
+      "subtemas": [
+        "Páginas oficiais support.google.com/youtube sobre strike, penalidade e reagendamento, e como conferir o estado dos vídeos agendados no Studio sem a API do Google"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0514.md 2026-11-19"
+    },
+    {
+      "id": "shorts_regras_oficiais",
+      "nome": "Regras oficiais de Shorts e monetização por região",
+      "subtemas": [
+        "Páginas oficiais e o blog.youtube sobre conteúdo reutilizado, duração de Shorts e elegibilidade ao YPP em 2026"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0514.md 2026-11-19"
+    },
+    {
+      "id": "adb_upload_estavel",
+      "nome": "Upload estável no app do YouTube",
+      "subtemas": [
+        "notas e issues sobre intent SEND, URIs do MediaStore e seletor de arquivos; busca sem filtro de data"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0546.md 2026-11-19"
+    },
+    {
+      "id": "adb_intent_youtube",
+      "nome": "Share intent do app do YouTube via adb",
+      "subtemas": [
+        "Procurar relatos e exemplos de `am start ... SEND ... com.google.android.youtube` com `content://`, nome da activity de upload e problemas de permissão no Android 13 ou superior"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0637.md 2026-11-19"
+    },
+    {
+      "id": "sess_pool",
+      "nome": "Pool de sessões com cooldown e retomada de lote",
+      "subtemas": [
+        "procurar projetos pequenos em Python que retomam fila de gerações (imagem de capa, roteiro) após queda de sessão, sem navegador"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0756.md 2026-11-19"
+    },
+    {
+      "id": "cota_img",
+      "nome": "Limite diário de imagem e vídeo do app Gemini",
+      "subtemas": [
+        "página oficial support.google.com/gemini sobre limites de geração de imagem e vídeo e quando a cota renova, para planejar capas por dia"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0756.md 2026-11-19"
+    },
+    {
+      "id": "capas_lote",
+      "nome": "Capas e miniaturas em lote com cota controlada",
+      "subtemas": [
+        "ideias prontas em Python + FFmpeg para gerar variações de capa e testar título, dentro do tema \"títulos, capas e primeiros 30 s\""
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0756.md 2026-11-19"
+    },
+    {
+      "id": "vistos_recaps",
+      "nome": "Recaps mais vistos",
+      "subtemas": [
+        "achar via yt-dlp e `/shorts`/`/videos` os recaps com mais views por inscrito em canais pequenos de anime e manhwa, em outras línguas"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0826.md 2026-11-19"
+    },
+    {
+      "id": "trend_01",
+      "nome": "Recaps mais vistos por nicho",
+      "subtemas": [
+        "yt-dlp com ordenação por views e `--dateafter` para listar os campeões de recap (anime/manhwa) e comparar views÷inscritos por canal"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0942.md 2026-11-19"
+    },
+    {
+      "id": "playl_02",
+      "nome": "Série, compilado e ponte Short→longo",
+      "subtemas": [
+        "como o YouTube sugere o próximo vídeo e o uso de fim de tela/playlist para levar o público do Short ao longo"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0942.md 2026-11-19"
+    },
+    {
+      "id": "render_03",
+      "nome": "Render em Android (Termux)",
+      "subtemas": [
+        "ffmpeg no Termux para fazer upscale 720p→1080p e distribuir fila de render entre PCs e celulares"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0942.md 2026-11-19"
+    },
+    {
+      "id": "cota_gemini",
+      "nome": "Limite diário de imagem/vídeo do app Gemini",
+      "subtemas": [
+        "página oficial support.google.com/gemini com os limites por plano e relatos de erro ao estourar a cota"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1029.md 2026-11-19"
+    },
+    {
+      "id": "cel_zoompan",
+      "nome": "Zoompan/crop animado em Termux no celular",
+      "subtemas": [
+        "exemplos em Python/FFmpeg que rodam no Termux/Android, com `crop` por expressão (mais leve que zoompan), para dividir render de Shorts com os PCs fracos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1247.md 2026-11-19"
+    },
+    {
+      "id": "termux_lote",
+      "nome": "Render em lote no celular Android",
+      "subtemas": [
+        "scripts de ffmpeg em fila no Termux com controle de temperatura e espaço, para usar os celulares como máquinas extras."
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1324.md 2026-11-19"
+    },
+    {
+      "id": "titulo_capa_30s",
+      "nome": "Primeiros 30 s, títulos e capas de recaps campeões",
+      "subtemas": [
+        "ideias pequenas de gancho de abertura e capa, feitas em Python/FFmpeg e testáveis nos nossos vídeos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1417.md 2026-11-19"
+    },
+    {
+      "id": "titulo_capa_ctr",
+      "nome": "títulos e capas em PT/EN/ES",
+      "subtemas": [
+        "scripts que comparem título e capa dos vídeos campeões de um nicho (yt-dlp mais Python, sem API do Google) e gerem padrões de título por idioma."
+      ],
+      "origem": "area_webgl_frame_a_frame__sonnet_1541.md 2026-11-19"
+    },
+    {
+      "id": "serie_proximo",
+      "nome": "Séries e \"próximo vídeo\"",
+      "subtemas": [
+        "Truques de ordem, título numerado e tela final que levam do vídeo 1 ao vídeo 2 em canais de recap (YouTube Help e blog.youtube)"
+      ],
+      "origem": "area_webgl_frame_a_frame__sonnet_1601.md 2026-11-19"
     }
   ],
   "projetos": [

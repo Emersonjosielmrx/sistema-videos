@@ -80,7 +80,7 @@ def _rc(cfg):
     out.update(cfg.get("rede") or {})
     # 19/11: os 2 canais do Veo (InventoReact/ManhwaReact) foram removidos 17/11 -> Veo parado. Canal travado sai da
     # lista e entra o substituto vivo de tema parecido (tecnologia/como funciona). REDE_VEO_SUBSTITUTOS="" desliga.
-    subs = [x for x in os.environ.get("REDE_VEO_SUBSTITUTOS", "pordentro,fatochocante").split(",") if x]
+    subs = [x for x in os.environ.get("REDE_VEO_SUBSTITUTOS", "fatochocante").split(",") if x]
     trav = _travados()
     vivos = [c for c in (out.get("canais_veo_limpo") or []) if c not in trav]
     if subs and len(vivos) < len(out.get("canais_veo_limpo") or []):

@@ -457,3 +457,9 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - Causa provável: Vídeos removidos ou travados pelo YouTube em canais específicos e timeout temporário na coleta de analytics pelo YouTube Studio.
 - CONSERTO PROPOSTO: Nenhum. O comportamento é esperado para vídeos removidos/travados pelo YouTube e timeouts transientes de scraping no Studio; nenhum código ou estado deve ser alterado sem intervenção direta do dono nas contas travadas.
 - Estado: NADA A FAZER
+## 20261119_1536 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos a cada 20 minutos (último às 15:27 "janela: D: com 5.2 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). A produção está rodando normalmente sem travamentos críticos.
+- O que fiz: Nenhum código alterado (Modo Só Aviso estrito). Apenas leitura dos logs e registro da ronda.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

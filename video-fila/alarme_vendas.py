@@ -25,9 +25,16 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 EST = BASE / "estado" / "alarme_vendas.json"
 LOG = BASE / "estado" / "alarme_vendas.log"
-REPETIR_MIN = 10          # Telegram: repete o alerta pendente a cada 10 min até a confirmação
-SOM_A_CADA_MIN = 2        # PC: toca de novo a cada 2 min enquanto houver pendente
-DESISTIR_H = 24           # depois de 24 h sem confirmação para de insistir (fica no registro)
+# 19/11 dona: "respondi a mensagem ontem e ele mandou CENTENAS de mensagens mesmo eu tendo respondido" — 56 lembretes x
+# 10 bots (~560). Agora: o 1º aviso vai a todos os bots; os LEMBRETES só no bot Plantão, no máximo MAX_LEMBRETES, com
+# intervalo dobrando (10, 20, 40, 60, 60, 60 min); e o alarme FECHA SOZINHO quando a dona responde na plataforma
+# (resolvido(chave), chamado pelo robô do 99Freelas e pelo vigia do GGMax).
+REPETIR_MIN = 10          # 1º lembrete 10 min depois; depois dobra até TETO_MIN
+TETO_MIN = 60
+MAX_LEMBRETES = 6
+SOM_A_CADA_MIN = 5        # PC: toca de novo a cada 5 min enquanto houver pendente (e só nas 2 primeiras horas)
+SOM_ATE_H = 2
+DESISTIR_H = 12           # depois de 12 h sem resposta para de insistir (fica no registro)
 CONFIRMA = re.compile(r"^\W*(ok|okay|visto|vi|j[aá]\s*vi|respondi|j[aá]\s*respondi|entendi|recebi|beleza|blz|certo)"
                       r"\W*(\d+)?\W*$", re.I)
 
@@ -93,12 +100,37 @@ def tocar(tipo):
 
 def _telegram(a, n, repeticao):
     sys.path.insert(0, str(BASE))
-    import avisos
     rot = "💰💰💰 VENDA FEITA" if a["tipo"] == "venda" else "💬💬 CLIENTE MANDOU MENSAGEM"
-    rep = f" (lembrete {repeticao})" if repeticao else ""
-    texto = (f"{rot}{rep} — #{n}\n{a['origem']}: {a['titulo']}\n\n{a['texto'][:1500]}\n\n👉 {a['link']}\n\n"
-             f"Responda \"ok {n}\" (ou só \"ok\" para todos) no bot Plantão para parar este alarme.")
+    if repeticao:  # lembrete: curto e SÓ no bot Plantão (não nos 10 bots)
+        import plantao
+        txt = (f"🔔 Lembrete {repeticao}/{MAX_LEMBRETES} — {rot} #{n}\n{a['origem']}: {a['titulo']}\n👉 {a['link']}\n"
+               f"(para sozinho quando você responder lá; ou mande \"ok\")")
+        return 1 if plantao.enviar(txt) else 0
+    import avisos
+    texto = (f"{rot} — #{n}\n{a['origem']}: {a['titulo']}\n\n{a['texto'][:1500]}\n\n👉 {a['link']}\n\n"
+             f"O alarme para sozinho quando você responder ao cliente lá (ou mande \"ok\" no bot Plantão).")
     return avisos.prioridade(texto, origem=f"alarme-{a['tipo']}")
+
+
+def resolvido(chave, motivo="a dona respondeu na plataforma"):
+    """Fecha o alarme daquela chave (a dona já respondeu/atendeu). Devolve True se fechou algum."""
+    d = _ler()
+    fechou = False
+    for n, a in d["alertas"].items():
+        if a["chave"] == chave and not a.get("confirmado"):
+            a["confirmado"] = datetime.now().isoformat(timespec="seconds")
+            a["motivo_fim"] = motivo
+            fechou = True
+            log(f"#{n} fechado sozinho: {motivo}")
+    if fechou:
+        _gravar(d)
+    return fechou
+
+
+def abertos(prefixo=""):
+    """Chaves dos alarmes ainda abertos (para o vigia conferir se já foram atendidos)."""
+    return [a["chave"] for a in _ler()["alertas"].values()
+            if not a.get("confirmado") and not a.get("desistiu") and a["chave"].startswith(prefixo)]
 
 
 def alertar(tipo, origem, titulo, texto, link="", chave=None):
@@ -155,11 +187,13 @@ def rodada():
             a["desistiu"] = True; mudou = True
             log(f"#{n} sem confirmação em {DESISTIR_H}h — parei de insistir")
             continue
-        if agora - a["ultimo_tg"] >= REPETIR_MIN * 60:
+        feitos = a["vezes"] - 1
+        espera = min(TETO_MIN, REPETIR_MIN * 2 ** feitos) * 60
+        if feitos < MAX_LEMBRETES and agora - a["ultimo_tg"] >= espera:
             a["vezes"] += 1; a["ultimo_tg"] = agora; mudou = True
             _telegram(a, n, a["vezes"] - 1)
             log(f"#{n} lembrete {a['vezes'] - 1}")
-        if agora - a["ultimo_som"] >= SOM_A_CADA_MIN * 60:
+        if agora - a["criado"] < SOM_ATE_H * 3600 and agora - a["ultimo_som"] >= SOM_A_CADA_MIN * 60:
             a["ultimo_som"] = agora; mudou = True
             tocar_tipo = "venda" if a["tipo"] == "venda" or tocar_tipo == "venda" else "mensagem"
     if mudou:

@@ -123,7 +123,7 @@ def medir_molde(qs, W, H, antigo):
     isca, _ = _casar(base, W, H, "@" + antigo.lstrip("@")[::-1])
     nota = round(float(v), 3)
     medir_molde.isca = round(float(isca), 3)
-    if cx is None or v < float(os.environ.get("REMARCAR_NOTA_MIN", "0.40")) or v - isca < 0.05:
+    if cx is None or v < float(os.environ.get("REMARCAR_NOTA_MIN", "0.30")) or v - isca < 0.05:
         return None, nota
     X0, Y0, X1, Y1 = cx
     h = Y1 - Y0

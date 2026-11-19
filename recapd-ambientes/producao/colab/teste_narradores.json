@@ -76,7 +76,7 @@
   "chaves",
   "chaves_chapolin"
  ],
- "cursor": 931,
+ "cursor": 936,
  "videos": [
   {
    "pid": "20261026_111528_5-vQopGwQ8Y",
@@ -1829,24 +1829,17 @@
    "pid": "20261116_061745_GoFYsj0q_s4",
    "vozes": [
     "momo",
-    "fatos_desconhecidos",
-    "mattz",
-    "ludmilla",
-    "jessie_toy_story",
-    "buzz_lightyear",
-    "galvao_bueno"
+    "mike",
+    "jubertim",
+    "ijax",
+    "pica_pau"
    ]
   },
   {
    "pid": "20261116_071249_QwY2Kqk7jo8",
    "vozes": [
     "momo",
-    "mike",
-    "mangaticos",
-    "iki",
-    "mc_melody_brazilian_singer_v2_500",
-    "walter_white_breaking_bad",
-    "seu_madruga"
+    "mike"
    ]
   },
   {
@@ -1861,12 +1854,9 @@
    "pid": "20261117_080624__GRXRlk-1v8",
    "vozes": [
     "momo",
-    "guugou",
-    "iki",
-    "solemsun",
-    "cid_moreira",
-    "moana",
-    "seu_madruga"
+    "mike",
+    "ijax",
+    "jubertim"
    ]
   },
   {
@@ -1901,26 +1891,37 @@
    "pid": "20261119_030240_RzoyNcnlIj8",
    "vozes": [
     "momo",
-    "solemsun",
-    "cid_moreira",
-    "mangaticos",
-    "moana",
-    "iki"
+    "mike",
+    "mattz",
+    "cid_moreira"
    ]
   },
   {
    "pid": "20261119_032806_iWIgK8o9pxE",
    "vozes": [
     "momo",
-    "solemsun"
+    "fatos_desconhecidos",
+    "mattz",
+    "mike",
+    "walter_white_breaking_bad"
    ]
   },
   {
    "pid": "20261119_035825_rVacUCRJQxg",
    "vozes": [
     "porao",
-    "guugou",
-    "solemsun"
+    "fatos_desconhecidos",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261119_105701_o5eorVpfrUA",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "doinsuka",
+    "drezin",
+    "kkvirjao"
    ]
   }
  ],
@@ -1951,7 +1952,10 @@
    "mangaticos",
    "iki",
    "solemsun",
-   "fatos_desconhecidos"
+   "fatos_desconhecidos",
+   "mattz",
+   "ijax",
+   "jubertim"
   ],
   "primarios": [
    "momo",
@@ -1959,7 +1963,14 @@
    "guugou",
    "mangaticos",
    "iki",
-   "solemsun"
+   "solemsun",
+   "mattz",
+   "ijax",
+   "jubertim",
+   "drezin",
+   "kkvirjao",
+   "doinsuka",
+   "porao"
   ],
   "secundarios": [
    "vegeta",
@@ -2003,5 +2014,14 @@
   "_vegeta": "29/10 dona: 'Vegeta é um excelente dublador, põe ele como uma das prioridades do segundo'",
   "_leia_modos_30_10": "Fable 30/10 (dona: vídeos SOLO, misturas com mais e com menos narradores, outros só com os da fila 1): solo = 1 primário; dupla = 2 primários; so_primarios = 4; primarios_secundarios; com_terciarios; mistura_grande = 6-7 vozes. Só-primários somam 65%. O modo vai no pedido.json (narradores_modo) pra comparar pelas views."
  },
- "_modo": "dupla"
+ "prioridade_fish": [
+  "momo",
+  "mike",
+  "mattz",
+  "guugou",
+  "ijax",
+  "jubertim"
+ ],
+ "_prioridade_fish": "19/11 dona via claude-f1: próximos longos com narradores top no Fish (momo, mike primeiro). cliente._narradores_por_grupo põe estes na frente e tira quem não tem referencia_fish (LONGO_SO_FISH=0 desliga).",
+ "_modo": "so_primarios"
 }

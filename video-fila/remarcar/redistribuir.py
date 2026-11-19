@@ -58,7 +58,24 @@ def log(m):
         f.write(linha + "\n")
 
 
+RECUSAS = AQUI / "recusas.json"  # {pasta: nº de recusas} — 2 recusas = não tenta mais (REMARCAR_RETENTA=1 ignora)
+
+
+def _recusas():
+    try:
+        return json.loads(RECUSAS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _recusou(pasta):
+    r = _recusas()
+    r[pasta] = r.get(pasta, 0) + 1
+    RECUSAS.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def planejar(lote, teto):
+    rec = {} if os.environ.get("REMARCAR_RETENTA") == "1" else _recusas()
     c = json.loads(pd.CFG.read_text(encoding="utf-8"))
     trav = pd._canais_travados(c)
     handle = {d["canal"]: d.get("handle") for d in c["pt"]}
@@ -71,7 +88,8 @@ def planejar(lote, teto):
     # mais antigos primeiro, alternando os canais removidos pra não esvaziar um só
     por_morto = {}
     for x in its:
-        if x["estado"] == "pronto" and x["canal"] in MAPA and x["canal"] in trav and x["lang"] == "pt":
+        if (x["estado"] == "pronto" and x["canal"] in MAPA and x["canal"] in trav and x["lang"] == "pt"
+                and rec.get(x["pj"].parent.name, 0) < 2):
             por_morto.setdefault(x["canal"], []).append(x)
     fila = []
     while any(por_morto.values()):
@@ -109,8 +127,14 @@ def executar(plano, maquina):
                 log(f"PULA {x['pj'].parent.name}: sem vídeo e sem _NO_DRIVE.txt")
                 continue
             drive = nd.read_text(encoding="utf-8").strip()
-            subprocess.run([RCLONE, "copyto", drive, str(ent), "--retries", "3"], capture_output=True, timeout=900,
-                           creationflags=NO_WIN)
+            # 19/11: um download travou 15 min e o TimeoutExpired derrubava o lote inteiro — agora só pula este
+            try:
+                subprocess.run([RCLONE, "copyto", drive, str(ent), "--retries", "3", "--timeout", "2m",
+                                "--contimeout", "60s"], capture_output=True, timeout=600, creationflags=NO_WIN)
+            except subprocess.TimeoutExpired:
+                log(f"PULA {x['pj'].parent.name}: download do Drive travou")
+                ent.unlink(missing_ok=True)
+                continue
             if not ent.exists():
                 log(f"PULA {x['pj'].parent.name}: não baixou do Drive")
                 continue
@@ -131,7 +155,14 @@ def executar(plano, maquina):
     subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", maquina,
                     "mkdir -p ~/remarcar && rm -f ~/remarcar/v*.mp4 ~/remarcar/*.png"], capture_output=True, timeout=60)
     t0 = time.time()
-    subprocess.run([SCP, "-q"] + arquivos + [f"{maquina}:remarcar/"], check=True, timeout=3600)
+    for _t in range(3):  # 19/11: scp 255 (queda de conexão) derrubava o lote inteiro — tenta 3x
+        if subprocess.run([SCP, "-q", "-o", "ConnectTimeout=30"] + arquivos + [f"{maquina}:remarcar/"],
+                          timeout=3600).returncode == 0:
+            break
+        log(f"scp pro {maquina} falhou (tentativa {_t + 1}/3)")
+        time.sleep(60)
+    else:
+        raise RuntimeError(f"não consegui mandar o lote pro {maquina}")
     r = subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", maquina, "bash ~/remarcar/lote.sh"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=7200)
     feitos = set()
@@ -149,6 +180,7 @@ def executar(plano, maquina):
             p["caixa"] = j.get("caixa")
         else:
             log(f"RECUSA {p['x']['pj'].parent.name} ({p['de']}): {j.get('motivo') or 'sem saída do remarcar'}")
+            _recusou(p["x"]["pj"].parent.name)
     for n in sorted(feitos):  # 1 arquivo por scp (vários remotos num scp só traziam só o 1º)
         subprocess.run([SCP, "-q", f"{maquina}:remarcar/{n}_ok.mp4", str(TRAB)], timeout=1800)
     log(f"render em {maquina}: {len(feitos)}/{len(prontos)} em {time.time() - t0:.0f} s")
@@ -201,4 +233,9 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception:  # noqa: BLE001 — pela tarefa agendada não há console: o erro vai pro log
+        import traceback
+        log("ERRO: " + traceback.format_exc()[-1500:])
+        sys.exit(1)

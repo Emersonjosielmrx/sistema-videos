@@ -797,7 +797,7 @@ def mascote_cta(marcas, video_in, retrato):
 
 
 def burn_subtitles_ass(video_in, entries, video_out, words_per_card=None,
-                       word_times=None, offsets=None, extra=None, falantes=None):
+                       word_times=None, offsets=None, extra=None, falantes=None, gaps_sfx=None):
     """Queima legenda dinâmica (1-2 palavras, karaokê amarelo) via libass — UMA passada.
 
     Substitui burn_subtitles (PNG overlay) pra vídeos LONGOS: o overlay PNG re-encoda
@@ -875,6 +875,16 @@ def burn_subtitles_ass(video_in, entries, video_out, words_per_card=None,
         wt_real = None
         if word_times and i < len(word_times) and word_times[i]:
             wt_real = _alinhar_tempos(words, word_times[i])
+        # 19/11 dona ("quando é usado um efeito sonoro a legenda vai atrasando... a ideia é NÃO mostrar a legenda
+        # durante o som ou meme"): o SFX toca ANTES da voz (ANIME_SFX_GAP: _voz_depois_do_sfx). Sem tempos por palavra
+        # (o Fish não grava words.json) as palavras eram espalhadas pelo clipe INTEIRO, SFX incluso: a legenda aparecia
+        # durante o efeito e ficava atrasada em relação à voz até a próxima frase. Agora a frase só começa quando a voz
+        # começa e as palavras se espalham só pela fala. Com words.json os tempos já vêm com o gap. LEGENDA_ESCONDE_NO_SFX=0 desliga.
+        if (not wt_real and gaps_sfx and i < len(gaps_sfx) and gaps_sfx[i]
+                and os.environ.get("LEGENDA_ESCONDE_NO_SFX", "1") != "0"):
+            _g = min(float(gaps_sfx[i]), max(0.0, dur - 0.4))
+            start += _g
+            dur -= _g
         weights = [max(2, len(w)) for w in words]
         total_w = sum(weights)
         word_durs = [dur * (wt / total_w) for wt in weights]

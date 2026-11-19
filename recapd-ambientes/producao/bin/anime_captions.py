@@ -13,6 +13,16 @@ from pathlib import Path
 from fx_subtitles import render_subtitles_short, burn_subtitles, burn_subtitles_ass
 
 
+def _gaps_sfx(entries):
+    """19/11: segundos de SFX antes da voz de cada entry (anime_segments.ULTIMOS_GAPS_SFX), só se alinhado a entries."""
+    try:
+        import anime_segments
+        g = anime_segments.ULTIMOS_GAPS_SFX
+        return g if g and len(g) == len(entries) else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def burn_captions(video_in, entries, video_out, orient="landscape",
                   word_times=None, offsets=None, gancho="", gancho_barra=True, falantes=None, tarja=None):
     """Queima legendas (1-2 palavras por vez) no vídeo.
@@ -73,7 +83,8 @@ def burn_captions(video_in, entries, video_out, orient="landscape",
             import anime_tarja_capitulo
             extra = anime_tarja_capitulo.juntar(extra, tarja)
         ok = burn_subtitles_ass(str(video_in), entries, str(video_out),
-                                word_times=word_times, offsets=offsets, extra=extra, falantes=falantes)
+                                word_times=word_times, offsets=offsets, extra=extra, falantes=falantes,
+                                gaps_sfx=_gaps_sfx(entries))
         if ok:
             return True
         logging.warning("[captions] libass falhou — tentando PNG overlay como fallback")
@@ -113,7 +124,8 @@ def burn_captions(video_in, entries, video_out, orient="landscape",
             import anime_gancho
             extra = anime_gancho.extras(gancho, video_in, na_legenda=True)
         ok = burn_subtitles_ass(str(video_in), entries, str(video_out),
-                                word_times=word_times, offsets=offsets, extra=extra, falantes=falantes)
+                                word_times=word_times, offsets=offsets, extra=extra, falantes=falantes,
+                                gaps_sfx=_gaps_sfx(entries))
         if ok:
             return True
     if not ok:

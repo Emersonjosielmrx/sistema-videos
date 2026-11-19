@@ -2109,5 +2109,52 @@
   "estado": "sem_capa",
   "tentativas": 3,
   "em": "2026-11-17T08:02"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "WEmcyeDuSxc",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-7bdb9a_cap1_20261119",
+  "params": {
+   "anime": "sem-obra-7bdb9a",
+   "cap": 1,
+   "texto": "ELE SE VINGOU",
+   "cena": "A ESPOSA FINGIU MORTE e ELE DEU O TROCO PERFEITO | homem reencarna e se vinga",
+   "protagonista": "adult man, short dark hair, sharp blue eyes, wearing a clean modern dark suit, dramatic lighting, highly detailed webtoon style, no text, no logos",
+   "generos": [
+    "regressao",
+    "vinganca",
+    "romance",
+    "drama"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=Jjd71vw8hXQ"
+  },
+  "publicar": true,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-19T09:52"
+ },
+ {
+  "canal": "novo_universo_ia_d6s",
+  "vid": "1QELmMJgPUA",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0f2015_cap1_20261119",
+  "params": {
+   "anime": "sem-obra-0f2015",
+   "cap": 1,
+   "texto": "REJEITOU A TRAIDORA",
+   "cena": "ELE FOI REJEITADO mas VOLTOU NO TEMPO e REJEITOU A TRAIDORA",
+   "protagonista": "young adult male protagonist, dark short hair, sharp eyes, wearing a sleek modern dark suit, dramatic lighting, high quality webtoon style",
+   "generos": [
+    "romance",
+    "regressao",
+    "escola"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=ZZ7LeUws7-c"
+  },
+  "publicar": false,
+  "estado": "pendente",
+  "tentativas": 1,
+  "em": "2026-11-19T15:06"
  }
 ]

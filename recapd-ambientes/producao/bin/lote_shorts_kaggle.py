@@ -110,6 +110,73 @@ def kaggle_em_pausa():
             f"testa de novo em {pausa - horas:.1f} h")
 
 
+def _fish_antes(pasta, env, voz):
+    """19/11 dona ("já temos quase 10 contas, melhorou muito o uso pelo site"): o Short ia pro Kaggle SEM o Fish online
+    (só roda no PC1, onde estão as contas) e os créditos do site sobravam. Agora o PC1 narra no site ANTES de mandar e
+    vai junto audio_cache/ — o anime-pipeline do Kaggle acha os audio_i.wav prontos e só narra o que faltou.
+    Fica de fora: fala da mascote (ANIME_MASCOTE_FALAS) e Short de várias vozes (roteiro_falas.json).
+    SHORTS_FISH_ANTES=0 desliga. Nunca levanta."""
+    if os.environ.get("SHORTS_FISH_ANTES", "1") == "0" or env.get("VOZ_ONLINE") != "fish":
+        return
+    try:
+        if (pasta / "roteiro_falas.json").exists():
+            return
+        linhas = [l.strip() for l in (pasta / "roteiro.txt").read_text(encoding="utf-8").splitlines() if l.strip()]
+        try:
+            masc = {int(x) for x in str(env.get("ANIME_MASCOTE_FALAS", "")).split(",") if x.strip()}
+        except ValueError:
+            masc = set()
+        import sys
+        sys.path.insert(0, r"D:\hipercool-materiais\comum\fish_audio")
+        import fish_lote
+        if not fish_lote.disponivel():
+            return
+        # voz do Short: com narrador clonado escolhido (Sonic, Cid...) = a MESMA voz no site; narrador sem voz no site
+        # (parceiros: momo, guugou...) = não usa o site — o Fish do Kaggle narra com o trecho original dele.
+        # Sem narrador clonado = voz do nicho (Chris / Neymar no esporte), como no PC.
+        voz_site = None
+        if voz:
+            try:
+                mapa = json.loads(Path(r"D:\hipercool-materiais\comum\fish_audio\vozes_site.json").read_text(
+                    encoding="utf-8"))
+                voz_site = (mapa.get(Path(voz).name) or {}).get("id")
+            except (OSError, ValueError):
+                voz_site = None
+            if not voz_site:
+                logging.info(f"[kaggle-lote] {Path(voz).name} sem voz no site — narração fica pro Fish do Kaggle")
+                return
+        ad = pasta / "audio_cache"
+        ad.mkdir(exist_ok=True)
+        import anime_tts
+        ped = [(i, anime_tts._seguro(t), str(ad / f"audio_{i}.wav")) for i, t in enumerate(linhas) if i not in masc]
+        antes = {k: os.environ.get(k) for k in ("NICHO_CLONE", "PARCEIRO_TIPO", "FISH_TEMPOS")}
+        for k in antes:
+            if env.get(k):
+                os.environ[k] = env[k]
+        os.environ["FISH_TEMPOS"] = "0"  # 19/11: Whisper no PC1 a 100% = 75 min; mede no Kaggle (GPU)
+        try:
+            feitos = fish_lote.gerar(ped, log=logging.info, voz=voz_site)
+        finally:
+            for k, v in antes.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+        for i in feitos:
+            anime_tts._acabamento_fish(ad / f"audio_{i}.wav", Path(voz).name if voz else "")
+            if i == len(linhas) - 1:
+                anime_tts._aplicar_margem_final(ad / f"audio_{i}.wav")
+        if feitos:
+            (ad / "_voz_online.json").write_text(json.dumps({"motor": "fish", "frases": sorted(feitos),
+                                                              "total": len(ped), "onde": "PC1 antes do Kaggle"}),
+                                                 encoding="utf-8")
+        else:
+            shutil.rmtree(ad, ignore_errors=True)
+        logging.info(f"[kaggle-lote] Fish online antes do Kaggle: {len(feitos)}/{len(ped)} frases")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[kaggle-lote] Fish antes do Kaggle falhou ({type(e).__name__}: {str(e)[:120]}) — segue")
+
+
 def renderizar(work, video, roteiro, cand, short_kind, env, vf):
     """Manda o pedido, espera o Kaggle e baixa o vídeo pra vf. True = vf pronto."""
     if os.environ.get("SHORTS_KAGGLE_SEM_CURTO") != "1" and _curto_rodando() is False:
@@ -134,10 +201,13 @@ def renderizar(work, video, roteiro, cand, short_kind, env, vf):
     envs.pop("VOZ_CLONADA_RESUMO", None)  # caminho do PC
     voz = envs.get("VOZ_CLONADA")
     pedido = {"titulo": cand.get("title", ""), "short_kind": short_kind, "env": envs,
-              "vozes": [Path(voz).name] if voz else [], "enviado": datetime.now().isoformat(timespec="seconds")}
+              # 19/11: narrador_chris/neymar = reserva do Fish no Kaggle (voz sem referência nunca cai no p3 lá)
+              "vozes": ([Path(voz).name] if voz else []) + ["narrador_chris", "neymar"],
+              "enviado": datetime.now().isoformat(timespec="seconds")}
     if voz:
         envs["VOZ_CLONADA"] = Path(voz).name  # no Kaggle a voz fica em models/rvc/vozes/<nome>
         _garantir_voz_no_drive(Path(voz).name)
+    _fish_antes(pasta, env, voz)
     (pasta / "pedido.json").write_text(json.dumps(pedido, ensure_ascii=False, indent=1), encoding="utf-8")
     _rc("copy", str(pasta), f"{FILA}/{pid}", timeout=1800)
     logging.info(f"[kaggle-lote] Short {pid} na fila_shorts — esperando o Kaggle")
@@ -162,7 +232,7 @@ def renderizar(work, video, roteiro, cand, short_kind, env, vf):
             break
         if "pronto.json" in nomes and "video.mp4" in nomes:
             _rc("copyto", f"{FILA}/{pid}/video.mp4", str(vf), timeout=1800)
-            for extra in ("marcas_visuais.json", "_testes_usados.json"):
+            for extra in ("marcas_visuais.json", "_testes_usados.json", "_voz_online.json"):  # 19/11: motor da voz
                 if extra in nomes:
                     _rc("copyto", f"{FILA}/{pid}/{extra}", str(work / extra), timeout=300)
             _rc("purge", f"{FILA}/{pid}", timeout=300)

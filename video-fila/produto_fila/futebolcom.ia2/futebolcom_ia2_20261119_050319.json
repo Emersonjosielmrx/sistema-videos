@@ -1,0 +1,154 @@
+{
+ "conta": "futebolcom.ia2",
+ "produto": "cardapio_digital",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio Digital: pedido sem demora no WhatsApp",
+ "legenda": "Quando a resposta demora, o cliente costuma pedir em outro lugar. Com cardápio digital com fotos, atendimento com IA e pedido pelo WhatsApp, a dúvida é resolvida na hora. 🍔 Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#cardapiodigital #delivery #restaurante #lanchonete #gestaoderestaurante",
+ "roteiro": {
+  "gancho_tela": "Cliente desiste pela demora?",
+  "pergunta_cliente": "Seu cliente desiste de pedir porque demora para responder?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Quando eu demorava a responder o cardápio, o cliente cansava de esperar e pedia no concorrente.",
+    "visual": "apresentador",
+    "prompt_en": "a small Brazilian restaurant counter, tidy and well lit, a customer seen from behind looking at a phone, warm light, realistic commercial photo, no text",
+    "cenario_en": "standing at the tidy, well lit counter of a small Brazilian restaurant",
+    "real_tema": "",
+    "destaques": [
+     "cansava de esperar",
+     "pedia no concorrente"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261119_050418_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Com o cardápio digital, o cliente olha as fotos e tira dúvida com a IA sem esperar.",
+    "visual": "apresentador",
+    "prompt_en": "a customer seen from the side browsing food photos on a smartphone in a bright Brazilian snack bar, warm light, realistic commercial photo, no legible text",
+    "cenario_en": "standing in a clean, tidy, well lit Brazilian snack bar next to an organized counter",
+    "real_tema": "",
+    "destaques": [
+     "olha as fotos",
+     "tira dúvida"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi! Vocês têm opção sem cebola?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Temos sim! Posso te mostrar as fotos das opções."
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode mostrar, por favor."
+     },
+     {
+      "de": "empresa",
+      "texto": "Prontinho! Escolha no cardápio e faça o pedido por aqui."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261119_050418_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261119_050418_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje o pedido sai do cardápio direto para o WhatsApp e eu deixo de perder venda pela demora.",
+    "visual": "apresentador",
+    "prompt_en": "a Brazilian delivery restaurant kitchen pass, tidy and well lit, a staff member from behind preparing a packed order, warm cinematic light, no text",
+    "cenario_en": "standing at a tidy, well lit counter of a Brazilian delivery restaurant",
+    "real_tema": "",
+    "destaques": [
+     "direto para o WhatsApp",
+     "perder venda pela demora"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261119_050418_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261119_050418_1.png"
+   }
+  ],
+  "legenda": "Quando a resposta demora, o cliente costuma pedir em outro lugar. Com cardápio digital com fotos, atendimento com IA e pedido pelo WhatsApp, a dúvida é resolvida na hora. 🍔 Link no perfil.",
+  "titulo": "Cardápio Digital: pedido sem demora no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "atendimento_demorado_perde_ven",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 46,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\futebolcom.ia2_20261119_050319\\dono_3.mp4",
+ "duracao_s": 30.96,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-19T05:31:23",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.46,
+   "fala": "Seu cliente desiste de pedir porque demora para responder?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.46,
+   "fim": 12.29,
+   "fala": "Quando eu demorava a responder o cardápio, o cliente cansava de esperar e pedia no concorrente.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.29,
+   "fim": 19.82,
+   "fala": "Com o cardápio digital, o cliente olha as fotos e tira dúvida com a IA sem esperar.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 19.82,
+   "fim": 27.11,
+   "fala": "Hoje o pedido sai do cardápio direto para o WhatsApp e eu deixo de perder venda pela demora.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.11,
+   "fim": 30.96,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 4.5,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 4.0,
+   "roteiro_marca": 4.0,
+   "diretor": 5.0
+  },
+  "graves": 10,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

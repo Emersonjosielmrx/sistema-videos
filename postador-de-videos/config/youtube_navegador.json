@@ -727,20 +727,6 @@
       "porta": 9838,
       "channel_id": "UCmGAAoh6XRGs0Vz2S2hvARQ",
       "nota": "18/11: canal novo (conta nova phikhanh141173). usar=false até a dona aprovar a 1ª postagem. Chrome = cofre 9838. Conta nova: captcha/confirmação = parar e avisar."
-    },
-    "pordentro": {
-      "usar": true,
-      "nome": "Por Dentro",
-      "handle": "@pordentrobr-d4w",
-      "creds": [
-        "novo_pordentro"
-      ],
-      "email": "duongphuong6983@gmail.com",
-      "perfil": "duongphuong6983",
-      "perfil_existe": false,
-      "porta": 9839,
-      "channel_id": "UCq_n2JGOuagdyC3GHMv0J0w",
-      "nota": "18/11: canal novo (conta nova duongphuong6983). Chrome = cofre 9839. Conta nova: captcha/confirmação = parar e avisar."
     }
   },
   "_leia": "usar=true: politica.postar_youtube sobe esse canal pelo navegador (youtube_web_poster.py) em vez da API. Perfil e porta vem do cofre de logins (D:/logins-google/cofre/contas.json) pelo email; perfil/porta daqui sao antigos."

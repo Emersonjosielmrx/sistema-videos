@@ -158,6 +158,19 @@ def _narradores_por_grupo(t, disponiveis):
     (mulheres e engraçados). Tipo do vídeo sorteado por 'modos' (normalmente só primários). Dentro de cada grupo vai
     primeiro quem foi MENOS usado nos últimos 7 dias (garante 1 vídeo de cada primário/secundário por semana)."""
     g = t["grupos"]
+    # 19/11 dona ("os próximos quero com outros dubladores/narradores top, tipo momo, mike"; Fish é o padrão dos longos):
+    # só entra quem tem referencia_fish no Drive (thomas_shelby/moana/solemsun saíam no clone antigo) e os da lista
+    # 'prioridade_fish' vão na frente do seu grupo. LONGO_SO_FISH=0 desliga.
+    prio = list(t.get("prioridade_fish") or [])
+    if os.environ.get("LONGO_SO_FISH", "1") != "0":
+        try:
+            sys.path.insert(0, str(BIN))
+            import anime_voz_clonada
+            com_ref = anime_voz_clonada._vozes_com_fish()
+            if len(com_ref & set(g.get("primarios", []))) >= 2:
+                disponiveis = {v for v in disponiveis if v in com_ref}
+        except Exception as e:  # noqa: BLE001
+            print(f"lista do Fish ilegível ({type(e).__name__}) — revezamento sem filtro", flush=True)
     limite = (datetime.now() - timedelta(days=7)).strftime("%Y%m%d")
     uso = {}
     for v in t.get("videos") or []:
@@ -168,7 +181,8 @@ def _narradores_por_grupo(t, disponiveis):
     def ordem(grupo, fora=()):
         cand = [v for v in g.get(grupo, []) if v in disponiveis and v not in fora]
         random.shuffle(cand)
-        return sorted(cand, key=lambda v: uso.get(v, 0))
+        # momo/mike (2 primeiros da prioridade) abrem, revezando pelo uso; depois os outros top; depois o resto
+        return sorted(cand, key=lambda v: (v not in prio, v not in prio[:2], uso.get(v, 0)))
 
     modos = g.get("modos") or {"so_primarios": 1}
     modo = random.choices(list(modos), weights=list(modos.values()))[0]
@@ -193,8 +207,8 @@ def _narradores_por_grupo(t, disponiveis):
         escolhidas += ordem("secundarios")[:1] + ordem("terciarios")[:3]
     # 31/10 dona: no máx. 5 narradores (trocas ~4-6); Galvão/Chaves só como participação especial curta
     # (anime_tts.revezar põe 3 frases deles no meio de um bloco) — em 1 de cada 3 vídeos com mais de 1 narrador
-    escolhidas = escolhidas[:5]
-    esp = ordem("participacao_especial", escolhidas)
+    escolhidas = list(dict.fromkeys(escolhidas))[:5]  # 19/11: voz em 2 grupos (mattz) não entra 2 vezes
+    esp =ordem("participacao_especial", escolhidas)
     if modo != "solo" and esp and (modo in ("com_terciarios", "mistura_grande") or random.random() < 0.33):
         escolhidas.append(esp[0])
     print(f"narradores ({modo}): {', '.join(escolhidas)}", flush=True)
@@ -309,6 +323,8 @@ def enviar(work, video, roteiro, titulo, extra=None, pid=None):
                                                         + (_p.get("vozes_crianca") or []) + _m if v]))
     except (OSError, ValueError):
         pass
+    # 19/11 dona: no Kaggle SEMPRE o motor novo — voz sem referência do Fish narra com o narrador do Chris (reserva)
+    pedido["vozes_extra"] = list(dict.fromkeys((pedido.get("vozes_extra") or []) + ["narrador_chris"]))
     exp = _variante_do_experimento()
     if exp:  # 28/10: teste A/B do melhorador_longo (linhas\LONGOS\experimento.json) — A e B se alternam por pedido
         pedido.update(exp)
@@ -1073,6 +1089,23 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
                         (BIN.parent / "config" / "fontes_prioridade.json").read_text(encoding="utf-8"))["videos"]]
                 except (OSError, ValueError, KeyError):
                     prio_lista = []
+            # 19/11 dona ("priorizar vídeos longos que não têm legenda, pois fica muito ruim a tarja branca"): dentro da
+            # lista de prioridade, os SEM legenda queimada (nota 0-1 nas 3 miniaturas do YouTube, fonte_sem_legenda.py,
+            # 15/16 certos no teste) vão na frente; os com legenda continuam, só depois. Ordem estável; série com
+            # "forcar_longo" (Medieval da dona) não perde a frente. Olha no máx. FONTE_LEG_MAX (20) por volta (cache).
+            # FONTE_SEM_LEGENDA_PRIMEIRO=0 desliga.
+            if prio_lista and os.environ.get("FONTE_SEM_LEGENDA_PRIMEIRO", "1") != "0":
+                try:
+                    import fonte_sem_legenda as _fsl
+                    _pend = [v for v in prio_lista if v["id"] not in feitos and v["id"] not in em_fila]
+                    _notas = {v["id"]: _fsl.nota(v["id"])
+                              for v in _pend[:int(os.environ.get("FONTE_LEG_MAX", "20"))]}
+                    prio_lista.sort(key=lambda v: (0 if v.get("forcar_longo") else
+                                                   1 if (_notas.get(v["id"]) is not None and _notas[v["id"]] <= 1) else 2))
+                    print(f"{datetime.now():%H:%M} prioridade: {sum(1 for n in _notas.values() if n is not None and n <= 1)}"
+                          f" sem legenda queimada na frente (de {len(_notas)} olhados)", flush=True)
+                except Exception as ex:  # noqa: BLE001 — nunca trava o alimentador
+                    print(f"seleção sem legenda falhou ({type(ex).__name__}: {ex}) — ordem de antes", flush=True)
             for e in prio_lista + lista:
                 if (e["id"] in feitos or e["id"] in em_fila or e["id"] in est.get("ignorar", [])
                         or est["falhas"].get(e["id"], 0) >= 2):

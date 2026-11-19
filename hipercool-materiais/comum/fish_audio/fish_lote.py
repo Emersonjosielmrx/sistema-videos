@@ -30,6 +30,15 @@ MAX_CHARS = 480
 TRAVA = AQUI / "_em_uso.lock"
 
 
+def _dono_vivo():
+    """19/11 (revisão): o processo que segura a trava ainda existe? Morto (kill/OOM) = a trava é lixo."""
+    try:
+        import psutil
+        return psutil.pid_exists(int(TRAVA.read_text().strip()))
+    except Exception:  # noqa: BLE001 — sem psutil ou trava ilegível: vale só a idade
+        return True
+
+
 def _travar(prazo=600):
     for _ in range(prazo):
         try:
@@ -39,18 +48,23 @@ def _travar(prazo=600):
             return True
         except FileExistsError:
             try:
-                if time.time() - TRAVA.stat().st_mtime > 1800:  # trava velha (processo morto)
+                # trava velha OU de processo morto: antes esperava 10 min por Short antes de cair no p3
+                if time.time() - TRAVA.stat().st_mtime > 1800 or not _dono_vivo():
                     TRAVA.unlink()
                     continue
             except OSError:
                 pass
             time.sleep(1)
+        except OSError:  # PermissionError (trava sendo apagada no Windows): tenta de novo
+            time.sleep(1)
     return False
 
 
 def _soltar():
+    """Só apaga a trava se for DESTE processo (não derruba a de outro)."""
     try:
-        TRAVA.unlink()
+        if TRAVA.read_text().strip() == str(os.getpid()):
+            TRAVA.unlink()
     except OSError:
         pass
 
@@ -70,6 +84,11 @@ def _palavras(feitos, textos, log):
     """Sidecar <wav>.words.json [[ini, fim, palavra]] (formato do edge_tts_engine). Whisper 'small' na CPU (~1 s por
     frase curta); as palavras são as do ROTEIRO, casadas por ordem com os tempos. Contagem diferente = sem sidecar
     (a legenda estima pelo tamanho, como faz com o Kokoro sem tempos)."""
+    # 19/11: no PC1 com CPU a 100% o Whisper levou 75 min pra 3 frases (Short MdZJXqdBIXM) e travou a produção.
+    # FISH_TEMPOS=0 pula aqui (o Short que vai pro Kaggle mede lá, na GPU: anime_segments._tempos_fish).
+    if os.environ.get("FISH_TEMPOS", "1") == "0":
+        log("[fish] tempos das palavras ficam pro Kaggle (GPU)")
+        return
     m = None
     for tentativa in (1, 2):  # 19/11: RuntimeError de memória momentânea no PC1 — 1 nova tentativa, com menos threads
         try:
@@ -103,6 +122,25 @@ def _palavras(feitos, textos, log):
         except Exception as e:  # noqa: BLE001
             log(f"[fish] tempos da frase {i}: {type(e).__name__}")
     log(f"[fish] tempos por palavra: {ok}/{len(feitos)} frases")
+
+
+def _colher(voz, feitos, textos):
+    """19/11 dona: referência de personagem NUNCA gastando crédito — guarda as falas que os Shorts JÁ geraram no Fish
+    (colheita\\<id da voz>\\) e o colher_referencias.py monta a referencia_fish dela a partir daí. Máx. 30 por voz."""
+    try:
+        import shutil
+        pasta = AQUI / "colheita" / str(voz)
+        pasta.mkdir(parents=True, exist_ok=True)
+        if len(list(pasta.glob("*.wav"))) >= 30:
+            return
+        for i, wav in feitos.items():
+            nome = f"{int(time.time())}_{i}"
+            shutil.copyfile(wav, pasta / f"{nome}.wav")
+            (pasta / f"{nome}.txt").write_text(textos[i], encoding="utf-8")
+        import colher_referencias  # >= 8 s colhidos de um personagem: monta a referência do Kaggle e sobe (grátis)
+        colher_referencias.montar(str(voz))
+    except Exception:  # noqa: BLE001 — colheita é extra, nunca atrapalha o Short
+        pass
 
 
 def disponivel():
@@ -150,6 +188,7 @@ def gerar(frases, log=print, voz=None):
                 feitos[i] = wav
         if feitos:
             _palavras(feitos, {i: t for i, t, _ in frases}, log)
+            _colher(voz, feitos, {i: t for i, t, _ in frases})
         log(f"[fish] {len(feitos)}/{len(frases)} frases online em {time.time() - t0:.0f}s")
         return feitos
     except Exception as e:  # noqa: BLE001

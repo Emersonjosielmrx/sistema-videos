@@ -1,5 +1,32 @@
 # LONGOS — estado (atualizar a cada ciclo; mais novo em cima)
 
+## 19/11 14h10 — claude-8f ASSUMIU A CENTRAL (dona: "você mesmo pode fazer")
+- Feito: kaggle_trabalhador da central S_POR_FRASE 24 -> 32 (backup .bak_19nov_fish_tempo). Pendente: _voz_online.json
+  nos extras do Short (abaixo) — próximo passo.
+
+## 19/11 13h50 — LONGO FISH PERDIDO NO FIM DA SESSÃO (para quem cuida da central)
+- 46LkpAILgrQ ("I Got a Girlfriend Abroad...", Momo/Mike/iki/guugou/mangáticos, 100% Fish) ficou PRONTO às 15:56
+  UTC (final 79 min, 1080p) na rezaulkarimul355, mas o kernel (lançado 04:10) foi cancelado (cancel_acknowledged =
+  limite de 12 h) ANTES de subir o vídeo. Recomeçou do zero em outra conta.
+- Medido: 758 frases em ~6 h (09:48 -> 15:56) = ~29 s/frase com Fish (Fish 2 h + legenda 1h40). O cabe_na_sessao usa
+  24 s/frase -> errou. PEDIDO: TRAB_S_POR_FRASE ~30 nos longos Fish, e/ou não pegar longo de 700+ frases depois de ~4 h
+  de sessão. Também: subir o vídeo assim que sair o PRONTO (antes de cortes/extras) pra não perder no corte.
+
+## 19/11 12h50 — PARA QUEM CUIDA DA CENTRAL DO KAGGLE (claude-5f fechou)
+- 1º longo com Fish PÚBLICO no Fio da Meada: https://youtu.be/WEmcyeDuSxc (Jjd71, porão/iki/mangáticos no Fish).
+- 2º longo Fish ("I Got a Girlfriend Abroad...", rezaulkarimul355, kernel lançado 04:10 UTC) em 95% "legenda na tela"
+  desde ~10:40 BRT — 1º ficou ~1 h nessa etapa. Conferir se travou ANTES de derrubar.
+- CÓDIGO NOVO no Drive do Kaggle desde 09:37 (montar_pacote --codigo): fx_subtitles/anime_segments/anime_captions —
+  legenda some durante o SFX que toca antes da voz (Fish não grava words.json). LEGENDA_ESCONDE_NO_SFX=0 desliga.
+  Se algum longo falhar na etapa da legenda, suspeitar disso primeiro.
+- Revezamento dos longos só com narrador que tem referencia_fish (momo, mike primeiro; LONGO_SO_FISH=0 desliga).
+- Alimentador: vídeos SEM legenda queimada na frente da prioridade (colab\fonte_sem_legenda.py;
+  FONTE_SEM_LEGENDA_PRIMEIRO=0 desliga).
+- PEDIDO (13h20): no kaggle_trabalhador da CENTRAL (/opt/recap_central, 1450 linhas — diferente do PC1, 1371), na
+  linha `for extra in ("marcas_visuais.json", "_testes_usados.json"):` do Short (~l.790), acrescentar
+  "_voz_online.json" — o PC1 (lote_shorts_kaggle + anime_publish._motor_voz) já traz e grava postar.json "motor_voz"
+  (frases no Fish x total). Feito só no PC1; NÃO copiei pra central (é sua).
+
 ## 28/10 22h — feito à tarde/noite (tudo no pacote do Kaggle; nenhum longo saiu ainda: GPU sem cota)
 - Efeitos: lista em EFEITOS_LISTA_DONA.md (17 feitos, ~+35% só CPU). Brilho e paralaxe 2.5D "5x menos" (só momentos-
   chave). Glitch corrigido (ia nos trechos normais). H.264 no download conferido (398 AV1 → 136 avc1).

@@ -2268,3 +2268,158 @@
 - prova: e53948 cena 5 (11.2%) e cena 6 (10.8%); db9a3a q08 21.7%. Mesma queixa em 2 Shorts, mas com notas de movimento 8–9, então é leve.
 - onde: Seleção/corte de cena e punch-in (provável cortes_cenas / montagem), com o limite de movimento por cena
 - como testar: Para cena com movimento <12%, aplicar zoom-in leve ou trocar a tomada por outra do mesmo trecho. Medir se o movimento mediano sobe sem piorar a nota de história. Fazer 1 teste por vez, depois da regra de gancho.
+
+## 19/11 04:04 PROPOSTA [GOSTO] Afastar a legenda palavra a palavra do rosto em close (gemini-4-argon)
+- prova: ae220f q02: 'DOS SEGUIDORES', 'ANOS' e 'RARA' ficam sobre o rosto do apresentador. 8630cd q10: 'NINGUÉM ESPERAVA' cobre o rosto do criador no pico da reação de surpresa. O júri marcou os dois como 'grave'. Falta confirmar no roteiro.txt e nos quadros que a legenda estava mesmo na altura do rosto.
+- onde: Módulo que renderiza a legenda palavra a palavra (posição vertical, provavelmente ASS/drawtext no render da linha CORTES). Se houver detecção de rosto na visão, usá-la para decidir a altura.
+- como testar: Em um lote de 10 Shorts, deslocar a legenda para o terço inferior (ou para o lado) só nas cenas em que a visão acusar rosto grande no centro. Depois comparar a nota de legibilidade/retenção e o % assistido contra o lote anterior. Respeitar a preferência da dona (palavras de impacto maiores, de lado) e a zona segura. Não mexer em tarja nem em cobertura.
+
+## 19/11 04:04 PROPOSTA [GOSTO] Conferir se o gancho do título aparece nos primeiros 1,5 s (gemini-4-argon)
+- prova: bbcf8f q01: o gancho visual mostra só 'EDIFÍCIO' em rosa, enquanto o título é muito mais forte. a69410 q01: o início é confuso (bolo de cabeça para baixo sem contexto). ae220f q02: palavras soltas, sem impacto. As causas diferem, então ainda não é padrão.
+- onde: Montagem dos primeiros 1,5 s no render (escolha da 1ª tomada e da 1ª palavra da legenda) e o roteiro.txt dos 3 Shorts.
+- como testar: Antes de qualquer mudança, abrir o roteiro.txt dos 3 Shorts e ver se a 1ª frase é pergunta ou gancho. Se for fraca em pelo menos 2 deles, voltar no próximo lote com UMA regra de roteiro de gancho. Hoje não há prova suficiente.
+
+## 19/11 05:18 PROPOSTA [CERTEZA] Legenda palavra a palavra aparece cortada na base do quadro (gemini-4-argon)
+- prova: ee7d84 q02 ("ciência já conseq..." cortada) e q03 ("não consegue" colada na margem). nano-machine q02 ("nave para voltar"), q03 ("no mesmo nível,") e q12 ("e essa treta"), todas com as letras cortadas horizontalmente. São 2 Shorts e 5 quadros. O júri às vezes vê animação de entrada da palavra como corte, então é preciso confirmar no quadro em resolução cheia antes de corrigir.
+- onde: Função que renderiza a legenda palavra a palavra (margem vertical inferior / posição y e altura da caixa da fonte), mais a camada de overlay de status que pode estar sobre a legenda no nano-machine.
+- como testar: Extrair os quadros q02, q03 e q12 desses 2 Shorts em >= 720 px e medir a caixa das letras. Confirmar se o limite inferior passa de y=1580 (zona segura do aprendiz) ou se algum overlay cobre o topo das letras. Usar como controle 3 Shorts do dia sem o problema. Se confirmar, subir a margem inferior e re-renderizar os 2 Shorts como teste.
+
+## 19/11 05:18 PROPOSTA [CERTEZA] Conferir se o título do nano-machine traz o nome da obra (gemini-4-argon)
+- prova: nano-machine q07: a tarja amarela superior mostra "...MACHINE E BUSCA VINGANÇA", e a regra fixa diz título SEM o nome da obra. O texto visto está truncado e é só 1 Short, então a prova é parcial. Também no q01 a legenda aparece cortada ("UMA PORTA CO...") com um adesivo rosa "FALA" no gancho.
+- onde: Título gravado no metadado/roteiro do Short nano-machine e o filtro que remove o nome da obra do título (geração de título de SEO).
+- como testar: Ler o título final salvo desse Short. Se tiver "NANO MACHINE" (ou parte), verificar por que o filtro do nome da obra não pegou e testar com 3 obras de nome composto. Se o título for limpo, descartar. Confirmar também se o adesivo "FALA" vem da fonte ou do nosso pipeline.
+
+## 19/11 05:18 PROPOSTA [GOSTO] Filme Noturno tem a pior retenção entre os canais de cortes e nenhum Short no júri deste lote (gemini-4-argon)
+- prova: Brief central: Filme Noturno com 37.2% assistido e views48 mediana 201.5, contra Esporte Noturno com 69.7% e Inovare com 67.8%. Nenhum dos 4 Shorts julgados é desse canal, então não há quadro nem nota que explique a queda.
+- onde: Seleção de amostra do júri (cortes_juri) e o gancho dos primeiros 1,5 s dos Shorts de filme.
+- como testar: Rodar o júri e a folha do topo (folha_topo.py) nos Shorts de Filme Noturno das últimas 48 h. Comparar o gancho e o % assistido com os de Esporte Noturno. Só propor regra de roteiro se o mesmo defeito aparecer em >= 2 Shorts.
+
+## 19/11 06:26 PROPOSTA [CERTEZA] Texto da legenda, da tarja de gancho e dos cards cortado nas bordas da tela (gemini-4-argon)
+- prova: 4 de 4 Shorts do júri: 6c58b9 q03 e q04 (nome 'JPMorgan Chase & Co.' cortado nas laterais), the-devil-laughed q02 ('ESSE CABEÇA-DUR[A]', palavra composta longa) e q16 (balão na margem), 3b2771 q05 (texto saindo pela borda inferior), b7242b q09 ('ALERTA PER' com o P cortado). Não é fala cortada no fim: é largura do texto passando do quadro, em qualquer ponto do Short.
+- onde: Módulo que desenha a legenda palavra a palavra, a tarja de gancho do topo e os cards ALERTA (drawtext/ASS/PNG). Procurar onde o tamanho da fonte e a largura da caixa são calculados, provavelmente em cortes_render ou equivalente.
+- como testar: Antes de mudar, rodar D:\tmp\folha_topo.py na folha do 1,5 s de TODOS os Shorts do dia, porque o júri vê 1 em 4 e quadros soltos podem pegar a animação no meio. Medir a caixa do texto: o que passar de x 60-1020 é defeito. A correção é reduzir a fonte ou quebrar a linha até caber na margem de 60 px, só nos casos que estouram. Conferir de novo na folha de quadros e com um nome longo (JPMORGAN CHASE & CO., CABEÇA-DURA).
+
+## 19/11 06:26 PROPOSTA [GOSTO] Legenda grande cobrindo o rosto ou a ação principal (gemini-4-argon)
+- prova: b7242b q01 (legenda amarela 'CARA' sobre o rosto) e q08 ('FILHO' cortando o rosto do ator); the-devil-laughed q11 ('VITÓRIA! BICHO' sobre a criatura); 6c58b9 q05 (texto sobre o logo da Tesla).
+- onde: Posicionamento vertical da legenda palavra a palavra no módulo de render. A preferência da dona é palavras de impacto maiores e de lado, não faixa preta.
+- como testar: Testar UMA variação só: subir ou descer a legenda quando um detector de rosto achar rosto na faixa dela. Rodar em 10 Shorts com rosto em primeiro plano e comparar a nota média do júri e o % assistido antes de ligar. Se a nota piorar, desfaz.
+
+## 19/11 07:37 PROPOSTA [CERTEZA] Medir a faixa inferior em todos os Shorts do dia antes de mexer em tarja ou cobertura (gemini-4-argon)
+- prova: 537a36 q04 (texto em inglês embaixo, cortado abaixo de y=1580), 0261a7 q06 e q16 (legenda estática da fonte colidindo com a nossa), 78a593 q11 (tarja inferior metade borrada). São 3 de 4 Shorts, mas a causa não está provada.
+- onde: cortes_juri / D:\tmp\folha_topo.py (versão para a faixa inferior, y 1300-1700, em ~1,5 s e ~50% do vídeo); logs '[hardsub]' de cada Short
+- como testar: Gerar a folha da base de todos os Shorts do dia e cruzar com o log de cada um. Se houver legenda queimada lida e a tarja não cobrir as letras (tarja menor que a legenda), é bug de medição da caixa, em resolução ≥ 720 px. Se o texto for rótulo da fonte e não legenda, é caso de regra de roteiro/título ou de ignorar. Só depois decidir se tarja_largura_max ou tarja_letra entram.
+
+## 19/11 07:37 PROPOSTA [CERTEZA] Conferir no roteiro.txt e na legenda gerada se 'use a planejadora', 'ampe' e 'DESCOBRE DESCOBRE' vêm do roteiro (gemini-4-argon)
+- prova: 78a593 q04, q08 e q17: a legenda na tela diverge da fala descrita pelo júri ('será que você realmente precisa de crédito?', 'FAMPE'). Só 1 Short, então ainda não é padrão.
+- onde: roteiro.txt e arquivo de palavras com tempo do 78a593; função que casa as palavras com o áudio, em cortes_legenda
+- como testar: Diff entre roteiro.txt e as palavras renderizadas. Se o roteiro tem o erro, vale regra de roteiro, mas só se repetir em outro Short do lote. Se só a legenda diverge, é bug de tokenização (sigla FAMPE quebrada, palavra repetida) e vira conserto de código.
+
+## 19/11 07:37 PROPOSTA [GOSTO] Checar se 'ESQUECED' e 'PODE' no q01 são quadro no meio da animação da palavra (gemini-4-argon)
+- prova: 537a36 q01 ('ESQUECED' truncado) e 78a593 q01 ('PODE' isolada). Os dois aparecem no primeiro quadro amostrado, onde a palavra pode estar entrando em animação; não há prova de que o vídeo final tenha a palavra cortada.
+- onde: renderização da legenda palavra a palavra, no tempo de entrada da primeira palavra
+- como testar: Extrair os quadros 0, 3, 6 e 12 do início de 537a36 e 78a593. Se a palavra aparece inteira logo em seguida, é artefato da amostragem do júri e nada muda. Se ficar truncada por mais de ~0,2 s, corrigir o tempo de entrada da primeira palavra.
+
+## 19/11 08:46 PROPOSTA [CERTEZA] O @ e os cartões fixos não podem cair na mesma faixa que a legenda palavra a palavra (cc-sobra)
+- prova: a5d1ab q14: '@empresariointeligenteia' dentro do balão 'PRÁTICO' (legibilidade grave). c0e66d q17/q18: 'CAPÍTULO NOVO JÁ NA CINEFY' embolado com 'QUANDO'/'ACREDITAR', virando 'JÁ NQUANDO' (grave em legibilidade e história). São 2 Shorts.
+- onde: Montagem da legenda e dos textos fixos (@ e cartões) no render dos CORTES: a função que posiciona a legenda e a que desenha o @ e os cartões; agente/cortes_agente.py ou o módulo de render que ele chama.
+- como testar: Antes de queimar, calcular a caixa (bbox) da legenda e a de cada texto fixo. Se elas se cruzarem, subir a legenda acima do cartão ou trocar o @ de canto. Renderizar de novo o a5d1ab e o c0e66d e tirar a folha de quadros nos tempos q14 e q17: nada pode estar por cima de nada. Conferir também se 'CINEFY' é produto nosso. Se for, a regra da dona vale: só no meio e só nas cópias TikTok/Insta, nunca no fim nem no YouTube.
+
+## 19/11 08:46 PROPOSTA [CERTEZA] Palavra fantasma ou duplicada na troca de palavra da legenda (cc-sobra)
+- prova: a5d1ab q05: borrão/tarja vazia sob 'FAZ'. 55d84b q09: 'NINGUÉM' duas vezes, em amarelo e em vermelho. c0e66d q01: texto do topo duplicado ('MAR CONGELADO' sobreposto). São 3 Shorts.
+- onde: Animação da legenda palavra a palavra (o fade de saída da palavra anterior e a camada de 'palavra de impacto').
+- como testar: Primeiro confirmar se o 'NINGUÉM' duplo é o estilo que a dona pediu (palavra de impacto maior, de lado). Se for, não é defeito. Depois tirar quadros a cada 40 ms em volta de 3 trocas de palavra do a5d1ab. Em nenhum quadro duas palavras da legenda podem aparecer juntas, nem pode ficar uma caixa vazia ou borrada.
+
+## 19/11 08:46 PROPOSTA [CERTEZA] Regras 4 e 7 do APRENDIDO.md contradizem a dona: barrar nas DECISOES_DONO (cc-sobra)
+- prova: A regra 4 do aprendiz manda 'cobrir integralmente legendas e textos nativos com tarja preta semitransparente ou fundo sólido'. A dona proíbe isso: tarja só sobre legenda queimada e do tamanho exato. A regra 7 manda 'tarja de alto impacto' no gancho, e a dona não gostou da barra preta com frase (lição de 27/10).
+- onde: cortes_juri (filtro DECISOES_DONO) aplicado ao APRENDIDO.md
+- como testar: Passar o APRENDIDO atual pelo filtro. As regras 4 e 7 têm de sair marcadas como bloqueadas, e nenhuma mudança do pipeline pode citar essas duas.
+
+## 19/11 09:56 PROPOSTA [GOSTO] Tirar a legenda palavra a palavra de cima do rosto (cc-sobra)
+- prova: 97e5af q02 ('DE ATITUDE' tapa a expressão do personagem principal bem no gancho, retenção 6.0) e q11 ('O QUE' em cima do rosto na virada). 2b801e q01-q02: a faixa amarela atravessa rosto e olhos (legibilidade 4.0). São 2 Shorts.
+- onde: parte do pipeline que desenha a legenda e escolhe a altura (y) dela. Detectar o rosto nos quadros da cena e, se a caixa da legenda bater no rosto, descer ou subir a legenda dentro da zona segura, sem encostar na tarja.
+- como testar: Refazer 97e5af e 2b801e e gerar a folha de quadros antes e depois (q02, q11, q01-q04). Controle: 1 Short sem rosto na área da legenda tem de sair igual. Depois comparar a nota de retenção e o % assistido em 48 h de 10 Shorts com a mudança contra 10 sem.
+
+## 19/11 09:56 PROPOSTA [GOSTO] Cena parada (menos de 15% de movimento): aproximação leve ou cena mais curta (cc-sobra)
+- prova: b9c70c cena 3 com 11,5% (q07, q09, plano aberto parado no meio do vídeo) e cena 6 com 13,6% (q16, q18). 2fdc85 cenas 2 e 6 com 7,7% e 8,1% (q04, q16). 2b801e cena 5 com 12,0%, o mesmo rosto em q13, q14 e q15. São 3 Shorts, e em todos o júri tirou ponto de movimento ou retenção.
+- onde: parte do pipeline que monta as cenas (onde já se mede o movimento por cena). Quando a cena tiver menos de 15%, aplicar uma aproximação lenta (cerca de 4-6%) ou cortar a cena pela metade para trocar de tomada no ritmo da fala.
+- como testar: Teste A/B: metade dos Shorts do dia com a mudança. Medir o % assistido mediano das 48 h (hoje 53,0) e a nota de movimento e retenção do júri. Se o % assistido não subir, desfazer.
+
+## 19/11 09:56 PROPOSTA [CERTEZA] Conferir 2b801e: legenda da fonte à mostra e 'link no perfil' na tela (cc-sobra)
+- prova: Só 1 Short (2b801e), por isso não é padrão: é só para conferir. q01: o júri diz que a faixa central 'sobrepõe e corta o texto em inglês/coreano da fonte', ou seja, pode ter legenda queimada sem tarja por baixo. q16: 'link no perfil' e logos (Cinefy, 'ALERTA MONSTRO') na tela, o que vai contra a regra fixa de nada de link ou @ na tela.
+- onde: log do Short 2b801e: procurar a linha [hardsub], a quantidade de quadros onde a visão leu legenda e a faixa medida. Também o trecho final do vídeo do parceiro (pode ser o CTA dele, e não a nossa camada).
+- como testar: Gerar a folha de quadros de q01 e q16 em 720 px ou mais. Se o log mostrar menos de 2 de 6 quadros com legenda, ou uma faixa no lugar errado, refazer com a faixa medida pelo tamanho das letras. Se 'link no perfil' vier da fonte, cortar o CTA final do parceiro ou cobrir só aquele texto. Rodar a folha do topo/fim nos Shorts do dia desse canal para ver se o problema se repete.
+
+## 19/11 11:07 PROPOSTA [GOSTO] Medir a posição real da legenda palavra a palavra na zona segura inferior (gemini-4-argon)
+- prova: 68f31d q03 ('legenda inferior cortada na linha inferior da tela') e q08 ('BOTAR' baixa); 9af107 q03 ('FUNDO' quase na borda inferior). São 2 Shorts do lote, mas o júri vê quadros soltos e já errou com legenda antes.
+- onde: Módulo de render da legenda palavra a palavra (procurar a margem inferior / posição Y da legenda no render do Short). Não localizei o arquivo exato.
+- como testar: Gerar a folha de quadros em 1080x1920 dos 3 Shorts citados e medir com régua em pixels o fundo das letras. Se a base passar de y≈1580 (ou colar na borda), subir a posição Y alguns px e comparar. Se estiver dentro da zona segura, descartar: foi erro do júri.
+
+## 19/11 11:07 PROPOSTA [CERTEZA] Conferir se o título da tarja de gancho quebra ou corta palavras longas (gemini-4-argon)
+- prova: 68f31d q02: tarja 'CARNES REJEITADAS MAS O BOFE' corta a palavra 'REJEITADAS'. leonardo-da-vinci q01: 'DA VINCI' aparece dividido/cortado. Dois Shorts, mesmo tipo de defeito.
+- onde: Função que desenha a tarja de gancho/título no topo (procurar drawtext/quebra de linha/largura máxima do título). Não localizei o arquivo exato.
+- como testar: Renderizar o título dos dois Shorts e de 3 títulos longos de teste (palavra ≥ 10 letras) e olhar o quadro do 1,5 s (folha do TOPO, D:\tmp\folha_topo.py). Corrigir se a quebra for no meio da palavra ou se o texto passar da largura da tarja. Quebra deve ser só entre palavras, com fonte reduzida se precisar.
+
+## 19/11 11:07 PROPOSTA [CERTEZA] Não aplicar do APRENDIZ as regras 3, 22 e a parte de 'fundo sólido' sem passar pelas DECISOES_DONO (gemini-4-argon)
+- prova: A regra 3 do APRENDIZ ('cobrir legendas e textos nativos com fundo sólido ou tarja preta') contradiz a regra fixa da dona: tarja SÓ quando há legenda queimada e do TAMANHO EXATO. A regra 22 é só 'Sim', lixo de parsing da resposta. A regra 1 ('banir tarjas sobre o rosto') também ignora que a tarja segue a posição da legenda da fonte.
+- onde: cortes_juri (filtro APRENDIZ → DECISOES_DONO) e o parser que escreve o APRENDIZ.md.
+- como testar: Rodar o filtro com o APRENDIZ de 19/11 10:35 e conferir que a 3 e a 22 são barradas. Adicionar validação mínima (rejeitar regra com menos de ~15 caracteres ou sem verbo).
+
+## 19/11 11:07 PROPOSTA [GOSTO] Avaliar mudanças de alavanca por views/% assistido e não só pela nota do júri (gemini-4-argon)
+- prova: Em 13–15/11 a mesma regra de roteiro foi 'mantida' (4.25→4.88) e depois 'desfeita' (5.54→4.87) em horas, e o júri vê 1 em 4 Shorts. A nota do júri ficou ruidosa demais para decidir desfazer.
+- onde: Lógica de 'mantida/desfeita' no melhorador central (comparação de nota média antes/depois).
+- como testar: Exigir amostra mínima de Shorts julgados (por exemplo ≥ 12) e usar o % assistido mediano dos elegíveis como segunda prova. Só desfazer se as duas piorarem. Simular com o histórico das 7 mudanças acima.
+
+## 19/11 12:15 PROPOSTA [CERTEZA] Legenda palavra a palavra estoura a margem lateral (texto cortado) (gemini-4-argon)
+- prova: 64b197 q07 ('WAKU WAKU' encostando nas bordas) e q16 ('DO QUE O BARBEIRO' cortado à esquerda); 916bd5 q17 (texto cortado dos dois lados). Aparece em 2 Shorts com palavras ou blocos longos em fonte grande.
+- onde: Função que calcula tamanho da fonte, quebra e posição da legenda palavra a palavra (módulo de legenda da linha CORTES; arquivo exato não verificado).
+- como testar: Medir a largura real do texto renderizado de cada bloco e reduzir a fonte (ou quebrar em 2 linhas) até caber em 1080 − 2×60 px. Regerar 64b197 e 916bd5, tirar a folha de quadros em ≥720 px e conferir q07, q16 e q17. Usar como controle um Short que já saiu sem corte.
+
+## 19/11 12:15 PROPOSTA [CERTEZA] Eventos de legenda sobrepostos no mesmo instante (palavras duplicadas/empilhadas) (gemini-4-argon)
+- prova: cb51fb q09 ('NINGUÉM' duplicado sobre o peixe) e q10 (4 trechos juntos); 8bb2a1 q09 ('MAS' sobre 'milhares') e q18 ('RESOLVEU / resolveu' na transição do loop). Antes de agir, confirmar que não é o júri juntando pedaços de quadros soltos (lição de 28/10). O loop em si é intencional; só importa se o trecho do fim e o do começo aparecem sobrepostos na mesma tela.
+- onde: Geração do arquivo de legenda (ASS/eventos com início e fim) e a emenda do fim com o começo do loop.
+- como testar: Listar os eventos de legenda de cb51fb e 8bb2a1 e checar se há 2 ou mais ativos no tempo dos quadros q09/q10/q18. Se houver, forçar o fim de cada evento no início do próximo e conferir de novo os mesmos quadros.
+
+## 19/11 13:28 PROPOSTA [CERTEZA] Evitar a mesma palavra duas vezes ao mesmo tempo (legenda palavra a palavra + palavra de impacto) (gemini-4-argon)
+- prova: b2d2f0 q16: 'FUGIU' duplicado e sobreposto, ilegível. a1fa1a q16: 'SURPREENDENTE' grande em amarelo com uma cópia menor de borda branca logo abaixo. Dois Shorts, o mesmo quadro final. A dona prefere palavras de impacto maiores, então a cópia a cortar é a pequena, não a grande.
+- onde: Montagem da legenda (geração do .ass ou camadas de texto). Provável: função que desenha a palavra de impacto junto da legenda palavra a palavra. Não consegui confirmar o nome exato do arquivo.
+- como testar: Abrir o quadro q16 dos dois Shorts em resolução cheia antes de mexer (o júri já juntou pedaços de legenda em quadros soltos). Se a duplicata for real, suprimir a legenda pequena enquanto a palavra de impacto igual estiver na tela. Reprocessar os dois Shorts e conferir que só uma instância aparece.
+
+## 19/11 13:28 PROPOSTA [CERTEZA] Conferir por que caixas e legendas ficam cortadas ou coladas na borda (gemini-4-argon)
+- prova: b2d2f0 q04: caixa preta 'LOCAL FLO' cortada embaixo. b2d2f0 q16: caixa 'RASTREANDO...' cortada na lateral direita. a1fa1a q08: legenda 'alguns minutos' na borda inferior. 37f09b q03: 'GALARIANG' quase invadindo a lateral. Quatro ocorrências em 3 dos 4 Shorts.
+- onde: Posicionamento da legenda e dos overlays (margem segura). Antes, checar se a caixa 'LOCAL ...' é do vídeo da fonte cortada pelo nosso crop ou é nossa. Se for da fonte, NÃO cobrir com tarja: a regra fixa é tarja só sobre legenda queimada, do tamanho exato.
+- como testar: Abrir o vídeo original e comparar com o Short. Se a caixa for nossa, forçar a legenda e os overlays a ficarem dentro de x 60 a 1020 e y 150 a 1580. Se for da fonte, abrir proposta separada sobre o enquadramento. Medir em 4 Shorts novos se o júri para de acusar corte de borda.
+
+## 19/11 13:28 PROPOSTA [CERTEZA] Validar texto da tela contra palavras coladas (tipo 'OQUE') (gemini-4-argon)
+- prova: a1fa1a q05 mostra 'OQUE ELE FEZ!' em texto grande central. Apareceu em 1 Short, mas é erro de português objetivo, e já existe regra de título contra palavra colada, que a IA não está cumprindo.
+- onde: Validação de título e gancho antes de queimar o texto (função que confere o título, como a checagem de palavra colada de 26/10). Acrescentar uma lista pequena de contrações coladas conhecidas ('OQUE', 'UMERRO', 'PORQUE' fora de contexto) e regerar o texto se achar.
+- como testar: Conferir primeiro no roteiro.txt e no log do Short se 'OQUE' veio do gancho. Depois rodar a validação sobre os títulos e ganchos dos últimos 7 dias e contar quantos seriam barrados, sem falso positivo.
+
+## 19/11 13:28 PROPOSTA [GOSTO] Zoom/punch-in leve em cenas com movimento medido baixo, só depois de corrigir o júri (gemini-4-argon)
+- prova: Cena do meio ou do fim com 8.4% a 13.5% de movimento nos 4 Shorts. Mas o júri chama isso de 'abaixo de 4%', então o limiar do prompt dele está inconsistente. Sem esse conserto não dá para saber se é defeito.
+- onde: Prompt do júri de movimento (cortes_juri) e o passo de montagem que aplica zoom/pan por cena.
+- como testar: 1) Corrigir o limiar do júri. 2) Só então testar 1 regra: punch-in suave nas cenas abaixo do limiar, em metade dos Shorts do dia, e comparar % assistido mediano. Máximo de 1 mudança por vez.
+
+## 19/11 13:28 PROPOSTA [CERTEZA] Regras 3 e 17 do APRENDIDO.md conflitam com as regras fixas da dona (gemini-4-argon)
+- prova: A regra 3 manda cobrir 'legendas e textos nativos' com fundo sólido ou tarja preta limpa, e a 17 fala em banir tarjas coloridas. As regras fixas dizem tarja só sobre legenda queimada e do tamanho exato. A regra 5 (uma palavra por vez) briga com a preferência da dona por palavras de impacto maiores e com cores por personagem.
+- onde: APRENDIDO.md e a checagem das DECISOES_DONO em cortes_juri.
+- como testar: Passar as regras 3, 5 e 17 pelas DECISOES_DONO. Se conflitarem, marcar como descartadas e não repassar à sessão que aplica no pipeline.
+
+## 19/11 14:35 PROPOSTA [CERTEZA] Legenda palavra a palavra sobrepondo ou cortando palavras (gemini-4-argon)
+- prova: sem-obra-63d15f q04: 'alé ELAS O' com a palavra anterior espremida sob a seguinte. somebody-that-i-used-to-know q07: texto inferior duplicado ('fai na m... e foi na música'). Como a legenda é o texto do roteiro, a causa provável é a renderização, não o roteiro. Em somebody, o texto de baixo pode ser a legenda da fonte, então precisa do log.
+- onde: Módulo que monta os eventos da legenda palavra a palavra (ASS/drawtext). Localizar por grep de 'karaok' ou 'palavra' em D:\video-fila\linhas\CORTES. Não consegui confirmar o nome exato da função.
+- como testar: Reler o .ass/eventos gerados dos dois Shorts e procurar eventos com tempos sobrepostos para palavras consecutivas. No somebody, conferir antes no log se há '[hardsub] só 0/6' (tarja faltando). Se houver, é defeito de tarja e não de legenda. Depois rerenderizar os dois e comparar os mesmos quadros (q04, q07).
+
+## 19/11 14:35 PROPOSTA [GOSTO] Palavra/tarja de impacto cobrindo rosto ou ação principal (gemini-4-argon)
+- prova: 0f824b q06 (RIGBY sobre o rosto da Bluey) e q16 (POR QUÊ sobre a expressão da cabeça na privada); somebody q01 (tarja amarela 'ESSA MÚSICA' sobre os olhos do apresentador) e q03 (INTEIRO na linha dos olhos); 901fd0 q01 (tarja vermelha 'MESTRE' cobrindo a ação). A dona prefere palavras de impacto maiores e de lado (27/10).
+- onde: Posição vertical/horizontal da palavra de impacto na montagem da legenda (mesmo módulo da proposta 1). Não é alavanca permitida.
+- como testar: Gerar a folha do TOPO (D:\tmp\folha_topo.py) no 1,5 s de todos os Shorts do dia e medir quantos têm palavra sobre a região do rosto. Testar a 1 regra só: palavras de impacto deslocadas para o terço lateral/inferior, sem mexer no tamanho da tarja da fonte. Medir a nota média por lote antes de manter.
+
+## 19/11 14:35 PROPOSTA [CERTEZA] Conferir no log se a legenda da fonte ficou à mostra em somebody-that-i-used-to-know (gemini-4-argon)
+- prova: q13 mostra 'ganhou o processo' na legenda inferior enquanto o roteiro diz 'acabou processado por plágio e teve que pagar uma fortuna'. A frase do júri não bate com o roteiro, então o texto inferior provavelmente é a legenda queimada da fonte e não a nossa.
+- onde: log do Short somebody-that-i-used-to-know_cap1_20261113 (linha '[hardsub]') e roteiro.txt.
+- como testar: Ler o roteiro.txt e o log. Se o roteiro disser 'processado' e o log disser que a visão não leu legenda, é defeito de tarja ausente (CERTEZA). Se o log leu a legenda e a tarja foi aplicada, descartar como erro do júri.
+
+## 19/11 14:35 PROPOSTA [CERTEZA] Júri aponta 'cena estática' com movimento de 12–20%, acima do limiar de 4% (gemini-4-argon)
+- prova: 0f824b q05 (20.3%) e q14 (17.3%), somebody q04 (21.2%), q10 (12.4%) e q15 (17.0%), 63d15f q16 (16.4%) e 901fd0 q13 (16.8%) foram anotados como estáticos, e o texto cita o limiar de 4%. Cada nota contradiz o próprio número.
+- onde: Prompt/limiar do júri de movimento em cortes_juri.
+- como testar: Reexecutar o júri de movimento nesses Shorts e só aceitar a nota 'estático' quando o movimento medido ficar abaixo do limiar. Conferir se a nota média de movimento sobe sem mudar o vídeo.

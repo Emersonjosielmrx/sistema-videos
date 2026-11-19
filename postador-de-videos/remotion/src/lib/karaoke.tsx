@@ -93,9 +93,12 @@ export const Karaoke: React.FC<Props> = ({
           columnGap: Math.round(tamanho * 0.16),
           rowGap: Math.round(tamanho * 0.18),
           maxWidth: 960,
-          padding: '14px 22px',
-          borderRadius: 22,
-          background: 'rgba(10, 10, 12, 0.72)',
+          minWidth: 280,
+          padding: '14px 28px',
+          borderRadius: 24,
+          background: '#0B0D13',
+          border: '1.5px solid rgba(255, 255, 255, 0.12)',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.85)',
         }}
       >
         {blocoAtual.map((w, k) => {

@@ -36,7 +36,8 @@ def ns_usados():
         pass
     reg = cofre._ler().get("contas", {})
     for e in reg.values():
-        for campo in ("kaggle_proxy", "fish_proxy"):
+        # kaggle_proxy_antigo = IP de conta já BANIDA no Kaggle (19/11): queimado, nunca reusar (2º banimento 09/11)
+        for campo in ("kaggle_proxy", "kaggle_proxy_antigo", "fish_proxy"):
             m = re.match(r"rnprmtfo-(\d+)", str(e.get(campo) or ""))
             if m:
                 usados.add(int(m.group(1)))
@@ -53,6 +54,16 @@ def pool_atual():
     return {e_mail: e["fish_proxy"] for e_mail, e in reg.items() if e.get("fish_proxy")}
 
 
+def _eh_nova(e):
+    """Conta ainda no período de conta nova (regra 19/11, ver memória feedback_conta_nova_canal_poucos_lugares)."""
+    from datetime import datetime
+    ate = str(e.get("nova_ate") or "")
+    if ate:
+        return ate >= datetime.now().strftime("%Y-%m-%d")
+    usos = " ".join(str(v) for v in (e.get("usos") or {}).values()).lower()
+    return "canal novo" in usos or "conta nova" in str(e.get("_obs") or "").lower()
+
+
 def candidatas():
     """Contas não-Kaggle, com Google vivo, ainda sem fish_proxy — as de menos uso em outros serviços primeiro."""
     reg = cofre._ler().get("contas", {})
@@ -63,6 +74,12 @@ def candidatas():
         if str(e.get("google")) == "morto":
             continue
         if eh_kaggle(email):
+            continue
+        # 19/11 dona (Por Dentro perdido: conta nova do canal foi pro pool do Fish com outro IP no mesmo dia ->
+        # "Confirme que é você" e não voltou): conta NOVA fica só no aparelho onde nasceu. Fora do pool: (a) nova_ate
+        # no futuro (cofre.marcar_nova), (b) qualquer uso "canal novo" no YouTube, (c) _obs de conta nova sem nova_ate.
+        # POOL_FISH_ACEITA_NOVA=1 desliga.
+        if __import__("os").environ.get("POOL_FISH_ACEITA_NOVA") != "1" and _eh_nova(e):
             continue
         peso = len(e.get("usos") or {})  # menos serviços = mais seguro = primeiro
         out.append((peso, email))

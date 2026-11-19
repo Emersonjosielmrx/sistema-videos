@@ -6,7 +6,7 @@
 # ffmpeg com mais de -HorasFfmpeg e que não gastou CPU em 30 s = parado -> fecha. Nunca toca em python/pythonw.
 #   powershell -File limpeza_chrome.ps1 [-Horas 3] [-HorasFfmpeg 6] [-Simular]
 param([double]$Horas = 3, [double]$HorasFfmpeg = 6, [double]$MinTravado = 15, [switch]$Simular)
-$PortasFixas = @('9725')  # 18/11: Chrome que fica aberto 24 h de propósito (9725 = loja GGMax do alarme de vendas)
+$PortasFixas = @()  # 19/11: vazio — o vigia do GGMax (9725) agora é sem navegador; Chrome só ~20 s quando o login vence
 $log = Join-Path $PSScriptRoot "logs\limpeza_chrome.log"
 New-Item -ItemType Directory -Force (Split-Path $log) | Out-Null
 function L($m) { $l = "{0:yyyy-MM-dd HH:mm:ss} {1} {2}" -f (Get-Date), $env:COMPUTERNAME, $m; Add-Content -Path $log -Value $l -Encoding UTF8; $l }

@@ -24,6 +24,10 @@ from fx_detect import pick_sfx_for_text, sfx_duration
 from anime_tts import narrate
 
 ULTIMOS_FALANTES = None  # 23/10: quem fala cada entry do último build_segments (formato com várias vozes)
+# 19/11 dona ("quando é usado um efeito sonoro a legenda vai atrasando... a ideia é NÃO mostrar a legenda durante o
+# som ou meme"): segundos de SFX ANTES da voz em cada entry (ANIME_SFX_GAP: _voz_depois_do_sfx). Lido pelo
+# fx_subtitles.burn_subtitles_ass: a legenda da frase só começa quando a voz começa. Alinhado a entries.
+ULTIMOS_GAPS_SFX = None
 PAUSAS = {}  # 29/10: {índice da frase: (webm da mascote, lado, k)} — CTAs que viram a pausa com a voz dela
 _POOL_CLIPES = None  # 02/11: pool de clipes em paralelo (ANIME_CLIPES_PARALELO), criado no 1º build_segments
 
@@ -231,6 +235,41 @@ def _fugir_do_escuro(video_path, plano, src_dur):
     return out
 
 
+def _tempos_fish(lines, audio_dir):
+    """19/11: o Short narrado no site do Fish pelo PC1 chega ao Kaggle sem .words.json (o Whisper no PC1 a 100% de CPU
+    levou 75 min pra 3 frases). Aqui, só com GPU, mede o tempo real de cada palavra das frases do _voz_online.json
+    (Whisper small na GPU, ~1 s por frase) — legenda cinética no tempo da fala. Sem GPU/erro = legenda estimada."""
+    try:
+        marca = Path(audio_dir) / "_voz_online.json"
+        if not marca.exists():
+            return
+        idx = [int(i) for i in json.loads(marca.read_text(encoding="utf-8")).get("frases") or []]
+        falta = [i for i in idx if i < len(lines) and (Path(audio_dir) / f"audio_{i}.wav").exists()
+                 and not Path(str(Path(audio_dir) / f"audio_{i}.wav") + ".words.json").exists()]
+        if not falta:
+            return
+        import torch
+        if not torch.cuda.is_available():
+            return
+        import re
+        from faster_whisper import WhisperModel
+        m = WhisperModel("small", device="cuda", compute_type="float16")
+        ok = 0
+        for i in falta:
+            wav = Path(audio_dir) / f"audio_{i}.wav"
+            segs = list(m.transcribe(str(wav), language="pt", word_timestamps=True)[0])
+            tempos = [(float(x.start), float(max(x.end, x.start + 0.05))) for s in segs for x in (s.words or [])]
+            palavras = re.findall(r"\S+", lines[i])
+            if tempos and len(tempos) == len(palavras):
+                Path(str(wav) + ".words.json").write_text(json.dumps(
+                    [[round(a, 3), round(b, 3), p] for (a, b), p in zip(tempos, palavras)], ensure_ascii=False),
+                    encoding="utf-8")
+                ok += 1
+        logging.info(f"[fish] tempos por palavra na GPU: {ok}/{len(falta)} frases")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish] tempos na GPU falharam ({type(e).__name__}: {str(e)[:100]}) — legenda estimada")
+
+
 def _falas_mascote(lines, originais, audio_dir):
     """Dona 28/10 ("não há mascote aparecendo ou falando; dar voz à mascote"): as frases ANIME_MASCOTE_FALAS (índices,
     o anime-pipeline marca os CTAs do longo) saem com a voz DELA (ANIME_MASCOTE_VOZ, edge; tom/velocidade em
@@ -434,6 +473,7 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
     entries = []
     sfx_durs = []
     word_times = []
+    gaps_sfx = []  # 19/11: ver ULTIMOS_GAPS_SFX
 
     # curva de locutor (hipercool, 17/10): impactos escolhidos 1x por vídeo, guardados ao lado da fonte
     # (_impactos.json) — as duas orientações e as versões nas outras línguas usam os mesmos
@@ -453,6 +493,8 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
     vozes_rev = [v.strip() for v in os.environ.get("VOZ_CLONADA_LISTA", "").split(",") if v.strip()]
     dono_rev = None
     originais = list(lines)
+    if audio_dir is not None:
+        _tempos_fish(lines, audio_dir)  # 19/11: Short narrado no site pelo PC1 mede os tempos aqui (GPU)
     if falas and len(falas) == len(lines):
         anime_formatos.preparar_formato(falas, audio_dir)
     elif anime_tts.clone_ligado() and len(vozes_rev) >= 2:
@@ -469,12 +511,14 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
         # 19/11 dona ("Fish vai ser o padrão"): Short SEM voz clonada também tenta o Fish online antes do laço; o
         # narrate() reusa o audio_i.wav que já existe (cache). Sem crédito/erro = narrate de sempre (Edge).
         try:
+            anime_tts._narrar_fish_nuvem(lines, audio_dir)  # 19/11 dona: no Kaggle SEMPRE o motor novo (GPU)
             anime_tts._narrar_online(lines, audio_dir)
         except Exception as e:  # noqa: BLE001
-            logging.warning(f"[segments] Fish online sem clone falhou ({type(e).__name__}) — narração normal")
+            logging.warning(f"[segments] Fish sem clone falhou ({type(e).__name__}) — narração normal")
     # 23/10: cor/nome de quem fala na legenda (só formato com 2+ vozes); falhou = legenda normal
-    global ULTIMOS_FALANTES
+    global ULTIMOS_FALANTES, ULTIMOS_GAPS_SFX
     ULTIMOS_FALANTES, quem = None, None
+    ULTIMOS_GAPS_SFX = None
     if falas and len(falas) == len(lines):
         try:
             quem = anime_formatos.falantes_legenda(falas, impactos)  # + ênfase/impacto (23/10)
@@ -624,6 +668,7 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
         entries.append((line, clip_dur))
         sfx_durs.append(sfx_dur)
         word_times.append(wt)
+        gaps_sfx.append(float(gap or 0.0))
         if falantes is not None:
             falantes.append(quem[i])
         pendentes.append(futuro)
@@ -640,6 +685,7 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
             entries.append(real[1])
             sfx_durs.append(0.0)
             word_times.append(real[2])
+            gaps_sfx.append(0.0)
             if falantes is not None:
                 falantes.append(None)
             pendentes.append(None)
@@ -660,6 +706,7 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
         entries = [c for c, m in zip(entries, manter) if m]
         sfx_durs = [c for c, m in zip(sfx_durs, manter) if m]
         word_times = [c for c, m in zip(word_times, manter) if m]
+        gaps_sfx = [c for c, m in zip(gaps_sfx, manter) if m]
         if falantes is not None:
             falantes = [c for c, m in zip(falantes, manter) if m]
 
@@ -669,8 +716,10 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
         entries.insert(0, intro[1])
         sfx_durs.insert(0, 0.0)
         word_times.insert(0, intro[2])
+        gaps_sfx.insert(0, 0.0)
         if falantes is not None:
             falantes.insert(0, None)
+    ULTIMOS_GAPS_SFX = gaps_sfx if len(gaps_sfx) == len(entries) else None
     ULTIMOS_FALANTES = falantes  # [(cor_rgb, nome, extra)] alinhado a entries, ou None (lido pelo anime-pipeline, 23/10)
     return clips, entries, sfx_durs, word_times
 

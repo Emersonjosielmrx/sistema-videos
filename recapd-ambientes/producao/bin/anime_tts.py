@@ -410,11 +410,23 @@ def _fish_nuvem_pronto():
     """19/11 dona ("a partir de agora o Fish vai ser o padrão; os longos são feitos no Kaggle"): Fish Speech na GPU
     do Kaggle. Só onde o kaggle_trabalhador montou o ambiente (FISH_NUVEM=1 + FISH_VENV) e o narrador tem trecho
     ORIGINAL de referência (referencia_fish.wav/.txt na pasta da voz). Sem isso = segue Kitten/p3 como antes."""
-    voz = os.environ.get("VOZ_CLONADA")
-    if os.name == "nt" or os.environ.get("FISH_NUVEM") != "1" or not voz or _OUTRA:
-        return False
-    pv = VOZES_DIR / Path(voz).name
-    return (pv / "referencia_fish.wav").exists() and (pv / "referencia_fish.txt").exists()
+    return _pasta_fish() is not None
+
+
+def _pasta_fish(voz=None):
+    """19/11 dona: "no Kaggle tem que ser sempre o motor novo; p3 só fora do Kaggle e sem crédito no site". Pasta com
+    a referência do Fish: a da própria voz; sem ela (ou sem voz escolhida) a do nicho — narrador do Chris, Neymar no
+    esporte — para o Short NUNCA cair no Kitten/p3 no Kaggle. None = fora do Kaggle / Fish não instalado."""
+    if os.name == "nt" or os.environ.get("FISH_NUVEM") != "1" or _OUTRA:
+        return None
+    voz = voz if voz is not None else (os.environ.get("VOZ_CLONADA") or "")
+    nicho = (os.environ.get("NICHO_CLONE") or os.environ.get("PARCEIRO_TIPO") or "").lower()
+    reserva = "neymar" if nicho in ("esportes", "futebol", "esporte") else "narrador_chris"
+    for nome in ([Path(voz).name] if voz else []) + [reserva, "narrador_chris"]:
+        pv = VOZES_DIR / nome
+        if (pv / "referencia_fish.wav").exists() and (pv / "referencia_fish.txt").exists():
+            return pv
+    return None
 
 
 def _acabamento_fish(out, voz):
@@ -438,8 +450,11 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
     if not _fish_nuvem_pronto():
         return
     try:
-        voz = os.environ["VOZ_CLONADA"]
-        pv = VOZES_DIR / Path(voz).name
+        voz = os.environ.get("VOZ_CLONADA") or ""
+        pv = _pasta_fish()
+        if pv.name != Path(voz).name:
+            logging.info(f"[fish nuvem] {voz or 'sem narrador'} sem referência do Fish — narra com {pv.name} "
+                         "(no Kaggle é sempre o motor novo)")
         itens = []
         for i, line in enumerate(lines):
             if so is not None and i not in so:
@@ -481,7 +496,7 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
             (Path(audio_dir) / "_voz_online.json").write_text(json.dumps(
                 {"motor": "fish_nuvem", "frases": sorted(feitos), "total": len(itens)}), encoding="utf-8")
         logging.info(f"[fish nuvem] {len(feitos)}/{len(itens)} frases em {time.time() - t0:.0f}s "
-                     f"(narrador {voz}); o resto no {_voz_modo()}")
+                     f"(narrador {pv.name}); o resto no {_voz_modo()}")
     except Exception as e:  # noqa: BLE001
         logging.warning(f"[fish nuvem] falhou ({type(e).__name__}: {str(e)[:150]}) — tudo no {_voz_modo()}")
 

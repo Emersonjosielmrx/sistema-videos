@@ -439,6 +439,12 @@ def _nome_canal(pg):
 
 def _abrir_studio(pg, channel_id, caminho=""):
     url = f"https://studio.youtube.com/channel/{channel_id}{caminho}"
+    # 19/11 (claude-f1): Fato Chocante e Por Dentro (contas novas compradas) abrem o Studio em VIETNAMITA — o poster só
+    # sabe pt/en e falhava em "idioma do Studio 'vi'". ?hl=pt-BR força a interface em português (só nesta sessão, não
+    # muda a conta). YT_STUDIO_HL="" desliga.
+    _hl = os.environ.get("YT_STUDIO_HL", "pt-BR")
+    if _hl:
+        url += ("&" if "?" in url else "?") + f"hl={_hl}"
     pg.goto(url, wait_until="domcontentloaded", timeout=90000)
     if esperar_assentar(pg) == "login":
         raise Falha("morto", "perfil do navegador não está logado (rode --logar)")
@@ -471,6 +477,31 @@ def _idioma(pg):
             break
         except Exception:  # noqa: BLE001
             pg.wait_for_timeout(1500)
+    if lang and not lang.startswith(("pt", "en")) and os.environ.get("YT_STUDIO_HL") != "" \
+            and not getattr(_idioma, "_tentou", False):
+        # 19/11: Fato Chocante/Por Dentro (contas compradas) abrem o Studio em VIETNAMITA mesmo com ?hl=pt-BR na URL —
+        # a preferência da CONTA ganha. O idioma do YouTube fica no cookie PREF (hl=...): troca só o hl dele pra pt-BR
+        # (mantém as outras preferências), recarrega e lê de novo. Uma tentativa por processo. YT_STUDIO_HL="" desliga.
+        _idioma._tentou = True
+        try:
+            ctx = pg.context
+            prefs = [c for c in ctx.cookies(["https://www.youtube.com", "https://studio.youtube.com"])
+                     if c["name"] == "PREF"]
+            alvo = os.environ.get("YT_STUDIO_HL", "pt-BR")
+            novos = []
+            for dom in (".youtube.com",):
+                base = next((c["value"] for c in prefs if c.get("domain", "").endswith("youtube.com")), "")
+                partes = [p for p in base.split("&") if p and not p.startswith("hl=")] + [f"hl={alvo}"]
+                novos.append({"name": "PREF", "value": "&".join(partes), "domain": dom, "path": "/",
+                              "secure": True, "expires": time.time() + 400 * 86400})
+            ctx.add_cookies(novos)
+            pg.reload(wait_until="domcontentloaded")
+            esperar_assentar(pg)
+            lang2 = (pg.evaluate("document.documentElement.lang") or "").lower()
+            print(f"[idioma] Studio em '{lang}' -> cookie PREF hl={alvo} -> agora '{lang2}'", flush=True)
+            lang = lang2 or lang
+        except Exception as ex:  # noqa: BLE001
+            print(f"[idioma] troca pelo cookie falhou ({type(ex).__name__}: {str(ex)[:120]})", flush=True)
     return "pt" if lang.startswith("pt") else "en" if lang.startswith("en") else lang
 
 

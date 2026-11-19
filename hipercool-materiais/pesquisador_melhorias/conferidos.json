@@ -19373,5 +19373,165 @@
     "arquivado": false,
     "descricao": "Frame-exact regression gate for video exports: decode every frame back to its source frame and diff the export against the timeline (JSON or",
     "data": "2026-11-19"
+  },
+  "catkod/my-gemini-pro": {
+    "ok": true,
+    "nome": "CatKod/my-gemini-pro",
+    "estrelas": 0,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini Deep Research via Gemini Advanced subscription (no AI Studio pay-per-use) - dual-account pool routing",
+    "data": "2026-11-19"
+  },
+  "shawtim/gemini-app2api": {
+    "ok": true,
+    "nome": "ShawTim/gemini-app2api",
+    "estrelas": 30,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Zero-dependency native Gemini HTTP/2 gateway & in-process Pi extension (pi-gemini-app) connecting Gemini subscriptions to OpenAI-compatible ",
+    "data": "2026-11-19"
+  },
+  "vaaskout/vdroid_scripter": {
+    "ok": true,
+    "nome": "VaasKout/vdroid_scripter",
+    "estrelas": 2,
+    "push": "2026-11-18",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "👓 Computer vision–based automation tool for remotely controlling Android devices via Go server and custom client.",
+    "data": "2026-11-19"
+  },
+  "lisn0/android-device-control": {
+    "ok": true,
+    "nome": "lisn0/android-device-control",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Local ADB CLI and MCP server for inspecting authorized Android devices. Read-only by default, with opt-in taps.",
+    "data": "2026-11-19"
+  },
+  "hyusband/droid-agent": {
+    "ok": true,
+    "nome": "hyusband/droid-agent",
+    "estrelas": 1,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Give any AI agent hands on a real Android device — zero install on the phone, zero dependencies, built-in MCP server",
+    "data": "2026-11-19"
+  },
+  "nebigoktug/android-agent": {
+    "ok": true,
+    "nome": "nebigoktug/android-agent",
+    "estrelas": 2,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Let an AI agent use your Android phone and its apps - ~10x cheaper than screenshot-based tools. CLI + MCP server, works from a PC or on the ",
+    "data": "2026-11-19"
+  },
+  "roomi-fields/notebooklm-mcp": {
+    "ok": true,
+    "nome": "roomi-fields/notebooklm-mcp",
+    "estrelas": 242,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Google Gemini Notebook (formerly NotebookLM) over MCP + a local HTTP REST API. Citation-backed Q&A, full Studio generation, chat history, mu",
+    "data": "2026-11-19"
+  },
+  "javedhamzabwn/gemini-web2api": {
+    "ok": true,
+    "nome": "javedhamzabwn/gemini-web2api",
+    "estrelas": 1,
+    "push": "2026-11-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "High-performance local developer gateway bridging Google Gemini Web to OpenAI-compatible clients (OpenCode, Cline, Claude Code, Cursor) and ",
+    "data": "2026-11-19"
+  },
+  "sortedcord/authocookie": {
+    "ok": true,
+    "nome": "sortedcord/AuthoCookie",
+    "estrelas": 1,
+    "push": "2026-09-05",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Efficient Gemini Web session cookie rotation ",
+    "data": "2026-11-19"
+  },
+  "ganznosuy/omni-video-studio": {
+    "ok": true,
+    "nome": "GanZnosuy/omni-video-studio",
+    "estrelas": 0,
+    "push": "2026-11-02",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "🎬 Unified AI Video, Motion Graphics, Code Animation & Visual Storytelling Studio with Autonomous Intent Routing & Gemini Cookie Rotator.",
+    "data": "2026-11-19"
+  },
+  "plokmklo/freegem": {
+    "ok": true,
+    "nome": "plokmklo/freegem",
+    "estrelas": 2,
+    "push": "2026-11-19",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Local bridge exposing the Gemini web session as an OpenAI-compatible API, a Google-native API, and MCP tools, with a guarded web scraper and",
+    "data": "2026-11-19"
+  },
+  "printemps-tokyo/stripcut": {
+    "ok": true,
+    "nome": "printemps-tokyo/stripcut",
+    "estrelas": 0,
+    "push": "2026-11-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Slice a 40,000px webtoon canvas without cutting through a face. Finds the gutters between panels and cuts there, as close to your target til",
+    "data": "2026-11-19"
+  },
+  "leeguannan/webtoon2video": {
+    "ok": true,
+    "nome": "leeguannan/Webtoon2Video",
+    "estrelas": 0,
+    "push": "2026-11-19",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-19"
+  },
+  "che0dan/recap-shorts-automation": {
+    "ok": true,
+    "nome": "CHE0DAN/recap-shorts-automation",
+    "estrelas": 81,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "커뮤니티 인기글 하나로 30~40초 한국어 요약 쇼츠를 만드는 Windows 앱",
+    "data": "2026-11-19"
+  },
+  "jrubiosainz/manga-3d-color": {
+    "ok": true,
+    "nome": "jrubiosainz/manga-3d-color",
+    "estrelas": 1,
+    "push": "2026-02-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "🎨 Transform B&W manga into colorized 3D parallax experiences. AI colorization + depth maps + WebGL reader.",
+    "data": "2026-11-19"
+  },
+  "skyeyesec333/photo-depth": {
+    "ok": true,
+    "nome": "skyeyesec333/photo-depth",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skill: Give a single photo or painting real depth on the web: MoGe-2 depth maps, a three.js window effect with parallax that doe",
+    "data": "2026-11-19"
   }
 }

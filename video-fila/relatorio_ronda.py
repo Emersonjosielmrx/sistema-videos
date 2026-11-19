@@ -935,12 +935,89 @@ def sec_hydrogen():
     return out
 
 
+def sec_recuperacao():
+    """19/11 dona ("temos que acompanhar se esses canais vão se recuperar ou vão continuar restringidos"): depois dos 13
+    canais removidos em 17-18/11, os VIVOS caíram de alcance. Views ganhas por dia de cada canal vivo (diferença do
+    total público em estado\\canais_views_hist.jsonl, 1ª leitura de cada dia) x a média ANTES (12-16/11).
+    Recuperado = >= 70% da média de antes; restrito = < 30%. RONDA_RECUPERACAO=0 tira a seção."""
+    if os.environ.get("RONDA_RECUPERACAO", "1") == "0":
+        return []
+    arq = BASE / "estado" / "canais_views_hist.jsonl"
+    prim = {}  # (slug, dia) -> (ts, views, nome)
+    ult = {}   # slug -> (ts, views)
+    try:
+        for ln in arq.read_text(encoding="utf-8", errors="ignore").splitlines()[-60000:]:
+            try:
+                r = json.loads(ln)
+            except ValueError:
+                continue
+            s, ts, v = r.get("slug"), r.get("ts", ""), r.get("views")
+            if not s or v is None or ts < "2026-11-11":
+                continue
+            k = (s, ts[:10])
+            if k not in prim or ts < prim[k][0]:
+                prim[k] = (ts, v, r.get("nome") or s)
+            if s not in ult or ts > ult[s][0]:
+                ult[s] = (ts, v)
+    except OSError:
+        return ["## 🩺 Recuperação dos canais", "- sem canais_views_hist.jsonl"]
+    try:
+        trav = set(json.loads(Path(r"D:\postador-de-videos\config\contas_travadas.json")
+                              .read_text(encoding="utf-8")).keys())
+    except (OSError, ValueError, AttributeError):
+        trav = set()
+    antes = [f"2026-11-{d}" for d in range(12, 17)]
+    hoje_iso = agora.strftime("%Y-%m-%d")
+    linhas = []
+    for s in sorted({k[0] for k in prim}):
+        if s in trav:
+            continue
+        dias = sorted(d for (ss, d) in prim if ss == s)
+        ganho = {}
+        for a, b in zip(dias, dias[1:]):
+            ganho[a] = prim[(s, b)][1] - prim[(s, a)][1]
+        base = [ganho[d] for d in antes if d in ganho]
+        if not base:
+            continue
+        media = sum(base) / len(base)
+        ontem = (agora - timedelta(days=1)).strftime("%Y-%m-%d")
+        g_ontem = ganho.get(ontem)
+        # hoje até agora, projetado pro dia inteiro
+        g_hoje = None
+        real_hoje = None  # 19/11 dona: "além da projeção de hoje, o real atual também"
+        if (s, hoje_iso) in prim and s in ult and ult[s][0][:10] == hoje_iso:
+            real_hoje = ult[s][1] - prim[(s, hoje_iso)][1]
+            h = max(1.0, (datetime.fromisoformat(ult[s][0]) - datetime.fromisoformat(prim[(s, hoje_iso)][0]))
+                    .total_seconds() / 3600)
+            # o total público pula em degraus: projeção só com 6 h+ de leitura (de manhã exagerava 2x)
+            g_hoje = (ult[s][1] - prim[(s, hoje_iso)][1]) * 24 / h if h >= 6 else None
+        ref = g_hoje if g_hoje is not None else g_ontem
+        if ref is None or media <= 0:
+            est = "—"
+        else:
+            p = ref / media
+            est = "✅ recuperado" if p >= 0.7 else ("🟡 parcial" if p >= 0.3 else "🔴 restrito")
+        nome = prim[(s, dias[-1])][2]
+        linhas.append((media, f"| {nome[:24]} | {media:,.0f} | {'—' if g_ontem is None else f'{g_ontem:,.0f}'} | "
+                              f"{'—' if real_hoje is None else f'{real_hoje:,.0f}'} | "
+                              f"{'—' if g_hoje is None else f'~{g_hoje:,.0f}'} | {est} |".replace(",", ".")))
+    linhas.sort(key=lambda x: -x[0])
+    out = ["## 🩺 Recuperação dos canais vivos (views/dia x antes dos banimentos 12-16/11)",
+           f"| Canal | Antes (média/dia) | Ontem | Hoje até agora ({agora:%H:%M}) | Hoje (projeção) | Situação |",
+           "|---|---:|---:|---:|---:|---|"]
+    out += [l for _, l in linhas]
+    n = Counter(l.rsplit("|", 2)[-2].strip() for _, l in linhas)
+    out.append(f"- Resumo: {n.get('✅ recuperado', 0)} recuperados, {n.get('🟡 parcial', 0)} parciais, "
+               f"{n.get('🔴 restrito', 0)} restritos (recuperado = ≥ 70% da média de antes; restrito = < 30%)")
+    return out
+
+
 def main(gravar):
     partes = [f"# Relatório completo — {agora:%d/%m, %H:%M}",
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
-    for f in (sec_numeros, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
+    for f in (sec_numeros, sec_recuperacao, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
               sec_pesquisador, sec_hydrogen, sec_redes, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()

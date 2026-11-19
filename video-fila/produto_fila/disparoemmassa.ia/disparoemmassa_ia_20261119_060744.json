@@ -1,0 +1,144 @@
+{
+ "conta": "disparoemmassa.ia",
+ "produto": "disparo_massa",
+ "marca": "Disparo em Massa IA",
+ "titulo": "Rotação de números protege seu atendimento principal",
+ "legenda": "Campanhas grandes no WhatsApp exigem cuidado com os números que você usa. A rotação distribui os envios entre vários números, em vez de concentrar tudo em um só. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#whatsappmarketing #disparoemmassa #vendas #automacao #marketingdigital",
+ "roteiro": {
+  "gancho_tela": "Medo de perder o número?",
+  "pergunta_cliente": "E se o meu WhatsApp principal for bloqueado numa campanha?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu tinha medo de disparar para a base inteira e ver meu número principal ficar comprometido.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit counter of a small Brazilian clothing store, shelves neatly organized",
+    "real_tema": "dono de loja com receio de concentrar todos os envios em um único chip",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261119_060902_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O sistema reveza os números nos envios. Assim, nenhum chip concentra a campanha inteira, e o atendimento principal fica separado.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "rotação de números separando a campanha do atendimento principal",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Olá, Marina! Sua encomenda já está disponível para retirada."
+     },
+     {
+      "de": "cliente",
+      "texto": "Que ótimo! Já passo aí hoje."
+     },
+     {
+      "de": "empresa",
+      "texto": "Este aviso saiu de um dos nossos números de campanha."
+     },
+     {
+      "de": "empresa",
+      "texto": "Para qualquer dúvida, fale com nosso atendimento principal."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, obrigada!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje aviso milhares de clientes com rotação de números e meu atendimento principal segue tranquilo.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting at a clean, bright office desk of a small Brazilian online store, tidy, well lit",
+    "real_tema": "dono tranquilo, campanha e atendimento principal separados",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261119_060902_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261119_060902_1.png"
+   }
+  ],
+  "legenda": "Campanhas grandes no WhatsApp exigem cuidado com os números que você usa. A rotação distribui os envios entre vários números, em vez de concentrar tudo em um só. Link no perfil.",
+  "titulo": "Rotação de números protege seu atendimento principal",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "receio_bloqueio_geral",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 66,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\disparoemmassa.ia_20261119_060744\\dono_3.mp4",
+ "duracao_s": 32.2,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-19T06:34:18",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.58,
+   "fala": "E se o meu WhatsApp principal for bloqueado numa campanha?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.58,
+   "fim": 11.62,
+   "fala": "Eu tinha medo de disparar para a base inteira e ver meu número principal ficar comprometido.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.62,
+   "fim": 20.42,
+   "fala": "O sistema reveza os números nos envios. Assim, nenhum chip concentra a campanha inteira, e o atendimento principal fica separado.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.42,
+   "fim": 28.26,
+   "fala": "Hoje aviso milhares de clientes com rotação de números e meu atendimento principal segue tranquilo.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.26,
+   "fim": 32.2,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.95,
+  "notas": {
+   "legibilidade": 9.0,
+   "movimento": 6.0,
+   "roteiro_marca": 6.0,
+   "diretor": 6.8
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

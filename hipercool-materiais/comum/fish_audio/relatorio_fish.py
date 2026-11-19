@@ -2,7 +2,7 @@
 com o Fish (marca _voz_online.json na pasta do áudio), por motor, e o estado das contas/créditos/referências.
     python relatorio_fish.py            # imprime e grava RELATORIO_MANHA.md
 """
-import json, os, subprocess
+import json, os, subprocess, sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -49,6 +49,18 @@ try:
 except Exception as e:  # noqa: BLE001
     L.append(f"- (não li o Kaggle: {type(e).__name__})")
 
+# 2b) longos do Kaggle prontos desde ontem à noite (o 1º longo com Fish: 20261115_231005_Jjd71vw8hXQ)
+try:
+    alvo = "20261115_231005_Jjd71vw8hXQ"
+    l = subprocess.run([R, "lsf", f"manhwa-drive:colab_recap/fila/{alvo}"], capture_output=True, text=True,
+                       timeout=120, encoding="utf-8", errors="replace").stdout
+    est = "PRONTO" if "pronto.json" in l else "ERRO" if "erro.json" in l else "renderizado, subindo"
+    L.append(f"- 1º longo com Fish (I Was Reborn To Give My Cheating Wife..., ~40 min 1080p): **{est}**")
+    L.append("  - Fish Speech no Kaggle narrou: **porao 128/128, iki 56/56, mangaticos 54/54 frases** (log do "
+             "pipeline 19/11). thomas_shelby/moana e personagens ficaram no clone antigo (sem referência na hora).")
+except Exception as e:  # noqa: BLE001
+    L.append(f"- (longo: {type(e).__name__})")
+
 # 3) contas e créditos
 try:
     import sys
@@ -72,4 +84,5 @@ except Exception:  # noqa: BLE001
     pass
 txt = "\n".join(L)
 (AQUI / "RELATORIO_MANHA.md").write_text(txt, encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace") if hasattr(sys.stdout, "reconfigure") else None
 print(txt)

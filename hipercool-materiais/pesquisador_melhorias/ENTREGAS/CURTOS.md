@@ -4403,3 +4403,113 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 03:43 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_eres2net_licenca__sonnet_0341.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 04:12 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0406.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 04:47 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0427.md`
+- [INÉDITO] github.com/CatKod/my-gemini-pro — ★0, push 2026-11-19, MIT — Gemini Deep Research via Gemini Advanced subscription (no AI Studio pay-per-use) - dual-account pool routing
+- [INÉDITO] github.com/ShawTim/gemini-app2api — ★30, push 2026-11-19, MIT — Zero-dependency native Gemini HTTP/2 gateway & in-process Pi extension (pi-gemini-app) connecting Gemini subscriptions to OpenAI-compatible 
+
+## [ ] PENDENTE — 2026-11-19 05:24 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0514.md`
+- [INÉDITO] github.com/VaasKout/vdroid_scripter — ★2, push 2026-11-18, Apache-2.0 — 👓 Computer vision–based automation tool for remotely controlling Android devices via Go server and custom client.
+
+## [ ] PENDENTE — 2026-11-19 05:44 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0527.md`
+- [INÉDITO] github.com/lisn0/android-device-control — ★0, push 2026-11-18, MIT — Local ADB CLI and MCP server for inspecting authorized Android devices. Read-only by default, with opt-in taps.
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 05:54 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0546.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 06:11 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0601.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 06:31 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0616.md`
+- [INÉDITO] github.com/hyusband/droid-agent — ★1, push 2026-11-18, MIT — Give any AI agent hands on a real Android device — zero install on the phone, zero dependencies, built-in MCP server
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 06:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0637.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 06:58 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0646.md`
+- [INÉDITO] github.com/nebigoktug/android-agent — ★2, push 2026-11-19, MIT — Let an AI agent use your Android phone and its apps - ~10x cheaper than screenshot-based tools. CLI + MCP server, works from a PC or on the 
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 07:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_0708.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 07:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0721.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 07:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0732.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 08:08 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0756.md`
+- [INÉDITO] github.com/roomi-fields/notebooklm-mcp — ★242, push 2026-11-17, MIT — Google Gemini Notebook (formerly NotebookLM) over MCP + a local HTTP REST API. Citation-backed Q&A, full Studio generation, chat history, mu
+- [INÉDITO] github.com/javedhamzabwn/gemini-web2api — ★1, push 2026-11-07, MIT — High-performance local developer gateway bridging Google Gemini Web to OpenAI-compatible clients (OpenCode, Cline, Claude Code, Cursor) and 
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 08:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0816.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 08:37 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0826.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 08:53 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0842.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 09:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0856.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 09:30 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0908.md`
+- [INÉDITO] github.com/GanZnosuy/omni-video-studio — ★0, push 2026-11-02, MIT — 🎬 Unified AI Video, Motion Graphics, Code Animation & Visual Storytelling Studio with Autonomous Intent Routing & Gemini Cookie Rotator.
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 09:37 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0932.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 09:54 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0942.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 10:20 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_0958.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 10:37 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1029.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 11:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1052.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 12:33 — cenas Three.js leves para CPU (sem sombras, PBR simples, baixo MSAA) (`area_three_cpu_budget`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_three_cpu_budget__sonnet_1230.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 14:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1352.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 15:55 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_webgl_frame_a_frame__sonnet_1541.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 16:05 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_webgl_frame_a_frame__sonnet_1601.md`
+- (todos os itens desta pesquisa foram reprovados)

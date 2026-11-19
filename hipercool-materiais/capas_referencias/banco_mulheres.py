@@ -116,6 +116,9 @@ def main(video, obra, passo=2.5):
     try:
         fotos = quadros(video, passo, tmp)
         rostos, homens = [], []
+        # 19/11: u7tN estourou 4 h 2x — o WD14 (o passo mais caro) rodava em TODO rosto e depois só os 400 mais nítidos
+        # de cada lado eram usados. Agora: 1ª passada barata (detecção + nitidez), WD14 só nos BANCO_WD14 mais nítidos.
+        cands = []
         for i, q in enumerate(fotos):
             img = Image.open(q).convert("RGB")
             for box, _lbl, score in detect_faces(img):
@@ -127,19 +130,24 @@ def main(video, obra, passo=2.5):
                 cara = recorte(img, box, 0.35)
                 if not colorido(cara):
                     continue
-                _rating, tags, _chars = get_wd14_tags(cara, general_threshold=0.35)
-                girl, boy = tags.get("1girl", 0), tags.get("1boy", 0)
-                item = {"quadro": str(q), "seg": round(i * passo, 1), "box": box, "cara": cara,
-                        "nitidez": nitidez(cara) * (x1 - x0), "menor": sorted(MENOR & set(tags))}
-                # 03/11 dona: "precisa de mulheres diferentes e do protagonista claro ou personagens principais" ->
-                # rosto de homem vai pro banco dos homens (protagonista), não some
-                if boy >= 0.6 and girl < 0.3:
-                    homens.append(item)
-                    continue
-                # 03/11 teste 6g2b: o herói (menino de cabelo preto) entrou junto com a mulher no p01
-                if girl < 0.6 or boy > 0.3:
-                    continue
-                rostos.append(item)
+                cands.append((nitidez(cara) * (x1 - x0), i, q, box, cara))
+        cands.sort(key=lambda c: -c[0])
+        limite = int(os.environ.get("BANCO_WD14", "900"))
+        print(f"rostos candidatos: {len(cands)} (WD14 nos {min(limite, len(cands))} mais nítidos)", flush=True)
+        for _nit, i, q, box, cara in cands[:limite]:
+            _rating, tags, _chars = get_wd14_tags(cara, general_threshold=0.35)
+            girl, boy = tags.get("1girl", 0), tags.get("1boy", 0)
+            item = {"quadro": str(q), "seg": round(i * passo, 1), "box": box, "cara": cara,
+                    "nitidez": _nit, "menor": sorted(MENOR & set(tags))}
+            # 03/11 dona: "precisa de mulheres diferentes e do protagonista claro ou personagens principais" ->
+            # rosto de homem vai pro banco dos homens (protagonista), não some
+            if boy >= 0.6 and girl < 0.3:
+                homens.append(item)
+                continue
+            # 03/11 teste 6g2b: o herói (menino de cabelo preto) entrou junto com a mulher no p01
+            if girl < 0.6 or boy > 0.3:
+                continue
+            rostos.append(item)
         # 04/11: KJ5F (76 min, muita luta) ficou 8 h preso no agrupamento CCIP, que compara todos x todos (N²).
         # Fica só com os 400 rostos mais nítidos de cada lado antes de agrupar.
         rostos = sorted(rostos, key=lambda r: -r["nitidez"])[:400]

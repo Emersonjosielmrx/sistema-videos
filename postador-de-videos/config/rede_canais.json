@@ -915,7 +915,7 @@
       "creds": [
         "novo_pordentro"
       ],
-      "status": "ativo",
+      "status": "retirado",
       "categoria": "24",
       "nicho": "como as coisas funcionam por dentro: motores, aviões, eletrônicos, máquinas, invenções, engenharia do dia a dia",
       "persona": "explicador curioso e didático, frases curtas, 'olha o que acontece lá dentro'",
@@ -933,7 +933,8 @@
       ],
       "nota": "18/11: canal novo do projeto rede (adicionar_canal.py)",
       "max_dia": 1,
-      "pausa": "18/11: canal novo, 1/dia na 1ª semana (dona liberou)."
+      "pausa": "18/11: canal novo, 1/dia na 1ª semana (dona liberou).",
+      "nota_retirada": "19/11 14:33 dona: retirar o canal Por Dentro (conta duongphuong6983 removida do cofre)"
     }
   ],
   "a_verificar": {

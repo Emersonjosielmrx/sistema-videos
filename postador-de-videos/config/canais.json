@@ -1069,21 +1069,21 @@
       ],
       "reserva_dono": 1
     },
-    "pordentro": {
-      "slug": "pordentro",
+    "novo_pordentro": {
+      "slug": null,
       "creds": [
         "novo_pordentro"
       ],
       "nome": "Por Dentro",
-      "handle": "@pordentrobr-d4w",
-      "channel_id": "UCq_n2JGOuagdyC3GHMv0J0w",
-      "navegador": true,
+      "handle": null,
+      "channel_id": null,
+      "navegador": false,
       "idioma": "pt",
       "fuso": "America/Sao_Paulo",
       "nicho": "como as coisas funcionam por dentro: motores, aviões, eletrônicos, máquinas, invenções, engenharia do dia a dia",
-      "dono": "manhwa-react",
+      "dono": null,
       "alimentadores": {},
-      "max_dia": 3,
+      "max_dia": null,
       "horarios_rede": [
         "12:30",
         "19:30",

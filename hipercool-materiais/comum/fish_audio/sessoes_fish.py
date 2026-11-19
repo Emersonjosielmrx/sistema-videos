@@ -124,8 +124,20 @@ def saldo(email):
     Token recusado = marca a sessão como morta e levanta SessaoMorta."""
     import creditos
     s, ws = sessao_http(email)
-    if s is None or not ws:
+    if s is None:
         return None
+    if not ws:
+        # 19/11: conta recém-logada às vezes grava o token antes de a página criar o active_workspace_id. O
+        # /team/context devolve o workspace só com o Bearer (medido: workspace_id = id do "My Team" pessoal).
+        try:
+            r0 = s.get(f"{API}/team/context", timeout=30)
+            ws = r0.json().get("workspace_id") if r0.status_code == 200 else None
+        except (requests.RequestException, ValueError):
+            ws = None
+        if not ws:
+            s.close()
+            return None
+        marcar(email, workspace=ws)
     try:
         r = s.get(f"{API}/wallet/{ws}/package", timeout=30)
     finally:
@@ -205,6 +217,11 @@ def registrar_conta(email):
     try:
         r = saldo(email)
     finally:
+        # 19/11: soltar (fecha o Chrome JÁ). O fechar() deixa quente 15 min — no login em série acumulava 5+ Chromes
+        try:
+            f.soltar()
+        except Exception:  # noqa: BLE001
+            pass
         f.fechar()
     return r
 

@@ -1,10 +1,7 @@
 {
  "_leia": "17/11 18h dona: teste pra saber se os 4 canais removidos hoje (CartuchoReact, ManhwaReact, InventoReact, Esporte Noturno) caíram pelos LOGINS nos celulares ou por POSTAR por eles. Estes canais (poucos inscritos, contas FORA do Kaggle, já logadas nos celulares) postam SÓ pelo celular; todos os outros postam SÓ pelo PC. Medir: se cair canal que só tem login no celular (e posta pelo PC) = o problema é o login; se cair só estes = é a postagem pelo app. Esvaziar 'canais' encerra o teste.",
  "inicio": "2026-11-17",
- "canais": [
-  "inovare_viet",
-  "fiodameada"
- ],
+ "canais": [],
  "canais_pausados": [
   "inovare_eng",
   "inovare_thai",
@@ -12,9 +9,8 @@
  ],
  "_pausa": "17/11 19:35: PAUSADO — são 12 canais encerrados (todos tinham conta no G20); os 3 do teste também estão no G20 e postar por ele pode puxar a próxima onda. Só a dona religa.",
  "_religado": "18/11 ~01h50 dona: 'usar o que tiver logado em cada telefone pra postar, apenas um canal por telefone e o menor que tiver naquele telefone'. S20=inovare_viet (19 inscr.), A2=leielucro (3), G20=fiodameada (120; único vivo visível no app do G20). Todos no 4G, sem Kaggle, sem trava. Postam SÓ pelo celular; 1 Short/dia, agendado, sem apagar.",
- "aparelho": {
-  "inovare_viet": "100.117.134.73:5555",
-  "fiodameada": "100.75.139.24:5555"
- },
- "_a2": "18/11 02h: A2 sem canal possível — os 4 canais dele (2035 leielucro, 2037 bilionarionoturno, verse9 clinicalucrativaia, revolutionemerson1/2 removidos) são Kaggle VIVA no cofre ou removidos. A2 fora do teste."
+ "aparelho": {},
+ "_a2": "18/11 02h: A2 sem canal possível — os 4 canais dele (2035 leielucro, 2037 bilionarionoturno, verse9 clinicalucrativaia, revolutionemerson1/2 removidos) são Kaggle VIVA no cofre ou removidos. A2 fora do teste.",
+ "_fio_saiu": "19/11 ~09h dona: tirar o Fio da Meada do teste (postar o longo do motor novo nele pelo PC, público)",
+ "_encerrado": "19/11 ~09h dona: 'eu forneci canais novos pra não usar os que já tinha, então o outro que você separou pra postar pelo celular poste pelo PC também' — teste ENCERRADO; inovare_viet e fiodameada voltam pro PC"
 }

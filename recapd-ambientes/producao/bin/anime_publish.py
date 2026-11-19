@@ -347,6 +347,22 @@ def _usados(video):
         return {}
 
 
+def _motor_voz(video):
+    """19/11 dona ("todos os Shorts novos têm que sair já com o motor novo"): quantas frases saíram no Fish (online no
+    site ou Fish Speech na GPU) — audio_cache/_voz_online.json ao lado do vídeo. {"motor", "fish", "total"} ou None
+    (sem marca = motor antigo ou não deu pra saber). Só leitura; nunca derruba."""
+    pasta = Path(video).parent
+    ac = pasta / "audio_cache"
+    for marca in (ac / "_voz_online.json", pasta / "_voz_online.json"):  # PC1 / Short que voltou do Kaggle
+        try:
+            m = json.loads(marca.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        total = len([p for p in ac.glob("audio_*.wav") if p.name.count(".") == 1]) if ac.exists() else 0
+        return {"motor": m.get("motor"), "fish": len(m.get("frases") or []), "total": total or m.get("total")}
+    return None
+
+
 def _variantes_do_ambiente():
     """30/10: {teste: braço} das envs CORTES_* (bin\\variantes.py); None fora do Short de parceiro (sem env)."""
     try:
@@ -556,6 +572,7 @@ def main():
         "revisao": "pendente",
         "narrador": args.narrador,
         "voz_base": args.voz_base,
+        "motor_voz": _motor_voz(video),            # 19/11: frases no Fish (motor novo) x total
         "teste_voz": args.teste_voz,               # tem de estar na 1ª gravação: o medidor olha cada vídeo 1x só
         "cobertura": __import__("os").environ.get("CORTES_COBERTURA_USADA") or None,  # 27/10 teste T2 tarja x delogo
         "legenda_estilo": __import__("os").environ.get("CORTES_LEGENDA_ESTILO") or None,  # 27/10 teste T3 impacto

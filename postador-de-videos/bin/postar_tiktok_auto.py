@@ -398,7 +398,26 @@ def main():
     def _ja_no_pc(v):
         return bool(v.get("limpo") and Path(v["limpo"]).exists()) or bool(v["no_pc"] and Path(v["caminho"]).exists())
 
+    ip_fora = {}  # 19/11: IP Webshare testado nesta rodada -> abriu?
+
     def um_post(conta, r, cand):
+            # 19/11 dona ("por que tantos erros no TikTok se temos tantos PCs desocupados?"): 71 de 72 contas da
+            # Webshare sem banda (402); o IP 2 não abre túnel desde 04:20 e jogoscomia/inovaremanhwabr tentavam toda
+            # rodada — baixavam vídeo, esperavam e davam ERRO (50 dos ~70 erros do dia). Agora o IP da conta é testado
+            # ANTES (1 CONNECT, guardado na rodada): fora = a conta só sai desta rodada, sem erro e sem baixar nada.
+            # TIKTOK_PULA_IP_FORA=0 desliga.
+            if (os.environ.get("TIKTOK_PULA_IP_FORA", "1") != "0" and not r.get("sem_proxy")
+                    and (catalogo._ler(catalogo.REUSO, {}).get("tiktok") or {}).get("proxy_webshare")):
+                try:
+                    n_ip = proxy_tiktok.ip_da_conta(conta)
+                    with trava:
+                        if n_ip not in ip_fora:
+                            ip_fora[n_ip] = not (proxy_tiktok.garantir() and proxy_tiktok.pronto(n_ip))
+                    if ip_fora[n_ip]:
+                        log(f"  {conta}: IP {n_ip} da Webshare fora nesta rodada — fica pra próxima (sem contar erro)")
+                        return
+                except Exception:  # noqa: BLE001 — na dúvida segue o caminho normal (que já recusa sem proxy)
+                    pass
             while cand:
                 v = cand.pop(0)
                 if drive_falhas[0] >= 3 and not _ja_no_pc(v):

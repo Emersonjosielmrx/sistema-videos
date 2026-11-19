@@ -98,6 +98,20 @@ VERSOES["keyla"] = dict(
     financ=[("Solfácil – Financiamento Solar", 120, 0.0215, 6, "Pelo portal do integrador · sem conta em banco"),
             ("BV – Meu Financiamento Solar", 96, 0.0219, 4, "Pelo portal do integrador · sem conta em banco"),
             ("Santander – CDC Socioambiental", 96, 0.0229, 4, "Pelo portal do parceiro · sem conta em banco")])
+# Melck 19/11: 1.100 kWh/mes -> 14 x 625 W = 8,75 kWp + 2 ar-condicionados no valor; pagamento igual ao da Keyla
+VERSOES["melck"] = dict(
+    VERSOES["keyla"], n=14, ger_media=1100, consumo=1100, valor=27900.00, num="P26-1119",  # 23.900 solar + 4.000 pelos 2 ar (dona 19/11)
+    saida="Proposta MS Energy - Melck Muller de Oliveira Amancio - 1.100 kWh - 14x625W Solis 8k.pdf",
+    cliente="MELCK MÜLLER DE OLIVEIRA AMANCIO", cliente_doc="", cliente_end="",
+    ligacao="Bifásico", grupo="Grupo B1 – Residencial", minimo=50,
+    inversores=[(1, "INVERSOR SOLAR SOLIS 8 kW", "Ligação 220 V · 2 MPPT · monitoramento Wi-Fi pelo celular", "SOLIS")],
+    inv_curto="Solis 8 kW", cabo_m=50,
+    extras=[("AR-CONDICIONADO SPLIT INVERTER 12.000 BTUs", "Instalação inclusa · tecnologia inverter, gasta menos energia", "PC", 2, "ar")],
+    porque=["Gera cerca de 1.100 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "14 painéis de 625 W (8,75 kWp): menos painéis para a mesma energia, menos peso e menos furos no telhado.",
+            "Dois ar-condicionados inverter inclusos: mais conforto, com a energia vindo do próprio sol.",
+            "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano).",
+            "Inversor Solis de 8 kW com acompanhamento da geração pelo aplicativo."])
 CHAVE = sys.argv[1] if len(sys.argv) > 1 else "solis"
 V = VERSOES[CHAVE]
 SAIDA = os.path.join(AQUI, V["saida"])
@@ -498,10 +512,10 @@ if V.get("pagamento"):
         f"<td>{car} meses</td><td class='q' style='font-size:11pt'>R$ {brl(pmt(VALOR, i, n))}</td></tr>"
         for b, n, i, car, obs in FINANC)
     bloco_fin = (f"""<h2>Simulação de financiamento</h2>
-  <p class="sub" style="margin-bottom:3mm">Valor financiado: R$ {brl(VALOR)} · cliente {V['cliente']} · {V['cliente_doc']} · no maior prazo de cada linha</p>
+  <p class="sub" style="margin-bottom:3mm">Valor financiado: R$ {brl(VALOR)} · cliente {V['cliente']}{' · ' + V['cliente_doc'] if V['cliente_doc'] else ''} · no maior prazo de cada linha</p>
   <table class="prod"><tr><th style="text-align:left">Financeira</th><th>Prazo</th><th>Juros</th><th>Carência</th><th>Parcela estimada</th></tr>{linhas_fin}</table>
   <div class="destaque" style="font-size:9.5pt"><b>Parcela estimada:</b> ao submeter à aprovação da financeira, os valores
-  podem aumentar dependendo do score de crédito. A taxa final sai da análise feita com o CPF da cliente e pode incluir IOF,
+  podem aumentar dependendo do score de crédito. A taxa final sai da análise feita com o CPF do(a) cliente e pode incluir IOF,
   seguro e tarifas.</div>"""
                  if FINANC else "")
     pagina(f"""

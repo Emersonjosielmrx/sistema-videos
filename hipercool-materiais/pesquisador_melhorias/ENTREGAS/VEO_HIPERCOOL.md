@@ -316,3 +316,28 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 04:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_0356.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 05:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_0456.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 12:44 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1238.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 13:06 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1247.md`
+- [INÉDITO] github.com/printemps-tokyo/stripcut — ★0, push 2026-11-12, MIT — Slice a 40,000px webtoon canvas without cutting through a face. Finds the gutters between panels and cuts there, as close to your target til
+
+## [ ] PENDENTE — 2026-11-19 13:50 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1324.md`
+- [INÉDITO] github.com/CHE0DAN/recap-shorts-automation — ★81, push 2026-11-03, MIT — 커뮤니티 인기글 하나로 30~40초 한국어 요약 쇼츠를 만드는 Windows 앱
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 14:28 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1417.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 14:50 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1431.md`
+- [INÉDITO] github.com/jrubiosainz/manga-3d-color — ★1, push 2026-02-18, MIT — 🎨 Transform B&W manga into colorized 3D parallax experiences. AI colorization + depth maps + WebGL reader.
+- [INÉDITO] github.com/skyeyesec333/photo-depth — ★0, push 2026-11-18, MIT — Claude Code skill: Give a single photo or painting real depth on the web: MoGe-2 depth maps, a three.js window effect with parallax that doe

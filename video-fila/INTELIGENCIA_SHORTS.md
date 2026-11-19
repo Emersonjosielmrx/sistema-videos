@@ -1,6 +1,6 @@
-# Inteligência dos Shorts — 18/11/2026 05:40
+# Inteligência dos Shorts — 19/11/2026 05:42
 
-1696 Shorts de parceiro com 48 h+ (Studio). Gerado por `video-fila/inteligencia_ajustada.py` (tarefa FocoShorts, 05:40).
+1718 Shorts de parceiro com 48 h+ (Studio). Gerado por `video-fila/inteligencia_ajustada.py` (tarefa FocoShorts, 05:40).
 
 ## Horário nobre (21-23 h de Brasília) x resto do dia — mediana de views no MESMO canal
 
@@ -12,15 +12,15 @@
 | bichonoturno | 1259 | 23 | 11 | 72 | 105.0x |
 | esportenoturno | 1292 | 22 | 1216 | 97 | 1.1x |
 | doramanoturno | 5 | 18 | 4 | 70 | 1.2x |
-| inovareu8b | 6 | 18 | 6 | 51 | 1.0x |
+| inovareu8b | 6 | 18 | 6 | 52 | 1.0x |
 | fiodameada | 1400 | 16 | 868 | 55 | 1.6x |
-| inovaremanhwabr | 1020 | 15 | 420 | 76 | 2.4x |
+| inovaremanhwabr | 1020 | 15 | 414 | 78 | 2.5x |
 | cartuchoreact | 1223 | 13 | 6 | 68 | 174.9x |
 | curiosidadesnoturnas | 1000 | 13 | 4 | 56 | 200.2x |
 | historiasemframes | 1002 | 12 | 1000 | 84 | 1.0x |
 | animescomia | 1149 | 11 | 6 | 63 | 164.3x |
 | inventoreact | 1083 | 11 | 1004 | 32 | 1.1x |
-| cenareact | 1136 | 9 | 986 | 91 | 1.2x |
+| cenareact | 1136 | 9 | 992 | 94 | 1.1x |
 | manhwanoturno | 3 | 8 | 3 | 21 | 1.0x |
 | dicasfinanceirasdaia | 729 | 4 | 1100 | 71 | 0.7x |
 
@@ -28,13 +28,13 @@
 
 ## Fontes (nota sem o efeito do horário; 1,00 = normal do canal)
 
-Melhores: shortsadabr 2.03 (17), richan 1.97 (21), Ecommerce na Prática 1.83 (6), xiuliamelo 1.81 (29), carlosmerchanat 1.74 (8), levisaosensei 1.73 (7), Sebrae 1.73 (5), caosmetria 1.67 (27), ryukmovies 1.5 (5), explicaaii1 1.49 (21), d_UCrQEaK 1.45 (13), curiosidadesemtela 1.32 (31)
+Melhores: shortsadabr 2.03 (17), richan 1.97 (21), xiuliamelo 1.81 (29), carlosmerchanat 1.74 (8), levisaosensei 1.73 (7), caosmetria 1.67 (27), Sebrae 1.61 (5), explicaaii1 1.6 (22), ryukmovies 1.5 (5), Professor Baroni 1.49 (9), d_UCrQEaK 1.45 (13), Ecommerce na Prática 1.4 (7)
 
-Piores: grananerd-k3r 0.4 (44), king_chan01 0.44 (22), Elementar 0.45 (4), historyinsyncbrasil 0.47 (5), fabioindaia2006 0.49 (13), ddedits5 0.5 (4), nerdcf 0.53 (9), historiasdofranck 0.59 (8), projetopipocayt 0.61 (5), edumontalvao4665 0.63 (4), eduardoflix 0.63 (10), a_UCHCxgk 0.64 (5)
+Piores: grananerd-k3r 0.4 (44), king_chan01 0.44 (22), Elementar 0.45 (6), historyinsyncbrasil 0.47 (5), fabioindaia2006 0.49 (13), ddedits5 0.5 (4), historiasdofranck 0.59 (8), projetopipocayt 0.61 (5), RecapandoManhwa 0.62 (4), edumontalvao4665 0.63 (4), eduardoflix 0.63 (10), nerdcf 0.64 (10)
 
 ## Narradores (log2 da razão ajustada; 0 = normal, +1 = dobro, -1 = metade; entre parênteses, vídeos)
 
-Melhores: jett_valorant +1.07 (7), ilulu_kobayashi_san_dragon_maid +0.71 (10), cid_moreira +0.46 (7), mei_overwatch +0.45 (14), mulher_maravilha +0.45 (11), apostolo_valdemiro_santiago +0.38 (8), ivete_sangalo +0.37 (17), mc_melody_brazilian_singer_v2_500 +0.34 (11), luiz_carlos_persy +0.29 (45)
+Melhores: jett_valorant +0.93 (8), ilulu_kobayashi_san_dragon_maid +0.71 (10), mei_overwatch +0.45 (14), mulher_maravilha +0.45 (11), apostolo_valdemiro_santiago +0.38 (8), ivete_sangalo +0.37 (17), mc_melody_brazilian_singer_v2_500 +0.34 (11), iki +0.32 (26), luiz_carlos_persy +0.29 (50)
 
-Piores: dino_da_silva_sauro_familia_dinossauro -0.64 (38), capitao_nascimento -0.64 (9), verosika_helluva_boss_fandub -0.59 (6), chapolin_colorado -0.58 (40), thomas_shelby_peaky_blinders -0.45 (18), homem_de_ferro_tony_stark -0.43 (9), seu_madruga -0.41 (13)
+Piores: dino_da_silva_sauro_familia_dinossauro -0.65 (38), capitao_nascimento -0.64 (9), verosika_helluva_boss_fandub -0.59 (6), chapolin_colorado -0.54 (42), thomas_shelby_peaky_blinders -0.45 (18), seu_madruga -0.41 (13)
 

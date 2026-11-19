@@ -787,7 +787,7 @@ def fazer_short(pid):
     videos = sorted(local.rglob("final_anime_short*.mp4"))
     if rcod == 0 and videos and videos[0].stat().st_size > 300_000:
         rc("copyto", str(videos[0]), f"{FILA_SH}/{pid}/video.mp4")
-        for extra in ("marcas_visuais.json", "_testes_usados.json"):
+        for extra in ("marcas_visuais.json", "_testes_usados.json", "_voz_online.json"):  # 19/11: motor da voz
             for p in local.rglob(extra):
                 rc("copyto", str(p), f"{FILA_SH}/{pid}/{extra}")
                 break

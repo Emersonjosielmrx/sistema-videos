@@ -362,3 +362,30 @@ STATUS: OK
 - Causa provável: Instabilidade temporária no proxy Webshare e falta temporária de novos candidatos válidos na fonte de pesca/negócios.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar reconexão do proxy e nova varredura de candidatos).
 - Estado: NADA A FAZER
+## 20261119_0417 — Recap longo no PC1 e parceiro: funcionamento normal com reposição de estoque em 8/8
+- Motivo / O que achei (trecho de log): Processos em Python do ambiente de produção ativos e estáveis. Estoque do parceiro completo em 8/8, com pequenas falhas transitórias de proxy já tratadas pelo rodízio automático.
+- Causa provável: Ciclo normal de operação e controle de fluxo do sistema.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código realizada).
+- Estado: NADA A FAZER
+## 20261119_0555 — Vistoria geral: alimentador longo reiniciado e GPUs em uso normal
+- Motivo / O que achei (trecho de log): Recap longo com alimentador travado (107 min) e reiniciado automaticamente; 17 de 20 GPUs sem conta (aguardando próxima volta de lançamento), contas verificadas 11 de 71. Wise Memory Optimizer rodando normalmente.
+- Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera em JSON/API.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o alimentador já foi reiniciado e o sistema prossegue no fluxo normal).
+- Estado: NADA A FAZER
+## 20261119_0755 — Disco D: com 5.41 GB livres (abaixo do limite de 8 GB)
+- Motivo / O que achei (trecho de log): Get-CimInstance Win32_LogicalDisk mostra D: com 5.41 GB livres (3.26% de 166.01 GB), abaixo do limite mínimo de 8 GB estabelecido para a produção. Os processos de render, melhorador central e alimentadores estão ativos e trabalhando normalmente. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Acúmulo normal de materiais, workspaces e artefatos de render nas filas de produção.
+- CONSERTO PROPOSTO: Nenhum (o sistema possui rotinas automáticas de gerenciamento de espaço e o modo é estritamente de aviso, conforme regra do dono).
+- Estado: PRECISA REVISÃO
+
+## 20261119_1156 — Recap longo com alimentador ativo na pilha e PC2 pausado por falhas no parceiro; contas em uso normal
+- Motivo / O que achei (trecho de log): encher_pilha.log mostra processamento contínuo da pilha de Shorts (com baixadores em paralelo e pausas por timeout em algumas fontes), enquanto parceiro_postar.log relata PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json). Processos de Python ativos e Wise Memory Optimizer rodando normalmente.
+- Causa provável: Ciclo normal de operação do alimentador com pausa de proteção automática no PC2 após falhas consecutivas de Shorts do parceiro, além de timeout em baixadores externos eventuais.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar a pausa automática de proteção do PC2 sem remover arquivos de falha nem interferir nos fluxos).
+- Estado: NADA A FAZER
+STATUS: OK
+## 20261119_1436 — Vistoria geral: disco D: em 7.24 GB livres (abaixo do limite de 8 GB) e proxy Groq com falhas transitórias
+- Motivo / O que achei (trecho de log): Get-CimInstance Win32_LogicalDisk mostra D: com 7.24 GB livres (7.24 GB / 166.01 GB), ligeiramente abaixo do limite mínimo de 8 GB. Logs de parceiro registraram avisos de proxy Webshare/Groq fora (recuperáveis com teste posterior) e WinError 32 pontual em capar_shorts.log. Produção de anime e monitoramento ativos e normais.
+- Causa provável: Acúmulo padrão de arquivos na produção e instabilidade temporária em proxies externos de API.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar limpeza automática do sistema e reconexão de proxy sem modificações manuais).
+- Estado: PRECISA REVISÃO

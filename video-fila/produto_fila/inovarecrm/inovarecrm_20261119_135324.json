@@ -1,0 +1,146 @@
+{
+ "conta": "inovarecrm",
+ "produto": "crm_chatwoot",
+ "marca": "Inovare CRM",
+ "titulo": "Suporte que vira ticket e não se perde",
+ "legenda": "Mensagem de suporte que não vira chamado costuma ficar esquecida. Com o CRM Chatwoot IA, atendimento, tickets e histórico de cada cliente ficam em um só lugar. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Suporte esquecido no WhatsApp?",
+  "pergunta_cliente": "Mensagem de cliente some no WhatsApp e ninguém abre chamado?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia pedidos de suporte porque a mensagem chegava, ficava no meio da conversa e ninguém abria chamado.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit reception desk of a small Brazilian service company, clean modern office",
+    "real_tema": "",
+    "destaques": [
+     "ninguém abria chamado"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261119_135458_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "No CRM Chatwoot IA, a mensagem do cliente vira ticket de suporte, com o histórico dele no mesmo lugar.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "vira ticket"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, meu pedido veio com defeito."
+     },
+     {
+      "de": "empresa",
+      "texto": "Sinto muito! Já abri um ticket de suporte para você."
+     },
+     {
+      "de": "cliente",
+      "texto": "Obrigado! Alguém vai me responder?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, o atendente já vê todo o seu histórico e dá sequência."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje cada solicitação vira chamado e fica registrada. Eu acompanho o suporte com mais clareza e organização.",
+    "visual": "imagem",
+    "prompt_en": "standing in a tidy, well lit modern office of a small Brazilian company, laptop on a clean desk, no people in focus",
+    "cenario_en": "standing in a tidy, well lit modern office of a small Brazilian company, laptop on a clean desk",
+    "real_tema": "",
+    "destaques": [
+     "vira chamado",
+     "fica registrada"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261119_135458_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261119_135458_1.png"
+   }
+  ],
+  "legenda": "Mensagem de suporte que não vira chamado costuma ficar esquecida. Com o CRM Chatwoot IA, atendimento, tickets e histórico de cada cliente ficam em um só lugar. Link no perfil.",
+  "titulo": "Suporte que vira ticket e não se perde",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "chamado_sem_dono",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 88,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecrm_20261119_135324\\dono_1.mp4",
+ "duracao_s": 32.87,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-19T14:30:37",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.87,
+   "fala": "Mensagem de cliente some no WhatsApp e ninguém abre chamado?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.87,
+   "fim": 12.06,
+   "fala": "Eu perdia pedidos de suporte porque a mensagem chegava, ficava no meio da conversa e ninguém abria chamado.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.06,
+   "fim": 20.98,
+   "fala": "No CRM Chatwoot IA, a mensagem do cliente vira ticket de suporte, com o histórico dele no mesmo lugar.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.98,
+   "fim": 28.92,
+   "fala": "Hoje cada solicitação vira chamado e fica registrada. Eu acompanho o suporte com mais clareza e organização.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 28.92,
+   "fim": 32.87,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

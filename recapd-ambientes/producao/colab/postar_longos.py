@@ -706,7 +706,7 @@ def rodada(ver=False):
     # 11/11 dona (Medieval Age = prioridade máxima): a parte 9 ficou sem disco porque o OUTRO canal baixou o dele
     # antes (5,4 GB cada). Fio da Meada VIP na frente e disco < 20 GB = 1 envio por vez (ela pega o disco primeiro).
     try:
-        if (n_par > 1 and ordem and ordem[0][1] == "Fio da Meada"
+        if (n_par > 1 and ordem and ordem[0][1] == "Fio da Meada" and not _teste_celular(ordem[0][0])
                 and shutil.disk_usage(str(TMP)).free < float(os.environ.get("VIP_SOZINHA_GB", "20")) * 1e9):
             n_par = 1
             log("Fio da Meada (VIP) na frente e disco apertado — 1 envio por vez nesta rodada")
@@ -717,6 +717,19 @@ def rodada(ver=False):
         # 05/11: canal sem os recursos avançados (aviso do YouTube) não recebe longo — config/longo.json canais_bloqueados
         if cred in bloqueados_cfg:
             log(f"{nome_canal}: BLOQUEADO pra longo (config/longo.json canais_bloqueados) — pula")
+            return
+        # 19/11 (claude-f1): InventoReact REMOVIDO 17/11 continuava "preparando" longo (baixa 5-6 GB do Drive, enche o
+        # D: e o poster recusa no fim) — 5x só na madrugada de 19/11. Canal travado (trava_conta: removido/encerrado)
+        # não recebe longo. LONGO_PULA_TRAVADO=0 desliga.
+        if os.environ.get("LONGO_PULA_TRAVADO", "1") != "0" and _canal_travado(cred):
+            log(f"{nome_canal}: canal TRAVADO/encerrado (trava_conta) — pula")
+            return
+        # 19/11 (claude-f1): Fio da Meada está no TESTE CELULAR da dona (postador config\teste_celular.json: só posta
+        # pelo app, 1 Short/dia). O longo de 2 GB baixava, "subia" e o poster recusava ("celular não postou") TODA hora
+        # — e como VIP com disco apertado a rodada era 1 envio só: os outros 4 canais nunca tinham vez (0 longos 19/11).
+        # Canal em teste do celular não recebe longo enquanto o teste durar. LONGO_PULA_TESTE_CELULAR=0 desliga.
+        if os.environ.get("LONGO_PULA_TESTE_CELULAR", "1") != "0" and _teste_celular(cred):
+            log(f"{nome_canal}: canal no TESTE CELULAR (só posta pelo app) — sem longo por enquanto, pula")
             return
         # 04/11 dona: "dá pra postar mais de um por dia em cada canal; os longos têm espaço de prioridade todo dia" —
         # até LONGOS_POR_DIA (2) por canal; a ordem abaixo já põe na frente quem recebeu menos hoje
@@ -764,8 +777,13 @@ def rodada(ver=False):
                         if _canal_travado(_p.get("canal")):
                             presos.pop(_n, None)
                             log(f"  {_n[:40]}: estava preso a {_p.get('canal_nome')} (canal ENCERRADO) — solto pra outro canal")
+                # 19/11 (claude-f1): o 1º longo com Fish (Jjd71) veio com "canal": InventoReact (tema ex_arrependida),
+                # canal REMOVIDO 17/11 — ficaria pra sempre na fila. Canal fixo travado = livre pra qualquer canal.
+                # LONGO_CANAL_FIXO_MORTO_SOLTA=0 desliga.
+                _solta = os.environ.get("LONGO_CANAL_FIXO_MORTO_SOLTA", "1") != "0"
                 cand = [i for i, (_, f, _d) in enumerate(fila) if _dono_serie(f.name, est) in (None, cred)
-                        and (not _d.get("canal") or _d["canal"] == cred)
+                        and (not _d.get("canal") or _d["canal"] == cred
+                             or (_solta and _canal_travado(_d["canal"])))
                         and presos.get(f.name, {}).get("canal", cred) == cred]
                 if not cand:
                     break
@@ -1198,6 +1216,18 @@ def _publico(vid):
 
 
 _TRAVADO_CACHE = {}
+
+
+def _teste_celular(cred):
+    """True se o canal (cred id) está em postador config\\teste_celular.json "canais" (só posta pelo celular)."""
+    try:
+        if r"D:\postador-de-videos\bin" not in sys.path:
+            sys.path.append(r"D:\postador-de-videos\bin")
+        import youtube_web_poster as ywp
+        slug, _e = ywp.entrada_do_cred(cred)
+        return bool(slug and slug in ywp._canais_teste_celular())
+    except Exception:  # noqa: BLE001
+        return False
 
 
 def _canal_travado(cred):

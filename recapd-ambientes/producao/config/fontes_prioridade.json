@@ -2,6 +2,18 @@
  "_leia": "09/11 dona: 'prioridade aos vídeos que dão mais visualizações, independente do canal' + autorização dos canais novos (8 escolhidos pela dona 09/11 21h30 (lista colada), pesquisa de 09/11, conferida na página). O alimentador (cliente.py alimentar) pega DESTA lista primeiro, do mais visto pro menos, 1 por vez; vídeo já feito/enviado é pulado; lista vazia = só o canal normal. FONTES_PRIORIDADE=0 desliga. tipo: anime | manhwa.",
  "videos": [
   {
+   "id": "o5eorVpfrUA",
+   "canal": "AnimeSynth and Otaku Srin ",
+   "views": 156117,
+   "min": 61,
+   "titulo": "I’m Just a Lowly Sweeper, But I Secretly Bury Every \"System User\" Who Crosses Me! - Anime Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "jardineiro_academia",
+   "garimpado": "2026-11-19",
+   "parecido": true
+  },
+  {
    "id": "Bb3C8_mEpUE",
    "canal": "Mamoru Manhwa",
    "views": 1189622,
@@ -633,6 +645,18 @@
    "garimpado": "2026-11-14"
   },
   {
+   "id": "4_-IexPhd4k",
+   "canal": "Haruto Xplainer",
+   "views": 438315,
+   "min": 97,
+   "titulo": "After Reincarnating as a Rich Loser, I Took My Company Back and Cut Off My Fiancée | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-19",
+   "parecido": true
+  },
+  {
    "id": "_GRXRlk-1v8",
    "canal": "Torno Petruska",
    "views": 253611,
@@ -1195,6 +1219,7 @@
   "2r6xu8KAjs0",
   "42aL4ga52LE",
   "46LkpAILgrQ",
+  "4_-IexPhd4k",
   "5gZycXTnxrU",
   "65WBxTrMYGQ",
   "6pTrDAse5do",
@@ -1270,6 +1295,7 @@
   "lB1rbKXs3aQ",
   "mHEDdMTTUWs",
   "msdGuyJ4gLA",
+  "o5eorVpfrUA",
   "pvf8yoBphtk",
   "qWr_xHqLZ5I",
   "q_CFsP6B0hQ",

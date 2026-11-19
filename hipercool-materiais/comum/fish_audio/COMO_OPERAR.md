@@ -27,7 +27,15 @@ Atualizado em 19/11/2026 (madrugada). A dona ouviu e disse: "realmente é outro 
 > **⚠️ LICENÇA:** plano grátis do site = sem uso comercial; Fish Speech 1.5 (pesos) = CC-BY-NC-SA 4.0 (não comercial).
 > Decisão da dona (assinar o Plus libera o comercial no site).
 >
-> **Logins do pool:** `logar_pool_noite.py` tenta 1 conta a cada 10 min pelo IP dela e para em verificação.
+> **Logins do pool (19/11, 51 de 53 prontas, ~347 min de voz/mês):** `python logar_dona.py [email] [--espera 900]` —
+> uma conta por vez, pelo IP dela, janela NA FRENTE (maximiza + topo) + apito; a dona clica em "Iniciar sessão" e
+> entra com o Google; o script guarda o token DIRETO da janela (o cofre fecha o Chrome com taskkill e o login às vezes
+> se perdia) e registra no rodízio. Pula conta aberta por outro projeto; janela fechada = pula na hora. Fora (lista
+> `PULAR` em `faltam()`): `comoseriasecomia`, `revolutionemerson3`. Saldo sem workspace = `sessoes_fish.saldo` busca em
+> `/team/context`. **Os 100 IPs rnprmtfo estão em uso** — conta nova no Fish só com mais IP no Webshare.
+> **Banidas do Kaggle no pool:** `kaggle_proxy` foi movido para `kaggle_proxy_antigo` (o `pool_fish` nunca reusa esse
+> IP). Conta VIVA no Kaggle continua proibida. **Conta nova (canal recém-criado) nunca entra** (`pool_fish._eh_nova`).
+> O antigo `logar_pool_noite.py` (sem a dona) não loga: para na verificação.
 > **Relatório:** `python relatorio_fish.py` -> `RELATORIO_MANHA.md`.
 
 > **18/11 noite — caminho RÁPIDO por HTTP: `fish_http.py` + `fabrica_fish.py` + `sessoes_fish.py`.** A geração
@@ -342,3 +350,27 @@ python da produção, sem subprocesso. Tudo o que está abaixo vale nos Shorts s
   depois roda `sessoes_fish.py registrar <email>`. A partir daí a conta entra na escolha por crédito sozinha.
 - **Validade do token:** ainda não medida (nenhum morreu até 18/11 21h). Quando morre, o sistema percebe (401),
   marca a sessão como morta, e a fábrica grava um token novo na próxima vez que abrir a conta. Para ver: `vida`.
+
+## 19/11 — referência de PERSONAGEM sem gastar crédito (colheita)
+Dona: "não gaste créditos; use os Shorts já feitos com o motor novo e vá trocando". Toda fala que um Short gera no Fish
+(fish_lote.gerar) é copiada para `colheita\<id da voz>\` (máx. 30). Com >= 8 s de um personagem, `colher_referencias.montar`
+junta 8-14 s, sobe como `colab_recap/vozes/<voz>/referencia_fish.*` (origem `colheita:<id>`) e guarda a anterior como
+`referencia_fish_antiga.*`. Narrador parceiro (origem `original:cortado`) nunca é trocado. IDs do site dos personagens:
+vozes_site.json (17 achados pela busca 19/11, campo "achado" = conferir ouvindo). Rodar à mão: `python colher_referencias.py`.
+NUNCA gerar referência no site só para ter referência (gasta ~155 créditos por voz).
+
+## 19/11 — Short que vai pro Kaggle já leva a narração do site (lote_shorts_kaggle._fish_antes)
+Antes: todo Short de parceiro ia pro Kaggle sem narração (o Fish online só roda no PC1) e os créditos sobravam.
+Agora o PC1 narra no site ANTES de mandar e sobe audio_cache/ junto; o Kaggle pula as frases prontas.
+- narrador clonado com voz no site (Sonic, Cid, Walter, Vegeta, Galvão...) = a MESMA voz no site;
+- narrador sem voz no site (parceiros: momo, guugou, doinsuka...) = não usa o site, o Fish do Kaggle narra c/ original;
+- sem narrador clonado = voz do nicho (Chris / Neymar esporte); fala da mascote e Short de várias vozes ficam de fora.
+Testado 19/11: 2/2 frases Sonic (conta inovarecap), momo pulou. SHORTS_FISH_ANTES=0 desliga.
+
+## 19/11 — REGRA DA DONA: no Kaggle é SEMPRE o motor novo
+"Não tem problema fazer Shorts no Kaggle; o que não pode é não ser com o motor novo lá, já que tem GPU. O único
+cenário de usar o p3 é não estar no Kaggle E não ter conta com crédito online."
+- anime_tts._pasta_fish: voz sem referencia_fish -> narra com a do nicho (neymar no esporte, narrador_chris no resto);
+  Short sem narrador escolhido também passa pelo Fish do Kaggle (anime_segments, caminho sem clone).
+- Os pedidos levam narrador_chris/neymar em "vozes" (Short) e narrador_chris em "vozes_extra" (longo) pro Kaggle baixar.
+- Kitten/p3 no Kaggle só se o Fish Speech não instalou no kernel (vivo_<conta>.json "fish": false).
