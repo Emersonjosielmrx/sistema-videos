@@ -471,3 +471,10 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só AVISO). Apenas verificação do log e registro no diário.
 - CONSERTO PROPOSTO: Nenhum (comportamento padrão esperado para vídeos removidos/travados pelo YouTube até que a dona limpe o registro em contas_travadas.json).
 - Estado: NADA A FAZER
+
+## 20261120_1157 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos e regulares a cada 20 minutos (último às 11:46 "janela: D: com 4.2 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). Processos e rotinas automáticas respondendo normalmente sem travamentos críticos.
+- O que fiz: Nenhum código alterado (Modo Só Aviso estrito). Apenas leitura dos logs e registro da ronda.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

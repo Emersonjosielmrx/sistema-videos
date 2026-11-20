@@ -45,10 +45,14 @@ def abrir(conta):
             raise SystemExit(f"{conta}: saída do cofre rnprmtfo-{n} != configurada {c['saida']}")
         px = fish_audio._subir_ponte(n)
         _, proc = cofre.abrir(c["email"], extra=(f"--proxy-server=127.0.0.1:{px}",))
-    for _ in range(40):
-        if _porta_aberta(porta):
+    # 20/11: o Chrome do perfil antigo às vezes leva >20 s pra responder o CDP (ECONNRESET no connect_over_cdp)
+    import urllib.request
+    for _ in range(120):
+        try:
+            urllib.request.urlopen(f"http://127.0.0.1:{porta}/json/version", timeout=3).read()
             break
-        time.sleep(0.5)
+        except Exception:
+            time.sleep(0.5)
     time.sleep(3)
     _conferir_saida(conta)
     return porta, proc
@@ -73,6 +77,13 @@ def _conferir_saida(conta):
 def fechar(proc):
     if proc:
         subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
+        # 20/11 11:05 (MS Energy): reabrir o mesmo perfil logo depois dava ECONNREFUSED — espera o Chrome sair de verdade
+        for _ in range(30):
+            out = subprocess.run(["tasklist", "/FI", f"PID eq {proc.pid}", "/NH", "/FO", "CSV"], capture_output=True).stdout
+            if str(proc.pid).encode() not in (out or b""):
+                break
+            time.sleep(0.5)
+        time.sleep(4)
 
 
 def listar_paginas(ctx):

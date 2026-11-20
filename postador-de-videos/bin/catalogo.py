@@ -70,6 +70,9 @@ FICHAS = [(r"D:\hipercool-materiais\animes recap\shorts", "parceiro", "parceiro/
           # 16/11 dona ("aplique no 3D tudo que os outros já usam"): Shorts 3D (kit3d, fichas 3d-*) no reuso
           # TikTok/Instagram e no backup, como os de parceiro.
           (r"D:\hipercool-materiais\historias-em-frames", "kit3d", "kit3d/fichas", False)]
+FB_PAGINAS_LOG = LOGS / "facebook_paginas.json"  # 20/11: Reels nas Páginas (postar_facebook_paginas.py)
+FB_NOMES = {k: v.get("nome", k) for k, v in (json.loads((CONFIG / "facebook_paginas.json").read_text(encoding="utf-8"))
+                                             if (CONFIG / "facebook_paginas.json").exists() else {}).get("paginas", {}).items()}
 MS_ENERGY_LOG = Path(r"D:\ms-energy\videos\postagem_log.json")  # postador proprio do ms-energy (insta/fb/stories)
 BRUTOS = Path(r"D:\hipercool-materiais\veo\veo_videos_iniciais")  # geracoes brutas do Veo: reaproveitaveis em videos novos
 SUSPENSOS = Path(r"D:\hipercool-materiais\veo\pos_final\completo")  # VO3 antigo: muitos passaram pelos canais suspensos
@@ -190,6 +193,11 @@ def _postagens(caminhos):
                 except ValueError:  # o log as vezes so diz "ok": postado, sem data
                     quando = None
                 out.append((plat, "ms-energy", None, quando, None, stem + ".mp4"))
+    # 20/11: Reels nas Páginas do Facebook (postar_facebook_paginas.py) — o catálogo passa a saber o que já foi pro FB
+    for chave, ps in (_ler(FB_PAGINAS_LOG, {}).get("postados") or {}).items():
+        for e in ps:
+            out.append(("facebook", FB_NOMES.get(chave, chave), None, politica._dt(e.get("quando")), e.get("caminho"),
+                        Path(e.get("caminho") or "x").name))
     for log, conta in LOGS_PROPRIOS:  # postadores proprios gravam so o caminho
         quando = datetime.fromtimestamp(log.stat().st_mtime).astimezone() if log.exists() else None
         for p in _ler(log, []):
@@ -515,7 +523,7 @@ def resumo(cat):
     print(f"catalogo {cat['atualizado']}: {len(cat['videos'])} video(s)")
     for proj, c in sorted(por.items()):
         print(f"  {proj:20} {c['videos']:5} videos | PC {c['GB no PC']:6.2f} GB | Drive {c['GB no Drive']:6.2f} GB | "
-              f"youtube {c['youtube']} tiktok {c['tiktok']} instagram {c['instagram']}")
+              f"youtube {c['youtube']} tiktok {c['tiktok']} instagram {c['instagram']} facebook {c['facebook']}")
     for plat in ("tiktok", "instagram"):
         d = Counter(v["conta_reuso"] for v in disponiveis(plat, cat))
         print(f"  disponivel para {plat}: {sum(d.values())} -> " + ", ".join(f"{k} {n}" for k, n in d.most_common()))

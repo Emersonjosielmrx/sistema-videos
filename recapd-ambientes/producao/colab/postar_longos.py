@@ -326,7 +326,14 @@ def _longo_fish(ficha):
         txt = (ficha / "pipeline.log").read_text(encoding="utf-8", errors="ignore")
     except OSError:
         return False
-    return any(int(n) > 0 for n in re.findall(r"\[fish nuvem\] (\d+)/\d+ frases", txt))
+    pares = [(int(a), int(b)) for a, b in re.findall(r"\[fish nuvem\] (\d+)/(\d+) frases", txt)]
+    # 20/11 (ZaWVmJcOjfo subiu com 98 de ~480 frases no Fish — o resto no motor antigo): exige a MAIORIA no Fish.
+    # LONGO_FISH_MIN_PCT (60) = % mínimo das frases pedidas ao Fish que o Fish entregou. 0 = volta ao "qualquer uma".
+    minimo = float(os.environ.get("LONGO_FISH_MIN_PCT", "60"))
+    feitas, pedidas = sum(a for a, _ in pares), sum(b for _, b in pares)
+    if minimo <= 0:
+        return feitas > 0
+    return pedidas > 0 and feitas * 100 >= minimo * pedidas
 
 
 def _avisar_qa(ficha):

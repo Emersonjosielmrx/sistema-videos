@@ -284,7 +284,35 @@ def med_capas_longos(agora):
     return out
 
 
-MEDIDORES = (med_postagem, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
+def med_facebook(agora):
+    """20/11: Páginas do Facebook (postar_facebook_paginas.py). Depois das 22 h: Página ativa sem nenhum Reel no dia;
+    a qualquer hora: o mesmo erro 3x em 6 h na mesma Página. A escada (fb_escada.py) já segura bloqueio sozinha."""
+    import json as _j
+    base = Path(r"D:\postador-de-videos")
+    try:
+        cfg = _j.loads((base / "config" / "facebook_paginas.json").read_text(encoding="utf-8"))
+        reg = _j.loads((base / "logs" / "facebook_paginas.json").read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    out, hoje = [], f"{agora:%Y-%m-%d}"
+    corte = (agora - timedelta(hours=6)).isoformat()
+    for ch, pag in cfg.get("paginas", {}).items():
+        if pag.get("pausada"):
+            continue
+        posts = [x for x in reg.get("postados", {}).get(ch, []) if x["quando"].startswith(hoje)]
+        if agora.hour >= 22 and not posts and (pag.get("_criada", "")[:10] != hoje):
+            out.append({"chave": f"facebook:sem_post:{ch}", "categoria": "postagem-facebook", "projeto": "postador",
+                        "titulo": f"Facebook {pag['nome']}: 0 Reels hoje",
+                        "evidencia": "logs\\facebook_paginas.json sem postagem hoje; ver logs\\facebook_paginas.log"})
+        erros = [m for k, m in (reg.get("erros", {}).get(ch) or {}).items() if k >= corte[:19]]
+        for m, n in Counter(_norm(x) for x in erros).items():
+            if n >= 3:
+                out.append({"chave": f"facebook:erro:{ch}:{m[:40]}", "categoria": "postagem-facebook", "projeto": "postador",
+                            "titulo": f"Facebook {pag['nome']}: mesmo erro {n}x em 6 h", "evidencia": m})
+    return out
+
+
+MEDIDORES = (med_postagem, med_facebook, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
              med_capas_longos, med_qa_longos)
 
 

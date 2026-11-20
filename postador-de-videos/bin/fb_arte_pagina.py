@@ -14,6 +14,15 @@ TEMAS = {  # fundo topo, fundo base, destaque, símbolo
     "filmes": ((10, 10, 14), (70, 10, 10), (255, 190, 60), "▶"),
     "manhwa": ((6, 10, 30), (30, 40, 110), (120, 220, 255), "✦"),
     "futebol": ((4, 30, 12), (20, 110, 50), (255, 255, 255), "⚽"),
+    # 20/11: temas da fila das 53 Páginas (fb_criar_fila.py)
+    "financas": ((4, 20, 40), (10, 90, 70), (90, 230, 140), "$"),
+    "games": ((20, 4, 40), (80, 20, 140), (120, 255, 200), "✚"),
+    "ia": ((4, 12, 40), (20, 70, 140), (110, 200, 255), "✦"),
+    "humor": ((40, 20, 0), (170, 80, 10), (255, 230, 90), "☺"),
+    "bichos": ((10, 30, 10), (60, 110, 30), (255, 220, 120), "✿"),
+    "misterio": ((6, 6, 20), (40, 30, 80), (170, 255, 170), "✪"),
+    "musica": ((30, 0, 40), (140, 20, 120), (255, 160, 240), "♫"),
+    "historias": ((30, 14, 4), (110, 50, 20), (255, 200, 120), "✎"),
 }
 chave, titulo, sub, linha2, tema = sys.argv[1:6]
 C1, C2, DEST, SIMB = TEMAS[tema]
@@ -43,7 +52,7 @@ def lua(im, cx, cy, r):
 
 
 def simbolo(im, cx, cy, tam):
-    f = ImageFont.truetype(FB if SIMB == "?" else FSYM, tam)
+    f = ImageFont.truetype(FB if SIMB in ("?", "$") else FSYM, tam)
     d = ImageDraw.Draw(im)
     w = d.textlength(SIMB, font=f)
     sombra = Image.new("RGBA", im.size, (0, 0, 0, 0))

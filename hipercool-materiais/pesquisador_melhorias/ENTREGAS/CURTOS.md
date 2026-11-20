@@ -4646,3 +4646,16 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 07:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0751.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 08:19 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0811.md`
+- [INÉDITO] github.com/mofanx/pilotdroid — ★None, push ?, ver repo (fallback HTML) — Device-side Android automation — persistent msgpack protocol + on-device batch exec. stdio MCP server (21 tools), uiautomator2 drop-in shim,
+
+## [ ] PENDENTE — 2026-11-20 08:32 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0821.md`
+- [INÉDITO] github.com/kilolonion/agent-vscreen — ★155, push 2026-11-20, MIT — A background virtual screen for any Android AI agent: it operates apps on an invisible display while you keep using your phone. CLI / MCP / 
+- [INÉDITO] github.com/aivanelabs/ai-rpa — ★14, push 2026-11-20, MIT — AI mobile automation starter repo for AIVane. Android REPL beta, Python client, skills, examples, and protocol docs for AI agents.
+
+## [ ] PENDENTE — 2026-11-20 10:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1034.md`
+- [INÉDITO] github.com/pndurette/pybatchexecute — ★25, push 2026-01-05, MIT — Python package to ease interactions with Google's batchexecute batch RPC system

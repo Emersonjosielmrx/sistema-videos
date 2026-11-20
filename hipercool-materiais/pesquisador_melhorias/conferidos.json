@@ -20053,5 +20053,65 @@
     "arquivado": false,
     "descricao": "Fork of thedjchi/Shizuku adding Tasker daemon-ready/stopped broadcasts and Android 17 wireless ADB pairing/startup without the device choose",
     "data": "2026-11-20"
+  },
+  "mofanx/pilotdroid": {
+    "ok": true,
+    "nome": "mofanx/pilotdroid",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "Device-side Android automation — persistent msgpack protocol + on-device batch exec. stdio MCP server (21 tools), uiautomator2 drop-in shim,",
+    "data": "2026-11-20"
+  },
+  "kilolonion/agent-vscreen": {
+    "ok": true,
+    "nome": "kilolonion/agent-vscreen",
+    "estrelas": 155,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A background virtual screen for any Android AI agent: it operates apps on an invisible display while you keep using your phone. CLI / MCP / ",
+    "data": "2026-11-20"
+  },
+  "aivanelabs/ai-rpa": {
+    "ok": true,
+    "nome": "aivanelabs/ai-rpa",
+    "estrelas": 14,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "AI mobile automation starter repo for AIVane. Android REPL beta, Python client, skills, examples, and protocol docs for AI agents.",
+    "data": "2026-11-20"
+  },
+  "sheerabth/anirecap": {
+    "ok": true,
+    "nome": "Sheerabth/anirecap",
+    "estrelas": 0,
+    "push": "2026-10-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn anime episodes into narrated recap videos: fandom-canonical summaries, VO-only mix, fast cuts.",
+    "data": "2026-11-20"
+  },
+  "pndurette/pybatchexecute": {
+    "ok": true,
+    "nome": "pndurette/pybatchexecute",
+    "estrelas": 25,
+    "push": "2026-01-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Python package to ease interactions with Google's batchexecute batch RPC system",
+    "data": "2026-11-20"
+  },
+  "9b9387/adb-agent": {
+    "ok": true,
+    "nome": "9b9387/adb-agent",
+    "estrelas": 1,
+    "push": "2026-04-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A vision-empowered Android automation agent that allows you to control your mobile device using natural language.",
+    "data": "2026-11-20"
   }
 }

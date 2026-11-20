@@ -25,6 +25,26 @@ hashtag da legenda tem que estar nas `tags` da Página. Registro:
   foto/capa; `fb_arte_pagina.py` gera a arte; `fb_conferir_reels.py` confere a aba Reels; `fb_monetizacao.py` lê a aba
   Monetização.
 
+## Inteligência (20/11, igual às outras redes)
+- **Catálogo**: `catalogo.py` lê `logs\facebook_paginas.json` → o vídeo passa a ter postagem "facebook" (resumo mostra a
+  coluna facebook; o backup do Drive sabe o que já foi pro FB).
+- **Escada** `fb_escada.py` (estado `config\fb_escada.json`, log `logs\fb_escada.log`): base = `por_dia` (3), sobe +1 a
+  cada 3 dias se encheu o teto em 2 dos últimos 3 dias, sem bloqueio e views não caindo; teto 8/dia. Erro com
+  bloqueio/restrição/limite no postador = desce 1 e segura 24 h sem postar. `python fb_escada.py ver`.
+- **Medidor** `fb_medir.py`: views de cada reel + seguidores por Página (pela saída fixa) → `logs\fb_views.jsonl` e
+  `FACEBOOK_VISUALIZACOES.md`.
+- Tarefa `FacebookInteligencia` 08:30 (medir + escada).
+
+## Criação automática de Páginas (20/11: 1 por TikTok, 53 na fila)
+- Fila `config\fb_fila_paginas.json` (53 = TikToks sem Página; 27 na msenergypara/perfil 10+ anos, 26 na
+  emersonjosiel02). Página de TikTok sem canal = `temas_veo` (Veo do tema que já saiu no YouTube, só versão limpa).
+- `fb_criar_fila.py`: arte → cria (nome/categoria/bio) → id + asset_id → foto → capa → entra no
+  `facebook_paginas.json` → 1º Reel. Etapa que falhou continua na próxima rodada. 1 Chrome aberto o procedimento todo.
+- Ritmo: revezam as contas, 3 h entre criações da mesma conta, máx. 3/dia (msenergypara) e 2/dia (emersonjosiel02);
+  aviso de "rápido demais"/restrição/checkpoint = conta parada 48 h + Telegram. Estado `logs\fb_fila_estado.json`.
+- Tarefa `FacebookCriarPaginas` 09:40 13:40 16:40 19:40 22:40 (pula se uma rodada de postagem está rodando).
+  `python fb_criar_fila.py --ver` mostra a fila.
+
 ## Monetização (aba do Business Suite, 20/11)
 - MS energy: qualificada em Monetização de conteúdo, Estrelas e Assinaturas — falta a dona aceitar os termos e
   cadastrar a conta de pagamento.

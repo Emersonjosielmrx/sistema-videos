@@ -42,6 +42,8 @@ try:
             print("sem botão Criar Página"); sys.exit(2)
         b.click(); time.sleep(15)
         pg.screenshot(path=str(LOG / f"fb_criar_{tag}_2_criada.png"))
+        # 20/11: o texto da tela vai pro log — o fb_criar_fila procura aviso de "rápido demais"/restrição/checkpoint
+        print("tela:", " ".join(pg.inner_text("body").split())[:1500])
         # passos seguintes (foto, capa, WhatsApp, convidar amigos): pular
         for _ in range(6):
             s = vis(pg.get_by_role("button", name="Avançar")) or vis(pg.get_by_role("button", name="Ignorar")) \

@@ -442,3 +442,19 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Causa provável: Falha transitória ou erro na execução do script anime-pipeline.py no Kaggle ao testar o formato experimental joao_chico.
 - CONSERTO PROPOSTO: Nenhum — falha transitória no Kaggle com formato experimental, mantendo o fluxo normal.
 - Estado: NADA A FAZER
+
+## 20261120_0856 — Vistoria do vigia: Recap longo (alimentador ativo no PC1) e GPUs aguardando cota/trabalho
+- Motivo / O que achei (trecho de log): Logs do recap longo (anime_health_monitor.log, alimentar_pc2.log, encher_pilha.log) indicam que o alimentador (`cliente.py alimentar`) está ativo e operando no PC1, com pausas automáticas de fluxo e reabastecimento de pilha. Contas verificadas (16 de 77) e 15/23 GPUs sem conta aguardando cota/trabalho na fila. Wise Memory Optimizer ativo (PID 3840) e RAM livre em ~5.2 GB.
+- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento automático e a próxima volta do alimentador.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código necessária; operação dentro do fluxo normal).
+- Estado: NADA A FAZER
+
+## 20261120_0957 — Alerta de SSLError temporário no discover_canal (@richan-anime) e recuperação automática via yt-dlp
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\logs\parceiro_producao.log registrou aviso [discover_canal] API do site falhou em https://www.youtube.com/@richan-anime/shorts (SSLError: HTTPSConnectionPool...). O sistema lidou com instabilidades de rede e seguiu postando e processando Shorts com sucesso nas horas seguintes.
+- Causa provável: Instabilidade transitória de DNS/SSL na requisição HTTP com o YouTube, contornada automaticamente com fallback para o yt-dlp.
+- CONSERTO PROPOSTO: Nenhum (comportamento resiliente padrão já implementado e funcional).
+- Estado: NADA A FAZER
+## 20261120_1155 — Vigia: guarda do disco D (4.1 GB) e Wise Memory Optimizer ativo
+- Motivo / O que achei: D: com 4.1 GB livres, disparado backup_drive e cache do Chrome, apaguei 3 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo de arquivos temporários e cache no disco D. | CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — guarda do disco atuando automaticamente). | O que fez: Nenhuma intervenção manual necessária, automações do sistema em execução.
+- Estado: NADA A FAZER
+

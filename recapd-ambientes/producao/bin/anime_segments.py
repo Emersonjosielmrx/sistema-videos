@@ -492,6 +492,19 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
     # seguido, com uma passagem engraçada na troca e o nome dela na legenda (pra ela escolher quais servem pra manhwa)
     vozes_rev = [v.strip() for v in os.environ.get("VOZ_CLONADA_LISTA", "").split(",") if v.strip()]
     dono_rev = None
+    # 20/11 dona: "os gatilhos de piada têm que ser pela imagem também, principalmente o duplo sentido sexual" —
+    # cena SENSUAL no quadro (CLIP na GPU) ganha o "com todo respeito" (a voz estica o S). Antes de copiar 'originais'
+    # pra legenda acompanhar a voz. GATILHO_VISUAL=0 desliga.
+    try:
+        import gatilho_visual
+        tags = gatilho_visual.classificar(video_path, lines, tempos, Path(video_path).parent)
+        if tags:
+            lines, n_ = gatilho_visual.aplicar(lines, tags)
+            os.environ["GATILHO_SENSUAL"] = ",".join(str(i) for i, v in tags.items() if v == "sensual")
+            if n_:
+                logging.info(f"[gatilho visual] 'com todo respeito' em {n_} cena(s) sensual(is) da imagem")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[gatilho visual] pulado ({type(e).__name__}: {str(e)[:100]})")
     originais = list(lines)
     if audio_dir is not None:
         _tempos_fish(lines, audio_dir)  # 19/11: Short narrado no site pelo PC1 mede os tempos aqui (GPU)
@@ -750,7 +763,11 @@ def _nota_fala(texto, dur, frase):
     com ! ou ? e fala com ! ou ?) = +1."""
     import re as _re
     palavras = _re.findall(r"[\wÀ-ú]+", texto)
-    if not palavras or not texto.rstrip().endswith((".", "!", "?", "…")):
+    # 20/11 dona ("falas acabam no meio de palavras: 'no próximo capi-'"): reticências = fala interrompida; começo em
+    # minúscula = pedaço do meio de uma frase
+    if not palavras or not texto.rstrip().endswith((".", "!", "?")) or texto.rstrip().endswith("..."):
+        return 0
+    if not texto.strip()[:1].isupper() and not texto.strip()[:1].isdigit():
         return 0
     if [p for p in palavras[1:] if p[:1].isupper()]:
         return 0
@@ -766,6 +783,12 @@ def _nota_fala(texto, dur, frase):
     return nota
 
 
+def _inteira(texto):
+    """20/11: fala com começo e fim de frase (não é pedaço cortado)."""
+    t = texto.strip()
+    return bool(t) and (t[:1].isupper() or t[:1].isdigit()) and t.endswith((".", "!", "?")) and not t.endswith("...")
+
+
 class _FalasReais:
     """05/11/2026 dona ("as falas estão aprovadas de usar, essas aí já pode começar"): banco de falas ORIGINAIS de
     cada narrador (hermes-staging falas_narradores.py -> manhwa-drive:narradores_originais/<voz>/banco; o Kaggle
@@ -779,6 +802,49 @@ class _FalasReais:
 
     def __init__(self):
         self.dir, self.desde, self.usados, self.bancos = None, 0.0, set(), {}
+        self.hist, self.espera = [], 0
+
+    def _juiz(self, cands, hist, voz):
+        """20/11 dona ("o Momo falando de hospital do nada; usar as falas o máximo possível, com inteligência, e as
+        piadinhas safadas que o YouTube permite"): o Gemini 3.8 lê as últimas frases narradas e escolhe a fala do
+        banco que um narrador humano soltaria AGORA, ou nenhuma. Devolve o item, False (nenhuma serve) ou None (IA
+        fora — vale a regra antiga). FALAS_REAIS_JUIZ=0 desliga."""
+        if os.environ.get("FALAS_REAIS_JUIZ", "1") == "0" or not cands:
+            return None
+        try:
+            import claude_client
+            if not claude_client.is_available():
+                return None
+            lista = cands[:60]
+            opcoes = "\n".join(f"{k + 1}. [{x.get('categoria')}] {x.get('texto')}" for k, x in enumerate(lista))
+            prompt = (
+                f"Você é o editor de um vídeo de recap de manhwa narrado pelo {voz}. Entre uma frase e outra dá pra "
+                "encaixar UM áudio real dele (gravado em OUTROS vídeos). Ele só pode entrar se soar natural AGORA, "
+                "como se ele estivesse comentando ESTA cena.\n\nÚLTIMAS FRASES NARRADAS (a última acabou de tocar):\n"
+                + "\n".join(f"- {h}" for h in hist) + f"\n\nÁUDIOS DISPONÍVEIS:\n{opcoes}\n\n"
+                "REGRAS:\n- Recuse fala que cita pessoa, lugar, objeto ou acontecimento que NÃO está na cena (ex.: "
+                "falar de hospital, de chefe, de jogo, de capítulo, de andar, de cachorro quando a cena não tem isso).\n"
+                "- Recuse fala de transição ('próximo capítulo', 'um tempo depois', 'de volta no presente') no meio da "
+                "cena, e fala que parece pedaço de frase.\n- A reação tem que bater com o TOM: susto/espanto depois de "
+                "algo chocante, risada/piada depois de algo ridículo, 'sem entender' só depois de algo confuso.\n"
+                "- PREFIRA as piadinhas maliciosas permitidas no YouTube (RES-peito, mulherão, poderosa, 'não vou "
+                "mostrar', olhar onde não devia) quando a cena tiver mulher ADULTA bonita/sensual; nunca com criança.\n"
+                "- Na dúvida, responda 0. Melhor nenhuma do que fora de contexto.\n\n"
+                'Responda SÓ JSON: {"escolha": <número ou 0>, "motivo": "<curto>"}')
+            txt = claude_client._post([{"role": "user", "content": prompt}], max_tokens=200, temperature=0.2,
+                                      model=os.environ.get("GEMINI_TEXTO_VIDEO", "antigravity/gemini-3-flash"),
+                                      timeout=60, max_retries=1)
+            if not txt:
+                return None
+            import re as _re
+            m = _re.search(r"\{.*\}", txt, _re.S)
+            d = json.loads(m.group(0)) if m else {}
+            k = int(d.get("escolha") or 0)
+            logging.info(f"[falas reais/juiz] {voz}: escolha {k} — {str(d.get('motivo'))[:90]}")
+            return lista[k - 1] if 1 <= k <= len(lista) else False
+        except Exception as e:  # noqa: BLE001
+            logging.info(f"[falas reais/juiz] falhou ({type(e).__name__}: {str(e)[:80]}) — regra antiga")
+            return None
 
     def _banco(self, pasta, voz):
         if voz not in self.bancos:
@@ -790,6 +856,9 @@ class _FalasReais:
                     # 05/11 dona: "nem todas são risadas, do Momo só uma é risada mesmo" — o detector erra; som só
                     # entra com "aprovado": true NO ITEM (a dona ouviu aquele arquivo)
                     ok_cat = it.get("categoria") in self.CATS if it.get("tipo") == "fala" else it.get("aprovado") is True
+                    # 20/11: a retranscrição (falas_narradores.conferir) achou a fala cortada no meio da palavra
+                    if it.get("cortada") is True:
+                        ok_cat = False
                     # 12/11: o banco novo guarda a frase inteira até 10 s (+0,3 s de folga) — 6,5 jogava fora as longas
                     if ok_cat and 0.4 <= float(it.get("dur") or 0) <= 10.5 and (b / it["arquivo"]).exists():
                         itens.append({**it, "wav": b / it["arquivo"]})
@@ -808,16 +877,33 @@ class _FalasReais:
             self.__init__()
             self.dir = str(out_dir)
         self.desde += clip_dur
+        self.hist = (self.hist + [str(line)])[-4:]
         forte = impacto or str(line).rstrip().endswith(("!", "?"))
         # 12/11 dona ("as falas reais são muito boas, ampliar o máximo possível"): 1 a cada 60 s (era 150)
-        if not forte or self.desde < float(os.environ.get("FALAS_REAIS_A_CADA", "60")) or i < 3:
+        # 20/11: com o juiz de contexto, a vaga não precisa de frase "forte" — o juiz decide se cabe; recusou =
+        # espera 3 frases antes de perguntar de novo (não chama a IA em toda frase)
+        juiz_on = os.environ.get("FALAS_REAIS_JUIZ", "1") != "0"
+        if self.espera > 0:
+            self.espera -= 1
+        if (not forte and not juiz_on) or self.espera > 0 or i < 3 \
+                or self.desde < float(os.environ.get("FALAS_REAIS_A_CADA", "45" if juiz_on else "60")):
             return None
         cands = [x for x in self._banco(Path(video_path).parent, voz) if x["arquivo"] not in self.usados]
+        # pedaço de frase (começo minúsculo / fim sem pontuação / reticências) nunca vai pro juiz nem pro sorteio
+        cands = [x for x in cands if _inteira(str(x.get("texto") or ""))]
+        esc_juiz = self._juiz(cands, self.hist, voz)
+        if esc_juiz is False:
+            self.espera = 3
+            return None
+        if esc_juiz:
+            cands = [esc_juiz]
         # 19/11 dona ("as vozes reais às vezes não têm a ver com o que está sendo narrado: o Momo falando 'uma está em
         # X lugar' e do nada está num hospital"): o banco guarda trechos da narração de OUTRAS histórias (nomes, lugares,
         # ações). Só entra fala que serve em QUALQUER cena: curta, sem nome próprio e sem conteúdo de enredo — ou que
         # divida palavra-chave com a frase narrada. FALAS_REAIS_SO_GENERICAS=0 volta ao sorteio antigo.
-        if os.environ.get("FALAS_REAIS_SO_GENERICAS", "1") != "0":
+        if esc_juiz is None and not forte:
+            return None  # sem o juiz, só depois de frase forte (como antes)
+        if esc_juiz is None and os.environ.get("FALAS_REAIS_SO_GENERICAS", "1") != "0":
             # 19/11 dona ("não podemos perder as falas reais, elas são boas; eu só via as mesmas 5-10; talvez o problema
             # era a aplicação"): usa o banco INTEIRO, mas escolhe a que COMBINA com a frase narrada — nota por palavras em
             # comum + coringa genérica; fala com nome de personagem de outra história fica fora. Entre as que servem,

@@ -956,6 +956,172 @@
     "não descrever o que acontece: a piada é justamente NÃO contar",
     "só quando a obra de fato insinua (casal a sós, porta fecha) — nunca inventar cena"
    ]
+  },
+  {
+   "nome": "Não vou mostrar porque o YouTube não gosta (pisca pro público na cena ousada)",
+   "beleza": true,
+   "molde": "<a cena fica ousada / a moça aparece com pouca roupa>. Essa parte eu não vou mostrar não, porque o YouTube não gosta, galera.",
+   "exemplo_real": "Ela sai do banho só de toalha. Essa parte eu não vou mostrar não, porque o YouTube não gosta.",
+   "travas": [
+    "só personagem ADULTA",
+    "nunca descrever o corpo em detalhe",
+    "nunca palavra explícita"
+   ]
+  },
+  {
+   "nome": "Poderosa (elogio malicioso da mulher gostosa sem palavrão)",
+   "beleza": true,
+   "molde": "<fato com a personagem>. Olha ela, toda poderosa. <volta pra história>",
+   "exemplo_real": "A rainha desce a escada de vestido vermelho. Olha ela, toda poderosa. Todo mundo para pra olhar.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavrão",
+    "no máximo 1 por trecho"
+   ]
+  },
+  {
+   "nome": "RES-peito variado (o S alongado, cada vez num contexto)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a moça adulta com decote/seios grandes faz algo>. E aqui é só RESSS-peito, galera. / Com todo RESSS-peito do mundo. / Respeita os dois... digo, respeita ela.",
+   "exemplo_real": "Ela se inclina na mesa pra pegar o mapa. Com todo RESSS-peito do mundo, galera.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Macetar (porrada que soa sexual)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<personagem> quer macetar <o outro> — <de porrada, gente, de porrada>.",
+   "exemplo_real": "Ela olha pro prota e diz que vai macetar ele hoje. De porrada, galera. Eu acho.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Acabar com ele de um jeito gostoso",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a vilã/rival> promete acabar com <ele>... e do jeito que ela fala, parece que ele vai até gostar.",
+   "exemplo_real": "A vilã chega perto e sussurra que vai acabar com ele bem devagarinho. Rapaz, isso é ameaça ou convite?",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Apanhar dela (eu deixaria)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a moça> bate/ameaça bater <nele>. <Narrador>: sinceramente, se for ela, eu deixava.",
+   "exemplo_real": "Ela ameaça dar uma surra no garoto. Galera, se for ela batendo, eu nem corria.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Eu faria esse acordo — e você, faria?",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a moça faz a proposta>. Eu faria esse acordo na hora. E você aí, faria? Comenta aí.",
+   "exemplo_real": "A rainha oferece proteção se ele virar servo pessoal dela. Eu fazia esse acordo na hora. E você, faria?",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Poderosa",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a moça adulta bonita entra/age>. Olha ela, toda poderosa.",
+   "exemplo_real": "A comandante desce do cavalo e tira o capacete. Olha ela, toda poderosa.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Não vou mostrar porque o YouTube não gosta",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<cena com pouca roupa/ousada>. Essa parte eu não vou mostrar não, que o YouTube não gosta.",
+   "exemplo_real": "Ela sai do banho só de toalha. Essa parte eu não vou mostrar não, que o YouTube não gosta.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Pegar (duplo sentido de agarrar/pegar alguém)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<ela/ele> quer pegar <o outro> — <pegar na luta, né, gente?>.",
+   "exemplo_real": "A guerreira grita que vai pegar ele de jeito. Na luta, né, gente. Na luta.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Por cima / montada (na luta)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<ela> derruba <ele> e fica por cima. <Narrador>: posição de luta, galera, posição de luta.",
+   "exemplo_real": "Ela derruba o garoto e senta em cima pra imobilizar. Golpe de luta, galera. Só golpe de luta.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "O cara não sabe o que fazer com tanta mulher (inveja)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<ele cercado de moças>. <Narrador>: e eu aqui sem nenhuma, olha que injustiça.",
+   "exemplo_real": "Três princesas brigam pra sentar do lado dele. E eu aqui sozinho, que injustiça.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Toma aqui nos peitos (golpe no peito, piada do Mike)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<golpe acerta o peito de alguém>. Toma aqui nos peitos!",
+   "exemplo_real": "O mago solta o poderzão e acerta em cheio. Toma aqui nos peitos!",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
+  },
+  {
+   "nome": "Ela é gostosa... digo, gosta dele (troca de palavra)",
+   "beleza": true,
+   "duplo": true,
+   "molde": "<a moça>. Ela é muito gostosa... digo, ela gosta muito dele. Me confundi.",
+   "exemplo_real": "A elfa fica vermelha perto dele. Ela é muito gostosa... digo, gosta muito dele. Me confundi aqui.",
+   "travas": [
+    "só personagem ADULTA",
+    "sem palavra explícita (nada de sexo, transar, foder, pau, buceta)",
+    "o sentido inocente tem que existir de verdade na cena"
+   ]
   }
  ],
  "jargao": {

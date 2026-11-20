@@ -391,3 +391,32 @@ Conserto (já em produção):
 3. Fim que sobe (`anime_tts._fim_que_sobe`, FISH_FIM_ST mike 1,5 / momo 0,8 / kkvirjao 1,0; FISH_FIM=0 desliga).
 Narradores estáveis (Pie, Solem, Drezin, Guugou, Iki) ficam só com a normal.
 Comparação pra ouvir: `amostras_voz\COMPARAR_VOZ_FISH_20NOV`.
+
+## 20/11 — Sistema de IMITAÇÃO do jeito de falar (marcas registradas)
+Dona: "o KkVirjão chama a mulher de burra, o homem de chuinga, o personagem de retardado, fala uma coisa e depois
+'mentira' — tem que ter um sistema de imitação dessas coisas que não é voz, é o jeito deles de falar que só ele faz".
+- `comum\fish_audio\marcas_registradas.py <voz> <pasta_segs> --sobe`: lê as falas REAIS transcritas do narrador
+  (segs.json dos jobs de sub-vozes) e grava em `linguagem_v2.json["marcas_registradas"]` só os truques que ele REPETE
+  (≥3x), com exemplo real: xingar personagem, "mentira", se atrapalhar, desabafo, pergunta ao público, imitar fala,
+  exagero, conectores próprios. Marca com `"manual": true` não é apagada.
+- `anime_script._jeito_do_narrador` põe 2-4 marcas no roteiro, sempre sobre PERSONAGENS (nunca ofende o público).
+- Feito: KkVirjão (1.654 falas; marcas escritas à mão a partir delas) e Mike (1.864). Momo: falta o vídeo baixar.
+- 20/11 (2) `comum\fish_audio\marcas_profundas.py <voz> <pastas segs> [--sobe]`: em vez de regex, a IA LÊ todas as
+  falas reais (8-9 blocos) e tira truque + quando + molde + exemplos; e COMPARA com os outros narradores
+  (D:\tmp\outros_narr = transcricao.json da hermes-staging) → "SÓ DELE" primeiro e `nao_fala` (o que os outros
+  falam e ele não; o roteiro proíbe). Conferir à mão: tira nome de personagem/enredo do vídeo-fonte (Mike veio com
+  "madame", "rei demônio"). Gíria que o Whisper não pega ("guria trancada no boga") = marca manual.
+  `anime_script._jeito_do_narrador`: até 10 marcas, 4-8 no vídeo, + regra de DOSE (sem ela saiu palavrão em toda
+  linha e "punheteiro"). Feito: kkvirjao, mike (Drive colab_recap/vozes/<voz>). Momo: falta o material dele.
+
+## 20/11 — DUPLO SENTIDO (malícia) nas narrações
+Dona: "existe uma coisa humana chamada duplo sentido — adicionar ao máximo, com prioridade as sexuais e as que os
+narradores já fazem". OBRIGATÓRIO: mulher bonita/seios grandes na tela → "com todo respeito".
+- Voz: o texto vai NORMAL pro Fish; depois `anime_tts._esticar_s_respeito` acha o S de "respeito" pelo chiado
+  (> 4 kHz) e estica só ele pra 0,45 s (a dona aprovou "C_S_bem_alongado_0.45s"; reprovou frase toda lenta e
+  pausa grande entre "res" e "peito"). Só quando a frase fala de mulher/corpo (`_CTX_CORPO`).
+- Roteiro: `config/duplo_sentido.json` (repertório universal + o de cada narrador, achado nas falas reais) →
+  `anime_script` manda 2-5 por longo / 1-2 por Short, SEMPRE sugestivo (sentido inocente junto), nunca explícito
+  (YouTube limita conteúdo sexual explícito). DUPLO_SENTIDO=0 desliga.
+- PRÓXIMO: gatilho pela IMAGEM (decote na tela → forçar "com todo respeito" naquela frase) usando
+  `censura_visual.detectar_score` (nota média = sugestivo). Hoje o roteiro decide pelo texto da cena.

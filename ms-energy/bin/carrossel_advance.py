@@ -399,7 +399,13 @@ def postar(pasta):
     try:
         code = ig.carrossel(imgs, meta["legenda_insta"])
     except Exception as e:  # noqa: BLE001  06/11: HTTP limitado (spam/1357001) -> pelo Chrome do cofre, como o reel
-        if not any(s in str(e).lower() for s in ("1357001", "entre para continuar", "feedback_required", "spam")):
+        # 20/11 (Advance e Globo sem carrossel desde 13/11, 390+ tentativas): o configure_sidecar passou a responder
+        # 200 com corpo VAZIO ({'raw': ''}) — não era "spam", então nunca caía no Chrome e repetia a cada 10 min.
+        # Resposta vazia também vai pelo navegador. CARROSSEL_VAZIO_NAV=0 desliga.
+        import os as _os
+        _vazio = "{'raw': ''}" in str(e) and _os.environ.get("CARROSSEL_VAZIO_NAV", "1") != "0"
+        if not _vazio and not any(s in str(e).lower() for s in ("1357001", "entre para continuar", "feedback_required",
+                                                                "spam")):
             raise
         log("HTTP limitado pelo Instagram — carrossel pelo navegador do cofre")
         if not reel_pelo_navegador(CONTA, "|".join(imgs), meta["legenda_insta"]):

@@ -1,16 +1,17 @@
-# Vigilância 24 h — 2026-11-20T08:00:39
+# Vigilância 24 h — 2026-11-20T12:00:46
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (6)
+## Alarmes desta volta (7)
 - canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (50)
+## Casos abertos (55)
 - [revisar] tiktok: mesmo erro 8x em 6 h (1minopus-sonnetweb)
 - [consertar] longo SjQHP-0GKJs_1_11__His_Girlfriend_Cheated_on_Him saiu com problema de qualidade (cw/claude-sonnet-5-5)
 - [consertar] tiktok: mesmo erro 5x em 6 h (1minopus-sonnetweb)
@@ -61,6 +62,11 @@
 - [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [vigia_rodando] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
 - [falso] instagram: 10 posts até 22:20, normal ~45 — - / -

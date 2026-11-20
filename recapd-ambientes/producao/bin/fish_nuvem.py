@@ -56,6 +56,11 @@ def lote(pasta_voz, lista_json):
         if suf.endswith("antiga") or not t.exists():
             continue
         por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=t.read_text(encoding="utf-8").strip())]
+    # 20/11: "todas as sub-vozes juntas" (versão 12) foi aprovada em TODOS os tipos ouvidos -> "_todas" = todas as
+    # sub-vozes da voz como referência (reserva de quem não tem a sub-voz específica da frase)
+    subs_ = [v[0] for k, v in por_clima.items() if k and k not in ("_antiga",)]
+    if len(subs_) >= 3:
+        por_clima["_todas"] = subs_
     print(f"FISH referências: {sorted(k or 'normal' for k in por_clima)}", flush=True)
     # 20/11 (estudo 3, mesmas frases x real): narrador que varia muito (Momo/Mike/KkVirjão) fica mais perto do real com
     # temperatura/top_p 0,85 (Mike: desvio de tom 5,69 x 5,73 real; com 0,7 = 5,40). Estáveis seguem 0,7.
@@ -71,9 +76,20 @@ def lote(pasta_voz, lista_json):
     print(f"FISH temperatura/top_p {SOLTO}", flush=True)
 
     def gera(txt, suf=""):
-        req = ServeTTSRequest(text=txt, references=por_clima.get(suf) or refs, reference_id=None,
+        # 20/11 dona (amostras por tipo, KkVirjão): "as mesmas técnicas em tipos de áudio diferentes funcionam e em
+        # outros se invertem — as variações só valem pra aqueles trechos". Temperatura POR SUB-VOZ conforme o que ela
+        # aprovou: irritado e metralhadora = solta (aprovou 07 "mais solta"); agudo = normal (só aprovou 05/09/12/14).
+        TEMP_SUB = {"_irritado": 0.95, "_metralhadora": 0.95, "_agudo": 0.85}
+        t_ = min(1.0, TEMP_SUB.get(suf, SOLTO))
+        # 20/11 dona (KkVirjão "mulher"): a sub-voz mulher SOZINHA foi quase toda reprovada; aprovadas só as MISTAS
+        # (normal+mulher, mulher+piada, todas juntas). Sub-vozes em SUB_SO_MISTA nunca vão sozinhas: vão com a normal.
+        SUB_SO_MISTA = {"_mulher"}
+        r_ = por_clima.get(suf) or refs
+        if suf in SUB_SO_MISTA and suf in por_clima:
+            r_ = refs + por_clima[suf]
+        req = ServeTTSRequest(text=txt, references=r_, reference_id=None,
                               max_new_tokens=1024, chunk_length=200,
-                              top_p=SOLTO, repetition_penalty=1.2, temperature=SOLTO, format="wav")
+                              top_p=t_, repetition_penalty=1.2, temperature=t_, format="wav")
         for r in eng.inference(req):
             if r.code == "final":
                 return r.audio

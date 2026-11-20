@@ -2543,3 +2543,63 @@
 - prova: sem-obra-20d752: EMPREENDEDOR (q01), SOZINHO na tarja amarela (q03) e EMPREENDEDORES (q04) cobrem olhos e testa do palestrante. sem-obra-d5d10e: QUATRO (q02) e PRODUTO (q11) cobrem a boca da narradora. O júri vê quadros soltos, e a dona prefere palavras de impacto maiores e de lado (27/10).
 - onde: Função que calcula a posição Y/X da palavra de destaque no módulo da legenda palavra a palavra.
 - como testar: Medir em 20 Shorts com rosto em plano médio quantos quadros têm a caixa da palavra cruzando a caixa do rosto, usando a folha de quadros em resolução >= 720 px. Se passar de 10% dos quadros, testar subir ou descer a palavra ou deslocá-la para o lado quando houver rosto. Mudar só isso em 1 lote e comparar a nota média, sem diminuir o tamanho da palavra.
+
+## 20/11 08:06 PROPOSTA [CERTEZA] Legenda da fonte vazando pelas pontas da tarja (pedaços de letra cortados no rodapé) (cc-sobra)
+- prova: 5647e7 q03; 8e2050 q01 'OCÊ BRE', q10 'GRAM', q13 '0' cortado, q16 'COL L'; 9fd18f q04 'A pressão er...'. São 3 Shorts com pedaços de frase da fonte nas bordas, o desenho de uma legenda mais larga que a tarja ou de uma caixa medida errado. Pela lição de 26/10, o júri não vê o que está debaixo da tarja, mas aqui o problema é o que fica fora dela. Não achei linha [hardsub] desses Shorts no juri.log, então falta confirmar no log de produção de cada um. A dona exige tarja do tamanho EXATO da legenda: se a legenda tem mais de 80% da largura, o teto de 0.8 a corta pela metade.
+- onde: Na cobertura da legenda (delogo): o cálculo da caixa a partir da faixa da visão e o corte por tarja_largura_max. Ver também a medida da caixa das letras em >= 720 px (lição de 27/10).
+- como testar: Fazer a folha de quadros (6 quadros) dos Shorts 5647e7, 8e2050 e 9fd18f com a caixa medida desenhada por cima e conferir se as letras passam da caixa. Se passarem, deixar a caixa seguir a medida real, sempre do tamanho exato da legenda e nunca faixa grande. Repetir com um controle negativo (vídeo sem legenda) e um vídeo de legenda curta para ver que a tarja não cresce à toa. Conferir também se o borrão do delogo em b-roll com movimento (8e2050 q13) some.
+
+## 20/11 08:06 PROPOSTA [CERTEZA] Palavra de destaque da legenda dinâmica em cima de olhos e boca (cc-sobra)
+- prova: 8773a3 q03: 'VERMELHO' cobre os olhos no gancho (problema grave de retenção). 5647e7 q06: 'QUANDO' em cima da boca/queixo. 5647e7 q12: o balão 'MACHUCADO' cobre a mão. A dona já pediu palavras de impacto maiores e de lado (lição de 27/10).
+- onde: Na posição da legenda palavra a palavra / palavra de impacto. Detectar o rosto no quadro (ou usar a caixa do rosto que a visão já devolve) e mover a palavra para o lado ou para o terço livre.
+- como testar: Renderizar de novo 8773a3 e 5647e7 com o desvio de rosto e montar a folha de quadros em q03, q06 e q12: nenhuma palavra pode tocar a caixa dos olhos ou da boca. Medir a nota de retenção do próximo lote contra a deste (média 6.25).
+
+## 20/11 08:06 PROPOSTA [GOSTO] Última cena parada: zoom leve (punch-in/ken burns) só na cena final (cc-sobra)
+- prova: Movimento medido na cena 6: 8773a3 19.8, 5647e7 4.5 (o júri marcou queda de interesse 'no momento de transição para o loop'), 8e2050 12.0, 9fd18f 19.6. É sempre a cena mais parada do Short, em 4 de 4.
+- onde: Na montagem das cenas: aplicar zoom contínuo de 1.0 → 1.08 quando o movimento medido da cena for < 20%, em especial na última. Não mexer no tempo da fala nem no fim em gancho: o loop é intencional.
+- como testar: Ligar o zoom em metade do próximo lote (A/B) e comparar o movimento medido da cena 6, a nota de retenção do júri e o % assistido de 48 h entre as metades.
+
+## 20/11 09:16 PROPOSTA [GOSTO] Cor da palavra de impacto escolhida pelo fundo (contraste mínimo), mantendo cores por personagem (cc-sobra)
+- prova: Em 3 de 4 Shorts a palavra colorida some no fundo: sem-obra-387779 q03 ('BACTÉRIAS' azul escuro sobre a pia escura) e q10 ('É A DE' sobre parede azulada); sem-obra-ecc541 q07 ('TEM FILHOTE' sobre fundo branco pontilhado); sem-obra-4afe99 q06 ('QUERENDO' azul brilhante sobre os olhos).
+- onde: Gerador da legenda palavra a palavra (escolha de cor/contorno por palavra, provavelmente no módulo que monta o .ass/drawtext da legenda dos CORTES)
+- como testar: Medir a luminância média da caixa da palavra no quadro. Se o contraste for < 4.5:1, trocar pela cor da paleta com maior contraste ou engrossar contorno e sombra. Refazer 387779 e ecc541 e comparar a folha de quadros q03/q07 antes e depois. Medir a nota de legibilidade e retenção em 1 lote.
+
+## 20/11 09:16 PROPOSTA [CERTEZA] Conferir de onde vem o inglês na legenda do sem-obra-4afe99 (roteiro ou legenda da fonte vazando) (cc-sobra)
+- prova: sem-obra-4afe99 q01 'THE' junto de 'QUEM GANHOU', q02 'LAWSUIT' no meio de 'UM CONCURSO', q03 'YOU'LL ACHANDO'. O júri marcou como grave no gancho (retenção 7.0). Ocorreu em 1 Short só, por isso é verificação e não mudança.
+- onde: roteiro.txt e log do Short (linha [hardsub] e faixa medida da cobertura/delogo)
+- como testar: Se o roteiro.txt tiver as palavras em inglês, é a validação do roteiro que falhou: barrar o Short que tiver palavra inglesa fora da lista de nomes próprios. Se o roteiro estiver limpo e o log mostrar legenda lida, é a legenda da fonte vazando pela borda do delogo: medir a caixa das letras em >= 720 px nos quadros q01–q03 e comparar com a faixa aplicada.
+
+## 20/11 09:16 PROPOSTA [GOSTO] Cena com pouco movimento recebe zoom/pan mínimo (cc-sobra)
+- prova: Movimento medido baixo e apontado em 3 Shorts: sem-obra-387779 cena 5 = 9.4% (q13, marcado grave em retenção), sem-obra-ecc541 cena 2 = 10.5% (q05), sem-obra-4afe99 cena 3 = 23.9% (q09).
+- onde: Montagem das cenas (função que aplica zoom/ken burns por cena, a partir do movimento medido)
+- como testar: Quando o movimento medido da cena ficar abaixo de ~15%, aplicar punch-in lento de 6–8%. Comparar a nota de movimento e retenção de 1 lote contra o anterior, sem mexer em mais nada no mesmo lote.
+
+## 20/11 10:32 PROPOSTA [CERTEZA] Card de personagem (PROTAGONISTA / PODER / PERIGO) saindo em vídeo de entrevista real e cobrindo o rosto (gemini-4-argon)
+- prova: sem-obra-311ae0, q05 e q06: o card fixo cobre olhos e testa do entrevistado, em canal imobiliário (Imóvel em Foco). O júri marcou grave em legibilidade (7) e história (6). A palavra 'PROTAGONISTA' na tela também é o termo que a dona proíbe. Só 1 Short viu, então a primeira coisa a medir é a frequência.
+- onde: Gerador de cards/overlays de personagem do pipeline CORTES. Não sei o nome exato do arquivo: procurar os textos 'PODER', 'PERIGO' e 'PROTAGONISTA' no código.
+- como testar: 1) Fazer um grep por esses textos para achar a função e a condição que liga o card. 2) Montar folha de quadros (como D:\tmp\folha_topo.py, mas no meio do Short) de todos os Shorts do dia dos canais não-ficção (Imóvel em Foco, Lei e Lucro, Dicas Financeiras, Clínica Lucrativa) e contar quantos têm card. 3) Se for >= 2, restringir o card a nichos de ficção (anime, manhwa, dorama, filme) e nunca em cima do rosto. 4) Re-renderizar o 311ae0 sem o card e conferir os olhos livres.
+
+## 20/11 10:32 PROPOSTA [CERTEZA] Conferir 'BELA BELA' + seta 'OLHA ISSO' e a tarja sem legenda em sem-obra-62b052 (gemini-4-argon)
+- prova: q15: a narração diz 'pequena Bela' e a tela mostra 'BELA BELA' gigante com seta. Se o roteiro.txt tem 'Bela' uma vez só, a duplicação vem da renderização da legenda. Se tem duas, é o roteiro, e aí vale regra de roteiro. q06 e q12: o júri diz que a tarja não cobre legenda legível. Isso só vale se o log do Short disser '[hardsub] só 0/6'.
+- onde: roteiro.txt e log do Short 62b052; depois o renderizador de legenda palavra a palavra e o módulo que desenha a seta/adesivo.
+- como testar: Abrir o roteiro.txt e procurar 'Bela'. Procurar '[hardsub]' no log. Se for 0/6, a tarja não devia existir: corrigir a decisão de tarja. Se for >= 2/6, o júri errou e nada muda. A seta só é defeito se a dona não a quiser: a dona prefere palavras de impacto maiores, então perguntar a ela antes de proibir.
+
+## 20/11 10:32 PROPOSTA [CERTEZA] Regra 1 do APRENDIDO ('banindo tarjas') contradiz a regra fixa da dona (gemini-4-argon)
+- prova: O APRENDIDO de 20/11 diz 'banindo tarjas, setas, caixas...' na regra 1, mas a regra fixa manda tarja do tamanho exato da legenda quando a fonte tem legenda queimada (a própria regra 3 pede cobrir legenda nativa). A regra 16 (banir setas, cards, emojis) também pode ir contra a preferência de 27/10 por palavras de impacto maiores.
+- onde: cortes_juri: filtro DECISOES_DONO, aplicado antes de uma regra do APRENDIDO virar mudança.
+- como testar: Passar as regras 1, 3 e 16 pelo DECISOES_DONO e confirmar que a 1 é descartada ou reescrita como 'tarja nunca sobre o rosto'. A regra 16 só vale como a dona decidir.
+
+## 20/11 11:40 PROPOSTA [CERTEZA] Nunca desenhar duas camadas de texto ao mesmo tempo com a mesma palavra ou em cima uma da outra (gemini-4-argon)
+- prova: c84315_cap1 q01 ('DIGITALP', 'DIGITAL' sobre 'STOP') e q02 ('STOP' menor sobre 'STOP' maior); 9c6e96_cap1 q16 ('DESCOBRIU' em cima e embaixo no mesmo quadro); the-maid_cap1 q02 ('MAS' flutuando sobre 'FIQUEI'). São 3 Shorts, e é defeito objetivo: a mesma palavra aparece duas vezes ou duas camadas se encobrem.
+- onde: Montagem do ASS/overlay da legenda palavra a palavra e do texto de gancho no topo (provável cortes_legenda / função que gera os eventos de legenda e o título fixo; confirmar o nome exato no repositório).
+- como testar: Rodar folha_topo.py (D:\tmp\folha_topo.py) no 1,5 s de todos os Shorts do dia para medir quantos têm duas camadas de texto sobrepostas ou palavras duplicadas. Depois, com uma checagem que compara as caixas (bbox) dos eventos ativos no mesmo instante, confirmar que o título fixo e a palavra ativa não se sobrepõem nem repetem a palavra. Reprocessar c84315 e 9c6e96 e comparar os quadros q01/q02/q16.
+
+## 20/11 11:40 PROPOSTA [GOSTO] Posicionar a palavra de impacto e a caixa de pergunta fora da região dos olhos e da boca (gemini-4-argon)
+- prova: the-maid_cap1 q03 (caixa amarela 'SOZINHO' sobre olhos e nariz), c84315_cap1 q01 ('DIGITAL' sobre o rosto), 5f4032_cap1 q01 (caixa da pergunta cobrindo metade do rosto no primeiro segundo). A dona prefere palavras de impacto maiores e 'de lado', então a mudança deve deslocar o texto, não diminuí-lo.
+- onde: Cálculo de posição da palavra de impacto e da caixa de gancho (provável cortes_legenda / layout do overlay). Usar a detecção de rosto já existente, se houver, para escolher o lado livre.
+- como testar: Antes de mudar, confirmar no log do 5f4032 se a caixa da pergunta é nossa ou veio da fonte (se for da fonte, não é defeito nosso). Aplicar em 1 nicho (dorama), comparar a nota de legibilidade e a retenção medida de 10 Shorts com e sem a regra, e desfazer se a retenção cair.
+
+## 20/11 11:40 PROPOSTA [GOSTO] Calibrar o júri de movimento: ele reclama de valores acima do próprio limite (gemini-4-argon)
+- prova: c84315_cap1: o júri trata 27.2%, 13.6% e 14.7% como problema citando um limite de 4%, e ainda cita 'baixo movimento' no the-maid (29.2% e 20.5%) enquanto dá nota 10.0 em movimento nos dois casos. A nota e o texto se contradizem.
+- onde: cortes_juri (prompt do júri de movimento): passar o limiar real usado pelo pipeline e pedir que só marque problema abaixo dele.
+- como testar: Reprocessar o júri em c84315 e the-maid com o limiar explícito no prompt e verificar se as queixas de movimento acima do limiar somem sem derrubar a nota de Shorts realmente parados.

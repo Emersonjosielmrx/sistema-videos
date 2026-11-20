@@ -172,3 +172,5 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-19 18:40 | veo_corpo_humano_20261119_114718__fatochocante.mp4 | 10.1 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_corpo_humano_20261119_114718__fatochocante.mp4` | backup_drive.py |
 | 2026-11-19 18:40 | veo_corpo_humano_20261119_114718__fatochocante.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_corpo_humano_20261119_114718__fatochocante.png` | backup_drive.py |
 | 2026-11-19 19:52 | veo_aulas_ia_20261119_141050__fatochocante.mp4 | 9.3 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_aulas_ia_20261119_141050__fatochocante.mp4` | backup_drive.py |
+| 2026-11-20 11:45 | veo_recordes_mundia_20261119_190641__fatochocante.mp4 | 5.6 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_recordes_mundia_20261119_190641__fatochocante.mp4` | backup_drive.py |
+| 2026-11-20 11:45 | veo_recordes_mundia_20261119_190641__fatochocante.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_recordes_mundia_20261119_190641__fatochocante.png` | backup_drive.py |

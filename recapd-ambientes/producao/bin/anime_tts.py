@@ -509,11 +509,307 @@ def _fim_que_sobe(wav, voz):
 _SUB_RISO =re.compile(r"(?i)\b(k{3,}|ha(ha)+|he(he)+|rs(rs)+|risos?|riu|rindo|gargalh\w*)\b")
 _SUB_MULHER = re.compile(r"(?i)\b(peito\w*|gostos\w*|del[ií]cia|bunda|seio\w*|sexy|safad\w*|tes[aã]o|novinha\w*|"
                          r"gatinha|maravilhosa|respeito|mina\w*)\b")
+# 20/11 dona (ouvindo kkvirjao/risada 4_SUB_risada_mais_solta): "essas com grito no final subindo são muito boas,
+# ele faz isso quando está chateado, tipo 'eu não aguento isso' — tem que usar". Era a sub-voz "_risada" (que na
+# verdade não tinha risada): virou "_irritado".
+_SUB_IRRITADO = re.compile(r"(?i)(n[aã]o aguento|que [oó]dio|absurdo|rid[ií]culo|pelo amor de deus|"
+                           r"que palha[cç]ada|t[aá] de brincadeira|n[aã]o [eé] poss[ií]vel|que raiva|"
+                           r"vai se \w+|cansei|chega|af+|aff+|!!)")
 _SUB_PERSON = re.compile(r"(?i)(\b(ele|ela) (fala|disse|diz|grita|responde|pergunta)\b.*[:\"“]|[\"“].{6,}[\"”])")
 # ordem de reserva: sub-voz que a voz não tem -> a próxima da lista -> normal
-_SUB_RESERVA = {"_risada": ["_piada", "_agudo"], "_mulher": ["_piada", "_agudo"], "_personagem": ["_agudo", "_piada"],
+_SUB_RESERVA = {"_irritado": ["_agudo", "_piada"], "_risada": ["_irritado", "_piada", "_agudo"], "_mulher": ["_piada", "_agudo"], "_personagem": ["_agudo", "_piada"],
                 "_metralhadora": ["_agudo", "_tensao"], "_piada": ["_agudo"], "_agudo": ["_piada"],
                 "_tensao": []}
+
+
+def _impactos_do(audio_dir):
+    """Frases de impacto do vídeo (anime_segments grava _impactos.json ao lado da fonte = pasta acima do audio_cache)."""
+    for p in (Path(audio_dir).parent / "_impactos.json", Path(audio_dir) / "_impactos.json"):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+            return d.get("impactos", d) if isinstance(d, dict) else d
+        except (OSError, ValueError):
+            continue
+    return []
+
+
+_LENTA = [
+    # (fator, padrão) — o 1º que bater manda
+    (0.88, re.compile(r"(?i)(você acha mesmo|acha mesmo que|ah,? claro|claro que (não|sim)|parabéns|que (gênio|esperto|"
+                      r"inteligente)|olha só quem|grande coisa|nossa,? que medo|tá bom,? então|uau,? que|sério mesmo)")),
+    (0.90, re.compile(r"(?i)\b(ele|ela) (fala|diz|disse|responde|grita|pergunta)\b[^.]*[:\"“]")),  # fala do personagem
+    (0.90, re.compile(r"(?i)(coitad\w*|tadinh\w*|pobre (coitad|garot|menin)|que dó|que pena)")),     # pena/lamento
+    # 20/11 dona (KkVirjão "tensão"): "tensão NÃO pode ser devagar, exceto quando tiver uma piada (um 'né')" — aprovou
+    # as soltas/rápidas e não as contidas. A regra de suspense (-8%) saiu; tensão segue a curva (acelera).
+    (0.93, re.compile(r"(?i)^(pois é|e foi isso|simples assim|é isso aí|fazer o quê)\b")),            # constatação seca
+    # 20/11 dona (KkVirjão "piada"): "nem aprovei todos pois todos ficaram bons — a piada combina com a parte dela ser
+    # devagar, seja onde for". Piada/comentário/duplo sentido = mais devagar
+    (0.90, re.compile(r"(?i)(com todo res+[\s.\-…]*peito|com todo respeito|macet\w*|do jeito gostoso|eu faria esse|"
+                      r"você faria|não é isso que (vocês|cês) (tão|estão) pensando|em batalha,? (gente|galera)|"
+                      r"particulares?,? hein|só olhando o)")),                                          # duplo sentido
+    (0.92, re.compile(r"(?i)\b(mano|rapaz|meu compadre|cara|gente|galera),? (olha|imagina|sério|pelo amor)|"
+                      r"\b(kkk|rsrs|haha)|\b(mentira|zoeira|brincadeira)\b|tá\?$|né\?$")),                 # piada/comentário
+]
+
+
+def _frase_lenta(texto):
+    """Fator < 1 se a frase pede fala mais lenta (deboche, fala de personagem, pena, suspense, constatação)."""
+    for f, p in _LENTA:
+        if p.search(texto or ""):
+            return f
+    return None
+
+
+_GOL_CTX = {}  # {i: ("sobe"|"gol"|"falha", posição, tamanho da sequência)} — preenchido por _marcar_gol
+_GOL_SIM = re.compile(r"(?i)\b(acert\w*|derrot\w*|venc\w*|conseg\w*|finalmente|destr[oó]i\w*|nocaute\w*|"
+                      r"esmag\w*|ganh\w*|isso[!,]|toma[!,]|vitória|matou o|acabou com o)\b")
+_GOL_NAO = re.compile(r"(?i)\b(é atingid\w*|foi atingid\w*|morr\w*|caiu|cai no chão|falh\w*|perd\w*|errou|"
+                      r"sangr\w*|não,? não|derrubad\w*|ferid\w*|esfaquead\w*|desmai\w*)\b")
+
+
+def _marcar_gol(lines, climas):
+    """Acha as sequências de tensão/ação (≥ 3 frases seguidas) e marca a posição de cada frase; a frase depois da
+    sequência (ou a última dela) é o desfecho: gol (o bom acerta/vence) ou falha (o bom é atingido/morre)."""
+    _GOL_CTX.clear()
+    if not climas:
+        return
+    alvo = {"tensao", "acao", "epico", "vilao", "terror"}
+    i, n = 0, len(lines)
+    while i < n:
+        if climas[i] in alvo:
+            j = i
+            while j + 1 < n and climas[j + 1] in alvo:
+                j += 1
+            if j - i + 1 >= 3:
+                tam = j - i + 1
+                for k in range(i, j + 1):
+                    _GOL_CTX[k] = ("sobe", k - i, tam)
+                for d in (j, j + 1):  # desfecho: última da sequência ou a seguinte
+                    if d < n:
+                        t = _seguro(lines[d])
+                        if _GOL_NAO.search(t):
+                            _GOL_CTX[d] = ("falha", 0, tam)
+                            break
+                        if _GOL_SIM.search(t):
+                            _GOL_CTX[d] = ("gol", 0, tam)
+                            break
+            i = j + 1
+        else:
+            i += 1
+
+
+def _ritmo_fish(wav, voz, texto, i, impactos, n):
+    """20/11 dona: "os narradores originais às vezes aceleram e às vezes diminuem — tem que fazer tudo isso no clone";
+    "a dublagem antiga era mais dinâmica e rápida (a IA usou várias técnicas pra aproximar do original); as que saíram
+    nos longos são lentas". O Fish já vem na velocidade NATURAL do narrador (medido: Momo novo 227 ppm x 221 real),
+    então aqui entra só a VARIAÇÃO da curva do locutor (narracao_curva: clímax/impacto acelera, "..."/tensão
+    desacelera), na amplitude do narrador (perfil_v2 curva_rate) — sem a base +10% do clone (deixaria rápido demais).
+    atempo muda a velocidade sem mudar o tom. FISH_RITMO=0 desliga; FISH_RITMO_ESCALA ajusta a força (padrão 1)."""
+    if os.environ.get("FISH_RITMO", "1") == "0":
+        return
+    try:
+        dr, _dp, _dg, _cauda = narracao_curva.deltas(texto, i, impactos or [], n)
+    except Exception:  # noqa: BLE001
+        return
+    escala = float(os.environ.get("FISH_RITMO_ESCALA", "1") or 1)
+    try:
+        perfil = _perfil_v2(voz) if voz else None
+        escala *= float((perfil or {}).get("curva_rate", 1.0))
+    except Exception:  # noqa: BLE001
+        pass
+    fator = max(0.88, min(1.25, 1 + dr * escala / 100))
+    # 20/11 dona (KkVirjão "personagem", aprovou de 161 a 310 ppm): "deboche fica bem com palavras lentas; nesse caso
+    # as lentas ficaram até melhores que as rápidas — analise quais pra encaixar as lentas". A velocidade depende do
+    # CONTEÚDO: deboche/ironia, fala de vilão arrogante, suspense/revelação, pena e constatação seca = MAIS LENTA
+    # (até -15%); ação, clímax e desabafo seguem a curva (acelera). Só reprovou a lenta demais (86 ppm) -> piso 0,85.
+    lenta = _frase_lenta(texto)
+    if lenta:
+        fator = max(0.85, min(fator, 1.0) * lenta)
+    # 20/11 dona — ACELERAÇÃO DO GOL: "tensão não pode ser devagar; vão acelerando como um narrador de futebol que vai
+    # aproximando a bola do gol, falando mais rápido, mais emocionante; e tem um desfecho pra quando é gol e outro pra
+    # quando é falha (Mike: quando o bom acerta comemora; quando o bom é atingido ou morre: 'não, não, galera!', fica
+    # triste)". Numa sequência de frases de tensão/ação, cada uma mais rápida que a anterior (até +30%, curva que
+    # dispara no fim); no desfecho, comemoração = rápida; falha = cai (mais lenta). FISH_GOL=0 desliga.
+    gol = _GOL_CTX.get(i)
+    if gol and os.environ.get("FISH_GOL", "1") != "0":
+        tipo, k, nseq = gol
+        if tipo == "sobe" and not lenta:
+            f_ = (k / max(1, nseq - 1)) ** 2
+            fator = max(fator, 1.0 + 0.30 * f_)
+        elif tipo == "gol":
+            fator = max(fator, 1.22)
+        elif tipo == "falha":
+            fator = min(fator, 0.90)
+    if abs(fator - 1) < 0.02:
+        return
+    wav = Path(wav)
+    tmp = wav.with_name(wav.stem + ".ritmo.wav")
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", f"atempo={fator:.3f}", str(tmp)],
+                       capture_output=True)
+    if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+        os.replace(tmp, wav)
+        wj = Path(str(wav) + ".words.json")  # tempos das palavras acompanham a nova velocidade
+        if wj.exists():
+            try:
+                ws = json.loads(wj.read_text(encoding="utf-8"))
+                wj.write_text(json.dumps([[round(a / fator, 3), round(b / fator, 3), *r_] for a, b, *r_ in ws],
+                                         ensure_ascii=False), encoding="utf-8")
+            except (OSError, ValueError, TypeError):
+                pass
+
+
+_RISO_TXT = re.compile(r"(?i)\b(k{2,}|(?:ha){2,}h?|(?:he){2,}h?|(?:hu){2,}|rs(?:rs)+|risos?)\b[\s,!.]*")
+_LETRA_REPETIDA = re.compile(r"([A-Za-zÀ-ÿ])\1{2,}")
+
+
+def _texto_fish(t):
+    """20/11 dona (ouvindo as amostras): (1) "kkkk" no texto = "risada de robô tentando rir; a nossa risada de verdade
+    não é assim" -> o Fish nunca recebe kkk/haha/rsrs (a risada real entra depois, cortada do próprio narrador);
+    (2) vogal alongada é humana, mas uma ficou "alongada acima do que um humano faria, ficaria sem ar" -> letra
+    repetida no máximo 2x ("nãooooo" -> "nãoo"). Devolve (texto, tinha_risada)."""
+    tinha = bool(_RISO_TXT.search(t))
+    t = _RISO_TXT.sub("", t)
+    t = _LETRA_REPETIDA.sub(lambda m: m.group(1) * 2, t)
+    t = _duplo_sentido_fala(t)
+    t = re.sub(r"\s{2,}", " ", t).strip(" ,")
+    return (t or "Olha isso."), tinha
+
+
+# 20/11 dona (KkVirjão, sub-voz mulher): "respeito dito normal é só respeito mesmo; mas quando se fala 'ressss-peito'
+# com o S alongado ou uma pequena separação do 'res' pro 'peito', está se falando dos peitos dela". O duplo sentido
+# está na PRONÚNCIA: só no contexto da piada ("com todo respeito" falando de mulher/corpo), o texto que vai pro Fish
+# vira "ressss... peito" (S alongado de propósito + micro-pausa). Fora desse contexto, "respeito" fica normal.
+# Exceção ao limite de letra repetida (é proposital e curto). FISH_DUPLO_SENTIDO=0 desliga.
+_CTX_CORPO = re.compile(r"(?i)\b(gostos\w*|del[ií]cia|corpo|curvas?|bunda|peit\w*|seio\w*|decote|mulher(ão|aço)?|"
+                        r"mina|gata|gatinha|novinha|bonit\w+|linda|maravilhos\w*|sexy|safad\w*|biquíni|academia)\b")
+_RESPEITO = re.compile(r"(?i)\b(com (todo|o maior|muito) )?(r)(espeito)\b")
+
+
+def _duplo_sentido_fala(t):
+    """20/11: o texto vai NORMAL pro Fish (a dona reprovou "resss... peito": deixava a frase toda lenta ou abobalhada);
+    só marca que a frase tem a piada — o S é esticado DEPOIS no áudio (_esticar_s_respeito).
+    20/11 (2): o roteiro escreve "RES-peito"/"RESSS-peito" quando é piada -> o Fish lê "respeito" normal."""
+    return _RES_PEITO.sub("respeito", t)
+
+
+_RES_PEITO = re.compile(r"(?i)res+[\s.\-…]*peito")
+
+
+def _tem_respeito_piada(t, i=None):
+    if os.environ.get("FISH_DUPLO_SENTIDO", "1") == "0":
+        return False
+    marcado = bool(re.search(r"RES+[\s.\-…]*[Pp]eito", t or ""))  # o roteiro marcou a piada (RES-peito)
+    if marcado or (bool(_CTX_CORPO.search(t or "")) and bool(_RESPEITO.search(t or ""))):
+        return True
+    # 20/11: a IMAGEM daquela cena foi marcada sensual (gatilho_visual -> GATILHO_SENSUAL) e a frase tem "respeito"
+    sens = {x for x in os.environ.get("GATILHO_SENSUAL", "").split(",") if x}
+    return i is not None and str(i) in sens and bool(_RESPEITO.search(t or ""))
+
+
+def _esticar_s_respeito(wav, alvo_s=0.45):
+    """20/11 dona aprovou: "C_S_bem_alongado_0.45s — é isso que precisamos". Frase em velocidade NORMAL; só o S de
+    "respeito" (o chiado entre "re" e "peito") é esticado pra ~0,45 s, mantendo o chiado (atempo, sem mudar o resto).
+    Acha a palavra pelos tempos do Whisper (.words.json, ou mede aqui) e o S pela energia aguda (> 4 kHz)."""
+    try:
+        import numpy as np
+        wav = Path(wav)
+        sr = 44100
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(wav), "-f", "s16le", "-ac", "1", "-ar", str(sr), "-"],
+                             capture_output=True).stdout
+        a = np.frombuffer(raw, np.int16).astype(np.float32) / 32768.0
+        # onde está "respeito": words.json (tempo real das palavras) ou Whisper rápido
+        ini = fim = None
+        wj = Path(str(wav) + ".words.json")
+        palavras = json.loads(wj.read_text(encoding="utf-8")) if wj.exists() else None
+        if not palavras:
+            try:
+                from faster_whisper import WhisperModel
+                dev = "cuda" if os.environ.get("FISH_NUVEM") == "1" else "cpu"
+                m = WhisperModel("small", device=dev, compute_type="float16" if dev == "cuda" else "int8")
+                segs, _ = m.transcribe(a[::1].copy() if sr == 16000 else a[::int(sr / 16000)].copy(), language="pt",
+                                       word_timestamps=True)
+                palavras = [[w.start, w.end, w.word] for s in segs for w in (s.words or [])]
+            except Exception:  # noqa: BLE001
+                palavras = []
+        for p0, p1, w in palavras:
+            if re.search(r"(?i)resp", str(w)):
+                ini, fim = float(p0), float(p1)
+                break
+        if ini is None:
+            return False
+        seg = a[int(ini * sr):int(fim * sr)]
+        hop, win = int(0.005 * sr), int(0.02 * sr)
+        hf = []
+        for i in range(0, max(0, len(seg) - win), hop):
+            fr = seg[i:i + win] * np.hanning(win)
+            sp = np.abs(np.fft.rfft(fr))
+            f = np.fft.rfftfreq(win, 1 / sr)
+            hf.append(sp[f > 4000].sum() / (sp.sum() + 1e-9))
+        hf = np.array(hf)
+        if len(hf) < 5 or hf.max() < 0.3:
+            return False
+        idx = np.where(hf >= max(0.3, np.percentile(hf, 70)))[0]
+        blocos, cur = [], [idx[0]]
+        for k in idx[1:]:
+            if k == cur[-1] + 1:
+                cur.append(k)
+            else:
+                blocos.append(cur)
+                cur = [k]
+        blocos.append(cur)
+        b = max(blocos, key=len)
+        s0, s1 = ini + b[0] * 0.005, ini + b[-1] * 0.005 + 0.02
+        d = s1 - s0
+        if d <= 0.02 or d >= alvo_s:
+            return False
+        f, cad = d / alvo_s, []
+        while f < 0.5:
+            cad.append("atempo=0.5")
+            f /= 0.5
+        cad.append(f"atempo={f:.4f}")
+        fc = (f"[0:a]atrim=0:{s0:.3f},asetpts=PTS-STARTPTS[a];"
+              f"[0:a]atrim={s0:.3f}:{s1:.3f},asetpts=PTS-STARTPTS,{','.join(cad)},afade=t=in:d=0.02,"
+              f"afade=t=out:st={max(0, alvo_s - 0.03):.3f}:d=0.03[s];"
+              f"[0:a]atrim={s1:.3f},asetpts=PTS-STARTPTS[b];[a][s][b]concat=n=3:v=0:a=1[o]")
+        tmp = wav.with_name(wav.stem + ".s.wav")
+        r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-filter_complex", fc, "-map", "[o]",
+                            "-ar", str(sr), "-ac", "1", str(tmp)], capture_output=True)
+        if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+            os.replace(tmp, wav)
+            extra = alvo_s - d  # palavras depois do S andam junto
+            if wj.exists() and palavras:
+                wj.write_text(json.dumps([[round(p0 + (extra if p0 >= s1 else 0), 3),
+                                           round(p1 + (extra if p1 >= s1 else 0), 3), w] for p0, p1, w in palavras],
+                                         ensure_ascii=False), encoding="utf-8")
+            logging.info(f"[fish] 'respeito' com S alongado ({d:.2f}s -> {alvo_s:.2f}s)")
+            return True
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish] esticar S falhou ({type(e).__name__}: {str(e)[:100]})")
+    return False
+
+
+def _risada_real(voz, wav):
+    """Põe uma risada REAL do narrador (risada_real/*.wav na pasta da voz, cortada dos vídeos dele) no começo da frase
+    que tinha kkk. Sem risada cortada = a frase fica sem risada (melhor que a de robô). FISH_RISADA_REAL=0 desliga."""
+    if os.environ.get("FISH_RISADA_REAL", "1") == "0" or not voz:
+        return False
+    pasta = VOZES_DIR / Path(voz).name / "risada_real"
+    lst = sorted(pasta.glob("*.wav")) if pasta.is_dir() else []
+    if not lst:
+        return False
+    import hashlib
+    ris = lst[int(hashlib.md5(str(wav).encode()).hexdigest(), 16) % len(lst)]
+    wav = Path(wav)
+    tmp = wav.with_name(wav.stem + ".ris.wav")
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(ris), "-i", str(wav), "-filter_complex",
+                        "[0:a]aresample=44100,aformat=channel_layouts=mono,apad=pad_dur=0.12[a];"
+                        "[1:a]aresample=44100,aformat=channel_layouts=mono[b];[a][b]concat=n=2:v=0:a=1[o]",
+                        "-map", "[o]", str(tmp)], capture_output=True)
+    if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+        os.replace(tmp, wav)
+        return True
+    tmp.unlink(missing_ok=True)
+    return False
 
 
 def _subvoz_por_frase(lines, audio_dir, pv):
@@ -538,7 +834,9 @@ def _subvoz_por_frase(lines, audio_dir, pv):
     out = {}
     for i, line in enumerate(lines):
         t = _seguro(line)
-        if _SUB_RISO.search(t):
+        if _SUB_IRRITADO.search(t):
+            quer = "_irritado"
+        elif _SUB_RISO.search(t):
             quer = "_risada"
         elif _SUB_MULHER.search(t):
             quer = "_mulher"
@@ -552,6 +850,11 @@ def _subvoz_por_frase(lines, audio_dir, pv):
             if s in tem:
                 out[i] = s
                 break
+        else:
+            # 20/11: sem a sub-voz da frase = "todas as sub-vozes juntas" (aprovada em todos os tipos ouvidos), não a
+            # normal (que saiu lenta). O fish_nuvem monta "_todas" quando a voz tem >= 3 sub-vozes.
+            if len(tem) >= 3:
+                out[i] = "_todas"
     return out
 
 
@@ -567,6 +870,15 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
             logging.info(f"[fish nuvem] {voz or 'sem narrador'} sem referência do Fish — narra com {pv.name} "
                          "(no Kaggle é sempre o motor novo)")
         subs = _subvoz_por_frase(lines, audio_dir, pv)
+        try:  # 20/11: aceleração do gol (sequências de tensão/ação aceleram até o desfecho)
+            import climas_voz
+            _marcar_gol(lines, climas_voz.escolher([_seguro(x) for x in lines], audio_dir))
+            if _GOL_CTX:
+                logging.info(f"[fish nuvem] aceleração do gol: {sum(1 for v in _GOL_CTX.values() if v[0] == 'sobe')} "
+                             f"frases subindo, {sum(1 for v in _GOL_CTX.values() if v[0] == 'gol')} gol(s), "
+                             f"{sum(1 for v in _GOL_CTX.values() if v[0] == 'falha')} falha(s)")
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[fish nuvem] aceleração do gol pulada ({type(e).__name__})")
         itens = []
         for i, line in enumerate(lines):
             if so is not None and i not in so:
@@ -574,10 +886,10 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
             out = Path(audio_dir) / f"audio_{i}.wav"
             if out.exists() and out.stat().st_size > 500:
                 continue
-            texto = _seguro(line)
+            texto, riso = _texto_fish(_seguro(line))
             if texto.strip():
                 itens.append({"texto": texto, "saida": str(Path(audio_dir) / f"audio_{i}.fish_bruto.wav"), "i": i,
-                              "ref": subs.get(i, "")})
+                              "ref": subs.get(i, ""), "riso": riso})
         if not itens:
             return
         if subs:
@@ -607,6 +919,11 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
             if r.returncode == 0 and out.exists():
                 feitos.append(it["i"])
                 _acabamento_fish(out, voz)
+                _ritmo_fish(out, Path(pv).name, it["texto"], it["i"], _impactos_do(audio_dir), len(lines))
+                if _tem_respeito_piada(it["texto"], it["i"]):  # 20/11: S de "respeito" esticado (0,45 s), resto normal
+                    _esticar_s_respeito(out)
+                if it.get("riso"):  # 20/11: frase tinha kkk -> risada REAL do narrador na frente (nunca a de robô)
+                    _risada_real(Path(pv).name, out)
                 if it["i"] == len(lines) - 1:
                     _aplicar_margem_final(out)
         if feitos:

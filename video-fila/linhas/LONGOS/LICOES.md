@@ -38,13 +38,13 @@
 - 26/10: vídeo de 1 h: música dinâmica leva ~30 min pra mixar; timeout tem que ser proporcional à duração.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Recap longo — 20/11 07:54
+# Brief do melhorador central — Recap longo — 20/11 12:04
 
-Vídeos nos últimos 7 dias: 29 | elegíveis (receberam o lote do feed): 17 | NÃO elegíveis: 0 | sem medida ainda: 12
+Vídeos nos últimos 7 dias: 30 | elegíveis (receberam o lote do feed): 17 | NÃO elegíveis: 0 | sem medida ainda: 13
 % assistido mediano (só elegíveis): 0.8 | views 48 h mediana: 7 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
-- @CodigoInteligente-n7j: n 12, elegíveis 8, % assistido 0.7, views48 34
+- @CodigoInteligente-n7j: n 13, elegíveis 8, % assistido 0.7, views48 34
 - HistoriasEmFrames: n 3, elegíveis 1, % assistido 0, views48 8.5
 - inovaremanhwabr: n 2, elegíveis 1, % assistido 0.6, views48 5.5
 - InventoReact: n 6, elegíveis 4, % assistido 8.7, views48 5
@@ -70,35 +70,35 @@ Vídeos nos últimos 7 dias: 29 | elegíveis (receberam o lote do feed): 17 | N�
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-20T07:23: youtube 35/42, tiktok 43/58, instagram 46/53, flow 10/235, fotos 0/4 | MORTOS: youtube assistiainvestimentos, youtube filmenoturno, youtube manhwareact, youtube empresariointeligenteia, youtube dentrodascoisas3d, youtube fatochocante, youtube pordentro, flow seebotsia, flow inovaremanhwaverse2@x200ma, flow emersonjosiel2032@pc2, flow aulacomia@x200ma, flow canalanimescomia@x200ma
+## SEM NAVEGADOR (HTTP) — saúde em 11-20T11:24: youtube 34/42, tiktok 42/58, instagram 46/53, flow 13/236, fotos 0/4 | MORTOS: youtube filmenoturno, youtube manhwanoturno, youtube manhwareact, youtube clinicalucrativaia, youtube vendasqueescalam, youtube dentrodascoisas3d, youtube fatochocante, youtube pordentro, tiktok filmenoturno, flow inovaremanhwaverse2@x200ma, flow emersonjosiel2032@pc2, flow canalanimescomia@x200ma
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
 Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @inovaremanhwaverse2 (6), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0), Tiktok @solarmundo195 (0), Tiktok @empressinovare (0), Tiktok @filmescomia00 (0), Tiktok @inovaremultiatendimento (0), Tiktok @emersonjosiel1995 (0)
 
 ## PEDIDOS DA DONA QUE NÃO SAÍRAM NOS ÚLTIMOS LONGOS (conferido no log do render; corrigir a causa)
-- keBJ_bd5oVw_My_Ex_Begged_Me_Back_When_I_: 13/13 ok — faltou: nada
 - Jjd71vw8hXQ_I_Was_Reborn_To_Give_My_Chea: 12/13 ok — faltou: Narradores por grupo, 1º = voz do resumo
 - GoFYsj0q_s4_My_Girlfriend_Was_a_Demon_An: 11/13 ok — faltou: Falas de personagem com outra voz, Mini-ganchos a cada 15 min
 - QwY2Kqk7jo8_She_Betrayed_Him_for_a_Serva: 12/13 ok — faltou: Mini-ganchos a cada 15 min
 - ZaWVmJcOjfo_Every_RUMOR_Became_True__So_: 12/13 ok — faltou: Mini-ganchos a cada 15 min
+- Bb3C8_mEpUE_New_Academy_Student_Is_Break: 12/13 ok — faltou: Mini-ganchos a cada 15 min
 
 ## VARIANTES DOS LONGOS (views/h e % assistido por fator; só fixar com 4+ vídeos por variante)
 | cortes_resumo | A | 23 | 0.05 | 2.2 |
 | cortes_resumo | B | 26 | 0.19 | 0.7 |
 | **cortes_resumo** | **vence B** (views/h) | | | |
-| fala_rapida | A | 9 | 0.05 | 0.6 |
-| fala_rapida | B | 13 | 0.03 | 0.9 |
+| fala_rapida | A | 9 | 0.04 | 0.6 |
+| fala_rapida | B | 13 | 0.02 | 0.9 |
 | fala_rapida | C | 11 | 0.03 | 2.2 |
-| fala_rapida | D | 8 | 0.10 | 0.5 |
+| fala_rapida | D | 8 | 0.09 | 0.5 |
 | fala_rapida | E | 8 | 0.35 | 2.7 |
 | **fala_rapida** | **vence E** (views/h) | | | |
-| ganchos_15min | A | 14 | 0.19 | 0.6 |
-| ganchos_15min | B | 13 | 0.31 | 2.6 |
+| ganchos_15min | A | 14 | 0.18 | 0.6 |
+| ganchos_15min | B | 13 | 0.30 | 2.6 |
 | ganchos_15min | C | 22 | 0.03 | 0.8 |
 | **ganchos_15min** | **vence B** (views/h) | | | |
 | narradores_modo | com_terciarios | 4 | 0.01 | 36.4 |
 | narradores_modo | dupla | 9 | 0.04 | 0.6 |
-| narradores_modo | mistura_grande | 3 | 0.21 | 11.4 |
+| narradores_modo | mistura_grande | 3 | 0.20 | 11.4 |
 | narradores_modo | primarios_secundarios | 11 | 0.10 | 0.5 |
 | narradores_modo | so_primarios | 12 | 0.24 | 2.0 |
 | narradores_modo | solo | 10 | 0.11 | 0.7 |
@@ -107,34 +107,34 @@ Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovareman
 | **titulo_triade** | **vence A** (views/h) | | | |
 
 ## OBRAS: CONTINUAR OU NÃO (48 h+, 20+ views, 30%+ assistido)
-| She Betrayed Him for a Servant Now He s | Fio da Meada | 0 | — | 4 | pouco dado |
-| My Girlfriend Was a Demon And When I Tri | Fio da Meada | 0 | — | 6 | pouco dado |
-| I Was Reborn To Give My Cheating Wife Th | Curiosidades Noturnas | 1 | — | 22 | pouco dado |
-| My Ex Begged Me Back When I Started Dati | HistoriasEmFrames | 1 | — | 15 | pouco dado |
-| Reborn to Reject My Cheating Fiancee and | CenaReact | 2 | — | 16 | pouco dado |
-| I Was Reborn To Give My Cheating Wife Th | Fio da Meada | 1 | — | 22 | pouco dado |
-| They Kicked Him To Die In The Apocalypse | HistoriasEmFrames | 12 | — | 72 | pouco dado |
-| He Awakens With The Power Of The STRONGE | inovare manhwa br | 8 | — | 78 | pouco dado |
-| Reincarnated With 999x LEGENDARY Power E | ForjaReact | 1 | — | 98 | pouco dado |
-| Pharmacologist Reincarnated Into Isekai | Fio da Meada | 43 | — | 100 | pouco dado |
-| He s the Only Genius Summoner with Creat | Fio da Meada | 143 | 2.2 | 105 | parar (assistem pouco) |
-| This Useless Loser Swallowed God s Finge | inovare manhwa br | 5 | 0.6 | 110 | pouco dado |
-| When a Top Player Gets 6 Unique Traits R | Fio da Meada | 39 | 0.8 | 125 | parar (assistem pouco) |
-| 17  He got into the Medieval Age   bega | Fio da Meada | 48 | 0.6 | 131 | parar (assistem pouco) |
-| Orphan Reincarnated With God s Leveling | HistoriasEmFrames | 8 | — | 136 | pouco dado |
-| 6 He got into the Medieval Age   began | Fio da Meada | 44 | 1.4 | 137 | parar (assistem pouco) |
-| 4 He got into the Medieval Age   began | Fio da Meada | 48 | 0.5 | 145 | parar (assistem pouco) |
-| 16  He got into the Medieval Age   bega | Fio da Meada | 16 | 0.2 | 156 | pouco dado |
-| 10  He got into the Medieval Age   bega | Fio da Meada | 50 | 2.7 | 159 | parar (assistem pouco) |
-| 15  He got into the Medieval Age   bega | Fio da Meada | 47 | 0.4 | 163 | parar (assistem pouco) |
-| 14  He got into the Medieval Age   bega | Fio da Meada | 115 | 2.6 | 170 | parar (assistem pouco) |
-| 13  He got into the Medieval Age   bega | Fio da Meada | 57 | 8.9 | 170 | parar (assistem pouco) |
-| 8 He got into the Medieval Age   began | Fio da Meada | 204 | 0.7 | 171 | parar (assistem pouco) |
-| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 8 | — | 176 | pouco dado |
-| He Destroys the Hunter Exam So Easily Th | CenaReact | 10 | — | 177 | pouco dado |
-| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 178 | pouco dado |
-| He got into the Stone Age and Conquered | inovare manhwa br | 15 | — | 196 | pouco dado |
-| He Got Max Luck After a System Error and | Curiosidades Noturnas | 5 | 0.1 | 202 | pouco dado |
+| Every RUMOR Became True  So My Cheating | Fio da Meada | 2 | — | 3 | pouco dado |
+| She Betrayed Him for a Servant Now He s | Fio da Meada | 1 | — | 8 | pouco dado |
+| My Girlfriend Was a Demon And When I Tri | Fio da Meada | 0 | — | 10 | pouco dado |
+| I Was Reborn To Give My Cheating Wife Th | Curiosidades Noturnas | 1 | — | 26 | pouco dado |
+| My Ex Begged Me Back When I Started Dati | HistoriasEmFrames | 1 | — | 19 | pouco dado |
+| Reborn to Reject My Cheating Fiancee and | CenaReact | 2 | — | 20 | pouco dado |
+| I Was Reborn To Give My Cheating Wife Th | Fio da Meada | 1 | — | 26 | pouco dado |
+| They Kicked Him To Die In The Apocalypse | HistoriasEmFrames | 12 | — | 76 | pouco dado |
+| He Awakens With The Power Of The STRONGE | inovare manhwa br | 8 | — | 82 | pouco dado |
+| Reincarnated With 999x LEGENDARY Power E | ForjaReact | 1 | — | 102 | pouco dado |
+| Pharmacologist Reincarnated Into Isekai | Fio da Meada | 43 | — | 104 | pouco dado |
+| He s the Only Genius Summoner with Creat | Fio da Meada | 143 | 2.2 | 109 | parar (assistem pouco) |
+| This Useless Loser Swallowed God s Finge | inovare manhwa br | 5 | 0.6 | 114 | pouco dado |
+| When a Top Player Gets 6 Unique Traits R | Fio da Meada | 39 | 0.8 | 129 | parar (assistem pouco) |
+| 17  He got into the Medieval Age   bega | Fio da Meada | 48 | 0.6 | 135 | parar (assistem pouco) |
+| Orphan Reincarnated With God s Leveling | HistoriasEmFrames | 8 | — | 140 | pouco dado |
+| 6 He got into the Medieval Age   began | Fio da Meada | 44 | 1.4 | 141 | parar (assistem pouco) |
+| 4 He got into the Medieval Age   began | Fio da Meada | 48 | 0.5 | 149 | parar (assistem pouco) |
+| 16  He got into the Medieval Age   bega | Fio da Meada | 16 | 0.2 | 160 | pouco dado |
+| 10  He got into the Medieval Age   bega | Fio da Meada | 50 | 2.7 | 163 | parar (assistem pouco) |
+| 15  He got into the Medieval Age   bega | Fio da Meada | 47 | 0.4 | 167 | parar (assistem pouco) |
+| 14  He got into the Medieval Age   bega | Fio da Meada | 115 | 2.6 | 174 | parar (assistem pouco) |
+| 13  He got into the Medieval Age   bega | Fio da Meada | 57 | 8.9 | 174 | parar (assistem pouco) |
+| 8 He got into the Medieval Age   began | Fio da Meada | 204 | 0.7 | 175 | parar (assistem pouco) |
+| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 8 | — | 180 | pouco dado |
+| He Destroys the Hunter Exam So Easily Th | CenaReact | 10 | — | 181 | pouco dado |
+| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 182 | pouco dado |
+| He got into the Stone Age and Conquered | inovare manhwa br | 15 | — | 200 | pouco dado |
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

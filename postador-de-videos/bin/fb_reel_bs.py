@@ -69,12 +69,17 @@ def _so_facebook(pg, nome_pagina):
         sel = (it.get_attribute("aria-selected") or it.get_attribute("aria-checked") or "").lower() == "true"
         tem_ig = it.locator("img[src*='instagram'], svg").count() and "Grupo" not in txt
         e_pagina = txt.split("\n")[0].strip().casefold() == nome_pagina.casefold()
-        if e_pagina:
-            if not sel:
-                it.click(); time.sleep(1)
-            marcados_fb = True
-        elif sel:
-            it.click(); time.sleep(1); desmarcou.append(txt.split("\n")[0])
+        try:  # 20/11 11:05 (MS Energy): opção fora da tela travou o clique 30 s e derrubou a postagem
+            if e_pagina:
+                if not sel:
+                    it.click(timeout=8000); time.sleep(1)
+                marcados_fb = True
+            elif sel:
+                it.click(timeout=8000); time.sleep(1); desmarcou.append(txt.split("\n")[0])
+        except Exception:
+            if e_pagina:
+                marcados_fb = sel  # não conseguiu marcar: só vale se já estava
+            # não conseguiu desmarcar: o rótulo final é conferido logo abaixo (só a Página ou não posta)
     pg.keyboard.press("Escape")
     time.sleep(1.5)
     rotulo = " ".join((caixa.inner_text() or "").replace("​", " ").split())

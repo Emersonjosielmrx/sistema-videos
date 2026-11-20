@@ -94,3 +94,11 @@ decisão da dona 19/11: conta de e-mail temp sem Google não liga família). Fal
 - `pool_fish.py` — IPs livres/usados (lê também as reservas do criador do Kaggle).
 - `fabrica_fish.py` — molde do reCAPTCHA Enterprise (seção `_JS_CARREGAR`/`_JS_TOKEN`, sitekey, action 'tts').
 - `sessoes_fish.py` — token Bearer por conta, saldo sem Chrome (`/team/context` quando falta workspace).
+
+## 7. Kit no DESKTOP (20/11) — a dona cria a conta lá, o PC1 importa
+- Pasta no desktop: `D:\fish_contas` (LEIA_PRIMEIRO.txt bem detalhado, abrir_cadastro.py casa|4g, pegar_token.py,
+  contas_a_criar.json). Cópia local do kit: `D:\tmp\kit_desktop\kit`.
+- O desktop sai pelo MESMO IP da casa (191.36.137.8). Modo 4g usa a ponte do S20 (`ssh s20 "python3 -u
+  ~/_proxy_celular.py 8880"` em segundo plano no PC1; S20 4G = 179.151.x).
+- Depois que a dona logar e rodar `pegar_token.py`, no PC1: `python importar_token_desktop.py` (traz o token por scp,
+  registra no cofre com o IP do caixas_fish.json e lê o saldo).

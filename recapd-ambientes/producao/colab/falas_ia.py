@@ -29,7 +29,13 @@ cumprimento ("salve rapaziada"), pedido de inscrição/like/comentário, despedi
 "meu Deus do céu"), risada, piada ou comentário que serve pra qualquer cena ("esse cara não tem limite", "olha a
 cara dele kkk"), transição ("bora pro próximo capítulo", "mas calma que piora"). Trecho que cita qualquer coisa da
 história NÃO é genérico.
-Responda SÓ JSON: [{"n": <número>, "cat": "saudacao|inscricao|despedida|reacao|risada|piada|bordao|transicao",
+PRIORIDADE MÁXIMA (dona 20/11): as piadinhas MALICIOSAS que o YouTube permite, sobre mulher bonita, sem palavrão:
+"muito RES-peito" (trocadilho do peito), "que mulherão", "olha ela toda poderosa", "essa parte eu não vou mostrar
+porque o YouTube não gosta", "foco, foco", "perdido nas montanhas", "tentando olhar só pro rosto dela" — marque como
+"beleza" com nota alta, MESMO que cite "ela"/"a moça" (servem em qualquer cena com mulher adulta). Só não marque se
+tiver nome de personagem.
+O trecho tem que ser FRASE INTEIRA (com começo e fim); pedaço que começa ou termina no meio NÃO serve.
+Responda SÓ JSON: [{"n": <número>, "cat": "saudacao|inscricao|despedida|reacao|risada|piada|bordao|transicao|beleza",
 "nota": <1-10, quão bom e engraçado/marcante pra reusar>}]. Lista vazia se nenhum.
 
 """

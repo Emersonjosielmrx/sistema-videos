@@ -1293,3 +1293,8 @@
 - 2026-11-20 05:53 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261120_055039_99a6.md](20261120_055039_99a6.md)
 - 2026-11-20 07:23 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261120_072040_d76e.md](20261120_072040_d76e.md)
 - 2026-11-20 07:42 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261120_074041_dd16.md](20261120_074041_dd16.md)
+- 2026-11-20 08:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261120_084040_085a.md](20261120_084040_085a.md)
+- 2026-11-20 09:22 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261120_092042_58ec.md](20261120_092042_58ec.md)
+- 2026-11-20 09:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261120_094047_e2e5.md](20261120_094047_e2e5.md)
+- 2026-11-20 10:14 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261120_101056_38a0.md](20261120_101056_38a0.md)
+- 2026-11-20 12:04 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261120_120046_588d.md](20261120_120046_588d.md)

@@ -2265,7 +2265,9 @@ def _saude():
     try:  # tarefas que fazem a produção/postagem: faltando, desabilitada ou sem rodar há mais de 26 h
         esperadas = ("ControladorVideos", "PainelVideos", "VigiaVideos", "PostadorDeVideos", "BackupDriveVideos",
                      "ParceiroKaijinre-Postagem", "HipercoolPostagem", "HipercoolPC2", "MSEnergy_PostarInsta",
-                     "MSEnergy_PostarTikTok", "TikTokRodadaExtra", "ManhwaReact-Rede", "ManhwaReact-Lote", "VozClonadaVigia")
+                     "MSEnergy_PostarTikTok", "TikTokRodadaExtra", "ManhwaReact-Rede", "ManhwaReact-Lote", "VozClonadaVigia",
+                     # 20/11: Facebook (Páginas): postagem, MS Energy FB, criação de Páginas, medidor+escada
+                     "FacebookPaginas", "MSEnergy_PostarFB", "FacebookCriarPaginas", "FacebookInteligencia")
         ps = ("foreach($x in @(" + ",".join(f"'{t}'" for t in esperadas) + ")){ $t=Get-ScheduledTask -TaskName $x "
               "-ErrorAction SilentlyContinue; if(-not $t){\"$x|FALTA||\"; continue}; $i=Get-ScheduledTaskInfo -TaskName $x; "
               "\"$x|$($t.State)|$($i.LastTaskResult)|$($i.LastRunTime.ToString('yyyy-MM-dd HH:mm'))\" }")

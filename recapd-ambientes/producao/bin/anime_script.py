@@ -251,6 +251,23 @@ def _jeito_do_nicho():
             travas = "; ".join(m.get("travas") or [])
             linhas.append(f"  * {m.get('nome', '')} | MOLDE: {m.get('molde', '')} | exemplo real: "
                           f"\"{m.get('exemplo_real', '')}\"" + (f" | NUNCA: {travas}" if travas else ""))
+        # 20/11 dona ("RESSS-peito o máximo possível falando das mulheres, de formas diferentes em contextos diferentes,
+        # principalmente seios grandes na tela — é quase universal; poderosa; DUPLO SENTIDO ao máximo: 'macetar',
+        # 'acabar com ele de um jeito gostoso', 'eu faria esse acordo, você faria?'"): com mulher ADULTA bonita no
+        # trecho, a piada de beleza/duplo sentido vira OBRIGATÓRIA e pode ter até 3, cada uma com molde diferente.
+        # DUPLO_SENTIDO=0 volta à regra de 1 por trecho.
+        if beleza and os.environ.get("DUPLO_SENTIDO", "1") != "0":
+            extra = random.sample(beleza, min(5, len(beleza)))
+            linhas.append("- DUPLO SENTIDO E PIADA DE MULHER BONITA (vale por cima do 'EXATAMENTE 1' acima): se o trecho "
+                          "tiver mulher ADULTA bonita/sensual, decote ou seios grandes, ponha 1 a 3 tiradas maliciosas "
+                          "(a cada ~6 frases com ela em cena), CADA UMA COM UM MOLDE DIFERENTE — nunca repita a mesma "
+                          "piada no vídeo. Use também o duplo sentido natural da cena (luta = 'macetar', 'pegar de jeito', "
+                          "'ficar por cima'; ameaça dela = 'acabar com ele bem devagarinho'; proposta = 'eu faria esse "
+                          "acordo, e você?'). 'RES-peito' escreva 'respeito' normal (a voz estica o S sozinha), no "
+                          "máximo 2 no vídeo e em contextos diferentes. Sempre sem palavra explícita; nunca com menor. "
+                          "Moldes extras:")
+            for m in extra:
+                linhas.append(f"  * {m.get('nome', '')} | {m.get('molde', '')} | ex.: \"{m.get('exemplo_real', '')}\"")
     linhas += [f"- {r}" for r in ajustes_cortes().get("regras_roteiro") or []]
     # 13/11 teste T13 (pesquisador: ThomasPraun/spoken-script, hooks.md — ideia reescrita): o TIPO da 1ª frase vira
     # variante sorteada por vídeo (variantes.py "abertura"). "fato" (ou sem env) = como sempre. As outras continuam
@@ -391,11 +408,60 @@ def _jeito_do_narrador(gancho=False):
         linhas.append(f"- Gírias/regionalismos DELE (1 ou 2 no vídeo, onde couber natural): {lista('girias_regionais', 8)}.")
     if g.get("contracoes"):
         linhas.append(f"- Escreva como ele FALA (a voz lê do jeito escrito): {lista('contracoes', 8)}.")
+    # 20/11 dona (ouvindo o KkVirjão): "ele tem essas falas que chama a mulher de burra, o homem de chuinga, o
+    # personagem de retardado, e fala uma coisa e depois fala 'mentira' — isso tem que ser adicionado; tem que ter um
+    # sistema de imitação dessas coisas que não é voz, é o jeito deles de falar que só ele faz". "marcas_registradas"
+    # no linguagem_v2.json = os truques DELE, com exemplo real; o roteiro usa 2-4 no vídeo (sempre com PERSONAGEM,
+    # nunca com o público — a regra acima continua valendo).
+    if g.get("marcas_registradas") and not prota1:
+        marcas = []
+        for m in g["marcas_registradas"][:10]:
+            if isinstance(m, dict):
+                # 20/11: marca "profunda" (marcas_profundas.py) traz molde + vários exemplos reais
+                exs = m.get("exemplos") or ([m["exemplo"]] if m.get("exemplo") else [])
+                marcas.append(f"{m.get('o_que', '')}" + (f" — molde: {m['como']}" if m.get("como") else "")
+                              + (" (exemplos reais: " + " / ".join(f'"{e}"' for e in exs[:3]) + ")" if exs else ""))
+            else:
+                marcas.append(str(m))
+        linhas.append("- MARCAS REGISTRADAS dele (o que só ELE faz — use 4 a 8 no vídeo (as primeiras são as mais dele), espalhadas, sempre sobre os "
+                      "PERSONAGENS da história): " + " | ".join(marcas))
+    # 20/11 dona: "existe uma coisa humana chamada DUPLO SENTIDO — temos que adicionar ao máximo nas narrações, com
+    # prioridade as sexuais e as que os narradores já fazem" (com todo ressss-peito, a poderosa, macetar, apanhar de
+    # um jeito gostoso, "eu faria esse acordo, você faria?"). config/duplo_sentido.json. DUPLO_SENTIDO=0 desliga.
+    if os.environ.get("DUPLO_SENTIDO", "1") != "0" and not prota1:
+        try:
+            ds = json.loads((Path(__file__).resolve().parent.parent / "config" / "duplo_sentido.json")
+                            .read_text(encoding="utf-8"))
+            ex = [f"{x['o_que']} (ex.: \"{x['ex']}\")" for x in (ds.get("obrigatorio") or []) + (ds.get("frases") or [])]
+            dele = (ds.get("por_narrador") or {}).get(voz or "", [])
+            linhas.append("- DUPLO SENTIDO (malícia de humano, o público ama): use " + ds.get("quanto", "2 a 5") +
+                          ". Quando: " + ds.get("quando", "") + ". SEMPRE sugestivo (a frase também tem sentido "
+                          "inocente), NUNCA explícito nem palavrão sexual. OBRIGATÓRIO: mulher bonita/decote na tela "
+                          "→ 'com todo respeito' logo depois do elogio. Repertório: " + " | ".join(ex[:12]) +
+                          (f". JEITO DELE (prioridade): {' | '.join(dele)}" if dele else "") + ".")
+        except (OSError, ValueError, KeyError):
+            pass
+    # 20/11 dona: "o Virjão fala 'guria', 'trancada no boga', os outros não falam; e tem coisa que os outros falam
+    # que ele não fala — não é só a voz, é absorver o jeito de falar". vocabulario_exclusivo.py compara as falas reais
+    # de todos os narradores: so_dele = palavras que só ele usa; nao_fala = as dos outros que ele não usa.
+    if g.get("so_dele"):
+        linhas.append(f"- Palavras que SÓ ELE usa (espalhe algumas, natural): {', '.join(g['so_dele'][:15])}.")
+    if g.get("nao_fala"):
+        linhas.append(f"- Palavras dos OUTROS narradores que ELE NÃO FALA (nunca use): {', '.join(g['nao_fala'][:12])}.")
     if g.get("frases_reais"):
         linhas.append("- Jeito real dele (só o ritmo e o vocabulário, NÃO copie): "
                       + " | ".join(str(f) for f in g["frases_reais"][:5]))
     if g.get("evitar"):
         linhas.append(f"- Ele NÃO faz: {lista('evitar', 5)}.")
+    if g.get("marcas_registradas") and not prota1:
+        # 20/11 teste KkVirjão: com as marcas profundas o texto saiu com palavrão e xingamento em TODA linha
+        # ("punheteiro", "caralho") — forçado e arriscado pro YouTube. Dose de quem fala de verdade.
+        linhas.append("- DOSE (vale por cima das marcas): no máximo 1 marca a cada 5-6 frases, a maioria das frases é "
+                      "narração normal no vocabulário dele. Palavrão leve (porra, caralho) no máximo 1 a cada 30 frases; "
+                      "NUNCA palavrão sexual (punheteiro, foder, buceta, pau) nem xingamento pesado de cunho sexual. "
+                      "Xingar personagem (burra, retardado, anta) no máximo 1 a cada 15 frases.")
+    if g.get("nao_fala") and not prota1:  # 20/11 dona: "tem coisa que os outros falam que ele não fala"
+        linhas.append(f"- Expressões que OUTROS narradores usam e ELE NUNCA usa (não escreva): {lista('nao_fala', 15)}.")
     if g.get("tipo") == "personagem" and not gancho and not prota1:  # dono 20/10: o público tem que reconhecer quem narra
         quem = g.get("canal", voz).upper()
         # 22/10 (dono: "parar de ser alguém falando com a voz da Chiquinha — ser a PRÓPRIA Chiquinha narrando do jeito

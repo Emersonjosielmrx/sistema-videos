@@ -840,6 +840,62 @@ def sec_celulares_adb():
     return out
 
 
+def sec_facebook():
+    """20/11 dona ("adicionamos agora Facebook, adicione também no relatório"): Reels nas Páginas (postar_facebook_paginas,
+    tarefa FacebookPaginas) + views medidas (fb_medir -> logs\\fb_views.jsonl). Só lê arquivos locais.
+    RONDA_FACEBOOK=0 tira a seção."""
+    if os.environ.get("RONDA_FACEBOOK", "1") == "0":
+        return []
+    out = ["## 📘 Facebook (Reels nas Páginas)"]
+    fb = Path(r"D:\postador-de-videos")
+    cfg = _json(fb / "config" / "facebook_paginas.json", {}) or {}
+    nomes = {k: v.get("nome", k) for k, v in (cfg.get("paginas") or {}).items()}
+    post = (_json(fb / "logs" / "facebook_paginas.json", {}) or {}).get("postados") or {}
+    views = {}
+    try:
+        for l in (fb / "logs" / "fb_views.jsonl").read_text(encoding="utf-8", errors="ignore").splitlines():
+            try:
+                d = json.loads(l)
+            except ValueError:
+                continue
+            views[d.get("pagina")] = d  # fica a leitura mais nova de cada Página
+    except OSError:
+        pass
+    linhas, tot_d, tot_h = [], 0, 0
+    for k in sorted(set(nomes) | set(post) | set(views)):
+        itens = post.get(k) or []
+        hj = [x for x in itens if str(x.get("quando", "")).startswith(f"{agora:%Y-%m-%d}")]
+        dd = [x for x in hj if _dt(x.get("quando")) and _dt(x.get("quando")) >= ultima]
+        tot_d += len(dd)
+        tot_h += len(hj)
+        v = views.get(k) or {}
+        reels = v.get("reels") or []
+        soma = sum(int(r.get("views") or 0) for r in reels)
+        linhas.append(f"| {nomes.get(k, k)} | {len(dd)} | {len(hj)} | {len(itens)} | "
+                      f"{soma if reels else '—'} | {v.get('seguidores', '—')} |")
+    out.append(f"- Reels postados: **{tot_d} desde a última · {tot_h} hoje** em {len(linhas)} Páginas "
+               "(MS Energy posta pelo postar_ms_energy, fora desta tabela)")
+    if linhas:
+        out += ["", "| Página | Desde a última | Hoje | Total | Views (reels medidos) | Seguidores |",
+                "|---|---:|---:|---:|---:|---:|", *linhas]
+    # erros da rodada mais recente
+    try:
+        rod = max((fb / "logs").glob("fb_rodada_*.log"), key=lambda p: p.stat().st_mtime)
+        erros = [l.strip() for l in rod.read_text(encoding="utf-8", errors="ignore").splitlines() if "ERRO" in l]
+        if erros:
+            out.append(f"- ⚠️ {len(erros)} erro(s) na última rodada ({rod.name}): {erros[-1][:140]}")
+    except (OSError, ValueError):
+        pass
+    return out
+
+
+def _dt(s):
+    try:
+        return datetime.fromisoformat(str(s)[:19])
+    except ValueError:
+        return None
+
+
 def sec_3d():
     """16/11 dona ("adicione no relatório os Shorts 3D, vamos ver como se saem em visualizações"): kit3d-producao.
     Feitos/falhos hoje (logs\\diario.log), postados (posted_url nos postar.json 3d-*) e views (painel :8790/api/ranking)."""
@@ -1023,7 +1079,7 @@ def main(gravar):
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
     for f in (sec_numeros, sec_recuperacao, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
-              sec_pesquisador, sec_hydrogen, sec_redes, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
+              sec_pesquisador, sec_hydrogen, sec_redes, sec_facebook, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()
         except Exception as e:  # noqa: BLE001 — uma seção quebrada não derruba o relatório

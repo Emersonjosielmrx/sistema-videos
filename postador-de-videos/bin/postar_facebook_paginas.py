@@ -35,7 +35,20 @@ def _ler(p, padrao):
 
 
 def _gravar(reg):
-    tmp = REG.with_suffix(".tmp")
+    """Grava mesclando com o que está no disco (20/11: as 2 contas postam em paralelo, cada uma num processo)."""
+    disco = _ler(REG, {})
+    for sec in ("postados",):
+        for ch, lst in (disco.get(sec) or {}).items():
+            meu = reg.setdefault(sec, {}).setdefault(ch, [])
+            vistos = {(x["caminho"], x["quando"]) for x in meu}
+            meu.extend(x for x in lst if (x["caminho"], x["quando"]) not in vistos)
+            meu.sort(key=lambda x: x["quando"])
+    for sec in ("erros",):
+        for ch, d in (disco.get(sec) or {}).items():
+            reg.setdefault(sec, {}).setdefault(ch, {}).update({k: v for k, v in d.items() if k not in reg[sec][ch]})
+    for k, v in (disco.get("pulados") or {}).items():
+        reg.setdefault("pulados", {}).setdefault(k, v)
+    tmp = REG.with_suffix(f".{os.getpid()}.tmp")
     tmp.write_text(json.dumps(reg, ensure_ascii=False, indent=1), encoding="utf-8")
     os.replace(tmp, REG)
 
@@ -58,7 +71,14 @@ def candidatos(chave, pag, cat, reg):
     for v in cat["videos"]:
         if v["tipo"] != "final" or not (v["no_pc"] or v["drive"]):
             continue
-        yt = [p for p in v["postagens"] if p["plataforma"] == "youtube" and p["conta"] in pag["postados_em"]]
+        yt = [p for p in v["postagens"] if p["plataforma"] == "youtube" and p["conta"] in pag.get("postados_em", [])]
+        # 20/11: Página sem canal próprio (TikTok de reserva Veo) = Veo do tema que já saiu no YouTube, SÓ a versão limpa
+        veo = None
+        if not yt and pag.get("temas_veo") and v["projeto"] == "veo" and any(v["nome"].startswith(t) for t in pag["temas_veo"]):
+            yt = [p for p in v["postagens"] if p["plataforma"] == "youtube"]
+            veo = catalogo.versao_limpa(v) if yt else None
+            if not veo:
+                continue
         if not yt or v["caminho"].casefold() in ja:
             continue
         chave_nome = Path(v["caminho"]).parent.name.casefold() + "/" + Path(v["caminho"]).name.casefold()
@@ -66,13 +86,13 @@ def candidatos(chave, pag, cat, reg):
             continue
         if Path(v["caminho"]).name.endswith("_ULTIMO.mp4"):  # historias: 2 versões da mesma história
             continue
-        if pag.get("tags"):  # só o tema da Página (hashtag da legenda)
+        if pag.get("tags") and not veo:  # só o tema da Página (hashtag da legenda)
             import re
             tags = [t.casefold() for t in re.findall(r"#(\w+)", catalogo.legenda_reuso(v))]
             # 20/11: a 1ª hashtag é o tema (#anime ... #acao não é filme); só ela decide
             if not tags or tags[0] not in {t.casefold() for t in pag["tags"]}:
                 continue
-        out.append(dict(v, quando_yt=max(p["quando"] or "" for p in yt)))
+        out.append(dict(v, quando_yt=max(p["quando"] or "" for p in yt), **({"limpo": str(veo)} if veo else {})))
     out.sort(key=lambda v: (v["no_pc"], v["quando_yt"]), reverse=True)
     return out
 
@@ -86,7 +106,8 @@ def postar_um(chave, pag, cfg, cat, reg, preview=False):
     from playwright.sync_api import sync_playwright
     import fb_contas, fb_reel_bs, fb_entrar_como
     cands = candidatos(chave, pag, cat, reg)
-    print(f"[{pag['nome']}] {len(cands)} vídeo(s) disponíveis; hoje {hoje_na_pagina(reg, chave)}/{pag.get('por_dia', 3)}", flush=True)
+    import fb_escada
+    print(f"[{pag['nome']}] {len(cands)} vídeo(s) disponíveis; hoje {hoje_na_pagina(reg, chave)}/{fb_escada.teto(chave, pag)}", flush=True)
     if preview:
         for v in cands[:5]:
             print("   ", v["caminho"][-90:], "|", catalogo.legenda_reuso(v)[:90].replace("\n", " "))
@@ -117,6 +138,12 @@ def postar_um(chave, pag, cfg, cat, reg, preview=False):
             fb_contas.fechar(proc)
             catalogo.liberar(mp4)
         print(f"   {'OK' if ok else 'ERRO'} {v['caminho'][-70:]} — {msg}", flush=True)
+        if not ok:  # 20/11 escada: guarda o erro; bloqueio/restrição do Facebook = desce e segura 24 h
+            reg.setdefault("erros", {}).setdefault(chave, {})[datetime.now().isoformat(timespec="seconds")] = msg[:300]
+            _gravar(reg)
+            import fb_escada
+            if fb_escada.e_bloqueio(msg):
+                fb_escada.descer(chave, msg)
         if ok:
             reg.setdefault("postados", {}).setdefault(chave, []).append(
                 {"caminho": v["caminho"], "quando": datetime.now().isoformat(timespec="seconds"), "legenda": legenda[:200],
@@ -137,24 +164,58 @@ def main():
     ap.add_argument("--um", action="store_true")
     ap.add_argument("--pagina")
     ap.add_argument("--intervalo", type=int, default=300)
+    ap.add_argument("--conta", help="só as Páginas desta conta (as 2 contas rodam em paralelo, cada uma na sua saída)")
+    ap.add_argument("--horario", action="store_true",
+                    help="rodada de hora em hora: posta só nas Páginas atrasadas pelo relógio (08-23 h) + horário nobre")
     a = ap.parse_args()
     cfg = _ler(CFG, {})
     reg = _ler(REG, {})
     cat = catalogo.sincronizar(salvar=False)
-    paginas = {k: v for k, v in cfg["paginas"].items() if (not a.pagina or k == a.pagina) and not v.get("pausada")}
-    # página mais atrasada hoje primeiro
-    ordem = sorted(paginas, key=lambda k: hoje_na_pagina(reg, k) / max(1, paginas[k].get("por_dia", 3)))
+    paginas = {k: v for k, v in cfg["paginas"].items() if (not a.pagina or k == a.pagina) and not v.get("pausada")
+               and (not a.conta or v["conta"] == a.conta)}
+    # página mais atrasada hoje primeiro; o teto do dia vem da escada (fb_escada.py)
+    import fb_escada
+    ordem = sorted(paginas, key=lambda k: hoje_na_pagina(reg, k) / max(1, fb_escada.teto(k, paginas[k])))
+    agora = datetime.now()
     for i, k in enumerate(ordem):
         pag = paginas[k]
         if a.preview:
             postar_um(k, pag, cfg, cat, reg, preview=True); continue
-        if hoje_na_pagina(reg, k) >= pag.get("por_dia", 3):
-            print(f"[{pag['nome']}] já postou {pag.get('por_dia', 3)} hoje"); continue
+        reg = _ler(REG, {})  # outro processo (a outra conta / criar_fila) pode ter gravado
+        lim, feitos = fb_escada.teto(k, pag), hoje_na_pagina(reg, k)
+        if feitos >= lim:
+            if not a.horario:
+                print(f"[{pag['nome']}] já postou {lim} hoje" + (" (segurada pela escada)" if lim == 0 else ""))
+            continue
+        if a.horario and not deve_postar_agora(feitos, lim, agora):
+            continue
+        viral = fb_escada.segurar_viral(k)
+        if viral and not a.pagina:
+            print(f"[{pag['nome']}] segura: {viral}"); continue
         r = postar_um(k, pag, cfg, cat, reg)
         if a.um and r and r[0]:
             break
-        if i < len(ordem) - 1:
+        if i < len(ordem) - 1 and not a.horario:
             time.sleep(a.intervalo)
+
+
+NOBRE = (21, 22)  # 13/11 (Shorts de parceiro): o 1º post das 21-22 h rende ~100x nos canais fracos — 1 por Página/dia
+INICIO, FIM = 8, 23
+
+
+def deve_postar_agora(feitos, lim, agora):
+    """Espalha os 'lim' Reels do dia de 08 h a 23 h e guarda 1 para o horário nobre (21-22 h):
+    antes das 21 h a Página posta até lim-1 no ritmo do relógio; às 21-22 h sai o do nobre; depois, o que faltar."""
+    h = agora.hour + agora.minute / 60
+    if h < INICIO or h >= FIM + 1:
+        return False
+    if NOBRE[0] <= agora.hour <= NOBRE[1]:
+        return True  # nobre: 1 por rodada (a rodada das 21 e a das 22 completam o dia)
+    if agora.hour > NOBRE[1]:
+        return True  # 23 h: completa o que faltou
+    dia_util = max(1, lim - 1)  # antes do nobre só lim-1
+    esperado = int(dia_util * (h - INICIO) / (NOBRE[0] - INICIO)) + 1
+    return feitos < min(dia_util, esperado)
 
 
 if __name__ == "__main__":

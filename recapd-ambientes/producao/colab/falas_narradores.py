@@ -237,7 +237,46 @@ def ajustar_vad(voz16, ini, fim):
     # 12/11 dona ("acabam bruscamente no meio de uma palavra"): 80 ms no fim comia a última sílaba (o Whisper marca o
     # fim da palavra cedo); fim com 0,30 s de folga e o fade de saída mais longo no cortar(). FALA_FOLGA_FIM=0.08 volta.
     import os
+    if os.environ.get("FALA_FIM_ENERGIA", "1") != "0":
+        # 20/11 dona ("o Momo fala 'no próximo capi-' e para"): o fim do Whisper/VAD vinha cedo e a folga fixa não
+        # alcançava o fim da palavra. Agora estende até a voz CALAR de verdade (150 ms abaixo de -40 dB do pico da
+        # fala), no máximo +1,2 s. FALA_FIM_ENERGIA=0 volta ao fim fixo.
+        try:
+            import numpy as np
+            a16 = np.asarray(ajustar_vad.a) if "a" in ajustar_vad.__dict__ else None
+            if a16 is not None:
+                w = 160  # 10 ms
+                corpo = a16[int(ini * 16000):int(fim * 16000)]
+                ref = 20 * np.log10(np.sqrt(np.mean(corpo ** 2)) + 1e-9) if len(corpo) else -30
+                k, quieto = int(fim * 16000), 0
+                lim = min(len(a16), int((fim + 1.2) * 16000))
+                while k + w <= lim and quieto < 15:
+                    e = 20 * np.log10(np.sqrt(np.mean(a16[k:k + w] ** 2)) + 1e-9)
+                    quieto = quieto + 1 if e < ref - 22 else 0
+                    k += w
+                fim = max(fim, k / 16000 - quieto * w / 16000)
+        except Exception:  # noqa: BLE001
+            pass
     return max(0, ini - 0.08), fim + float(os.environ.get("FALA_FOLGA_FIM", "0.30"))
+
+
+def conferir(wav, texto):
+    """20/11: retranscreve o corte pronto. True = a última palavra ouvida é a última do texto (não ficou pedaço de
+    palavra nem começo da frase seguinte). Sem Whisper = True (não bloqueia)."""
+    import unicodedata
+
+    def norm(s):
+        s = unicodedata.normalize("NFKD", s.lower())
+        return re.findall(r"[a-z0-9]+", "".join(c for c in s if not unicodedata.combining(c)))
+    try:
+        from faster_whisper import WhisperModel
+        if "m" not in conferir.__dict__:
+            conferir.m = WhisperModel("small", device="cpu", compute_type="int8")
+        segs, _ = conferir.m.transcribe(str(wav), language="pt", vad_filter=False)
+        ouv, esp = norm(" ".join(s.text for s in segs)), norm(texto)
+        return bool(esp) and bool(ouv) and ouv[-1] == esp[-1]
+    except Exception:  # noqa: BLE001
+        return True
 
 
 def cortar(audio, ini, fim, saida):
@@ -296,8 +335,13 @@ def fazer(voz):
         a, b = ajustar_vad(voz16, a, b)
         arq = banco / "falas" / f"{cat}_{n:03d}.wav"
         cortar(vozw, a, b, arq)
+        # 20/11: fala que começa ou termina no meio da frase/palavra não entra no banco
+        inteira = txt.strip()[:1].isupper() and txt.rstrip().endswith((".", "!", "?"))
+        if not inteira or not conferir(arq, txt):
+            arq.unlink(missing_ok=True)
+            continue
         itens.append({"tipo": "fala", "categoria": cat, "texto": txt, "ini": round(a, 2), "dur": round(b - a, 2),
-                      "arquivo": f"falas/{arq.name}"})
+                      "arquivo": f"falas/{arq.name}", "conferida": True})
     for n, (nome, a, b, s) in enumerate(sons(voz16), 1):
         arq = banco / "sons" / f"{nome}_{n:03d}.wav"
         cortar(vozw, max(0, a - 0.1), b + 0.15, arq)

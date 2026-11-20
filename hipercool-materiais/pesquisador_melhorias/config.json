@@ -25851,6 +25851,78 @@
         "Ler as páginas em support.google.com/youtube sobre conteúdo reutilizado e inautêntico, data da última atualização e o que muda para recaps de vídeo de parceiro."
       ],
       "origem": "area_gemini_web_sessao_cookie__sonnet_0751.md 2026-11-20"
+    },
+    {
+      "id": "regras_yt_auto",
+      "nome": "Regras oficiais do YouTube sobre automação e upload por app",
+      "subtemas": [
+        "support.google.com/youtube: spam/práticas enganosas, conteúdo repetitivo/inautêntico, limite de uploads por dia"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0811.md 2026-11-20"
+    },
+    {
+      "id": "adb_agendar_short",
+      "nome": "Agendar publicação no app do YouTube",
+      "subtemas": [
+        "Regras oficiais do YouTube (support.google.com) sobre agendar Short e limites de upload diário por canal novo, para decidir se agendar vale mais que postar na hora"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0821.md 2026-11-20"
+    },
+    {
+      "id": "politica_longos_traduzidos",
+      "nome": "Política oficial de dublagem e áudio multi-idioma do YouTube e de legendas traduzidas",
+      "subtemas": [
+        "páginas support.google.com/youtube sobre \"áudio em vários idiomas\" e tradução de título/descrição, para o tema (4) vídeo longo em outras línguas"
+      ],
+      "origem": "area_avatares_stop__sonnet_0846.md 2026-11-20"
+    },
+    {
+      "id": "ponte_short_longo_oficial",
+      "nome": "Recursos oficiais do YouTube para ligar Short a vídeo longo",
+      "subtemas": [
+        "páginas de ajuda sobre \"vídeo relacionado\" em Shorts e playlists, para o tema (5)"
+      ],
+      "origem": "area_avatares_stop__sonnet_0846.md 2026-11-20"
+    },
+    {
+      "id": "celular_ffmpeg_fila",
+      "nome": "Renderização em lote no Android com Termux e FFmpeg",
+      "subtemas": [
+        "scripts pequenos (menos de 50 estrelas) de fila de render em Termux, para o tema (7)"
+      ],
+      "origem": "area_avatares_stop__sonnet_0846.md 2026-11-20"
+    },
+    {
+      "id": "capa_hook30s",
+      "nome": "Capas e primeiros 30 s",
+      "subtemas": [
+        "Truques em ffmpeg/Python para escolher o frame de capa e montar a abertura de 3 s dos recaps"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0856.md 2026-11-20"
+    },
+    {
+      "id": "titulos_capas_outlier",
+      "nome": "Títulos e capas dos recaps mais vistos",
+      "subtemas": [
+        "ideias simples de extrair padrão de título e capa dos recaps campeões (por yt-dlp, só metadados) para aplicar no `seo_generator"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0922.md 2026-11-20"
+    },
+    {
+      "id": "cap_hook30",
+      "nome": "Primeiros 30 s de recap",
+      "subtemas": [
+        "scripts Python/ffmpeg que montam o gancho (melhor cena do vídeo no início) e capas de recap de anime/manhwa de canais pequenos, projetos com 0 a 50 estrelas"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1001.md 2026-11-20"
+    },
+    {
+      "id": "cookie_dbsc",
+      "nome": "Cookies com DBSC e Firefox",
+      "subtemas": [
+        "Issues recentes sobre cookies Chromium durando pouco e como exportar de um perfil Firefox dedicado"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1034.md 2026-11-20"
     }
   ],
   "projetos": [

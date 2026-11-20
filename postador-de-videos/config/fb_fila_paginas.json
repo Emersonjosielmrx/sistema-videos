@@ -1,0 +1,759 @@
+{
+ "_leia": "Fila das Páginas a criar (dona 20/11/2026: 'uma Página pra cada TikTok, uma a cada X horas como o Instagram, procedimento completo'). 53 = 58 TikToks de reuso_plataformas.json menos os 5 que já têm Página (curiosidadesnoturnas, doramanoturno, filmenoturno, emersonjosiel649=Anime Noturno, emersonjosiel2033=Assist-IA). fb_criar_fila.py pega a 1ª 'pendente' da conta da vez e faz tudo (arte, criar, id, foto, capa, config, 1º Reel). 'postados_em' = canais do YouTube; 'temas_veo' = página de reserva Veo (só versão limpa). 'tags' = 1ª hashtag aceita (vazio = sem filtro). Contas: emersonjosiel02 (perfil novo, Webshare rnprmtfo-58) e msenergypara (perfil 10+ anos, casa) — revezam. Na msenergypara só entra conteúdo neutro (nunca solar/produto de outra empresa).",
+ "intervalo_h": 3,
+ "max_dia_por_conta": {
+  "msenergypara": 6,
+  "emersonjosiel02": 3
+ },
+ "perfil_pessoal": {
+  "emersonjosiel02": "Mund Solar",
+  "msenergypara": "Mund Solar III"
+ },
+ "fila": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2029",
+   "conta": "msenergypara",
+   "nome": "Cena React",
+   "categoria": "Filme",
+   "arte": "filmes",
+   "bio": "As cenas mais marcantes de filmes e séries com reação. Reels novos todo dia.",
+   "postados_em": [
+    "CenaReact"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "revolutionemerson1",
+   "conta": "emersonjosiel02",
+   "nome": "Esporte Noturno",
+   "categoria": "Esportes",
+   "arte": "futebol",
+   "bio": "Os lances mais incríveis do esporte. Reels novos todo dia.",
+   "postados_em": [
+    "Esporte Noturno"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2027",
+   "conta": "msenergypara",
+   "nome": "Histórias em Frames",
+   "categoria": "Entretenimento",
+   "arte": "historias",
+   "bio": "Histórias contadas quadro a quadro. Reels novos todo dia.",
+   "postados_em": [
+    "HistoriasEmFrames"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "revolutionemerson2",
+   "conta": "emersonjosiel02",
+   "nome": "Bicho Noturno",
+   "categoria": "Animais",
+   "arte": "bichos",
+   "bio": "Os bichos mais curiosos e engraçados do mundo. Reels novos todo dia.",
+   "postados_em": [
+    "Bicho Noturno"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2030",
+   "conta": "msenergypara",
+   "nome": "Cartucho React",
+   "categoria": "Videogame",
+   "arte": "games",
+   "bio": "Games, nostalgia e reações. Reels novos todo dia.",
+   "postados_em": [
+    "CartuchoReact"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "revolutionemerson3",
+   "conta": "emersonjosiel02",
+   "nome": "Mistérios Noturnos",
+   "categoria": "Entretenimento",
+   "arte": "misterio",
+   "bio": "Mistérios, enigmas e casos sem explicação. Reels novos todo dia.",
+   "postados_em": [
+    "Mistérios Noturnos"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwabr",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa BR",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Resumos de manhwa em português. Reels novos todo dia.",
+   "postados_em": [
+    "inovare manhwa br",
+    "inovaremanhwabr"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "seebotsia",
+   "conta": "emersonjosiel02",
+   "nome": "Tech Noturno",
+   "categoria": "Ciência, tecnologia e engenharia",
+   "arte": "ia",
+   "bio": "Tecnologia, robôs e invenções que parecem de outro mundo. Reels novos todo dia.",
+   "postados_em": [
+    "Tech Noturno"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "jogoscomia",
+   "conta": "msenergypara",
+   "nome": "Game Noturno",
+   "categoria": "Videogame",
+   "arte": "games",
+   "bio": "Os melhores momentos dos games. Reels novos todo dia.",
+   "postados_em": [
+    "Game Noturno"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2026",
+   "conta": "emersonjosiel02",
+   "nome": "Invento React",
+   "categoria": "Ciência, tecnologia e engenharia",
+   "arte": "ia",
+   "bio": "Invenções geniais e ideias que dão dinheiro. Reels novos todo dia.",
+   "postados_em": [
+    "InventoReact"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovarecap",
+   "conta": "msenergypara",
+   "nome": "Inovare Recap",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Recaps de histórias, animes e manhwas. Reels novos todo dia.",
+   "postados_em": [
+    "Inovare"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "mundosolar1995",
+   "conta": "emersonjosiel02",
+   "nome": "Comédia Noturna",
+   "categoria": "Comediante",
+   "arte": "humor",
+   "bio": "Para rir antes de dormir. Reels novos todo dia.",
+   "postados_em": [
+    "Comedia Noturna",
+    "Comédia Noturna"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2032",
+   "conta": "msenergypara",
+   "nome": "Manhwa React",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Manhwas com reação e comentários. Reels novos todo dia.",
+   "postados_em": [
+    "ManhwaReact",
+    "ManhwaReact-ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel2031",
+   "conta": "emersonjosiel02",
+   "nome": "Fio da Meada",
+   "categoria": "Entretenimento",
+   "arte": "historias",
+   "bio": "Histórias que prendem do começo ao fim. Reels novos todo dia.",
+   "postados_em": [
+    "Fio da Meada"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "canalanimescomia",
+   "conta": "msenergypara",
+   "nome": "Animes com IA",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Animes, lutas e reviravoltas. Reels novos todo dia.",
+   "postados_em": [
+    "Animescomia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersongenc",
+   "conta": "emersonjosiel02",
+   "nome": "Forja React",
+   "categoria": "Entretenimento",
+   "arte": "games",
+   "bio": "Feito à mão, forjado no fogo, com reação. Reels novos todo dia.",
+   "postados_em": [
+    "ForjaReact"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverse2",
+   "conta": "msenergypara",
+   "nome": "Manhwa Noturno",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Os melhores manhwas resumidos. Reels novos todo dia.",
+   "postados_em": [
+    "Manhwa Noturno"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "comoseriasecomia",
+   "conta": "emersonjosiel02",
+   "nome": "Mundo Que Não Existe",
+   "categoria": "Entretenimento",
+   "arte": "misterio",
+   "bio": "E se o mundo fosse diferente? Reels novos todo dia.",
+   "postados_em": [
+    "MundoQueNaoExiste",
+    "Mundo Que Nao Existe"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "vendeafiliados3",
+   "conta": "msenergypara",
+   "nome": "Dicas Financeiras da IA",
+   "categoria": "Serviços financeiros",
+   "arte": "financas",
+   "bio": "Dinheiro, investimentos e renda extra. Reels novos todo dia.",
+   "postados_em": [
+    "DicasFinanceirasDaIA",
+    "Dicas financeiras da ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "fabricadeautomacoesia",
+   "conta": "emersonjosiel02",
+   "nome": "Fábrica de Automações IA",
+   "categoria": "Empresa de software",
+   "arte": "financas",
+   "bio": "Negócios, vendas e automação com IA. Reels novos todo dia.",
+   "postados_em": [
+    "Bilionário Noturno",
+    "Empresário Inteligente IA"
+   ],
+   "tags": [],
+   "temas_veo": [
+    "vendas_com_ia",
+    "dicas_de_negocio",
+    "produtividade"
+   ]
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverseita",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa Italia",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Riassunti di manhwa in italiano. Nuovi reel ogni giorno.",
+   "postados_em": [
+    "inovaremanhwaverseita"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaversehindi",
+   "conta": "emersonjosiel02",
+   "nome": "Inovare Manhwa Hindi",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Manhwa recaps in Hindi. New reels every day.",
+   "postados_em": [
+    "Inovaremanhwaversehindi"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverserussian",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa RU",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Пересказы манхвы на русском. Новые ролики каждый день.",
+   "postados_em": [
+    "inovare manhwa verse ru"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaversethai",
+   "conta": "emersonjosiel02",
+   "nome": "Inovare Manhwa Thai",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Manhwa recaps in Thai. New reels every day.",
+   "postados_em": [
+    "Inovaremanhwaversethai"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverseviet",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa Viet",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Manhwa recaps in Vietnamese. New reels every day.",
+   "postados_em": [
+    "YouTube inovaremanhwaverseviet",
+    "inovaremanhwaverseviet",
+    "Inovaremanhwaverseviet"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverseind",
+   "conta": "emersonjosiel02",
+   "nome": "Inovare Manga Indonesia",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Rekap manhwa bahasa Indonesia. Reels baru setiap hari.",
+   "postados_em": [
+    "YouTube inovaremanhwaverseind",
+    "inovaremanhwaverseind",
+    "Inovare Manga ind"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverse",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa Verse",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "O universo dos manhwas. Reels novos todo dia.",
+   "postados_em": [
+    "InovareManhwaVerse"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "jornalcomia",
+   "conta": "emersonjosiel02",
+   "nome": "Jornal com IA",
+   "categoria": "Site de notícias e mídia",
+   "arte": "ia",
+   "bio": "Notícias de IA e tecnologia em 1 minuto. Reels novos todo dia.",
+   "temas_veo": [
+    "noticias_de_ia",
+    "tech_news"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "canalhistoriacomia",
+   "conta": "msenergypara",
+   "nome": "História com IA",
+   "categoria": "Entretenimento",
+   "arte": "misterio",
+   "bio": "Alienígenas, oceano e os 'e se...'. Reels novos todo dia.",
+   "temas_veo": [
+    "alienigenas",
+    "e_se",
+    "segredos_do_oce",
+    "oceano"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "entrevistacomia",
+   "conta": "emersonjosiel02",
+   "nome": "Entrevista com IA",
+   "categoria": "Comediante",
+   "arte": "humor",
+   "bio": "Humor de IA, stand-up e cassetadas. Reels novos todo dia.",
+   "temas_veo": [
+    "stand-up",
+    "humor_de_ia",
+    "cassetadas_ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "3dfabricadeautomacoesia",
+   "conta": "msenergypara",
+   "nome": "Aulas de IA",
+   "categoria": "Site de educação",
+   "arte": "ia",
+   "bio": "Aprenda IA em 1 minuto. Reels novos todo dia.",
+   "temas_veo": [
+    "aulas_ia",
+    "cerebro_digital"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "canalalucinaai",
+   "conta": "emersonjosiel02",
+   "nome": "Alucina AI",
+   "categoria": "Artista",
+   "arte": "ia",
+   "bio": "Vídeos surreais feitos com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "surreal",
+    "morphing",
+    "ilusoes",
+    "ilusoes_de_otic",
+    "alucinaai"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "filmescomia1",
+   "conta": "msenergypara",
+   "nome": "Filmes com IA",
+   "categoria": "Filme",
+   "arte": "filmes",
+   "bio": "Cenas de cinema feitas com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "recenas_ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "aulasrevolution",
+   "conta": "emersonjosiel02",
+   "nome": "Mentoria com IA",
+   "categoria": "Site de educação",
+   "arte": "ia",
+   "bio": "Produtividade e carreira com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "produtividade",
+    "aulas_ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "e4487017",
+   "conta": "msenergypara",
+   "nome": "Música e Dança IA",
+   "categoria": "Artista",
+   "arte": "musica",
+   "bio": "Música, dança e câmera lenta com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "super_slow_ia",
+    "slowmo"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosielmrx1995",
+   "conta": "emersonjosiel02",
+   "nome": "Fatos e Curiosidades IA",
+   "categoria": "Site de educação",
+   "arte": "curiosidades",
+   "bio": "Fatos bizarros e recordes do mundo. Reels novos todo dia.",
+   "temas_veo": [
+    "curiosidades_ia",
+    "fatos_bizarros",
+    "recordes_mundia",
+    "mitos_vs_verdad",
+    "mitos"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "gameoftroneskingsroadbrasil",
+   "conta": "msenergypara",
+   "nome": "Reinos e Batalhas",
+   "categoria": "Videogame",
+   "arte": "games",
+   "bio": "Reinos, batalhas e lendas. Reels novos todo dia.",
+   "temas_veo": [
+    "e_se...",
+    "e_se"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "en1653964",
+   "conta": "emersonjosiel02",
+   "nome": "Fofos e Absurdos",
+   "categoria": "Animais",
+   "arte": "bichos",
+   "bio": "Fofura e absurdo feitos com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "fofos_e_absurdo",
+    "fofura"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "murilodoctor192",
+   "conta": "msenergypara",
+   "nome": "Corpo e Mente IA",
+   "categoria": "Saúde/beleza",
+   "arte": "ia",
+   "bio": "Corpo humano, saúde e cérebro explicados. Reels novos todo dia.",
+   "temas_veo": [
+    "corpo_humano",
+    "cerebro_digital",
+    "dicas_fitness"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersongencshin",
+   "conta": "emersonjosiel02",
+   "nome": "Robôs Desastrados",
+   "categoria": "Comediante",
+   "arte": "humor",
+   "bio": "Robôs fazendo tudo errado. Reels novos todo dia.",
+   "temas_veo": [
+    "robos_desastrad",
+    "robos"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "solarmundo195",
+   "conta": "msenergypara",
+   "nome": "Segredos do Oceano",
+   "categoria": "Site de educação",
+   "arte": "misterio",
+   "bio": "O que esconde o fundo do mar. Reels novos todo dia.",
+   "temas_veo": [
+    "segredos_do_oce",
+    "oceano"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel0",
+   "conta": "emersonjosiel02",
+   "nome": "Ilusões de Ótica IA",
+   "categoria": "Artista",
+   "arte": "ia",
+   "bio": "Ilusões que enganam o seu cérebro. Reels novos todo dia.",
+   "temas_veo": [
+    "ilusoes_de_otic",
+    "ilusoes",
+    "morphing"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "empressinovare",
+   "conta": "msenergypara",
+   "nome": "Dicas Financeiras Já",
+   "categoria": "Serviços financeiros",
+   "arte": "financas",
+   "bio": "Dicas rápidas de dinheiro. Reels novos todo dia.",
+   "temas_veo": [
+    "dicas_financeir",
+    "financas"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremultiatendimento",
+   "conta": "emersonjosiel02",
+   "nome": "Vendas com IA",
+   "categoria": "Empresa de software",
+   "arte": "financas",
+   "bio": "Vender mais com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "vendas_com_ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "emersonjosiel1995",
+   "conta": "msenergypara",
+   "nome": "Motivação IA",
+   "categoria": "Figura pública",
+   "arte": "ia",
+   "bio": "Uma dose de motivação por dia. Reels novos todo dia.",
+   "temas_veo": [
+    "motivacao_ia",
+    "motivacao"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "fabricadeautomacoes0",
+   "conta": "emersonjosiel02",
+   "nome": "Transformações IA",
+   "categoria": "Artista",
+   "arte": "ia",
+   "bio": "Transformações impossíveis feitas com IA. Reels novos todo dia.",
+   "temas_veo": [
+    "transformacao",
+    "morphing"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "fabiovideoseducativos",
+   "conta": "msenergypara",
+   "nome": "Vídeos Educativos IA",
+   "categoria": "Site de educação",
+   "arte": "curiosidades",
+   "bio": "Aprender rindo e se surpreendendo. Reels novos todo dia.",
+   "temas_veo": [
+    "curiosidades_ia",
+    "mitos_vs_verdad"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "iapro",
+   "tiktok": "mentoriaiapro",
+   "conta": "emersonjosiel02",
+   "nome": "IA Pro",
+   "categoria": "Site de educação",
+   "arte": "ia",
+   "bio": "Ferramentas de IA que valem a pena. Reels novos todo dia.",
+   "temas_veo": [
+    "aulas_ia",
+    "tech_news"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "aulacomia",
+   "conta": "msenergypara",
+   "nome": "Aula com IA",
+   "categoria": "Site de educação",
+   "arte": "ia",
+   "bio": "Uma aula de IA por dia. Reels novos todo dia.",
+   "temas_veo": [
+    "aulas_ia",
+    "cerebro_digital"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "rezaulkarimul355",
+   "conta": "emersonjosiel02",
+   "nome": "Stand-up IA",
+   "categoria": "Comediante",
+   "arte": "humor",
+   "bio": "Stand-up feito por IA. Reels novos todo dia.",
+   "temas_veo": [
+    "stand-up_ia",
+    "stand-up"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverseing",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa English",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Manhwa recaps in English. New reels every day.",
+   "postados_em": [
+    "Inovare Manhwa eng"
+   ],
+   "temas_veo": [
+    "surreal"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaversefrench",
+   "conta": "emersonjosiel02",
+   "nome": "Inovare Manhwa FR",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Résumés de manhwa en français. Nouveaux reels chaque jour.",
+   "temas_veo": [
+    "super_slow_ia"
+   ],
+   "tags": []
+  },
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "tiktok": "inovaremanhwaverseesp",
+   "conta": "msenergypara",
+   "nome": "Inovare Manhwa ES",
+   "categoria": "Entretenimento",
+   "arte": "manhwa",
+   "bio": "Resúmenes de manhwa en español. Nuevos reels cada día.",
+   "temas_veo": [
+    "humor_de_ia",
+    "cassetadas_ia"
+   ],
+   "tags": []
+  }
+ ],
+ "intervalo_h_por_conta": {
+  "msenergypara": 2,
+  "emersonjosiel02": 3
+ },
+ "_ritmo": "20/11 11h dona: 'criar o máximo de Páginas'. Sem limite oficial (Meta não publica); relatos = aviso 'rápido demais' depois de 3-5 seguidas. Perfil 10+ anos 6/dia a cada 2 h; perfil novo 3/dia a cada 3 h. Aviso = conta parada 48 h."
+}

@@ -7466,3 +7466,64 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0751.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 08:19 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0811.md`
+
+- [INÉDITO] github.com/mofanx/pilotdroid — ★None, push ?, ver repo (fallback HTML) — Device-side Android automation — persistent msgpack protocol + on-device batch exec. stdio MCP server (21 tools), uiautomator2 drop-in shim,
+
+## 2026-11-20 08:32 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0821.md`
+
+- [INÉDITO] github.com/kilolonion/agent-vscreen — ★155, push 2026-11-20, MIT — A background virtual screen for any Android AI agent: it operates apps on an invisible display while you keep using your phone. CLI / MCP / 
+- [INÉDITO] github.com/aivanelabs/ai-rpa — ★14, push 2026-11-20, MIT — AI mobile automation starter repo for AIVane. Android REPL beta, Python client, skills, examples, and protocol docs for AI agents.
+
+## 2026-11-20 08:51 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_avatares_stop__sonnet_0846.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 09:06 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0856.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 09:19 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0911.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 09:30 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0922.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 09:58 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0952.md`
+
+- [USA em D:\recapd-ambientes\producao\bin\anime_discover.py:116] github.com/Sheerabth/anirecap — ★0, push 2026-10-15, MIT — Turn anime episodes into narrated recap videos: fandom-canonical summaries, VO-only mix, fast cuts.
+
+## 2026-11-20 10:12 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1001.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 10:29 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1017.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 10:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1034.md`
+
+- [INÉDITO] github.com/pndurette/pybatchexecute — ★25, push 2026-01-05, MIT — Python package to ease interactions with Google's batchexecute batch RPC system
