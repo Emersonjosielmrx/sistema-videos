@@ -13,4 +13,6 @@ set MEDIU=%ERRORLEVEL%
 popd
 if not "%MEDIU%"=="0" "%PY%" -u "D:\postador-de-videos\bin\fb_medir.py" >> "%LOG%" 2>&1
 "%PY%" -u "D:\postador-de-videos\bin\fb_escada.py" >> "%LOG%" 2>&1
+REM 20/11 dona: ate quantas Paginas vale a pena no mesmo perfil -> para de criar se os Reels novos cairem
+"%PY%" -u "D:\postador-de-videos\bin\fb_saturacao.py" >> "%LOG%" 2>&1
 echo [%date% %time%] fim >> "%LOG%"

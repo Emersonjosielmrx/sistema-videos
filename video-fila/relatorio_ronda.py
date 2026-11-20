@@ -840,6 +840,22 @@ def sec_celulares_adb():
     return out
 
 
+def sec_urgente():
+    """20/11 dona ("isso não pode acontecer; se o conserto não funcionar, passar com urgência para o chat e analisar
+    quantos processos têm esse tipo de erro"): processos sem sucesso além do prazo (vigilancia.med_sem_sucesso,
+    lista em config_processos_vigiados.json) vão no TOPO do relatório. O chat da ronda conserta na mesma hora."""
+    try:
+        sys.path.insert(0, str(BASE))
+        import vigilancia
+        achados = vigilancia.med_sem_sucesso(agora)
+    except Exception as e:  # noqa: BLE001
+        return ["## 🚨 Processos parados", f"- não consegui conferir ({type(e).__name__}: {e})"]
+    if not achados:
+        return ["## 🚨 Processos parados", "- nenhum: todos os processos vigiados tiveram sucesso dentro do prazo"]
+    return ["## 🚨 PROCESSOS PARADOS — consertar AGORA"] + [f"- **{a['titulo']}** — {a['evidencia'][:220]}"
+                                                           for a in achados]
+
+
 def sec_facebook():
     """20/11 dona ("adicionamos agora Facebook, adicione também no relatório"): Reels nas Páginas (postar_facebook_paginas,
     tarefa FacebookPaginas) + views medidas (fb_medir -> logs\\fb_views.jsonl). Só lê arquivos locais.
@@ -1078,7 +1094,7 @@ def main(gravar):
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
-    for f in (sec_numeros, sec_recuperacao, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
+    for f in (sec_urgente, sec_numeros, sec_recuperacao, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
               sec_pesquisador, sec_hydrogen, sec_redes, sec_facebook, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()

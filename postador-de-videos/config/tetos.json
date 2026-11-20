@@ -1114,9 +1114,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T11:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-14T19:20:51",
-     "tipo": "saude_morto",
-     "maquina": "x200ma"
+     "em": "2026-11-20T14:39:24",
+     "tipo": "sessao_expirada",
+     "maquina": "pc1"
     },
     "historico": [
      {
@@ -1994,9 +1994,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-02T04:11:47",
     "ultimo_sinal": {
-     "em": "2026-11-20T11:40:29",
-     "tipo": "sessao_expirada",
-     "maquina": "pc1"
+     "em": "2026-11-20T14:27:22",
+     "tipo": "saude_morto",
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -2149,9 +2149,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T18:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-20T07:17:07",
+     "em": "2026-11-20T13:21:33",
      "tipo": "saude_morto",
-     "maquina": "x200ma"
+     "maquina": "pc1"
     },
     "historico": [
      {
@@ -2834,9 +2834,9 @@
     "desde": "2026-11-20T08:07:58",
     "ultimo_degrau": "2026-11-20T08:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-20T08:56:43",
-     "tipo": "recusa_politica",
-     "maquina": "?"
+     "em": "2026-11-20T12:26:36",
+     "tipo": "saude_morto",
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -2845,6 +2845,16 @@
       "teto": 90
      }
     ]
+   },
+   "inovaremanhwaverse5": {
+    "base": 90,
+    "nivel": 0,
+    "teto": 90,
+    "estado": "subindo",
+    "desde": "2026-11-20T13:08:06",
+    "ultimo_degrau": "2026-11-20T13:08:06",
+    "ultimo_sinal": null,
+    "historico": []
    }
   },
   "instagram": {
@@ -4223,9 +4233,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-20T11:51:40",
+    "em": "2026-11-20T14:39:24",
     "tipo": "sessao_expirada",
-    "conta": "inovarecap"
+    "conta": "filmescomia1"
    },
    "historico": [
     {

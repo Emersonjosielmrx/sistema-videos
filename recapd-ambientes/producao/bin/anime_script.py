@@ -263,7 +263,7 @@ def _jeito_do_nicho():
                           "(a cada ~6 frases com ela em cena), CADA UMA COM UM MOLDE DIFERENTE — nunca repita a mesma "
                           "piada no vídeo. Use também o duplo sentido natural da cena (luta = 'macetar', 'pegar de jeito', "
                           "'ficar por cima'; ameaça dela = 'acabar com ele bem devagarinho'; proposta = 'eu faria esse "
-                          "acordo, e você?'). 'RES-peito' escreva 'respeito' normal (a voz estica o S sozinha), no "
+                          "acordo, e você?'). quando 'respeito' for a PIADA escreva exatamente 'RES-peito' (a voz estica o S), no "
                           "máximo 2 no vídeo e em contextos diferentes. Sempre sem palavra explícita; nunca com menor. "
                           "Moldes extras:")
             for m in extra:

@@ -1,5 +1,7 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 20/11 16:01 [melhorador código cc-sobra] fx_clips.py: Eliminar ghosting e fusão travada em transições entre cenas para evitar duplicidade de marcas d'água (33 linhas). Desfazer: copiar fx_clips.py.bak_20261120_160147_melhorador
+
 - 20/11 07:31 [melhorador código cc-sobra] mascote_overlay.py: Corrigir truncamento do áudio/vídeo da mascote no encerramento cortado em 'aqui, já é' (41 linhas). Desfazer: copiar mascote_overlay.py.bak_20261120_073132_melhorador
 
 - 19/11 16:53 [melhorador código cc-sobra] anime_tts.py: Correção de truncamento do áudio e narração no encerramento do vídeo (12 linhas). Desfazer: copiar anime_tts.py.bak_20261119_165331_melhorador

@@ -312,7 +312,68 @@ def med_facebook(agora):
     return out
 
 
-MEDIDORES = (med_postagem, med_facebook, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
+def med_sem_sucesso(agora):
+    """20/11 dona ("isso já está assim há uma semana, não pode acontecer; tinha que ser consertado automaticamente pelo
+    vigia"): os carrosséis da Advance/Globo falharam 8 dias seguidos (390/404 erros) e o vigia não via — ele só olhava o
+    TOTAL de posts das solares (os Reels seguiam saindo). Agora cada processo de config_processos_vigiados.json tem o
+    seu prazo: sem a palavra de sucesso no log há mais de max_h horas = problema; o mesmo erro >= erro_max (20) vezes
+    nas últimas 12 h sem sucesso também. A hora vem do "[dd/mm/aaaa hh:mm" do cabeçalho ou do mtime do arquivo.
+    VIGIA_SEM_SUCESSO=0 desliga."""
+    import json as _j
+    import os as _o
+    if _o.environ.get("VIGIA_SEM_SUCESSO", "1") == "0":
+        return []
+    try:
+        cfg = _j.loads((Path(__file__).resolve().parent / "config_processos_vigiados.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    out = []
+    for pr in cfg.get("processos", []):
+        f = Path(pr["log"].replace("{hoje}", f"{agora:%Y%m%d}"))  # log diário: tiktok_{hoje}.log
+        try:
+            linhas = f.read_text(encoding="utf-8", errors="ignore").splitlines()[-6000:]
+        except OSError:
+            continue
+        dia = None  # data do último cabeçalho "[20/11/2026 ..." visto (as linhas de dentro só têm a hora)
+        ultimo_ok, erros = None, []
+        # log sem data nenhuma (só "[hh:mm:ss]"): sucesso nas últimas 300 linhas conta na hora do arquivo (mtime)
+        tem_data = any(re.match(r"\[\d\d/\d\d", l) for l in linhas)
+        if not tem_data:
+            # log diário ({hoje}) = o arquivo inteiro é de hoje; log corrido = só o fim conta
+            if any(re.search(pr["sucesso"], l) for l in (linhas if "{hoje}" in pr["log"] else linhas[-300:])):
+                ultimo_ok = datetime.fromtimestamp(f.stat().st_mtime)
+            linhas = []
+        for l in linhas:
+            m = re.match(r"\[(\d\d)/(\d\d)/(\d{4})[ ,]+(\d{1,2}):(\d\d)", l)
+            if m:
+                dia = datetime(int(m.group(3)), int(m.group(2)), int(m.group(1)), int(m.group(4)), int(m.group(5)))
+            m2 = re.match(r"\[(\d\d)/(\d\d) (\d\d):(\d\d)", l)
+            if m2:
+                dia = datetime(agora.year, int(m2.group(2)), int(m2.group(1)), int(m2.group(3)), int(m2.group(4)))
+            if re.search(pr["sucesso"], l):  # regex (texto simples também funciona)
+                ultimo_ok = dia or ultimo_ok
+            elif re.search(r"(ERRO|ERROR|erro:|falhou|recusad)", l):
+                erros.append((dia, _norm(re.sub(r"^\[[^]]*\]\s*", "", l))[:120]))
+        # processo com marca de sucesso nova: "desde" = só cobra depois disso (sem histórico ainda)
+        if ultimo_ok is None and pr.get("desde"):
+            try:
+                ultimo_ok = datetime.fromisoformat(pr["desde"])
+            except ValueError:
+                pass
+        horas = (agora - ultimo_ok).total_seconds() / 3600 if ultimo_ok else 9999
+        if horas > float(pr.get("max_h", 30)):
+            recentes = [e for d, e in erros if d and (agora - d).total_seconds() < 12 * 3600]
+            motivo = Counter(recentes).most_common(1)[0] if recentes else ("sem erro no log", 0)
+            out.append({"chave": f"sem_sucesso:{pr['nome']}", "categoria": f"sem-sucesso-{pr.get('projeto', 'geral')}",
+                        "projeto": pr.get("projeto", "geral"),
+                        "titulo": f"{pr['nome']}: sem sucesso há {horas:.0f} h (limite {pr.get('max_h', 30)} h)",
+                        "evidencia": f"{f}: último '{pr['sucesso']}' em "
+                                     f"{ultimo_ok:%d/%m %H:%M}" if ultimo_ok else f"{f}: nenhum '{pr['sucesso']}' no log"
+                        + f"; erro mais repetido 12 h ({motivo[1]}x): {motivo[0]}", "urgente": True})
+    return out
+
+
+MEDIDORES = (med_postagem, med_facebook, med_sem_sucesso, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
              med_capas_longos, med_qa_longos)
 
 
@@ -461,6 +522,10 @@ def abrir_casos(d, achados, agora):
         caso = {**a, "id": cid, "etapa": "vigia", "aberto": agora.isoformat(timespec="seconds")}
         d["casos"][cid] = caso
         _registro(caso, "aberto", titulo=a["titulo"], evidencia=a["evidencia"][:300])
+        # 20/11 dona ("se o conserto não funcionar, passar com urgência para o chat"): processo sem sucesso além do
+        # prazo avisa JÁ no Telegram (não espera o conserto falhar 3x)
+        if a.get("urgente"):
+            _avisar(f"🚨 URGENTE: {a['titulo']}\n{a['evidencia'][:300]}\n(o vigia já abriu o conserto)")
 
 
 def _job(jid):

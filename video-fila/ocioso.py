@@ -188,6 +188,7 @@ def _fechar_short_pc2(est, trouxe):
         with open(FEITOS / "_feitos_short.txt", "a", encoding="utf-8") as f:
             f.write(vid + "\n")
         PC2_FALHOU.unlink(missing_ok=True)
+        log(f"PC2 Short PRONTO: {vid}")  # 20/11: marca de sucesso pro vigia (config_processos_vigiados.json)
         sys.path.insert(0, str(PROD / "bin"))
         import parceiro_diario
         parceiro_diario.disparar_postagem()  # canal sem post hoje recebe em minutos

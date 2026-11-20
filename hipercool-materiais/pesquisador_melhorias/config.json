@@ -25923,6 +25923,62 @@
         "Issues recentes sobre cookies Chromium durando pouco e como exportar de um perfil Firefox dedicado"
       ],
       "origem": "area_gemini_web_sessao_cookie__sonnet_1034.md 2026-11-20"
+    },
+    {
+      "id": "android_share_intent",
+      "nome": "Fluxo de share intent para o app do YouTube",
+      "subtemas": [
+        "exemplos de `am start` com ACTION_SEND e FileProvider em projetos pequenos de Android/Termux, e como tratam o crash de permissão de URI"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1241.md 2026-11-20"
+    },
+    {
+      "id": "yt_upload_agendamento_app",
+      "nome": "Agendamento de publicação pelo app/Studio no celular",
+      "subtemas": [
+        "relatos e scripts que mexem na tela de visibilidade e agendamento do upload, com versões recentes do app"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1241.md 2026-11-20"
+    },
+    {
+      "id": "termux_fila_render",
+      "nome": "Render ffmpeg em celular Android via Termux",
+      "subtemas": [
+        "Scripts simples de fila, wake-lock e limite térmico para rodar ffmpeg em lote no celular, sem renderizador próprio"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1347.md 2026-11-20"
+    },
+    {
+      "id": "capas_primeiros_30s",
+      "nome": "Capa e primeiros 30 s em recap de manhwa",
+      "subtemas": [
+        "Ideias pequenas (0 a 50 estrelas) de gancho de abertura e retenção para recap pt-BR/es, evitando modelos novos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1347.md 2026-11-20"
+    },
+    {
+      "id": "yt_reuso",
+      "nome": "Regras oficiais de conteúdo reutilizado e inautêntico",
+      "subtemas": [
+        "Ler as páginas em support.google.com/youtube sobre conteúdo reutilizado e monetização; separar o texto da regra da interpretação, para recaps de parceiros e de outros canais"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1418.md 2026-11-20"
+    },
+    {
+      "id": "yt_ponte",
+      "nome": "Ponte do Short para o longo no canal novo",
+      "subtemas": [
+        "Truques em Python/yt-dlp para achar Shorts campeões e linkar o longo como vídeo relacionado, com checagem de impressões de canal novo"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1418.md 2026-11-20"
+    },
+    {
+      "id": "render_pc_fraco",
+      "nome": "Render leve em PC sem GPU e no Android (Termux)",
+      "subtemas": [
+        "truques de FFmpeg para `zoompan`/`xfade`/`overlay` mais rápidos, como pré-escala e cache de quadros, e ffmpeg em Termux."
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1548.md 2026-11-20"
     }
   ],
   "projetos": [

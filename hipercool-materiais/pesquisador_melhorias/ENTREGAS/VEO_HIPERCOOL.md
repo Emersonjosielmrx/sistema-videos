@@ -487,3 +487,15 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 10:29 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1017.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 13:42 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1328.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 14:12 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1347.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 16:00 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1548.md`
+- (todos os itens desta pesquisa foram reprovados)

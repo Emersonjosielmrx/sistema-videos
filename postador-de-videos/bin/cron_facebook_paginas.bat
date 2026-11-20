@@ -8,7 +8,8 @@ set PYTHONUTF8=1
 set LOG=D:\postador-de-videos\logs\facebook_paginas.log
 set PY=D:\hipercool-videos\venv\Scripts\python.exe
 echo [%date% %time%] === Reels nas Paginas (rodada da hora) === >> "%LOG%"
-start "" /b "%PY%" -u "D:\postador-de-videos\bin\postar_facebook_paginas.py" --horario --conta msenergypara >> "D:\postador-de-videos\logs\facebook_paginas_msenergypara.log" 2>&1
+REM 20/11 dona: o perfil msenergypara (MS Energy, cliente) NAO tem Pagina de entretenimento; a Pagina MS energy posta
+REM pelo postar_ms_energy (tarefa MSEnergy_PostarFB), com os mesmos videos do Instagram.
 "%PY%" -u "D:\postador-de-videos\bin\postar_facebook_paginas.py" --horario --conta emersonjosiel02 >> "%LOG%" 2>&1
 echo [%date% %time%] exit=%ERRORLEVEL% >> "%LOG%"
 echo. >> "%LOG%"

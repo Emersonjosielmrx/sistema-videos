@@ -2267,7 +2267,7 @@ def _saude():
                      "ParceiroKaijinre-Postagem", "HipercoolPostagem", "HipercoolPC2", "MSEnergy_PostarInsta",
                      "MSEnergy_PostarTikTok", "TikTokRodadaExtra", "ManhwaReact-Rede", "ManhwaReact-Lote", "VozClonadaVigia",
                      # 20/11: Facebook (Páginas): postagem, MS Energy FB, criação de Páginas, medidor+escada
-                     "FacebookPaginas", "MSEnergy_PostarFB", "FacebookCriarPaginas", "FacebookInteligencia")
+                     "FacebookPaginas", "MSEnergy_PostarFB", "FacebookCriarPaginas", "FacebookInteligencia", "FacebookVigia")
         ps = ("foreach($x in @(" + ",".join(f"'{t}'" for t in esperadas) + ")){ $t=Get-ScheduledTask -TaskName $x "
               "-ErrorAction SilentlyContinue; if(-not $t){\"$x|FALTA||\"; continue}; $i=Get-ScheduledTaskInfo -TaskName $x; "
               "\"$x|$($t.State)|$($i.LastTaskResult)|$($i.LastRunTime.ToString('yyyy-MM-dd HH:mm'))\" }")
@@ -3155,7 +3155,9 @@ ROTAS = {"/api/geral": lambda p: _cache("geral", 60, lambda: api_geral(p)), "/ap
          "/api/agenda": api_agenda, "/api/desempenho": api_desempenho, "/api/contas": api_contas, "/api/voz": api_voz,
          "/api/tendencias": api_tendencias, "/api/referencias": api_referencias, "/api/saude": api_saude, "/api/cortes_dia": api_cortes_dia, "/api/tela": api_tela,
          "/api/segurados": lambda p: _cache("segurados", 120, lambda: api_segurados(p)), "/api/medicoes": api_medicoes,
-         "/api/recap_longo": lambda p: _cache("recap_longo", 60, api_recap_longo)}
+         "/api/recap_longo": lambda p: _cache("recap_longo", 60, api_recap_longo),
+         # 20/11 dona: ranking dos canais postados pelos CELULARES (escada.json) — painel_celulares.py
+         "/api/celulares_ranking": lambda p: __import__("painel_celulares").api_ranking(p)}
 
 
 def api_recap_longo():
@@ -3195,7 +3197,8 @@ ROTAS_POST = {"/api/desktop_camera": api_desktop_camera, "/api/controle": api_co
               "/api/er_prioridade": api_er_prioridade,
               "/api/aprendizado_marcar": api_aprendizado_marcar, "/api/ia_pedir": api_ia_pedir, "/api/ia_acao": api_ia_acao,
               "/api/ia_corrigir_todos": api_ia_corrigir_todos, "/api/mover": api_mover, "/api/soltar": api_soltar,
-              "/api/referencia_nova": api_referencia_nova}
+              "/api/referencia_nova": api_referencia_nova,
+              "/api/celulares_medir": lambda b: __import__("painel_celulares").api_medir(b)}
 AQUECER = [("geral", 60, lambda: api_geral({})), ("producao", 90, lambda: api_producao({})), ("canais", 120, _canais),
            ("postagens", 60, _postagens), ("tarefas", 90, _tarefas), ("bots", 600, _bots), ("problemas", 120, _problemas),
            ("saude", 180, _saude), ("tendencias", 900, _tendencias)]

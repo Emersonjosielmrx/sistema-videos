@@ -458,3 +458,15 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Motivo / O que achei: D: com 4.1 GB livres, disparado backup_drive e cache do Chrome, apaguei 3 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo de arquivos temporários e cache no disco D. | CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — guarda do disco atuando automaticamente). | O que fez: Nenhuma intervenção manual necessária, automações do sistema em execução.
 - Estado: NADA A FAZER
 
+## 20261120_1455 — parceiro-render falhou no Kaggle por erro no Applio/Whisper/clip-vit (rc=1)
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log aponta [kaggle-lote] Short 20261120_144802_6CfVaYeVu1E deu erro no Kaggle: rc=1, applio ok em 195 s, erro em clipe/clip-vit-base do HuggingFace.
+- Causa provável: Instabilidade transitória no download de modelos do HuggingFace ou contenção no worker do Kaggle durante o processamento do Applio/TTS para o formato trio_chaves.
+- CONSERTO PROPOSTO: Nenhum (falha transitória na API/servidor externo do Kaggle/HuggingFace). O sistema gerencia lotes e novas tentativas de renderização automaticamente.
+- Estado: NADA A FAZER
+
+## 20261120_1518 — Vistoria do vigia: Recap longo com alimentador ativo no PC1, 21 de 25 GPUs sem conta e contas verificadas 17 de 79; espaço em disco reduzido (~1.7 GB livres).
+- Motivo / O que achei (trecho de log): Logs do abastecedor kaggle e de monitoramento indicam alimentador ativo no PC1 e contas verificadas (17 de 79), com 21 de 25 GPUs aguardando cota/trabalho na fila e disco D com ~1.7 GB livres (< 6 GB).
+- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo e acúmulo de arquivos temporários, aguardando reabastecimento ou limpeza natural pelo sistema.
+- CONSERTO PROPOSTO: Nenhum. O sistema gere automaticamente as contas e o Wise Memory Optimizer gerencia a RAM, enquanto a rotina própria cuida da limpeza quando necessário.
+- Estado: NADA A FAZER
+

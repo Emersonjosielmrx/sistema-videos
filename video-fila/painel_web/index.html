@@ -331,6 +331,15 @@ details.dobra > summary svg.lucide { color: hsl(var(--primary)); width: 17px; he
        eu quero também a versão em gráfico" -->
   <h2 class="tit"><i data-lucide="trophy"></i>Melhores canais no período <span class="mini">barra = views ganhas · 🔥 acima do normal (≥2× a média diária do canal) · ⭐ bateu as duas metas (views E inscritos)</span></h2>
   <div class="glass card"><div id="geral-melhores"></div></div>
+  <!-- 20/11 dona: "canais dos celulares no painel, na página inicial, num gráfico separado (é mais difícil de
+       atualizar) + botão de atualização + ranking separado" — /api/celulares_ranking (escada.json do celular) -->
+  <h2 class="tit"><i data-lucide="smartphone"></i>Canais dos CELULARES <span class="mini" id="cel-sub"></span>
+    <button class="btn" id="btn-att-cel" style="margin-left:auto;font-size:12px" onclick="atualizarCelulares()" title="mede as views pelos celulares (um por vez, alguns minutos)"><i data-lucide="refresh-cw"></i>atualizar celulares</button></h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>📱 Views por canal</b> <span class="mini">(soma dos Shorts na última medida)</span><div id="cel-canais"></div></div>
+    <div class="glass card"><b>🏆 Ranking dos Shorts</b><div id="cel-shorts"></div></div>
+  </div>
+  <div class="glass tabela" id="t-cel" style="margin-top:12px"></div>
   <h2 class="tit"><i data-lucide="bar-chart-3"></i>Postagens por dia <span class="mini">(todas as redes)</span></h2>
   <div class="glass card"><div id="geral-chart"></div></div>
   <!-- 16/11 dona: "views e horas dos longos separados dos Shorts, em gráfico; imagens e vídeos gerados (Flow x Gemini);
@@ -1145,6 +1154,25 @@ async function atualizarViews() {
     if (window.lucide) lucide.createIcons(); toast('views atualizadas'); }, 90000);
 }
 
+// 20/11 dona: canais dos celulares (escada.json) — gráfico e ranking separados + botão de atualizar
+const CEL_COR = {A2: '#10b981', A3: '#94a3b8', S20: '#84cc16', S20U: '#14b8a6', G20: '#eab308'};
+async function loadCelulares() {
+  const r = await api('celulares_ranking');
+  if (r.erro) { $('cel-canais').innerHTML = erro(r); return; }
+  $('cel-sub').textContent = `total ${fmt(r.total)} views · ${r.canais.length} canais` + (r.medindo ? ' · medindo agora…' : '');
+  $('cel-canais').innerHTML = barrasH(r.canais.map(c => ({nome: `${c.canal} (${c.celular})`, v: c.views, cor: CEL_COR[c.celular]})), 'views');
+  $('cel-shorts').innerHTML = barrasH(r.shorts.slice(0, 10).map(s => ({nome: s.titulo, v: s.views, cor: CEL_COR[s.celular]})), 'views');
+  $('t-cel').innerHTML = `<table><thead><tr><th>#</th><th>Canal</th><th>Celular</th><th>Views</th><th>Shorts c/ view</th><th>Melhor Short</th><th>Medido</th></tr></thead><tbody>` +
+    r.canais.map((c, i) => `<tr><td>${i + 1}</td><td>${esc(c.canal)} <span class="mini">${esc(c.handle || '')}</span></td><td>${esc(c.celular)}</td><td>${fmt(c.views)}</td><td>${c.shorts}</td><td>${esc(c.melhor || '')}${c.melhor_v ? ' — ' + fmt(c.melhor_v) : ''}</td><td class="mini">${esc((c.medido || 'sem medida').replace('T', ' '))}</td></tr>`).join('') + '</tbody></table>';
+}
+async function atualizarCelulares() {
+  const b = $('btn-att-cel'); b.disabled = true; b.textContent = 'medindo…';
+  const r = await api('celulares_medir', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Painel': '1'}, body: '{}'});
+  toast(r.erro ? 'não atualizou: ' + r.erro : r.msg, !!r.erro);
+  setTimeout(async () => { await loadCelulares(); b.disabled = false; b.innerHTML = '<i data-lucide="refresh-cw"></i>atualizar celulares';
+    if (window.lucide) lucide.createIcons(); }, 240000);
+}
+
 // 16/11 dona: gráficos de longos x Shorts, mídia (Flow x Gemini), aparelhos e vigia — /api/graficos (cache 5 min)
 const MAQ_COR = {pc1: '#10b981', pc2: '#22d3ee', desktop: '#a78bfa', sti: '#fbbf24', hp: '#f87171', asus: '#60a5fa',
   acer: '#e879f9', x200ma: '#f97316', s20: '#84cc16', s20ultra: '#14b8a6', g20: '#eab308', a3: '#94a3b8'};
@@ -1218,7 +1246,7 @@ let G = null, POST14 = null;
 async function loadGeral() {
   // 11/11: os gráficos e o ranking não esperam o kanban/cobertura (lentos logo depois de religar o painel)
   // gráficos: na 1ª vez e a cada 5 min (o loadGeral roda de 30 em 30 s; redesenhar tudo a cada 30 s piscava a tela)
-  if (!$('per-geral').innerHTML || Date.now() - (window._gerT || 0) > 300000) { window._gerT = Date.now(); montarPerGeral(); graficosGeral(); loadRankingGeral(); graficosExtras(); }
+  if (!$('per-geral').innerHTML || Date.now() - (window._gerT || 0) > 300000) { window._gerT = Date.now(); montarPerGeral(); graficosGeral(); loadRankingGeral(); graficosExtras(); loadCelulares(); }
   loadResumoSaude();
   const [d, p, v1, v2, cob, kb, mh, mi] = await Promise.all([api('geral'), POST14 ? Promise.resolve(POST14) : api('postagens?dias=14'),
     api('canais_views?dias=1'), api('canais_views?dias=2'), api('cobertura'), api('kanban'), api('views_mesma_hora'),

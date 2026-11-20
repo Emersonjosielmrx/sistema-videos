@@ -1,0 +1,26 @@
+{
+ "_leia": "Dona 20/11: 'existe uma coisa humana chamada DUPLO SENTIDO e isso que temos que adicionar ao máximo nas nossas narrações; com prioridade as sexuais e as que os narradores já fazem'. Usado pelo anime_script (roteiro) em TODO narrador. Regra do YouTube: sempre SUGESTIVO (a frase também faz sentido inocente), nunca explícito/palavrão sexual — duplo sentido funciona justamente porque dá pra negar. O 'com todo respeito' sai na voz com o S alongado (anime_tts._esticar_s_respeito).",
+ "quando": "mulher bonita na tela (principalmente decote/seios grandes), casal, luta entre homem e mulher, castigo/apanhar, acordo/proposta, comida/'comer', 'pegar', treino a sós, 'experiência', vilã sedutora",
+ "obrigatorio": [
+  {"o_que": "'com todo respeito' logo depois de elogiar mulher bonita na tela (a voz estica o S = 'ressss-peito')", "ex": "E aí chega ela, a mais gostosa da academia, com todo respeito, e o piazinho simplesmente trava."}
+ ],
+ "frases": [
+  {"o_que": "chamar a personagem de 'a poderosa' / 'a patroa' / 'a dona da porra toda'", "ex": "E quem chega? A poderosa, rapaz."},
+  {"o_que": "'macetar': sexual ou porrada — usar na luta homem x mulher", "ex": "Ela tá doida pra macetar ele... na porrada, gente, na porrada."},
+  {"o_que": "apanhar 'de um jeito gostoso' / 'acabar com ele'", "ex": "Ela vai acabar com ele. Do jeito gostoso ou do jeito ruim, ainda não sei."},
+  {"o_que": "proposta/acordo: 'eu faria esse acordo, e você?'", "ex": "Ela oferece qualquer coisa pra ele ficar. Eu faria esse acordo. Você faria?"},
+  {"o_que": "'comer' (comida x outra coisa) quando tem comida + casal", "ex": "Ela fez o almoço e chamou ele pra comer. O almoço, tá? O almoço."},
+  {"o_que": "'pegar' (segurar x ficar com)", "ex": "Ele finalmente consegue pegar ela. Pegar no braço, gente, pra ela não cair."},
+  {"o_que": "treino/aula particular a sós", "ex": "Ela oferece umas aulas particulares pra ele. Particulares, hein."},
+  {"o_que": "'experiência' / 'ela tem muita experiência'", "ex": "Ela diz que tem muita experiência. Em batalha. Em batalha, galera."},
+  {"o_que": "o protagonista 'sem malícia nenhuma' enquanto a cena é cheia de malícia", "ex": "E o piazinho, inocente, sem maldade nenhuma, só olhando o... cenário."},
+  {"o_que": "corrigir de propósito depois de soar safado ('não é isso que vocês estão pensando')", "ex": "Ela pede pra ele ir mais forte. No treino. Não é isso que vocês tão pensando."},
+  {"o_que": "olhar que desce ('os olhos do prota foram descendo')", "ex": "Ele tenta manter os olhos no rosto dela. Tenta."}
+ ],
+ "por_narrador": {
+  "kkvirjao": ["Começou a putaria (sem palavrão sexual pesado no roteiro)", "A amiga dela peituda", "muito gostosa e todo mundo queria sair com ela, né?", "A Sara até chama ele de safadinho"],
+  "mike": ["bicho danado", "o nosso safado", "e as duas são lindas, rapaz"],
+  "mangaticos": ["e segundo ele é até gostoso, tá?"]
+ },
+ "quanto": "de 2 a 5 por vídeo longo (1-2 por Short), sempre colado numa cena que dá contexto; nunca repetir a mesma piada no mesmo vídeo"
+}

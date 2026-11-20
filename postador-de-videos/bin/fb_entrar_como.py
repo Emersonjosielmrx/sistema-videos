@@ -12,6 +12,26 @@ def _vis(loc):
     return None
 
 
+def entrar_como_cookie(ctx, page_id, nome=None):
+    """20/11 (do navegador-sem-navegador): o Facebook decide quem age pelo cookie i_user = id da Página. Põe o cookie no
+    Chrome e confere na home (USER_ID). Sem menu, sem clique (o menu era o passo que travava). True/False."""
+    if not page_id:
+        return False
+    ctx.add_cookies([{"name": "i_user", "value": str(page_id), "domain": ".facebook.com", "path": "/",
+                      "secure": True, "sameSite": "None"}])
+    pg = ctx.new_page()
+    try:
+        pg.goto("https://www.facebook.com/", wait_until="domcontentloaded", timeout=90000)
+        time.sleep(5)
+        h = pg.content()
+        ok = f'"USER_ID":"{page_id}"' in h or (nome and f"No que você está pensando, {nome}?" in pg.inner_text("body"))
+        return bool(ok)
+    except Exception:
+        return False
+    finally:
+        pg.close()
+
+
 def entrar_como(pg, nome):
     pg.goto("https://www.facebook.com/", wait_until="domcontentloaded", timeout=90000)
     time.sleep(8)

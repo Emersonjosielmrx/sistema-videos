@@ -45,6 +45,31 @@ hashtag da legenda tem que estar nas `tags` da Página. Registro:
 - Tarefa `FacebookCriarPaginas` 09:40 13:40 16:40 19:40 22:40 (pula se uma rodada de postagem está rodando).
   `python fb_criar_fila.py --ver` mostra a fila.
 
+## Rodada de hora em hora + correções (20/11 tarde)
+- `FacebookPaginas` 08:20→23:20 de hora em hora; as 2 contas em PARALELO (`--horario --conta X`, cada uma no Chrome e
+  saída dela). `deve_postar_agora`: o teto da escada espalhado 08-21 h e 1 post guardado pro nobre 21-22 h.
+  Sem post devido = sai em ~1 s sem abrir nada. Catálogo: usa o `catalogo_videos.json` salvo (< 2 h); o
+  `sincronizar()` lia o Drive e travou a rodada das 12:20 por 10+ min.
+- Entrar como a Página = cookie `i_user=<id>` no Chrome (`fb_entrar_como.entrar_como_cookie`); menu só de reserva.
+- `fb_contas.abrir`: sem porta = mata os Chromes restantes DESTE perfil e tenta 2x (ECONNREFUSED 9401 da MS Energy 11:05
+  era Chrome do perfil morrendo); `fechar` espera o processo sair.
+- `fb_escada`: segura Página com Reel decolando (como o YouTube) e +1 vaga no dia em que estagna.
+- Medição por HTTP (`D:\projeto-navegador-sem-navegador\services\facebook\medir.py`, chat "navegador sem navegador"),
+  fallback `fb_medir.py`; 08:30 14:30 20:00. Postagem por HTTP: em andamento lá (`docs\FACEBOOK_SEM_NAVEGADOR.md`).
+- Vigilância: `video-fila\vigilancia.med_facebook` (Página sem Reel até 22 h; mesmo erro 3x em 6 h); painel confere as
+  4 tarefas.
+
+## Decisões da dona 20/11 tarde
+- **MS Energy é comercial**: o perfil msenergypara só posta na Página MS energy, os MESMOS vídeos do Instagram
+  (`postar_ms_energy.py`). Nada de entretenimento lá: Cena React e Histórias em Frames (criadas lá) PAUSADAS; a fila
+  inteira (51) vai pro emersonjosiel02.
+- **msenergypara fora do Fish** (era rnprmtfo-37 desde 19/11, e o Facebook/TikTok dela saem de casa = 2 IPs): cofre
+  `fish_proxy_removido` + `fish_removida`; `pool_fish.candidatas` pula `fish_removida`/`so_casa`.
+- **1 perfil = 1 saída**: proxy por Página não adianta (o mesmo perfil gerencia todas). O que se mede é até quantas
+  Páginas VALEM a pena: `fb_saturacao.py` (depois do medidor) compara a mediana de views dos Reels dos últimos 3 dias
+  com a 1ª semana do perfil; < 40% com >= 15 Reels = perfil saturando -> `fb_criar_fila` para de criar + Telegram.
+  Relatório `FACEBOOK_SATURACAO.md` (views por lote de 5 Páginas, na ordem de criação).
+
 ## Monetização (aba do Business Suite, 20/11)
 - MS energy: qualificada em Monetização de conteúdo, Estrelas e Assinaturas — falta a dona aceitar os termos e
   cadastrar a conta de pagamento.

@@ -2,7 +2,6 @@
  "_leia": "Fila das Páginas a criar (dona 20/11/2026: 'uma Página pra cada TikTok, uma a cada X horas como o Instagram, procedimento completo'). 53 = 58 TikToks de reuso_plataformas.json menos os 5 que já têm Página (curiosidadesnoturnas, doramanoturno, filmenoturno, emersonjosiel649=Anime Noturno, emersonjosiel2033=Assist-IA). fb_criar_fila.py pega a 1ª 'pendente' da conta da vez e faz tudo (arte, criar, id, foto, capa, config, 1º Reel). 'postados_em' = canais do YouTube; 'temas_veo' = página de reserva Veo (só versão limpa). 'tags' = 1ª hashtag aceita (vazio = sem filtro). Contas: emersonjosiel02 (perfil novo, Webshare rnprmtfo-58) e msenergypara (perfil 10+ anos, casa) — revezam. Na msenergypara só entra conteúdo neutro (nunca solar/produto de outra empresa).",
  "intervalo_h": 3,
  "max_dia_por_conta": {
-  "msenergypara": 6,
   "emersonjosiel02": 3
  },
  "perfil_pessoal": {
@@ -65,7 +64,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel2030",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Cartucho React",
    "categoria": "Videogame",
    "arte": "games",
@@ -91,7 +90,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwabr",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa BR",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -118,7 +117,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "jogoscomia",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Game Noturno",
    "categoria": "Videogame",
    "arte": "games",
@@ -144,7 +143,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovarecap",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Recap",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -171,7 +170,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel2032",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Manhwa React",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -198,7 +197,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "canalanimescomia",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Animes com IA",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -224,7 +223,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverse2",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Manhwa Noturno",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -251,7 +250,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "vendeafiliados3",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Dicas Financeiras da IA",
    "categoria": "Serviços financeiros",
    "arte": "financas",
@@ -284,7 +283,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverseita",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa Italia",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -310,7 +309,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverserussian",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa RU",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -336,7 +335,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverseviet",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa Viet",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -366,7 +365,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverse",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa Verse",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -393,7 +392,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "canalhistoriacomia",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "História com IA",
    "categoria": "Entretenimento",
    "arte": "misterio",
@@ -424,7 +423,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "3dfabricadeautomacoesia",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Aulas de IA",
    "categoria": "Site de educação",
    "arte": "ia",
@@ -455,7 +454,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "filmescomia1",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Filmes com IA",
    "categoria": "Filme",
    "arte": "filmes",
@@ -482,7 +481,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "e4487017",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Música e Dança IA",
    "categoria": "Artista",
    "arte": "musica",
@@ -513,7 +512,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "gameoftroneskingsroadbrasil",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Reinos e Batalhas",
    "categoria": "Videogame",
    "arte": "games",
@@ -541,7 +540,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "murilodoctor192",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Corpo e Mente IA",
    "categoria": "Saúde/beleza",
    "arte": "ia",
@@ -570,7 +569,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "solarmundo195",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Segredos do Oceano",
    "categoria": "Site de educação",
    "arte": "misterio",
@@ -599,7 +598,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "empressinovare",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Dicas Financeiras Já",
    "categoria": "Serviços financeiros",
    "arte": "financas",
@@ -626,7 +625,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel1995",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Motivação IA",
    "categoria": "Figura pública",
    "arte": "ia",
@@ -654,7 +653,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "fabiovideoseducativos",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Vídeos Educativos IA",
    "categoria": "Site de educação",
    "arte": "curiosidades",
@@ -682,7 +681,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "aulacomia",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Aula com IA",
    "categoria": "Site de educação",
    "arte": "ia",
@@ -710,7 +709,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverseing",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa English",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -739,7 +738,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverseesp",
-   "conta": "msenergypara",
+   "conta": "emersonjosiel02",
    "nome": "Inovare Manhwa ES",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -752,8 +751,8 @@
   }
  ],
  "intervalo_h_por_conta": {
-  "msenergypara": 2,
   "emersonjosiel02": 3
  },
- "_ritmo": "20/11 11h dona: 'criar o máximo de Páginas'. Sem limite oficial (Meta não publica); relatos = aviso 'rápido demais' depois de 3-5 seguidas. Perfil 10+ anos 6/dia a cada 2 h; perfil novo 3/dia a cada 3 h. Aviso = conta parada 48 h."
+ "_ritmo": "20/11 11h dona: 'criar o máximo de Páginas'. Sem limite oficial (Meta não publica); relatos = aviso 'rápido demais' depois de 3-5 seguidas. Perfil 10+ anos 6/dia a cada 2 h; perfil novo 3/dia a cada 3 h. Aviso = conta parada 48 h.",
+ "_msenergypara": "20/11 dona: 'MS Energy é comercial, não precisa de vídeo de entretenimento; os vídeos devem ser os mesmos do Instagram'. Perfil antigo fora da fila; Cena React e Histórias em Frames (criadas lá) pausadas."
 }

@@ -35,21 +35,30 @@ try:
         b = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}")
         pg = b.contexts[0].new_page()
         pg.set_viewport_size({"width": 1366, "height": 900})
+        # 20/11: entra como a Página pelo cookie i_user (as telas de troca travavam o clique)
+        import re as _re, fb_entrar_como
+        fb_entrar_como.entrar_como_cookie(b.contexts[0], (_re.search(r"id=(\d+)", url) or [None, None])[1])
         pg.goto(url, wait_until="domcontentloaded", timeout=90000)
         time.sleep(8)
         t = vis(pg, pg.get_by_role("button", name="Trocar agora")) or vis(pg, pg.get_by_text("Trocar agora", exact=True)) or vis(pg, pg.get_by_role("button", name="Alternar", exact=True)) or vis(pg, pg.get_by_text("Alternar", exact=True))
         if t:
-            t.click(); time.sleep(4)
-            c = vis(pg, pg.get_by_role("button", name="Trocar", exact=True))
-            if c:
-                c.click()
+            try:
+                t.click(timeout=8000); time.sleep(4)
+                c = vis(pg, pg.get_by_role("button", name="Trocar", exact=True))
+                if c:
+                    c.click(timeout=8000)
+            except Exception:
+                pass
             time.sleep(12)
             pg.goto(url, wait_until="domcontentloaded", timeout=90000)
             time.sleep(10)
         for nome_b in ("Usar Página", "Agora não", "Fechar", "OK"):
             u = vis(pg, pg.get_by_role("button", name=nome_b, exact=True))
             if u:
-                u.click(); time.sleep(3)
+                try:
+                    u.click(timeout=5000); time.sleep(3)
+                except Exception:
+                    pg.keyboard.press("Escape"); time.sleep(1)
         pg.screenshot(path=str(LOG / f"fb_fc_{tag}_1_como_pagina.png"))
 
         # FOTO DE PERFIL: clica na foto grande -> "Atualizar foto do perfil" -> "Carregar foto"

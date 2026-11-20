@@ -523,3 +523,18 @@
 - prova: Em 97bBeHddKJI o crop dividiu a tela na linha divisória preta com dedo no topo e queixo na base (movimento 5.0 e legibilidade 6.0); em QwY2Kqk7jo8 o corte focou apenas no quadril decapitando o protagonista.
 - onde: bin/fx_clips.py (_movimento e cálculo de clamping vertical/offset Y do crop)
 - como testar: Renderizar as cenas de transição de 97bBeHddKJI e QwY2Kqk7jo8 conferindo que o algoritmo rejeita divisórias horizontais escuras e fixa a âncora no painel principal com preservação de cabeça e olhos.
+
+## 20/11 14:45 [CERTEZA] Implementar safe-zone facial obrigatória para stickers, reações e cards de comentários (antigravity/gemini-3.8-flash-tiered)
+- prova: O sticker 'OS GURI?' cobriu integralmente olhos, nariz e boca e 'DIZ' cobriu a testa no 97bBeHddKJI (legibilidade 6.0); o card 'SINCERAMENTE' cobriu boca/queixo e o sticker feminino cobriu o olho no ZZ7LeUws7-c (legibilidade 4.5); o sticker da vaqueira cobriu o olho e franja no QwY2Kqk7jo8 (legibilidade 5.0).
+- onde: bin/fx_clips.py e bin/mascote_overlay.py (rotina de posicionamento de stickers e cards sobrepostos)
+- como testar: Processar os quadros críticos de 97bBeHddKJI, ZZ7LeUws7-c e QwY2Kqk7jo8 com detector facial ativado, validando que os elementos visuais são deslocados para áreas neutras (cantos desobstruídos) ou suprimidos quando houver colisão com rostos.
+
+## 20/11 14:45 [CERTEZA] Padronizar canvas 16:9 em memes/b-rolls e eliminar barras brancas e pillarbox assimétrico (antigravity/gemini-3.8-flash-tiered)
+- prova: Em QwY2Kqk7jo8 (legibilidade 5.0 e movimento 5.0), a inserção de meme exibiu uma barra branca vazia com linha preta no terço esquerdo, desfoque esticado assimétrico à direita e ausência de legenda, seguido de letterbox abrupto cortando o protagonista.
+- onde: bin/fx_clips.py e bin/arsenal_memes.py (redimensionamento, enquadramento e composição de memes em 16:9)
+- como testar: Renderizar trechos de inserção de memes de QwY2Kqk7jo8 confirmando preenchimento total do canvas 16:9 com blur bilateral simétrico quando necessário, sem faixas brancas e garantindo a continuidade da legenda.
+
+## 20/11 14:45 [CERTEZA] Eliminar ghosting e fusão travada em transições entre cenas para evitar duplicidade de marcas d'água (antigravity/gemini-3.8-flash-tiered)
+- prova: Em ZZ7LeUws7-c (legibilidade 4.5 e movimento 5.0), a transição entre q25 e q26 reteve quadros estáticos da cena anterior sobrepostos ao avião por tempo excessivo, duplicando a marca d'água 'Jinwoo Recap' de forma desalinhada.
+- onde: bin/fx_clips.py (filtros de transição xfade e rotina de queima da marca d'água)
+- como testar: Inspecionar os quadros da transição q25-q26 em ZZ7LeUws7-c garantindo duração máxima de 6 a 8 frames para dissolvências ou forçando corte seco (hard cut) para impedir a persistência de quadros semitransparentes.

@@ -52,10 +52,12 @@ def lote(pasta_voz, lista_json):
     por_clima = {"": refs}
     for w in sorted(pv.glob("referencia_fish_*.wav")):
         suf = w.stem.replace("referencia_fish", "")
-        t = w.with_suffix(".txt")
-        if suf.endswith("antiga") or not t.exists():
+        # 20/11: era "t" — sobrescrevia o t = time.time() e o "FISH carga" dava TypeError (Path - float): o processo
+        # morria antes da 1ª frase e o longo de teste kxohroSbgS8 saiu com 0/558 no Fish
+        w_txt = w.with_suffix(".txt")
+        if suf.endswith("antiga") or not w_txt.exists():
             continue
-        por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=t.read_text(encoding="utf-8").strip())]
+        por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=w_txt.read_text(encoding="utf-8").strip())]
     # 20/11: "todas as sub-vozes juntas" (versão 12) foi aprovada em TODOS os tipos ouvidos -> "_todas" = todas as
     # sub-vozes da voz como referência (reserva de quem não tem a sub-voz específica da frase)
     subs_ = [v[0] for k, v in por_clima.items() if k and k not in ("_antiga",)]
@@ -83,10 +85,19 @@ def lote(pasta_voz, lista_json):
         t_ = min(1.0, TEMP_SUB.get(suf, SOLTO))
         # 20/11 dona (KkVirjão "mulher"): a sub-voz mulher SOZINHA foi quase toda reprovada; aprovadas só as MISTAS
         # (normal+mulher, mulher+piada, todas juntas). Sub-vozes em SUB_SO_MISTA nunca vão sozinhas: vão com a normal.
-        SUB_SO_MISTA = {"_mulher"}
+        # 20/11 (Mike "agudo"): sozinha "começa com a voz dele e depois muda, ou fica lenta" — aprovou só normal,
+        # mista, sub+piada e todas juntas. Por voz: {voz: sub-vozes que só vão misturadas com a normal}
+        SO_MISTA_POR_VOZ = {"kkvirjao": {"_mulher"}, "mike": {"_mulher", "_agudo"}}
+        SUB_SO_MISTA = SO_MISTA_POR_VOZ.get(pv.name, {"_mulher"})
         r_ = por_clima.get(suf) or refs
         if suf in SUB_SO_MISTA and suf in por_clima:
             r_ = refs + por_clima[suf]
+        # 20/11 (teste gol4, dona): "falta homogeneidade — as ligadas parecem vários áudios emendados, até de pessoas
+        # diferentes; na frase isolada acerta, quando junta não combina" ("na hora que começou a briga pareceu outra
+        # voz"). Cada frase com uma sub-voz SOZINHA muda o timbre. Agora toda sub-voz vai JUNTO da referência normal
+        # (a âncora da voz, sempre a 1ª) — o jeito muda, a pessoa fica a mesma. FISH_SUB_SOZINHA=1 volta ao antigo.
+        elif suf and os.environ.get("FISH_SUB_SOZINHA") != "1":
+            r_ = refs + [x for x in (por_clima.get(suf) or []) if x not in refs]
         req = ServeTTSRequest(text=txt, references=r_, reference_id=None,
                               max_new_tokens=1024, chunk_length=200,
                               top_p=t_, repetition_penalty=1.2, temperature=t_, format="wav")

@@ -85,6 +85,9 @@ def candidatas():
             continue
         if str(e.get("google")) == "morto":
             continue
+        # 20/11 dona: conta tirada do Fish (ex.: msenergypara = cliente MS Energy, fala só pela casa) nunca volta sozinha
+        if e.get("fish_removida") or e.get("so_casa"):
+            continue
         if eh_kaggle(email):
             continue
         # 19/11 dona (Por Dentro perdido: conta nova do canal foi pro pool do Fish com outro IP no mesmo dia ->

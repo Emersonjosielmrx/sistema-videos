@@ -129,8 +129,11 @@ def postar_um(chave, pag, cfg, cat, reg, preview=False):
         try:
             with sync_playwright() as p:
                 ctx = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}").contexts[0]
-                pg = ctx.new_page(); pg.set_viewport_size({"width": 1366, "height": 900})
-                ok_troca = fb_entrar_como.entrar_como(pg, pag["nome"]); pg.close()
+                # 20/11: troca pelo cookie i_user (instantâneo); o menu da foto fica só de reserva
+                ok_troca = fb_entrar_como.entrar_como_cookie(ctx, pag.get("id"), pag["nome"])
+                if not ok_troca:
+                    pg = ctx.new_page(); pg.set_viewport_size({"width": 1366, "height": 900})
+                    ok_troca = fb_entrar_como.entrar_como(pg, pag["nome"]); pg.close()
                 if not ok_troca:
                     return False, "não conseguiu entrar como a Página"
                 ok, msg = fb_reel_bs.postar(ctx, pag["asset_id"], pag["nome"], str(mp4), legenda, tag=f"fb_{chave}")
@@ -170,13 +173,17 @@ def main():
     a = ap.parse_args()
     cfg = _ler(CFG, {})
     reg = _ler(REG, {})
-    cat = catalogo.sincronizar(salvar=False)
     paginas = {k: v for k, v in cfg["paginas"].items() if (not a.pagina or k == a.pagina) and not v.get("pausada")
                and (not a.conta or v["conta"] == a.conta)}
     # página mais atrasada hoje primeiro; o teto do dia vem da escada (fb_escada.py)
     import fb_escada
     ordem = sorted(paginas, key=lambda k: hoje_na_pagina(reg, k) / max(1, fb_escada.teto(k, paginas[k])))
     agora = datetime.now()
+    if a.horario and not any(hoje_na_pagina(reg, k) < fb_escada.teto(k, paginas[k])
+                             and deve_postar_agora(hoje_na_pagina(reg, k), fb_escada.teto(k, paginas[k]), agora) for k in ordem):
+        print(f"{agora:%H:%M} nenhuma Página com post devido nesta hora", flush=True)
+        return
+    cat = carregar_catalogo()
     for i, k in enumerate(ordem):
         pag = paginas[k]
         if a.preview:
@@ -197,6 +204,18 @@ def main():
             break
         if i < len(ordem) - 1 and not a.horario:
             time.sleep(a.intervalo)
+
+
+def carregar_catalogo(max_h=2):
+    """20/11 12:20: sincronizar() lê o Drive (rclone) e travou a rodada 10+ min com o Drive lento. O catálogo salvo
+    (catalogo_videos.json, regravado pelo TikTok/Instagram/backup) serve se tem menos de max_h; a repetição no FB é
+    controlada pelo registro logs/facebook_paginas.json, não pelo catálogo."""
+    try:
+        if (time.time() - catalogo.CATALOGO.stat().st_mtime) < max_h * 3600:
+            return json.loads(catalogo.CATALOGO.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    return catalogo.sincronizar(salvar=False)
 
 
 NOBRE = (21, 22)  # 13/11 (Shorts de parceiro): o 1º post das 21-22 h rende ~100x nos canais fracos — 1 por Página/dia

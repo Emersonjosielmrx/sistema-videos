@@ -1,4 +1,4 @@
-# Vigilância 24 h — 2026-11-20T12:00:46
+# Vigilância 24 h — 2026-11-20T16:00:41
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
@@ -11,7 +11,7 @@
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (55)
+## Casos abertos (62)
 - [revisar] tiktok: mesmo erro 8x em 6 h (1minopus-sonnetweb)
 - [consertar] longo SjQHP-0GKJs_1_11__His_Girlfriend_Cheated_on_Him saiu com problema de qualidade (cw/claude-sonnet-5-5)
 - [consertar] tiktok: mesmo erro 5x em 6 h (1minopus-sonnetweb)
@@ -66,11 +66,16 @@
 - [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [vigia_rodando] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Carrossel Advance Solar: sem sucesso há 183 h (limite 30 h) (-)
+- [consertar] Carrossel Globo Solar: sem sucesso há 182 h (limite 30 h) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [falso] instagram: 10 posts até 22:20, normal ~45 — - / -
-- [sem_mudanca] _parceiro_20261114.log: mesmo erro 6x — gemini-4-argon / -
 - [sem_mudanca] instagram: 10 posts até 10:30, normal ~23 — gemini-4-argon / -
 - [sem_mudanca] _parceiro_20261115.log: mesmo erro 8x — gemini-4-argon / -
 - [sem_mudanca] canal animenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — 1minopus-sonnetweb / -
@@ -84,6 +89,8 @@
 - [sem_mudanca] _parceiro_20261116.log: mesmo erro 5x — gemini-4-argon / -
 - [sem_mudanca] _parceiro_20261116.log: mesmo erro 5x — gemini-4-argon / -
 - [sem_mudanca] instagram: 10 posts até 22:50, normal ~47 — gemini-4-argon / -
+- [falso] Reel Globo Solar: sem sucesso há 87 h (limite 30 h) — - / -
+- [falso] Reel Advance Solar: sem sucesso há 75 h (limite 30 h) — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 31 casos, nota 6% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0), qualidade-longo: 0/3 (voltou 0)

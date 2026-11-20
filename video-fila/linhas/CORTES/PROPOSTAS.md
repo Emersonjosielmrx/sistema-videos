@@ -2603,3 +2603,23 @@
 - prova: c84315_cap1: o júri trata 27.2%, 13.6% e 14.7% como problema citando um limite de 4%, e ainda cita 'baixo movimento' no the-maid (29.2% e 20.5%) enquanto dá nota 10.0 em movimento nos dois casos. A nota e o texto se contradizem.
 - onde: cortes_juri (prompt do júri de movimento): passar o limiar real usado pelo pipeline e pedir que só marque problema abaixo dele.
 - como testar: Reprocessar o júri em c84315 e the-maid com o limiar explícito no prompt e verificar se as queixas de movimento acima do limiar somem sem derrubar a nota de Shorts realmente parados.
+
+## 20/11 12:46 PROPOSTA [GOSTO] Palavra de impacto do gancho não pode cobrir o ponto focal da ação nem ficar com hierarquia quebrada (gemini-4-argon)
+- prova: Em 3 Shorts do lote a palavra grande ou a seta cai sobre a ação: 94179f q01 ('PESCADOR' sobre o cais), aaf5d1 q10 (seta e 'OLHA SE O RIO' sobre a água) e b8991c q07 ('PRA ACABAR' sobre o painel). Em 4ab5ac q01 a palavra 'TRÊS' sai bem menor que 'PEDAÇOS' no 1,5 s do gancho.
+- onde: Módulo da legenda palavra a palavra / destaque de palavra de impacto (provável fx_subtitles.py ou equivalente da linha CORTES; confirmar no código). Função que posiciona e dimensiona a palavra e quebra linhas de 2 palavras.
+- como testar: 1) Abrir os 4 quadros citados na resolução original e confirmar o defeito, pois o júri só vê quadros soltos. 2) Rodar no D:\tmp\folha_topo.py a folha do 1,5 s de todos os Shorts do dia para medir quantos têm palavra sobre o centro da ação. 3) Testar a variante de palavra de impacto lateral ou no terço inferior em metade dos Shorts do próximo lote (A/B) e comparar % assistido. Mudar só uma coisa por vez.
+
+## 20/11 12:46 PROPOSTA [CERTEZA] Quebra de linha de 2 palavras no gancho: segunda palavra com tamanho e contraste iguais à primeira (gemini-4-argon)
+- prova: 4ab5ac q01: 'TRÊS' sai minúscula e apagada sob 'PEDAÇOS' gigante, e a palavra que carrega o número some no 1,5 s. Só 1 Short no lote, mas é defeito objetivo de leitura. Por isso não vira regra de roteiro, e sim checagem no render.
+- onde: Mesma função de layout da legenda de impacto (tamanho da fonte por palavra, quebra em duas linhas).
+- como testar: Gerar o gancho do 4ab5ac com 2 palavras de comprimentos muito diferentes e medir a razão de altura entre as linhas (meta: >= 0,7). Varrer os roteiros do dia com 'número + palavra longa' no início e conferir quantos saem com a mesma quebra.
+
+## 20/11 14:00 PROPOSTA [CERTEZA] Conferir se a tarja cobre a legenda da fonte por inteiro (sem-obra-da8137) (cw/claude-sonnet-5-5)
+- prova: sem-obra-da8137 q05 e q10: sobram letras da legenda da fonte visíveis no rodapé ('entos', 'e cri', 'eiro'), ou seja, a tarja/delogo ficou menor que a legenda real. Aparece em 1 Short do lote; vale confirmar nos próximos lotes se repete.
+- onde: função que mede a caixa da legenda queimada e desenha a tarja/delogo (cortes_juri / etapa de cobertura da legenda)
+- como testar: Abrir a folha de quadros do da8137, medir a caixa das letras em resolução >= 720 px e comparar com a altura da tarja aplicada. Se a sobra se repetir em >= 2 Shorts no próximo lote, aumentar a margem vertical da caixa medida (sem passar para faixa grande, regra fixa da dona).
+
+## 20/11 14:00 PROPOSTA [GOSTO] Conferir tomada de arquivo anacrônica em narração histórica (cw/claude-sonnet-5-5)
+- prova: sem-obra-da8137 q13: imagem de lowrider moderno com narração sobre 1901. Só em 1 Short, então só observar.
+- onde: seleção de cenas / casamento da tomada com a narração
+- como testar: Se aparecer em >= 2 Shorts históricos, checar no roteiro.txt e nos logs de seleção de tomada se a cena foi escolhida por palavra-chave sem checar época.

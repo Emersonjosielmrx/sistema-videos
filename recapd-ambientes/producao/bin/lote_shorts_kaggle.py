@@ -116,7 +116,12 @@ def _fish_antes(pasta, env, voz):
     vai junto audio_cache/ — o anime-pipeline do Kaggle acha os audio_i.wav prontos e só narra o que faltou.
     Fica de fora: fala da mascote (ANIME_MASCOTE_FALAS) e Short de várias vozes (roteiro_falas.json).
     SHORTS_FISH_ANTES=0 desliga. Nunca levanta."""
-    if os.environ.get("SHORTS_FISH_ANTES", "1") == "0" or env.get("VOZ_ONLINE") != "fish":
+    try:
+        import anime_tts as _at
+        antigo = _at.motor_antigo()  # 20/11: MOTOR_VOZ=antigo volta tudo ao motor anterior
+    except Exception:  # noqa: BLE001
+        antigo = False
+    if antigo or os.environ.get("SHORTS_FISH_ANTES", "1") == "0" or env.get("VOZ_ONLINE") != "fish":
         return
     try:
         if (pasta / "roteiro_falas.json").exists():

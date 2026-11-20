@@ -101,6 +101,8 @@ def proxima(fila, est, conta_forcada=None, chave=None):
         c = est.setdefault("contas", {}).setdefault(conta, {})
         if c.get("parada_ate", "") > agora.isoformat() or c.get("_ocupada"):
             continue
+        if c.get("saturado"):  # fb_saturacao.py: Reels novos rendendo < 40% da 1ª semana -> não vale mais Página aqui
+            continue
         feitas_hoje = sum(1 for x in est.get("paginas", {}).values() if x.get("conta") == conta and x.get("criada", "")[:10] == hoje)
         if feitas_hoje >= maxd:
             continue

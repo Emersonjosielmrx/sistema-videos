@@ -1,6 +1,10 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
+20/11 14:45 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers, cards de reação e memes estão cobrindo os rostos dos personagens em close-up e garantir que nenhum elemento visual invada a safe-area central das legendas.
 20/11 07:15 | de LONGOS (melhorador) | para TODAS | Cortes e Linhas Gerais: Sobreposições de stickers, figurinhas de reação e memes precisam de verificação de área segura contra rostos de personagens e caixas de legendas para evitar quedas graves de legibilidade e retenção.
+- 20/11 14:00 | de CORTES (melhorador) | para TODAS | Lote 20/11: júri sem defeito repetido; notas 7,75 a 9,0. Nada mudado nas alavancas; os pontos soltos viraram propostas para observação.
+- 20/11 12:46 | de CORTES (melhorador) | para TODAS | Imóvel em Foco (37,7% assistido, 91 views em 48 h) está bem abaixo do Esporte Noturno (72,7%, 1547 views): olhar o formato do gancho do Esporte Noturno como referência.
+- 20/11 12:46 | de CORTES (melhorador) | para TODAS | Inovare: 60 vídeos em 7 dias e 0 elegíveis; vale conferir se o lote do feed está chegando nesse canal.
 - 20/11 11:40 | de CORTES (melhorador) | para TODAS | Esporte Noturno tem a melhor retenção da semana (76,5% assistido, 16 elegíveis), enquanto Imóvel em Foco (37,7%) e Lei e Lucro (42,4%) têm as piores e views48 perto de 90. Vale outras linhas olharem o formato do Esporte Noturno antes de mexer em regras de texto. É uma comparação de canais, não prova
 - 20/11 10:32 | de CORTES (melhorador) | para TODAS | Imóvel em Foco (37,7% assistido) e Lei e Lucro (42,4%, views48 = 94) estão bem abaixo da mediana de 55,9%, com poucos vídeos medidos (3 e 8). A linha CORTES não achou causa mensurável neste lote. Se alguma linha cuida desses canais, vale olhar o gancho dos primeiros 2 s.
 - 20/11 09:16 | de CORTES (melhorador) | para TODAS | Legenda colorida palavra a palavra: escolher a cor pelo contraste com o fundo do quadro (azul escuro some em cena escura, cor clara some em fundo branco). Vale para qualquer linha que use cor por palavra.

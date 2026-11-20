@@ -4659,3 +4659,19 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-20 10:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1034.md`
 - [INÉDITO] github.com/pndurette/pybatchexecute — ★25, push 2026-01-05, MIT — Python package to ease interactions with Google's batchexecute batch RPC system
+
+## [ ] PENDENTE — 2026-11-20 12:36 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1221.md`
+- [INÉDITO] github.com/9b9387/adb-agent — ★1, push 2026-04-08, MIT — A vision-empowered Android automation agent that allows you to control your mobile device using natural language.
+
+## [ ] PENDENTE — 2026-11-20 12:57 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1241.md`
+- [INÉDITO] github.com/YOCRRZ224/Orrivn — ★9, push 2026-10-21, MIT — ORRIVN is a lightweight, modern self-hosted media hub that supports chunk-based uploads, YouTube downloading, automatic video merging, and i
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 14:28 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1418.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 15:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1441.md`
+- (todos os itens desta pesquisa foram reprovados)

@@ -1,0 +1,4 @@
+{
+ "motor": "fish",
+ "_leia": "Dona 20/11: 'não descartar como era feita a narração antes do novo motor — era boa, deu trabalho pra ajustar; a nova se imagina ficar melhor mas não é certeza, então deve ser versionado; se não der certo é só voltar ao motor antigo'. Troque para \"antigo\" e rode montar_pacote.py --codigo: TODO o Fish (Kaggle, site, sub-vozes, aceleração do gol, S do respeito) desliga e a narração volta ao motor anterior (Kitten 2/RVC na GPU, p3 com as técnicas nos PCs). O que aprendemos no ROTEIRO (duplo sentido, marcas registradas, vocabulário só dele, gatilho pela imagem) continua valendo nos dois motores. Versões: producao/versoes_motor_voz/ (v1 = antes do Fish, commit 1370e236 de 18/11; v2 = Fish 20/11). Também dá pra forçar por variável: MOTOR_VOZ=antigo."
+}

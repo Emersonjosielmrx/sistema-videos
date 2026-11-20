@@ -1,0 +1,76 @@
+{
+ "_leia": "20/11 dona (carrossel da Advance/Globo 8 dias falhando sem ninguém saber): cada processo importante tem um log, a palavra de SUCESSO (regex) e o máximo de horas sem sucesso. Passou = vigilancia.med_sem_sucesso abre problema URGENTE (Telegram na hora + topo da ronda). '{hoje}' no caminho = AAAAMMDD (log diário). Adicione aqui todo processo novo.",
+ "processos": [
+  {
+   "nome": "Carrossel MS Energy",
+   "log": "D:\\ms-energy\\logs\\carrossel.log",
+   "sucesso": "PUBLICADO",
+   "max_h": 60,
+   "projeto": "msenergy"
+  },
+  {
+   "nome": "Carrossel Advance Solar",
+   "log": "D:\\ms-energy\\logs\\carrossel_advance.log",
+   "sucesso": "PUBLICADO",
+   "max_h": 30,
+   "projeto": "msenergy"
+  },
+  {
+   "nome": "Carrossel Globo Solar",
+   "log": "D:\\ms-energy\\logs\\carrossel_globo.log",
+   "sucesso": "PUBLICADO",
+   "max_h": 30,
+   "projeto": "msenergy"
+  },
+  {
+   "nome": "Reel Advance Solar",
+   "log": "D:\\ms-energy\\logs\\reel_advance_cron.log",
+   "sucesso": "PUBLICADO",
+   "max_h": 30,
+   "projeto": "msenergy"
+  },
+  {
+   "nome": "Reel Globo Solar",
+   "log": "D:\\ms-energy\\logs\\reel_globo_cron.log",
+   "sucesso": "PUBLICADO",
+   "max_h": 30,
+   "projeto": "msenergy"
+  },
+  {
+   "nome": "Longos no YouTube",
+   "log": "D:\\recapd-ambientes\\producao\\colab\\postar_longos.log",
+   "sucesso": "ok: https",
+   "max_h": 36,
+   "projeto": "longos"
+  },
+  {
+   "nome": "Instagram (contas de vídeo)",
+   "log": "D:\\postador-de-videos\\logs\\instagram_{hoje}.log",
+   "sucesso": "postados [1-9]",
+   "max_h": 14,
+   "projeto": "postador"
+  },
+  {
+   "nome": "TikTok",
+   "log": "D:\\postador-de-videos\\logs\\tiktok_{hoje}.log",
+   "sucesso": "Postados: [1-9]",
+   "max_h": 8,
+   "projeto": "postador"
+  },
+  {
+   "nome": "Shorts no PC2",
+   "log": "D:\\video-fila\\ocioso.log",
+   "sucesso": "PC2 Short PRONTO",
+   "max_h": 24,
+   "projeto": "cortes",
+   "desde": "2026-11-20T14:00"
+  },
+  {
+   "nome": "Rede: reagendar pro horário nobre",
+   "log": "D:\\video-fila\\logs\\reagendar_nobre.log",
+   "sucesso": "feitos: [1-9]",
+   "max_h": 30,
+   "projeto": "postador"
+  }
+ ]
+}

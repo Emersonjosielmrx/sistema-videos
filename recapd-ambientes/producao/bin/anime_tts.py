@@ -411,10 +411,29 @@ aplicar_margem_final = _aplicar_margem_final
 proteger_cauda_bruto = _proteger_cauda_bruto
 
 
+def motor_antigo():
+    """20/11 dona: "não descartar como era feita a narração antes do novo motor — ela era boa, deu trabalho pra
+    ajustar; a nova se imagina ficar melhor mas não é certeza, então deve ser versionado; se não der certo, é só
+    voltar ao motor antigo". MOTOR_VOZ=antigo (variável) OU config/motor_voz.json {"motor": "antigo"} desliga TODO o
+    Fish (Kaggle, site, sub-vozes, gol, S do respeito) e a narração volta ao motor anterior (Kitten 2/RVC na GPU, p3
+    com as técnicas nos PCs) — o caminho antigo continua inteiro no código. Versões guardadas em
+    producao\\versoes_motor_voz\\ (v1 = antes do Fish, commit 1370e236 de 18/11; v2 = Fish 20/11)."""
+    v = (os.environ.get("MOTOR_VOZ") or "").strip().lower()
+    if not v:
+        try:
+            v = str(json.loads((Path(__file__).resolve().parent.parent / "config" / "motor_voz.json")
+                               .read_text(encoding="utf-8")).get("motor", "")).strip().lower()
+        except (OSError, ValueError):
+            v = ""
+    return v in ("antigo", "rvc", "p3", "kitten", "v1")
+
+
 def _fish_nuvem_pronto():
     """19/11 dona ("a partir de agora o Fish vai ser o padrão; os longos são feitos no Kaggle"): Fish Speech na GPU
     do Kaggle. Só onde o kaggle_trabalhador montou o ambiente (FISH_NUVEM=1 + FISH_VENV) e o narrador tem trecho
     ORIGINAL de referência (referencia_fish.wav/.txt na pasta da voz). Sem isso = segue Kitten/p3 como antes."""
+    if motor_antigo():
+        return False
     return _pasta_fish() is not None
 
 
@@ -506,6 +525,80 @@ def _fim_que_sobe(wav, voz):
         os.replace(tmp, wav)
 
 
+def _fala_rindo(wav, ini_s, fim_s, st=8.0, risadinha=None):
+    """20/11 dona (Mike "personagem", 4-6 s do original): "ele não só ri, ele fala a palavra RINDO — dá uma risadinha
+    no 4 s e segue falando 'o prota virou eunuco' rindo e mais agudo; todos fazem isso". Medido no original: risadinha
+    314 Hz e a fala rindo 308 Hz contra 132-203 Hz da fala normal (≈ +7 a +9 st), com o tom segurado. Aqui: a risadinha
+    REAL do narrador (risada_real/*.wav ou o arquivo dado) entra antes e o trecho [ini_s, fim_s] sobe `st` semitons
+    (mesma duração). Usado na palavra-chave da piada sobre desgraça/vergonha alheia. FISH_FALA_RINDO=0 desliga."""
+    if os.environ.get("FISH_FALA_RINDO", "1") == "0":
+        return False
+    wav = Path(wav)
+    k = 2 ** (st / 12)
+    entradas = ["-i", str(wav)]
+    fc = (f"[0:a]atrim=0:{ini_s:.3f},asetpts=PTS-STARTPTS[a];"
+          f"[0:a]atrim={ini_s:.3f}:{fim_s:.3f},asetpts=PTS-STARTPTS,asetrate=44100*{k:.5f},aresample=44100,"
+          f"atempo={1 / k:.5f},vibrato=f=6:d=0.15[b];"
+          f"[0:a]atrim={fim_s:.3f},asetpts=PTS-STARTPTS[c];")
+    if risadinha and Path(risadinha).exists():
+        entradas += ["-i", str(risadinha)]
+        fc += "[1:a]aresample=44100,aformat=channel_layouts=mono,afade=t=out:st=0.4:d=0.15[r];"
+        fc += "[a][r][b][c]concat=n=4:v=0:a=1[o]"
+    else:
+        fc += "[a][b][c]concat=n=3:v=0:a=1[o]"
+    tmp = wav.with_name(wav.stem + ".rindo.wav")
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", *entradas, "-filter_complex", fc, "-map", "[o]", "-ar", "44100",
+                        "-ac", "1", str(tmp)], capture_output=True)
+    if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+        os.replace(tmp, wav)
+        return True
+    return False
+
+
+# fecho grosso por narrador (semitons no último pedaço): Mike = -4,5 (o exemplo que a dona aprovou); o resto -2,0
+FECHO_GROSSO_ST = {"mike": -4.5}
+
+
+def _desfecho_gol(wav, tipo, voz=None):
+    """20/11 dona (Mike "metralhadora"): as boas "terminaram AGUDAS e rápidas no final" (gol) ou "lentas no final mas
+    ENGROSSARAM a voz — o Mike faz isso, é como a falha do gol"; reprovou as que ficam "iguais do começo ao fim".
+    Medido nas aprovadas: gol +2 a +4,5 st no fim; falha -1,3 a -1,7 st (voz mais grossa); +6,7 st foi exagero.
+    20/11 (Mike "risada" 12 e "tensão"): "a finalização mais grossa — o Mike faz muito, temos que usar muito pra
+    finalização de frases"; "fica bom o final da frase ser lento, cada passo dele no final, e até engrossar a voz".
+    Medido no exemplo dela: -4,5 st no fim. tipo "grosso" = fecho grosso do narrador (tensão/falha).
+    Muda o tom só do ÚLTIMO pedaço (último 1 s, depois da última pausa) — o resto da frase fica igual."""
+    # 20/11 (teste gol4, KkVirjão): o "nãooo" da falha "ficou estranho, parecendo um carro acelerando" — mudar o tom
+    # do fim em quem NÃO engrossa a voz (KkVirjão/Momo) soa artificial. Falha muda o tom só em quem tem fecho grosso
+    # medido (Mike); nos outros fica só a fala natural do Fish.
+    nome = Path(voz).name if voz else ""
+    if tipo in ("falha", "grosso") and nome not in FECHO_GROSSO_ST:
+        return
+    grosso = FECHO_GROSSO_ST.get(nome, -2.0)
+    st = {"gol": 3.0, "falha": grosso, "grosso": grosso}.get(tipo)
+    if st is None or os.environ.get("FISH_GOL", "1") == "0":
+        return
+    lento = 0.92 if tipo in ("falha", "grosso") else 1.0  # o fecho grosso vem também mais lento ("cada passo dele")
+    wav = Path(wav)
+    d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
+                             capture_output=True, text=True).stdout or 0)
+    if d < 1.0:
+        return
+    r = subprocess.run(["ffmpeg", "-v", "info", "-i", str(wav), "-af", "silencedetect=noise=-35dB:d=0.18", "-f", "null",
+                        "-"], capture_output=True, text=True)
+    pausas = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", r.stderr) if float(x) < d - 0.4]
+    ini = max([d - 1.1] + [p for p in pausas if p > d - 2.0])  # último trecho falado, ~1 s
+    k = 2 ** (st / 12)
+    fc = (f"[0:a]atrim=0:{ini:.3f},asetpts=PTS-STARTPTS[a];"
+          f"[0:a]atrim={ini:.3f},asetpts=PTS-STARTPTS,asetrate=44100*{k:.5f},aresample=44100,"
+          f"atempo={lento / k:.5f}[b];"
+          f"[a][b]acrossfade=d=0.05[o]")
+    tmp = wav.with_name(wav.stem + ".desf.wav")
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-filter_complex", fc, "-map", "[o]", "-ar",
+                        "44100", "-ac", "1", str(tmp)], capture_output=True)
+    if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+        os.replace(tmp, wav)
+
+
 _SUB_RISO =re.compile(r"(?i)\b(k{3,}|ha(ha)+|he(he)+|rs(rs)+|risos?|riu|rindo|gargalh\w*)\b")
 _SUB_MULHER = re.compile(r"(?i)\b(peito\w*|gostos\w*|del[ií]cia|bunda|seio\w*|sexy|safad\w*|tes[aã]o|novinha\w*|"
                          r"gatinha|maravilhosa|respeito|mina\w*)\b")
@@ -580,6 +673,18 @@ def _marcar_gol(lines, climas):
             j = i
             while j + 1 < n and climas[j + 1] in alvo:
                 j += 1
+            # 20/11 (teste gol4): a briga inteira virou 1 sequência e o gol do MEIO ("acerta um soco... isso!") se
+            # perdeu — desfecho no meio corta a sequência: marca gol/falha ali e a aceleração recomeça depois
+            k0 = i
+            for k in range(i + 2, j):
+                t = _seguro(lines[k])
+                tipo = "falha" if _GOL_NAO.search(t) else ("gol" if _GOL_SIM.search(t) else None)
+                if tipo and k - k0 >= 2:
+                    for m in range(k0, k):
+                        _GOL_CTX[m] = ("sobe", m - k0, k - k0 + 1)
+                    _GOL_CTX[k] = (tipo, 0, k - k0 + 1)
+                    k0 = k + 1
+            i = k0
             if j - i + 1 >= 3:
                 tam = j - i + 1
                 for k in range(i, j + 1):
@@ -596,6 +701,10 @@ def _marcar_gol(lines, climas):
             i = j + 1
         else:
             i += 1
+    # 20/11 (Mike tensão): frase de tensão FORA da corrida pro gol fecha lenta e com a voz engrossando
+    for k in range(n):
+        if k not in _GOL_CTX and climas[k] in ("tensao", "terror", "vilao"):
+            _GOL_CTX[k] = ("grosso", 0, 0)
 
 
 def _ritmo_fish(wav, voz, texto, i, impactos, n):
@@ -624,7 +733,9 @@ def _ritmo_fish(wav, voz, texto, i, impactos, n):
     # (até -15%); ação, clímax e desabafo seguem a curva (acelera). Só reprovou a lenta demais (86 ppm) -> piso 0,85.
     lenta = _frase_lenta(texto)
     if lenta:
-        fator = max(0.85, min(fator, 1.0) * lenta)
+        # 20/11 (teste gol4, KkVirjão): "teve uma hora que ficou tão lento que pareceu retardado" — o Fish já fala
+        # devagar na piada; o lento soma: piso 0,92 na frase toda (o lento de verdade é só no FIM do deboche)
+        fator = max(0.92, min(fator, 1.0) * (1 - (1 - lenta) * 0.6))
     # 20/11 dona — ACELERAÇÃO DO GOL: "tensão não pode ser devagar; vão acelerando como um narrador de futebol que vai
     # aproximando a bola do gol, falando mais rápido, mais emocionante; e tem um desfecho pra quando é gol e outro pra
     # quando é falha (Mike: quando o bom acerta comemora; quando o bom é atingido ou morre: 'não, não, galera!', fica
@@ -639,7 +750,7 @@ def _ritmo_fish(wav, voz, texto, i, impactos, n):
         elif tipo == "gol":
             fator = max(fator, 1.22)
         elif tipo == "falha":
-            fator = min(fator, 0.90)
+            fator = min(fator, 0.95)
     if abs(fator - 1) < 0.02:
         return
     wav = Path(wav)
@@ -671,6 +782,10 @@ def _texto_fish(t):
     t = _RISO_TXT.sub("", t)
     t = _LETRA_REPETIDA.sub(lambda m: m.group(1) * 2, t)
     t = _duplo_sentido_fala(t)
+    # 20/11 dona (teste do gol, Mike): "era só pra ter uma pausa no 'e vocês fariam?' — afinal é uma pergunta".
+    # Pergunta curta pro público no fim da frase vira frase própria (o ponto dá a pausa natural no Fish).
+    t = re.sub(r"(?i),\s*((?:e |mas )?(?:você|vocês|cês|tu|o senhor|a galera)\b[^.?!,]{0,40}\?)\s*$",
+               lambda m: ". " + m.group(1)[0].upper() + m.group(1)[1:], t)
     t = re.sub(r"\s{2,}", " ", t).strip(" ,")
     return (t or "Olha isso."), tinha
 
@@ -706,7 +821,7 @@ def _tem_respeito_piada(t, i=None):
     return i is not None and str(i) in sens and bool(_RESPEITO.search(t or ""))
 
 
-def _esticar_s_respeito(wav, alvo_s=0.45):
+def _esticar_s_respeito(wav, alvo_s=0.45, texto=None):
     """20/11 dona aprovou: "C_S_bem_alongado_0.45s — é isso que precisamos". Frase em velocidade NORMAL; só o S de
     "respeito" (o chiado entre "re" e "peito") é esticado pra ~0,45 s, mantendo o chiado (atempo, sem mudar o resto).
     Acha a palavra pelos tempos do Whisper (.words.json, ou mede aqui) e o S pela energia aguda (> 4 kHz)."""
@@ -726,16 +841,33 @@ def _esticar_s_respeito(wav, alvo_s=0.45):
                 from faster_whisper import WhisperModel
                 dev = "cuda" if os.environ.get("FISH_NUVEM") == "1" else "cpu"
                 m = WhisperModel("small", device=dev, compute_type="float16" if dev == "cuda" else "int8")
-                segs, _ = m.transcribe(a[::1].copy() if sr == 16000 else a[::int(sr / 16000)].copy(), language="pt",
-                                       word_timestamps=True)
+                # 20/11 (bug achado pela dona: esticou o S do "simplesmente"): a[::2] dava 22 kHz lido como 16 kHz e
+                # os tempos saíam 38% atrasados. O Whisper recebe 16 kHz de verdade, convertido pelo ffmpeg.
+                raw16 = subprocess.run(["ffmpeg", "-v", "error", "-i", str(wav), "-f", "s16le", "-ac", "1", "-ar",
+                                        "16000", "-"], capture_output=True).stdout
+                a16 = np.frombuffer(raw16, np.int16).astype(np.float32) / 32768.0
+                segs, _ = m.transcribe(a16, language="pt", word_timestamps=True)
                 palavras = [[w.start, w.end, w.word] for s in segs for w in (s.words or [])]
-            except Exception:  # noqa: BLE001
+            except Exception as e:  # noqa: BLE001
+                logging.info(f"[fish S] sem Whisper ({type(e).__name__}) — acho o 'respeito' pela posição no texto")
                 palavras = []
         for p0, p1, w in palavras:
             if re.search(r"(?i)resp", str(w)):
                 ini, fim = float(p0), float(p1)
                 break
+        if ini is None and texto:
+            # 20/11 (teste gol4: o "respeito" do KkVirjão saiu SEM o S esticado — no Kaggle não tinha Whisper e a
+            # função desistia calada): estima pela posição da palavra no texto (fala sem as pausas) ± 0,6 s
+            pos = texto.lower().find("respeit")
+            if pos >= 0:
+                env = np.abs(a[:len(a) // 256 * 256]).reshape(-1, 256).mean(1)
+                ativos = np.where(env > 0.01)[0]
+                if len(ativos):
+                    t0, t1 = ativos[0] * 256 / sr, ativos[-1] * 256 / sr
+                    c = t0 + (t1 - t0) * pos / max(1, len(texto))
+                    ini, fim = max(0.0, c - 0.6), min(len(a) / sr, c + 0.9)
         if ini is None:
+            logging.info(f"[fish S] {wav.name}: não achei o 'respeito'")
             return False
         seg = a[int(ini * sr):int(fim * sr)]
         hop, win = int(0.005 * sr), int(0.02 * sr)
@@ -757,6 +889,9 @@ def _esticar_s_respeito(wav, alvo_s=0.45):
                 blocos.append(cur)
                 cur = [k]
         blocos.append(cur)
+        # o S de "re-S-peito" fica na 1ª parte da palavra: só vale bloco que começa nos primeiros 60% dela
+        lim = int(len(hf) * 0.6)
+        blocos = [b_ for b_ in blocos if b_[0] <= lim] or blocos
         b = max(blocos, key=len)
         s0, s1 = ini + b[0] * 0.005, ini + b[-1] * 0.005 + 0.02
         d = s1 - s0
@@ -905,6 +1040,14 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
                                 str(pv), str(lista)], stdout=fh, stderr=subprocess.STDOUT, timeout=3 * 3600)
             except subprocess.TimeoutExpired:
                 logging.warning("[fish nuvem] passou de 3 h — uso as frases que já saíram")
+        # 20/11 (longo de teste saiu com 0 Fish e o erro ficou só no _fish_nuvem.log, que não volta do Kaggle): sem
+        # nenhuma frase pronta, o fim do log do Fish vai pro pipeline.log
+        if not any(Path(it["saida"]).exists() for it in itens):
+            try:
+                cauda = (Path(audio_dir) / "_fish_nuvem.log").read_text(encoding="utf-8", errors="ignore")[-1500:]
+                logging.error("[fish nuvem] NENHUMA frase saiu — fim do log do Fish: " + cauda.replace("\n", " | "))
+            except OSError:
+                pass
         feitos = []
         for it in itens:
             bruto = Path(it["saida"])
@@ -920,12 +1063,19 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
                 feitos.append(it["i"])
                 _acabamento_fish(out, voz)
                 _ritmo_fish(out, Path(pv).name, it["texto"], it["i"], _impactos_do(audio_dir), len(lines))
+                g_ = _GOL_CTX.get(it["i"])  # 20/11: desfecho do gol — fim agudo (gol) ou voz engrossando (falha)
+                if g_ and (g_[0] in ("gol", "falha") or (g_[0] == "grosso" and pv.name in FECHO_GROSSO_ST)):
+                    _desfecho_gol(out, g_[0], pv.name)
                 if _tem_respeito_piada(it["texto"], it["i"]):  # 20/11: S de "respeito" esticado (0,45 s), resto normal
-                    _esticar_s_respeito(out)
+                    _esticar_s_respeito(out, texto=it["texto"])
                 if it.get("riso"):  # 20/11: frase tinha kkk -> risada REAL do narrador na frente (nunca a de robô)
                     _risada_real(Path(pv).name, out)
                 if it["i"] == len(lines) - 1:
                     _aplicar_margem_final(out)
+        if feitos and os.environ.get("FISH_PASSOS3") == "1":
+            _passos_antigos_no_fish(audio_dir, feitos, itens, lines)
+        if feitos and os.environ.get("FISH_RVC") == "1":
+            _rvc_por_cima_do_fish(audio_dir, feitos, pv.name)
         if feitos:
             (Path(audio_dir) / "_voz_online.json").write_text(json.dumps(
                 {"motor": "fish_nuvem", "frases": sorted(feitos), "total": len(itens)}), encoding="utf-8")
@@ -935,13 +1085,101 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
         logging.warning(f"[fish nuvem] falhou ({type(e).__name__}: {str(e)[:150]}) — tudo no {_voz_modo()}")
 
 
+def _passos_antigos_no_fish(audio_dir, feitos, itens, lines):
+    """20/11 dona ("um terceiro com esses 3 passos"): as 3 técnicas do motor antigo que faltam no Fish —
+    (1) microcortes (pausa interna longa vira curta, sem acelerar a fala); (2) tom que varia entre frases (±1,5 st,
+    sorteio fixo pelo texto — quebra o "tudo igual"; com FISH_RVC o tom vai pro RVC, sem mexer no timbre aqui);
+    (3) ritmo dentro da frase (alonga a última palavra e a de antes da vírgula; precisa do .words.json).
+    FISH_PASSOS3=1 liga (teste)."""
+    import hashlib
+    txt = {it["i"]: it["texto"] for it in itens}
+    for i in feitos:
+        w = Path(audio_dir) / f"audio_{i}.wav"
+        try:
+            narracao_curva.microcortes(w)
+        except Exception as e:  # noqa: BLE001
+            logging.info(f"[fish passos] microcortes {w.name}: {e}")
+        h = int(hashlib.md5(txt.get(i, "").encode("utf-8")).hexdigest(), 16)
+        _FISH_TOM[i] = ((h % 7) - 3) * 0.5  # -1,5 .. +1,5 st
+        wj = Path(str(w) + ".words.json")
+        if wj.exists():
+            try:
+                pal = [(float(a), float(b), str(x)) for a, b, x in json.loads(wj.read_text(encoding="utf-8"))]
+                import wave
+                with wave.open(str(w)) as f_:
+                    dur = f_.getnframes() / f_.getframerate()
+                segs = narracao_curva._plano_ritmo(pal, txt.get(i, ""), dur, 0.12)
+                if segs:
+                    fc = "".join(f"[0:a]atrim={a:.4f}:{b:.4f},asetpts=PTS-STARTPTS,atempo={max(0.5, tp):.4f}[s{n}];"
+                                 for n, (a, b, tp) in enumerate(segs))
+                    fc += "".join(f"[s{n}]" for n in range(len(segs))) + f"concat=n={len(segs)}:v=0:a=1[o]"
+                    tmp = w.with_name(w.stem + ".rit.wav")
+                    if subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(w), "-filter_complex", fc, "-map",
+                                       "[o]", str(tmp)], capture_output=True).returncode == 0:
+                        os.replace(tmp, w)
+            except Exception as e:  # noqa: BLE001
+                logging.info(f"[fish passos] ritmo {w.name}: {e}")
+        if os.environ.get("FISH_RVC") != "1" and _FISH_TOM[i]:
+            k = 2 ** (_FISH_TOM[i] / 12)
+            tmp = w.with_name(w.stem + ".tom.wav")
+            if subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(w), "-af",
+                               f"asetrate=44100*{k:.5f},aresample=44100,atempo={1 / k:.5f}", str(tmp)],
+                              capture_output=True).returncode == 0:
+                os.replace(tmp, w)
+    logging.info(f"[fish passos] microcortes + tom entre frases + ritmo em {len(feitos)} frases")
+
+
+_FISH_TOM = {}
+
+
+def _rvc_por_cima_do_fish(audio_dir, feitos, voz):
+    import shutil
+    """20/11 dona (comparação A/B/C: Fish "engrossa ou afina demais, parece que distorceu"; Kitten "muito igual"):
+    une os dois — o Fish dá o JEITO de falar e o RVC do narrador (o mesmo do motor antigo) passa por cima e firma o
+    TIMBRE. O Fish já sai no tom do narrador: o tom do RVC é zerado (cancela o tom da base). Precisa do Applio
+    (VOZES_PY_NUVEM) e do .pth da voz. Falhou = fica o Fish como estava. FISH_RVC=1 liga (teste)."""
+    try:
+        pv = VOZES_DIR / voz
+        if not (pv / f"{voz}.pth").exists() or not os.environ.get("VOZES_PY_NUVEM"):
+            logging.info(f"[fish+rvc] sem .pth de {voz} ou sem Applio — fica só o Fish")
+            return
+        tf = pv / "tom_2_edge_francisca.txt"
+        tom_fr = int(tf.read_text().strip()) if tf.exists() else 0
+        d = Path(audio_dir) / "_fish_antes_rvc"
+        d.mkdir(exist_ok=True)
+        itens = []
+        for i in feitos:
+            w = Path(audio_dir) / f"audio_{i}.wav"
+            src = d / w.name
+            shutil.copy(w, src)
+            itens.append({"saida": str(w), "entrada": str(src), "texto": "", "tom_base": "2_edge_francisca",
+                          "tom_extra": -tom_fr + int(round(_FISH_TOM.get(i, 0))), "protect": 0.45, "index_rate": 0.6,
+                          "volume_envelope": 1.0})
+        lj = d / "lista.json"
+        lj.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
+        r = subprocess.run([os.environ["VOZES_PY_NUVEM"], str(Path(__file__).with_name("voz_clonada_nuvem.py")),
+                            "lote", voz, str(lj)], capture_output=True, text=True, timeout=3 * 3600,
+                           env={**os.environ, "VOZES_DIR": str(VOZES_DIR)})
+        ok = sum(1 for i in feitos if (Path(audio_dir) / f"audio_{i}.wav").stat().st_mtime >
+                 (d / f"audio_{i}.wav").stat().st_mtime)
+        logging.info(f"[fish+rvc] {ok}/{len(feitos)} frases com o RVC de {voz} por cima (rc={r.returncode})"
+                     + ("" if r.returncode == 0 else f" {(r.stdout + r.stderr)[-300:]}"))
+        for i in feitos:  # o RVC sai no volume dele: nivela de novo como o resto
+            try:
+                narracao_curva.pos_processar(Path(audio_dir) / f"audio_{i}.wav", 0.0)
+            except Exception:  # noqa: BLE001
+                pass
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish+rvc] falhou ({type(e).__name__}: {str(e)[:150]}) — fica só o Fish")
+
+
 def _narrar_online(lines, audio_dir, so=None):
     """18/11 dona: "quando for Shorts, priorizar gerar o áudio online e aí monta; se não houver créditos usa o mesmo p3
     com técnicas". VOZ_ONLINE=fish (ligado só no pedido de Short) -> narra pelo Fish Audio (voz do narrador do Chris,
     comum/fish_audio/fish_lote.py, conta escolhida pelo creditos.json, IP fixo de cada conta). Cada audio_i.wav que
     sai online fica pronto e o laço do preparar_clone pula (já pulava wav existente); o resto segue no p3. Nunca
     levanta. Personagem com voz própria (mascote/falas) não passa aqui: só as frases desta chamada (so)."""
-    if os.environ.get("VOZ_ONLINE", "").strip().lower() != "fish" or _OUTRA:
+    if os.environ.get("VOZ_ONLINE", "").strip().lower() != "fish" or _OUTRA or motor_antigo():
         return
     try:
         sys.path.insert(0, r"D:\hipercool-materiais\comum\fish_audio")
