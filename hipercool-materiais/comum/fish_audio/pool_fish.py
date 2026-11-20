@@ -16,6 +16,7 @@ sys.path.insert(0, r"D:\recapd-ambientes\producao\colab")
 import cofre  # noqa: E402
 
 POOL_KAGGLE = Path(r"D:\recapd-ambientes\producao\colab\kaggle_pool.json")
+CRIADOR = Path(r"D:\criador-contas-kaggle")  # reservas de IP do criador de contas do Kaggle (outro chat)
 N_MIN, N_MAX = 1, 100  # a conta Webshare rnprmtfo tem 100 IPs
 
 
@@ -34,10 +35,21 @@ def ns_usados():
         usados |= {int(m) for m in re.findall(r"rnprmtfo-(\d+)", POOL_KAGGLE.read_text(encoding="utf-8"))}
     except OSError:
         pass
+    # 19/11 (corrida do p100 com o criador do Kaggle): o criador RESERVA o N em saidas_usadas.json / contas_criadas.json
+    # (chaves "pN" ou textos rnprmtfo-N) antes de a conta aparecer no kaggle_pool. Sem ler isso, o Fish pegou o 100 que o
+    # criador já tinha reservado 6 min antes.
+    for arq in (CRIADOR / "saidas_usadas.json", CRIADOR / "contas_criadas.json", CRIADOR / "n_liberados.json"):
+        try:
+            t = arq.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        usados |= {int(m) for m in re.findall(r"rnprmtfo-(\d+)", t)}
+        usados |= {int(m) for m in re.findall(r'"p(\d+)"', t)}
     reg = cofre._ler().get("contas", {})
     for e in reg.values():
         # kaggle_proxy_antigo = IP de conta já BANIDA no Kaggle (19/11): queimado, nunca reusar (2º banimento 09/11)
-        for campo in ("kaggle_proxy", "kaggle_proxy_antigo", "fish_proxy"):
+        # fish_proxy_conflito = IP que o Fish teve que largar porque era do Kaggle (19/11 p100)
+        for campo in ("kaggle_proxy", "kaggle_proxy_antigo", "fish_proxy", "fish_proxy_conflito"):
             m = re.match(r"rnprmtfo-(\d+)", str(e.get(campo) or ""))
             if m:
                 usados.add(int(m.group(1)))

@@ -119,6 +119,21 @@ def run_one(video_path, script_path, orient, out_name, max_panels):
     # medidos por ffprobe dentro do concat e sincronizam a legenda com o vídeo.
     import fx_clips
     offsets = list(getattr(fx_clips, "_CLIP_ABS_STARTS", []) or [])
+    # 19/11: trechos onde a mascote já aparece (reação/canto no concat + pausas dela) -> _mascote_longo evita
+    _MASCOTE_OCUPADO.clear()
+    try:
+        _abs = offsets
+        for k in _MASCOTE_IDX_CONCAT:
+            if k < len(_abs):
+                fim_k = _abs[k + 1] if k + 1 < len(_abs) else _abs[k] + 10
+                _MASCOTE_OCUPADO.append((_abs[k], fim_k))
+        import anime_segments as _asg
+        _offs = [o for kk, o in enumerate(_abs) if kk not in memes_idx] if memes_idx and len(_abs) == len(para_concat) else _abs
+        for i in (_asg.PAUSAS or {}):
+            if i < len(_offs) and i < len(entries):
+                _MASCOTE_OCUPADO.append((_offs[i], _offs[i] + float(entries[i][1] or 0)))
+    except Exception as _e:  # noqa: BLE001
+        logging.warning(f"[longo] trechos da mascote não calculados ({type(_e).__name__}) — segue como antes")
     if memes_idx and len(offsets) == len(para_concat):
         offsets = [o for k, o in enumerate(offsets) if k not in memes_idx]
     if len(offsets) != len(clips):
@@ -570,6 +585,14 @@ def _mascote_longo(concat_out, entries, offsets, caps, workspace):
         # (anime_segments -> mascote_overlay.montar_pausa: lado oposto, mesmo tamanho, fala depois da Maria).
         # 29/10 dona: só a mascote nova (gravações vivas dela andando) — as animações MOV antigas nos capítulos saem
         ev = [e for e in ev if e.get("vivo")]
+        # 19/11 dona ("às vezes a mascote aparece duplicada, ou a mascote e a amiga falando ao mesmo tempo"): nenhuma
+        # aparição dela por cima de um trecho onde ela JÁ está (reação, canto, pausa com a voz dela/amiga), com 3 s de
+        # folga. MASCOTE_SEM_DUPLICAR=0 desliga.
+        if os.environ.get("MASCOTE_SEM_DUPLICAR", "1") != "0" and _MASCOTE_OCUPADO:
+            antes = len(ev)
+            ev = [e for e in ev if not any(a - 3 < e["t"] + e["dur"] and e["t"] < b + 3 for a, b in _MASCOTE_OCUPADO)]
+            if len(ev) < antes:
+                logging.info(f"[longo] mascote: {antes - len(ev)} aparição(ões) tiradas (já havia mascote no trecho)")
         # 30/10 dona: "cenas engraçadas sem falar nada — passeando, apontando calada no canto, pendurada estilo Homem-
         # Aranha, de avião com a faixa 'deixe seu like'... sem parar o vídeo": a cada ~mascote.cenas_a_cada_s (420 s)
         # uma cena muda por cima do vídeo andando (só a imagem; o som é o do vídeo). Fora do 1º e do último minuto e
@@ -577,7 +600,7 @@ def _mascote_longo(concat_out, entries, offsets, caps, workspace):
         cada = float(m.get("cenas_a_cada_s", 420))
         fim = offsets[-1] if offsets else 0.0
         if cada > 0 and fim > 180:
-            ocupado = [(e["t"] - 20, e["t"] + e["dur"] + 20) for e in ev]
+            ocupado = [(e["t"] - 20, e["t"] + e["dur"] + 20) for e in ev] + [(a - 20, b + 20) for a, b in _MASCOTE_OCUPADO]
             t, k = 60.0 + cada / 2, 0
             while t < fim - 60:
                 cena = mascote_overlay.cena_viva(k)
@@ -781,12 +804,19 @@ def _memes_resumo(clips, sfx_durs, workspace):
         sfx2.insert(k + 1, 0.0)
     # índices finais dos memes na lista do concat
     idx = {i for i, c in enumerate(novos) if Path(str(c)).name.startswith("_meme_resumo_")}
+    # 19/11 dona ("às vezes a mascote aparece duplicada, ou a mascote e a amiga com vozes ao mesmo tempo"): posições
+    # no concat dos clipes que JÁ têm a mascote (reação em pausa _meme_resumo_r*, no canto _canto_*) — o
+    # _mascote_longo não põe outra aparição dela por cima desses trechos.
+    _MASCOTE_IDX_CONCAT[:] = [i for i, c in enumerate(novos)
+                              if Path(str(c)).name.startswith(("_meme_resumo_r", "_canto_"))]
     if idx:
         logging.info(f"[longo] {len(idx)} meme(s) abrindo brecha no resumo (posições {sorted(idx)})")
     return novos, sfx2, idx
 
 
 _ENTRIES_TEXTO = []  # texto narrado de cada clipe (run_one preenche antes do concat)
+_MASCOTE_IDX_CONCAT = []  # 19/11: posições no concat dos clipes que já mostram a mascote (reação/canto)
+_MASCOTE_OCUPADO = []  # 19/11: [(ini, fim)] s no vídeo final onde a mascote já aparece (reação, canto, pausa)
 
 
 _GENERICOS = {"?", "", "ele", "ela", "garoto", "garota", "menino", "menina", "homem", "mulher", "rapaz", "moça",

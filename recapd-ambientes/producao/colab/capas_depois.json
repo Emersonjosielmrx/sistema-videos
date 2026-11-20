@@ -2153,8 +2153,55 @@
    "source_url": "https://www.youtube.com/watch?v=ZZ7LeUws7-c"
   },
   "publicar": false,
-  "estado": "pendente",
-  "tentativas": 1,
+  "estado": "feito",
+  "tentativas": 3,
   "em": "2026-11-19T15:06"
+ },
+ {
+  "canal": "novo_historias_em_frames",
+  "vid": "O9JUktZkzPg",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\jinwoo-recap_cap1_20261119",
+  "params": {
+   "anime": "Jinwoo Recap",
+   "cap": 1,
+   "texto": "DEMITIU A PATROA",
+   "cena": "ELE FOI HUMILHADO mas REJEITOU a PATROA e FICOU COM A RIVAL mais rica",
+   "protagonista": "Young adult male protagonist with sleek dark hair, sharp blue eyes, wearing a sharp modern business suit, confident expression, clean urban background, high quality digital art",
+   "generos": [
+    "romance",
+    "comedia",
+    "escola"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=keBJ_bd5oVw"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 4,
+  "em": "2026-11-19T16:41"
+ },
+ {
+  "canal": "novo_curiosidadesnoturnas",
+  "vid": "NOFMnHsOSRA",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-7bdb9a_cap1_20261119",
+  "params": {
+   "anime": "sem-obra-7bdb9a",
+   "cap": 1,
+   "texto": "ELE SE VINGOU",
+   "cena": "ELE FOI TRAÍDO mas VOLTOU no TEMPO para SE VINGAR e DESTRUIR todos os traidores",
+   "protagonista": "adult man, short dark hair, sharp blue eyes, wearing a clean modern dark suit, dramatic lighting, highly detailed webtoon style, no text, no logos",
+   "generos": [
+    "regressao",
+    "vinganca",
+    "romance",
+    "drama"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=Jjd71vw8hXQ"
+  },
+  "publicar": true,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-19T18:24"
  }
 ]

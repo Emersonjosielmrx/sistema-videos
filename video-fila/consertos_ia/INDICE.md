@@ -1263,3 +1263,7 @@
 - 2026-11-19 11:52 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem po → [20261119_115039_0b64.md](20261119_115039_0b64.md)
 - 2026-11-19 13:04 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261119_130046_1935.md](20261119_130046_1935.md)
 - 2026-11-19 14:43 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261119_144041_08bd.md](20261119_144041_08bd.md)
+- 2026-11-19 17:03 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261119_170040_0c85.md](20261119_170040_0c85.md)
+- 2026-11-19 17:33 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261119_173044_832e.md](20261119_173044_832e.md)
+- 2026-11-19 19:16 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261119_191043_57d8.md](20261119_191043_57d8.md)
+- 2026-11-19 19:37 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261119_193042_8c15.md](20261119_193042_8c15.md)

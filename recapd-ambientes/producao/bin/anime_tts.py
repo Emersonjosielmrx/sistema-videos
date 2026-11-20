@@ -358,7 +358,7 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
     if not wav.exists() or wav.stat().st_size < 500:
         return
     tag = wav.with_name(wav.stem + ".margem_ok")
-    if tag.exists():
+    if tag.exists() and tag.stat().st_mtime >= wav.stat().st_mtime:
         return
     if margem is None:
         try:
@@ -373,16 +373,20 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
             logging.warning(f"[anime_tts] ffprobe falhou em {wav.name}: rc={r.returncode}")
             return
         dur = float(r.stdout.strip().splitlines()[0])
+        r_ch = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=channels", "-of", "csv=p=0", str(wav)],
+                              capture_output=True, text=True, timeout=30, creationflags=flags)
+        ch = int(r_ch.stdout.strip().splitlines()[0]) if r_ch.returncode == 0 and r_ch.stdout.strip() else 1
     except Exception as e:  # noqa: BLE001
         logging.warning(f"[anime_tts] ffprobe falhou em {wav.name} ({e})")
         return
     fade_dur = min(fade, margem / 2)
     fade_start = max(0.0, dur + margem - fade_dur)
-    fmt = "aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo"
+    layout = "stereo" if ch == 2 else "mono"
+    fmt = f"aformat=sample_fmts=s16:sample_rates=44100:channel_layouts={layout}"
     filtros = f"{fmt},apad=pad_dur={margem:.3f},afade=t=out:st={fade_start:.3f}:d={fade_dur:.3f}"
     tmp = wav.with_name(wav.stem + ".margem.wav")
     try:
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", filtros, str(tmp)],
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", filtros, "-c:a", "pcm_s16le", str(tmp)],
                        check=True, capture_output=True, timeout=60, creationflags=flags)
         for tentativa in range(3):
             try:
@@ -396,7 +400,7 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
             tag.write_text("1", encoding="utf-8")
         except OSError:
             pass
-        logging.info(f"[anime_tts] margem final aplicada em {wav.name}: +{margem:.1f}s (fade {fade_dur:.1f}s, total {dur + margem:.1f}s)")
+        logging.info(f"[anime_tts] margem final aplicada em {wav.name}: +{margem:.1f}s (fade {fade_dur:.1f}s, total {dur + margem:.1f}s, {layout})")
     except Exception as e:  # noqa: BLE001
         tmp.unlink(missing_ok=True)
         logging.warning(f"[anime_tts] margem final falhou em {wav.name} ({e})")

@@ -19533,5 +19533,125 @@
     "arquivado": false,
     "descricao": "Claude Code skill: Give a single photo or painting real depth on the web: MoGe-2 depth maps, a three.js window effect with parallax that doe",
     "data": "2026-11-19"
+  },
+  "abhiramajay/anime-ranked-shorts": {
+    "ok": true,
+    "nome": "abhiramAjay/anime-ranked-shorts",
+    "estrelas": 0,
+    "push": "2026-11-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn YouTube anime compilations into ranked vertical Shorts: OCR-based gag/scene analysis, narrator detection, house-style and tweet templat",
+    "data": "2026-11-19"
+  },
+  "algometrix/vertical_video_convertor": {
+    "ok": true,
+    "nome": "algometrix/vertical_video_convertor",
+    "estrelas": 1,
+    "push": "2026-07-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Automatically convert horizontal videos into vertical short-form clips for TikTok, Reels, and YouTube Shorts. Face-tracking smart crop with ",
+    "data": "2026-11-19"
+  },
+  "zhanglucia992-jpg/english-picturebook-animation": {
+    "ok": true,
+    "nome": "zhanglucia992-jpg/english-picturebook-animation",
+    "estrelas": 0,
+    "push": "2026-11-02",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "英文绘本故事短视频生成 skill：分镜JSON → 插画 → edge-tts 英文旁白 → Ken Burns 运镜 → 同步字幕 → logo 角标 → 竖版成片 MP4 | Free, no API key",
+    "data": "2026-11-19"
+  },
+  "andrewdunndev/pinboard": {
+    "ok": true,
+    "nome": "andrewdunndev/pinboard",
+    "estrelas": 0,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Ken Burns-style video generator that composites photos as vintage Polaroids on panoramic backgrounds, with smooth camera movement and music.",
+    "data": "2026-11-19"
+  },
+  "johannespettersson80/scena": {
+    "ok": true,
+    "nome": "johannesPettersson80/scena",
+    "estrelas": 26,
+    "push": "2026-11-18",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Rust-native 3D scene-graph renderer for glTF/GLB, WebGPU/WebGL2, WASM, and headless rendering.",
+    "data": "2026-11-19"
+  },
+  "abramovi4ch/animoji-converter": {
+    "ok": true,
+    "nome": "ABRAMOVI4CH/animoji-converter",
+    "estrelas": 0,
+    "push": "2026-10-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert decoded Apple AvatarKit Animoji (27 characters) to web-ready glTF 2.0 GLB with original Apple morph targets (sparse POSITION+NORMAL)",
+    "data": "2026-11-19"
+  },
+  "pablofmm/numinia-digital-goods-data": {
+    "ok": true,
+    "nome": "PabloFMM/numinia-digital-goods-data",
+    "estrelas": 0,
+    "push": "2026-06-14",
+    "licenca": "CC0-1.0",
+    "arquivado": false,
+    "descricao": "cc0 data from Numinia Digital Goods (VRM Avatars + 3D GLB Assets)",
+    "data": "2026-11-19"
+  },
+  "rana-jatin/avatar-stage": {
+    "ok": true,
+    "nome": "rana-jatin/avatar-stage",
+    "estrelas": 5,
+    "push": "2026-07-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Three.js toolkit for rigged GLB avatars: humanoid rig detection, runtime-generated procedural animations, ARKit expression presets, and vise",
+    "data": "2026-11-19"
+  },
+  "natalia-3nitilab/vita-myth-studio": {
+    "ok": true,
+    "nome": "natalia-3nitilab/vita-myth-studio",
+    "estrelas": 1,
+    "push": "2026-09-24",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "The engine behind Ordinary Myths: long-form narrated video rendered from a VRM character with real mocap. ~$0.86 and 7.4 min of compute per ",
+    "data": "2026-11-19"
+  },
+  "abdulrehman043/humanforge": {
+    "ok": true,
+    "nome": "abdulrehman043/humanforge",
+    "estrelas": 4,
+    "push": "2026-10-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "HumanForge: open-source 3D avatar SDK for React & React Native. Realistic CC0 humans, Mixamo rig, ARKit blendshapes, selfie-to-avatar.",
+    "data": "2026-11-19"
+  },
+  "metiutek/editorvideo-ai": {
+    "ok": true,
+    "nome": "metiutek/editorvideo-ai",
+    "estrelas": 25,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Tell an AI to edit your video and watch it happen. A real non-linear editor with a timeline, plus 83 tools an agent can call over MCP — work",
+    "data": "2026-11-19"
+  },
+  "maxazure/video-editing-skill": {
+    "ok": true,
+    "nome": "maxazure/video-editing-skill",
+    "estrelas": 216,
+    "push": "2026-10-18",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "OpenClaw/Codex Skill: Auto video editing for talk/vlog videos — speech recognition, sentence splitting, subtitle burning, and clip merging",
+    "data": "2026-11-19"
   }
 }

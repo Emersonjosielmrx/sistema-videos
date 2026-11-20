@@ -724,6 +724,48 @@ def build_segments(video_path, lines, out_dir, audio_dir=None, orient="landscape
     return clips, entries, sfx_durs, word_times
 
 
+_PALAVRAS_VAZIAS = set("a o os as um uma uns umas de da do das dos e é que em no na nos nas pra para por com se ele ela "
+                       "eles elas eu você vc tu me te nos mas mais muito já tá ta não sim isso esse essa aí ai lá aqui "
+                       "mano cara meu minha fala diz porém então".split())
+
+
+def _fala_cabe(texto, dur, frase):
+    """19/11: fala real serve nesta frase? Genérica (curta, sem nome próprio, poucas palavras de conteúdo) cabe em
+    qualquer cena; com conteúdo, só se dividir palavra-chave com a frase narrada."""
+    import re as _re
+    palavras = _re.findall(r"[\wÀ-ú]+", texto)
+    if not palavras or not texto.rstrip().endswith((".", "!", "?", "…")):
+        return False  # pedaço cortado ("rapaz, você vai ter que") soa errado em qualquer cena
+    proprios = [p for p in palavras[1:] if p[:1].isupper()]
+    conteudo = {p.lower() for p in palavras if p.lower() not in _PALAVRAS_VAZIAS and len(p) > 3}
+    if dur <= 2.6 and len(palavras) <= 7 and not proprios and len(conteudo) <= 2:
+        return True  # "Nossa, que coisa", "caramba", risada
+    chave = {p.lower() for p in _re.findall(r"[\wÀ-ú]+", frase) if len(p) > 3} - _PALAVRAS_VAZIAS
+    return not proprios and len(conteudo & chave) >= 2
+
+
+def _nota_fala(texto, dur, frase):
+    """19/11: 0 = não serve nesta frase; > 0 = quanto combina. Nome próprio de outra história = 0. Pedaço cortado = 0.
+    Coringa genérica (curta, sem enredo) = 2. Cada palavra-chave em comum com a frase narrada = +2. Mesmo tom (frase
+    com ! ou ? e fala com ! ou ?) = +1."""
+    import re as _re
+    palavras = _re.findall(r"[\wÀ-ú]+", texto)
+    if not palavras or not texto.rstrip().endswith((".", "!", "?", "…")):
+        return 0
+    if [p for p in palavras[1:] if p[:1].isupper()]:
+        return 0
+    conteudo = {p.lower() for p in palavras if p.lower() not in _PALAVRAS_VAZIAS and len(p) > 3}
+    chave = {p.lower() for p in _re.findall(r"[\wÀ-ú]+", frase) if len(p) > 3} - _PALAVRAS_VAZIAS
+    nota = 2 * len(conteudo & chave)
+    if dur <= 3.5 and len(palavras) <= 9 and len(conteudo) <= 3:
+        nota += 2  # serve em qualquer cena
+    elif not conteudo & chave:
+        return 0  # fala com enredo próprio e nada em comum com a cena = era o "do nada num hospital"
+    if frase.rstrip().endswith(("!", "?")) and texto.rstrip().endswith(("!", "?")):
+        nota += 1
+    return nota
+
+
 class _FalasReais:
     """05/11/2026 dona ("as falas estão aprovadas de usar, essas aí já pode começar"): banco de falas ORIGINAIS de
     cada narrador (hermes-staging falas_narradores.py -> manhwa-drive:narradores_originais/<voz>/banco; o Kaggle
@@ -771,6 +813,24 @@ class _FalasReais:
         if not forte or self.desde < float(os.environ.get("FALAS_REAIS_A_CADA", "60")) or i < 3:
             return None
         cands = [x for x in self._banco(Path(video_path).parent, voz) if x["arquivo"] not in self.usados]
+        # 19/11 dona ("as vozes reais às vezes não têm a ver com o que está sendo narrado: o Momo falando 'uma está em
+        # X lugar' e do nada está num hospital"): o banco guarda trechos da narração de OUTRAS histórias (nomes, lugares,
+        # ações). Só entra fala que serve em QUALQUER cena: curta, sem nome próprio e sem conteúdo de enredo — ou que
+        # divida palavra-chave com a frase narrada. FALAS_REAIS_SO_GENERICAS=0 volta ao sorteio antigo.
+        if os.environ.get("FALAS_REAIS_SO_GENERICAS", "1") != "0":
+            # 19/11 dona ("não podemos perder as falas reais, elas são boas; eu só via as mesmas 5-10; talvez o problema
+            # era a aplicação"): usa o banco INTEIRO, mas escolhe a que COMBINA com a frase narrada — nota por palavras em
+            # comum + coringa genérica; fala com nome de personagem de outra história fica fora. Entre as que servem,
+            # gira (a ordem "beleza/piada primeiro" repetia sempre as mesmas do topo).
+            notas = [(_nota_fala(str(x.get("texto") or ""), float(x.get("dur") or 0), str(line)), k, x)
+                     for k, x in enumerate(cands)]
+            notas = [t for t in notas if t[0] > 0]
+            if not notas:
+                return None
+            melhor = max(n for n, _k, _x in notas)
+            # as que ficam a até 1 ponto da melhor; sorteio entre elas (gira o banco)
+            topo = [x for n, _k, x in notas if n >= melhor - 1]
+            cands = [random.choice(topo)]
         if not cands:
             return None
         esc = cands[0]

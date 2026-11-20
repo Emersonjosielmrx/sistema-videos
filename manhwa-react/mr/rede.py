@@ -243,8 +243,15 @@ def inventario(cfg, politica, so_aprovados=True):
     # levariam 9 dias. Agora os REDE_3D_POR_DIA (padrão 3 = os 3 horários do canal Dentro das Coisas 3D) mais antigos
     # viram canal_fixo juntos.
     if tres_d and __import__("os").environ.get("REDE_3D_FIXO", "1") != "0":
-        for _t, it3 in sorted(tres_d, key=lambda t: t[0])[:REDE_3D_POR_DIA]:
-            it3["dados"] = dict(it3["dados"], canal_fixo=(it3.get("so_canais") or ["inventoreact"])[0])
+        # 19/11 (vários canais 3D: Dentro das Coisas 3D, Código Bilhão e os novos de cada dia): o teto vale POR CANAL —
+        # antes eram os 3 mais antigos da rede inteira e o canal novo ficava sem vídeo enquanto o outro tinha fila.
+        por_canal = {}
+        for _t, it3 in sorted(tres_d, key=lambda t: t[0]):
+            ch3 = (it3.get("so_canais") or ["inventoreact"])[0]
+            if por_canal.get(ch3, 0) >= REDE_3D_POR_DIA:
+                continue
+            por_canal[ch3] = por_canal.get(ch3, 0) + 1
+            it3["dados"] = dict(it3["dados"], canal_fixo=ch3)
     # 3. Veo LIMPO (sem a marca @InovareStories e sem o slide de propaganda/WhatsApp que derrubou os canais antigos):
     #    so nos canais de canais_veo_limpo; o limpar_veo.py ja aprova os de estrutura padrao (os outros ficam em 'esperando')
     R = _rc(cfg)
@@ -1376,12 +1383,17 @@ def _agendar(cfg, simular=False, dias=1, limite=None, janela_h=None, recuperar=F
         # 16/11 (REDE_3D_FIXO): o Short 3D tem vaga PRÓPRIA (+1/dia no canal dele), fora do max_dia do react — o
         # InventoReact (max_dia 1) nunca tinha vaga pra ele. Só se nenhum 3D subiu nesse dia.
         f3 = [it for it in itens if it.get("dados", {}).get("origem") == "kit3d" and it["dados"].get("canal_fixo")]
-        if f3 and k < dias and f3[0]["dados"]["canal_fixo"] in vagas:
-            ja3d = sum(1 for r in politica._ler_ledger()
-                       if Path(str(r.get("arquivo") or "")).name.startswith("3d-")
-                       and (politica._dt(r.get("ts")) or agora).date() == dia)
-            # 17/11: até REDE_3D_POR_DIA por dia (antes 1)
-            vagas[f3[0]["dados"]["canal_fixo"]] += max(0, min(len(f3), REDE_3D_POR_DIA - ja3d))
+        if f3 and k < dias:
+            # 19/11: vaga 3D por CANAL (cada canal 3D com a fila dele; o ledger conta só os 3D daquele canal no dia)
+            led_dia = [r for r in politica._ler_ledger() if Path(str(r.get("arquivo") or "")).name.startswith("3d-")
+                       and (politica._dt(r.get("ts")) or agora).date() == dia]
+            cred_de = {c["slug"]: c["cred"] for c in chans}
+            for ch3 in {it["dados"]["canal_fixo"] for it in f3}:
+                if ch3 not in vagas:
+                    continue
+                fila = sum(1 for it in f3 if it["dados"]["canal_fixo"] == ch3)
+                ja3d = sum(1 for r in led_dia if politica._do_canal(r, cred_de[ch3]))
+                vagas[ch3] += max(0, min(fila, REDE_3D_POR_DIA - ja3d))
         plano = []
         if any(vagas.values()):
             sem_veo = {s: [o for o in os_ if o not in ocup_veo[s]] for s, os_ in ocup.items()}

@@ -1,11 +1,11 @@
 {
  "contas": 29,
  "prontas": 0,
- "cookies_mortos": 3,
- "sem_cota": 26,
- "bloqueadas": 1,
+ "cookies_mortos": 8,
+ "sem_cota": 25,
+ "bloqueadas": 0,
  "aguardando_oi": 28,
- "proxima_volta": "2026-11-19T16:21",
+ "proxima_volta": "2026-11-19T21:00",
  "ultimas_voltas": [
   [
    "2026-11-18T17:43",
@@ -40,24 +40,31 @@
    "inovaremultiatendimento"
   ]
  ],
- "em": "2026-11-19T16:18:48",
- "duracao_s": 343,
- "conferidas": 7,
+ "em": "2026-11-19T20:42:24",
+ "duracao_s": 1162,
+ "conferidas": 20,
  "mortas_vistas": [
+  "emersonjosiel2029",
+  "inovaremanhwaverseesp",
+  "inovaremanhwaverseing",
+  "aulacomia",
   "aulasrevolution",
+  "inovaremultiatendimento",
+  "filmescomia1",
+  "msenergypara",
   "murilodoctor192",
-  "emersongenc",
-  "fabiovideoseducativos"
+  "e4487017"
  ],
  "renovadas": [
-  "emersongenc"
+  "inovaremanhwaverseesp",
+  "aulacomia"
  ],
  "falhas_renovar": [
+  "inovaremanhwaverseing",
   "aulasrevolution",
+  "filmescomia1",
   "murilodoctor192"
  ],
  "voltaram": [],
- "oi_sem_cota": [
-  "msenergypara"
- ]
+ "oi_sem_cota": []
 }

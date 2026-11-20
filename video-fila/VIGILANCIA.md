@@ -1,13 +1,15 @@
-# Vigilância 24 h — 2026-11-19T15:50:58
+# Vigilância 24 h — 2026-11-19T20:00:49
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (3)
+## Alarmes desta volta (5)
+- canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (38)
+## Casos abertos (42)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (1minopus-sonnetweb)
 - [revisar] tiktok: mesmo erro 8x em 6 h (1minopus-sonnetweb)
 - [consertar] longo SjQHP-0GKJs_1_11__His_Girlfriend_Cheated_on_Him saiu com problema de qualidade (1minopus-sonnetweb)
@@ -46,6 +48,10 @@
 - [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
 - [sem_mudanca] _parceiro_20261114.log: mesmo erro 5x — cw/claude-sonnet-5-5 / -

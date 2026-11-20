@@ -341,3 +341,54 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1431.md`
 - [INÉDITO] github.com/jrubiosainz/manga-3d-color — ★1, push 2026-02-18, MIT — 🎨 Transform B&W manga into colorized 3D parallax experiences. AI colorization + depth maps + WebGL reader.
 - [INÉDITO] github.com/skyeyesec333/photo-depth — ★0, push 2026-11-18, MIT — Claude Code skill: Give a single photo or painting real depth on the web: MoGe-2 depth maps, a three.js window effect with parallax that doe
+
+## [ ] PENDENTE — 2026-11-19 16:33 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1621.md`
+- [INÉDITO] github.com/algometrix/vertical_video_convertor — ★1, push 2026-07-20, MIT — Automatically convert horizontal videos into vertical short-form clips for TikTok, Reels, and YouTube Shorts. Face-tracking smart crop with 
+- [INÉDITO] github.com/zhanglucia992-jpg/english-picturebook-animation — ★0, push 2026-11-02, MIT — 英文绘本故事短视频生成 skill：分镜JSON → 插画 → edge-tts 英文旁白 → Ken Burns 运镜 → 同步字幕 → logo 角标 → 竖版成片 MP4 | Free, no API key
+- [INÉDITO] github.com/andrewdunndev/pinboard — ★0, push 2026-11-16, MIT — Ken Burns-style video generator that composites photos as vintage Polaroids on panoramic backgrounds, with smooth camera movement and music.
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 16:58 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_1652.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 17:12 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_1701.md`
+- [INÉDITO] github.com/ABRAMOVI4CH/animoji-converter — ★0, push 2026-10-14, MIT — Convert decoded Apple AvatarKit Animoji (27 characters) to web-ready glTF 2.0 GLB with original Apple morph targets (sparse POSITION+NORMAL)
+
+## [ ] PENDENTE — 2026-11-19 18:20 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_1757.md`
+- [INÉDITO] github.com/PabloFMM/numinia-digital-goods-data — ★0, push 2026-06-14, CC0-1.0 — cc0 data from Numinia Digital Goods (VRM Avatars + 3D GLB Assets)
+- [INÉDITO] github.com/rana-jatin/avatar-stage — ★5, push 2026-07-21, MIT — Three.js toolkit for rigged GLB avatars: humanoid rig detection, runtime-generated procedural animations, ARKit expression presets, and vise
+
+## [ ] PENDENTE — 2026-11-19 18:39 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_1832.md`
+- [INÉDITO] github.com/natalia-3nitilab/vita-myth-studio — ★1, push 2026-09-24, MIT — The engine behind Ordinary Myths: long-form narrated video rendered from a VRM character with real mocap. ~$0.86 and 7.4 min of compute per 
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 18:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1841.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 18:58 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1851.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 19:08 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1901.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 19:19 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1911.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 19:35 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_avatar_3d_comercial__sonnet_1927.md`
+- [INÉDITO] github.com/abdulrehman043/humanforge — ★4, push 2026-10-21, MIT — HumanForge: open-source 3D avatar SDK for React & React Native. Realistic CC0 humans, Mixamo rig, ARKit blendshapes, selfie-to-avatar.
+
+## [ ] PENDENTE — 2026-11-19 19:54 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1938.md`
+- [INÉDITO] github.com/metiutek/editorvideo-ai — ★25, push 2026-11-18, MIT — Tell an AI to edit your video and watch it happen. A real non-linear editor with a timeline, plus 83 tools an agent can call over MCP — work
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 20:11 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1959.md`
+- (todos os itens desta pesquisa foram reprovados)

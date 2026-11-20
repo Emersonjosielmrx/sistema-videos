@@ -246,6 +246,27 @@
       ],
       "reserva_dono": 1
     },
+    "codigobilhao3d": {
+      "slug": "codigobilhao3d",
+      "creds": [
+        "novo_codigobilhao3d"
+      ],
+      "nome": "Código Bilhão",
+      "handle": "@codigobilhao3d",
+      "channel_id": "UCmEJ2_-dMsxDczbpzbHsHFg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "educação financeira em animações 3D: juros compostos, bolsa, bancos, impostos, como os ricos multiplicam dinheiro",
+      "dono": "manhwa-react",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ]
+    },
     "comedianoturna": {
       "slug": "comedianoturna",
       "creds": [

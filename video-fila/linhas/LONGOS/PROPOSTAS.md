@@ -458,3 +458,53 @@
 - prova: No 5DoGv3EXHgc o log registrou 'Broken pipe [rawvideo] packet size 1966080 < expected frame_size 2764800', falhando na remoção e deixando logos chinesas visíveis ('BOOK.SFACG.COM').
 - onde: bin/marca_site.py / comando ffmpeg com rawvideo
 - como testar: Executar marca_site sobre vídeo com resolução não padronizada e validar se os parâmetros width/height/pix_fmt do pipe rawvideo batem dinamicamente com o arquivo de entrada.
+
+## 19/11 16:13 [CERTEZA] Correção de truncamento do áudio e narração no encerramento do vídeo (antigravity/gemini-3.8-flash-tiered)
+- prova: Vídeos 97bBeHddKJI e ZZ7LeUws7-c tiveram a fala final cortada bruscamente na metade da frase ('aqui, já é') sem conclusão do raciocínio.
+- onde: bin/anime_tts.py ou bin/montar_longo.py (muxing final do áudio do CTA de encerramento)
+- como testar: Renderizar os últimos 30 segundos de um vídeo com CTA de fim e verificar se a fala é executada até o fim com fade-out suave, sem truncar antes do encerramento do container.
+
+## 19/11 16:13 [CERTEZA] Safe-zone e ancoragem obrigatória para evitar stickers e cards sobre rostos (antigravity/gemini-3.8-flash-tiered)
+- prova: Sticker 'SÓ QUE BIZARRA' tapou a testa/olhos em 5DoGv3EXHgc, sticker 'OS GURI?' cobriu olhos e boca em 97bBeHddKJI e o card 'SINCERAMENTE' cobriu boca e queixo em ZZ7LeUws7-c.
+- onde: bin/mascote_overlay.py e bin/fx_clips.py
+- como testar: Fixar coordenadas de cards narrativos e stickers nos cantos seguros (margem superior/inferior sem obstrução central) e validar contra amostras de quadros em close-up.
+
+## 19/11 16:13 [CERTEZA] Eliminar ghosting e dupla exposição travada em transições de cena (antigravity/gemini-3.8-flash-tiered)
+- prova: ZZ7LeUws7-c registrou defeito grave de cross-dissolve congelado entre q25 e q26, retendo camada fantasma do trecho anterior e duplicando a marca d'água 'Jinwoo Recap'.
+- onde: bin/fx_clips.py
+- como testar: Substituir fusões problemáticas por corte seco (hard cut) ou limitar dissolvências a no máximo 8 frames sem persistência de quadros estáticos.
+
+## 19/11 16:49 [CERTEZA] Stickers e cards nunca em cima do rosto (zona proibida) (gemini-4-argon)
+- prova: Legibilidade grave nos 3 últimos vídeos: 5DoGv ('SÓ QUE BIZARRA' entre os olhos), 97bBe ('OS GURI?' cobrindo olhos, nariz e boca; 'DIZ' na testa) e ZZ7Le ('SINCERAMENTE' tapando boca e queixo, e sticker com a mão sobre o olho do protagonista). Isso já era regra da dona (gancho não cobre rosto) e continua acontecendo.
+- onde: Provável: onde os stickers/cards são posicionados (bin/fx_clips.py ou o módulo de stickers de narrador/reação). Confirmar com grep por 'sticker' e 'card' antes de editar.
+- como testar: Rodar detecção de rosto (anime face) no quadro do trecho e escolher o canto ou terço mais distante da caixa do rosto. Re-renderizar 5 min do ZZ7Le e do 97bBe e passar o júri de legibilidade. Aceitar se zerar os 'grave' de sticker sobre rosto e o render não crescer mais de 5%.
+
+## 19/11 16:49 [CERTEZA] Transição com fantasma (dupla exposição) e sticker que vaza para o trecho seguinte (gemini-4-argon)
+- prova: ZZ7Le: dois 'grave' (legibilidade e movimento) pelo fantasma do trecho q25 sobre q26 com marca 'Jinwoo Recap' duplicada, e o sticker 'SE ELE O GRITO' de q11 ainda na tela em q12 após o corte.
+- onde: Provável: montagem dos trechos e crossfade em bin/fx_clips.py, mais o ponto de saída (enable/between) dos stickers na timeline.
+- como testar: Trocar o dissolve por corte seco ou limitar a 8 frames. Fixar o fim do sticker no fim do trecho. Renderizar 3 emendas q24–q27 do ZZ7Le e conferir quadro a quadro que não há dupla exposição nem sticker atravessando o corte.
+
+## 19/11 16:49 [CERTEZA] Painel parado por mais de 9 s e gancho com um só quadro (gemini-4-argon)
+- prova: Mesmo painel por 9 s em 3 de 3 vídeos: 2966–2975 s (5DoGv), 1434–1443 s (97bBe) e 629–638 s (ZZ7Le, só 12,1% de movimento). O trecho 1 (gancho) tem o menor movimento em 5DoGv (16,6%) e 97bBe (19,1%), e no ZZ7Le (21,5%) fica na faixa baixa; em 97bBe e 5DoGv o quadro de fundo não muda por mais de 4,5 s e só os stickers trocam. A mudança do dia 12/11 (câmera dinâmica obrigatória nos 6 s iniciais) foi mantida, mas o defeito continua, então provavelmente não está pegando nesse caminho. A mudança afeta A e B do experimento ativo por igual, mas convém avisar quando for aplicada.
+- onde: bin/fx_clips.py (_movimento e a escolha de quadros por frase) e o ponto onde o gancho é montado.
+- como testar: Teto de 3,5 s por painel (troca para contraplano, detalhe ou outro painel da mesma cena). Nos 6 primeiros s, trocar de painel a cada ≤2,5 s. Medir o movimento do trecho 1 (meta acima de 30%) e a nota de movimento num lote de 3 vídeos, conferindo que o render não passa de +10%.
+
+## 19/11 16:49 [CERTEZA] Verificar o final com Whisper antes de consertar 'frase cortada' (gemini-4-argon)
+- prova: 97bBe e ZZ7Le trazem o mesmo texto ('aqui, já é') como 'final cortado no meio da frase'. O texto idêntico em dois vídeos diferentes sugere o falso alarme já registrado em LICOES (30/10, u7tN: o júri vê quadros soltos e a fala da mascote saía inteira). Pode também ser fala fora de hora, como 'Se você chegou até aqui' no CTA do meio.
+- onde: Conferir primeiro com Whisper os últimos 15 s dos MP4 de 97bBe e ZZ7Le. Se a fala estiver inteira, o caso é só calibrar o júri (descartar esse tipo de achado sem transcrição). Se estiver cortada, o ponto provável é o fim do mix em bin/anime_tts.py (já corrigido em 29/10) ou a mascote no fim.
+- como testar: Transcrever o trecho final dos 2 vídeos. Se a fala estiver inteira, nada a corrigir. Se estiver cortada, estender 1–2 s com fade e transcrever de novo.
+
+## 19/11 16:49 [CERTEZA] Auditar os 4 vídeos com média assistida de 4 a 52 s e os canais fora do nicho (gemini-4-argon)
+- prova: PFbuZNbc6cA (4,0 s, 0,1%), RA4H5DXjAfM (22,8 s, 0,8%), gF-1j3NGxq8 (17,0 s, 0,3%) e actvN3DSLLI (51,6 s, 1,4%). Os longos normais ficam em 32–36% assistido. O PFbu e o RA4H já foram reenviados em duplicidade (LICOES 27/10). Além disso, o gF-1j foi para 'Assist-IA Investimentos' (nota do júri 5,5, o melhor render, mas canal sem relação com manhwa).
+- onde: Conferir no YouTube se o arquivo postado dessas 4 URLs toca inteiro (duração, áudio, vídeo). Conferir também no postador/alimentador o mapeamento canal -> vídeo e por que esses canais entraram.
+- como testar: Abrir as 4 URLs e comparar a duração do arquivo postado com a do render local. Se estiver quebrado, reenviar o arquivo correto (sem refazer o vídeo). Revisar a lista de canais destino contra os da dona.
+
+## 19/11 16:49 [CERTEZA] Cobertura baixa do marca_site (marca d'água de scan ainda visível) (gemini-4-argon)
+- prova: O júri ainda vê logos de scan em 5DoGv ('BOOK.SFACG.COM' e logo chinês) e em ZZ7Le (ícone verde e texto vermelho entre os rostos). O log mostra só 8940 de 597065 quadros limpos no 97bBe (1,5%) e 413 de 165887 no ZZ7Le (0,25%). No 5DoGv (antes do conserto de 17/11) o marca_site deu 'Broken pipe / frame_size'. A correção do frame_size está em 'vigiando' e o 97bBe/ZZ7Le rodaram sem esse erro. Ainda não dá para dizer se a marca aparece só em poucos quadros ou se a detecção falha.
+- onde: bin/marca_site.py (detecção e janela de tempo das marcas). Preferir delogo do ffmpeg, que a dona aprovou.
+- como testar: Pegar 20 quadros com logo visível no ZZ7Le e checar quantos o detector marca. Se a falha de detecção passar de 20%, baixar o limiar ou ampliar a janela de tempo e re-renderizar 5 min conferindo o logo.
+
+## 19/11 16:49 [CERTEZA] Cards cortados pela borda esquerda (fora da área segura) (gemini-4-argon)
+- prova: ZZ7Le: card do canto superior esquerdo com palavras cortadas ('TELLA', 'DER', 'RIGO'). 97bBe: sticker roxo fatiado pela borda superior.
+- onde: Posição X/Y dos cards e stickers, junto da proposta de zona proibida acima (mesma função).
+- como testar: Limitar x e y a 5% de margem em 16:9, com clamp após a rotação ou o balanço do sticker. Passar o júri de legibilidade em 3 amostras.

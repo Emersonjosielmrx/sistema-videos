@@ -831,6 +831,11 @@ def producao(args):
             pts = [d for d in c["pt"] if d.get("ativo", True) and d["canal"] not in _canais_travados(c)]
             its = itens(c)
             fila = _fila(its)
+            # 19/11 dona ("os do motor antigo viram reserva; produzir só vídeo novo com o motor novo; as Kaggles renovam
+            # amanhã, temos que usar agora"): o estoque que segura a produção conta SÓ os prontos do motor novo — os 936
+            # antigos deixavam todo canal "cheio" e o Kaggle parado. Mesma chave da postagem (PARCEIRO_MOTOR_NOVO_PRIMEIRO=0).
+            if os.environ.get("PARCEIRO_MOTOR_NOVO_PRIMEIRO", "1") != "0":
+                fila = _fila([x for x in its if _motor_novo(x)])
             rend_pt = _rendimento_canais() if os.environ.get("PARCEIRO_RESERVA_POR_RENDIMENTO", "1") != "0" else {}
 
             def _alvo(d):  # 11/11 dona: quem rende (mediana 48 h >= 300) guarda o dobro de vídeos prontos
@@ -971,6 +976,30 @@ def horas_nobres():
 
 
 _NOTA_CACHE = {}
+
+
+def _motor_novo(x):
+    """19/11: o Short saiu com o motor novo (Fish)? motor_voz gravado (anime_publish._motor_voz) manda; sem ele, a data
+    do nome da pasta (..._cap1_AAAAMMDD) >= MOTOR_NOVO_DESDE (20261119)."""
+    d = x.get("d") or {}
+    mv = d.get("motor_voz")
+    if isinstance(mv, dict):
+        return (mv.get("fish") or 0) > 0
+    m = re.search(r"_(\d{8})$", x["pj"].parent.name)
+    if not (m and m.group(1) >= os.environ.get("MOTOR_NOVO_DESDE", "20261119")):
+        return False
+    # 19/11 tarde: de hoje, mas com narrador SEM voz no Fish (pedro_bial, sam_winchester...) = motor antigo
+    nar = d.get("narrador")
+    if not nar:
+        return True
+    if "fish" not in _NOTA_CACHE:
+        try:
+            import anime_voz_clonada
+            _NOTA_CACHE["fish"] = set(anime_voz_clonada._vozes_com_fish())
+        except Exception:  # noqa: BLE001
+            _NOTA_CACHE["fish"] = None
+    ref = _NOTA_CACHE["fish"]
+    return True if ref is None else Path(str(nar)).name in ref
 
 
 def nota_pronto(x, dst):
@@ -1528,6 +1557,23 @@ def postar(args):
                 prontos = [x for x in prontos if _id_fonte(x["fonte"]) not in pendentes_pt or _fonte_lingua(x)]
             livres = [x for x in prontos if x["fonte"] not in usados[(dia, dst["idioma"])]]
             livres.sort(key=lambda x: not x["d"].get("viral_de"))  # 30/10: a versão do viral sai antes do Short comum
+            # 19/11 dona ("os Shorts do motor antigo viram RESERVA em vez de fila; produzir/postar só os novos com o motor
+            # novo e ver se tem diferença de views; se não tiver, voltamos com os antigos"): pronto feito a partir de
+            # MOTOR_NOVO_DESDE (19/11, Fish como padrão) ou com postar.json motor_voz.fish > 0 vai na FRENTE; o antigo
+            # só sai quando o canal não tem nenhum novo pronto. Ordem estável (o viral continua primeiro dentro de cada
+            # grupo). PARCEIRO_MOTOR_NOVO_PRIMEIRO=0 desliga.
+            if os.environ.get("PARCEIRO_MOTOR_NOVO_PRIMEIRO", "1") != "0":
+                livres.sort(key=lambda x: not _motor_novo(x))
+                # 19/11 tarde dona ("conforme o canal tiver pelo menos 3 Fish na fila, já armazena a fila dos vídeos do
+                # motor anterior pra usar em caso de necessidade"): com >= RESERVA_FISH_MIN (3) novos prontos no canal,
+                # os antigos saem da fila dele (ficam guardados, nada é apagado). Menos de 3 = o antigo ainda cobre.
+                novos_canal = sum(1 for y in prontos if _motor_novo(y))
+                if novos_canal >= int(os.environ.get("RESERVA_FISH_MIN", "3")):
+                    livres = [y for y in livres if _motor_novo(y)]
+                    if not livres:
+                        log(f"{nome}: {novos_canal} Shorts Fish prontos, mas a fonte deles já saiu hoje — antigos "
+                            f"guardados na reserva")
+                        break
             if not livres:
                 outros = Counter(x["estado"] for x in its if x["canal"] == cid)
                 log(f"{nome}: nada pronto pra {alvo:%d/%m %H:%M} ({dict(outros) or 'fila vazia'}"

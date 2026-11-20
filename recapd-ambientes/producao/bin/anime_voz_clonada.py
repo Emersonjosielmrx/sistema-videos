@@ -376,6 +376,14 @@ def proxima(nicho=None, genero=None):
             fish_pool = [c for c in cands if c["voz"] in com_ref and c["fit"] >= 1]
         if len(fish_pool) >= 3:
             pool = fish_pool
+        elif os.environ.get("FISH_SO", "1") != "0":
+            # 19/11 tarde dona ("entre em alta produção já com o Fish"): com < 3 com referência, antes voltava pro pool
+            # inteiro (pedro_bial/sam_winchester/pato_donald_galvan saíram no motor antigo). Agora: qualquer voz COM
+            # referência (no nicho, senão de qualquer nicho); só sem nenhuma no Drive fica o pool de antes.
+            # FISH_SO=0 volta à regra dos 3.
+            qualquer = [c for c in pool if c["voz"] in com_ref] or [c for c in cands if c["voz"] in com_ref]
+            if qualquer:
+                pool = qualquer
 
     def nota(c):
         # 02/11: quem vai bem no ranking perde menos por uso (aparece mais); quem vai mal perde mais (aparece menos).

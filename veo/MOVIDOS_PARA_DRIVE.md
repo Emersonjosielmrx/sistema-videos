@@ -2862,3 +2862,52 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - super_slow_ia_20261117_231104_intro.mp4
   - super_slow_ia_20261117_231104_prop.mp4
   - super_slow_ia_20261117_231104_punch.mp4
+
+## 2026-11-19 17:12 — 296 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (296 MB) — 45 arquivos:
+  - aulas_ia_20261115_024858_final.mp4
+  - aulas_ia_20261115_024858_imp.mp4
+  - aulas_ia_20261115_024858_intro.mp4
+  - aulas_ia_20261115_024858_prop.mp4
+  - aulas_ia_20261115_024858_punch.mp4
+  - aulas_ia_20261118_070736_final.mp4
+  - aulas_ia_20261118_070736_imp.mp4
+  - aulas_ia_20261118_070736_intro.mp4
+  - aulas_ia_20261118_070736_prop.mp4
+  - aulas_ia_20261118_070736_punch.mp4
+  - curiosidades_ia_20261115_032830_final.mp4
+  - curiosidades_ia_20261115_032830_imp.mp4
+  - curiosidades_ia_20261115_032830_intro.mp4
+  - curiosidades_ia_20261115_032830_prop.mp4
+  - curiosidades_ia_20261115_032830_punch.mp4
+  - danca_e_musica__20261118_150528_final.mp4
+  - danca_e_musica__20261118_150528_imp.mp4
+  - danca_e_musica__20261118_150528_intro.mp4
+  - danca_e_musica__20261118_150528_prop.mp4
+  - danca_e_musica__20261118_150528_punch.mp4
+  - ilusoes_de_otic_20261118_081008_final.mp4
+  - ilusoes_de_otic_20261118_081008_imp.mp4
+  - ilusoes_de_otic_20261118_081008_intro.mp4
+  - ilusoes_de_otic_20261118_081008_prop.mp4
+  - ilusoes_de_otic_20261118_081008_punch.mp4
+  - noticias_de_ia_20261118_064007_final.mp4
+  - noticias_de_ia_20261118_064007_imp.mp4
+  - noticias_de_ia_20261118_064007_intro.mp4
+  - noticias_de_ia_20261118_064007_prop.mp4
+  - noticias_de_ia_20261118_064007_punch.mp4
+  - segredos_do_oce_20261118_140110_final.mp4
+  - segredos_do_oce_20261118_140110_imp.mp4
+  - segredos_do_oce_20261118_140110_intro.mp4
+  - segredos_do_oce_20261118_140110_prop.mp4
+  - segredos_do_oce_20261118_140110_punch.mp4
+  - stand-up_ia_20261118_131039_final.mp4
+  - stand-up_ia_20261118_131039_imp.mp4
+  - stand-up_ia_20261118_131039_intro.mp4
+  - stand-up_ia_20261118_131039_prop.mp4
+  - stand-up_ia_20261118_131039_punch.mp4
+  - super_slow_ia_20261118_053846_final.mp4
+  - super_slow_ia_20261118_053846_imp.mp4
+  - super_slow_ia_20261118_053846_intro.mp4
+  - super_slow_ia_20261118_053846_prop.mp4
+  - super_slow_ia_20261118_053846_punch.mp4

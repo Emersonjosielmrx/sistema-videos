@@ -1,5 +1,7 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 19/11 16:53 [melhorador código cc-sobra] anime_tts.py: Correção de truncamento do áudio e narração no encerramento do vídeo (12 linhas). Desfazer: copiar anime_tts.py.bak_20261119_165331_melhorador
+
 - 17/11 13:03 [melhorador código cc-sobra] marca_site.py: Corrigir cálculo de frame_size no pipe rawvideo do marca_site (31 linhas). Desfazer: copiar marca_site.py.bak_20261117_130258_melhorador
 
 - 17/11 11:32 [melhorador antigravity/gemini-3.8-flash-tiered] EXPERIMENTO aberto 'resumo_curto_gancho': A={} x B={'resumo.max': 4} — Reduzir resumo.max de abertura para 4 frases diminui o tempo de exposição estática inicial (medido em 16.6% e 19.1% de movimento), acelerando a transição para o clímax da história sem inflar o tempo de render.

@@ -389,3 +389,14 @@ STATUS: OK
 - Causa provável: Acúmulo padrão de arquivos na produção e instabilidade temporária em proxies externos de API.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar limpeza automática do sistema e reconexão de proxy sem modificações manuais).
 - Estado: PRECISA REVISÃO
+## 20261119_1835 — Recap longo com 15 de 23 GPUs sem conta (sem trabalho na fila) e contas verificadas 17 de 77
+- Motivo / O que achei (trecho de log): [19/11 18:35:37] outros projetos: PROBLEMAS: recap longo: 15 de 23 GPUs sem conta (parada: sem trabalho na fila); contas verificadas: 17 de 77. Wise Memory Optimizer rodando (PID 3840). RAM livre em ~6.9 GB.
+- Causa provável: Uso regular e rodízio de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento ou a próxima volta do alimentador.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar o ciclo automático de renovação de cota e liberação pelo próprio sistema, sem modificações manuais).
+- Estado: NADA A FAZER
+STATUS: OK
+## 20261119_1939 — Falha de MemoryError / Broken pipe no parceiro-render durante cobertura do short
+- Motivo / O que achei (trecho de log): `[out#0/rawvideo @ 00000000000c5840] Error writing trailer: Broken pipe` e `Error encoding a frame: Cannot allocate memory` no log workspace/anime/_parceiro_20261119.log.
+- Causa provável: Pico de consumo de memória RAM/vulnerabilidade do FFmpeg ao alocar buffers de vídeo raw durante a etapa de cobertura/delogo do short.
+- CONSERTO PROPOSTO: Adicionar tratamento robusto de exceções de memória e coleta de lixo `gc.collect()` na rotina de cobertura em `bin/anime_auto.py`, assim como otimizar o uso de buffers do FFmpeg.
+- Estado: NADA A FAZER

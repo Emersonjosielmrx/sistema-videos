@@ -34,10 +34,29 @@ def lote(pasta_voz, lista_json):
     dec = load_decoder_model(config_name="firefly_gan_vq",
                              checkpoint_path=str(CK / "firefly-gan-vq-fsq-8x1024-21hz-generator.pth"), device="cuda")
     eng = TTSInferenceEngine(llama_queue=llama, decoder_model=dec, compile=False, precision=prec)
+    # 19/11 dona ("é proposital estarem tão baixos?"): as referências vinham de -30 a -18 dB (momo -30). Nivela a cópia
+    # usada aqui em -16 LUFS — referência baixa faz o Fish copiar a fala "longe/fraca".
+    try:
+        import subprocess as _sp
+        niv = Path("/tmp") / f"ref_niv_{pv.name}.wav"
+        if _sp.run(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
+                    "-ar", "44100", "-ac", "1", str(niv)], capture_output=True).returncode == 0 and niv.exists():
+            ref = niv
+    except Exception:  # noqa: BLE001
+        pass
     refs = [ServeReferenceAudio(audio=ref.read_bytes(), text=ref_txt)]
+    # 19/11 dona ("momo e mike falam de muitas maneiras no mesmo vídeo, principalmente nas piadas e comentários"):
+    # referência por jeito de falar (referencias_por_clima.py). Item com "ref": "_piada"/"_tensao" usa a dele.
+    por_clima = {"": refs}
+    for suf in ("_piada", "_tensao"):
+        w, t = pv / f"referencia_fish{suf}.wav", pv / f"referencia_fish{suf}.txt"
+        if w.exists() and t.exists():
+            por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=t.read_text(encoding="utf-8").strip())]
+    print(f"FISH referências: {sorted(k or 'normal' for k in por_clima)}", flush=True)
 
-    def gera(txt):
-        req = ServeTTSRequest(text=txt, references=refs, reference_id=None, max_new_tokens=1024, chunk_length=200,
+    def gera(txt, suf=""):
+        req = ServeTTSRequest(text=txt, references=por_clima.get(suf) or refs, reference_id=None,
+                              max_new_tokens=1024, chunk_length=200,
                               top_p=0.7, repetition_penalty=1.2, temperature=0.7, format="wav")
         for r in eng.inference(req):
             if r.code == "final":
@@ -54,7 +73,7 @@ def lote(pasta_voz, lista_json):
             continue
         t0 = time.time()
         try:
-            sr, a = gera(it["texto"])
+            sr, a = gera(it["texto"], it.get("ref", ""))
             a = np.asarray(a).squeeze()
             # 19/11 (revisão): grava num .tmp e renomeia — processo morto no meio não deixa wav parcial "pronto"
             tmp = it["saida"] + ".tmp.wav"

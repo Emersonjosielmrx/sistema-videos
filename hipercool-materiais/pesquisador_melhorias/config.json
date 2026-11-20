@@ -25491,6 +25491,118 @@
         "Truques de ordem, título numerado e tela final que levam do vídeo 1 ao vídeo 2 em canais de recap (YouTube Help e blog.youtube)"
       ],
       "origem": "area_webgl_frame_a_frame__sonnet_1601.md 2026-11-19"
+    },
+    {
+      "id": "cam_limites",
+      "nome": "Regras de câmera (limite de velocidade, zona morta, corte seco) para pan entre painéis",
+      "subtemas": [
+        "buscar \"camera smoothing deadband speed cap\" em projetos de reframe com ffmpeg puro"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1621.md 2026-11-19"
+    },
+    {
+      "id": "tira_rolagem",
+      "nome": "Rolagem contínua de tira longa de manhwa com crop/overlay do FFmpeg",
+      "subtemas": [
+        "buscar scripts de scroll vertical em manhwa recap, `crop` com expressão de tempo e easing"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1621.md 2026-11-19"
+    },
+    {
+      "id": "dur_por_fala",
+      "nome": "Duração do painel e sentido do zoom ligados à frase narrada",
+      "subtemas": [
+        "buscar shorts/recaps que sincronizam painel com timestamps de fala sem IA"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1621.md 2026-11-19"
+    },
+    {
+      "id": "yt_playlist_ponte",
+      "nome": "Ponte Short para longo e playlists",
+      "subtemas": [
+        "scripts pequenos que ligam Short ao longo da mesma série via descrição fixada ou playlist"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1732.md 2026-11-19"
+    },
+    {
+      "id": "sleep_contos_dp",
+      "nome": "Longos \"sleep stories\" de contos de domínio público por idioma",
+      "subtemas": [
+        "canais de contos para dormir de 1 a 4 h, títulos e duração por país, fontes de contos de domínio público em pt/en/es"
+      ],
+      "origem": "area_avatar_3d_comercial__sonnet_1832.md 2026-11-19"
+    },
+    {
+      "id": "gancho_10_variantes",
+      "nome": "Gancho de 15 s em passe separado com 10 variantes",
+      "subtemas": [
+        "projetos pequenos que geram e escolhem gancho do roteiro com Python + LLM, medido por retenção dos 30 s iniciais"
+      ],
+      "origem": "area_avatar_3d_comercial__sonnet_1832.md 2026-11-19"
+    },
+    {
+      "id": "camera_exprs",
+      "nome": "Expressões FFmpeg de câmera",
+      "subtemas": [
+        "exemplos de `zoompan`/`crop`/`scale eval=frame` com easing e sem jitter, em gists e posts de blog, não em repositórios"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1841.md 2026-11-19"
+    },
+    {
+      "id": "recap_hooks_30s",
+      "nome": "Primeiros 30 s em recaps de mangá",
+      "subtemas": [
+        "análise de retenção de recaps de mangá/manhwa mais vistos, em canais públicos (com yt-dlp só em metadados)"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1841.md 2026-11-19"
+    },
+    {
+      "id": "cam_shake_zoompan",
+      "nome": "Correção de tremor do zoompan no FFmpeg",
+      "subtemas": [
+        "Buscar issues, gists e posts com \"zoompan jitter\" e \"zoompan smooth\"; precisa de um comando pronto que rode em CPU"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1851.md 2026-11-19"
+    },
+    {
+      "id": "hook30s_retencao",
+      "nome": "Primeiros 30 s dos shorts de recap",
+      "subtemas": [
+        "Buscar repositórios pequenos que teste ordem de cenas ou corte do início usando dados de retenção do Studio, sem API do Google"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1851.md 2026-11-19"
+    },
+    {
+      "id": "sincronia_painel_fala",
+      "nome": "Painel ↔ frase narrada",
+      "subtemas": [
+        "Projetos pequenos que ligam o tempo de cada enquadramento ao timestamp da frase em recaps, com ffmpeg"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1901.md 2026-11-19"
+    },
+    {
+      "id": "tira_vertical_9x16",
+      "nome": "Webtoon em tira longa para Shorts",
+      "subtemas": [
+        "Truques de scroll/crop de tira vertical para 9:16 sem perder balões, só com Python e ffmpeg"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1901.md 2026-11-19"
+    },
+    {
+      "id": "tremida_zoompan",
+      "nome": "Zoom suave em CPU fraca",
+      "subtemas": [
+        "Receitas de `crop` com easing contra o jitter do `zoompan`, com custo em CPU medido"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1901.md 2026-11-19"
+    },
+    {
+      "id": "rec_viral_painel",
+      "nome": "Quais painéis de manhwa/mangá seguram retenção nos 3 primeiros segundos",
+      "subtemas": [
+        "repos e relatos de recap shorts que escolhem o painel de abertura (gancho visual) e testam ordem de painéis, sem modelo novo"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1959.md 2026-11-19"
     }
   ],
   "projetos": [

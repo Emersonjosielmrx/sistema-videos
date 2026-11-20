@@ -312,9 +312,21 @@ def _fila(est):
         d = json.loads(nj.read_text(encoding="utf-8"))
         if (d.get("formato") == "deitado" and d.get("feito_em", "") >= DESDE and nj.parent.name not in feitos
                 and (not (nj.parent / "TESTE_NARRADORES.txt").exists() or _revezamento_limpo(nj.parent))
-                and _modelo_novo(nj.parent)):
+                and _modelo_novo(nj.parent) and _longo_fish(nj.parent)):
             out.append((d["feito_em"], nj.parent, d))
     return sorted(out, key=lambda x: x[0])
+
+
+def _longo_fish(ficha):
+    """19/11 dona ("só quero com o motor novo"): longo só sobe se o Fish narrou (pipeline.log com '[fish nuvem] N/M
+    frases', N > 0). Os do motor antigo ficam na ficha como RESERVA (nada apagado). LONGO_SO_FISH_POSTAR=0 desliga."""
+    if os.environ.get("LONGO_SO_FISH_POSTAR", "1") == "0":
+        return True
+    try:
+        txt = (ficha / "pipeline.log").read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return False
+    return any(int(n) > 0 for n in re.findall(r"\[fish nuvem\] (\d+)/\d+ frases", txt))
 
 
 def _avisar_qa(ficha):
@@ -806,6 +818,17 @@ def rodada(ver=False):
                 est["reprovados"].append(ficha.name)
                 _gravar_estado(est)
                 continue
+            # 19/11 (Jjd71 saiu no Fio da Meada pelo --so às 09:52 e de novo no Curiosidades Noturnas às 18:24): a rodada
+            # que começou ANTES do --so tinha a fila velha na memória. Antes de preparar, relê o disco: já postado em
+            # qualquer canal = pula (vídeo único). LONGO_RECHECA_POSTADO=0 desliga.
+            if os.environ.get("LONGO_RECHECA_POSTADO", "1") != "0":
+                try:
+                    _disco = _estado()
+                    if any(p.get("nome") == ficha.name for p in _disco.get("postados", [])):
+                        log(f"  {ficha.name[:40]}: já postado (visto no disco agora) — pula")
+                        continue
+                except Exception:  # noqa: BLE001
+                    pass
             log(f"{nome_canal}: preparando {ficha.name}")
             _avisar_qa(ficha)
             pj, pasta = _publicar(ficha, d)
@@ -984,6 +1007,10 @@ def rodada(ver=False):
                     ja = json.loads((AQUI / "publicar_ja.json").read_text(encoding="utf-8"))
                 except (OSError, ValueError):
                     ja = []
+                # 19/11 dona ("eu disse pra postar público pra eu ver"): TODO longo novo abre público assim que sobe (com a
+                # capa reserva; a própria troca depois). LONGO_TODOS_PUBLICO_JA=0 volta a só a lista publicar_ja.
+                if os.environ.get("LONGO_TODOS_PUBLICO_JA", "1") != "0":
+                    ja = list(ja) + [ficha.name[:11]]
                 if p.get("capa_depois"):  # 05/11: capa gerada depois; o capas_depois.py abre quando aplicar
                     try:
                         import capas_depois

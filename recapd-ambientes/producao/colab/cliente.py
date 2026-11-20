@@ -513,6 +513,18 @@ def _cortar_intro(work, video, url):
     cues_arq = work / "legenda_tempos.json"
     if cues_arq.exists():
         cues = json.loads(cues_arq.read_text(encoding="utf-8"))
+    if not cues and os.environ.get("INTRO_PULA_SE_OCUPADO", "1") != "0":
+        # 19/11 (py-spy: até o Whisper "tiny" de 150 s ficou 15+ min parado com o PC1 a 100% — a fila de longos do Kaggle
+        # ficava com 6 pedidos e 17 vagas): sem legenda do YouTube e CPU do PC1 acima de INTRO_CPU_MAX (70%) = não corta a
+        # intro aqui (o longo vai com os ~30 s de abertura do canal-fonte) — melhor que travar a fila. =0 desliga.
+        try:
+            import psutil
+            if psutil.cpu_percent(interval=2) > float(os.environ.get("INTRO_CPU_MAX", "70")):
+                print("intro: PC1 ocupado e sem legenda do YouTube — vai sem cortar (não trava a fila)", flush=True)
+                marca.write_text(json.dumps({"corte_s": 0, "resposta": "pc1 ocupado — sem corte"}), encoding="utf-8")
+                return
+        except Exception:  # noqa: BLE001
+            pass
     if not cues:
         try:
             os.environ.setdefault("HF_HOME", r"D:\hipercool-materiais\modelos\hf")
@@ -520,10 +532,14 @@ def _cortar_intro(work, video, url):
             # 29/10: transcrever o vídeo direto carregava o áudio INTEIRO (2h07) na memória e dava MemoryError;
             # só os 4 primeiros minutos num wav pequeno
             wav = work / "_intro_4min.wav"
-            subprocess.run(["ffmpeg", "-v", "error", "-y", "-t", "240", "-i", str(video), "-vn", "-ac", "1", "-ar",
-                            "16000", str(wav)], check=True, capture_output=True, timeout=300)
-            segs, _ = WhisperModel("base", device="cpu", compute_type="int8", cpu_threads=4).transcribe(
-                str(wav), language="pt", vad_filter=True)
+            # 19/11 (py-spy: o alimentador ficou ~1 h parado AQUI, Whisper "base" na CPU do PC1 a 100% — e os 32
+            # milionários não entravam na fila do Kaggle): a intro do canal fica nos primeiros 1-2 min; "tiny" em 150 s
+            # basta pra achar onde ela acaba. INTRO_WHISPER_LEVE=0 volta ao "base" 240 s.
+            _leve = os.environ.get("INTRO_WHISPER_LEVE", "1") != "0"
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-t", "150" if _leve else "240", "-i", str(video), "-vn",
+                            "-ac", "1", "-ar", "16000", str(wav)], check=True, capture_output=True, timeout=300)
+            segs, _ = WhisperModel("tiny" if _leve else "base", device="cpu", compute_type="int8",
+                                   cpu_threads=4).transcribe(str(wav), language="pt", vad_filter=True)
             cues = [[round(s.start, 1), s.text.strip()] for s in segs]
             wav.unlink(missing_ok=True)
         except Exception as e:  # noqa: BLE001
@@ -1110,6 +1126,21 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
                 if (e["id"] in feitos or e["id"] in em_fila or e["id"] in est.get("ignorar", [])
                         or est["falhas"].get(e["id"], 0) >= 2):
                     continue
+                # 19/11 dona ("isso tem que ver ANTES de fazer o vídeo, e não depois que já está sendo feito"): fonte
+                # com LEGENDA QUEIMADA (nota >= 2 nas 3 miniaturas) nem vai pro Kaggle — sai com tarja. Série da dona
+                # (forcar_longo) passa sempre. Nota sem resposta (None) = passa. FONTE_SO_SEM_LEGENDA=0 desliga.
+                if os.environ.get("FONTE_SO_SEM_LEGENDA", "1") != "0" and not e.get("forcar_longo"):
+                    try:
+                        import fonte_sem_legenda as _fsl2
+                        _n = _fsl2.nota(e["id"])
+                        if _n is not None and _n >= 2:
+                            if e["id"] not in est.setdefault("com_legenda", []):
+                                est["com_legenda"].append(e["id"])
+                                print(f"{datetime.now():%H:%M} pula {e['id']} (legenda queimada nota {_n}) — "
+                                      f"{(e.get('title') or e.get('titulo') or '')[:50]}", flush=True)
+                            continue
+                    except Exception:  # noqa: BLE001
+                        pass
                 # Kaggle/Colab cortam a sessão em 12 h; render ~5x o tempo do vídeo → acima disso fica pra VPS
                 # 12/11 dona (parte 13 do Medieval, ~190 min): as partes 11/12 (191 min) já renderizaram dentro das
                 # 11,5 h do Kaggle; série que a dona acompanha passa com "forcar_longo" na fontes_prioridade (até 200 min)

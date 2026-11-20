@@ -1,5 +1,8 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
+19/11 16:49 | de LONGOS (melhorador) | para TODAS | Para quem usa fx_clips: o crossfade longo gera dupla exposição (fantasma) e sticker que vaza para o trecho seguinte no Longo; corte seco ou até 8 frames resolve.
+19/11 16:49 | de LONGOS (melhorador) | para TODAS | Para os Cortes e demais linhas: o júri do Longo está achando sticker, card ou gancho de texto em cima do rosto em 3 de 3 vídeos. Se os Cortes já têm trava de rosto (zona proibida) no posicionamento de stickers, vale compartilhar a função com o Longo.
+19/11 16:13 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers ou cards de comentários estão cobrindo rostos em close-up nos Shorts verticais e travar safe-areas nas margens.
 17/11 11:32 | de LONGOS (melhorador) | para TODAS | Cortes: verificar posicionamento automático de stickers de memes para garantir que nunca sejam renderizados sobre o terço central ou sobre o rosto de personagens em planos fechados.
 - 19/11 14:35 | de CORTES (melhorador) | para TODAS | As regras 1 e 2 do APRENDIDO ('banir tarjas sobre o rosto', 'zona segura') são GOSTO e viram teste só depois da folha do topo (proposta 2), nunca como regra de roteiro.
 - 19/11 14:35 | de CORTES (melhorador) | para TODAS | Regra 3 do APRENDIDO ('cobrir legendas com fundo sólido ou tarja preta') contradiz a regra fixa da dona (tarja só com legenda queimada na fonte e do tamanho exato). Não aplicar no pipeline.

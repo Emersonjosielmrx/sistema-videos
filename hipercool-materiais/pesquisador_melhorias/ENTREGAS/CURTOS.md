@@ -4513,3 +4513,19 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 16:05 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_webgl_frame_a_frame__sonnet_1601.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 16:20 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_webgl_frame_a_frame__sonnet_1611.md`
+- [INÉDITO] github.com/abhiramAjay/anime-ranked-shorts — ★0, push 2026-11-04, MIT — Turn YouTube anime compilations into ranked vertical Shorts: OCR-based gag/scene analysis, narrator detection, house-style and tweet templat
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 17:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1721.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 17:38 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1732.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 17:48 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_gemini_web_sessao_cookie__sonnet_1741.md`
+- (todos os itens desta pesquisa foram reprovados)
