@@ -4570,3 +4570,79 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 02:52 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_eres2net_licenca__sonnet_0247.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 04:32 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0426.md`
+- [INÉDITO] github.com/armanpoor/gemini-web-bridge — ★0, push 2026-11-20, MIT — پل محلی Gemini Web → API استاندارد | Local Gemini Web to OpenAI/Anthropic API bridge with Persian beginner guide
+
+## [ ] PENDENTE — 2026-11-20 04:48 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0441.md`
+- [INÉDITO] github.com/Vansh3503/MobilePilot — ★0, push 2026-11-18, Apache-2.0 — MCP server that drives Android phones, emulators and the iOS Simulator through the accessibility tree
+
+## [ ] PENDENTE — 2026-11-20 05:02 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0452.md`
+- [INÉDITO] github.com/ciszkin/corral — ★0, push 2026-11-20, Apache-2.0 — Device session manager for coding agents. Herds connected Android devices (USB, WiFi, emulators) into one pool and leases them exclusively t
+- [INÉDITO] github.com/zephyr7030/DroidBridge — ★26, push 2026-11-15, Apache-2.0 — On-device MCP server for Android. Connect ChatGPT through OpenAI's official secure tunnel, let AI agents operate your phone and run schedule
+- [INÉDITO] github.com/MerlinShieh/a11y-driver — ★0, push 2026-11-20, MIT — Android 无障碍自动化执行引擎：脱离 ADB 的 uiautomator2 替代方案，支持远程命令、用例编排与测试报告
+
+## [ ] PENDENTE — 2026-11-20 05:14 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0506.md`
+- [INÉDITO] github.com/Dynaevangelical2652/android-agent — ★4, push 2026-10-14, MIT — Control Android devices through ADB with this Python automation framework for task execution and phone farm scaling.
+- [INÉDITO] github.com/Nyashiiro/Share-To-Computer — ★None, push ?, ver repo (fallback HTML) — Use Share Intent &amp;&amp; Adb to send files or text to Computer
+- [INÉDITO] github.com/portable-uri-workshop/adb-kakaolink-capture — ★None, push ?, ver repo (fallback HTML) — Capture and optionally block explicit KakaoTalk share intents over ADB.
+- [INÉDITO] github.com/R-Dilipkumar/offline-reel-captions — ★None, push ?, ver repo (fallback HTML) — Android app that adds captions to your Reels and Shorts automatically, fully offline. Speak Tamil, Tanglish, Telugu, Kannada, Malayalam, Hin
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 05:22 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0516.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 05:31 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0526.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 05:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0536.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 05:51 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0546.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 06:07 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0556.md`
+- [INÉDITO] github.com/AngelKrak/adb-qc — ★13, push 2026-11-17, MIT — Quickly set up a wireless ADB connection for Android devices. Supports connection via pairing code or QR code, enabling remote debugging ove
+- [INÉDITO] github.com/Obamna1234/sevby — ★1, push 2026-11-19, MIT — Turn Spotify playlists or song lists into tagged MP3s - Bandcamp first, YouTube fallback. Built on yt-dlp and FFmpeg.
+
+## [ ] PENDENTE — 2026-11-20 06:21 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0611.md`
+- [INÉDITO] github.com/servedbyhau/vh-tennis-booker — ★0, push 2026-11-19, MIT — VH tennis court booking automation using Python, ADB, and uiautomator2.
+- [INÉDITO] github.com/yuehongzhang001/wireless-debug — ★0, push 2026-08-30, MIT — Wireless adb for macOS/Linux: mDNS discovery, remembered devices, one-command reconnect
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 06:33 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0626.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 06:50 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0641.md`
+- [INÉDITO] github.com/merbah3266/rish_installer — ★89, push 2026-09-26, MIT — Shizuku Rish Installer for Android terminals
+- [INÉDITO] github.com/Batestinha/shizuku-thedjchi-daemonstatebroadcast — ★18, push 2026-09-10, Apache-2.0 — Fork of thedjchi/Shizuku adding Tasker daemon-ready/stopped broadcasts and Android 17 wireless ADB pairing/startup without the device choose
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 06:59 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0652.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 07:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0706.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 07:34 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_0727.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 07:47 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0741.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 07:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0751.md`
+- (todos os itens desta pesquisa foram reprovados)

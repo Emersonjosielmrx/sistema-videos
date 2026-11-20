@@ -2513,3 +2513,33 @@
 - prova: 5102cd q02, q04, q05 e q13: legenda colada ou abaixo de y=1580. Só 1 Short, então ainda não é padrão.
 - onde: Mesma função de posicionamento da legenda (y máximo da caixa das letras)
 - como testar: Medir em resolução >= 720 px o y inferior real das letras nesses 4 quadros e em 5 Shorts de outros canais. Se passar de 1580 em >= 2 Shorts, subir a margem inferior e rodar de novo nos mesmos Shorts.
+
+## 20/11 04:35 PROPOSTA [CERTEZA] Legenda palavra a palavra nunca pode cortar nem quebrar uma palavra no meio (gemini-4-argon)
+- prova: 3 de 4 Shorts: 67a0fb q01 ('TRA...' e '...TE' saindo pelas laterais), ea3b7d q01 ('TEM'/'TOS' cortado na borda esquerda, primeira palavra do gancho), 145f81 q10 ('PRÓ' em cima e 'XIMAS' embaixo) e q03 (palavra 'O' isolada sobre 'PAPA-TERRA').
+- onde: Função que renderiza a legenda palavra a palavra (provável módulo de legenda/ASS da linha CORTES; não confirmei o nome exato, procurar onde se define a fonte e o tamanho da palavra ativa).
+- como testar: Renderizar palavras longas ('PRÓXIMAS', 'CASAMENTO', 'DESEMBOCADURAS', 'PAPA-TERRA') em 1080x1920. Exigir que a caixa da palavra fique dentro de x 60-1020, sem quebra de linha no meio da palavra, reduzindo a fonte até caber. Repetir no 1º quadro (0-1,5 s) de todos os Shorts do dia com a folha do topo (D:\tmp\folha_topo.py).
+
+## 20/11 04:35 PROPOSTA [GOSTO] Limitar o tamanho do emoji e das palavras de impacto sobre rosto/ponto focal (gemini-4-argon)
+- prova: 3 de 4 Shorts, cada um com um elemento diferente: ea3b7d q01 (emoji de mão gigante sobre a legenda), 67a0fb q10 (elemento gráfico sobre o rosto), 145f81 q10 (palavra 'PEDRAS' cobrindo o olho do peixe).
+- onde: Camada de overlays/emojis e posicionamento da palavra de impacto (provável módulo de composição dos Shorts).
+- como testar: Fazer uma só mudança: teto de tamanho do emoji e deslocar a palavra de impacto para o lado (a dona prefere palavras de impacto maiores, de lado). Medir a nota média de legibilidade em um lote antes e depois, e conferir que a dona não perde as palavras de impacto.
+
+## 20/11 05:46 PROPOSTA [CERTEZA] Legenda queimada da fonte que só aparece no fim ficou descoberta (cc-sobra)
+- prova: sem-obra-84593d q17–q18: a legenda da fonte ('Quando receber esse produto', 'se não é inscrito aqui no canal') aparece embaixo, sem tarja, junto com a fala de inscrição do criador parceiro. Nos quadros anteriores não há legenda da fonte. É o mesmo caso do Galaxy Express (lição 26/10): a legenda só aparece quando alguém fala. É 1 Short só, então primeiro precisa da prova no log.
+- onde: detecção de hardsub (amostragem de quadros que decide a tarja) e o log '[hardsub] x/6' desse Short
+- como testar: Conferir o log de produção do 84593d. Se mostrar '[hardsub] 0/6' ou 1/6, gerar a folha de quadros dos últimos 20% do vídeo da fonte e checar se a amostragem cobre o trecho final. Usar um vídeo sem legenda como controle negativo antes de mudar.
+
+## 20/11 05:46 PROPOSTA [CERTEZA] Possível nome de canal citado na narração ('Olá, Ciência!') (cc-sobra)
+- prova: gracyanne-barbosa q11: a nossa legenda mostra 'o Olá, Ciência!', que parece ser nome de canal do YouTube. Se for o narrador ou canal parceiro, viola a regra fixa de nunca chamar o parceiro pelo nome.
+- onde: roteiro.txt do gracyanne-barbosa_cap1_20261119; filtro de nomes de canal/narrador antes da voz
+- como testar: Procurar 'Olá, Ciência' no roteiro.txt e nos roteiros dos últimos 7 dias. Se aparecer em 2 ou mais, colocar o nome na lista de bloqueio do filtro e gerar o roteiro de novo.
+
+## 20/11 06:56 PROPOSTA [CERTEZA] Duas caixas de texto ao mesmo tempo (destaque + legenda ou destaque duplicado) (gemini-4-argon)
+- prova: sem-obra-fdd78a q10: tarja amarela/preta 'PRATE VINTE!' em conflito com a legenda azul/branca abaixo. sem-obra-d5d10e q14 e q17: 'E-COMMERCE' em caixa amarela sobre a boca e em caixa laranja logo abaixo. São 2 Shorts do lote com defeito grave.
+- onde: Renderizador da legenda palavra a palavra e da palavra de destaque (camada de legenda dinâmica); conferir também a tarja de cobertura no mesmo quadro.
+- como testar: Abrir os quadros q10 (fdd78a) e q14/q17 (d5d10e) e ler o log de cada Short. Se o 2º texto é a legenda queimada da fonte vazando, é tarja menor que o devido (regra fixa: tamanho exato da legenda) e o ajuste é na medição da caixa. Se são duas caixas nossas, o código deve impedir duas palavras ativas ao mesmo tempo. Depois rodar 10 Shorts do dia e contar quadros com 2 caixas de texto simultâneas; o esperado é zero.
+
+## 20/11 06:56 PROPOSTA [GOSTO] Palavra de destaque grande cobrindo olhos e boca (gemini-4-argon)
+- prova: sem-obra-20d752: EMPREENDEDOR (q01), SOZINHO na tarja amarela (q03) e EMPREENDEDORES (q04) cobrem olhos e testa do palestrante. sem-obra-d5d10e: QUATRO (q02) e PRODUTO (q11) cobrem a boca da narradora. O júri vê quadros soltos, e a dona prefere palavras de impacto maiores e de lado (27/10).
+- onde: Função que calcula a posição Y/X da palavra de destaque no módulo da legenda palavra a palavra.
+- como testar: Medir em 20 Shorts com rosto em plano médio quantos quadros têm a caixa da palavra cruzando a caixa do rosto, usando a folha de quadros em resolução >= 720 px. Se passar de 10% dos quadros, testar subir ou descer a palavra ou deslocá-la para o lado quando houver rosto. Mudar só isso em 1 lote e comparar a nota média, sem diminuir o tamanho da palavra.

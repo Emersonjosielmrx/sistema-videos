@@ -425,3 +425,20 @@ STATUS: OK
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar as regras do modo, não interferir em processos de disco ou renderização, e aguardar a faxina automática).
 - Estado: NADA A FAZER
 STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de 8 GB); faxina_disco.py acionada automaticamente pelo abastecedor.
+## 20261120_0415 — Vigia: guarda do disco D (4.65 GB) e Wise Memory Optimizer ativo
+- Motivo / O que achei (trecho de log): Disco D com 4.65 GB livres, acionado backup_drive e cache do Chrome, apagados 7 trechos velhos do aprendizado. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Uso de espaço por arquivos de trabalho e caches.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — guarda do disco atuando automaticamente).
+- Estado: NADA A FAZER
+
+## 20261120_0515 — parceiro-render: processamento ativo com pausas de yt-dlp e time-outs pontuais de ffmpeg
+- Motivo / O que achei (trecho de log): _parceiro_20261120.log mostra o ciclo do nime_auto.py rodando, discover de canais funcionando, e pequenos timeouts pontuais no ffmpeg/ffprobe (TimeoutExpired: Command '['ffprobe', ...]' timed out after 60 seconds e fmpeg [...] timed out after 180 seconds), além de pausas no Groq/yt-dlp tratadas automaticamente pelo sistema. O processo de render short no Kaggle concluiu e gerou o postar.json corretamente.
+- Causa provável: Sobrecarga temporária de I/O / CPU no Windows fazendo o ffprobe/ffmpeg estourar o timeout e bloqueios transitórios de IP/proxy no Groq/yt-dlp.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sem intervenção no código ou processos).
+- Estado: NADA A FAZER
+## 20261120_0635 — parceiro-render: erro rc=1 no Kaggle ao disparar formato joao_chico em anime-pipeline.py linha 1n- Causa provável: Erro de execução ou traceback na primeira linha do script anime-pipeline.py durante o teste do formato experimental joao_chico no Kaggle.n- Estado: NADA A FAZER
+## 20261120_0635 — parceiro-render: erro rc=1 no Kaggle ao disparar formato joao_chico em anime-pipeline.py
+- Motivo / O que achou: Short 20261120_062235_tm_GrRTBkhk deu erro no Kaggle com rc=1. Trecho de log: Traceback (most recent call last): File "/kaggle/tmp/trab/raiz/D/recapd-ambientes/producao/bin/anime-pipeline.py", line 1
+- Causa provável: Falha transitória ou erro na execução do script anime-pipeline.py no Kaggle ao testar o formato experimental joao_chico.
+- CONSERTO PROPOSTO: Nenhum — falha transitória no Kaggle com formato experimental, mantendo o fluxo normal.
+- Estado: NADA A FAZER

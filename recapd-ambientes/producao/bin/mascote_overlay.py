@@ -250,33 +250,32 @@ def pausa_viva(texto, k=0, posicao=None, usados=()):
     return str(p), s["fala"], s.get("lado")
 
 
-PAUSA_MAX_S = 4.0
+PAUSA_MAX_S = 12.0
 
 
-def _fim_da_fala(audio, margem=0.3):
-    """Segundo em que a ÚLTIMA palavra termina (silêncio do fim ignorado) + margem. 03/11 dona: "as reações da mascote
-    são muito boas, só que 8 segundos é muito longo; parada é melhor porque a fala é mais curta — cortar o vídeo dela
-    pra menos tempo / deixar ela falar e soltar o vídeo". A gravação tem entrada andando, fala, silêncio e saída: a pausa
-    agora acaba logo depois da fala. Sem medida = a duração inteira (como antes)."""
+def _fim_da_fala(audio, margem=1.5):
+    """Segundo em que a ÚLTIMA palavra termina (silêncio do fim ignorado) + margem.
+    Garante margem de 1.5s sem corte seco para a fala completa (inclusive encerramento/CTA)."""
     total = _probe_dur(audio)
-    # 03/11: as gravações do Veo têm som até o fim (fala + ambiente), o silêncio quase nunca aparece — teto fixo
-    # PAUSA_MAX_S (a dona: "deixar ela falar e depois de uns segundos soltar o vídeo e mutar ela"); a voz some em fade
     teto = float(os.environ.get("MASCOTE_PAUSA_MAX_S", PAUSA_MAX_S))
-    total = min(total, teto) if teto > 0 else total
     try:
         r = subprocess.run([_ff(), "-hide_banner", "-nostats", "-i", str(audio), "-af",
                             "silencedetect=noise=-32dB:d=0.35", "-f", "null", "-"],
                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     except Exception:  # noqa: BLE001
-        return total
+        dur = total + margem if total > 0 else teto
+        return min(dur, teto) if teto > 0 else dur
     ini = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", r.stderr)]
     fim = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", r.stderr)]
     # silêncio que começa e não termina = cauda do arquivo: a fala acabou ali
     if len(ini) > len(fim) and ini[-1] > 0.5:
-        return min(total, ini[-1] + margem)
-    if ini and fim and fim[-1] >= total - 0.05 and ini[-1] > 0.5:
-        return min(total, ini[-1] + margem)
-    return total
+        dur = ini[-1] + margem
+        return min(dur, teto) if teto > 0 else dur
+    if ini and fim and fim[-1] >= total - 0.2 and ini[-1] > 0.5:
+        dur = ini[-1] + margem
+        return min(dur, teto) if teto > 0 else dur
+    dur = total + margem if (total > 0 and (teto <= 0 or total + margem <= teto)) else total
+    return min(dur, teto) if teto > 0 else dur
 
 
 def montar_pausa(fonte, t, webm, wav, out_mp4, w, h, k=0, lado=None, amiga=None):
@@ -284,7 +283,7 @@ def montar_pausa(fonte, t, webm, wav, out_mp4, w, h, k=0, lado=None, amiga=None)
     Paisagem: tela cheia, variando a cada uso (dona 29/10: "nem sempre no meio — da direita pra esquerda e ficar no
     canto e ao contrário; é só inverter o vídeo"): 0 como gravou, 1 espelhada, 2 parando no canto do lado por onde
     entrou, 3 espelhada + canto. Em pé (gravações antigas): no canto esquerdo, 65% da altura. True/False."""
-    dur_m = _fim_da_fala(wav)  # 03/11: só até a última palavra (+0,3 s), não o arquivo inteiro (~8 s)
+    dur_m = _fim_da_fala(wav)  # só até a última palavra (+1,5 s de margem), sem corte seco
     if dur_m <= 0:
         return False
     pais = _paisagem(webm)
@@ -320,6 +319,8 @@ def montar_pausa(fonte, t, webm, wav, out_mp4, w, h, k=0, lado=None, amiga=None)
           f"[bg][mv]overlay=x={x}:y=H-h:eof_action=repeat:shortest=0[pm]")
     extra = []
     audio_map = "2:a"
+    fade_d = min(1.5, dur)
+    fade_st = max(0.0, dur - fade_d)
     if amiga:
         r = _escala_amiga(webm, amiga)
         aw, ah = int(w * r) // 2 * 2, int(h * r) // 2 * 2
@@ -331,11 +332,11 @@ def montar_pausa(fonte, t, webm, wav, out_mp4, w, h, k=0, lado=None, amiga=None)
                f"[3:a]aresample=44100,atrim=duration={dur_a:.3f},adelay={int(ta * 1000)}:all=1[aa];"
                f"[2:a]aresample=44100,apad[ma];"
                f"[ma][aa]amix=inputs=2:duration=longest:dropout_transition=0:normalize=0,"
-               f"atrim=duration={dur:.3f},afade=t=out:st={max(0.0, dur - 0.4):.3f}:d=0.4[aout]")
+               f"atrim=duration={dur:.3f},afade=t=out:st={fade_st:.3f}:d={fade_d:.3f}[aout]")
         audio_map = "[aout]"
         extra = ["-c:v", "libvpx-vp9", "-i", str(amiga)]
-    else:  # 03/11: pausa cortada no teto (4 s) — a voz dela some em 0,4 s em vez de cortar no meio da palavra
-        fc += f";[2:a]aresample=44100,atrim=duration={dur:.3f},afade=t=out:st={max(0.0, dur - 0.4):.3f}:d=0.4[aout]"
+    else:  # margem de 1.5s com fade-out suave para não cortar seco nem truncar fala de encerramento
+        fc += f";[2:a]aresample=44100,apad,atrim=duration={dur:.3f},afade=t=out:st={fade_st:.3f}:d={fade_d:.3f}[aout]"
         audio_map = "[aout]"
     fc += f";[{'pm2' if amiga else 'pm'}]format=yuv420p[vout]"
     cmd = [_ff(), "-y", "-ss", f"{max(0.0, t):.2f}", "-t", f"{max(3.0, dur + 1.0):.3f}", "-i", str(fonte),

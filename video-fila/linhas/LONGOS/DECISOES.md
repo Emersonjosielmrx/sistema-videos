@@ -1,5 +1,7 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 20/11 07:31 [melhorador código cc-sobra] mascote_overlay.py: Corrigir truncamento do áudio/vídeo da mascote no encerramento cortado em 'aqui, já é' (41 linhas). Desfazer: copiar mascote_overlay.py.bak_20261120_073132_melhorador
+
 - 19/11 16:53 [melhorador código cc-sobra] anime_tts.py: Correção de truncamento do áudio e narração no encerramento do vídeo (12 linhas). Desfazer: copiar anime_tts.py.bak_20261119_165331_melhorador
 
 - 17/11 13:03 [melhorador código cc-sobra] marca_site.py: Corrigir cálculo de frame_size no pipe rawvideo do marca_site (31 linhas). Desfazer: copiar marca_site.py.bak_20261117_130258_melhorador

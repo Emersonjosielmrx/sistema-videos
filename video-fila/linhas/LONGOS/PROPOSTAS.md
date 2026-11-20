@@ -508,3 +508,18 @@
 - prova: ZZ7Le: card do canto superior esquerdo com palavras cortadas ('TELLA', 'DER', 'RIGO'). 97bBe: sticker roxo fatiado pela borda superior.
 - onde: Posição X/Y dos cards e stickers, junto da proposta de zona proibida acima (mesma função).
 - como testar: Limitar x e y a 5% de margem em 16:9, com clamp após a rotação ou o balanço do sticker. Passar o júri de legibilidade em 3 amostras.
+
+## 20/11 07:15 [CERTEZA] Corrigir truncamento do áudio/vídeo da mascote no encerramento cortado em 'aqui, já é' (antigravity/gemini-3.8-flash-tiered)
+- prova: O júri de movimento apontou encerramento cortado no meio da frase como grave em 97bBeHddKJI ('aqui, já é'), ZZ7LeUws7-c ('aqui, já é') e QwY2Kqk7jo8 ('aqui, já é'), interrompendo bruscamente a fala insc2 da mascote ('Se você chegou até aqui, já é de casa! Se inscreve aí pra não perder o próximo.').
+- onde: bin/mascote_overlay.py e bin/anime_tts.py (rotina de alinhamento de áudio, cálculo de duração e fade do bloco de encerramento)
+- como testar: Renderizar trecho dos últimos 15s com a fala insc2 de mascote_producao.py, rodar Whisper para conferir transcrição integral até 'não perder o próximo.' e verificar margem de 1.5s com fade-out sem corte seco.
+
+## 20/11 07:15 [CERTEZA] Implementar verificação de colisão com rostos (face avoidance) para stickers, memes e cards (antigravity/gemini-3.8-flash-tiered)
+- prova: Sticker 'OS GURI?' cobriu integralmente olhos, nariz e boca no 97bBeHddKJI (legibilidade 6.0), card 'SINCERAMENTE' cobriu boca e queixo no ZZ7LeUws7-c (legibilidade 4.5), e o sticker da vaqueira cobriu olho e franja no QwY2Kqk7jo8 (legibilidade 5.0).
+- onde: bin/mascote_overlay.py e bin/fx_clips.py (rotina de posicionamento de stickers, memes e cards de comentários)
+- como testar: Processar os frames críticos de 97bBeHddKJI e ZZ7LeUws7-c verificando que sobreposições gráficas são ancoradas em terços livres fora das bounding boxes faciais e respeitando a title-safe area 16:9.
+
+## 20/11 07:15 [CERTEZA] Evitar corte em sarjeta (gutter) entre painéis no crop 16:9 e priorizar terço superior (antigravity/gemini-3.8-flash-tiered)
+- prova: Em 97bBeHddKJI o crop dividiu a tela na linha divisória preta com dedo no topo e queixo na base (movimento 5.0 e legibilidade 6.0); em QwY2Kqk7jo8 o corte focou apenas no quadril decapitando o protagonista.
+- onde: bin/fx_clips.py (_movimento e cálculo de clamping vertical/offset Y do crop)
+- como testar: Renderizar as cenas de transição de 97bBeHddKJI e QwY2Kqk7jo8 conferindo que o algoritmo rejeita divisórias horizontais escuras e fixa a âncora no painel principal com preservação de cabeça e olhos.

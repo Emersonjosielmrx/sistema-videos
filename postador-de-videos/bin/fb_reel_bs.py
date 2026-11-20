@@ -49,7 +49,15 @@ def _so_facebook(pg, nome_pagina):
     caixa = pg.locator("text=Postar em").locator("xpath=following::div[@role='combobox' or @aria-haspopup][1]").first
     if not caixa.count():
         caixa = pg.locator("div[role=combobox]").first
-    caixa.click()
+    # 20/11: às vezes um aviso cobre a caixa e o clique estoura; se ela já mostra SÓ a página, segue
+    rotulo0 = " ".join((caixa.inner_text(timeout=15000) or "").replace("​", " ").split())
+    if nome_pagina and rotulo0.casefold() == nome_pagina.casefold():
+        return True, [], rotulo0
+    try:
+        caixa.click(timeout=15000)
+    except Exception:
+        _fechar_avisos(pg)
+        caixa.click(force=True, timeout=15000)
     time.sleep(2.5)
     itens = pg.locator("[role=listbox] [role=option], [role=option]")
     marcados_fb, desmarcou = False, []

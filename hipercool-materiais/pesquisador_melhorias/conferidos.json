@@ -19833,5 +19833,225 @@
     "arquivado": false,
     "descricao": "Open unified-camera 2.5D parallax renderer for single images",
     "data": "2026-11-20"
+  },
+  "kashyapman/ghostbot": {
+    "ok": true,
+    "nome": "Kashyapman/GhostBot",
+    "estrelas": 6,
+    "push": "2026-11-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "SOTA Autonomous AI Video Engine. Generates 3D parallax documentaries with LLMs & Computer Vision ($0 to run).",
+    "data": "2026-11-20"
+  },
+  "armanpoor/gemini-web-bridge": {
+    "ok": true,
+    "nome": "armanpoor/gemini-web-bridge",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "پل محلی Gemini Web → API استاندارد | Local Gemini Web to OpenAI/Anthropic API bridge with Persian beginner guide",
+    "data": "2026-11-20"
+  },
+  "shleeshlee/gemini-api-oneclick": {
+    "ok": true,
+    "nome": "shleeshlee/gemini-api-oneclick",
+    "estrelas": 64,
+    "push": "2026-11-19",
+    "licenca": "AGPL-3.0",
+    "arquivado": false,
+    "descricao": "One-click Gemini API multi-account gateway with Cookie Manager and channel guard",
+    "data": "2026-11-20"
+  },
+  "khai-1711/dsh-gemini-bridge": {
+    "ok": true,
+    "nome": "Khai-1711/dsh-gemini-bridge",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-20"
+  },
+  "vansh3503/mobilepilot": {
+    "ok": true,
+    "nome": "Vansh3503/MobilePilot",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "MCP server that drives Android phones, emulators and the iOS Simulator through the accessibility tree",
+    "data": "2026-11-20"
+  },
+  "ciszkin/corral": {
+    "ok": true,
+    "nome": "ciszkin/corral",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Device session manager for coding agents. Herds connected Android devices (USB, WiFi, emulators) into one pool and leases them exclusively t",
+    "data": "2026-11-20"
+  },
+  "zephyr7030/droidbridge": {
+    "ok": true,
+    "nome": "zephyr7030/DroidBridge",
+    "estrelas": 26,
+    "push": "2026-11-15",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "On-device MCP server for Android. Connect ChatGPT through OpenAI's official secure tunnel, let AI agents operate your phone and run schedule",
+    "data": "2026-11-20"
+  },
+  "merlinshieh/a11y-driver": {
+    "ok": true,
+    "nome": "MerlinShieh/a11y-driver",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android 无障碍自动化执行引擎：脱离 ADB 的 uiautomator2 替代方案，支持远程命令、用例编排与测试报告",
+    "data": "2026-11-20"
+  },
+  "ehsan-ch/multi-phone-wifi-control-system": {
+    "ok": true,
+    "nome": "Ehsan-Ch/Multi-Phone-WiFi-Control-System",
+    "estrelas": 1,
+    "push": "2026-10-08",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Python controllers for Android-device automation over WiFi using ADB and scrcpy, with parallel command dispatch and diagnostics.",
+    "data": "2026-11-20"
+  },
+  "aliyanhadi/doraemon": {
+    "ok": true,
+    "nome": "aliyanhadi/doraemon",
+    "estrelas": 0,
+    "push": "2026-11-11",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Doraemon – the non-root Android power-user toolkit. Persistent wireless ADB daemon with auto-reconnect, Dhizuku & su bridges, debloater, per",
+    "data": "2026-11-20"
+  },
+  "theegoiko/urvid": {
+    "ok": true,
+    "nome": "theegoiko/urvid",
+    "estrelas": 1,
+    "push": "2026-10-21",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Uploads a batch of Android ringtones, notifications, alarms and UI sounds to YouTube",
+    "data": "2026-11-20"
+  },
+  "dynaevangelical2652/android-agent": {
+    "ok": true,
+    "nome": "Dynaevangelical2652/android-agent",
+    "estrelas": 4,
+    "push": "2026-10-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Control Android devices through ADB with this Python automation framework for task execution and phone farm scaling.",
+    "data": "2026-11-20"
+  },
+  "nyashiiro/share-to-computer": {
+    "ok": true,
+    "nome": "Nyashiiro/Share-To-Computer",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "Use Share Intent &amp;&amp; Adb to send files or text to Computer",
+    "data": "2026-11-20"
+  },
+  "portable-uri-workshop/adb-kakaolink-capture": {
+    "ok": true,
+    "nome": "portable-uri-workshop/adb-kakaolink-capture",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "Capture and optionally block explicit KakaoTalk share intents over ADB.",
+    "data": "2026-11-20"
+  },
+  "r-dilipkumar/offline-reel-captions": {
+    "ok": true,
+    "nome": "R-Dilipkumar/offline-reel-captions",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "Android app that adds captions to your Reels and Shorts automatically, fully offline. Speak Tamil, Tanglish, Telugu, Kannada, Malayalam, Hin",
+    "data": "2026-11-20"
+  },
+  "angelkrak/adb-qc": {
+    "ok": true,
+    "nome": "AngelKrak/adb-qc",
+    "estrelas": 13,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Quickly set up a wireless ADB connection for Android devices. Supports connection via pairing code or QR code, enabling remote debugging ove",
+    "data": "2026-11-20"
+  },
+  "growvv/uitest-sdk": {
+    "ok": true,
+    "nome": "growvv/uitest-sdk",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "HarmonyOS uitest SDK and agent CLI: UI automation, screenshots, H.264 casting, MP4 recording, MCP server and skill for coding agents",
+    "data": "2026-11-20"
+  },
+  "obamna1234/sevby": {
+    "ok": true,
+    "nome": "Obamna1234/sevby",
+    "estrelas": 1,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn Spotify playlists or song lists into tagged MP3s - Bandcamp first, YouTube fallback. Built on yt-dlp and FFmpeg.",
+    "data": "2026-11-20"
+  },
+  "servedbyhau/vh-tennis-booker": {
+    "ok": true,
+    "nome": "servedbyhau/vh-tennis-booker",
+    "estrelas": 0,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "VH tennis court booking automation using Python, ADB, and uiautomator2.",
+    "data": "2026-11-20"
+  },
+  "yuehongzhang001/wireless-debug": {
+    "ok": true,
+    "nome": "yuehongzhang001/wireless-debug",
+    "estrelas": 0,
+    "push": "2026-08-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Wireless adb for macOS/Linux: mDNS discovery, remembered devices, one-command reconnect",
+    "data": "2026-11-20"
+  },
+  "merbah3266/rish_installer": {
+    "ok": true,
+    "nome": "merbah3266/rish_installer",
+    "estrelas": 89,
+    "push": "2026-09-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Shizuku Rish Installer for Android terminals",
+    "data": "2026-11-20"
+  },
+  "batestinha/shizuku-thedjchi-daemonstatebroadcast": {
+    "ok": true,
+    "nome": "Batestinha/shizuku-thedjchi-daemonstatebroadcast",
+    "estrelas": 18,
+    "push": "2026-09-10",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Fork of thedjchi/Shizuku adding Tasker daemon-ready/stopped broadcasts and Android 17 wireless ADB pairing/startup without the device choose",
+    "data": "2026-11-20"
   }
 }

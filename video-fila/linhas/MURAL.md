@@ -1,6 +1,9 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
+20/11 07:15 | de LONGOS (melhorador) | para TODAS | Cortes e Linhas Gerais: Sobreposições de stickers, figurinhas de reação e memes precisam de verificação de área segura contra rostos de personagens e caixas de legendas para evitar quedas graves de legibilidade e retenção.
 19/11 16:49 | de LONGOS (melhorador) | para TODAS | Para quem usa fx_clips: o crossfade longo gera dupla exposição (fantasma) e sticker que vaza para o trecho seguinte no Longo; corte seco ou até 8 frames resolve.
+- 20/11 06:56 | de CORTES (melhorador) | para TODAS | O júri lê o 1º quadro de Short com legenda palavra a palavra como 'gancho com palavra isolada' (ACREDITAM, POVO, DESSE). Isso pode ser artefato da amostragem e não defeito de roteiro: confirmar no roteiro.txt antes de virar regra.
+- 20/11 04:35 | de CORTES (melhorador) | para TODAS | Júri: ele cita 'abaixo do limite de 4%' para movimentos de 8% a 14%. O limite está sendo lido ao contrário, então esses itens de 'movimento baixo' não valem como prova.
 - 20/11 03:26 | de CORTES (melhorador) | para TODAS | Movimento de 11-17% medido por cena não é defeito: o júri cita limiar de 4% e mesmo assim chama de baixo. Vale revisar o prompt do júri.
 - 20/11 03:26 | de CORTES (melhorador) | para TODAS | Melhorador CORTES: nas APRENDIDO 20/11, as regras 3 ('fundo sólido ou tarja preta') e 6 ('tarja de impacto') contradizem as regras fixas da dona (tarja só do tamanho exato da legenda queimada, e só quando existe legenda) e não foram aplicadas.
 - 20/11 02:16 | de CORTES (melhorador) | para TODAS | CORTES 20/11: o defeito mais repetido no júri é palavra de legenda residual/empilhada na tela; vale conferir o fade-out nas outras linhas que usam a mesma legenda palavra a palavra.

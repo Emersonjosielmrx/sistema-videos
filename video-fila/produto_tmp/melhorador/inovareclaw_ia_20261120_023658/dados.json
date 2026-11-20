@@ -1,0 +1,377 @@
+{
+ "video": "inovareclaw_ia_20261120_023658.mp4",
+ "conta": "inovareclaw.ia",
+ "marca": "Inovare Claw",
+ "titulo": "IA que só responde ou que faz o trabalho?",
+ "formato": "dono_mesma_foto",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.92
+   ],
+   [
+    1,
+    "dono",
+    10.35
+   ],
+   [
+    2,
+    "conversa",
+    7.18
+   ],
+   [
+    3,
+    "dono",
+    13.65
+   ],
+   [
+    4,
+    "cartao",
+    6.58
+   ]
+  ],
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê está posicionada diretamente sobre a boca e o queixo do apresentador, cobrindo a movimentação labial e parte do rosto durante a fala inicial.",
+   "como_corrigir": "Ajustar o enquadramento/escala da câmera na cena 0 para posicionar o apresentador mais para trás ou reposicionar a legenda mais abaixo, evitando sobreposição com o rosto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda 'perguntas ou realmente' segue cobrindo a boca e a mandíbula do apresentador no enquadramento apertado da cena 0.",
+   "como_corrigir": "Reenquadrar o vídeo do apresentador na cena 0 com o mesmo respiro visto na cena 1, garantindo que o rosto fique livre do bloco de legendas."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda 'por mim' permanece sobreposta ao queixo do apresentador, prejudicando o enquadramento da cena de abertura.",
+   "como_corrigir": "Adequar o posicionamento vertical da cena 0 ou ocultar a legenda nessa introdução, já que o cartão superior já exibe a pergunta completa."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "A tarja preta de fundo da legenda não foi renderizada no trecho 'Meu agente de'. A palavra 'Meu' destacada em roxo fica sem contraste sobre a camisa azul-escura do apresentador, tornando a leitura difícil.",
+   "como_corrigir": "Restaurar o fundo preto semitransparente (pill) sob a legenda de forma uniforme, garantindo contraste adequado para a palavra em roxo contra o vestuário escuro."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "A legenda karaokê está posicionada muito alta no quadro, sobrepondo diretamente o queixo e a boca do apresentador enquanto ele fala, atrapalhando a leitura labial e a clareza visual.",
+   "como_corrigir": "Rebaixar a posição vertical da legenda para a altura do peito (abaixo de y=1600) ou re-enquadrar levemente a filmagem do apresentador para manter a boca livre de interferências de texto."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca (jump cut) da cena 0 para a cena 1 mantendo exatamente o mesmo ângulo, enquadramento e posição do apresentador, com entrada súbita do banner superior sem animação de entrada.",
+   "como_corrigir": "Animar a entrada do banner com um slide-down suave e aplicar um corte de escala (punch zoom) no apresentador na troca de bloco temático para justificar o corte e evitar a sensação de salto no mesmo plano."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada e ritmo arrastado por mais de 7 segundos. Entre q04, q05 e q06 o enquadramento permanece completamente estático, sem aproximação de câmera, corte de escala ou suporte gráfico para a fala 'só escrevia texto'.",
+   "como_corrigir": "Aplicar corte de escala dinâmico (punch zoom de 100% para 115%) na virada da frase em q05 ou um slow push-in contínuo, complementando com ícones ou microanimações visuais que ilustrem o problema."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Quadro com vácuo estático no início da cena 2. O primeiro balão surge isolado no canto inferior, deixando mais de 70% do espaço da conversa vazio e estático por mais de 2 segundos antes da réplica.",
+   "como_corrigir": "Inserir indicador animado de digitação ('digitando...' com reticências pulsando) antes da resposta e aplicar uma sutil flutuação/escala suave contínua (floating motion) na moldura do WhatsApp para dar vida ao mockup."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade e molde repetido: a cena 3 volta exatamente ao mesmo plano médio, mesmo ângulo de câmera e mesmo cenário das cenas 0 e 1, tornando o vídeo visualmente monótono.",
+   "como_corrigir": "Variar o enquadramento utilizando um close-up mais fechado na expressão do apresentador ou alternar o posicionamento para a lateral, abrindo espaço para gráficos ou B-roll de tarefas sendo executadas."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Cena parada no momento de desfecho do argumento ('Meu agente de IA trabalha sozinho'). O apresentador continua no mesmo plano estático sem nenhum reforço de motion design.",
+   "como_corrigir": "Aplicar um punch zoom de ênfase na palavra 'sozinho' e animar um card flutuante ou selo com status de tarefa executada ao lado do apresentador."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "A barra de progresso no topo, presente em todas as cenas anteriores, desaparece abruptamente no cartão final; além disso, a fala da locução 'Chame a gente no direct' ficou sem a legenda karaokê animada que padronizou o restante do vídeo.",
+   "como_corrigir": "Manter a barra de progresso no topo preenchendo até 100% no encerramento e manter a legenda karaokê sincronizada com a locução do CTA."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos falha duplamente: não há a manchete de impacto no topo (a tarja roxa com 'SUA IA SÓ RESPONDE OU TRABALHA?' só aparece na cena 1) e a legenda karaokê foi posicionada diretamente sobre a boca e o queixo do apresentador, gerando poluição visual imediata e aspecto amador.",
+   "como_corrigir": "Subir o nível do gancho: colocar a tarja roxa com a chamada principal no topo desde o segundo 0; descer a legenda para o terço inferior (linha do peito); e reajustar o enquadramento do apresentador com respiro no topo para que a caixa de pergunta não cole na sua testa nem a legenda tape sua articulação facial."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação de WhatsApp parece um slide teórico e desconectado da realidade. A lógica de interface está invertida (o cliente aparece na esquerda e o bot na direita, sob o cabeçalho 'Inovare Claw'), o texto é vago e genérico ('organizar essa tarefa') e o diálogo tenta explicar a proposta de valor por texto ('Mas você só me diz como fazer? Não, eu faço por você') em vez de demonstrar a execução autônoma do produto.",
+   "como_corrigir": "Reformular a cena como demonstração prática: colocar a mensagem do usuário na direita solicitando uma tarefa de negócio tangível (ex.: 'Puxe o relatório de vendas de hoje e gere os boletos pendentes') e a resposta do Inovare Claw na esquerda confirmando a execução com passos concretos (ex.: 'Acessando ERP... 4 boletos gerados e enviados por e-mail'). Isso comprova a capacidade estilo OpenClaw/Hermes em vez de apenas prometer."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Diagramação descuidada da tela de chat: o primeiro balão de mensagem surge colado na borda inferior do card, deixando mais de 70% da área útil em um vazio bege desproporcional, transmitindo descuido na pós-produção.",
+   "como_corrigir": "Iniciar o histórico de mensagens a partir do topo do card ou centralizar o bloco de mensagens verticalmente na área útil da simulação, mantendo a tela visualmente equilibrada desde o primeiro segundo do bloco."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A captação do fundador tem linguagem excessivamente informal de selfie, prejudicando a percepção de seriedade tecnológica da empresa. A gravação foi feita à mão livre, com lente grande-angular muito próxima (que distorce as proporções faciais) e com contraluz forte da janela ao fundo, deixando o rosto subexposto e as janelas estouradas em branco.",
+   "como_corrigir": "Fixar a câmera em tripé na altura exata dos olhos, enquadrando em plano médio (peito para cima) com lente de 35mm a 50mm para eliminar a distorção; usar uma fonte de luz frontal suave (key light) para iluminar o rosto e equilibrar a iluminação com a janela de fundo."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Baixo contraste na legenda karaokê: a palavra ativa 'Meu' em tom roxo escuro é renderizada diretamente sobre a camisa azul-marinho do apresentador, tornando a leitura difícil e reduzindo a acessibilidade.",
+   "como_corrigir": "Utilizar uma cor de destaque mais brilhante e saturada (como lilás claro ou ciano/branco) e reforçar a borda ou caixa translúcida escura atrás do texto para garantir contraste legível em qualquer fundo de roupa."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.88,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.5,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "superchatia_ia_20261119_214019.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.45,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.8,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.5,
+    "roteiro_marca": 7.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "vitrineia_inovare_20261120_010728.mp4",
+   "conta": "vitrineia_inovare",
+   "formato": "dono_mesma_foto",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "inovareclaw_ia_20261120_023658.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.38,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   10,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   5,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

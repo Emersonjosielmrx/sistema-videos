@@ -25723,6 +25723,134 @@
         "repositórios pequenos que usam yt-dlp + ordenação por views÷inscritos para listar vídeos de recap mais vistos (anime/manhwa/outros) por idioma"
       ],
       "origem": "area_camera_3d_painel__sonnet_0346.md 2026-11-20"
+    },
+    {
+      "id": "yt_regras_upload_app",
+      "nome": "Regras oficiais do YouTube para upload por app/Studio mobile",
+      "subtemas": [
+        "Ler support.google.com/youtube sobre limite diário de uploads, verificação do canal e agendamento de Shorts no app, citando link e data"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0441.md 2026-11-20"
+    },
+    {
+      "id": "limite_diario",
+      "nome": "Limite diário de envios por canal",
+      "subtemas": [
+        "Ler o artigo oficial \"aumentar o limite de envios\" do YouTube (support.google.com) e extrair o número exato e o critério de aumento"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0546.md 2026-11-20"
+    },
+    {
+      "id": "rascunho_retomada",
+      "nome": "Rascunho e retomada de envio no app",
+      "subtemas": [
+        "Fonte oficial sobre rascunhos em Conteúdo e agendamento de Short pelo app YouTube Studio, para a lógica de retomada"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0546.md 2026-11-20"
+    },
+    {
+      "id": "verificacao_conta",
+      "nome": "Verificação de conta para vídeos acima de 15 min",
+      "subtemas": [
+        "Regra oficial para enviar longos de 1 a 4 h pelo celular (ligada ao artigo \"Enviar vídeos com mais de 15 minutos\")"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0546.md 2026-11-20"
+    },
+    {
+      "id": "yt_reutilizado_2026",
+      "nome": "Regras oficiais do YouTube sobre conteúdo reutilizado/inautêntico e monetização, e o que mudou em 2026 para recaps e shorts em lote",
+      "subtemas": [
+        "Páginas de support.google.com/youtube sobre a política de monetização e conteúdo reutilizado, mais blog.youtube; citar o link e a data de cada regra"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0556.md 2026-11-20"
+    },
+    {
+      "id": "yt_upload_limites",
+      "nome": "Limites e comportamento de upload em lote no app e no Studio (cota diária de uploads, agendamento de Short, verificação de canal novo)",
+      "subtemas": [
+        "Páginas oficiais de ajuda sobre limite de uploads, agendamento e verificação de conta, separando o que está escrito do que é interpretação"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0556.md 2026-11-20"
+    },
+    {
+      "id": "celular_ffmpeg",
+      "nome": "Render FFmpeg no celular Android via Termux como máquina extra",
+      "subtemas": [
+        "repositórios pequenos de 2026 com ffmpeg arm64, h264_mediacodec e fila de render por celular"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0611.md 2026-11-20"
+    },
+    {
+      "id": "shizuku_termux",
+      "nome": "Postagem 100% no celular via Shizuku/rish",
+      "subtemas": [
+        "scripts de `am start`/`input` sem PC, reativação após reboot"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0641.md 2026-11-20"
+    },
+    {
+      "id": "intent_share_ytapp",
+      "nome": "Intent SEND para o app do YouTube",
+      "subtemas": [
+        "exemplos de content:// com MediaStore, permissões e telas pós-share (título, visibilidade, agendamento)"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0641.md 2026-11-20"
+    },
+    {
+      "id": "fila_postagem_celulares",
+      "nome": "Fila e travas por celular",
+      "subtemas": [
+        "lock por dispositivo, retry com idempotência, 1 conta por IP"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0641.md 2026-11-20"
+    },
+    {
+      "id": "yt_politica_longo",
+      "nome": "Regras oficiais de monetização para recap e compilado de terceiros",
+      "subtemas": [
+        "páginas support.google.com/youtube sobre reused content, \"inauthentic content\" e Shorts monetization, com datas de atualização"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0652.md 2026-11-20"
+    },
+    {
+      "id": "fuso_pst_agendamento",
+      "nome": "Agendamento e data de exibição",
+      "subtemas": [
+        "ler as páginas oficiais de \"programar envio\" e de datas no YouTube Studio para ver como fuso e PST afetam o horário de postagem de canais em outros países"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0727.md 2026-11-20"
+    },
+    {
+      "id": "intent_share_midiastore",
+      "nome": "Share intent com MediaStore",
+      "subtemas": [
+        "técnica de `am start` SEND com URI do MediaStore e permissão, sem crash, procurando issues e gists curtos com exemplos reais"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0727.md 2026-11-20"
+    },
+    {
+      "id": "adb_conta_ativa_dumpsys",
+      "nome": "Conta ativa no celular",
+      "subtemas": [
+        "como ler a conta Google logada no app do YouTube sem root (dumpsys, uiautomator dump da tela de troca de conta), em issues e gists, não em repositórios grandes"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0727.md 2026-11-20"
+    },
+    {
+      "id": "trend_recaps",
+      "nome": "Achar recaps de anime/manhwa mais vistos por país e idioma",
+      "subtemas": [
+        "yt-dlp com busca por data e ordenação por views, usando views por inscritos e idade do vídeo, sem API do Google"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0741.md 2026-11-20"
+    },
+    {
+      "id": "yt_regras_conta",
+      "nome": "Regras oficiais do YouTube para canais novos e monetização",
+      "subtemas": [
+        "Ler as páginas em support.google.com/youtube sobre conteúdo reutilizado e inautêntico, data da última atualização e o que muda para recaps de vídeo de parceiro."
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0751.md 2026-11-20"
     }
   ],
   "projetos": [

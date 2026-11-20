@@ -451,3 +451,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 03:56 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0346.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 04:13 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0406.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 04:23 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0416.md`
+- [INÉDITO] github.com/Kashyapman/GhostBot — ★6, push 2026-11-06, MIT — SOTA Autonomous AI Video Engine. Generates 3D parallax documentaries with LLMs & Computer Vision ($0 to run).

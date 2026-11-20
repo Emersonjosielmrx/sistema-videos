@@ -1,0 +1,147 @@
+{
+ "conta": "inovareclaw.ia",
+ "produto": "inovare_claw",
+ "marca": "Inovare Claw",
+ "titulo": "IA que só responde ou que faz o trabalho?",
+ "legenda": "IA que só gera texto é uma coisa. Um agente que executa tarefas de verdade pelo dono é outra. Conheça o Inovare Claw, no nível do Hermes e do OpenClaw. Link no perfil 🚀\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Sua IA só responde ou trabalha?",
+  "pergunta_cliente": "Isso só responde perguntas ou realmente faz o trabalho por mim?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu achava que toda inteligência artificial só escrevia texto. Eu pedia, ela respondia, e o trabalho continuava comigo.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit modern Brazilian office with a clean desk and a laptop, professional look",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261120_023742_2.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Inovare Claw é um agente autônomo. Você passa a tarefa, e ele executa de verdade, sem ficar só na conversa.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "agente autônomo",
+     "executa de verdade"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso organizar essa tarefa para hoje."
+     },
+     {
+      "de": "empresa",
+      "texto": "Certo. Já comecei a executar."
+     },
+     {
+      "de": "cliente",
+      "texto": "Mas você só me diz como fazer?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Não. Eu faço a tarefa por você e aviso quando terminar."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, obrigado."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje eu delego a tarefa e sigo cuidando do meu negócio. Meu agente de IA trabalha sozinho.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian office with a clean desk, professional look",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261120_023742_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261120_023742_2.png"
+   }
+  ],
+  "legenda": "IA que só gera texto é uma coisa. Um agente que executa tarefas de verdade pelo dono é outra. Conheça o Inovare Claw, no nível do Hermes e do OpenClaw. Link no perfil 🚀",
+  "titulo": "IA que só responde ou que faz o trabalho?",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "diferenca_chat",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 18,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareclaw.ia_20261120_023658\\dono_3.mp4",
+ "duracao_s": 32.44,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-20T02:52:19",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.84,
+   "fala": "Isso só responde perguntas ou realmente faz o trabalho por mim?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.84,
+   "fim": 12.68,
+   "fala": "Eu achava que toda inteligência artificial só escrevia texto. Eu pedia, ela respondia, e o trabalho continuava comigo.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.68,
+   "fim": 20.67,
+   "fala": "O Inovare Claw é um agente autônomo. Você passa a tarefa, e ele executa de verdade, sem ficar só na conversa.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.67,
+   "fim": 28.5,
+   "fala": "Hoje eu delego a tarefa e sigo cuidando do meu negócio. Meu agente de IA trabalha sozinho.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.5,
+   "fim": 32.44,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 5.0
+  },
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

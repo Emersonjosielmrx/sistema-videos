@@ -1,11 +1,11 @@
-# Painel do Pesquisador automático (Sonnet 5.5 web) — 20/11 04:01
+# Painel do Pesquisador automático (Sonnet 5.5 web) — 20/11 08:01
 
 Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 min). Não editar à mão.
 
-- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **45/45** (MonitorSonnet 2026-11-20T03:54)
+- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **41/45** (MonitorSonnet 2026-11-20T07:54)
 - Rodando agora: nada
 - Próxima pesquisa: assim que a atual terminar (+2 min), enquanto houver cota
-- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 39 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 26 — pasta `ENTREGAS\`
+- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 46 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 27 — pasta `ENTREGAS\`
 - Chats das linhas (o CobradorPesquisador manda os pendentes de hora em hora): CURTOS: fable melhorias | LONGOS: claude-f1 | CAPAS: claude-f1 | VEO_HIPERCOOL: fable melhorias
 - Cobrança por linha: **CURTOS** chat fable melhorias FECHADO | **LONGOS** em dia | **CAPAS** em dia | **VEO_HIPERCOOL** chat fable melhorias FECHADO
 - Implantados pelos chats: **9** — `implantados.json`
@@ -19,18 +19,18 @@ Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 
 | 2026-11-17 | 106 | 81 | 2 | 0 | 23 | 6.6 | 71 | 70 |
 | 2026-11-18 | 112 | 81 | 2 | 1 | 28 | 6.0 | 56 | 56 |
 | 2026-11-19 | 110 | 74 | 3 | 1 | 32 | 6.6 | 38 | 38 |
-| 2026-11-20 | 21 | 13 | 1 | 0 | 7 | 5.7 | 2 | 2 |
+| 2026-11-20 | 43 | 32 | 1 | 0 | 10 | 6.0 | 18 | 18 |
 
 **Recomendação:** COTA: 1 pesquisa(s) hoje acabaram sem cota no meio — o motor espera a hora de volta das contas.
 
 Últimas pesquisas:
-- 2026-11-20T04:01:07 area_gemini_web_sessao_cookie: **sem_web** em 0.5 min, 0 novos (0 inéditos) — parou no passo 7 (2 ferramentas). iser, reenvie o pedido em uma sessão com as ferramentas habilitadas. **DESCARTADOS:** nenhum item avaliado. **AREAS_NOVAS:** (vazio: não houve pesquisa suficiente para propor subáreas com segurança)
-- 2026-11-20T03:46:58 area_camera_3d_painel: **ok** em 9.5 min, 0 novos (0 inéditos)
-- 2026-11-20T03:36:18 area_camera_3d_painel: **ok** em 6.3 min, 0 novos (0 inéditos)
-- 2026-11-20T03:18:55 area_camera_3d_painel: **esgotado** em 13.8 min, 0 novos (0 inéditos) — parou no passo 121 (47 ferramentas). aude Code com Bash habilitado, ou me passe os resultados das buscas colados aqui. Com os resultados em mãos, eu filtro por licença, T4 e RAM dos PCs e monto a lista ordenada no formato que você pediu.
-- 2026-11-20T03:01:41 area_avatares_stop: **sem_cota_no_meio** em 7.5 min, 0 novos (0 inéditos) — parou no passo 1 (0 ferramentas). API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 1s) API Error: Request rejected (429) · [claude-web/claude-sonnet-5-5] [429]: Rate limited by Claude Web API (reset after 1s) | próxima às 03:14 (volta da cota)
-- 2026-11-20T02:58:19 area_avatares_stop: **sem_web** em 0.3 min, 0 novos (0 inéditos) — parou no passo 1 (0 ferramentas). ndo só yt-dlp e o navegador Se você me der acesso às ferramentas Bash e Read, ou rodar a rodada em um ambiente que as tenha, refaço a pesquisa de verdade e devolvo a lista completa no formato pedido.
-- 2026-11-20T02:47:27 area_eres2net_licenca: **ok** em 5.5 min, 0 novos (0 inéditos)
-- 2026-11-20T02:36:43 area_three_threshold_determinism: **ok** em 6.3 min, 0 novos (0 inéditos)
+- 2026-11-20T07:51:24 area_gemini_web_sessao_cookie: **ok** em 8.2 min, 0 novos (0 inéditos)
+- 2026-11-20T07:41:41 area_gemini_web_sessao_cookie: **ok** em 5.5 min, 0 novos (0 inéditos)
+- 2026-11-20T07:27:07 area_android_adb_automacao_upload: **ok** em 7.3 min, 0 novos (0 inéditos)
+- 2026-11-20T07:21:49 area_gemini_web_sessao_cookie: **sem_web** em 0.7 min, 0 novos (0 inéditos) — parou no passo 4 (1 ferramentas). a com cota por conta, respeitando a regra de não usar duas contas no mesmo IP Se você quiser, a próxima mensagem pode vir com o Bash ativo. Aí eu faço a busca de teste e sigo as consultas de verdade.
+- 2026-11-20T07:06:07 area_gemini_web_sessao_cookie: **ok** em 9.5 min, 0 novos (0 inéditos)
+- 2026-11-20T06:52:05 area_android_adb_automacao_upload: **ok** em 7.2 min, 0 novos (0 inéditos)
+- 2026-11-20T06:41:20 area_android_adb_automacao_upload: **ok** em 5.8 min, 2 novos (2 inéditos)
+- 2026-11-20T06:36:15 area_android_adb_automacao_upload: **sem_web** em 0.9 min, 0 novos (0 inéditos) — parou no passo 7 (2 ferramentas). tem a tela de agendamento e o seletor de conta ativa adb_fila_paralela | Fila e travas para vários celulares em paralelo | lock por serial, reconexão Wi-Fi automática e retomada de upload interrompido
 
 Achados: `CATALOGO_DESCOBERTAS.md` | registro: `motor_registro.jsonl` | log: `motor_pesquisador.log`
