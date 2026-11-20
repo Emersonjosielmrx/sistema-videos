@@ -954,7 +954,12 @@ def sec_recuperacao():
             s, ts, v = r.get("slug"), r.get("ts", ""), r.get("views")
             if not s or v is None or ts < "2026-11-11":
                 continue
-            k = (s, ts[:10])
+            # 19/11 (dona viu no painel 6.363 "hoje" contra os 39 mil que eu dei): o YouTube só atualiza o total de
+            # views de MADRUGADA, fechando o dia ANTERIOR — mesma regra do painel (painel_controlador, 11/11): leitura
+            # antes das 06h conta no dia anterior. RONDA_VIEWS_MADRUGADA=0 volta ao dia do relógio.
+            _corte = 6 if os.environ.get("RONDA_VIEWS_MADRUGADA", "1") != "0" else 0
+            _d = (datetime.fromisoformat(ts[:16]) - timedelta(hours=_corte)).date().isoformat()
+            k = (s, _d)
             if k not in prim or ts < prim[k][0]:
                 prim[k] = (ts, v, r.get("nome") or s)
             if s not in ult or ts > ult[s][0]:
@@ -982,10 +987,11 @@ def sec_recuperacao():
         media = sum(base) / len(base)
         ontem = (agora - timedelta(days=1)).strftime("%Y-%m-%d")
         g_ontem = ganho.get(ontem)
+        g_hoje, real_hoje = None, None  # 19/11: o dia de hoje só fecha amanhã de madrugada
         # hoje até agora, projetado pro dia inteiro
         g_hoje = None
         real_hoje = None  # 19/11 dona: "além da projeção de hoje, o real atual também"
-        if (s, hoje_iso) in prim and s in ult and ult[s][0][:10] == hoje_iso:
+        if False and (s, hoje_iso) in prim and s in ult and ult[s][0][:10] == hoje_iso:
             real_hoje = ult[s][1] - prim[(s, hoje_iso)][1]
             h = max(1.0, (datetime.fromisoformat(ult[s][0]) - datetime.fromisoformat(prim[(s, hoje_iso)][0]))
                     .total_seconds() / 3600)
@@ -999,14 +1005,13 @@ def sec_recuperacao():
             est = "✅ recuperado" if p >= 0.7 else ("🟡 parcial" if p >= 0.3 else "🔴 restrito")
         nome = prim[(s, dias[-1])][2]
         linhas.append((media, f"| {nome[:24]} | {media:,.0f} | {'—' if g_ontem is None else f'{g_ontem:,.0f}'} | "
-                              f"{'—' if real_hoje is None else f'{real_hoje:,.0f}'} | "
-                              f"{'—' if g_hoje is None else f'~{g_hoje:,.0f}'} | {est} |".replace(",", ".")))
+                              f"{est} |".replace(",", ".")))
     linhas.sort(key=lambda x: -x[0])
     out = ["## 🩺 Recuperação dos canais vivos (views/dia x antes dos banimentos 12-16/11)",
-           f"| Canal | Antes (média/dia) | Ontem | Hoje até agora ({agora:%H:%M}) | Hoje (projeção) | Situação |",
-           "|---|---:|---:|---:|---:|---|"]
+           "| Canal | Antes (média/dia) | Ontem (fechado) | Situação |", "|---|---:|---:|---|"]
     out += [l for _, l in linhas]
     n = Counter(l.rsplit("|", 2)[-2].strip() for _, l in linhas)
+    out.append("- Hoje só fecha amanhã de madrugada (o YouTube atualiza o total de views 1x por dia, entre 00h e 06h).")
     out.append(f"- Resumo: {n.get('✅ recuperado', 0)} recuperados, {n.get('🟡 parcial', 0)} parciais, "
                f"{n.get('🔴 restrito', 0)} restritos (recuperado = ≥ 70% da média de antes; restrito = < 30%)")
     return out

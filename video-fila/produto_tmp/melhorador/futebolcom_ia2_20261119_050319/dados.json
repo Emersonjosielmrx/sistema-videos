@@ -1,0 +1,377 @@
+{
+ "video": "futebolcom_ia2_20261119_050319.mp4",
+ "conta": "futebolcom.ia2",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio Digital: pedido sem demora no WhatsApp",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 4.5,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 4.0,
+   "roteiro_marca": 4.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    13.27
+   ],
+   [
+    1,
+    "dono",
+    13.43
+   ],
+   [
+    2,
+    "dono",
+    12.77
+   ],
+   [
+    3,
+    "dono",
+    14.5
+   ],
+   [
+    4,
+    "cartao",
+    7.14
+   ]
+  ],
+  "graves": 10,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê 'para responder' sofreu perda de estilo e contraste: está translúcida, em tom cinza escuro sem preenchimento branco nem contorno preto, ficando praticamente invisível sobre a barba do apresentador.",
+   "como_corrigir": "Aplicar a formatação padrão da legenda com opacidade total (texto branco com contorno preto espesso e destaque da palavra falada) em todo o trecho da fala."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "A legenda 'cliente cansava' perdeu a renderização visual padrão, exibindo texto em cinza transparente sem contorno nem preenchimento, camuflando-se na camisa e no balcão e impossibilitando a leitura no celular.",
+   "como_corrigir": "Corrigir a timeline da legenda para assegurar que o texto mantenha o estilo consistente com alto contraste (letras brancas com traçado preto de segurança)."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "A legenda karaokê ('Seu cliente desiste' / 'demora para responder') está posicionada alta demais (em torno de y=1400), sobrepondo o queixo e a boca do apresentador.",
+   "como_corrigir": "Descer a linha da legenda para aproximadamente y=1500–1540 (mantendo-se acima da margem de segurança de y=1580) ou ajustar o enquadramento do apresentador para liberar o rosto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Erro de enquadramento com barras pretas verticais nas laterais (pillarboxing) em toda a cena 3 (q10 a q12), indicando que o vídeo não preenche a largura de 1080 px e fazendo o selo '3 O resultado' invadir a faixa preta.",
+   "como_corrigir": "Redimensionar o clipe da cena 3 em modo 'fill/cover' para preencher totalmente os 1080x1920 px, eliminando as faixas pretas laterais."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Falta de variedade visual e repetição do mesmo molde entre as cenas 1 e 2. O enquadramento, ângulo da câmera, iluminação, apresentador e o retângulo superior ('CLIENTE DESISTE PELA DEMORA?') são idênticos de 6.03s a 18.31s (mais de 12 segundos consecutivos no mesmo take fixo), alterando apenas o pequeno rótulo de '1' para '2'.",
+   "como_corrigir": "Variar o enquadramento na cena 2 através de um punch-in (corte para plano mais fechado) ou inserir B-roll com motion graphics dinâmico demonstrando a interface do cardápio digital no celular enquanto o apresentador fala."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cena parada e ausência total de animação nos elementos do cartão final de 27.88s a 30.19s. O título 'Cardápio Digital', o subtítulo, o botão 'Chame no direct' e o @ estão completamente estáticos, sem animação de entrada escalonada, sem pulso de destaque no CTA e com um corte abrupto no fundo onde uma pessoa surge instantaneamente entre q13 e q14.",
+   "como_corrigir": "Aplicar animação sequencial de entrada (stagger de baixo para cima com overshoot/ease-out) nos textos, adicionar efeito contínuo de brilho ou pulso no botão 'Chame no direct' para guiar o clique, e estabilizar o background com um slow zoom contínuo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Instabilidade de posição (jitter) no card de pergunta e falha na animação da legenda karaokê aos 2.23s. O cartão salta para cima e para a esquerda cortando o topo da tela, enquanto a legenda perde a caixa preta de fundo e pisca um texto cinza quase transparente e ilegível ('para responder').",
+   "como_corrigir": "Fixar as coordenadas X e Y do cartão de pergunta mantendo-o estático durante a fala, e sincronizar a legenda karaokê garantindo a permanência da tarja escura de fundo em todas as palavras ativas."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Transição seca e corte brusco de continuidade entre as cenas 2 e 3. O apresentador troca instantaneamente de camisa (da cinza para a vermelha) sem transição visual de passagem, e o enquadramento revela suportes e garras de celular borrados em primeiro plano obstruindo o terço inferior.",
+   "como_corrigir": "Inserir uma transição de movimento fluida (como whip pan lateral ou zoom veloz acompanhado de efeito sonoro) para conectar as cenas, e recortar ou reenquadrar a câmera para eliminar os suportes de celular do primeiro plano."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Ritmo arrastado por excesso de plano falado contínuo sem dinamismo visual. Mais de 26 segundos de vídeo permanecem quase que exclusivamente na imagem do apresentador falando, sem exibir na prática as fotos do cardápio ou a interação da IA citadas no roteiro.",
+   "como_corrigir": "Inserir recortes rápidos com mockups de smartphone animados mostrando a rolagem das fotos dos pratos e a simulação de respostas instantâneas da IA no WhatsApp para manter a retenção do espectador."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "O @ da conta no cartão de encerramento está definido como '@futebolcom.ia2', que pertence a um nicho completamente alheio ao produto anunciado ('Cardápio Digital').",
+   "como_corrigir": "Substituir '@futebolcom.ia2' pelo @ oficial e correto da marca do Cardápio Digital."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Falha de renderização na legenda karaokê: o texto 'para responder' aparece desformatado, translúcido/escuro e ilegível sobre o apresentador, além de dessincronizado da fala do momento ('porque demora').",
+   "como_corrigir": "Aplicar a formatação padrão da legenda (texto branco com contorno preto e destaque em vermelho) sincronizada com o trecho correto do áudio ('de pedir porque demora')."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Falha visual na legenda karaokê: o texto 'cliente cansav' aparece sem estilo (translúcido/escuro sobre a bancada) e com a palavra 'cansava' truncada/incompleta.",
+   "como_corrigir": "Ajustar a camada de legenda para exibir o trecho completo ('o cliente cansava') com preenchimento branco, borda preta legível e realce ativo da palavra."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Defeito de IA visível no logo da camisa polo vermelha, com letras deformadas e sem sentido acima de 'Delivery', além de quebra brusca de continuidade no figurino e cenário do apresentador em relação às cenas 1 e 2.",
+   "como_corrigir": "Remover o texto deformado na camisa via inpainting ou manter a mesma tomada e figurino das cenas anteriores para assegurar continuidade visual."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho não prende nos 2 primeiros segundos. O vídeo começa frio, apenas com o apresentador falando para a câmera em plano médio com um sticker estático de pergunta no topo. Falta uma quebra de padrão visual (pattern interrupt) ou dramatização da dor para reter a rolagem do feed.",
+   "como_corrigir": "Na Cena 0 (0s a 2s), abrir com impacto visual: inserir um corte rápido ou B-roll dinâmico de uma tela de celular com notificações acumuladas de WhatsApp e clientes sem resposta, antes de cortar para a fala do apresentador, tornando a dor imediatamente visível."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ausência total de demonstração visual do produto ou da IA. Na cena que explica 'Como funciona', o dono fala sobre olhar fotos no cardápio e tirar dúvidas com a inteligência artificial, mas o enquadramento continua fixo no balcão sem mostrar a interface do sistema, passando a impressão de discurso abstrato ou amador em vez de um software profissional.",
+   "como_corrigir": "Na Cena 2, inserir em Picture-in-Picture (PIP) ou tela dividida um mockup de smartphone animado mostrando a tela real do cardápio digital com fotos apetitosas e a simulação da IA respondendo no WhatsApp em tempo real com o selo 'Simulação'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Quebra severa de continuidade e interferência física no enquadramento. O apresentador troca abruptamente de roupa da camisa mescla cinza (usada nas cenas 0, 1 e 2) para uma polo vermelha, além de surgirem suportes/equipamentos pretos borrados invadindo a parte inferior da lente, poluindo a imagem e dando cara de bastidor mal gravado.",
+   "como_corrigir": "Na Cena 3, regravar o take mantendo rigorosamente a mesma camisa cinza das cenas anteriores (ou uniforme padronizado da marca em todo o anúncio) e afastar ou reposicionar os suportes e equipamentos para deixar o enquadramento limpo e focado no apresentador."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "inovarecrm_20261119_135324.mp4",
+   "conta": "inovarecrm",
+   "formato": "dono_abre_fecha",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "inovaresites_20261119_151614.mp4",
+   "conta": "inovaresites",
+   "formato": "dono_tres",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 3.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovaresites",
+   "formato": "dono_tres+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovaresites",
+   "formato": "dono_tres+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261119_183337.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.38,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.88,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.5,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "superchatia_ia_20261119_214019.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.45,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.8,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   10,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   5,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

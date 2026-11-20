@@ -4113,5 +4113,30 @@
   "descricao": "Alternância fluida entre cenas geradas por IA de casais típicos locais e vídeos reais em close-up de preparação de pratos e cortes de carne",
   "origem": "reprovado pela sessão: Nao se aplica a videos de produto/SaaS de automacao WhatsApp (Gestao de Grupos IA)",
   "em": "2026-11-19T08:48:30"
+ },
+ {
+  "descricao": "Lower third translúcido azul com corte diagonal para identificação de porta-voz",
+  "origem": "reprovado pela sessão: Em enquadramento vertical 9:16 com apresentador e karaokê inferior, lower third sobrepõe o tronco e conflita com a legenda inferior (regra 1 APRENDIDO)",
+  "em": "2026-11-20T03:04:15"
+ },
+ {
+  "descricao": "Tarja horizontal azul com corte diagonal para marcar tópicos numerados de lista",
+  "origem": "aplicado pela sessão: Aplicado no topo das cenas como tarja horizontal na cor da marca com corte diagonal (clipPath) para destacar o tópico",
+  "em": "2026-11-20T03:04:23"
+ },
+ {
+  "descricao": "Enumeração sequencial numerada (ex: '2. Definir meta de reserva', '3. Disciplina', '4. Onde guardar?') com caixa azul destacada no topo da tela acompanhando o tópico",
+  "origem": "aplicado pela sessão: Aplicado nas etapas do roteiro (01 O Problema, 02 Como Funciona, 03 O Resultado) com badge numerado no topo",
+  "em": "2026-11-20T03:04:30"
+ },
+ {
+  "descricao": "Apresentador posicionado de cabeça para baixo/diagonal no topo da tela reagindo ao conteúdo",
+  "origem": "reprovado pela sessão: Incompativel com video corporativo B2B serio de agente de IA da Inovare Claw",
+  "em": "2026-11-20T03:45:14"
+ },
+ {
+  "descricao": "Inclusão de um meme clássico de série (Jesse Pinkman de Breaking Bad apontando com sorriso irônico) no meio do vídeo educacional/notícia.",
+  "origem": "reprovado pela sessão: Incompativel com tom serio e sem meme da Inovare Claw e risco de copyright",
+  "em": "2026-11-20T03:45:21"
  }
 ]

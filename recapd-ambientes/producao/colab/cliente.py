@@ -628,6 +628,12 @@ def preparar(url, info=None):
         print(f"original quebrado ou incompleto ({video.stat().st_size // 2**20} MB) — baixando de novo", flush=True)
         video.unlink()
         video = None
+    if not video:
+        # 19/11 (a Vilão 4, 5,5 GB + merge com 2ª cópia, levou o D a 82 MB DUAS vezes): só baixa com folga. Original
+        # longo = ~2x o tamanho durante o merge. ALIMENTAR_MIN_LIVRE_GB (15).
+        _livre = shutil.disk_usage(str(work)).free / 1e9
+        if _livre < float(os.environ.get("ALIMENTAR_MIN_LIVRE_GB", "15")):
+            raise RuntimeError(f"PAUSA_DISCO: só {_livre:.1f} GB livres no D — tento depois")
     video = video or anime_fetch.download_video(url, work)
     if not video:
         raise RuntimeError("download falhou")
@@ -1093,7 +1099,15 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
         esperando += len(a_caminho)
         em_fila |= a_caminho
         import ytdlp_vez
-        if ytdlp_vez.pausado():  # YouTube barrando o IP de casa: nada de yt-dlp (regra: sem rajada)
+        # 19/11 (disco D chegou a 82 MB: a Vilão 4 tem 5,5 GB e o merge do yt-dlp faz uma 2ª cópia): só baixa original
+        # novo com >= ALIMENTAR_MIN_LIVRE_GB (15) livres no D; senão espera a próxima volta (não conta falha).
+        try:
+            _livre = shutil.disk_usage(str(anime_auto.BASE)).free / 1e9
+        except Exception:  # noqa: BLE001
+            _livre = 999
+        if _livre < float(os.environ.get("ALIMENTAR_MIN_LIVRE_GB", "15")):
+            print(f"{datetime.now():%H:%M} disco com {_livre:.1f} GB livres — não baixo original nesta volta", flush=True)
+        elif ytdlp_vez.pausado():  # YouTube barrando o IP de casa: nada de yt-dlp (regra: sem rajada)
             pass
         elif esperando < max(1, vivos) + folga - 1:
             # 09/11 dona ("esses que tem que fazer"): config/fontes_prioridade.json vai na FRENTE do canal normal
@@ -1162,7 +1176,9 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
                           flush=True)
                     (p["work"] / "source.mp4").unlink(missing_ok=True)  # já está no Drive da fila
                 except Exception as ex:  # noqa: BLE001
-                    if ytdlp_vez.bloqueio(str(ex)):  # bloqueio do IP não é culpa do vídeo
+                    if "PAUSA_DISCO" in str(ex):  # 19/11: disco cheio não é culpa do vídeo (não conta falha)
+                        print(f"{datetime.now():%H:%M} {ex}", flush=True)
+                    elif ytdlp_vez.bloqueio(str(ex)):  # bloqueio do IP não é culpa do vídeo
                         ytdlp_vez.pausar(f"alimentar recap longo: {ex}")
                         print(f"YouTube barrou o IP ({e['id']}): yt-dlp em pausa", flush=True)
                     else:

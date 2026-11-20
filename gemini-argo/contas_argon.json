@@ -4,13 +4,13 @@
    "email": "emersonjosiel2029@gmail.com",
    "apelido": "emersonjosiel2029",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-19T17:52",
-   "erros_seguidos": 2,
+   "ultimo_uso": "2026-11-20T01:11",
+   "erros_seguidos": 0,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1449,
-    "erros": 219,
+    "erros": 220,
     "seg_total": 66914.9
    },
    "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
@@ -18,8 +18,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:00",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-20T04:33"
   },
   {
    "email": "emersonjosiel2030@gmail.com",
@@ -39,7 +38,8 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:37"
+   "sem_cota_ate": "2026-11-20T04:59",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "comoseriasecomia@gmail.com",
@@ -59,7 +59,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:38"
+   "sem_cota_ate": "2026-11-20T04:26"
   },
   {
    "email": "emersonjosiel2033@gmail.com",
@@ -79,7 +79,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T23:17"
+   "sem_cota_ate": "2026-11-20T05:18"
   },
   {
    "email": "inovaremanhwaverseesp@gmail.com",
@@ -99,27 +99,27 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T23:26"
+   "sem_cota_ate": "2026-11-20T05:26"
   },
   {
    "email": "inovaremanhwaversethai@gmail.com",
    "apelido": "inovaremanhwaversethai",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-18T17:58",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-20T00:59",
+   "erros_seguidos": 1,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1218,
-    "erros": 234,
+    "erros": 235,
     "seg_total": 46411.3
    },
-   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /_/BardChatUi/data/assistant.lam",
+   "ultimo_erro": "inovaremanhwaversethai: ressincronização pelo cofre falhou (conta deslogada?)",
    "voltou_em": "2026-11-18T15:16",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:53"
+   "sem_cota_ate": "2026-11-20T05:30"
   },
   {
    "email": "solarmundo195@gmail.com",
@@ -139,7 +139,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:37"
+   "sem_cota_ate": "2026-11-20T04:59"
   },
   {
    "email": "inovaremanhwabr@gmail.com",
@@ -159,18 +159,18 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:38"
+   "sem_cota_ate": "2026-11-20T04:59"
   },
   {
    "email": "inovaremanhwaverseing@gmail.com",
    "apelido": "inovaremanhwaverseing",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-19T11:14",
+   "ultimo_uso": "2026-11-20T02:59",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1133,
-    "erros": 217,
+    "erros": 221,
     "seg_total": 47131.2
    },
    "volta_exata": false,
@@ -179,7 +179,7 @@
    "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T20:16"
+   "sem_cota_ate": "2026-11-20T06:03"
   },
   {
    "email": "aulacomia@gmail.com",
@@ -199,7 +199,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T23:34"
+   "sem_cota_ate": "2026-11-20T05:35"
   },
   {
    "email": "aulasrevolution@gmail.com",
@@ -237,8 +237,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:00",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-20T05:38"
   },
   {
    "email": "filmescomia1@gmail.com",
@@ -258,29 +257,27 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T20:33",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-20T05:26"
   },
   {
    "email": "msenergypara@gmail.com",
    "apelido": "msenergypara",
-   "bloqueada": false,
-   "ultimo_uso": "2026-11-19T18:55",
-   "erros_seguidos": 0,
+   "bloqueada": true,
+   "ultimo_uso": "2026-11-20T04:00",
+   "erros_seguidos": 10,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 248,
-    "erros": 593,
+    "erros": 615,
     "seg_total": 7809.0
    },
    "volta_exata": false,
    "voltou_em": "2026-11-05T10:02",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
-   "ultimo_erro": "StreamGenerate HTTP 401: )]}'\n\n105\n[[\"er\",null,null,null,null,401,null,null,null,16],[\"di\",15],[\"af.httprm\",15,\"-2425047",
+   "ultimo_erro": "StreamGenerate HTTP 401: )]}'\n\n104\n[[\"er\",null,null,null,null,401,null,null,null,16],[\"di\",13],[\"af.httprm\",13,\"71806221",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:08",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-19T22:08"
   },
   {
    "email": "murilodoctor192@gmail.com",
@@ -319,7 +316,7 @@
    "ultimo_erro": "resposta vazia",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:48"
+   "sem_cota_ate": "2026-11-20T06:23"
   },
   {
    "email": "mentoriaiapro@gmail.com",
@@ -339,7 +336,7 @@
    "ultimo_erro": "resposta vazia",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:01"
+   "sem_cota_ate": "2026-11-20T06:23"
   },
   {
    "email": "e4487017@gmail.com",
@@ -359,8 +356,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:23",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-20T06:25"
   },
   {
    "email": "fabricadeautomacoes0@gmail.com",
@@ -380,7 +376,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:54"
+   "sem_cota_ate": "2026-11-20T06:03"
   },
   {
    "email": "inovarecap@gmail.com",
@@ -400,7 +396,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:35"
+   "sem_cota_ate": "2026-11-20T06:27"
   },
   {
    "email": "emersongenc@gmail.com",
@@ -420,7 +416,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:35"
+   "sem_cota_ate": "2026-11-20T06:30"
   },
   {
    "email": "emersongencshin@gmail.com",
@@ -440,7 +436,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T21:55"
+   "sem_cota_ate": "2026-11-20T06:31"
   },
   {
    "email": "empressinovare@gmail.com",
@@ -460,7 +456,7 @@
    "voltou_em": "2026-11-16T04:49",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:01"
+   "sem_cota_ate": "2026-11-20T06:32"
   },
   {
    "email": "fabiovideoseducativos@gmail.com",
@@ -480,7 +476,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:07"
+   "sem_cota_ate": "2026-11-20T06:32"
   },
   {
    "email": "gameoftroneskingsroadbrasil@gmail.com",
@@ -500,7 +496,7 @@
    "voltou_em": "2026-11-16T17:58",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:09"
+   "sem_cota_ate": "2026-11-20T06:41"
   },
   {
    "email": "vendeafiliados3@gmail.com",
@@ -520,7 +516,7 @@
    "voltou_em": "2026-11-16T03:52",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:21"
+   "sem_cota_ate": "2026-11-20T06:40"
   },
   {
    "email": "en1653964@gmail.com",
@@ -540,7 +536,7 @@
    "voltou_em": "2026-11-16T05:02",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:22"
+   "sem_cota_ate": "2026-11-20T06:40"
   },
   {
    "email": "emersonjosiel2031@gmail.com",
@@ -560,7 +556,7 @@
    "voltou_em": "2026-11-16T04:49",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:32"
+   "sem_cota_ate": "2026-11-20T06:41"
   },
   {
    "email": "entrevistacomia@gmail.com",
@@ -580,7 +576,7 @@
    "voltou_em": "2026-11-16T19:50",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-19T22:49"
+   "sem_cota_ate": "2026-11-20T06:50"
   }
  ],
  "indice": 11

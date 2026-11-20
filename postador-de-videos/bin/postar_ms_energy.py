@@ -40,6 +40,7 @@ CREDS_FILE = Path(r"D:\credenciais-canais\instagram_contas.json")
 # Facebook CDP
 FB_POSTER = Path(r"D:\postador-de-videos\bin\facebook_cdp_poster.py")
 FB_PAGE = "https://www.facebook.com/mundosolarenergia/"
+FB_ASSET_ID = "495542104245364"  # id da página MS energy no Business Suite (asset_id)
 FB_PORT = 9401
 
 PY_EXE = Path(r"D:\hipercool-videos\venv\Scripts\python.exe")
@@ -398,6 +399,24 @@ def postar_instagram_stories(video_path, video_url=None):
 
 def postar_facebook(video_path, caption):
     """Posta Reel no Facebook via CDP. Retorna (ok, msg)."""
+    import subprocess
+    # 20/11 (dona: "comece a postar a da MS Energy"): o FB parou em 26/08 porque o Chrome 9401 precisava estar aberto à
+    # mão. Agora abre o Chrome msenergypara (saída de sempre = casa) e fecha no fim, como o TikTok.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import fb_contas
+    import fb_reel_bs
+    from playwright.sync_api import sync_playwright
+    _porta, _proc = fb_contas.abrir("msenergypara")
+    try:
+        # 20/11: Business Suite (o botão 'Criar reel' da página sumiu). Só a página MS energy; Instagram desmarcado.
+        with sync_playwright() as p:
+            b = p.chromium.connect_over_cdp(f"http://127.0.0.1:{_porta}")
+            return fb_reel_bs.postar(b.contexts[0], FB_ASSET_ID, "MS energy", str(video_path), caption, tag="fb_msenergy")
+    finally:
+        fb_contas.fechar(_proc)
+
+
+def _postar_facebook_cdp(video_path, caption):
     import subprocess
     cmd = [
         str(PY_EXE), str(FB_POSTER),

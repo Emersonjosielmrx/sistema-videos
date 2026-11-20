@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 19/11/2026 19:48. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 20/11/2026 03:45. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -18,7 +18,7 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 
 (nenhum)
 
-## B. Candidatos (sem resposta em 24 h): 451 grupo(s), os 40 mais fortes
+## B. Candidatos (sem resposta em 24 h): 454 grupo(s), os 40 mais fortes
 
 ### 1. [visual] Gráfico de escala de pH com garrafa e indicador de nível (seta preta apontando para o 7).
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
@@ -300,4 +300,4 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=A72DXdSi0cY seg 1333.6 (trecho bf4ec878.mp4)
 - ids: bf4ec878
 
-(+ 411 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+(+ 414 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

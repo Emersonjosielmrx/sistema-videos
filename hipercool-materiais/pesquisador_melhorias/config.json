@@ -25603,6 +25603,126 @@
         "repos e relatos de recap shorts que escolhem o painel de abertura (gancho visual) e testam ordem de painéis, sem modelo novo"
       ],
       "origem": "area_camera_3d_painel__sonnet_1959.md 2026-11-19"
+    },
+    {
+      "id": "ordem_leitura",
+      "nome": "Ordem de leitura e duração por painel",
+      "subtemas": [
+        "scripts pequenos em Python que ligam a ordem dos balões (direita para esquerda no mangá) e a duração da fala ao tempo de cada painel"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2047.md 2026-11-19"
+    },
+    {
+      "id": "recap_celular",
+      "nome": "Render de recap no Android",
+      "subtemas": [
+        "scripts de FFmpeg com `crop`/`zoompan` leves rodando em Termux para dividir o render entre PCs e celulares"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2047.md 2026-11-19"
+    },
+    {
+      "id": "serie_ponte_short_longo",
+      "nome": "Ponte Short→longo e séries",
+      "subtemas": [
+        "scripts pequenos que ligam Short ao longo (cartela final, link fixado, playlist em ordem)"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2106.md 2026-11-19"
+    },
+    {
+      "id": "tempo_audio",
+      "nome": "Montagem guiada pela duração do áudio",
+      "subtemas": [
+        "repositórios pequenos com ffprobe que calculam a tabela de tempos de fala e pausa para recap de mangá/manhwa (painel entra na fala certa)"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2116.md 2026-11-19"
+    },
+    {
+      "id": "vistos_idioma",
+      "nome": "Recaps mais vistos por idioma",
+      "subtemas": [
+        "scripts com yt-dlp que listam recaps por views em es/en/outros idiomas e as lacunas de canal por país"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2116.md 2026-11-19"
+    },
+    {
+      "id": "celular_tecnica_share",
+      "nome": "Técnica sem repositório: FileProvider/MediaStore e `am start -a SEND` com `content://` para o YouTube sem crash",
+      "subtemas": [
+        "Docs oficiais Android (FileProvider, `ACTION_SEND`) e issues do uiautomator2/adbutils sobre `content://`, `READ_MEDIA_VIDEO` e `adb push` + MediaScanner"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2132.md 2026-11-19"
+    },
+    {
+      "id": "pontes_short_longo",
+      "nome": "Ponte Short→longo e playlist em série",
+      "subtemas": [
+        "Exemplos reais de canal com card/fixado/playlist ligando Short ao longo e relato de retenção; só regra do YouTube ou prática de canal"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2222.md 2026-11-19"
+    },
+    {
+      "id": "ritmo_conta_gemini",
+      "nome": "Limitador e disjuntor de fila por conta",
+      "subtemas": [
+        "padrões de rate-limit e pausa por 403 em automação de Google sem navegador, com exemplos curtos em Python"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0007.md 2026-11-20"
+    },
+    {
+      "id": "cota_reset_conta",
+      "nome": "Mapa de reset de cota por conta",
+      "subtemas": [
+        "como saber e registrar a hora em que a cota diária do app Gemini volta, sem API"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0007.md 2026-11-20"
+    },
+    {
+      "id": "yt_reused",
+      "nome": "Política \"reused content\" para recap",
+      "subtemas": [
+        "ler a página oficial sobre conteúdo reutilizado e a de Shorts, listar o que conta como \"transformador\" (comentário, edição, narração própria) e montar um checklist por canal"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0236.md 2026-11-20"
+    },
+    {
+      "id": "yt_metadados_var",
+      "nome": "Variação de títulos, miniaturas e \"Sobre\" entre canais",
+      "subtemas": [
+        "técnica (sem repositório) para medir similaridade de metadados entre os canais próprios e evitar o aspecto de produção em massa"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0236.md 2026-11-20"
+    },
+    {
+      "id": "pos_curto",
+      "nome": "ponte Short→longo",
+      "subtemas": [
+        "como Shorts de painel apontam para o recap longo (pin de comentário, fim do Short com gancho \"parte 2\"), em Python + yt-dlp"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0336.md 2026-11-20"
+    },
+    {
+      "id": "pos_gancho",
+      "nome": "primeiros 30 s do recap",
+      "subtemas": [
+        "padrões de abertura de recaps mais vistos (medir via yt-dlp o que os campeões fazem nos 30 s iniciais)"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0336.md 2026-11-20"
+    },
+    {
+      "id": "pos_playlist",
+      "nome": "séries e compilados",
+      "subtemas": [
+        "formatos de compilado e playlist que aumentam a retenção de um vídeo para o próximo em canais de recap"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0336.md 2026-11-20"
+    },
+    {
+      "id": "mais_vistos",
+      "nome": "Achar recaps/shorts campeões por nicho",
+      "subtemas": [
+        "repositórios pequenos que usam yt-dlp + ordenação por views÷inscritos para listar vídeos de recap mais vistos (anime/manhwa/outros) por idioma"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0346.md 2026-11-20"
     }
   ],
   "projetos": [

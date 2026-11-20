@@ -610,6 +610,27 @@ def main():
     # (o Flow vive ocupado/instável nos notebooks). ANIME_CAPA_DEPOIS=1 (postar_longos) = sobe sem esperar; o
     # colab\capas_depois.py gera as MESMAS capas (capa A + teste A/B) e aplica no vídeo pelo Studio quando ficam prontas.
     capa_depois = os.environ.get("ANIME_CAPA_DEPOIS") == "1" and args.midia in ("anime", "manhwa")
+    # 19/11 dona ("quando terminar tem que postar logo e já público; deixa a capa dele pronta"): capa gerada ANTES, com
+    # o longo ainda no Kaggle (D:\hipercool-materiais\capas_prontas_longo\<id do YouTube>.jpg) = sobe JÁ com ela.
+    # CAPA_PRONTA_ANTES=0 ignora.
+    _vid_fonte = ""
+    try:
+        _m = re.search(r"[?&]v=([\w-]{11})", getattr(args, "source_url", "") or "")
+        _vid_fonte = _m.group(1) if _m else ""
+    except Exception:  # noqa: BLE001
+        pass
+    _sem_ia = False
+    _pronta = Path(r"D:\hipercool-materiais\capas_prontas_longo") / f"{_vid_fonte}.jpg"
+    if (_vid_fonte and _pronta.exists() and args.formato == "deitado" and not args.dry_run
+            and os.environ.get("CAPA_PRONTA_ANTES", "1") != "0"):
+        shutil.copy2(_pronta, capa_jpg)
+        for _ext in (".capa.json",):
+            if _pronta.with_suffix(_ext).exists():
+                shutil.copy2(_pronta.with_suffix(_ext), capa_jpg.with_suffix(_ext))
+        capa_depois = False
+        _sem_ia = True  # não gera de novo
+        capa_gerada = True
+        print(f"[publish] capa pronta de antes: {_pronta.name}")
     if capa_depois and not args.dry_run:
         postar["capa_depois"] = {
             "anime": args.anime, "cap": cap,
@@ -620,7 +641,7 @@ def main():
         postar_path.write_text(json.dumps(postar, ensure_ascii=False, indent=2), encoding="utf-8")
         print("[publish] capa vai DEPOIS do envio (capas_depois.py)")
     # capa IA só para anime/manhwa (os outros nichos usam quadro do próprio vídeo)
-    if capa_ia_anime and not args.dry_run and args.midia in ("anime", "manhwa") and not capa_depois:
+    if capa_ia_anime and not _sem_ia and not args.dry_run and args.midia in ("anime", "manhwa") and not capa_depois:
         try:
             capa_gerada = bool(capa_ia_anime.gerar_capa(
                 args.anime, cap, str(capa_jpg),

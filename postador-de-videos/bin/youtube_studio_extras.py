@@ -1458,6 +1458,14 @@ def metricas(pg, vid):
             yw.esperar_assentar(pg)
             pg.wait_for_timeout(9000)
             textos[aba] = pg.locator("ytcp-app").first.inner_text()
+            # 19/11: a página às vezes só tem o cabeçalho ("... Principais métricas") aos 9 s e os números chegam
+            # depois — era o "nenhuma métrica achada" de 286 vídeos. Espera até ~30 s por um número com % ou ":" .
+            for _ in range(7):
+                if re.search(r"Principais métricas\s*\n.*\d", textos[aba], re.S) and \
+                        re.search(r"\d+[,.]?\d*\s*%|\d+:\d\d", textos[aba].split("Principais métricas", 1)[-1]):
+                    break
+                pg.wait_for_timeout(3000)
+                textos[aba] = pg.locator("ytcp-app").first.inner_text()
             if not re.search(r"Algo deu errado|Something went wrong", textos[aba]):
                 if aba == "tab-interest_viewers":  # 29/10 (Fable, LONGOS_01): curva de retenção do SVG, mesma página
                     out["curva"] = _curva_retencao(pg)
@@ -1492,6 +1500,23 @@ def metricas(pg, vid):
         out["views"] = _numero(m.group(1))
     out["continuaram"] = _valor_depois(linhas, r"continuaram assistindo|stayed to watch")  # notebooks: Studio em inglês
     out["intencionais"] = _valor_depois(linhas, r"visualizações intencionais|engaged views")
+    # 19/11 (286 vídeos "sem views", 448 timeouts): a aba virou "Engajamento" e o card do feed mostra os DOIS números
+    # ACIMA dos rótulos ("12,3%  87,7%  /  Continuaram assistindo  Ignorado") — o _valor_depois pegava o 87,7 (que é o
+    # Ignorado) como "continuaram". Com os dois % na página, continuaram = 100 - ignorado. STUDIO_LEITURA_NOVA=0 desliga.
+    if os.environ.get("STUDIO_LEITURA_NOVA", "1") != "0":
+        _junto = " ".join(textos.values())
+        # ordem real no inner_text: "12,3%\nContinuaram assistindo\n87,7%\nIgnorado" — o número ANTES do rótulo
+        _m = re.search(r"([\d.,]+)\s*%\s*(?:Continuaram assistindo|Stayed to watch)\s*[\d.,]+\s*%\s*(?:Ignorado|Swiped away)",
+                       _junto)
+        if _m:
+            out["continuaram"] = _numero(_m.group(1))
+        elif os.environ.get("STUDIO_DEBUG_FEED"):
+            _i = _junto.find("Continuaram")
+            print("DEBUG_FEED:", repr(_junto[max(0, _i - 160):_i + 60]))
+        # Short: o número de views da página é o de "Visualizações intencionais" — sem ele o vídeo ficava sem views em
+        # todo placar/escada
+        if out.get("views") is None and out.get("intencionais") is not None:
+            out["views"] = out["intencionais"]
     # vídeo com 0 view caía como "nenhuma métrica" e sumia de todo placar (111 leituras ok, nenhuma com 0)
     if out["views"] is None and _so_traco(linhas, r"visualizações|views"):
         out["views"] = 0

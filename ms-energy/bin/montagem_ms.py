@@ -891,7 +891,13 @@ def montar(clip, roteiro, palavras, out_path, foto_fundo=None, log=print, karaok
                                                  "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt",
                                                  "yuv420p", "-r", "30", "-c:a", "aac", "-b:a", "160k",
                                                  "-movflags", "+faststart", str(out_path)]
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, encoding="utf-8", errors="replace")
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, encoding="utf-8", errors="replace")
+    except subprocess.TimeoutExpired:
+        # 20/11: em 16/11 o ffmpeg passou de 600 s e o TimeoutExpired derrubou o reel com o clipe do Veo já aprovado —
+        # agora vira falha de montagem e cai nos refazimentos abaixo
+        log("  [MONTAGEM] ffmpeg passou de 600 s")
+        r = subprocess.CompletedProcess(cmd, -1, "", "timeout 600s")
     ok = r.returncode == 0 and Path(out_path).exists() and Path(out_path).stat().st_size > 200_000
     if not ok:
         log(f"  [MONTAGEM] ffmpeg falhou (exit {r.returncode}): {r.stderr[-600:]}")

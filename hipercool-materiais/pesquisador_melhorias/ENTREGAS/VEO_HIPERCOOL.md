@@ -392,3 +392,62 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 20:11 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1959.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 20:39 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2026.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 20:57 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2047.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 21:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2106.md`
+- [INÉDITO] github.com/sukida678/ppt-to-microcourse-video — ★1, push 2026-10-26, MIT — Turn a PPT deck into a narrated micro-lecture video — free Edge TTS, word-accurate burned-in subtitles, Ken Burns motion, one MP4. Plain Pyt
+- [INÉDITO] github.com/BBQ2077/novel-to-manga-anime-generator — ★2, push 2026-10-01, MIT — AI novel-to-manga & anime video generator plugin for ChatGPT, Codex & Claude Code. Turn novel chapters into comics/webtoons or anime shorts 
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 21:24 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2116.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 22:15 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2208.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 22:40 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2222.md`
+- [INÉDITO] github.com/balgarath/gv-slideshow — ★1, push 2026-10-13, MIT — Android app that turns photos into Ken Burns slideshow videos
+- [INÉDITO] github.com/JorgeTheFox/koreader-dynamic-panelzoom — ★66, push 2026-09-07, MIT — A KOReader plugin for dynamic panel-by-panel zooming in comics and manga.
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 22:48 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2242.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-19 23:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2251.md`
+- [INÉDITO] github.com/myersm0/kenburns-renderer — ★0, push 2026-08-09, MIT — A standalone C++ Ken Burns effect renderer with support for Bézier curved motion paths and more
+- [INÉDITO] github.com/FURUYAN1234/ai-voice-comic-maker — ★3, push 2026-11-20, MIT — AI Voice Comic Maker: Drop a 4-koma manga image, get a fully voiced short video automatically. Powered by Gemini Vision & VOICEVOX. / 4コマ漫画画
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 23:17 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2307.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 23:46 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2338.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 00:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2353.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 01:54 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_avatar_3d_comercial__sonnet_0149.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 03:42 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0336.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 03:56 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0346.md`
+- (todos os itens desta pesquisa foram reprovados)

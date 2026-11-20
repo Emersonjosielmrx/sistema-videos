@@ -1,0 +1,160 @@
+export interface Palavra {
+  p: string;
+  ini: number;
+  fim: number;
+  cena: number;
+  quebraAntes?: boolean;
+  quebraApos?: boolean;
+}
+
+export interface MensagemConversa {
+  de: 'cliente' | 'empresa';
+  texto: string;
+}
+
+export const BRIEFING = {
+  marca: 'Agenda IA',
+  produto: 'Agenda IA',
+  publico:
+    'clínicas, consultórios, salões, barbearias, estúdios e prestadores de serviço que vivem de horário marcado',
+  fatos: [
+    'Agendamentos automaticos com IA',
+    'Agendamentos automáticos 24h',
+    'IA agenda, confirma e reagenda sozinha, direto no WhatsApp, sem conflito e sem duplo agendamento. Recepção humana custa 2500 por mês; a Agenda IA trabalha 24 horas a partir de 199.',
+  ],
+  cores: {
+    marca: '#FFA94D',
+    apoio: '#1F2937',
+    fundo_escuro: '#1F2937',
+    destaque: '#FFA94D',
+    texto_sobre_marca: '#1F2937',
+  },
+  arroba: '@sintetizerisada',
+  convite: 'Chame no direct',
+  convite_voz: 'Chame a gente no direct.',
+  titulo: 'A IA precisa de aprovação manual para agendar?',
+  gancho_tela: 'A IA faz tudo sozinha?',
+  duracao_s: 29.36,
+  cenas: [
+    {
+      n: 0,
+      ini: 0.0,
+      fim: 5.43,
+      tipo: 'pergunta' as const,
+      fala: 'Preciso parar meus atendimentos para aprovar cada horário marcado?',
+      rotulo: null,
+      foto: 'img_0.jpg',
+    },
+    {
+      n: 1,
+      ini: 5.08,
+      fim: 12.81,
+      tipo: 'dono' as const,
+      fala: 'Eu interrompia atendimentos no estúdio o dia inteiro só para validar mensagens de horário.',
+      rotulo: 'A rotina presa',
+      video: 'dono_1.mp4',
+    },
+    {
+      n: 2,
+      ini: 12.46,
+      fim: 18.21,
+      tipo: 'conversa' as const,
+      fala: 'O cliente escolhe a vaga e o sistema finaliza o processo ponta a ponta.',
+      rotulo: 'Autonomia total',
+      conversa: [
+        {
+          de: 'cliente' as const,
+          texto: 'Oi, tem vaga para quinta às 15h?',
+        },
+        {
+          de: 'empresa' as const,
+          texto: 'Tenho sim! Deseja confirmar para quinta às 15h?',
+        },
+        {
+          de: 'cliente' as const,
+          texto: 'Sim, pode marcar.',
+        },
+        {
+          de: 'empresa' as const,
+          texto: 'Perfeito! Horário reservado com sucesso na agenda.',
+        },
+      ],
+      foto: 'img_2.jpg',
+    },
+    {
+      n: 3,
+      ini: 17.86,
+      fim: 25.72,
+      tipo: 'dono' as const,
+      fala: 'Agora minha atenção fica inteira no cliente presencial enquanto os agendamentos automáticos rodam.',
+      rotulo: 'Foco no serviço',
+      video: 'dono_3.mp4',
+    },
+    {
+      n: 4,
+      ini: 25.37,
+      fim: 29.36,
+      tipo: 'cartao' as const,
+      fala: 'Chame a gente no direct.',
+      rotulo: null,
+      foto: 'img_4.jpg',
+    },
+  ],
+  palavras: [
+    {p: 'Preciso', ini: 0.319, fim: 0.76, cena: 0, quebraAntes: true},
+    {p: 'parar', ini: 0.772, fim: 1.116, cena: 0},
+    {p: 'meus', ini: 1.128, fim: 1.287, cena: 0},
+    {p: 'atendimentos', ini: 1.299, fim: 2.059, cena: 0},
+    {p: 'para', ini: 2.071, fim: 2.231, cena: 0},
+    {p: 'aprovar', ini: 2.243, fim: 2.672, cena: 0},
+    {p: 'cada', ini: 2.721, fim: 3.003, cena: 0},
+    {p: 'horário', ini: 3.015, fim: 3.334, cena: 0},
+    {p: 'marcado', ini: 3.346, fim: 3.959, cena: 0, quebraApos: true},
+    {p: 'Eu', ini: 5.674, fim: 6.294, cena: 1, quebraAntes: true},
+    {p: 'interrompia', ini: 6.294, fim: 6.874, cena: 1},
+    {p: 'atendimentos', ini: 6.874, fim: 7.614, cena: 1},
+    {p: 'no', ini: 7.614, fim: 7.854, cena: 1, quebraAntes: true},
+    {p: 'estúdio', ini: 7.854, fim: 8.534, cena: 1},
+    {p: 'o', ini: 8.534, fim: 8.774, cena: 1},
+    {p: 'dia', ini: 8.774, fim: 9.034, cena: 1},
+    {p: 'inteiro', ini: 9.034, fim: 9.494, cena: 1},
+    {p: 'só', ini: 9.494, fim: 10.174, cena: 1, quebraAntes: true},
+    {p: 'para', ini: 10.174, fim: 10.394, cena: 1},
+    {p: 'validar', ini: 10.394, fim: 10.954, cena: 1},
+    {p: 'mensagens', ini: 10.954, fim: 11.474, cena: 1, quebraAntes: true},
+    {p: 'de', ini: 11.474, fim: 11.694, cena: 1},
+    {p: 'horário.', ini: 11.694, fim: 12.014, cena: 1, quebraApos: true},
+    {p: 'O', ini: 12.958, fim: 13.044, cena: 2, quebraAntes: true},
+    {p: 'cliente', ini: 13.056, fim: 13.424, cena: 2},
+    {p: 'escolhe', ini: 13.436, fim: 13.816, cena: 2},
+    {p: 'a', ini: 13.828, fim: 13.902, cena: 2},
+    {p: 'vaga', ini: 13.914, fim: 14.294, cena: 2},
+    {p: 'e', ini: 14.306, fim: 14.367, cena: 2},
+    {p: 'o', ini: 14.38, fim: 14.416, cena: 2},
+    {p: 'sistema', ini: 14.429, fim: 14.858, cena: 2},
+    {p: 'finaliza', ini: 14.87, fim: 15.483, cena: 2},
+    {p: 'o', ini: 15.495, fim: 15.532, cena: 2},
+    {p: 'processo', ini: 15.544, fim: 16.083, cena: 2},
+    {p: 'ponta', ini: 16.095, fim: 16.389, cena: 2},
+    {p: 'a', ini: 16.402, fim: 16.438, cena: 2},
+    {p: 'ponta', ini: 16.451, fim: 16.892, cena: 2, quebraApos: true},
+    {p: 'Agora', ini: 18.74, fim: 19.48, cena: 3, quebraAntes: true},
+    {p: 'minha', ini: 19.6, fim: 19.72, cena: 3},
+    {p: 'atenção', ini: 19.72, fim: 20.08, cena: 3},
+    {p: 'fica', ini: 20.08, fim: 20.36, cena: 3},
+    {p: 'inteira', ini: 20.36, fim: 20.88, cena: 3},
+    {p: 'no', ini: 20.88, fim: 21.04, cena: 3},
+    {p: 'cliente', ini: 21.04, fim: 21.54, cena: 3},
+    {p: 'presencial', ini: 21.54, fim: 22.14, cena: 3},
+    {p: 'enquanto', ini: 22.76, fim: 23.02, cena: 3},
+    {p: 'os', ini: 23.02, fim: 23.26, cena: 3},
+    {p: 'agendamentos', ini: 23.26, fim: 23.82, cena: 3},
+    {p: 'automáticos', ini: 23.82, fim: 24.5, cena: 3},
+    {p: 'rodam.', ini: 24.5, fim: 24.92, cena: 3, quebraApos: true},
+    {p: 'Chame', ini: 25.864, fim: 26.219, cena: 4, quebraAntes: true},
+    {p: 'a', ini: 26.232, fim: 26.293, cena: 4},
+    {p: 'gente', ini: 26.305, fim: 26.636, cena: 4},
+    {p: 'no', ini: 26.648, fim: 26.746, cena: 4},
+    {p: 'direct', ini: 26.759, fim: 27.384, cena: 4, quebraApos: true},
+  ],
+};

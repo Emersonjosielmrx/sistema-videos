@@ -19653,5 +19653,185 @@
     "arquivado": false,
     "descricao": "OpenClaw/Codex Skill: Auto video editing for talk/vlog videos — speech recognition, sentence splitting, subtitle burning, and clip merging",
     "data": "2026-11-19"
+  },
+  "sukida678/ppt-to-microcourse-video": {
+    "ok": true,
+    "nome": "sukida678/ppt-to-microcourse-video",
+    "estrelas": 1,
+    "push": "2026-10-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn a PPT deck into a narrated micro-lecture video — free Edge TTS, word-accurate burned-in subtitles, Ken Burns motion, one MP4. Plain Pyt",
+    "data": "2026-11-19"
+  },
+  "sinmb79/webtoon-to-video": {
+    "ok": true,
+    "nome": "sinmb79/webtoon-to-video",
+    "estrelas": 5,
+    "push": "2026-04-06",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Convert webtoon panels + script into YouTube-ready videos with transitions, TTS, and sound effects.",
+    "data": "2026-11-19"
+  },
+  "bbq2077/novel-to-manga-anime-generator": {
+    "ok": true,
+    "nome": "BBQ2077/novel-to-manga-anime-generator",
+    "estrelas": 2,
+    "push": "2026-10-01",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "AI novel-to-manga & anime video generator plugin for ChatGPT, Codex & Claude Code. Turn novel chapters into comics/webtoons or anime shorts ",
+    "data": "2026-11-19"
+  },
+  "wellnesline/manga-panel-video": {
+    "ok": true,
+    "nome": "wellnesline/manga-panel-video",
+    "estrelas": 0,
+    "push": "2026-10-16",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "コマ割りページと音声からコマを順に見せる動画を作る",
+    "data": "2026-11-19"
+  },
+  "ysbing/yadb": {
+    "ok": true,
+    "nome": "ysbing/YADB",
+    "estrelas": 229,
+    "push": "2026-09-30",
+    "licenca": "LGPL-3.0",
+    "arquivado": false,
+    "descricao": "YADB is a utility tool that extends ADB, with its keyboard input feature being superior to ADBKeyboard.",
+    "data": "2026-11-19"
+  },
+  "fanxsu/phone-controller": {
+    "ok": true,
+    "nome": "Fanxsu/phone-controller",
+    "estrelas": 0,
+    "push": "2026-11-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Windows CLI + agent skill for Android real-device testing over ADB: inspect the live UI tree, find and tap by text or content-desc, swipe, t",
+    "data": "2026-11-19"
+  },
+  "albertensen/ai-manhwa-generator": {
+    "ok": true,
+    "nome": "Albertensen/ai-manhwa-generator",
+    "estrelas": 0,
+    "push": "2026-09-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "AI Manhwa & Anime Recap Video Generator - Fullstack Studio with Next.js, Supabase, and ComfyUI",
+    "data": "2026-11-19"
+  },
+  "mahinshorkar35-hub/mahin-manhwa-recap": {
+    "ok": true,
+    "nome": "mahinshorkar35-hub/mahin-manhwa-recap",
+    "estrelas": 0,
+    "push": "2026-07-06",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "AI-powered manhwa recap video generator with TTS, panel extraction, and video export",
+    "data": "2026-11-19"
+  },
+  "fitrahalim87-dot/automation-edit-manga-v4": {
+    "ok": true,
+    "nome": "fitrahalim87-dot/automation-edit-manga-v4",
+    "estrelas": 3,
+    "push": "2026-07-08",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "tools menmbuat video manga recap",
+    "data": "2026-11-19"
+  },
+  "shenxuakaekstasis/depthmotion-ai": {
+    "ok": true,
+    "nome": "ShenXuAkaEkstasis/DepthMotion-AI",
+    "estrelas": 1,
+    "push": "2026-08-06",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "AI-powered photo to cinematic 3D motion video generator using depth estimation and parallax rendering.",
+    "data": "2026-11-19"
+  },
+  "balgarath/gv-slideshow": {
+    "ok": true,
+    "nome": "balgarath/gv-slideshow",
+    "estrelas": 1,
+    "push": "2026-10-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android app that turns photos into Ken Burns slideshow videos",
+    "data": "2026-11-19"
+  },
+  "jorgethefox/koreader-dynamic-panelzoom": {
+    "ok": true,
+    "nome": "JorgeTheFox/koreader-dynamic-panelzoom",
+    "estrelas": 66,
+    "push": "2026-09-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A KOReader plugin for dynamic panel-by-panel zooming in comics and manga.",
+    "data": "2026-11-19"
+  },
+  "myersm0/kenburns-renderer": {
+    "ok": true,
+    "nome": "myersm0/kenburns-renderer",
+    "estrelas": 0,
+    "push": "2026-08-09",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A standalone C++ Ken Burns effect renderer with support for Bézier curved motion paths and more",
+    "data": "2026-11-19"
+  },
+  "furuyan1234/ai-voice-comic-maker": {
+    "ok": true,
+    "nome": "FURUYAN1234/ai-voice-comic-maker",
+    "estrelas": 3,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "AI Voice Comic Maker: Drop a 4-koma manga image, get a fully voiced short video automatically. Powered by Gemini Vision & VOICEVOX. / 4コマ漫画画",
+    "data": "2026-11-19"
+  },
+  "crisng95/flowkit": {
+    "ok": true,
+    "nome": "crisng95/flowkit",
+    "estrelas": 1179,
+    "push": "2026-11-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "AI agent can create video content better than you. No reason why you do it manually in google flow!",
+    "data": "2026-11-20"
+  },
+  "battiatus/dsh-gemini-antigravity-auth": {
+    "ok": true,
+    "nome": "Battiatus/dsh-gemini-antigravity-auth",
+    "estrelas": 0,
+    "push": "2026-11-11",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini for DeepSeek Harness (DSH) via Google Antigravity OAuth: multi-account quotas, Google Search grounding, image, audio, video and PDF u",
+    "data": "2026-11-20"
+  },
+  "sanskarprajapati/parallax-doc": {
+    "ok": true,
+    "nome": "sanskarprajapati/parallax-doc",
+    "estrelas": 8,
+    "push": "2026-11-01",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Cinematic one-camera history documentaries for Claude Code: layered 2.5D plates, no hard cuts, typed text with one red word, a worn film loo",
+    "data": "2026-11-20"
+  },
+  "nara-55beep/parallaxstudio3d": {
+    "ok": true,
+    "nome": "nara-55beep/ParallaxStudio3D",
+    "estrelas": 0,
+    "push": "2026-08-21",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Open unified-camera 2.5D parallax renderer for single images",
+    "data": "2026-11-20"
   }
 }

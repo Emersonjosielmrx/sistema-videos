@@ -7196,3 +7196,151 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_1959.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 20:39 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2026.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 20:57 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2047.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 21:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2106.md`
+
+- [INÉDITO] github.com/sukida678/ppt-to-microcourse-video — ★1, push 2026-10-26, MIT — Turn a PPT deck into a narrated micro-lecture video — free Edge TTS, word-accurate burned-in subtitles, Ken Burns motion, one MP4. Plain Pyt
+- [INÉDITO] github.com/BBQ2077/novel-to-manga-anime-generator — ★2, push 2026-10-01, MIT — AI novel-to-manga & anime video generator plugin for ChatGPT, Codex & Claude Code. Turn novel chapters into comics/webtoons or anime shorts 
+
+## 2026-11-19 21:24 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2116.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 21:45 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_android_adb_automacao_upload__sonnet_2132.md`
+
+- [INÉDITO] github.com/Fanxsu/phone-controller — ★0, push 2026-11-06, MIT — Windows CLI + agent skill for Android real-device testing over ADB: inspect the live UI tree, find and tap by text or content-desc, swipe, t
+
+## 2026-11-19 22:15 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2208.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 22:40 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2222.md`
+
+- [INÉDITO] github.com/balgarath/gv-slideshow — ★1, push 2026-10-13, MIT — Android app that turns photos into Ken Burns slideshow videos
+- [INÉDITO] github.com/JorgeTheFox/koreader-dynamic-panelzoom — ★66, push 2026-09-07, MIT — A KOReader plugin for dynamic panel-by-panel zooming in comics and manga.
+
+## 2026-11-19 22:48 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2242.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 23:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2251.md`
+
+- [INÉDITO] github.com/myersm0/kenburns-renderer — ★0, push 2026-08-09, MIT — A standalone C++ Ken Burns effect renderer with support for Bézier curved motion paths and more
+- [INÉDITO] github.com/FURUYAN1234/ai-voice-comic-maker — ★3, push 2026-11-20, MIT — AI Voice Comic Maker: Drop a 4-koma manga image, get a fully voiced short video automatically. Powered by Gemini Vision & VOICEVOX. / 4コマ漫画画
+
+## 2026-11-19 23:17 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2307.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-19 23:46 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2338.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 00:01 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_camera_3d_painel__sonnet_2353.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 00:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0007.md`
+
+- [INÉDITO] github.com/crisng95/flowkit — ★1179, push 2026-11-04, MIT — AI agent can create video content better than you. No reason why you do it manually in google flow!
+- [INÉDITO] github.com/Battiatus/dsh-gemini-antigravity-auth — ★0, push 2026-11-11, MIT — Gemini for DeepSeek Harness (DSH) via Google Antigravity OAuth: multi-account quotas, Google Search grounding, image, audio, video and PDF u
+
+## 2026-11-20 00:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0044.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 01:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_0107.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 01:40 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_webgl_frame_a_frame__sonnet_0136.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 01:54 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_avatar_3d_comercial__sonnet_0149.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 02:16 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_parallax_camera_paths__sonnet_0203.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 02:26 — cenas Three.js leves para CPU (sem sombras, PBR simples, baixo MSAA) (`area_three_cpu_budget`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_three_cpu_budget__sonnet_0223.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 02:33 — Chrome headless com ANGLE/Vulkan na T4 do Kaggle (Linux sem tela) (`area_three_gpu_t4_headless`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_three_gpu_t4_headless__sonnet_0232.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 02:43 — reprodutibilidade de float e shader entre drivers (`area_three_threshold_determinism`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_three_threshold_determinism__sonnet_0236.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 02:52 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_eres2net_licenca__sonnet_0247.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 03:42 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0336.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 03:56 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_0346.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

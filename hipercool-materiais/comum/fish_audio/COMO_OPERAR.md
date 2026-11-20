@@ -374,3 +374,20 @@ cenário de usar o p3 é não estar no Kaggle E não ter conta com crédito onli
   Short sem narrador escolhido também passa pelo Fish do Kaggle (anime_segments, caminho sem clone).
 - Os pedidos levam narrador_chris/neymar em "vozes" (Short) e narrador_chris em "vozes_extra" (longo) pro Kaggle baixar.
 - Kitten/p3 no Kaggle só se o Fish Speech não instalou no kernel (vivo_<conta>.json "fish": false).
+
+## 20/11 madrugada — Fish "desanimado" (Momo/Mike): causa e conserto
+Dona: "a narração do Momo parece muito mais desanimada e a do Mike também; o motor antigo era mais agudo nos finais".
+Medido (D:\tmp\estudo_voz, medir_prosodia.py + cepstro, mesmas 12 frases reais x Fish):
+- Momo real 213 Hz; Fish com a referência normal 186 Hz (≈2-5 st mais grave = "sem vida"); com referência
+  animada+piada 210 Hz e animada solta (temp 0,85) 219 Hz. Mike: tom/melodia do Fish já perto do real (124-132 x 129).
+- A referência normal era escolhida pelo TAMANHO das frases → fala plana (fim que sobe em 0-20% x 50-100% no real).
+Conserto (já em produção):
+1. Referência principal = frases mais animadas (medida: melodia + fim que sobe) + falas de piada do banco
+   (`D:\tmp\estudo_voz\animar_referencias.py`; Momo, Mike, KkVirjão).
+2. Sub-vozes por frase (`anime_tts._subvoz_por_frase`): risada / mulher / personagem / piada / agudo / tensão /
+   metralhadora, com reserva entre elas. Arquivos `referencia_fish_<sub>.wav` na pasta da voz; o fish_nuvem carrega
+   todos. Fonte: vídeos que a dona escolheu (Momo ILfIPivCBGo; Mike WZV3uwtOB18, _jhtRTNgvDM, Putzo-4t0Sk; KkVirjão)
+   via job_subvozes (baixador do Kaggle → demucs → Whisper → ECAPA com âncora) + `classificar_subvozes.py`.
+3. Fim que sobe (`anime_tts._fim_que_sobe`, FISH_FIM_ST mike 1,5 / momo 0,8 / kkvirjao 1,0; FISH_FIM=0 desliga).
+Narradores estáveis (Pie, Solem, Drezin, Guugou, Iki) ficam só com a normal.
+Comparação pra ouvir: `amostras_voz\COMPARAR_VOZ_FISH_20NOV`.

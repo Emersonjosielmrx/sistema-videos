@@ -47,17 +47,33 @@ def lote(pasta_voz, lista_json):
     refs = [ServeReferenceAudio(audio=ref.read_bytes(), text=ref_txt)]
     # 19/11 dona ("momo e mike falam de muitas maneiras no mesmo vídeo, principalmente nas piadas e comentários"):
     # referência por jeito de falar (referencias_por_clima.py). Item com "ref": "_piada"/"_tensao" usa a dele.
+    # 20/11 dona: sub-vozes do narrador (risada, piada, agudo, personagem, metralhadora, mulher, tensão) — carrega
+    # TODAS as referencia_fish_<sub>.wav que a voz tiver (a anime_tts escolhe por frase em "ref").
     por_clima = {"": refs}
-    for suf in ("_piada", "_tensao"):
-        w, t = pv / f"referencia_fish{suf}.wav", pv / f"referencia_fish{suf}.txt"
-        if w.exists() and t.exists():
-            por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=t.read_text(encoding="utf-8").strip())]
+    for w in sorted(pv.glob("referencia_fish_*.wav")):
+        suf = w.stem.replace("referencia_fish", "")
+        t = w.with_suffix(".txt")
+        if suf.endswith("antiga") or not t.exists():
+            continue
+        por_clima[suf] = [ServeReferenceAudio(audio=w.read_bytes(), text=t.read_text(encoding="utf-8").strip())]
     print(f"FISH referências: {sorted(k or 'normal' for k in por_clima)}", flush=True)
+    # 20/11 (estudo 3, mesmas frases x real): narrador que varia muito (Momo/Mike/KkVirjão) fica mais perto do real com
+    # temperatura/top_p 0,85 (Mike: desvio de tom 5,69 x 5,73 real; com 0,7 = 5,40). Estáveis seguem 0,7.
+    # FISH_SOLTO=<valor> força; "fish_solto" no personagem.json da voz também.
+    solto_pad = {"momo": 0.85, "mike": 0.85, "kkvirjao": 0.85}
+    SOLTO = solto_pad.get(pv.name, 0.7)
+    try:
+        SOLTO = float(json.loads((pv / "personagem.json").read_text(encoding="utf-8")).get("fish_solto", SOLTO))
+    except (OSError, ValueError):
+        pass
+    if os.environ.get("FISH_SOLTO"):
+        SOLTO = float(os.environ["FISH_SOLTO"])
+    print(f"FISH temperatura/top_p {SOLTO}", flush=True)
 
     def gera(txt, suf=""):
         req = ServeTTSRequest(text=txt, references=por_clima.get(suf) or refs, reference_id=None,
                               max_new_tokens=1024, chunk_length=200,
-                              top_p=0.7, repetition_penalty=1.2, temperature=0.7, format="wav")
+                              top_p=SOLTO, repetition_penalty=1.2, temperature=SOLTO, format="wav")
         for r in eng.inference(req):
             if r.code == "final":
                 return r.audio

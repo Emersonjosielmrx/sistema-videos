@@ -400,3 +400,28 @@ STATUS: OK
 - Causa provável: Pico de consumo de memória RAM/vulnerabilidade do FFmpeg ao alocar buffers de vídeo raw durante a etapa de cobertura/delogo do short.
 - CONSERTO PROPOSTO: Adicionar tratamento robusto de exceções de memória e coleta de lixo `gc.collect()` na rotina de cobertura em `bin/anime_auto.py`, assim como otimizar o uso de buffers do FFmpeg.
 - Estado: NADA A FAZER
+## 20261119_2056 — Vistoria de rotina: proxy Webshare com 402, disco D com 6.47 GB livres e retomada bem-sucedida
+- Motivo / O que achei (trecho de log): _parceiro_20261119.log registrou aviso de proxy Webshare (Tunnel connection failed: 402 Payment Required) seguido de pausa automática e retomada via Kaggle / rota alternativa. Disco D: com 6.47 GB livres (abaixo dos 8 GB recomendados). Processo de render/postagem do parceiro operando normalmente.
+- Causa provável: Limite de cota/saldo temporário no proxy Webshare e uso contínuo de espaço em disco na produção.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar a pausa automática de proxy e fluxo normal do sistema sem intervenção manual).
+- Estado: NADA A FAZER
+
+## 20261120_0045 — reel_globo: ffmpeg da montagem passando de 600 s não derruba mais o script (pelo painel)
+- Motivo: em 16/11 (logs\reel_globo.log:8551) o ffmpeg da montagem estourou 600 s com as 2 cenas do Veo já aprovadas; bin\montagem_ms.py:894 não tratava subprocess.TimeoutExpired, o erro subiu até o main() do reel_globo.py e o clipe pago foi perdido. Desde 16/11 não houve novo erro no log (montagens aprovadas e publicadas até 19/11 22:27); o defeito estava no código, não no dia de hoje.
+- O que fiz (arquivos): só bin\montagem_ms.py, linhas 894-900: a chamada subprocess.run(..., timeout=600) ficou dentro de try; no TimeoutExpired grava "[MONTAGEM] ffmpeg passou de 600 s" no log e usa um resultado de falha (returncode -1), que cai nos refazimentos que já existiam (sem SFX, karaokê, sem destaque) e, no fim, em ok=False. Nada mais foi mexido.
+- Como conferi: sintaxe OK; teste de mentira (simulando o TimeoutExpired nas linhas editadas, sem ffmpeg, sem gravar nada em disco) deu returncode -1, ok=False e a linha no log; caminho normal (returncode 0) segue igual. Li gerar_short_veo.py:426-437: se a montagem devolve falha, espera 90 s, tenta mais 1x e, se falhar de novo, avisa "[STOP] montagem falhou — nada vai para a fila" e devolve None (sem postar nada). Ainda não houve rodada real com ffmpeg lento depois da mudança. Não criei .bak por terminal; o backup é o do painel.
+- Como desfazer: botão "Desfazer" no painel (pedido 20261120_004528_80e2)
+- Estado: RESOLVIDO
+## 20261120_0237 — Vistoria do vigia: Recap longo com 18 de 23 GPUs sem conta (aguardando cota/alimentador) e contas verificadas 17 de 77
+- Motivo / O que achei (trecho de log): anime_health_monitor.log e logs correntes indicam contas verificadas 17 de 77, com 18 de 23 GPUs sem conta por falta de trabalho na fila. Alimentador ativo (cliente.py alimentar) no PC1 com pausas automáticas de fluxo. Wise Memory Optimizer rodando (PID 3840) e RAM livre em ~9.1 GB.
+- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento automático ou o próximo ciclo do alimentador.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar o ciclo automático de renovação de cota e liberação pelo próprio sistema, sem modificações manuais).
+- Estado: NADA A FAZER
+STATUS: OK
+
+## 20261120_0336 — Vistoria de rotina: Disco D com 0.82 GB livres e Wise Memory Optimizer ativo
+- Motivo / O que achei (trecho de log): alimentar_pc2.log indica PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json); abastecedor_kaggle.log relata 'disparei a faxina_disco.py (oculta) pra liberar espaço' e D: com 0.9 / 0.82 GB livres. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Acúmulo de arquivos temporários, workspaces e materiais na fila de render/produção, aguardando o ciclo automático de faxina em disco.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar as regras do modo, não interferir em processos de disco ou renderização, e aguardar a faxina automática).
+- Estado: NADA A FAZER
+STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de 8 GB); faxina_disco.py acionada automaticamente pelo abastecedor.

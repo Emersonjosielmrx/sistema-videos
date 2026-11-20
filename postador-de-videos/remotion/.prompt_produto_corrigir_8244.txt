@@ -1,0 +1,52 @@
+Leia EDITOR.md (pasta atual). Você é o CORRETOR da edição do vídeo `inovareclaw_ia_20261120_023658` (código em
+src/videos/inovareclaw_ia_20261120_023658/). A edição já existe e foi renderizada; os verificadores deram nota 7.38/10.
+NÃO recomece do zero: corrija os problemas abaixo no código, do mais grave ao mais leve, sem estragar o que foi
+elogiado. PROIBIDO abrir outras pastas de src/videos/.
+Pasta pública (material + briefing.json): D:\postador-de-videos\remotion\trabalhos\inovareclaw_ia_20261120_023658\public
+Pasta para seus quadros de conferência: D:\postador-de-videos\remotion\trabalhos\inovareclaw_ia_20261120_023658\quadros
+
+PROBLEMAS:
+- [grave] (movimento) q05.jpg cena 1: Ritmo arrastado com plano contínuo e estático do apresentador por quase 5 segundos. O enquadramento em q05 é idêntico a q04 sem qualquer corte de dinamismo típico de Reels. -> Aplicar um punch-in (corte de zoom digital de 1.15x centralizado no rosto) na virada da frase ('Eu pedia, ela respondia') para quebrar a monotonia do plano fixo e marcar o ritmo da fala.
+- [grave] (movimento) q11.jpg cena 3: Falta de variedade e repetição idêntica do molde da Cena 1. A Cena 3 reutiliza o mesmo ângulo de câmera, enquadramento, distância focal e postura do apresentador, mantendo o plano estático de q10 a q12 sem variação de escala. -> Diferenciar a Cena 3 da Cena 1 utilizando um plano mais fechado (close-up/punch-in logo na entrada) ou alternar cortes de escala entre as frases 'Hoje eu delego a tarefa' e 'Meu agente de IA trabalha sozinho'.
+- [grave] (diretor) q01.jpg cena 0: O gancho nos 2 primeiros segundos é visualmente frio e estático, exibindo um bloco isolado e um enorme vazio escuro no centro da tela, transmitindo aspecto de slide corporativo sem magnetismo para prender a rolagem do feed. -> Eliminar o espaço ocioso inicial animando o confronto dos dois blocos de forma mais ágil logo no primeiro segundo, ou abrir o vídeo com o apresentador já em cena com os cartões de dúvida sobrepostos para dar dinamismo e presença humana imediata.
+- [grave] (diretor) q08.jpg cena 2: O diálogo simulado é genérico e abstrato ('organizar essa tarefa', 'executando tarefa autônoma'), enfraquecendo a percepção de seriedade e autoridade de uma IA autônoma corporativa, soando como mockup básico em vez de solução executiva de alto nível. -> Substituir o exemplo fictício por uma tarefa comercial concreta e tangível (ex.: 'Dispare o follow-up dos clientes pendentes e atualize a planilha'), evidenciando a capacidade real de execução autônoma que diferencia a solução de um chatbot comum.
+- [grave] (regras_texto) - cena -: texto na tela quebra a regra: "✓ Execução 100% sem esforço seu": porcentagem inventada -> apague/troque esse texto (só os fatos permitidos, sem número/prazo/porcentagem)
+- [media] (legibilidade) q12.jpg cena 3: O card superior expandiu para três linhas ('MEU AGENTE DE IA TRABALHA / SOZINHO' + subtítulo) e avançou para baixo sobre o topo da cabeça do apresentador, cobrindo parte do cabelo e eliminando a margem de respiro. -> Reduzir levemente o tamanho da fonte do título para manter em linha única ('MEU AGENTE DE IA TRABALHA SOZINHO') ou reposicionar o vídeo do apresentador um pouco mais para baixo/subir a base do card para não sobrepor o cabelo.
+- [media] (legibilidade) q12.jpg cena 3: O título do card 'MEU AGENTE DE IA TRABALHA SOZINHO' está em tom roxo/lavanda sobre fundo escuro, com contraste de luminância insuficiente, ficando com menos destaque visual do que o subtítulo em branco abaixo dele. -> Manter o título principal em branco puro (#FFFFFF) no card — exatamente como foi feito em q10 e q11 —, deixando tons de cor apenas para palavras pontuais ou com alto brilho.
+- [media] (movimento) q03.jpg cena 0: Cena parada por mais de 1,5s após a entrada do bloco comparativo. Entre q02 (2.6s) e q03 (4.15s), os dois cartões ficam 100% estáticos na tela, movimentando-se apenas o destaque da legenda inferior. -> Adicionar micro-movimento contínuo, como um slow push-in suave (escala de 1.0 para 1.04) ou um pulso de brilho nas bordas do cartão 'Inovare Claw' para manter a retenção visual na pergunta.
+- [media] (movimento) q06.jpg cena 1: Troca de texto seca no card superior. O título 'A IA SÓ ESCREVE TEXTO?' é substituído abruptamente por 'O TRABALHO CONTINUAVA COMIGO' sem transição fluida de animação. -> Inserir transição animada de texto no card, como slide-up com fade (deslizar para cima alterando a opacidade) ao trocar a frase.
+- [media] (movimento) q07.jpg cena 2: Composição estática com excesso de espaço ocioso no frame. O mockup de chat flutua estático no centro sobre um fundo escuro estático sem movimento de câmera. -> Aplicar um push-in suave contínuo na janela do chat e uma rolagem visual simulada para cima (scroll up) conforme novas mensagens vão surgindo.
+- [media] (diretor) q04.jpg cena 1: Enquadramento vertical com margem superior insuficiente, fazendo o topo da cabeça do apresentador encostar no card de tópico ('01 O PROBLEMA'), combinado a uma tomada contínua estática sem ritmo de edição publicitária. -> Rebaixar sutilmente o enquadramento do apresentador para dar respiro em relação à barra superior e aplicar corte com zoom sutil de ênfase (punch-in de 8%) nas frases de virada para manter a energia visual do Reels.
+- [leve] (legibilidade) q07.jpg cena 2: O texto de status 'Inovare Claw está processando...' possui contraste baixo (texto azul-acinzentado escuro sobre pílula escura), dificultando a leitura rápida em telas de celular em ambientes externos. -> Clarear a cor da fonte desse status para um cinza claro ou branco com 70% de opacidade para aumentar a nitidez.
+- [leve] (legibilidade) q01.jpg cena 0: A tag 'LIMITADO' no card de chatbot tradicional tem baixo contraste (vermelho escuro sobre fundo vinho escuro), ao contrário da tag 'AUTÔNOMO' no card seguinte que tem contraste ideal. -> Aumentar o brilho/luminância da cor do texto 'LIMITADO' para torná-lo facilmente legível no primeiro segundo de vídeo.
+- [leve] (legibilidade) q13.jpg cena 4: A tagline de rodapé 'AGENTE AUTÔNOMO DE INTELIGÊNCIA ARTIFICIAL' está com corpo muito pequeno, traçado fino e cor acinzentada opaca, o que compromete a legibilidade em telas de smartphones. -> Aumentar em 2 a 3 pontos o corpo da fonte, aplicar peso semibold e elevar a luminosidade da cor do texto.
+- [leve] (movimento) q15.jpg cena 4: Cartão final estático no fechamento. Após o efeito de brilho passar pelo botão em q14, o quadro q15 fica totalmente estagnado até o encerramento do vídeo. -> Adicionar animação contínua em loop no CTA (como pulso sutil de escala no botão 'CHAME NO DIRECT' e rotação leve ou brilho pulsante no ícone de raio central) para sustentar a energia até o final.
+- [leve] (roteiro_marca) q09.jpg cena 2: O selo dentro da resposta da simulação exibe '✓ Execução 100% sem esforço seu', introduzindo uma métrica quantitativa inventada ('100%') que não consta nos fatos permitidos da marca. -> Remover o número '100%' e substituir por termos fiéis aos fatos permitidos, como '✓ Execução autônoma de verdade' ou '✓ O agente executa por você'.
+
+MANTER (elogiado):
+- Excelente respeito à safe zone inferior do Reels: todos os elementos essenciais terminam antes de y=1580, deixando livre a área ocupada pelos botões nativos de interação e legendas.
+- No cartão final (cena 4), todos os elementos de conversão (marca, botão 'CHAME NO DIRECT' e o obrigatório @inovareclaw.ia com selo de verificado) estão centralizados e concentrados na faixa de melhor visibilidade (entre y=650 e y=1260).
+- Legendas karaokê com ótimo tamanho, excelente contraste contra a caixa delimitadora escura e destaque roxo sincronizado e de fácil leitura.
+- A simulação do WhatsApp na cena 2 é limpa, bem diagramada, com espaçamento adequado das bolhas e selo 'SIMULAÇÃO' perfeitamente visível.
+- Barra de progresso no topo com gradiente e indicador em movimento contínuo bem calibrada.
+- Legenda karaokê sincronizada com destaque cor roxa por palavra com excelente legibilidade.
+- Efeito de shimmer reflexivo no botão do direct na Cena 4 (visível em q14.jpg) destacando o CTA.
+- Entrada sequencial das mensagens no chat da Cena 2, simulando a resposta do agente de forma progressiva.
+- Excelente sincronia entre a fala do apresentador, o destaque karaokê e a transição dos cartões informativos.
+- Paleta de cores consistente e elegante da marca Inovare Claw, com contrastes adequados nos tópicos e nos balões de simulação.
+- Cartão final completo e bem resolvido, contendo o nome da marca, convite claro ('CHAME NO DIRECT') e o @ obrigatório (@inovareclaw.ia).
+- Roteiro dinâmico e coerente com a proposta de valor (comparativo inicial, apresentação do problema, simulação prática e resultado).
+- Pontuação, concordância e acentuação gráfica impecáveis em todos os textos da tela e legendas.
+- Identidade visual forte e consistente, com paleta e elementos gráficos bem integrados ao universo de tecnologia e agentes autônomos.
+- Humanização acertada com a figura do dono como apresentador, gerando conexão direta e autenticidade para a empresa.
+- Divisão estrutural clara e didática da narrativa, conduzindo o espectador da dor à solução e ao resultado de forma lógica.
+- Legendas em estilo karaokê perfeitamente sincronizadas, com destaque na palavra falada e posicionadas com segurança para a interface do Reels.
+
+
+NÃO ESTRAGUE O QUE ESTÁ CERTO:
+- Fatos permitidos, e SÓ eles: Agente de IA autonomo (estilo Hermes Agent / OpenClaw) que executa tarefas pelo dono; Seu agente de IA que trabalha sozinho; Um agente de inteligência artificial que executa tarefas de verdade por você, no nível do Hermes e do OpenClaw.. Não acrescente número, prazo, "24h", preço ou alegação.
+- Tempo das cenas é fixo (a voz está pronta); rosto do dono sempre livre.
+- Scroll de mockup para com itens inteiros; legenda ancorada pela base em y <= 1580; letra >= 32 px; margem 60 px.
+
+Depois de corrigir, gere stills (npx remotion still) dos momentos mexidos, OLHE com Read e confirme. No fim
+responda uma frase com o que mudou.

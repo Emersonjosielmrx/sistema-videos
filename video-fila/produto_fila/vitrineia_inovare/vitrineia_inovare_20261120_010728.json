@@ -1,0 +1,152 @@
+{
+ "conta": "vitrineia_inovare",
+ "produto": "vitrine_ia",
+ "marca": "Vitrine IA",
+ "titulo": "Pare de perder venda por demora no atendimento",
+ "legenda": "Cliente que espera demais costuma procurar outra loja. O Vitrine IA é um bot que conhece os produtos da sua loja, atende, recomenda e vende. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Cliente some por demora?",
+  "pergunta_cliente": "Vou parar de perder cliente por demora no atendimento?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia venda toda vez que demorava a responder. O cliente esperava pouco e ia comprar em outra loja.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the tidy, well lit counter of a small Brazilian clothing store, organized shelves behind him",
+    "real_tema": "dono de loja que perdia vendas por demora na resposta",
+    "destaques": [
+     "perdia venda",
+     "demorava a responder"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261120_010811_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O cliente pergunta por uma sandália, e o bot, que conhece os produtos da loja, responde na hora e já indica o modelo.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "bot atendendo pergunta sobre um produto específico",
+    "destaques": [
+     "responde na hora",
+     "indica o modelo"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi! Vocês têm sandália confortável para o dia a dia?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Temos sim! Conheço todos os modelos da loja. Prefere salto baixo ou rasteira?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Rasteira, de preferência."
+     },
+     {
+      "de": "empresa",
+      "texto": "Então recomendo a rasteira de couro. Quer que eu separe o seu tamanho?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Quero sim, pode separar!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje o bot atende na hora, e eu deixo de perder cliente que só queria uma resposta rápida.",
+    "visual": "imagem",
+    "prompt_en": "standing at the tidy, well lit counter of a small Brazilian clothing store, soft natural light, no people in focus",
+    "cenario_en": "standing at the tidy, well lit counter of a small Brazilian clothing store, soft natural light",
+    "real_tema": "dono satisfeito, atendimento imediato e vendas mantidas",
+    "destaques": [
+     "atende na hora",
+     "resposta rápida"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261120_010811_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261120_010811_1.png"
+   }
+  ],
+  "legenda": "Cliente que espera demais costuma procurar outra loja. O Vitrine IA é um bot que conhece os produtos da sua loja, atende, recomenda e vende. Link no perfil.",
+  "titulo": "Pare de perder venda por demora no atendimento",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "antes_depois_demora_venda",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 36,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "glitch",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\vitrineia_inovare_20261120_010728\\dono_1.mp4",
+ "duracao_s": 30.58,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-20T01:48:07",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.48,
+   "fala": "Vou parar de perder cliente por demora no atendimento?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.48,
+   "fim": 12.32,
+   "fala": "Eu perdia venda toda vez que demorava a responder. O cliente esperava pouco e ia comprar em outra loja.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.32,
+   "fim": 20.21,
+   "fala": "O cliente pergunta por uma sandália, e o bot, que conhece os produtos da loja, responde na hora e já indica o modelo.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.21,
+   "fim": 26.64,
+   "fala": "Hoje o bot atende na hora, e eu deixo de perder cliente que só queria uma resposta rápida.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 26.64,
+   "fim": 30.58,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.88,
+  "notas": {
+   "legibilidade": 7.5,
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 5.0
+  },
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "conta": "inovareagenda",
+ "produto": "agenda_ia",
+ "marca": "Inovare Agenda",
+ "titulo": "Agenda IA: corte sem parar para responder mensagem",
+ "legenda": "Atender o cliente sem largar a tesoura é possível. A Agenda IA cuida do WhatsApp e da agenda por você, sem conflito de horário. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Barbeiro sem parar o corte",
+  "pergunta_cliente": "Vou conseguir trabalhar sem parar toda hora para responder mensagem?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu parava o corte no meio para responder mensagem. O cliente na cadeira esperava e o outro esperava resposta.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit Brazilian barbershop, clean counter and chairs in the background",
+    "real_tema": "barbearia",
+    "destaques": [
+     "parava o corte",
+     "responder mensagem"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261119_183426_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje a Agenda IA agenda, confirma e reagenda sozinha, direto no WhatsApp, sem conflito e sem duplo agendamento.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit barbershop counter, with a barber chair softly blurred behind him",
+    "real_tema": "barbearia",
+    "destaques": [
+     "agenda, confirma",
+     "reagenda sozinha"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261119_183426_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261119_183426_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Eu atendo sem interrupção, e a agenda funciona vinte e quatro horas. Custa bem menos que uma recepção humana.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern barbershop, smiling calmly toward the camera",
+    "real_tema": "barbearia",
+    "destaques": [
+     "atendo sem interrupção",
+     "vinte e quatro horas"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261119_183426_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261119_183426_1.png"
+   }
+  ],
+  "legenda": "Atender o cliente sem largar a tesoura é possível. A Agenda IA cuida do WhatsApp e da agenda por você, sem conflito de horário. Link no perfil.",
+  "titulo": "Agenda IA: corte sem parar para responder mensagem",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "barbearia_atendimento_pausa",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 48,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareagenda_20261119_183337\\dono_3.mp4",
+ "duracao_s": 32.7,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-19T18:53:14",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.25,
+   "fala": "Vou conseguir trabalhar sem parar toda hora para responder mensagem?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.25,
+   "fim": 13.09,
+   "fala": "Eu parava o corte no meio para responder mensagem. O cliente na cadeira esperava e o outro esperava resposta.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 13.09,
+   "fim": 20.92,
+   "fala": "Hoje a Agenda IA agenda, confirma e reagenda sozinha, direto no WhatsApp, sem conflito e sem duplo agendamento.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.92,
+   "fim": 28.75,
+   "fala": "Eu atendo sem interrupção, e a agenda funciona vinte e quatro horas. Custa bem menos que uma recepção humana.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.75,
+   "fim": 32.7,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.38,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 4.5
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

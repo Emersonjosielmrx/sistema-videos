@@ -463,3 +463,11 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso estrito). Apenas leitura dos logs e registro da ronda.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261119_2256 — Alerta conhecido de métricas em vídeo removido/travado
+- Motivo: Alerta em fila_postagem.log informando que as métricas do vídeo DTnxWcXcOME não puderam ser lidas por estar marcado como morto/travado pelo YouTube (removido desde 2026-11-18, a dona libera apagando a linha em contas_travadas.json).
+- O que achei (com trecho de log):
+  - [21:48:00]   métricas DTnxWcXcOME: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-18 (a dona libera apagando a linha em contas_travadas.json)) — inovare_viet não é tocado por nenhum)
+- O que fiz: Nenhum código alterado (Modo Só AVISO). Apenas verificação do log e registro no diário.
+- CONSERTO PROPOSTO: Nenhum (comportamento padrão esperado para vídeos removidos/travados pelo YouTube até que a dona limpe o registro em contas_travadas.json).
+- Estado: NADA A FAZER

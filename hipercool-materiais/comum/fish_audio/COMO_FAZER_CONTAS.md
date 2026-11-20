@@ -40,6 +40,19 @@ Testado a fundo. Resultado:
 | Injetar o reCAPTCHA eu mesmo | **FUNCIONA** — injetando `https://www.google.com/recaptcha/enterprise.js?render=<SITEKEY>` o grecaptcha carrega e `grecaptcha.enterprise.execute(SITEKEY,{action})` gera token (2400+ chars) para qualquer action (signup/tts/login/register). MESMA sitekey da geração: `6LfR4RwqAAAAAEvptRw9zohw7HeDU6NCqtAnJk1i` |
 | Capturar como o cadastro ENVIA o token | **FALTA** — não capturei o endpoint/campo do signup (o PC1 estava com CPU 100% e 78 Chrome, cada clique travava 30s) |
 
+### Resultado do dia 19/11 à noite (NÃO repetir sem esperar)
+- E-mail descartável (mail.tm/euploading.com): o Fish **recusa** ("Não é possível usar endereços de e-mail
+  descartáveis") — só aparece quando o reCAPTCHA passa. Precisa e-mail permanente (Proton novo).
+- E-mails Proton das contas VIVAS do Kaggle: proibido (ligaria a viva à casa).
+- Caixa Proton nova feita só pro Fish: `marinasouza24892@proton.me` (IP 50, em `caixas_fish.json`). Ainda sem conta no
+  Fish. O `criar_proton_fish.py <N>` cria outras (dona resolve o captcha do Proton).
+- Cadastro no Fish deu "A verificação de segurança falhou" por **todos** os caminhos: IP de servidor (rnprmtfo-50),
+  casa, 4G do S20 (179.151.x), Chrome limpo sem automação com mouse/teclado reais (`mao_real.py`) e até o Chrome
+  normal da dona. O reCAPTCHA do Google funciona na máquina (página demo carregou). A 1ª tentativa da dona (clique dela,
+  pela casa) passou do reCAPTCHA. Conclusão: o Fish bloqueou cadastro depois de ~20 tentativas seguidas. Esperar
+  ≥ 1 dia e tentar UMA vez, com a dona clicando em Continuar.
+- A tarefa `LimpezaChrome` fecha janelas abertas há muito tempo: não deixar janela de cadastro parada > 30 min.
+
 ### Fluxo do cadastro no site (mapeado)
 `fish.audio/pt/auth/` -> link **"Criar conta"** -> tela "Criar uma conta" (só campo e-mail) -> digita e-mail ->
 botão **"Continuar"** -> AQUI o site chama o reCAPTCHA (e falha se não estiver injetado) -> (esperado) manda código

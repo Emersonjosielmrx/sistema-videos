@@ -1,0 +1,68 @@
+{
+ "_leia": "Páginas do Facebook (dona 19-20/11/2026). Cada conta só abre pela 'saida' dela (fb_contas.abrir confere). Página -> canal(is) do YouTube cujos vídeos ela reposta (catalogo). MS Energy NÃO entra aqui: é produto de cliente, posta pelo postar_ms_energy (trava_empresa).",
+ "contas": {
+  "msenergypara": {
+   "fb_user": "100034440531020",
+   "perfil": "D:\\logins-google\\chrome-profiles\\msenergypara",
+   "porta": 9401,
+   "saida": "casa"
+  },
+  "emersonjosiel02": {
+   "fb_user": "61596623373095",
+   "email": "emersonjosiel02@gmail.com",
+   "porta": 9798,
+   "saida": "rnprmtfo-58"
+  }
+ },
+ "paginas": {
+  "anime_noturno": {
+   "conta": "emersonjosiel02",
+   "id": "61596515978918",
+   "asset_id": "1417861988084594",
+   "nome": "Anime Noturno",
+   "postados_em": ["Anime Noturno", "Animescomia"],
+   "tags": ["anime", "animerecap", "resumoanime", "animeacao", "animeshorts", "recap", "manhwa", "manhwarecap", "otaku", "baki", "naruto", "onepiece", "dragonball", "animes"],
+   "por_dia": 3
+  },
+  "assistia": {
+   "conta": "emersonjosiel02",
+   "id": "61596895973699",
+   "asset_id": "1374366055769626",
+   "nome": "Assist-IA Investimentos",
+   "postados_em": ["Assist-IA Investimentos", "Empresário Inteligente IA", "Lei e Lucro", "Vendas que Escalam", "Bilionário Noturno"],
+   "_tags": "20/11: o canal Assist-IA do YouTube recebe filme/dorama/anime do parceiro; a Página só leva FINANÇAS (hashtag da legenda).",
+   "tags": ["finanças", "financas", "investimento", "investimentos", "cripto", "trader", "dinheiro", "rendaextra", "educacaofinanceira", "bolsa", "bitcoin", "economia", "empreendedorismo", "negocios", "bilionario", "riqueza", "milionario"],
+   "por_dia": 3
+  },
+  "curiosidades": {
+   "conta": "emersonjosiel02",
+   "id": "61596465193153",
+   "asset_id": "1512516301935479",
+   "nome": "Curiosidades Noturnas",
+   "_criada": "20/11/2026 madrugada (dona: 'criar novas páginas nos 2 perfis'); tema com mais estoque no catálogo (#fatos 812)",
+   "postados_em": ["Curiosidades Noturnas", "Mistérios Noturnos", "Tech Noturno", "Bicho Noturno", "Plantão das Histórias", "Mundo Que Nao Existe", "Fio da Meada", "Assist-IA Investimentos", "Anime Noturno"],
+   "tags": ["fatos", "curiosidades", "vocesabia", "misterio", "misterios", "ciencia", "historia", "curiosidade", "tecnologia", "animais", "natureza", "espaco"],
+   "por_dia": 3
+  },
+  "dorama": {
+   "conta": "emersonjosiel02",
+   "id": "61596836216941",
+   "asset_id": "1500570279800224",
+   "nome": "Dorama Noturno",
+   "_criada": "20/11/2026 madrugada; #dorama 349 no catálogo",
+   "postados_em": ["Dorama Noturno", "Assist-IA Investimentos", "Curiosidades Noturnas", "Filme Noturno", "Anime Noturno"],
+   "tags": ["dorama", "kdrama", "doramas", "kdramas", "cdrama", "doramacoreano", "novelacoreana"],
+   "por_dia": 3
+  },
+  "filmes": {
+   "conta": "emersonjosiel02",
+   "id": "61596498791760",
+   "asset_id": "1476150265579471",
+   "nome": "Filme Noturno",
+   "_criada": "20/11/2026 madrugada",
+   "postados_em": ["Filme Noturno", "Assist-IA Investimentos", "CenaReact", "Curiosidades Noturnas", "Anime Noturno"],
+   "tags": ["filme", "filmes", "cinema", "cena", "cenas", "resumodefilme", "filmeresumo", "acao", "suspense", "terror", "comedia", "netflix", "movie"],
+   "por_dia": 3
+  }
+ }
+}

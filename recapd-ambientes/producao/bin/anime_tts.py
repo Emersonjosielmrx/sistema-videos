@@ -14,6 +14,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import subprocess
 import sys
 import time
@@ -446,6 +447,112 @@ def _acabamento_fish(out, voz):
         anime_formatos.aplicar_efeito_voz(voz, out)
     except Exception as e:  # noqa: BLE001
         logging.warning(f"[fish] efeito da voz em {Path(out).name} falhou ({e})")
+    try:
+        _fim_que_sobe(out, voz)
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish] fim que sobe em {Path(out).name} falhou ({e})")
+
+
+# 20/11 dona: "o motor antigo era mais agudo nos finais e por isso parecia mais com o original" (Mike, Momo). Medido:
+# Mike real sobe o fim em 50-67% das frases; Fish base 28%; subindo +1,5 st nos 0,42 s antes de cada pausa -> 50%.
+# Por narrador em FISH_FIM_ST (padrão abaixo) ou "fish_fim_st" no personagem.json da voz. FISH_FIM=0 desliga.
+FISH_FIM_ST = {"mike": 1.5, "momo": 0.8, "kkvirjao": 1.0}
+
+
+def _fim_que_sobe(wav, voz):
+    if os.environ.get("FISH_FIM", "1") == "0" or not voz:
+        return
+    nome = Path(voz).name
+    st = FISH_FIM_ST.get(nome)
+    try:
+        st = json.loads((VOZES_DIR / nome / "personagem.json").read_text(encoding="utf-8")).get("fish_fim_st", st)
+    except (OSError, ValueError):
+        pass
+    if not st:
+        return
+    wav = Path(wav)
+    d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
+                             capture_output=True, text=True).stdout or 0)
+    if d < 1.2:
+        return
+    r = subprocess.run(["ffmpeg", "-v", "info", "-i", str(wav), "-af", "silencedetect=noise=-35dB:d=0.18", "-f", "null",
+                        "-"], capture_output=True, text=True)
+    pausas = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", r.stderr)]
+    fins = [t for t in pausas if t > 0.8] + [d]
+    k = 2 ** (float(st) / 12)
+    cortes, ult = [], 0.0
+    for t in fins:
+        a = max(ult, t - 0.42)
+        if a - ult > 0.05:
+            cortes.append((ult, a, False))
+        if t - a > 0.1:
+            cortes.append((a, t, True))
+        ult = t
+    if d - ult > 0.05:
+        cortes.append((ult, d, False))
+    if not any(c[2] for c in cortes):
+        return
+    fc = ""
+    for n, (a, b, sobe) in enumerate(cortes):
+        fc += f"[0:a]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS"
+        if sobe:
+            fc += f",asetrate=44100*{k:.5f},aresample=44100,atempo={1 / k:.5f}"
+        fc += f"[c{n}];"
+    fc += "".join(f"[c{n}]" for n in range(len(cortes))) + f"concat=n={len(cortes)}:v=0:a=1[o]"
+    tmp = wav.with_name(wav.stem + ".fim.wav")
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-filter_complex", fc, "-map", "[o]", "-ar",
+                        "44100", "-ac", "1", str(tmp)], capture_output=True)
+    if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+        os.replace(tmp, wav)
+
+
+_SUB_RISO =re.compile(r"(?i)\b(k{3,}|ha(ha)+|he(he)+|rs(rs)+|risos?|riu|rindo|gargalh\w*)\b")
+_SUB_MULHER = re.compile(r"(?i)\b(peito\w*|gostos\w*|del[ií]cia|bunda|seio\w*|sexy|safad\w*|tes[aã]o|novinha\w*|"
+                         r"gatinha|maravilhosa|respeito|mina\w*)\b")
+_SUB_PERSON = re.compile(r"(?i)(\b(ele|ela) (fala|disse|diz|grita|responde|pergunta)\b.*[:\"“]|[\"“].{6,}[\"”])")
+# ordem de reserva: sub-voz que a voz não tem -> a próxima da lista -> normal
+_SUB_RESERVA = {"_risada": ["_piada", "_agudo"], "_mulher": ["_piada", "_agudo"], "_personagem": ["_agudo", "_piada"],
+                "_metralhadora": ["_agudo", "_tensao"], "_piada": ["_agudo"], "_agudo": ["_piada"],
+                "_tensao": []}
+
+
+def _subvoz_por_frase(lines, audio_dir, pv):
+    """20/11 dona ("pegar vários momentos do narrador como sub-vozes: Mike rindo, Momo fazendo piada mais agudo,
+    falando das mulheres, fazendo vozes de personagem, metralhadora"): escolhe por frase a referência do Fish que
+    combina com ela (referencia_fish_<sub>.wav na pasta da voz). Sem a sub-voz = a reserva dela; sem nenhuma = normal.
+    Antes (19/11) só piada/tensão — e essa parte tinha se perdido no anime_tts do longo Momo/Mike. FISH_CLIMAS=0 desliga."""
+    if os.environ.get("FISH_CLIMAS", "1") == "0":
+        return {}
+    tem = {p.stem.replace("referencia_fish", "") for p in Path(pv).glob("referencia_fish_*.wav")
+           if not p.stem.endswith("antiga")}
+    if not tem:
+        return {}
+    climas = None
+    try:
+        import climas_voz
+        climas = climas_voz.escolher([_seguro(x) for x in lines], audio_dir)
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[fish nuvem] climas indisponíveis ({type(e).__name__}) — só pelo texto")
+    por_clima = {"comentario": "_piada", "engracado": "_piada", "tensao": "_tensao", "vilao": "_tensao",
+                 "terror": "_tensao", "triste": "_tensao", "epico": "_agudo", "acao": "_metralhadora"}
+    out = {}
+    for i, line in enumerate(lines):
+        t = _seguro(line)
+        if _SUB_RISO.search(t):
+            quer = "_risada"
+        elif _SUB_MULHER.search(t):
+            quer = "_mulher"
+        elif _SUB_PERSON.search(t):
+            quer = "_personagem"
+        else:
+            quer = por_clima.get(climas[i] if climas and i < len(climas) else "normal", "")
+        if not quer:
+            continue
+        for s in [quer] + _SUB_RESERVA.get(quer, []):
+            if s in tem:
+                out[i] = s
+                break
+    return out
 
 
 def _narrar_fish_nuvem(lines, audio_dir, so=None):
@@ -459,6 +566,7 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
         if pv.name != Path(voz).name:
             logging.info(f"[fish nuvem] {voz or 'sem narrador'} sem referência do Fish — narra com {pv.name} "
                          "(no Kaggle é sempre o motor novo)")
+        subs = _subvoz_por_frase(lines, audio_dir, pv)
         itens = []
         for i, line in enumerate(lines):
             if so is not None and i not in so:
@@ -468,9 +576,14 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
                 continue
             texto = _seguro(line)
             if texto.strip():
-                itens.append({"texto": texto, "saida": str(Path(audio_dir) / f"audio_{i}.fish_bruto.wav"), "i": i})
+                itens.append({"texto": texto, "saida": str(Path(audio_dir) / f"audio_{i}.fish_bruto.wav"), "i": i,
+                              "ref": subs.get(i, "")})
         if not itens:
             return
+        if subs:
+            from collections import Counter
+            logging.info(f"[fish nuvem] sub-vozes de {pv.name}: "
+                         f"{dict(Counter(it['ref'] or 'normal' for it in itens))}")
         lista = Path(audio_dir) / "_fish_nuvem.json"
         lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
         t0 = time.time()

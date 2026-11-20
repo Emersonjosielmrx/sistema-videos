@@ -1,47 +1,31 @@
-# Estado do Facebook CDP Poster — FUNCIONANDO (2026-08-25)
+# Estado do Facebook — atualizado 20/11/2026
 
-## Status: COMPLETO E VALIDADO
+## Postador ATUAL: `bin\fb_reel_bs.py` (Meta Business Suite)
+O antigo `facebook_cdp_poster.py` (botão "Criar reel" na página) PAROU em 2026: o layout novo não tem o botão.
+Agora tudo posta pela tela "Criar reel" do Business Suite:
+`https://business.facebook.com/latest/reels_composer?asset_id=<asset_id>`
 
-Postagem de Reels no Facebook via Playwright CDP está 100% funcional.
-Teste real postou com sucesso na página `mundosolarenergia`.
+Fluxo: entrar como a Página (`fb_entrar_como.py`) → composer → "Postar em" fica SÓ a Página (Instagram desmarcado) →
+"Adicionar vídeo" (file chooser) → texto → Avançar (botão do rodapé; a setinha das miniaturas também se chama
+"Avançar") → Avançar → Compartilhar → "Reel em processamento".
 
-## O que funciona (fluxo completo)
-1. **Conexão CDP** porta 9401 (Chrome + perfil `msenergypara`)
-2. **Navegação** para página → /reels/ → "Criar Reel"
-3. **Upload** via `expect_file_chooser` + clique no botão "Carregar" (intercepta diálogo nativo)
-4. **Navegação multi-tela** — Reel Studio tem 3 telas:
-   - Upload → clica "Avançar" #1
-   - Edição/trim (com "Encurtar vídeo", "Legendas ocultas") → clica "Avançar" #2
-   - Descrição + "Publicar"
-5. **Caption** preenchida via contenteditable fallback
-6. **Publicar** clicado (botão aparece como "Postar")
-7. **Confirmação** detectada automaticamente
+## Quem posta
+| Página | Conta / saída | Script | Tarefa |
+|---|---|---|---|
+| MS energy (cliente) | msenergypara, casa, porta 9401 | `postar_ms_energy.py --so fb` | MSEnergy_PostarFB 11:05/20:05 |
+| Anime Noturno, Assist-IA Investimentos, Curiosidades Noturnas, Dorama Noturno, Filme Noturno | emersonjosiel02, Webshare rnprmtfo-58, porta 9798 | `postar_facebook_paginas.py` | FacebookPaginas 12:20/18:20/21:10 |
 
-## Método de upload que FUNCIONA
-**Playwright `expect_file_chooser`** — intercepta o file dialog nativo quando se clica "Carregar".
+Config: `config\facebook_paginas.json` (asset_id, tags do tema, canais de origem, por_dia). Filtro de tema: a 1ª
+hashtag da legenda tem que estar nas `tags` da Página. Registro:
+`logs\facebook_paginas.json`. Log: `logs\facebook_paginas.log`, `D:\ms-energy\videos\cron_postar_fb.log`.
 
-## Métodos de upload que NÃO funcionam (testados e descartados)
-1. `DOM.setFileInputFiles` — `files.length` fica 0, React ignora
-2. `element.click()` JS — evento "untrusted", Chrome recusa file picker
-3. `Input.dispatchMouseEvent` + FileChooser — FileChooser nunca dispara
-4. `Input.dispatchDragEvent` — drop executa mas files=0
-5. `set_input_files` no input[type=file] — UI não muda
-6. JS DataTransfer drop — não efetivo
+## Ferramentas
+- `fb_contas.py` abre o Chrome da conta e RECUSA se o proxy não bate com a saída da conta.
+- `fb_page_id.py` acha o asset_id (`delegate_page_id`); `fb_criar_pagina.py` cria Página; `fb_montar_pagina.py` põe
+  foto/capa; `fb_arte_pagina.py` gera a arte; `fb_conferir_reels.py` confere a aba Reels; `fb_monetizacao.py` lê a aba
+  Monetização.
 
-## Arquivo principal
-- `D:\postador-de-videos\bin\facebook_cdp_poster.py` (~340 linhas, Playwright)
-
-## Uso
-```bash
-cd /d/postador-de-videos
-PYTHONUTF8=1 /d/hipercool-videos/venv/Scripts/python.exe bin/facebook_cdp_poster.py \
-  --video "D:/ms-energy/videos/shorts_veo/video.mp4" \
-  --caption "Texto #hashtags" \
-  --port 9401 \
-  --page "https://www.facebook.com/mundosolarenergia/"
-```
-
-## Chrome CDP
-- BAT: `D:\postador-de-videos\bin\start_cdp_instagram.bat`
-- Perfil: `D:\logins-google\chrome-profiles\msenergypara`
-- Logado no Facebook como MS Energy (página `mundosolarenergia`)
+## Monetização (aba do Business Suite, 20/11)
+- MS energy: qualificada em Monetização de conteúdo, Estrelas e Assinaturas — falta a dona aceitar os termos e
+  cadastrar a conta de pagamento.
+- Páginas novas: Estrelas = 500 seguidores por 30 dias; Assinaturas = 5.000 seguidores.

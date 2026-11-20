@@ -2423,3 +2423,93 @@
 - prova: 0f824b q05 (20.3%) e q14 (17.3%), somebody q04 (21.2%), q10 (12.4%) e q15 (17.0%), 63d15f q16 (16.4%) e 901fd0 q13 (16.8%) foram anotados como estáticos, e o texto cita o limiar de 4%. Cada nota contradiz o próprio número.
 - onde: Prompt/limiar do júri de movimento em cortes_juri.
 - como testar: Reexecutar o júri de movimento nesses Shorts e só aceitar a nota 'estático' quando o movimento medido ficar abaixo do limiar. Conferir se a nota média de movimento sobe sem mudar o vídeo.
+
+## 19/11 20:50 PROPOSTA [GOSTO] Palavra de impacto da legenda cobrindo boca/rosto do falante (gemini-4-argon)
+- prova: sem-obra-591d83 q02: "TESTEMUNHA" (fundo azul) acima do centro, sobre a boca. a-garota-doava-os-órgãos q03: "QUARENTENA" sobre o rosto e o objeto médico. Repete em 2 Shorts do lote. A dona já preferiu legenda com palavras de impacto maiores, de lado (27/10), então esta proposta vai no mesmo sentido.
+- onde: Função que posiciona a legenda palavra a palavra no render (módulo de legenda do CORTES, ex.: cortes_legenda / cálculo do y da palavra em destaque).
+- como testar: Gerar 10 Shorts com falante em close usando um deslocamento lateral ou para o terço inferior só da palavra de impacto. Medir com a folha de quadros (como a D:\tmp\folha_topo.py) quantas vezes a palavra cai sobre a região do rosto. Comparar nota de legibilidade e % assistido contra um controle sem mudança antes de ligar para todos.
+
+## 19/11 20:50 PROPOSTA [CERTEZA] Conferir a tarja inferior (texto cortado nas laterais / sobreposição) no log de hardsub (gemini-4-argon)
+- prova: sem-obra-591d83 q01: tarja branca inferior com o título "SENHORZINHO MENTE, A BRONCA EM AUDIÊNCIA..." cortado nas laterais. sem-obra-5324f2 q01/q03: tarja inferior com "PROFESSOR BARONI" sobre a caixa de fala e legenda amarela ilegível. Pelas lições, o júri não vê o que está debaixo da tarja, então isso só vira defeito se o log mostrar tarja onde a visão NÃO leu legenda ("[hardsub] só 0/6") ou se a largura passar do tamanho exato da legenda.
+- onde: Log de hardsub desses 2 Shorts e a função que desenha a tarja (largura limitada por tarja_largura_max, hoje 0.8).
+- como testar: Abrir o log dos dois Shorts. Se a visão leu legenda em >= 2 de 6 quadros e a tarja coincide com a caixa das letras, descartar. Se a tarja foi desenhada sem legenda lida ou ficou maior que a legenda, é defeito de CERTEZA: segurar o Short e só então propor ajuste de largura (alavanca tarja_largura_max). Não mexer em tarja_letra, que foi desfeita em 15/11.
+
+## 19/11 22:40 PROPOSTA [GOSTO] Legenda/tarja inferior invadindo a faixa da interface (y > 1580) (gemini-4-argon)
+- prova: Repete em 2 Shorts: a019f5 q18 (tarja preta com texto branco cortada pelos botões do Reels/TikTok) e 28dc10 q01 e q10 (legenda inferior e 'PINTAR' cortadas no rodapé). O júri não vê o que está debaixo da tarja, então a causa pode ser a legenda dinâmica nossa ou a legenda queimada da fonte (esta fica fora do nosso controle e a tarja tem de cobrir o tamanho exato dela).
+- onde: Função que posiciona a legenda palavra a palavra e a tarja na montagem final do vídeo (provável módulo de render/legenda da linha CORTES; confirmar o nome).
+- como testar: Gerar a folha de quadros dos 2 Shorts em >= 720 px, medir a caixa das letras da legenda DINÂMICA e ver se o fundo dela passa de y=1580. Se for nossa legenda, subir a margem inferior; se for a da fonte, não mexer (regra da tarja no tamanho exato). Comparar a nota média antes e depois.
+
+## 19/11 22:40 PROPOSTA [GOSTO] Primeiros 2 s sem relação com a 1ª frase da narração (gemini-4-argon)
+- prova: Repete em 2 Shorts: a019f5 q01/q02 (mulher pensativa e carro vermelho enquanto a voz fala de errar a digitação e chamar o chefe de castrado) e 417419 q01 (palavra 'RIO' isolada com animação genérica enquanto a voz diz 'Eu explico o rio como explico uma reação').
+- onde: Escolha da tomada de abertura e quebra da 1ª frase da legenda (seleção de cena do 1º take, ligada ao texto do roteiro).
+- como testar: Em um lote de teste, escolher o 1º take pela palavra-chave da 1ª frase do roteiro e juntar as 3 primeiras palavras na legenda em vez de 1. Comparar % assistido e retenção só dos Shorts alterados contra os demais.
+
+## 19/11 22:40 PROPOSTA [GOSTO] Cenas com movimento baixo no meio do Short (gemini-4-argon)
+- prova: a019f5 q13 (cena 5, 16.3%, no clímax) e 417419 q16 (cena 6, abaixo de 4.5%). O número de a019f5 é contraditório no texto do júri, então a prova depende do log de movimento por cena.
+- onde: Medição de movimento por cena e a regra de renovar o estímulo/zoom (ken burns) na montagem.
+- como testar: Conferir no log os valores reais dessas 2 cenas. Se estiverem de fato abaixo de ~4.5%, aplicar zoom/pan contínuo ou trocar o take só nelas e comparar a nota de movimento.
+
+## 19/11 22:40 PROPOSTA [GOSTO] Final do Short: CTA, frase do loop e palavra duplicada disputando a mesma faixa (gemini-4-argon)
+- prova: a019f5 q16 (CTA e frase aberta do loop na mesma faixa inferior), 9a7f0e q17 ('GOSTOU GOSTOU?' duplicado) e q18 ('tem mais história' pequeno), 28dc10 q18 (CURTIR/INSCREVER-SE colados no topo). Não toco no fim em gancho, que é o loop e é intencional.
+- onde: Montagem do bloco final (CTA/loop) e texto do CTA no roteiro.txt.
+- como testar: Abrir o roteiro.txt de 9a7f0e e ver se 'gostou' está repetido no roteiro (se estiver, é regra de roteiro; se não, é bug de legenda). Medir a posição do CTA em 3 Shorts e separar a faixa do CTA da faixa da frase do loop.
+
+## 19/11 23:47 PROPOSTA [CERTEZA] CTA fixo do rodapé sai cortado/duplicado e fora da zona segura (gemini-4-argon)
+- prova: sem-obra-e7a75a: q16 e q17 mostram 'Link do VÍDEO COMPLETO no primeiro comentário' cortado/duplicado e invadindo abaixo de y=1580; q18 mostra o CTA colidindo com a legenda 'MESMO' e com o sticker 'É PRA QUÊ?'. q01 mostra tarja branca longa ('VALE A PENA vender APENAS...') ocupando a zona quente do gancho. É só 1 Short, por isso não vira alavanca.
+- onde: Trecho do render que monta a tarja/CTA do rodapé (procurar a string 'VÍDEO COMPLETO' no pipeline da linha CORTES). Provavelmente é a composição de overlays final e a ordem das camadas.
+- como testar: Re-renderizar o e7a75a e montar uma folha com os quadros dos últimos 3 s: o CTA deve aparecer uma vez só, inteiro, acima de y=1580 e sem encostar na legenda. Depois rodar a mesma checagem em 3 Shorts de outros canais que tenham o CTA, para ver se o defeito é geral.
+
+## 19/11 23:47 PROPOSTA [CERTEZA] Conferir a origem de 'HUEVO' e de 'DE BRIGHT/PASTO' no início do a27f34 (gemini-4-argon)
+- prova: sem-obra-a27f34: q10 e q12 trazem 'HUEVO' (espanhol) enquanto a narração diz 'ovo'. q02 traz 'DE BRIGHT' e 'PASTO' soltos antes do gancho da vaca/esterco. Pela lição de 27/10 a legenda é o TEXTO do roteiro, então a origem pode ser o roteiro, um adesivo da fonte ou a transcrição.
+- onde: roteiro.txt e log do Short sem-obra-a27f34_cap1_20261113; depois a etapa que gera a legenda palavra a palavra e a que traduz o texto da fonte.
+- como testar: Dar grep de 'huevo', 'bright' e 'pasto' no roteiro.txt. Se estiverem lá, a causa é o roteiro e a correção é uma regra de roteiro, mas só se o padrão aparecer em outro Short. Se não estiverem, a causa é adesivo ou texto da fonte vazando para a legenda, e é bug de pipeline. Só vale como regra se aparecer em >= 2 Shorts do próximo lote.
+
+## 19/11 23:47 PROPOSTA [GOSTO] Legenda palavra a palavra em cima de tabela/tarja informativa e legenda da fonte aparecendo sob a palavra (gemini-4-argon)
+- prova: ecb39b: q04, q05 e q10 mostram a legenda cobrindo e quebrando a tabela do Mercado Livre e a tarja informativa. q04 ainda mostra a legenda queimada rosa/branca da fonte ('por categoria') aparecendo sob a palavra 'POR'. 722b0b: q01 e q10 mostram sobreposição semelhante com a tarja/gráfico. Todas são notas leves ou médias.
+- onde: Posição vertical da legenda quando a cena é tela/tabela, e o cálculo da caixa da tarja/delogo no ecb39b. Pela lição de 27/10, medir a legenda queimada da fonte em resolução >= 720 px.
+- como testar: Medir a caixa real da legenda queimada no ecb39b (folha de quadros em 720 px ou mais) e comparar com a caixa coberta. Se a cobertura estiver menor que a legenda, é CERTEZA de tarja e deve ser corrigida. Para a posição da legenda, testar num único tipo de cena (tabela/tela) e comparar a nota média antes e depois, sem mexer em mais nada.
+
+## 20/11 01:01 PROPOSTA [CERTEZA] Legenda palavra a palavra cortada na borda (letra inicial/final some) (gemini-4-argon)
+- prova: sem-obra-0a8843_cap1_20261119 q13 e q16: "esde o nasciment" (falta o D e o O). sem-obra-12160c_cap1_20261119 q07: "CONTAR UMA BOA HISTÓRIA" colada na borda esquerda, abaixo de 60 px de margem. Dois Shorts do lote, com o mesmo sintoma de legenda encostando ou passando da borda.
+- onde: Provável: o módulo que gera a legenda palavra a palavra (ASS/drawtext) na montagem do CORTES, na função que calcula posição x e largura da palavra ou frase. Confirmar o nome do arquivo antes de editar.
+- como testar: 1) Abrir o roteiro.txt do 0a8843 e confirmar que o texto diz "Desde o nascimento" inteiro; se o roteiro já vier cortado, é regra de roteiro e não de legenda. 2) Se o roteiro está certo, renderizar um teste com palavras longas e frases de 4-5 palavras nas posições laterais e medir a caixa do texto: margem >= 60 px dos dois lados, sem letra fora do quadro. 3) Reprocessar os dois Shorts e comparar os mesmos quadros (q13/q16 e q07).
+
+## 20/11 01:01 PROPOSTA [GOSTO] Medir a altura real da tarja/título de gancho antes de mexer em qualquer coisa (gemini-4-argon)
+- prova: O júri chamou de grande a faixa do gancho em 2 Shorts: sem-obra-e7a75a_cap1_20261119 q01 (tarja branca com título longo) e sem-obra-12160c_cap1_20261119 q01 (tarja verde 'gigante' no centro). Sem o log do Short, não dá para saber se é tarja de cobertura (a regra fixa exige o tamanho exato da legenda) ou o card de título do gancho (o júri às vezes confunde os dois).
+- onde: Log de cada Short (linha de [hardsub] e tamanho da tarja de cobertura) e o D:\tmp\folha_topo.py, que gera a folha do topo no 1,5 s de todos os Shorts do dia.
+- como testar: Rodar o folha_topo.py em todos os Shorts de 19/11 e medir altura da faixa dividida pela altura do quadro. Se a faixa for de cobertura e passar da altura da legenda, é bug (CERTEZA, corrigir no cálculo da caixa). Se for o card de título, só entra uma regra de título curto se mais de 2 Shorts tiverem faixa acima de 20% da altura. Medir antes de ligar.
+
+## 20/11 02:16 PROPOSTA [CERTEZA] Legenda palavra a palavra: palavra anterior não some antes da próxima (2 palavras na tela ao mesmo tempo) (gemini-4-argon)
+- prova: sem-obra-69315d q12: 'ALLIU' (resto da palavra anterior) apagado perto da zona de risco. sem-obra-780185 q13: 'AGUENTARAM', 'FICARAM' e 'MINÚSCULOS' empilhados no canto inferior esquerdo. 780185 q02: 'PRO' verde cortado acima de 'E VOLTARAM VIVOS'. Mesmo defeito em 2 Shorts do lote, e bate com a regra 5 do APRENDIDO (uma palavra ativa por vez, com fade-out completo).
+- onde: Provável: o renderizador da legenda (ASS/drawtext) no módulo de legenda da linha CORTES. Procurar onde o fim de cada palavra é calculado e onde o início da próxima é definido; o fim deve ser <= início da próxima.
+- como testar: Pegar os 3 Shorts do lote, extrair quadros a cada 0,1 s nas trocas de palavra e contar quantos textos de legenda aparecem por quadro. Ao corrigir (cortar o fim de cada palavra no início da seguinte), rerrenderizar os mesmos 3 Shorts e confirmar no máximo 1 palavra por quadro.
+
+## 20/11 02:16 PROPOSTA [GOSTO] Legenda cobrindo rosto ou ação principal em planos fechados (gemini-4-argon)
+- prova: 69315d q11: 'ESTENDIA' sobre casaco e rosto. 570d83 q03 e q08: 'MAS ELA' e 'NÃO TEM MAIS SALVAÇÃO' sobre a mão e a água. 780185 q03: legenda cobrindo a base do tardígrado. Aparece em 3 Shorts, mas o júri não distingue legenda no meio do quadro que é intencional (impacto grande) da que atrapalha.
+- onde: Posição vertical da legenda no renderizador. Hoje é fixa; a alternativa é subir ou descer a legenda conforme a região de movimento ou rosto do quadro.
+- como testar: Teste A/B em 1 canal por 3 dias: legenda com altura adaptativa contra a fixa. Medir % assistido e a nota de legibilidade do júri. Não ligar para todos os canais antes de ter essa medida.
+
+## 20/11 02:16 PROPOSTA [CERTEZA] Investigar a barra preta e a caixa verde de chat sobre a cena em sem-obra-69315d (gemini-4-argon)
+- prova: 69315d q10: tarja/artefato preto sobre a parte inferior do cachorro nadando. q11: caixa verde de chat no topo, cortada. Ocorreu em 1 Short só. Antes de agir: abrir o log do Short e conferir se a tarja foi aplicada com '[hardsub]' lido (a visão leu legenda) ou se é um overlay residual. O júri não vê o que há debaixo da tarja.
+- onde: Log do Short sem-obra-69315d_cap1_20261119 (linhas '[hardsub]') e a função que desenha a tarja de cobertura (cobertura_legenda: delogo).
+- como testar: Se o log mostrar 'só 0/6' ou ausência de leitura, é tarja sem legenda embaixo: corrigir a decisão da visão. Se leu legenda, descartar como erro do júri. Se aparecer em mais 1 Short nos próximos lotes, vira padrão.
+
+## 20/11 02:16 PROPOSTA [GOSTO] Imagem à frente da narração (sincronia tomada x fala) (gemini-4-argon)
+- prova: sem-obra-780185 q02: o tardígrado aparece no início, mas só é narrado no final. q11: imagem de satélite enquanto o áudio fala dos tardígrados em 2007. Só 1 Short, então não é padrão. Repete o item 8 do APRENDIDO; só vale agir se aparecer em outro Short.
+- onde: Função que escolhe a tomada por trecho de roteiro (corte de cena/casamento de cena com frase).
+- como testar: No próximo lote, revisar 5 Shorts de curiosidades e marcar onde a imagem principal aparece antes da menção na voz. Com 2 ou mais casos, propor o ajuste do ponto de corte.
+
+## 20/11 03:26 PROPOSTA [CERTEZA] Legenda palavra a palavra não pode cobrir rosto/lábios do falante (gemini-4-argon)
+- prova: Em 2 Shorts: sem-obra-8db0c1 q01 (legenda sobre lábios/rosto) e q10 ('AO LONGO' com baixa opacidade sobre o rosto do palestrante); sem-obra-fdf26b q04 ('VISTO' cobrindo o rosto do personagem da esquerda).
+- onde: Função que posiciona a legenda palavra a palavra no render (provável módulo de legenda do pipeline CORTES; confirmar o nome do arquivo antes de editar). Não envolve tarja nem as alavancas liberadas.
+- como testar: Rodar o render nesses 2 Shorts com a legenda deslocada para a lateral ou para fora da caixa do rosto, mantendo palavras de impacto maiores como a dona prefere (27/10). Comparar os quadros q01, q04 e q10 antes e depois. Controle: um Short com rosto pequeno não pode piorar.
+
+## 20/11 03:26 PROPOSTA [GOSTO] Medir o 1,5 s do topo de todos os Shorts do dia antes de mexer no gancho (gemini-4-argon)
+- prova: Retenção 7.0 nos 4 Shorts, todos citando o q01. As causas são diferentes: tarja de título cobrindo o topo (d7d0dd), tweet estático (5102cd), legenda sobre lábios (8db0c1), tarja branca larga com fonte borrada (fdf26b). Nota baixa do júri não é prova (LICOES 28/10).
+- onde: D:\tmp\folha_topo.py (folha do topo no 1,5 s de todos os Shorts do dia)
+- como testar: Gerar a folha do topo do dia inteiro e medir a altura real da tarja de título e da fonte borrada em fdf26b e d7d0dd. Só propor ajuste se a tarja de título passar de uma faixa estreita em >= 2 Shorts. Conferir também no roteiro.txt do d7d0dd se 'Escute, a questão é simples' é a 1ª frase falada.
+
+## 20/11 03:26 PROPOSTA [CERTEZA] Conferir a margem inferior da legenda em sem-obra-5102cd (gemini-4-argon)
+- prova: 5102cd q02, q04, q05 e q13: legenda colada ou abaixo de y=1580. Só 1 Short, então ainda não é padrão.
+- onde: Mesma função de posicionamento da legenda (y máximo da caixa das letras)
+- como testar: Medir em resolução >= 720 px o y inferior real das letras nesses 4 quadros e em 5 Shorts de outros canais. Se passar de 1580 em >= 2 Shorts, subir a margem inferior e rodar de novo nos mesmos Shorts.
