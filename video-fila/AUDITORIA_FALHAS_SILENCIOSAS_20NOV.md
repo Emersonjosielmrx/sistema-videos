@@ -31,3 +31,14 @@ outras), gemini-tts (modelo desativado desde 15/10 — trocado), sinais_shorts/a
   🚨 URGENTE no Telegram NA HORA + caso aberto pro conserto automático. Desliga: VIGIA_SEM_SUCESSO=0.
 - `relatorio_ronda.py`: a ronda abre com "🚨 PROCESSOS PARADOS — consertar AGORA" (o chat da ronda conserta na hora).
 - Processo novo = 1 linha no config (log, palavra de sucesso, horas).
+
+## Rodada das 21h (relatório completo)
+| Processo | Situação | O que fiz |
+|---|---|---|
+| Disco D | 196 KB livres (100%) | apaguei a cópia local do longo QwY2 (3,1 GB, conferido igual no Drive) + prints de teste; Shorts da reserva (motor antigo) indo pro Drive (8 GB, confere tamanho antes de apagar) |
+| Gemini sem navegador (imagem/vídeo) | 0 ok desde 05:12 (12% no dia); Gemini responde "Are you signed in? I can search for images, but can't create any" em TODAS as contas — a rota HTTP chega como deslogada pra geração de mídia (mudança do lado do Google ~05-06h) | o Flow cobre (153 imagens hoje). Precisa capturar o pedido novo do site (chat "navegador sem navegador", fechado) |
+| Longo Vilão 2 (4,6 GB) | travou 2x no Whisper e marcou 2 contas como "ruim" | tirado da fila (_fila_parados) |
+| STI (máquina) | fora do ar (ssh sem resposta) | dona: ver se está ligada |
+| Bot Telegram "producao" | 502 no getMe | dona: @BotFather |
+| Melhorador dos longos | 43 falhas = modelos principais sem cota (429); a reserva Gemini aplicou 2 consertos hoje | funciona; só lento |
+| Instagram contas de vídeo | 0 desde 07h | NORMAL: regra da dona 14/11 (só 5 contas de foco, máx 2/dia) — já bateram o limite |

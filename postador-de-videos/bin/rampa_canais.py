@@ -227,7 +227,62 @@ def _mediana_shorts():
         if v is None:
             v = (m.get("ret_lista") or {}).get("views")
         por.setdefault(m.get("canal_slug"), []).append(float(v or 0))
-    return {s: (statistics.median(vs), len(vs)) for s, vs in por.items() if s and len(vs) >= SHORTS_MIN}
+    out = {s: (statistics.median(vs), len(vs)) for s, vs in por.items() if s and len(vs) >= SHORTS_MIN}
+    # 20/11 dona ("por que ontem 22 mil e hoje 12 mil? veja todos que podem receber mais vídeos, melhore a escada"):
+    # CenaReact ficava com mediana 1.020 (14 dias, dos dias bons antes de 17/11) recebendo 7/dia, com os Shorts de
+    # 18-20/11 dando 2-5 views no YouTube — vídeo jogado fora que daria ~1.000 no Tech Noturno. O Studio lido aqui
+    # chega atrasado e canal punido nem é relido. Agora a mediana RECENTE (Shorts de 1 a 4 dias, views ao vivo do
+    # painel :8790/api/ranking) manda quando caiu pra menos de 1/5 da de 14 dias: a escada desce e a produção manda
+    # os vídeos pros canais que rendem AGORA. RAMPA_RECENTE=0 desliga.
+    if os.environ.get("RAMPA_RECENTE", "1") != "0":
+        try:
+            for s, (med_r, n_r) in _mediana_recente().items():
+                # caiu pra < 1/5 (5+ vídeos) = punido agora; ou 8+ vídeos recentes = a recente vale nos dois sentidos
+                # (Tech Noturno: 84 em 14 dias, 1.057 agora — era tratado como fraco e é o melhor canal vivo)
+                if s in out and n_r >= 5 and med_r < out[s][0] / 5:
+                    _DESABOU.add(s)  # CenaReact 1.020 -> 38: punição recente mesmo acima de 30
+                if (s in out and n_r >= 5 and med_r < out[s][0] / 5) or n_r >= 8:
+                    out[s] = (med_r, n_r)
+                    _RECENTES.add(s)
+        except Exception:  # noqa: BLE001 — sem painel, fica a de 14 dias
+            pass
+    return out
+
+
+_RECENTES = set()  # slugs cuja nota veio da mediana recente (rodar() usa pra saber se é punição de agora)
+_DESABOU = set()   # slugs cuja mediana recente caiu abaixo de 1/5 da de 14 dias
+
+
+def _mediana_recente(dias_min=1, dias_max=4):
+    """{slug: (mediana de views, n)} dos Shorts publicados entre dias_min e dias_max dias atrás, ao vivo do YouTube
+    (painel :8790/api/ranking). Slug pelo nome do canal no cadastro."""
+    import statistics
+    import urllib.request
+    from datetime import date
+    with urllib.request.urlopen("http://127.0.0.1:8790/api/ranking", timeout=60) as r:
+        dados = json.loads(r.read())
+    cad = (politica.ler_json(politica.CONFIG_DIR / "canais.json", {}).get("canais") or {})
+    nome_slug = {}
+    for slug, x in cad.items():
+        if isinstance(x, dict):
+            for nome in (x.get("nome"), slug):
+                if nome:
+                    nome_slug[str(nome).lower()] = slug
+    hoje = date.today()
+    por = {}
+    for v in dados.get("videos") or []:
+        if v.get("tipo") != "short" or v.get("situacao") != "público" or v.get("views") is None:
+            continue
+        try:
+            idade = (hoje - date.fromisoformat(v["dia"])).days
+        except (KeyError, ValueError):
+            continue
+        if not dias_min <= idade <= dias_max:
+            continue
+        s = nome_slug.get(str(v.get("canal") or "").lower())
+        if s:
+            por.setdefault(s, []).append(float(v["views"]))
+    return {s: (statistics.median(vs), len(vs)) for s, vs in por.items()}
 
 
 def rodar(simular=False):
@@ -261,7 +316,8 @@ def rodar(simular=False):
         extra_atual = int(c.get("extra", 0))
         m = apr.get(chave) or {}
         if chave in shorts:  # 15/11: nota só dos Shorts de parceiro (ver _mediana_shorts)
-            m = dict(m, mediana=round(shorts[chave][0]), n=shorts[chave][1], _de="Shorts no Studio")
+            m = dict(m, mediana=round(shorts[chave][0]), n=shorts[chave][1],
+                     _de="recente" if chave in _RECENTES else "Shorts no Studio")
         # 12/11 dona ("os maiores sempre no máximo; os mais baixos ficam com as sobras"): a escada segue o RENDIMENTO.
         # Forte (mediana 48 h >= 300) sobe como liberado (1/dia até +8 = 12/dia). Fraco (< 50 com >= 4 vídeos medidos)
         # não sobe e DESCE 1 degrau por dia até o teto base (4/dia — o mínimo dele). RAMPA_POR_RENDIMENTO=0 desliga.
@@ -271,8 +327,24 @@ def rodar(simular=False):
         # 19/11 dona ("aumente o máximo que a escada permitir os canais restantes, sem se afogarem; temos muitos
         # vídeos sobrando e poucos canais" — 13 canais removidos 17-18/11): canal LIBERADO não desce por render pouco
         # (só desce no 'limite diário' do YouTube, em descer()). RAMPA_LIBERADO_NAO_DESCE=0 volta a descer.
-        if fraco and lib and os.environ.get("RAMPA_LIBERADO_NAO_DESCE", "1") != "0":
+        # 20/11: ...exceto canal PUNIDO AGORA (mediana recente < 30 com 8+ Shorts de 1-4 dias: CenaReact 38, Imóvel em
+        # Foco 0, Comédia Noturna 5) — ali o vídeo morre com 2-5 views; o liberado-não-desce era pra não afogar canal
+        # bom, não pra alimentar canal morto. Esses DESCEM até a base. RAMPA_PUNIDO_DESCE=0 volta.
+        punido = (os.environ.get("RAMPA_PUNIDO_DESCE", "1") != "0" and m.get("_de") == "recente"
+                  and (m.get("mediana", 0) < 30 or chave in _DESABOU))  # _DESABOU: caiu > 80% da própria história
+        if fraco and lib and not punido and os.environ.get("RAMPA_LIBERADO_NAO_DESCE", "1") != "0":
             fraco = False
+        # 20/11 dona ("pode ser, faça o melhor"): punido fica com 1/dia (politica._extra_rampa lê "punido"); volta ao
+        # normal quando a mediana recente sai da punição (>= 30 e não desabado). Vale pra liberado ou não.
+        for cr in x["creds"]:
+            cc = d["canais"].setdefault(cr, {"extra": 0})
+            if punido and not cc.get("punido"):
+                cc["punido"] = datetime.now().astimezone().isoformat(timespec="seconds")
+                mudancas.append((chave, base + extra_atual, 1, f"PUNIDO: 1/dia até as views voltarem (mediana recente "
+                                                                f"{m.get('mediana')})"))
+            elif not punido and cc.get("punido") and m.get("_de") == "recente":
+                cc.pop("punido", None)
+                mudancas.append((chave, 1, base + extra_atual, f"saiu da punição (mediana recente {m.get('mediana')})"))
         if fraco:
             ult = c.get("ultima_mudanca")
             recente = False
@@ -280,12 +352,16 @@ def rodar(simular=False):
                 recente = bool(ult) and (agora - datetime.fromisoformat(ult)).total_seconds() < 20 * 3600
             except ValueError:
                 pass
-            if extra_atual > 0 and not recente:
-                motivo = f"desceu: rende pouco (mediana {m.get('mediana')} em 48 h) — vagas vão pros canais fortes"
-                mudancas.append((chave, base + extra_atual, base + extra_atual - 1, motivo))
+            if extra_atual > 0 and (punido or not recente):
+                # punido agora: volta à base de uma vez (descer 1/dia deixava CenaReact 3 dias a 6-7/dia jogando vídeo fora)
+                passo = extra_atual if punido else 1
+                motivo = (f"desceu: PUNIDO agora (mediana {m.get('mediana')} nos Shorts de 1-4 dias) — vagas vão pros "
+                          "canais que rendem" if punido else
+                          f"desceu: rende pouco (mediana {m.get('mediana')} em 48 h) — vagas vão pros canais fortes")
+                mudancas.append((chave, base + extra_atual, base + extra_atual - passo, motivo))
                 if not simular:
                     for cr in x["creds"]:
-                        _mudar(d, cr, -1, motivo)
+                        _mudar(d, cr, -passo, motivo)
             continue
         if forte:
             lib = True

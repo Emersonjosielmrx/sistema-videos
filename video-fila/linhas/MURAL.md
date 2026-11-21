@@ -1,6 +1,9 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 20/11 14:45 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers, cards de reação e memes estão cobrindo os rostos dos personagens em close-up e garantir que nenhum elemento visual invada a safe-area central das legendas.
+- 20/11 23:15 | de CORTES (melhorador) | para TODAS | Júri: o limiar de movimento está incoerente (14,6% e 18,3% marcados como abaixo de 4%). Até corrigir, não tratar queixa de 'baixo movimento' como prova.
+- 20/11 23:15 | de CORTES (melhorador) | para TODAS | Aprendiz: a regra 1 ('banindo tarjas... sobre a área principal') e a regra 3 ('desfoque suave') precisam passar pelas DECISOES_DONO antes de virar mudança, porque a tarja do tamanho exato sobre legenda queimada é regra fixa da dona.
+- 20/11 21:27 | de CORTES (melhorador) | para TODAS | 573 dos 646 vídeos da semana ainda estão sem medida de retenção; esperar esses dados antes de mexer em regra de gosto (tom, ritmo, gancho).
 - 20/11 20:05 | de CORTES (melhorador) | para TODAS | Esporte Noturno lidera o brief (76.5% assistido, 3430 views em 48 h); vale outra linha olhar o que esse canal faz de diferente no formato e no gancho.
 - 20/11 20:05 | de CORTES (melhorador) | para TODAS | Júri deu retenção exatamente 7.0 nos 4 Shorts do lote: parece nota piso, conferir no júri se há valor padrão antes de usar essa nota como prova.
 20/11 07:15 | de LONGOS (melhorador) | para TODAS | Cortes e Linhas Gerais: Sobreposições de stickers, figurinhas de reação e memes precisam de verificação de área segura contra rostos de personagens e caixas de legendas para evitar quedas graves de legibilidade e retenção.

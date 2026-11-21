@@ -143,7 +143,14 @@ def lote(pasta_voz, lista_json):
     # tentativas da própria frase (a tentativa fora da curva perde).
     aceitas = []
     cps_aceitas = []
-    print(f"FISH melhor de {N_TENT} por frase (tom mais perto do normal do narrador)", flush=True)
+    try:
+        import soundfile as _sf
+        _info = _sf.info(str(ref))
+        CPS_REF = len(ref_txt) / max(_info.duration, 1.0)
+    except Exception:  # noqa: BLE001
+        CPS_REF = 0.0
+    print(f"FISH melhor de {N_TENT} por frase (tom mais perto do normal do narrador); ritmo da referência "
+          f"{CPS_REF:.0f} letras/s", flush=True)
 
     def gera_melhor(txt, suf):
         tent = []
@@ -155,14 +162,19 @@ def lote(pasta_voz, lista_json):
             alvo = float(np.median(aceitas)) if len(aceitas) >= 3 else 0.0
             if alvo and tent[-1][2]:
                 st0 = abs(12 * np.log2(tent[-1][2] / alvo))
-                cps_ok = (abs(cps / float(np.median(cps_aceitas)) - 1) <= 0.2) if len(cps_aceitas) >= 3 else True
+                _cref = float(np.median(cps_aceitas)) if len(cps_aceitas) >= 3 else CPS_REF
+                cps_ok = (abs(cps / _cref - 1) <= 0.2) if _cref else True
                 if st0 <= 1.5 and 8 <= cps <= 26 and cps_ok:  # já boa: não gasta mais tempo
                     break
         alvo = float(np.median(aceitas)) if len(aceitas) >= 3 else float(np.median([t_[2] for t_ in tent if t_[2]] or [0]))
         # 20/11 noite (dona: "no A2v2 ele falou 'levou 1, 2 e uma faca' — nenhum outro tem essa parte"): o Fish INVENTA
         # palavras às vezes. Palavra inventada = frase mais longa que o texto pede -> letras/s bem abaixo do ritmo das
         # frases já aceitas. Penaliza quem sai do ritmo normal do narrador neste vídeo (±30%).
-        cps_alvo = float(np.median(cps_aceitas)) if len(cps_aceitas) >= 3 else float(np.median([t_[3] for t_ in tent]))
+        # 20/11 noite (dona: "o início do Mike no A2v3/A4v3 está estranho"): a 1ª frase saiu com 11 s pra ~110 letras
+        # (metade do ritmo dele) — no começo ainda não há frases aceitas e as 3 tentativas podiam estar todas lentas.
+        # Antes de ter 3 aceitas, o ritmo-alvo é o da própria referência (letras do texto ÷ duração do trecho real).
+        cps_alvo = (float(np.median(cps_aceitas)) if len(cps_aceitas) >= 3
+                    else (CPS_REF or float(np.median([t_[3] for t_ in tent]))))
 
         def pena(t_):
             st_ = abs(12 * np.log2(t_[2] / alvo)) if t_[2] and alvo else 6.0

@@ -26075,6 +26075,102 @@
         "abrir github.com/h0ll0w-AkuZr0guY/MiaoTask e conferir se serve como agendador multi-celular"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_2001.md 2026-11-20"
+    },
+    {
+      "id": "agendar_short_app",
+      "nome": "Agendar publicação de Short pelo app do YouTube (tela de visibilidade/agendamento) e ler a conta ativa de forma estável",
+      "subtemas": [
+        "youtube shorts schedule android automation`, `uiautomator2 youtube studio"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2016.md 2026-11-20"
+    },
+    {
+      "id": "pan_subpixel",
+      "nome": "Pan e zoom sem tremor",
+      "subtemas": [
+        "truques em ffmpeg e Python para zoompan suave (supersampling, crop com subpixel, expressões `zoompan` sem arredondamento) em painel estático, medidos em 720p"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2039.md 2026-11-20"
+    },
+    {
+      "id": "tempo_painel",
+      "nome": "Tempo do painel pela narração",
+      "subtemas": [
+        "como calcular a duração de cada painel/cena a partir do áudio (ffprobe + mín/máx + margem de segurança 9:16), em projetos pequenos de recap com ideia clara"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2039.md 2026-11-20"
+    },
+    {
+      "id": "cache_hash_render",
+      "nome": "Cache de renders por hash de frase/painel",
+      "subtemas": [
+        "Projetos de pipeline em Python+FFmpeg que re-renderizam só o trecho alterado (cache por conteúdo), para ganhar vídeos por dia em PC fraco"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2227.md 2026-11-20"
+    },
+    {
+      "id": "politica_reutilizado",
+      "nome": "Checklist de reutilização/conteúdo não original",
+      "subtemas": [
+        "páginas oficiais do YouTube sobre conteúdo reutilizado e inautêntico, exemplos de \"valor agregado\" aceitos para recap e compilação"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2316.md 2026-11-20"
+    },
+    {
+      "id": "fila_celulares",
+      "nome": "Portão de prontidão e fila por celular",
+      "subtemas": [
+        "técnicas sem repositório: `adb get-state`, reconexão Wi-Fi com backoff, trava por serial"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2316.md 2026-11-20"
+    },
+    {
+      "id": "cel_disco",
+      "nome": "Liberar disco do celular após upload",
+      "subtemas": [
+        "scripts Termux/adb que apagam vídeo já postado e esvaziam cache do app do YouTube (`pm trim-caches`, `cmd package`), com conferência de postagem antes de apagar"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2332.md 2026-11-20"
+    },
+    {
+      "id": "cel_pre_voo",
+      "nome": "Pré-voo do celular antes de postar",
+      "subtemas": [
+        "checagem por adb de bateria, temperatura, espaço, conta ativa e Wi-Fi, para não perder vídeo por falha silenciosa"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2332.md 2026-11-20"
+    },
+    {
+      "id": "cel_render",
+      "nome": "FFmpeg no celular Android (Termux)",
+      "subtemas": [
+        "ffmpeg aarch64 no Termux com encoder de hardware (mediacodec) para o upscale 720p→1080p dos Shorts, usando os celulares como máquinas extras de render"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2332.md 2026-11-20"
+    },
+    {
+      "id": "fila_celular",
+      "nome": "Fila e travas entre celulares no adb",
+      "subtemas": [
+        "scripts que usam `adb -s serial` com lock de arquivo e reconexão `adb connect` em Python, sem framework de farm"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2351.md 2026-11-21"
+    },
+    {
+      "id": "yt_series_titulo",
+      "nome": "Títulos e numeração de série",
+      "subtemas": [
+        "como recaps campeões numeram partes (\"Parte 3\", \"Ep 12\") e o que aparece na busca; coletar com yt-dlp sem API"
+      ],
+      "origem": "area_dist_playlists_series__sonnet_0007.md 2026-11-21"
+    },
+    {
+      "id": "termux_render_lote",
+      "nome": "Render em celular Android",
+      "subtemas": [
+        "FFmpeg no Termux para ratear fila de render com os PCs, e liberar disco após o upload"
+      ],
+      "origem": "area_dist_playlists_series__sonnet_0007.md 2026-11-21"
     }
   ],
   "projetos": [

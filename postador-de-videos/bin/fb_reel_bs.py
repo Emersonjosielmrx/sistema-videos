@@ -107,16 +107,39 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
         if not ok_fb or rotulo.casefold() != nome_pagina.casefold():
             pg.screenshot(path=str(LOG / f"{tag}_erro_postar_em.png"))
             return False, f"'Postar em' ficou '{rotulo}' — esperado só '{nome_pagina}'"
-        # upload: o botão abre o seletor de arquivo nativo
-        with pg.expect_file_chooser(timeout=20000) as fc:
-            _botao(pg, "Adicionar vídeo").click()
-        fc.value.set_files(str(Path(video).resolve()), timeout=300000)  # pelo proxy o envio do arquivo demora
+        # upload: o botão abre o seletor de arquivo nativo. 20/11: o 1º upload da rodada (Chrome recém-aberto) às vezes
+        # não entra no FileChooser e estoura; tenta 2x antes de desistir.
+        enviado = False
+        for tent in range(2):
+            try:
+                with pg.expect_file_chooser(timeout=20000) as fc:
+                    _botao(pg, "Adicionar vídeo").click()
+                fc.value.set_files(str(Path(video).resolve()), timeout=60000)
+                enviado = True
+                break
+            except Exception as ex:
+                print(f"  upload tent {tent + 1} falhou ({str(ex)[:60]}); recarrego e tento de novo", flush=True)
+                if tent == 0:
+                    pg.goto(COMPOSER.format(asset_id), wait_until="domcontentloaded", timeout=120000)
+                    time.sleep(12)
+                    _fechar_avisos(pg)
+                    _so_facebook(pg, nome_pagina)
+        if not enviado:
+            return False, "upload não entrou (FileChooser timeout 2x)"
         print("  vídeo enviado ao seletor", flush=True)
-        # texto
+        # texto — a caixa só monta depois que o upload avança; espera até 3 min (MS Energy pela casa demora)
         caixa = pg.locator("[contenteditable=true][role=textbox]").first
-        caixa.click(); time.sleep(0.5)
-        pg.keyboard.insert_text(texto)
-        time.sleep(1)
+        for _ in range(36):
+            if caixa.count() and caixa.is_visible():
+                break
+            time.sleep(5)
+        try:
+            caixa.click(timeout=8000); time.sleep(0.5)
+            pg.keyboard.insert_text(texto)
+            time.sleep(1)
+        except Exception:
+            pg.screenshot(path=str(LOG / f"{tag}_sem_caixa_texto.png"))
+            print("  aviso: não digitei a legenda (caixa não apareceu); segue sem texto", flush=True)
         # espera o upload terminar (Avançar habilita)
         for i in range(120):
             b = _botao(pg, "Avançar")

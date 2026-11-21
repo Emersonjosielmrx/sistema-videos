@@ -3,12 +3,14 @@
  "intervalo_h": 3,
  "max_dia_por_conta": {
   "emersonjosiel02": 3,
-  "mundosolar1995": 3
+  "mundosolar1995": 3,
+  "inovare_rastreio": 2
  },
  "perfil_pessoal": {
   "emersonjosiel02": "Mund Solar",
   "msenergypara": "Mund Solar III",
-  "mundosolar1995": "Mund Solar II"
+  "mundosolar1995": "Mund Solar II",
+  "inovare_rastreio": "Inovare Rastreio"
  },
  "fila": [
   {
@@ -106,7 +108,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "seebotsia",
-   "conta": "mundosolar1995",
+   "conta": "emersonjosiel02",
    "nome": "Tech Noturno",
    "categoria": "Ciência, tecnologia e engenharia",
    "arte": "ia",
@@ -266,7 +268,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "fabricadeautomacoesia",
-   "conta": "mundosolar1995",
+   "conta": "emersonjosiel02",
    "nome": "Fábrica de Automações IA",
    "categoria": "Empresa de software",
    "arte": "financas",
@@ -754,7 +756,8 @@
  ],
  "intervalo_h_por_conta": {
   "emersonjosiel02": 3,
-  "mundosolar1995": 3
+  "mundosolar1995": 3,
+  "inovare_rastreio": 4
  },
  "_ritmo": "20/11 11h dona: 'criar o máximo de Páginas'. Sem limite oficial (Meta não publica); relatos = aviso 'rápido demais' depois de 3-5 seguidas. Perfil 10+ anos 6/dia a cada 2 h; perfil novo 3/dia a cada 3 h. Aviso = conta parada 48 h.",
  "_msenergypara": "20/11 dona: 'MS Energy é comercial, não precisa de vídeo de entretenimento; os vídeos devem ser os mesmos do Instagram'. Perfil antigo fora da fila; Cena React e Histórias em Frames (criadas lá) pausadas."

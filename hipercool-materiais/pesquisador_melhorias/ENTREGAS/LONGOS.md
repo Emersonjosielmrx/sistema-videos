@@ -1625,3 +1625,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 19/11 (automático: nada aproveitável) — 2026-11-19 00:58 — Política de conteúdo reutilizado e como documentar transformação (`area_yt_politica_conteudo_reutilizado`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-19\respostas\area_yt_politica_conteudo_reutilizado__sonnet_0047.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 00:18 — Playlists e séries para longos (`area_dist_playlists_series`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_playlists_series__sonnet_0007.md`
+- (todos os itens desta pesquisa foram reprovados)

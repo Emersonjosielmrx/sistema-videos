@@ -337,7 +337,7 @@ def med_sem_sucesso(agora):
         dia = None  # data do último cabeçalho "[20/11/2026 ..." visto (as linhas de dentro só têm a hora)
         ultimo_ok, erros = None, []
         # log sem data nenhuma (só "[hh:mm:ss]"): sucesso nas últimas 300 linhas conta na hora do arquivo (mtime)
-        tem_data = any(re.match(r"\[\d\d/\d\d", l) for l in linhas)
+        tem_data = any(re.match(r"\[\d\d/\d\d|\d{4}-\d\d-\d\d[ T]\d\d:", l) for l in linhas)
         if not tem_data:
             # log diário ({hoje}) = o arquivo inteiro é de hoje; log corrido = só o fim conta
             if any(re.search(pr["sucesso"], l) for l in (linhas if "{hoje}" in pr["log"] else linhas[-300:])):
@@ -347,6 +347,9 @@ def med_sem_sucesso(agora):
             m = re.match(r"\[(\d\d)/(\d\d)/(\d{4})[ ,]+(\d{1,2}):(\d\d)", l)
             if m:
                 dia = datetime(int(m.group(3)), int(m.group(2)), int(m.group(1)), int(m.group(4)), int(m.group(5)))
+            m3 = re.match(r"(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)", l)  # 20/11: logging do Python (midia.log)
+            if m3:
+                dia = datetime(int(m3.group(1)), int(m3.group(2)), int(m3.group(3)), int(m3.group(4)), int(m3.group(5)))
             m2 = re.match(r"\[(\d\d)/(\d\d) (\d\d):(\d\d)", l)
             if m2:
                 dia = datetime(agora.year, int(m2.group(2)), int(m2.group(1)), int(m2.group(3)), int(m2.group(4)))

@@ -71,6 +71,13 @@
    "sucesso": "feitos: [1-9]",
    "max_h": 30,
    "projeto": "postador"
+  },
+  {
+   "nome": "Gemini sem navegador (imagem/vídeo)",
+   "log": "D:\\gemini-argo\\midia.log",
+   "sucesso": "(imagem|video) OK",
+   "max_h": 6,
+   "projeto": "midia"
   }
  ]
 }

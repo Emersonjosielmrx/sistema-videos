@@ -25,7 +25,7 @@ sys.path.insert(0, str(BIN))
 LOG = BIN.parent / "logs" / "fb_vigia.log"
 EST = BIN.parent / "logs" / "fb_vigia.json"
 PY = r"D:\hipercool-videos\venv\Scripts\python.exe"
-TRAVADA_MIN = 50
+TRAVADA_MIN = 18  # 20/11: rodada pendurada (Chrome morreu no upload) travava o nobre; mata mais cedo
 SIMULAR = "--simular" in sys.argv
 
 

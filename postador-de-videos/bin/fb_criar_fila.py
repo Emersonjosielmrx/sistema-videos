@@ -77,7 +77,26 @@ def achar_pagina(conta, nome):
     try:
         with sync_playwright() as p:
             ctx = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}").contexts[0]
-            url = next((h for t, h in fb_contas.listar_paginas(ctx) if t.strip().casefold() == nome.casefold()), None)
+            url = None
+            for tent in range(4):  # conta nova demora a listar a Página recém-criada
+                url = next((h for t, h in fb_contas.listar_paginas(ctx) if t.strip().casefold() == nome.casefold()), None)
+                if url:
+                    break
+                # 2ª via: a tela "Páginas que você gerencia" / allactivity; e a aba de criação ainda aberta
+                pv = ctx.new_page()
+                try:
+                    pv.goto("https://www.facebook.com/pages/?category=your_pages", wait_until="domcontentloaded", timeout=60000)
+                    time.sleep(8)
+                    for a in pv.query_selector_all("a[href*='/profile.php?id='], a[href*='facebook.com/']"):
+                        txt = (a.inner_text() or "").strip().split("\n")[0]
+                        if txt.casefold() == nome.casefold():
+                            url = (a.get_attribute("href") or "").split("?__")[0].split("&")[0]
+                            break
+                finally:
+                    pv.close()
+                if url:
+                    break
+                time.sleep(20)
             if not url:
                 return None, None, None
             pg = ctx.new_page()
@@ -92,12 +111,43 @@ def achar_pagina(conta, nome):
         fb_contas.fechar(proc)
 
 
+def contas_livres(fila, est):
+    """Contas que podem criar AGORA (sem intervalo/limite/bloqueio/saturação)."""
+    agora = datetime.now()
+    hoje = agora.strftime("%Y-%m-%d")
+    out = []
+    for conta, maxd in fila["max_dia_por_conta"].items():
+        c = est.get("contas", {}).get(conta, {})
+        if c.get("parada_ate", "") > agora.isoformat() or c.get("saturado"):
+            continue
+        feitas = sum(1 for x in est.get("paginas", {}).values() if x.get("conta") == conta and x.get("criada", "")[:10] == hoje)
+        if feitas >= maxd:
+            continue
+        ult = c.get("ultima")
+        inter = (fila.get("intervalo_h_por_conta") or {}).get(conta, fila["intervalo_h"])
+        if ult and datetime.fromisoformat(ult) > agora - timedelta(hours=inter):
+            continue
+        out.append(conta)
+    # conta com página pela metade pode continuar mesmo fora do intervalo
+    for conta in fila["max_dia_por_conta"]:
+        if conta in out:
+            continue
+        if any(v.get("conta") == conta and v.get("etapa") not in (None, "pronta")
+               for v in est.get("paginas", {}).values()):
+            if not est.get("contas", {}).get(conta, {}).get("parada_ate", "") > agora.isoformat():
+                out.append(conta)
+    return out
+
+
 def proxima(fila, est, conta_forcada=None, chave=None):
-    """1ª pendente da conta que está liberada agora (respeita intervalo, máximo do dia e bloqueio)."""
+    """1ª pendente da conta que está liberada agora (respeita intervalo, máximo do dia e bloqueio).
+    conta_forcada = só olha essa conta."""
     agora = datetime.now()
     hoje = agora.strftime("%Y-%m-%d")
     livres = []
     for conta, maxd in fila["max_dia_por_conta"].items():
+        if conta_forcada and conta != conta_forcada:
+            continue
         c = est.setdefault("contas", {}).setdefault(conta, {})
         if c.get("parada_ate", "") > agora.isoformat() or c.get("_ocupada"):
             continue
@@ -115,10 +165,12 @@ def proxima(fila, est, conta_forcada=None, chave=None):
     paradas = {c for c, v in est.get("contas", {}).items() if v.get("parada_ate", "") > agora.isoformat()}
     if chave:
         return next((i for i in fila["fila"] if i["chave"] == chave), None)
+    livres_c = {c for _, c in livres} | ({conta_forcada} if conta_forcada else set())
     # 1º termina a que ficou pela metade (já criada; não conta como criação nova), se a conta não está parada
     for item in fila["fila"]:
         st = est.get("paginas", {}).get(item["chave"], {})
-        if st.get("etapa") and st["etapa"] != "pronta" and item["conta"] not in paradas:
+        if st.get("etapa") and st["etapa"] != "pronta" and item["conta"] not in paradas \
+                and (not conta_forcada or item["conta"] == conta_forcada):
             return item
     for _, conta in livres:
         for item in fila["fila"]:
@@ -225,10 +277,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ver", action="store_true")
     ap.add_argument("--chave")
+    ap.add_argument("--conta", help="só cria nesta conta")
+    ap.add_argument("--todas", action="store_true", help="dispara 1 processo por conta LIVRE, em paralelo (cada uma no seu IP)")
     a = ap.parse_args()
     fila, est = _ler(FILA, {}), _ler(EST, {})
     if a.ver:
         return ver(fila, est)
+    if a.todas:
+        livres = contas_livres(fila, est)
+        if not livres:
+            log("--todas: nenhuma conta livre agora"); return
+        log(f"--todas: disparando {len(livres)} conta(s) em paralelo: {livres}")
+        procs = []
+        for c in livres:
+            p = subprocess.Popen([PY, "-u", str(BIN / "fb_criar_fila.py"), "--conta", c], cwd=str(BIN),
+                                 creationflags=0x08000000, env=dict(os.environ, PYTHONUTF8="1"),
+                                 stdout=open(BIN.parent / "logs" / f"fb_criar_{c}.log", "a", encoding="utf-8"),
+                                 stderr=subprocess.STDOUT)
+            procs.append(p); time.sleep(3)
+        for p in procs:
+            p.wait()
+        return
     # não roda junto com a rodada de postagem (os dois trocariam o perfil ativo no mesmo Chrome)
     ocup = subprocess.run(["powershell", "-NoProfile", "-Command",
                            "(Get-CimInstance Win32_Process -Filter \"name='python.exe' or name='pythonw.exe'\" | ? { $_.CommandLine -match "
@@ -241,7 +310,7 @@ def main():
     if ocupadas and not a.chave:
         for c in ocupadas:  # tira a conta ocupada da vez sem mexer no estado gravado
             est.setdefault("contas", {}).setdefault(c, {})["_ocupada"] = True
-    item = proxima(fila, est, chave=a.chave)
+    item = proxima(fila, est, conta_forcada=a.conta, chave=a.chave)
     if item and est.get("contas", {}).get(item["conta"], {}).get("_ocupada"):
         log(f"conta {item['conta']} postando agora — fica pra próxima"); return
     if not item:

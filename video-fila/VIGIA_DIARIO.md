@@ -481,3 +481,14 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D.
 - CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
 - Estado: NADA A FAZER
+
+## 20261120_2256 — Vistoria do vigia: Recap longo com alimentador ativo, 20/25 GPUs sem conta e disco D com 5.4 GB livres
+- Motivo / O que achei (trecho de log): Recap longo com 20 de 25 GPUs sem conta (parada: sem trabalho na fila); contas verificadas: 17 de 79. Disco D com ~5.4 GB livres (abaixo do limite ideal de 8 GB). Wise Memory Optimizer rodando (PID 3840).
+- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo e acúmulo natural de arquivos de trabalho, aguardando reabastecimento ou limpeza natural pelo sistema.
+- CONSERTO PROPOSTO: Nenhum (o sistema gere automaticamente as contas, cotas e espaço em disco de forma autônoma).
+- Estado: NADA A FAZER
+## 20261120_2317 — [fetch] download (formato único) falhou: HTTP Error 403: Forbidden (recuperado automaticamente com retry e pausas)
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log: 2026-11-20 23:04:58,893 - WARNING - [fetch] download (formato único) falhou: ERROR: unable to download video data: HTTP Error 403: Forbidden
+- Causa provável: Bloqueio temporário do YouTube por volume de requisições / IP da casa, tratado automaticamente pelo sistema de pausas (ytdlp_vez).
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

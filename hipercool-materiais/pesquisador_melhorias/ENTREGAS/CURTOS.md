@@ -4702,3 +4702,48 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-20 20:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2001.md`
 - [INÉDITO] github.com/h0ll0w-AkuZr0guY/MiaoTask — ★126, push 2026-11-10, Apache-2.0 — 🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 20:21 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2016.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 21:14 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_2059.md`
+- [INÉDITO] github.com/CloudWaddie/GoogleInternal — ★4, push 2026-11-01, MIT — A TypeScript client providing a high-level, type-safe interface for interacting with Google's internal batchexecute RPC protocol.
+
+## [ ] PENDENTE — 2026-11-20 21:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_2117.md`
+- [INÉDITO] github.com/iamdurant/flowgoogle2api — ★9, push 2026-11-17, MIT — OpenAI-compatible image generation and editing API backed by Google Flow (nano banana), with multi-account rotation, a warmup ramp and a web
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 21:45 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_2132.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 22:14 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_2204.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 22:51 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2242.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 23:01 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2256.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 23:12 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2306.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 23:29 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2316.md`
+- [INÉDITO] github.com/fclcs/mobile-agent — ★1, push 2026-11-21, Apache-2.0 — 多设备手机自动化调度与控制台：脚本编排、批次并行、断线自愈，以及规则→视觉→Agent 三级兜底的救援 Agent，救回经验自动沉淀为可复用技能。基于 Open-AutoGLM 的社区二开。
+- [INÉDITO] github.com/cr1437/Shizako — ★131, push 2026-11-21, Apache-2.0 — 猫耳看板娘的系统权限助手：不 Root 也能用特权 API，兼容 Shizuku-API 生态（官方 SDK 应用零改动直连）| A catgirl-mascot privileged-API assistant for Android. Shizuku-API compatib
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 23:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2332.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 00:01 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2351.md`
+- (todos os itens desta pesquisa foram reprovados)

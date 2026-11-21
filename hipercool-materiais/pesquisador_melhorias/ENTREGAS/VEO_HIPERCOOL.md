@@ -543,3 +543,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 19:56 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1948.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 20:53 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_2039.md`
+- [INÉDITO] github.com/smallSheep123/motion-comic-poc — ★0, push 2026-08-30, MIT — PoC: automated motion-comic video generation - vision-driven camera timeline rendered programmatically with PIL + ffmpeg
+
+## [ ] PENDENTE — 2026-11-20 22:38 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_2227.md`
+- [INÉDITO] github.com/manosamy/script2comic — ★0, push 2026-11-07, MIT — Screenplay to motion comic: ElevenLabs voices, ink frames, ffmpeg push-in assembly. Pre-vis, pitch and table reads.

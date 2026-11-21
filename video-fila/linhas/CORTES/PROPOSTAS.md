@@ -2633,3 +2633,28 @@
 - prova: ffb8ba q16 (legenda 'MAS O QUE / LEVA / DOER' na zona inferior), ca9498 q02 (legenda quase no limite inferior, texto 'Hoje eu vou colocar cinco' apertado) e 95f07b q10 (legenda perto da interface e do @inovaremanhwabr). Ocorrência em 3 Shorts. Atenção: a tarja segue a posição da legenda queimada da fonte e a regra fixa proíbe mudar seu tamanho. O ajuste vale só para a NOSSA legenda.
 - onde: Renderizador da legenda palavra a palavra (cálculo do y da caixa de texto em 1080x1920). Arquivo exato não verificado.
 - como testar: Medir o limite inferior da caixa da nossa legenda nos quadros desses 3 Shorts e comparar com ~y 1580 (referência do APRENDIDO). Se ultrapassar, subir a legenda só nesses casos e rodar folha de quadros antes e depois, com um Short sem tarja como controle. Não mexer na tarja.
+
+## 20/11 21:27 PROPOSTA [GOSTO] Escolher como 1ª cena a de maior movimento/expressão entre as 3 primeiras candidatas (gemini-4-argon)
+- prova: Gancho fraco nos 2-3 s iniciais em 3 de 4 Shorts do lote: sem-obra-f20c93 q02 (nota de retenção 6.0, grave), sem-obra-ba65e4 q01 (7.0, gancho desconectado do título) e sem-obra-2eabce q02 (8.0, cena estática). O júri vê 1 em 4 Shorts e nota baixa não é prova, então tratar como hipótese a medir.
+- onde: Função que ordena os takes e escolhe a 1ª cena da montagem (provável módulo de montagem/seleção de cenas da linha CORTES, que usa o movimento medido por cena). Não confirmei o nome exato, quem aplicar localiza.
+- como testar: Fazer A/B em ~20 Shorts de canais parceiros comparando a regra atual com a nova, usando o % assistido e a retenção em 3 s. Conferir também que o título ainda combina com a 1ª cena. Só adotar se o % assistido mediano subir; manter no máximo uma regra de gosto por vez.
+
+## 20/11 23:15 PROPOSTA [CERTEZA] Júri reprova movimento acima do limiar que ele mesmo cita (gemini-4-argon)
+- prova: f099db q09: cena 3 com 14,6% marcada como 'abaixo do limiar de 4%'. 2b4b6b q18: cena final com 18,3% marcada como baixo movimento. Os dois valores são maiores que 4%, e o movimento recebeu nota 9–10 nos dois Shorts.
+- onde: Prompt e validação do júri em cortes_juri (onde o movimento medido e o limiar entram no pedido e onde a severidade é atribuída). Não confirmei o nome exato da função.
+- como testar: Reprocessar f099db e 2b4b6b com o mesmo movimento medido: nenhuma queixa de movimento deve sair para cenas acima do limiar. Rodar também uma cena abaixo de 4% e ver se continua sendo apontada.
+
+## 20/11 23:15 PROPOSTA [GOSTO] Legenda palavra a palavra cobrindo rosto ou ação (gemini-4-argon)
+- prova: f099db q01 (legenda grande sobre a perfuração), fb3ee9 q06 (texto amarelo sobre a mão apontando), dc0ba5 q02 ('GRUPO' sobre os olhos da idol). Cada quadro é um instante solto, e legenda palavra a palavra sempre cai sobre algum quadro.
+- onde: Módulo que renderiza a legenda palavra a palavra (posição vertical, margens e tamanho). Não confirmei o arquivo.
+- como testar: Testar uma única mudança em 1 canal por 48 h: palavras de impacto maiores e deslocadas para o lado ou para fora da zona do rosto, como a dona pediu em 27/10. Comparar % assistido e nota de legibilidade com o controle. Não misturar com outra mudança no mesmo lote.
+
+## 20/11 23:15 PROPOSTA [GOSTO] Texto cortado ou sobreposto entre camadas de texto (gemini-4-argon)
+- prova: dc0ba5 q01 (A POLÊMICA com partes atrás de outras camadas), fb3ee9 q04 (fundo semitransparente de 'EM UMA' cortando 'latinha'), 2b4b6b q09 (texto inferior 'cortado pela tarja'). O júri não vê o que está sob a tarja, então o q09 pode ser sobra da legenda da fonte ou segunda linha nossa. Vira CERTEZA se a folha de quadros confirmar.
+- onde: Ordem das camadas no render: vídeo < tarja de cobertura < cards < legenda < tarja de gancho/@. Provável arquivo de composição do vídeo, a confirmar.
+- como testar: Gerar folha de quadros em resolução >= 720 px (lição de 27/10) dos 3 quadros citados e ver se há texto realmente cortado. Se sim, corrigir a ordem ou o espaçamento das camadas. Se não, descartar.
+
+## 20/11 23:15 PROPOSTA [GOSTO] Canais com % assistido muito abaixo da mediana (57,2) (gemini-4-argon)
+- prova: Brief central: Lei e Lucro 18,2% (5 elegíveis), Imóvel em Foco 37,7% (3 elegíveis). Esporte Noturno, com 13 elegíveis, está em 72,7%. O inovaremanhwabr (29,1%) tem só 1 elegível, então não conta como prova. Nenhum dos 4 Shorts do júri é desses canais, e não há causa provada.
+- onde: roteiro.txt e gancho dos 1ºs segundos dos Shorts de Lei e Lucro e Imóvel em Foco; folha do topo no 1,5 s (D:\tmp\folha_topo.py).
+- como testar: Ler 5 roteiros de cada canal e comparar com os de Esporte Noturno. Só se aparecer o mesmo defeito em >= 2 Shorts, propor 1 regra de roteiro e medir no lote seguinte.

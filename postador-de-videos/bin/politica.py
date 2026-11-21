@@ -474,6 +474,12 @@ def _extra_rampa(canal):
         # 29/10 dona: canal LIBERADO no YouTube sobe até +8; e +1 vaga no dia em que o YouTube parou de entregar o
         # último vídeo (views das últimas 6 h caíram — rampa_canais.bonus_estagnacao, registrado em logs)
         extra = max(0, min(8 if c.get("liberado") else 4, int(c.get("extra", 0))))
+        # 20/11 dona ("pode ser, faça o melhor"): canal PUNIDO agora (rampa_canais marca "punido" quando os Shorts de
+        # 1-4 dias desabam) posta só PUNIDO_POR_DIA (1) por dia até as views voltarem — os outros vídeos vão pros canais
+        # que rendem. A escada tira a marca sozinha quando recupera. RAMPA_PUNIDO_1=0 desliga.
+        import os as _os
+        if c.get("punido") and _os.environ.get("RAMPA_PUNIDO_1", "1") != "0":
+            return int(_os.environ.get("PUNIDO_POR_DIA", "1")) - politica()["max_uploads_por_canal_dia"]
         import rampa_canais
         return extra + rampa_canais.bonus_estagnacao(canal.get("id"))
     except Exception:  # noqa: BLE001
@@ -485,6 +491,8 @@ def teto_canal(canal, cfg=None, cad=None):
     apertado pelo max_dia do cadastro (nunca afrouxa). O de UPLOAD por dia segue a mesma soma (cota_restante)."""
     extra = _extra_rampa(canal)
     teto = (cfg or politica())["max_uploads_por_canal_dia"] + extra
+    if extra < 0:  # 20/11: canal punido = teto exato (1/dia), não soma com o max_dia do cadastro
+        return max(0, teto)
     m = cadastro_do_canal(canal, cad).get("max_dia")
     # 23/10 (dono: "sobe a rampa de 4 pra 5 mas não faz nos dias seguintes"): o max_dia do cadastro (3 em 19 canais)
     # cortava o teto e o degrau da rampa nunca valia. O degrau soma também ao max_dia (a rampa só sobe com dados).

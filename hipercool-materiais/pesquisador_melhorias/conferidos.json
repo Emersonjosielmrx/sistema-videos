@@ -20203,5 +20203,65 @@
     "arquivado": false,
     "descricao": "🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与",
     "data": "2026-11-20"
+  },
+  "smallsheep123/motion-comic-poc": {
+    "ok": true,
+    "nome": "smallSheep123/motion-comic-poc",
+    "estrelas": 0,
+    "push": "2026-08-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "PoC: automated motion-comic video generation - vision-driven camera timeline rendered programmatically with PIL + ffmpeg",
+    "data": "2026-11-20"
+  },
+  "cloudwaddie/googleinternal": {
+    "ok": true,
+    "nome": "CloudWaddie/GoogleInternal",
+    "estrelas": 4,
+    "push": "2026-11-01",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A TypeScript client providing a high-level, type-safe interface for interacting with Google's internal batchexecute RPC protocol.",
+    "data": "2026-11-20"
+  },
+  "iamdurant/flowgoogle2api": {
+    "ok": true,
+    "nome": "iamdurant/flowgoogle2api",
+    "estrelas": 9,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "OpenAI-compatible image generation and editing API backed by Google Flow (nano banana), with multi-account rotation, a warmup ramp and a web",
+    "data": "2026-11-20"
+  },
+  "manosamy/script2comic": {
+    "ok": true,
+    "nome": "manosamy/script2comic",
+    "estrelas": 0,
+    "push": "2026-11-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Screenplay to motion comic: ElevenLabs voices, ink frames, ffmpeg push-in assembly. Pre-vis, pitch and table reads.",
+    "data": "2026-11-20"
+  },
+  "fclcs/mobile-agent": {
+    "ok": true,
+    "nome": "fclcs/mobile-agent",
+    "estrelas": 1,
+    "push": "2026-11-21",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "多设备手机自动化调度与控制台：脚本编排、批次并行、断线自愈，以及规则→视觉→Agent 三级兜底的救援 Agent，救回经验自动沉淀为可复用技能。基于 Open-AutoGLM 的社区二开。",
+    "data": "2026-11-20"
+  },
+  "cr1437/shizako": {
+    "ok": true,
+    "nome": "cr1437/Shizako",
+    "estrelas": 131,
+    "push": "2026-11-21",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "猫耳看板娘的系统权限助手：不 Root 也能用特权 API，兼容 Shizuku-API 生态（官方 SDK 应用零改动直连）| A catgirl-mascot privileged-API assistant for Android. Shizuku-API compatib",
+    "data": "2026-11-20"
   }
 }

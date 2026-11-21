@@ -899,8 +899,15 @@ def _esticar_s_respeito(wav, alvo_s=0.45, texto=None):
                 raw16 = subprocess.run(["ffmpeg", "-v", "error", "-i", str(wav), "-f", "s16le", "-ac", "1", "-ar",
                                         "16000", "-"], capture_output=True).stdout
                 a16 = np.frombuffer(raw16, np.int16).astype(np.float32) / 32768.0
-                segs, _ = m.transcribe(a16, language="pt", word_timestamps=True)
-                palavras = [[w.start, w.end, w.word] for s in segs for w in (s.words or [])]
+                try:
+                    segs, _ = m.transcribe(a16, language="pt", word_timestamps=True)
+                    palavras = [[w.start, w.end, w.word] for s in segs for w in (s.words or [])]
+                except RuntimeError:
+                    # 20/11 (v3: "sem Whisper (RuntimeError)"): na GPU do Kaggle o modelo carrega mas a libcublas
+                    # falha na hora de transcrever — refaz na CPU (1 frase é rápido)
+                    m = WhisperModel("small", device="cpu", compute_type="int8")
+                    segs, _ = m.transcribe(a16, language="pt", word_timestamps=True)
+                    palavras = [[w.start, w.end, w.word] for s in segs for w in (s.words or [])]
             except Exception as e:  # noqa: BLE001
                 logging.info(f"[fish S] sem Whisper ({type(e).__name__}) — acho o 'respeito' pela posição no texto")
                 palavras = []
