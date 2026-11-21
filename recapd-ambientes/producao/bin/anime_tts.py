@@ -1088,6 +1088,59 @@ def _xtts_versao():
     return str(os.environ.get("XTTS_VERSAO") or ovr.get("xtts_versao") or cfg.get("xtts_versao") or "6").strip().lower()
 
 
+def _audio_pronto_do_drive(audio_dir):
+    """21/11 dona (S2-Pro/Qwen3: "divide em sessões"): a voz do longo foi gerada antes, em pedaços paralelos, e está no
+    Drive (longo_override "audio_pronto": "manhwa-drive:colab_recap/qwen3_longo/<vid>_<voz>/audio"). Copia os
+    audio_<i>.wav pro audio_cache; o preparar_clone pula as frases que já têm áudio e faz o resto (XTTS/Fish/Kitten).
+    Pós aplicado aqui: microcortes + velocidade por frase (metade) + S do respeito, e RVC do narrador por cima."""
+    try:
+        ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
+    except ValueError:
+        return
+    src = ovr.get("audio_pronto")
+    if not src:
+        return
+    import glob
+    rcl = next((x for x in glob.glob("/kaggle/tmp/**/rclone", recursive=True) + glob.glob("/kaggle/working/**/rclone",
+                                                                                          recursive=True)
+                if os.access(x, os.X_OK)), None)
+    conf = next((c for c in ["/tmp/rclone.conf"] + glob.glob("/kaggle/input/**/rclone.conf", recursive=True)
+                 if os.path.isfile(c)), None)
+    if not rcl or not conf:
+        logging.warning("[audio pronto] sem rclone — narra do zero")
+        return
+    ad = Path(audio_dir)
+    tmp = ad / "_audio_pronto"
+    tmp.mkdir(parents=True, exist_ok=True)
+    r = subprocess.run([rcl, "--config", conf, "copy", src, str(tmp), "--include", "audio_*"], capture_output=True,
+                       text=True, timeout=3600)
+    n = 0
+    feitos = []
+    for w in tmp.glob("audio_*.wav"):
+        m = re.fullmatch(r"audio_(\d+)\.wav", w.name)
+        if not m:
+            continue
+        i = int(m.group(1))
+        out = ad / f"audio_{i}.wav"
+        if out.exists():
+            continue
+        if subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(w), "-ac", "2", "-ar", "44100", str(out)],
+                          capture_output=True).returncode == 0:
+            feitos.append(i)
+            n += 1
+    logging.info(f"[audio pronto] {n} frases vieram de {src} (rc={r.returncode})")
+    for i in feitos:
+        out = ad / f"audio_{i}.wav"
+        try:
+            narracao_curva.pos_processar(out, 0.0)
+            narracao_curva.microcortes(out)
+        except Exception:  # noqa: BLE001
+            pass
+    if feitos and _xtts_rvc():
+        pv = _pasta_fish()
+        _rvc_por_cima_do_fish(audio_dir, feitos, pv.name)
+
+
 def _xtts_rvc():
     """21/11 dona (ouviu xtts6 + RVC): "melhorou muito com o RVC — os próximos longos devem rodar com ele". Padrão LIGADO
     no XTTS (voz clonada do narrador por cima, firma o timbre); XTTS_RVC=0 ou longo_override "xtts_rvc": false desliga."""
@@ -1582,6 +1635,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     # 19/11 dona — ordem da voz: Fish Speech na GPU (Kaggle, narrador com trecho original) -> Fish online (Short no
     # PC1, conta com crédito) -> o modo de sempre (Kitten no Kaggle / p3 com mistura nos PCs). Cada um só narra o que
     # ainda não tem audio_i.wav; o que falhar segue para o próximo.
+    _audio_pronto_do_drive(audio_dir)  # 21/11: longo com a voz gerada antes, em pedaços (Qwen3/S2-Pro)
     _narrar_xtts(lines, audio_dir, so)  # 21/11: XTTS (motor_voz.json "motor": "xtts") vem antes do Fish
     _narrar_fish_nuvem(lines, audio_dir, so)
     _narrar_online(lines, audio_dir, so)

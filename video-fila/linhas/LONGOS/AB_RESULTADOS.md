@@ -1,4 +1,4 @@
-# Resultados das variantes dos LONGOS — 21/11 03:38
+# Resultados das variantes dos LONGOS — 21/11 07:38
 
 Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fator (antes disso é ruído).
 
@@ -11,18 +11,18 @@ Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fato
 | fala_rapida | B | 13 | 0.02 | 0.9 |
 | fala_rapida | C | 11 | 0.03 | 2.2 |
 | fala_rapida | D | 8 | 0.08 | 0.5 |
-| fala_rapida | E | 8 | 0.33 | 2.7 |
+| fala_rapida | E | 8 | 0.32 | 2.7 |
 | **fala_rapida** | **vence E** (views/h) | | | |
 | ganchos_15min | A | 14 | 0.17 | 0.6 |
-| ganchos_15min | B | 13 | 0.27 | 2.6 |
+| ganchos_15min | B | 13 | 0.26 | 2.6 |
 | ganchos_15min | C | 22 | 0.03 | 0.8 |
 | **ganchos_15min** | **vence B** (views/h) | | | |
 | narradores_modo | com_terciarios | 4 | 0.01 | 36.4 |
 | narradores_modo | dupla | 9 | 0.04 | 0.6 |
-| narradores_modo | mistura_grande | 3 | 0.20 | 11.4 |
+| narradores_modo | mistura_grande | 3 | 0.19 | 11.4 |
 | narradores_modo | primarios_secundarios | 11 | 0.09 | 0.5 |
-| narradores_modo | so_primarios | 12 | 0.22 | 2.0 |
+| narradores_modo | so_primarios | 12 | 0.21 | 2.0 |
 | narradores_modo | solo | 10 | 0.10 | 0.7 |
-| titulo_triade | A | 22 | 0.09 | 0.6 |
+| titulo_triade | A | 22 | 0.08 | 0.6 |
 | titulo_triade | B | 27 | 0.05 | 1.9 |
 | **titulo_triade** | **vence A** (views/h) | | | |

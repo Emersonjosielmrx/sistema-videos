@@ -1342,3 +1342,7 @@
 - 2026-11-21 03:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261121_033042_b85a.md](20261121_033042_b85a.md)
 - 2026-11-21 03:34 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261121_033042_9def.md](20261121_033042_9def.md)
 - 2026-11-21 03:43 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261121_034053_6f74.md](20261121_034053_6f74.md)
+- 2026-11-21 04:24 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261121_042052_f89f.md](20261121_042052_f89f.md)
+- 2026-11-21 06:12 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261121_061049_b1f5.md](20261121_061049_b1f5.md)
+- 2026-11-21 07:12 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): tiktok: mesmo erro 6x em 6 h EVIDÊNCIA: logs\tiktok_20261121.log: NAO CONFIRMADO: → [20261121_071054_d762.md](20261121_071054_d762.md)
+- 2026-11-21 07:36 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261121_073056_2c2f.md](20261121_073056_2c2f.md)

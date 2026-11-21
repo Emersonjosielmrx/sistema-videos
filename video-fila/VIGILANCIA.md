@@ -1,11 +1,10 @@
-# Vigilância 24 h — 2026-11-21T03:50:44
+# Vigilância 24 h — 2026-11-21T08:00:56
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (9)
-- Facebook Anime Noturno: mesmo erro 3x em 6 h
-- Facebook Anime Noturno: mesmo erro 4x em 6 h
-- Gemini sem navegador (imagem/vídeo): sem sucesso há 23 h (limite 6 h)
+## Alarmes desta volta (8)
+- tiktok: mesmo erro 7x em 6 h
+- Gemini sem navegador (imagem/vídeo): sem sucesso há 27 h (limite 6 h)
 - canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
@@ -13,7 +12,7 @@
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (79)
+## Casos abertos (83)
 - [revisar] tiktok: mesmo erro 8x em 6 h (1minopus-sonnetweb)
 - [consertar] tiktok: mesmo erro 5x em 6 h (1minopus-sonnetweb)
 - [revisar] reel_globo: clipe do Veo aprovado e a montagem morreu (gemini-4-argon)
@@ -93,6 +92,10 @@
 - [consertar] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: mesmo erro 6x em 6 h (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
 - [sem_mudanca] _parceiro_20261115.log: mesmo erro 5x — gemini-4-argon / -

@@ -551,3 +551,12 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-20 22:38 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_2227.md`
 - [INÉDITO] github.com/manosamy/script2comic — ★0, push 2026-11-07, MIT — Screenplay to motion comic: ElevenLabs voices, ink frames, ffmpeg push-in assembly. Pre-vis, pitch and table reads.
+
+## [ ] PENDENTE — 2026-11-21 05:46 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_0536.md`
+- [INÉDITO] github.com/treza-labs/ffmpeg-kenburns — ★0, push 2026-11-21, MIT — Smooth Ken Burns push-ins and pans on stills with FFmpeg zoompan, without the stair-step jitter. CLI + TypeScript API, no dependencies.
+- [INÉDITO] github.com/truyenkecom/smooth-ken-burns — ★0, push 2026-11-21, MIT — Smooth vertical 9:16 Ken Burns clips from still images, no ffmpeg zoompan jitter
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 05:59 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_avatar_3d_comercial__sonnet_0556.md`
+- (todos os itens desta pesquisa foram reprovados)

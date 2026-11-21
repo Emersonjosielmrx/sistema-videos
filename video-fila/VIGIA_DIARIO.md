@@ -515,3 +515,14 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Causa provável: Acúmulo de arquivos temporários e cache no disco D.
 - CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
 - Estado: NADA A FAZER
+## 20261121_0635 — parceiro-render: aviso de falha transiente no Kaggle e erro de roteiro recuperado automaticamente
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261121.log registrou falha pontual no Kaggle (`rc=1` no Short `0ONNeIWYGr4` em 01:27) e aviso de roteiro curto (`roteiro com tempo veio com 2 frases marcadas` em 01:43), ambos recuperados e concluídos com `publish OK`.
+- Causa provável: Instabilidade transitória no pipeline do Kaggle e ajuste automático de roteiro pelo mecanismo de re-tentativa.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema se recuperou sozinho e postou normalmente).
+- Estado: NADA A FAZER
+
+## 20261121_0716 — Recap longo ativo no PC1 e modelo agy/gemini-3-flash padronizado
+- Motivo / O que achei: O recap longo (cliente.py alimentar) e os fluxos do PC1/PC3 rodam regularmente. Verificou-se nos logs que alimentador e render operam nos ciclos normais, com pausas adequadas e controle por logs. Modelo antigo ajustado para ntigravity/gemini-3-flash.
+- Causa provável: Ciclo normal de operação e controle de fluxo do sistema.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código realizada).
+- Estado: NADA A FAZER

@@ -35,6 +35,21 @@ def api_ranking(_p=None):
     except (OSError, ValueError, KeyError) as e:
         return {"erro": f"escada.json: {e}"}
     canais, shorts = [], []
+    # 21/11: o mesmo canal aparece com chave antiga ("A2") e nova ("A2:email") — junta pelo e-mail, e cada Short vale a
+    # MAIOR leitura já vista (uma medida pode ler só parte da tela; ontem o Oculto Mundial "caiu" de 5.000 pra 1.806)
+    junto = {}
+    for chave, ch in d.items():
+        em = (ch.get("email") or chave).lower()
+        j = junto.setdefault(em, {"chave": chave, "email": ch.get("email", ""), "handle": ch.get("handle"),
+                                  "medidas": [], "melhor": {}})
+        j["medidas"] += ch.get("medidas") or []
+        for x in ch.get("medidas") or []:
+            for t, n in x.get("videos") or []:
+                j["melhor"][t] = max(n, j["melhor"].get(t, 0))
+    d = {v["chave"]: {"email": v["email"], "handle": v["handle"],
+                      "medidas": sorted(v["medidas"], key=lambda x: x["em"]) + [
+                          {"em": max((x["em"] for x in v["medidas"]), default=""), "videos": list(v["melhor"].items())}]}
+         for v in junto.values()}
     for chave, ch in d.items():
         m = ch.get("medidas") or []
         # última medida COM vídeos (a de celular sem banda volta vazia)

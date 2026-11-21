@@ -110,22 +110,25 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
         # upload: o botão abre o seletor de arquivo nativo. 20/11: o 1º upload da rodada (Chrome recém-aberto) às vezes
         # não entra no FileChooser e estoura; tenta 2x antes de desistir.
         enviado = False
-        for tent in range(2):
+        for tent in range(3):  # 21/11: madrugada com PC carregado estoura mais; 3 tentativas, recarregando o composer
             try:
-                with pg.expect_file_chooser(timeout=20000) as fc:
+                with pg.expect_file_chooser(timeout=30000) as fc:
                     _botao(pg, "Adicionar vídeo").click()
-                fc.value.set_files(str(Path(video).resolve()), timeout=60000)
+                fc.value.set_files(str(Path(video).resolve()), timeout=90000)
                 enviado = True
                 break
             except Exception as ex:
                 print(f"  upload tent {tent + 1} falhou ({str(ex)[:60]}); recarrego e tento de novo", flush=True)
-                if tent == 0:
-                    pg.goto(COMPOSER.format(asset_id), wait_until="domcontentloaded", timeout=120000)
-                    time.sleep(12)
-                    _fechar_avisos(pg)
-                    _so_facebook(pg, nome_pagina)
+                if tent < 2:
+                    try:
+                        pg.goto(COMPOSER.format(asset_id), wait_until="domcontentloaded", timeout=120000)
+                        time.sleep(12)
+                        _fechar_avisos(pg)
+                        _so_facebook(pg, nome_pagina)
+                    except Exception:
+                        time.sleep(5)
         if not enviado:
-            return False, "upload não entrou (FileChooser timeout 2x)"
+            return False, "upload não entrou (FileChooser timeout 3x)"
         print("  vídeo enviado ao seletor", flush=True)
         # texto — a caixa só monta depois que o upload avança; espera até 3 min (MS Energy pela casa demora)
         caixa = pg.locator("[contenteditable=true][role=textbox]").first

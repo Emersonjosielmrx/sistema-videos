@@ -20283,5 +20283,85 @@
     "arquivado": false,
     "descricao": "A standalone Windows widget to track daily image generation limits in Google Gemini.",
     "data": "2026-11-21"
+  },
+  "sulyaclean-sys/token-efficient-android-agent": {
+    "ok": true,
+    "nome": "sulyaclean-sys/token-efficient-android-agent",
+    "estrelas": 0,
+    "push": "2026-11-01",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "shrink / tapcalc / zoom / uicheck / linemap: small Python helpers so an LLM agent spends tokens on decisions, not screenshots. UI-dump looku",
+    "data": "2026-11-21"
+  },
+  "thedeathdragon/androidmcp": {
+    "ok": true,
+    "nome": "TheDeathDragon/AndroidMCP",
+    "estrelas": 4,
+    "push": "2026-11-21",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "MCP server for driving Android devices over ADB. C# .NET 8, direct ADB protocol, on-device agent for   fast UI ops, multi-device by serial.",
+    "data": "2026-11-21"
+  },
+  "treza-labs/ffmpeg-kenburns": {
+    "ok": true,
+    "nome": "treza-labs/ffmpeg-kenburns",
+    "estrelas": 0,
+    "push": "2026-11-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Smooth Ken Burns push-ins and pans on stills with FFmpeg zoompan, without the stair-step jitter. CLI + TypeScript API, no dependencies.",
+    "data": "2026-11-21"
+  },
+  "truyenkecom/smooth-ken-burns": {
+    "ok": true,
+    "nome": "truyenkecom/smooth-ken-burns",
+    "estrelas": 0,
+    "push": "2026-11-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Smooth vertical 9:16 Ken Burns clips from still images, no ffmpeg zoompan jitter",
+    "data": "2026-11-21"
+  },
+  "avi130805/webgl2video": {
+    "ok": true,
+    "nome": "Avi130805/webgl2video",
+    "estrelas": 8,
+    "push": "2026-10-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Render any WebGL or HTML animation (Three.js, shaders, p5.js, AI-generated pages) to frame-exact 4K60 video on a GPU, locally or on cheap cl",
+    "data": "2026-11-21"
+  },
+  "stoatworks-labs/gaffer": {
+    "ok": true,
+    "nome": "stoatworks-labs/gaffer",
+    "estrelas": 2,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A simulated lens on a depth map that the music gets hold of: the bass rattles the rig and the focus racks on cue. An FFGL effect for Resolum",
+    "data": "2026-11-21"
+  },
+  "houmahani/codrops-depth-gallery": {
+    "ok": true,
+    "nome": "houmahani/codrops-depth-gallery",
+    "estrelas": 124,
+    "push": "2026-03-09",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A Three.js depth gallery where images shape their own environment, mood-driven GLSL backgrounds, parallax motion, and velocity-reactive effe",
+    "data": "2026-11-21"
+  },
+  "pingan-ai/create-layered-paper-video": {
+    "ok": true,
+    "nome": "pingan-ai/create-layered-paper-video",
+    "estrelas": 0,
+    "push": "2026-07-23",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Codex skill for layered paper-cut, vintage collage, and 2.5D parallax videos with Remotion.",
+    "data": "2026-11-21"
   }
 }

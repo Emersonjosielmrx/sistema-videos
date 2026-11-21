@@ -26363,6 +26363,86 @@
         "docs oficiais do YouTube sobre \"vídeo relacionado\" e playlists no Short"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_0346.md 2026-11-21"
+    },
+    {
+      "id": "upload_intent_yt",
+      "nome": "Intent de compartilhar vídeo para o app do YouTube",
+      "subtemas": [
+        "gists/issues com `am start -a android.intent.action.SEND -t video/mp4` e FileProvider/content://, e como evitar crash na tela de upload"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0436.md 2026-11-21"
+    },
+    {
+      "id": "kenburns_celular",
+      "nome": "Ken Burns e zoompan leve em FFmpeg no Android (Termux): quanta RAM aguenta, se o oversample 2x cabe, receitas curtas",
+      "subtemas": [
+        "repositórios pequenos com `zoompan` ou `crop` por expressão em Termux"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0536.md 2026-11-21"
+    },
+    {
+      "id": "render_paralelo_pcs",
+      "nome": "dividir um render longo entre os 3 PCs e celulares (segmentos mais concat sem recodificar), liberar disco ao fim",
+      "subtemas": [
+        "scripts pequenos de render distribuído em ffmpeg com concat demuxer"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_0536.md 2026-11-21"
+    },
+    {
+      "id": "render_celular_fila",
+      "nome": "Render dividido entre PC e celular Android",
+      "subtemas": [
+        "ffmpeg em Termux com fila simples por pastas compartilhadas (rclone/ssh), sem GUI"
+      ],
+      "origem": "area_three_cpu_budget__sonnet_0621.md 2026-11-21"
+    },
+    {
+      "id": "playlist_proximo_video",
+      "nome": "Séries e telas finais que levam ao próximo vídeo",
+      "subtemas": [
+        "regras oficiais do YouTube sobre end screens e playlist em suporte.google.com/youtube, com datas"
+      ],
+      "origem": "area_three_cpu_budget__sonnet_0621.md 2026-11-21"
+    },
+    {
+      "id": "disco_limpeza_render",
+      "nome": "Liberar disco em PC fraco durante lotes de 1 a 4 h",
+      "subtemas": [
+        "limpeza de temporários do ffmpeg por etapa e `-c copy` entre estágios"
+      ],
+      "origem": "area_three_cpu_budget__sonnet_0621.md 2026-11-21"
+    },
+    {
+      "id": "yt_longo_idiomas",
+      "nome": "Faixas de áudio múltiplas e dublagem no YouTube",
+      "subtemas": [
+        "recurso oficial de áudio em vários idiomas, e o que muda de views por país ao dublar um recap"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0631.md 2026-11-21"
+    },
+    {
+      "id": "yt_pos_post",
+      "nome": "Conferir depois de postar",
+      "subtemas": [
+        "rotina que relê título, capa e playlist no Studio e avisa se o YouTube alterou algo"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0747.md 2026-11-21"
+    },
+    {
+      "id": "originalidade_recap",
+      "nome": "Checagem de \"valor agregado\" em recap",
+      "subtemas": [
+        "Regras e exemplos oficiais do YouTube sobre comentário original em vídeos de reação e compilação, para virar checklist por vídeo no anime_script"
+      ],
+      "origem": "area_eres2net_licenca__sonnet_0807.md 2026-11-21"
+    },
+    {
+      "id": "metadados_nao_massa",
+      "nome": "Títulos e descrições que não parecem produção em massa",
+      "subtemas": [
+        "Páginas oficiais sobre metadados e spam/engano, e um teste de similaridade entre títulos do próprio canal com difflib ou rapidfuzz"
+      ],
+      "origem": "area_eres2net_licenca__sonnet_0807.md 2026-11-21"
     }
   ],
   "projetos": [

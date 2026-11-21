@@ -1,0 +1,412 @@
+{
+ "video": "inovareagenda_20261121_024218.mp4",
+ "conta": "inovareagenda",
+ "marca": "Inovare Agenda",
+ "titulo": "Cliente avisou imprevisto? A IA reagenda sozinha",
+ "formato": "dono_mesma_foto",
+ "veo_total": 0,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 4.5,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 5.0,
+   "roteiro_marca": 4.0,
+   "diretor": 4.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.33
+   ],
+   [
+    1,
+    "imagem",
+    17.18
+   ],
+   [
+    2,
+    "conversa",
+    6.12
+   ],
+   [
+    3,
+    "imagem",
+    14.65
+   ],
+   [
+    4,
+    "cartao",
+    4.91
+   ]
+  ],
+  "graves": 9,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê 'e você ficou' está posicionada muito alta, sobrepondo diretamente o queixo e a barba do apresentador, cobrindo parte do seu rosto enquanto ele fala.",
+   "como_corrigir": "Reposicionar a legenda mais para baixo (na altura do peito/camisa, mantendo acima de y=1580) ou reenquadrar a câmera do apresentador mais para o alto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "A legenda karaokê 'vazio' continua sobreposta à ponta do queixo do apresentador, mantendo o problema de enquadramento da fala inicial.",
+   "como_corrigir": "Ajustar a coordenada vertical da legenda da cena 0 para que fique sempre abaixo da linha do maxilar do apresentador."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Quebra incorreta de legenda: o bloco exibe 'fica vazio E', deixando a conjunção 'E' maiúscula (pertencente ao início da oração seguinte) isolada no fim da linha e destacada em laranja.",
+   "como_corrigir": "Encerrar a linha de legenda em 'fica vazio' e iniciar o próximo bloco de fala com 'E eu ainda perdia tempo'."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Texto cortado e saindo da tela: a animação de rolagem das mensagens subiu todo o card de WhatsApp, cortando e fazendo desaparecer por completo o cabeçalho laranja (marca 'Agenda IA', status e o selo 'Simulação').",
+   "como_corrigir": "Fixar o cabeçalho no topo do cartão de conversa como elemento estático e aplicar a rolagem exclusivamente na área interna de balões de mensagens."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "O cartão '✓ remarca sozinho' é sobreposto exatamente na cabeça e pescoço do robô/mascote na bancada, prejudicando o enquadramento do elemento visual da cena.",
+   "como_corrigir": "Deslocar os cartões de tópicos para a lateral ou posicionar o mascote mais à direita no quadro."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Segmentação defeituosa da legenda: o quadro exibe isoladamente o fragmento 'a IA a', deixando o artigo final solto sem o substantivo 'agenda' da frase falada, parecendo um erro de digitação/gagueira.",
+   "como_corrigir": "Reagrupar a legenda para manter artigo e substantivo juntos, por exemplo exibindo 'com a IA' e abrindo o bloco seguinte com 'a agenda não tem conflito'."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Dois textos brigando e poluição por sobreposição: o cartão '✓ nem preciso intervir' e a legenda karaokê 'nem preciso intervir' competem visualmente exibindo o mesmo texto no mesmo terço, cobrindo totalmente o mascote do fundo.",
+   "como_corrigir": "Diferenciar o texto do cartão de benefício (ex.: '✓ processo 100% automático') para não duplicar a legenda falada simultaneamente, e posicioná-lo em área livre do mascote."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada e ritmo arrastado: a imagem de fundo permanece 100% estática por mais de 4,4 segundos (q04 a q06), sem nenhum movimento de câmera (slow zoom, pan ou Ken Burns). A foto parece de banco de imagens genérico e sem dinamismo para o formato Reels.",
+   "como_corrigir": "Aplicar um slow zoom-in contínuo (escala de 100% para 108%) ao longo da cena e animar a entrada dos badges brancos com slide lateral suave e efeito de amortecimento (overshoot/elastic ease)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Imagem com aspecto de inteligência artificial alucinada e cena estática: uma banana robô com pernas mecânicas surge na bancada da recepção, transmitindo um tom bizarro e amador que destoa do contexto de um negócio sério de agendamento. Além disso, o quadro fica totalmente congelado por cerca de 5 segundos.",
+   "como_corrigir": "Substituir a imagem surrealista por um vídeo curto (b-roll) ou foto com movimento de uma recepção moderna e real, com sutil câmera lenta ou transição de tela mostrando a interface da agenda sem conflitos."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Falta de variedade e repetição exata do molde da Cena 1: a Cena 3 é um clone estrutural da Cena 1 (topo fixo, pílula de tópico no canto superior esquerdo e dois badges brancos com checkmark empilhados no centro da tela), tornando o anúncio previsível e visualmente monótono.",
+   "como_corrigir": "Modificar a diagramação e a animação da Cena 3. Em vez de repetir dois badges idênticos sobrepostos, apresentar o resultado com cards em perspectiva, ícones de métricas animadas ou divisão dinâmica de tela."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Falta de fluidez e transição abrupta no chat: a primeira mensagem do cliente ('Oi, tive um imprevisto...') desaparece subitamente em q09 sem rolagem orgânica, enquanto a caixa de simulação e o fundo permanecem imóveis durante 5,4 segundos.",
+   "como_corrigir": "Animar a rolagem vertical (scroll up suave) da conversa à medida que as respostas chegam, preservando a continuidade natural do WhatsApp, e aplicar uma leve pulsação de escala na caixa de diálogo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Transição seca entre blocos: o corte do apresentador humano gravado em vídeo (cena 0) direto para a foto estática da cena 1 é seco e quebra o ritmo do início do Reels.",
+   "como_corrigir": "Adicionar uma transição dinâmica de corte no movimento do apresentador, como um push-in rápido com motion blur ou whip pan lateral para mascarar a troca de cena."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A imagem de fundo gerada por IA apresenta uma banana cibernética com pernas robóticas metálicas andando sobre a mesa do consultório. É uma alucinação/defeito bizarro de IA sem qualquer sentido ou relação com agendamentos, salão/clínica ou com a fala 'Hoje o cliente remarca sozinho com a IA'.",
+   "como_corrigir": "Substituir a imagem de fundo por um cenário profissional realista (recepção de clínica ou salão moderna e organizada, ou tela limpa com a agenda preenchida sem conflitos)."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Dessincronia entre tela e fala no momento crucial: a locução diz categoricamente 'e confirma a troca na hora', mas o chat do WhatsApp termina sem confirmar nada (para na resposta do cliente 'Quinta às 16h, por favor.' seguida apenas de balão com reticências '...'). Além disso, o balão de digitação está posicionado no lado esquerdo (remetente/cliente) em vez de sair da Agenda IA (lado direito).",
+   "como_corrigir": "Inserir a mensagem final de confirmação enviada pela Agenda IA no lado direito (ex.: 'Perfeito! Reagendado para quinta às 16h. Até lá! ✅') no exato momento da fala 'confirma a troca na hora'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Legenda karaokê truncada e sem sentido exibindo apenas 'a IA a', omitindo totalmente a frase falada pelo apresentador ('a agenda não tem conflito').",
+   "como_corrigir": "Ajustar o texto e o corte da legenda para sincronizar com a frase dita pelo locutor, exibindo 'a IA, a agenda não tem conflito'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A imagem de fundo exibe uma banana robótica amarela com pernas mecânicas andando sobre a mesa. Esse elemento surreal transforma um anúncio B2B profissional em meme e alucinação tosca de IA, destruindo totalmente a autoridade e seriedade da empresa para médicos, dentistas e donos de salão.",
+   "como_corrigir": "Substituir a banana robô por um take profissional (B-roll real ou imagem limpa) de uma recepção moderna, um profissional atendendo clientes com calma ou a tela do sistema mostrando a grade de horários organizada sem furos."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos é lento e estático: enquadramento selfie fechado sem iluminação de destaque e o cartão superior 'Pergunta frequente' cobre a cabeça do fundador trazendo uma pergunta retórica direcionada ao empresário, simulando falsamente uma caixinha de dúvidas sem gerar quebra de padrão visual que prenda a atenção.",
+   "como_corrigir": "Abrir com corte dinâmico ou zoom in rápido nos primeiros 1,5s, reposicionar o cartão de texto para a área de respiro superior sem encobrir o rosto do fundador, e inserir um estímulo visual de impacto (ex.: notificação vermelha de cancelamento na tela ou som de alerta) para reter quem rola o feed."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A demonstração no WhatsApp não entrega o desfecho prometido pela locução. O áudio afirma 'confirma a troca na hora', mas o chat é cortado logo após a resposta do cliente ('Quinta às 16h, por favor.') com a IA travada nos três pontinhos de digitação ('...'), sem exibir a mensagem de confirmação do reagendamento.",
+   "como_corrigir": "Exibir a mensagem final de confirmação da Agenda IA (ex.: 'Perfeito! Seu horário foi remarcado para quinta-feira às 16h.') antes de encerrar a cena 2, completando o ciclo visual da promessa do produto."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Uso de ícone de checkmark (✔) em itens que representam problemas e dores operacionais ('horário fica vazio' e 'perdia tempo respondendo'). O check transmite aprovação, conclusão positiva ou benefício, gerando conflito semiótico direto com a ideia de prejuízo e frustração.",
+   "como_corrigir": "Substituir o '✔' por um ícone de alerta (triângulo com exclamação), um 'X' sutil ou bullet point neutro nos tópicos de problema, reservando o checkmark verde/laranja apenas para a cena de soluções e resultados."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Presença de um objeto disforme amarelo e branco sobre a bancada no fundo da cena, fruto de imperfeição de geração por IA que se assemelha a um aparelho elétrico desconhecido ou brinquedo erótico, distraindo o espectador da mensagem principal.",
+   "como_corrigir": "Gerar uma cena de recepção limpa com objetos contextuais críveis e reconhecíveis (agenda de papel riscada, xícara de café ou notebook de apoio), evitando artefatos isolados sem contexto funcional."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "O fechamento do anúncio fica congelado por quase 3 segundos em uma tela estática estilo slide genérico, sem explorar os gatilhos comerciais decisivos da marca, como a ancoragem comparativa de custo (recepcionista R$ 2.500 vs. IA a partir de R$ 199/mês).",
+   "como_corrigir": "Incluir a proposta de valor e preço na tela final ('A partir de R$ 199/mês • 24h por dia') e aplicar uma leve animação de pulso no botão 'Chame no direct' para guiar a ação do lead."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261120_174409.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha",
+   "nota": 4.5,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 4.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "inovarecrm_20261121_000607.mp4",
+   "conta": "inovarecrm",
+   "formato": "dono_mesma_foto",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261121_024218.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_mesma_foto",
+   "nota": 4.5,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 4.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.5,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "superchatia_ia_20261121_052915.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 4.25,
+   "notas": {
+    "legibilidade": 4.0,
+    "movimento": 4.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   10,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   6,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

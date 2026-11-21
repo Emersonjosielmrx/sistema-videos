@@ -17,7 +17,8 @@ POSTADOS = AQUI / "longos_postados.json"
 LOG = AQUI / "postar_xtts_teste.log"
 PY = r"D:\recapd-ambientes\producao\venv\Scripts\python.exe"
 ALVOS = {"8fM6Ay7OJho": "só KkVirjão", "gJve_WjefZs": "só Mike", "e2nIzNGXvmA": "só Momo",
-         "kxohroSbgS8": "Momo+Mike+KkVirjão"}
+         "kxohroSbgS8": "Momo+Mike+KkVirjão",
+         "82ge1YYkUyA": "só Momo, PREMIUM Qwen3-TTS (21/11)"}
 
 
 def log(msg):

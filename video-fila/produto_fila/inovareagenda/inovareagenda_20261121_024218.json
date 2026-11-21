@@ -1,0 +1,146 @@
+{
+ "conta": "inovareagenda",
+ "produto": "agenda_ia",
+ "marca": "Inovare Agenda",
+ "titulo": "Cliente avisou imprevisto? A IA reagenda sozinha",
+ "legenda": "Imprevisto acontece. Com a Agenda IA, o cliente avisa pelo WhatsApp e a própria IA reagenda, sem conflito e sem duplo agendamento. Quer ver como funciona? Link no perfil. 📅\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Cliente cancelou? A IA reagenda",
+  "pergunta_cliente": "Cliente desmarcou em cima da hora e você ficou com o horário vazio?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Quando o cliente avisa que não vai, o horário fica vazio. E eu ainda perdia tempo respondendo cada mensagem.",
+    "visual": "imagem",
+    "prompt_en": "standing at the tidy, well lit counter of a small Brazilian beauty salon, clean and organized, no people in focus",
+    "cenario_en": "standing at the tidy, well lit counter of a small Brazilian beauty salon, clean and organized",
+    "real_tema": "",
+    "destaques": [
+     "horário fica vazio",
+     "perdia tempo respondendo"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261121_025241_2.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O cliente avisa do imprevisto no WhatsApp. A IA entende, oferece novos horários livres e confirma a troca na hora.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "oferece novos horários",
+     "confirma a troca"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, tive um imprevisto e não consigo ir hoje às 15h."
+     },
+     {
+      "de": "empresa",
+      "texto": "Sem problema! Tenho amanhã às 10h ou quinta às 16h. Qual prefere?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Quinta às 16h, por favor."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pronto, reagendado para quinta às 16h. Até lá!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje o cliente remarca sozinho com a IA, a agenda não tem conflito e eu nem preciso intervir.",
+    "visual": "imagem",
+    "prompt_en": "standing in a tidy, well lit reception area of a small Brazilian clinic, clean and professional, no people in focus",
+    "cenario_en": "standing in a tidy, well lit reception area of a small Brazilian clinic, clean and professional",
+    "real_tema": "",
+    "destaques": [
+     "remarca sozinho",
+     "nem preciso intervir"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261121_025241_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261121_025241_2.png"
+   }
+  ],
+  "legenda": "Imprevisto acontece. Com a Agenda IA, o cliente avisa pelo WhatsApp e a própria IA reagenda, sem conflito e sem duplo agendamento. Quer ver como funciona? Link no perfil. 📅",
+  "titulo": "Cliente avisou imprevisto? A IA reagenda sozinha",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "fluxo_reagendamento",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 13,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": null,
+ "duracao_s": 32.9,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo",
+ "gerado_em": "2026-11-21T03:36:15",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 0,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.87,
+   "fala": "Cliente desmarcou em cima da hora e você ficou com o horário vazio?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.87,
+   "fim": 12.26,
+   "fala": "Quando o cliente avisa que não vai, o horário fica vazio. E eu ainda perdia tempo respondendo cada mensagem.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 12.26,
+   "fim": 21.3,
+   "fala": "O cliente avisa do imprevisto no WhatsApp. A IA entende, oferece novos horários livres e confirma a troca na hora.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 21.3,
+   "fim": 28.95,
+   "fala": "Hoje o cliente remarca sozinho com a IA, a agenda não tem conflito e eu nem preciso intervir.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 28.95,
+   "fim": 32.9,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 4.5,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 5.0,
+   "roteiro_marca": 4.0,
+   "diretor": 4.0
+  },
+  "graves": 9,
+  "reprovar": false,
+  "motivo": ""
+ }
+}
