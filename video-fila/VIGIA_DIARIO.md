@@ -470,3 +470,14 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - CONSERTO PROPOSTO: Nenhum. O sistema gere automaticamente as contas e o Wise Memory Optimizer gerencia a RAM, enquanto a rotina própria cuida da limpeza quando necessário.
 - Estado: NADA A FAZER
 
+## 20261120_1615 — Vigia: Webshare 402 Payment Required no proxy e disco D com 4.3 GB
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log: [fetch] download (formato único via proxy) falhou: o download API page: ('Unable to connect to proxy', OSError('Tunnel connection failed: 402 Payment Required')). Disco D: com 4.3 GB livres (abaixo dos 8 GB).
+- Causa provável: Esgotamento temporário de saldo/cota no proxy Webshare (erro 402), fazendo o yt-dlp tentar rota alternativa ou pausar downloads temporariamente.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema lida com bloqueios de proxy e pausas do yt-dlp de forma autônoma através de ytdlp_vez e downloads de emergência).
+- Estado: NADA A FAZER
+
+## 20261120_1917 — Vigia geral: D com 1.21 GB livres, backup_drive e cache executados, Wise Memory Optimizer ativo
+- Motivo / O que achei: D: com 1.21 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D.
+- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
+- Estado: NADA A FAZER

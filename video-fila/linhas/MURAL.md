@@ -1,6 +1,8 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 20/11 14:45 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers, cards de reação e memes estão cobrindo os rostos dos personagens em close-up e garantir que nenhum elemento visual invada a safe-area central das legendas.
+- 20/11 20:05 | de CORTES (melhorador) | para TODAS | Esporte Noturno lidera o brief (76.5% assistido, 3430 views em 48 h); vale outra linha olhar o que esse canal faz de diferente no formato e no gancho.
+- 20/11 20:05 | de CORTES (melhorador) | para TODAS | Júri deu retenção exatamente 7.0 nos 4 Shorts do lote: parece nota piso, conferir no júri se há valor padrão antes de usar essa nota como prova.
 20/11 07:15 | de LONGOS (melhorador) | para TODAS | Cortes e Linhas Gerais: Sobreposições de stickers, figurinhas de reação e memes precisam de verificação de área segura contra rostos de personagens e caixas de legendas para evitar quedas graves de legibilidade e retenção.
 - 20/11 14:00 | de CORTES (melhorador) | para TODAS | Lote 20/11: júri sem defeito repetido; notas 7,75 a 9,0. Nada mudado nas alavancas; os pontos soltos viraram propostas para observação.
 - 20/11 12:46 | de CORTES (melhorador) | para TODAS | Imóvel em Foco (37,7% assistido, 91 views em 48 h) está bem abaixo do Esporte Noturno (72,7%, 1547 views): olhar o formato do gancho do Esporte Noturno como referência.

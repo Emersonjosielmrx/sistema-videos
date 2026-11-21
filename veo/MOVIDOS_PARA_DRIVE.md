@@ -2911,3 +2911,17 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - super_slow_ia_20261118_053846_intro.mp4
   - super_slow_ia_20261118_053846_prop.mp4
   - super_slow_ia_20261118_053846_punch.mp4
+
+## 2026-11-20 17:10 — 53 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (53 MB) — 10 arquivos:
+  - dicas_financeir_20261119_153019_final.mp4
+  - dicas_financeir_20261119_153019_imp.mp4
+  - dicas_financeir_20261119_153019_intro.mp4
+  - dicas_financeir_20261119_153019_prop.mp4
+  - dicas_financeir_20261119_153019_punch.mp4
+  - super_slow_ia_20261119_095028_final.mp4
+  - super_slow_ia_20261119_095028_imp.mp4
+  - super_slow_ia_20261119_095028_intro.mp4
+  - super_slow_ia_20261119_095028_prop.mp4
+  - super_slow_ia_20261119_095028_punch.mp4

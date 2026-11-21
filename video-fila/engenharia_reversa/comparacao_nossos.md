@@ -1,4 +1,4 @@
-# Os nossos Shorts medidos — 20/11 15:17
+# Os nossos Shorts medidos — 20/11 19:56
 
 Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 326, não elegíveis 412, sem dado 22. Elegível = o feed deu o lote de teste (Fable ER_01).
 

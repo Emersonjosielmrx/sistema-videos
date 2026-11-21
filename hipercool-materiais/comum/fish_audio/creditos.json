@@ -42,12 +42,12 @@
   "lido_em": "2026-11-20T07:18"
  },
  "entrevistacomia@gmail.com": {
-  "restantes": 7398,
+  "restantes": 7055,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T18:43"
+  "lido_em": "2026-11-20T17:33"
  },
  "fabiovideoseducativos@gmail.com": {
   "restantes": 6681,
@@ -148,8 +148,8 @@
  "msenergypara@gmail.com": {
   "restantes": 7419,
   "total": 8000,
-  "logado": true,
-  "erro": null,
+  "logado": false,
+  "erro": "msenergypara@gmail.com não está no pool do Fish (sem fish_proxy). Rode: pool_fish.py montar",
   "gasto_desde_leitura": 0,
   "lido_em": "2026-11-19T12:45"
  },
@@ -258,20 +258,20 @@
   "lido_em": "2026-11-20T06:00"
  },
  "emersonjosiel2030@gmail.com": {
-  "restantes": 7403,
+  "restantes": 6719,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T22:11"
+  "lido_em": "2026-11-20T17:17"
  },
  "emersonjosiel2031@gmail.com": {
-  "restantes": 7397,
+  "restantes": 6670,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T04:32"
+  "lido_em": "2026-11-20T18:46"
  },
  "emersonjosiel2033@gmail.com": {
   "restantes": 7359,
@@ -290,20 +290,20 @@
   "lido_em": "2026-11-19T21:06"
  },
  "emersonjosiel2037@gmail.com": {
-  "restantes": 7377,
+  "restantes": 6800,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T20:29"
+  "lido_em": "2026-11-20T19:23"
  },
  "emersonjosiel649@gmail.com": {
-  "restantes": 7396,
+  "restantes": 6937,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T19:21"
+  "lido_em": "2026-11-20T20:06"
  },
  "en1653964@gmail.com": {
   "restantes": 7341,
@@ -370,12 +370,12 @@
   "lido_em": "2026-11-20T10:01"
  },
  "empressinovare@gmail.com": {
-  "restantes": 7404,
+  "restantes": 6945,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T18:55"
+  "lido_em": "2026-11-20T16:43"
  },
  "solarmundo195@gmail.com": {
   "restantes": 6999,

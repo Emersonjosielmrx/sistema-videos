@@ -977,7 +977,19 @@ def _pick_xfade(desc, supported, last):
     if not pool:
         pool = [t for t in ("fade", "dissolve") if t in supported] or ["fade"]
     choices = [t for t in pool if t != last] or pool
-    return random.choice(choices), d
+    trans = random.choice(choices)
+    # 20/11: Eliminar ghosting e fusão travada — dissolvências (dissolve, fade) com duração
+    # máxima de 6 a 8 frames (~0.20-0.24s a 30fps) para impedir persistência de quadros semitransparentes
+    # e duplicidade de marcas d'água desalinhadas.
+    if trans in ("dissolve", "fade"):
+        try:
+            fps_val = float(FPS) if FPS else 30.0
+            frames_teto = float(os.environ.get("ANIME_DISSOLVE_FRAMES", "7"))
+            d_max = float(os.environ.get("ANIME_DISSOLVE_MAX_S", str(round(frames_teto / fps_val, 3))))
+        except (ValueError, TypeError, ZeroDivisionError):
+            d_max = 0.233
+        d = min(d, d_max)
+    return trans, d
 
 
 def _choose_xfade_batches(n, is_speech, max_batch):
@@ -1090,11 +1102,28 @@ def _render_xfade_segment(clips, durs, is_speech, gaps, descriptions,
         if soft:
             desc = descriptions[k] if k < len(descriptions) else ""
             trans, d = _pick_xfade(desc, supported, last_trans)
+            # 20/11 (melhorador do recap longo): dissolvências com duração máxima de 6 a 8 frames
+            # ou forçando corte seco via ANIME_HARDCUT / ANIME_XFADE_HARDCUT / ANIME_DISSOLVE_CORTE_SECO.
+            if trans in ("dissolve", "fade"):
+                if (os.environ.get("ANIME_DISSOLVE_CORTE_SECO") == "1"
+                        or os.environ.get("ANIME_HARDCUT") == "1"
+                        or os.environ.get("ANIME_XFADE_HARDCUT") == "1"):
+                    soft = False
+                else:
+                    try:
+                        fps_val = float(FPS) if FPS else 30.0
+                        frames_teto = float(os.environ.get("ANIME_DISSOLVE_FRAMES", "7"))
+                        d_max = float(os.environ.get("ANIME_DISSOLVE_MAX_S", str(round(frames_teto / fps_val, 3))))
+                    except (ValueError, TypeError, ZeroDivisionError):
+                        d_max = 0.233
+                    d = min(d, d_max)
+            elif os.environ.get("ANIME_HARDCUT") == "1" or os.environ.get("ANIME_XFADE_HARDCUT") == "1":
+                soft = False
             d = max(0.10, min(d, durs_eff[k] * 0.5, acc * 0.5))
             # 24/10 (dono: "vídeos terminando sem terminar a fala"): no Short o respiro é ~0 e o acrossfade
             # comia a última sílaba de cada frase. Sem silêncio do tamanho da transição = corte seco.
             gprev = gaps[k - 1] if k - 1 < len(gaps) else 0.0
-            soft = gprev + 0.07 >= d
+            soft = soft and (gprev + 0.07 >= d)
             # Transição gl (dona 02/11, ANIME_GL_TRANS_CHANCE / REALCE_TRANSICAO=0): no lugar do xfade, junta seca e o
             # começo do clip k vira a transição a partir do último quadro do k-1 (cópia temporária, mesma duração,
             # áudio intacto). Vale também onde o respiro curto tirou o xfade: não sobrepõe áudio.

@@ -20123,5 +20123,85 @@
     "arquivado": false,
     "descricao": "ORRIVN is a lightweight, modern self-hosted media hub that supports chunk-based uploads, YouTube downloading, automatic video merging, and i",
     "data": "2026-11-20"
+  },
+  "mouldybread/adb-auto-enable": {
+    "ok": true,
+    "nome": "mouldybread/adb-auto-enable",
+    "estrelas": 340,
+    "push": "2026-11-02",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Automatically enable wireless ADB and switch to port 5555 on Android device boot - no root required. Seamless wireless debugging on Chromeca",
+    "data": "2026-11-20"
+  },
+  "danielrosehill/claude-tasker-adb-plugin": {
+    "ok": true,
+    "nome": "danielrosehill/Claude-Tasker-ADB-Plugin",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code plugin: operate Tasker on Android over ADB by driving its editor; wireless-debugging watchdog recipe",
+    "data": "2026-11-20"
+  },
+  "jsneij/paneldet": {
+    "ok": true,
+    "nome": "jsneij/paneldet",
+    "estrelas": 0,
+    "push": "2026-09-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Comic panel detection: gutter cutting, connected components, deskew",
+    "data": "2026-11-20"
+  },
+  "td685548-sketch/freellmapi-custom": {
+    "ok": true,
+    "nome": "td685548-sketch/freellmapi-custom",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Render: https://freellm-thanhdo.onrender.com | Local Server: https://laptop-o6msglm4.tailc4d30d.ts.net | SnapDeploy: https://freellmapi-1d80",
+    "data": "2026-11-20"
+  },
+  "gulasz101/homelab-2nd": {
+    "ok": true,
+    "nome": "gulasz101/homelab-2nd",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-20"
+  },
+  "brave/brave-browser": {
+    "ok": true,
+    "nome": "brave/brave-browser",
+    "estrelas": 24264,
+    "push": "2026-11-20",
+    "licenca": "MPL-2.0",
+    "arquivado": false,
+    "descricao": "Brave browser for Android, iOS, Linux, macOS, Windows.",
+    "data": "2026-11-20"
+  },
+  "ffroliva/gflow-cli": {
+    "ok": true,
+    "nome": "ffroliva/gflow-cli",
+    "estrelas": 427,
+    "push": "2026-11-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "MCP server and CLI for Google Flow: generate Veo 3.1 and Omni video and Nano Banana / Imagen images from Claude Code, Claude Desktop, Cursor",
+    "data": "2026-11-20"
+  },
+  "h0ll0w-akuzr0guy/miaotask": {
+    "ok": true,
+    "nome": "h0ll0w-AkuZr0guY/MiaoTask",
+    "estrelas": 126,
+    "push": "2026-11-10",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与",
+    "data": "2026-11-20"
   }
 }

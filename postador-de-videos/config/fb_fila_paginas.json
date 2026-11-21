@@ -2,11 +2,13 @@
  "_leia": "Fila das Páginas a criar (dona 20/11/2026: 'uma Página pra cada TikTok, uma a cada X horas como o Instagram, procedimento completo'). 53 = 58 TikToks de reuso_plataformas.json menos os 5 que já têm Página (curiosidadesnoturnas, doramanoturno, filmenoturno, emersonjosiel649=Anime Noturno, emersonjosiel2033=Assist-IA). fb_criar_fila.py pega a 1ª 'pendente' da conta da vez e faz tudo (arte, criar, id, foto, capa, config, 1º Reel). 'postados_em' = canais do YouTube; 'temas_veo' = página de reserva Veo (só versão limpa). 'tags' = 1ª hashtag aceita (vazio = sem filtro). Contas: emersonjosiel02 (perfil novo, Webshare rnprmtfo-58) e msenergypara (perfil 10+ anos, casa) — revezam. Na msenergypara só entra conteúdo neutro (nunca solar/produto de outra empresa).",
  "intervalo_h": 3,
  "max_dia_por_conta": {
-  "emersonjosiel02": 3
+  "emersonjosiel02": 3,
+  "mundosolar1995": 3
  },
  "perfil_pessoal": {
   "emersonjosiel02": "Mund Solar",
-  "msenergypara": "Mund Solar III"
+  "msenergypara": "Mund Solar III",
+  "mundosolar1995": "Mund Solar II"
  },
  "fila": [
   {
@@ -51,7 +53,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "revolutionemerson2",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Bicho Noturno",
    "categoria": "Animais",
    "arte": "bichos",
@@ -77,7 +79,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "revolutionemerson3",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Mistérios Noturnos",
    "categoria": "Entretenimento",
    "arte": "misterio",
@@ -104,7 +106,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "seebotsia",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Tech Noturno",
    "categoria": "Ciência, tecnologia e engenharia",
    "arte": "ia",
@@ -130,7 +132,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel2026",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Invento React",
    "categoria": "Ciência, tecnologia e engenharia",
    "arte": "ia",
@@ -156,7 +158,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "mundosolar1995",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Comédia Noturna",
    "categoria": "Comediante",
    "arte": "humor",
@@ -184,7 +186,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel2031",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Fio da Meada",
    "categoria": "Entretenimento",
    "arte": "historias",
@@ -210,7 +212,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersongenc",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Forja React",
    "categoria": "Entretenimento",
    "arte": "games",
@@ -236,7 +238,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "comoseriasecomia",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Mundo Que Não Existe",
    "categoria": "Entretenimento",
    "arte": "misterio",
@@ -264,7 +266,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "fabricadeautomacoesia",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Fábrica de Automações IA",
    "categoria": "Empresa de software",
    "arte": "financas",
@@ -296,7 +298,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaversehindi",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Inovare Manhwa Hindi",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -322,7 +324,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaversethai",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Inovare Manhwa Thai",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -350,7 +352,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaverseind",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Inovare Manga Indonesia",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -378,7 +380,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "jornalcomia",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Jornal com IA",
    "categoria": "Site de notícias e mídia",
    "arte": "ia",
@@ -408,7 +410,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "entrevistacomia",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Entrevista com IA",
    "categoria": "Comediante",
    "arte": "humor",
@@ -437,7 +439,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "canalalucinaai",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Alucina AI",
    "categoria": "Artista",
    "arte": "ia",
@@ -467,7 +469,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "aulasrevolution",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Mentoria com IA",
    "categoria": "Site de educação",
    "arte": "ia",
@@ -495,7 +497,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosielmrx1995",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Fatos e Curiosidades IA",
    "categoria": "Site de educação",
    "arte": "curiosidades",
@@ -526,7 +528,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "en1653964",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Fofos e Absurdos",
    "categoria": "Animais",
    "arte": "bichos",
@@ -555,7 +557,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersongencshin",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Robôs Desastrados",
    "categoria": "Comediante",
    "arte": "humor",
@@ -583,7 +585,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "emersonjosiel0",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Ilusões de Ótica IA",
    "categoria": "Artista",
    "arte": "ia",
@@ -612,7 +614,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremultiatendimento",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Vendas com IA",
    "categoria": "Empresa de software",
    "arte": "financas",
@@ -639,7 +641,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "fabricadeautomacoes0",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Transformações IA",
    "categoria": "Artista",
    "arte": "ia",
@@ -667,7 +669,7 @@
   {
    "chave": "iapro",
    "tiktok": "mentoriaiapro",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "IA Pro",
    "categoria": "Site de educação",
    "arte": "ia",
@@ -695,7 +697,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "rezaulkarimul355",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Stand-up IA",
    "categoria": "Comediante",
    "arte": "humor",
@@ -725,7 +727,7 @@
   {
    "chave": "<SEGREDO_REMOVIDO>",
    "tiktok": "inovaremanhwaversefrench",
-   "conta": "emersonjosiel02",
+   "conta": "mundosolar1995",
    "nome": "Inovare Manhwa FR",
    "categoria": "Entretenimento",
    "arte": "manhwa",
@@ -751,7 +753,8 @@
   }
  ],
  "intervalo_h_por_conta": {
-  "emersonjosiel02": 3
+  "emersonjosiel02": 3,
+  "mundosolar1995": 3
  },
  "_ritmo": "20/11 11h dona: 'criar o máximo de Páginas'. Sem limite oficial (Meta não publica); relatos = aviso 'rápido demais' depois de 3-5 seguidas. Perfil 10+ anos 6/dia a cada 2 h; perfil novo 3/dia a cada 3 h. Aviso = conta parada 48 h.",
  "_msenergypara": "20/11 dona: 'MS Energy é comercial, não precisa de vídeo de entretenimento; os vídeos devem ser os mesmos do Instagram'. Perfil antigo fora da fila; Cena React e Histórias em Frames (criadas lá) pausadas."

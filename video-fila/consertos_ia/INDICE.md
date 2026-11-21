@@ -1307,3 +1307,7 @@
 - 2026-11-20 14:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261120_144050_8764.md](20261120_144050_8764.md)
 - 2026-11-20 15:23 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261120_152045_9902.md](20261120_152045_9902.md)
 - 2026-11-20 15:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261120_154051_e8ea.md](20261120_154051_e8ea.md)
+- 2026-11-20 16:11 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): _parceiro_20261120.log: mesmo erro 5x EVIDÊNCIA: D:\hipercool-materiais\anime\_pa → [20261120_161037_d911.md](20261120_161037_d911.md)
+- 2026-11-20 16:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261120_162042_639d.md](20261120_162042_639d.md)
+- 2026-11-20 18:12 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261120_181044_9166.md](20261120_181044_9166.md)
+- 2026-11-20 19:27 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261120_192043_9ce7.md](20261120_192043_9ce7.md)

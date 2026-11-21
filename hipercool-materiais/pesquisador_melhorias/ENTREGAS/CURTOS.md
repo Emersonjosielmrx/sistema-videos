@@ -4675,3 +4675,30 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 15:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1441.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 16:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1606.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 16:27 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1621.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 16:48 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1637.md`
+- [INÉDITO] github.com/mouldybread/adb-auto-enable — ★340, push 2026-11-02, MIT — Automatically enable wireless ADB and switch to port 5555 on Android device boot - no root required. Seamless wireless debugging on Chromeca
+- [INÉDITO] github.com/danielrosehill/Claude-Tasker-ADB-Plugin — ★0, push 2026-11-18, MIT — Claude Code plugin: operate Tasker on Android over ADB by driving its editor; wireless-debugging watchdog recipe
+
+## [ ] PENDENTE — 2026-11-20 18:19 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1811.md`
+- [INÉDITO] github.com/td685548-sketch/freellmapi-custom — ★0, push 2026-11-20, MIT — Render: https://freellm-thanhdo.onrender.com | Local Server: https://laptop-o6msglm4.tailc4d30d.ts.net | SnapDeploy: https://freellmapi-1d80
+- [INÉDITO] github.com/brave/brave-browser — ★24264, push 2026-11-20, MPL-2.0 — Brave browser for Android, iOS, Linux, macOS, Windows.
+- [INÉDITO] github.com/ffroliva/gflow-cli — ★427, push 2026-11-20, MIT — MCP server and CLI for Google Flow: generate Veo 3.1 and Omni video and Nano Banana / Imagen images from Claude Code, Claude Desktop, Cursor
+
+## [x] AVALIADO 20/11 (automático: nada aproveitável) — 2026-11-20 18:31 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1821.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-20 20:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2001.md`
+- [INÉDITO] github.com/h0ll0w-AkuZr0guY/MiaoTask — ★126, push 2026-11-10, Apache-2.0 — 🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与

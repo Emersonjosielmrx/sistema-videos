@@ -25979,6 +25979,102 @@
         "truques de FFmpeg para `zoompan`/`xfade`/`overlay` mais rápidos, como pré-escala e cache de quadros, e ffmpeg em Termux."
       ],
       "origem": "area_camera_3d_painel__sonnet_1548.md 2026-11-20"
+    },
+    {
+      "id": "camera_painel_zoompan",
+      "nome": "Câmera por painel com zoompan e easing",
+      "subtemas": [
+        "exemplos de expressões zoompan/crop com easing para sequências de painéis, em gists ou READMEs de projetos pequenos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1716.md 2026-11-20"
+    },
+    {
+      "id": "titulos_capas_recap",
+      "nome": "Títulos e capas de recap de manga/manhwa",
+      "subtemas": [
+        "padrões de título e primeiros 30 s dos recaps mais vistos, medidos por views÷inscritos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1716.md 2026-11-20"
+    },
+    {
+      "id": "zoompan_liso",
+      "nome": "Zoompan/crop sem tremor em CPU",
+      "subtemas": [
+        "exemplos de supersample + expressão de `t` no ffmpeg, testados em UHD 620, com medida de tempo por painel"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1746.md 2026-11-20"
+    },
+    {
+      "id": "ordem_leitura_painel",
+      "nome": "Ordem de leitura e duração por painel pelo texto falado",
+      "subtemas": [
+        "como sincronizar o tempo de cada painel com a fala (word timestamps do whisper) para o pan acompanhar o balão"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1746.md 2026-11-20"
+    },
+    {
+      "id": "render_celular_zoompan",
+      "nome": "Zoompan/crop no Termux (FFmpeg Android)",
+      "subtemas": [
+        "tempo de render de painel com zoompan em celular vs PC1, para distribuir a carga entre máquinas"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1746.md 2026-11-20"
+    },
+    {
+      "id": "termux_ffmpeg_puro",
+      "nome": "Render de shorts em celular Android",
+      "subtemas": [
+        "scripts de ffmpeg puro no Termux (sem Chromium): limite de threads, temperatura, fila por celular, distribuição de partes entre PCs e celulares"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1841.md 2026-11-20"
+    },
+    {
+      "id": "abertura_30s_recap",
+      "nome": "Primeiros 30 s e retenção em recaps de mangá/manhwa",
+      "subtemas": [
+        "análises públicas de retenção em recaps, e como cortar o primeiro painel/gancho antes da narração"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1841.md 2026-11-20"
+    },
+    {
+      "id": "series_playlists",
+      "nome": "Séries e compilados que levam ao próximo vídeo",
+      "subtemas": [
+        "padrão de título \"Parte N\", ordem de playlist e compilados de recaps, com exemplos de canais de recap"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1908.md 2026-11-20"
+    },
+    {
+      "id": "cam_zoompan",
+      "nome": "zoompan sem tremor em PC fraco",
+      "subtemas": [
+        "técnicas e issues de FFmpeg sobre subpixel, escala prévia e expressões de `crop`, com medição"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1948.md 2026-11-20"
+    },
+    {
+      "id": "cam_roteiro_paineis",
+      "nome": "roteiro que cita painéis",
+      "subtemas": [
+        "exemplos de prompt e JSON de roteiro com ids de painel por frase, em recaps de manhwa"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1948.md 2026-11-20"
+    },
+    {
+      "id": "adb_watchdog",
+      "nome": "Reconexão Wi-Fi do adb",
+      "subtemas": [
+        "buscar \"adb connect loop\" e \"get-state\" em scripts de fazenda de celulares, após o limite da API liberar"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2001.md 2026-11-20"
+    },
+    {
+      "id": "miaotask_leitura",
+      "nome": "Ler o README do MiaoTask",
+      "subtemas": [
+        "abrir github.com/h0ll0w-AkuZr0guY/MiaoTask e conferir se serve como agendador multi-celular"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2001.md 2026-11-20"
     }
   ],
   "projetos": [

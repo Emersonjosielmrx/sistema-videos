@@ -77,11 +77,20 @@ def lote(pasta_voz, lista_json):
         SOLTO = float(os.environ["FISH_SOLTO"])
     print(f"FISH temperatura/top_p {SOLTO}", flush=True)
 
+    def _tem_repeticao(txt):
+        import re as _re
+        pal = _re.findall(r"\w+", txt.lower())
+        return any(pal[k] == pal[k + 1] for k in range(len(pal) - 1))
+
     def gera(txt, suf=""):
         # 20/11 dona (amostras por tipo, KkVirjão): "as mesmas técnicas em tipos de áudio diferentes funcionam e em
         # outros se invertem — as variações só valem pra aqueles trechos". Temperatura POR SUB-VOZ conforme o que ela
         # aprovou: irritado e metralhadora = solta (aprovou 07 "mais solta"); agudo = normal (só aprovou 05/09/12/14).
         TEMP_SUB = {"_irritado": 0.95, "_metralhadora": 0.95, "_agudo": 0.85}
+        # 20/11 noite (caça de defeitos: "voz esquisita, distorcida, sons estranhos"): temperatura >= 0,9 com top_p
+        # igual solta demais o Fish. Teto 0,85 e top_p fixo 0,8 (FISH_TEMP_LIVRE=1 volta ao de antes)
+        if os.environ.get("FISH_TEMP_LIVRE") != "1":
+            TEMP_SUB = {k: min(v, 0.85) for k, v in TEMP_SUB.items()}
         t_ = min(1.0, TEMP_SUB.get(suf, SOLTO))
         # 20/11 dona (KkVirjão "mulher"): a sub-voz mulher SOZINHA foi quase toda reprovada; aprovadas só as MISTAS
         # (normal+mulher, mulher+piada, todas juntas). Sub-vozes em SUB_SO_MISTA nunca vão sozinhas: vão com a normal.
@@ -100,7 +109,9 @@ def lote(pasta_voz, lista_json):
             r_ = refs + [x for x in (por_clima.get(suf) or []) if x not in refs]
         req = ServeTTSRequest(text=txt, references=r_, reference_id=None,
                               max_new_tokens=1024, chunk_length=200,
-                              top_p=t_, repetition_penalty=1.2, temperature=t_, format="wav")
+                              top_p=(t_ if os.environ.get("FISH_TEMP_LIVRE") == "1" else min(t_, 0.8)),
+                              # "não, não, não" / "vai, vai": penalidade de repetição alta faz a 2ª/3ª sair estranha
+                              repetition_penalty=(1.1 if _tem_repeticao(txt) else 1.2), temperature=t_, format="wav")
         for r in eng.inference(req):
             if r.code == "final":
                 return r.audio
@@ -109,6 +120,62 @@ def lote(pasta_voz, lista_json):
 
     gera("Olá.")  # aquecimento
     print(f"FISH carga {time.time() - t:.1f}s", flush=True)
+
+    def _f0(a, sr):
+        """mediana do tom (Hz) — cepstro simples, só pra comparar tentativas da mesma frase"""
+        x = a[:: max(1, sr // 16000)].astype(np.float32)
+        out = []
+        for i in range(0, len(x) - 1024, 320):
+            fr = x[i:i + 1024] * np.hanning(1024)
+            if np.sqrt((fr ** 2).mean()) < 0.02:
+                continue
+            c = np.abs(np.fft.irfft(np.log(np.abs(np.fft.rfft(fr, 4096)) + 1e-9)))
+            out.append(16000 / (40 + np.argmax(c[40:228])))
+        return float(np.median(out)) if len(out) >= 5 else 0.0
+
+    # 20/11 noite (caça de defeitos, 3 rodadas da MESMA frase): o Fish sorteia o tom a cada geração — a mesma frase saiu
+    # de -4 a +12 st do normal do narrador (é o "engrossa/afina de repente"). Melhor de N: gera N tentativas e fica com
+    # a mais perto do tom do narrador (medido na própria referência) e com duração plausível pro texto.
+    # FISH_TENTATIVAS=1 volta ao de antes.
+    N_TENT = int(os.environ.get("FISH_TENTATIVAS", "3") or 1)
+    # o "normal" do narrador = mediana do tom das frases JÁ aceitas neste vídeo (o tom da referência medido igual não
+    # bate: no teste o Mike deu 195 Hz na referência x 116 Hz nas frases). Até ter 3 aceitas, vale a mediana das
+    # tentativas da própria frase (a tentativa fora da curva perde).
+    aceitas = []
+    cps_aceitas = []
+    print(f"FISH melhor de {N_TENT} por frase (tom mais perto do normal do narrador)", flush=True)
+
+    def gera_melhor(txt, suf):
+        tent = []
+        for k in range(N_TENT):
+            sr_, a_ = gera(txt, suf)
+            a_ = np.asarray(a_).squeeze()
+            cps = len(txt) / max(len(a_) / sr_, 0.1)
+            tent.append((sr_, a_, _f0(a_, sr_), cps))
+            alvo = float(np.median(aceitas)) if len(aceitas) >= 3 else 0.0
+            if alvo and tent[-1][2]:
+                st0 = abs(12 * np.log2(tent[-1][2] / alvo))
+                cps_ok = (abs(cps / float(np.median(cps_aceitas)) - 1) <= 0.2) if len(cps_aceitas) >= 3 else True
+                if st0 <= 1.5 and 8 <= cps <= 26 and cps_ok:  # já boa: não gasta mais tempo
+                    break
+        alvo = float(np.median(aceitas)) if len(aceitas) >= 3 else float(np.median([t_[2] for t_ in tent if t_[2]] or [0]))
+        # 20/11 noite (dona: "no A2v2 ele falou 'levou 1, 2 e uma faca' — nenhum outro tem essa parte"): o Fish INVENTA
+        # palavras às vezes. Palavra inventada = frase mais longa que o texto pede -> letras/s bem abaixo do ritmo das
+        # frases já aceitas. Penaliza quem sai do ritmo normal do narrador neste vídeo (±30%).
+        cps_alvo = float(np.median(cps_aceitas)) if len(cps_aceitas) >= 3 else float(np.median([t_[3] for t_ in tent]))
+
+        def pena(t_):
+            st_ = abs(12 * np.log2(t_[2] / alvo)) if t_[2] and alvo else 6.0
+            fora = abs(t_[3] / cps_alvo - 1) if cps_alvo else 0.0
+            # tom longe do normal + velocidade absurda (engoliu/repetiu) + ritmo fora do dele (inventou/engoliu palavra)
+            return st_ + (0 if 8 <= t_[3] <= 26 else 4) + (8 * (fora - 0.3) if fora > 0.3 else 0)
+        melhor = min(tent, key=pena)
+        if melhor[2]:
+            aceitas.append(melhor[2])
+        cps_aceitas.append(melhor[3])
+        print(f"FISH melhor de {len(tent)}: {pena(melhor):.1f} de penalidade, {melhor[3]:.0f} letras/s", flush=True)
+        return melhor[0], melhor[1]
+
     ok = 0
     for it in itens:
         if Path(it["saida"]).exists():
@@ -116,7 +183,7 @@ def lote(pasta_voz, lista_json):
             continue
         t0 = time.time()
         try:
-            sr, a = gera(it["texto"], it.get("ref", ""))
+            sr, a = gera_melhor(it["texto"], it.get("ref", ""))
             a = np.asarray(a).squeeze()
             # 19/11 (revisão): grava num .tmp e renomeia — processo morto no meio não deixa wav parcial "pronto"
             tmp = it["saida"] + ".tmp.wav"

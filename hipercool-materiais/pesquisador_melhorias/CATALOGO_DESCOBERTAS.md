@@ -7569,3 +7569,108 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1548.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 16:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1606.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 16:27 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1621.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 16:48 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_1637.md`
+
+- [INÉDITO] github.com/mouldybread/adb-auto-enable — ★340, push 2026-11-02, MIT — Automatically enable wireless ADB and switch to port 5555 on Android device boot - no root required. Seamless wireless debugging on Chromeca
+- [INÉDITO] github.com/danielrosehill/Claude-Tasker-ADB-Plugin — ★0, push 2026-11-18, MIT — Claude Code plugin: operate Tasker on Android over ADB by driving its editor; wireless-debugging watchdog recipe
+
+## 2026-11-20 17:02 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1656.md`
+
+- [INÉDITO] github.com/jsneij/paneldet — ★0, push 2026-09-12, MIT — Comic panel detection: gutter cutting, connected components, deskew
+
+## 2026-11-20 17:11 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1706.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 17:21 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1716.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 17:35 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1726.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 17:54 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1746.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 18:06 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1758.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 18:19 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1811.md`
+
+- [INÉDITO] github.com/td685548-sketch/freellmapi-custom — ★0, push 2026-11-20, MIT — Render: https://freellm-thanhdo.onrender.com | Local Server: https://laptop-o6msglm4.tailc4d30d.ts.net | SnapDeploy: https://freellmapi-1d80
+- [INÉDITO] github.com/brave/brave-browser — ★24264, push 2026-11-20, MPL-2.0 — Brave browser for Android, iOS, Linux, macOS, Windows.
+- [INÉDITO] github.com/ffroliva/gflow-cli — ★427, push 2026-11-20, MIT — MCP server and CLI for Google Flow: generate Veo 3.1 and Omni video and Nano Banana / Imagen images from Claude Code, Claude Desktop, Cursor
+
+## 2026-11-20 18:31 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_gemini_web_sessao_cookie__sonnet_1821.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 18:45 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1841.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 18:57 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1851.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 19:15 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1908.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 19:31 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1923.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 19:56 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_camera_3d_painel__sonnet_1948.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-20 20:15 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2001.md`
+
+- [INÉDITO] github.com/h0ll0w-AkuZr0guY/MiaoTask — ★126, push 2026-11-10, Apache-2.0 — 🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与

@@ -2623,3 +2623,13 @@
 - prova: sem-obra-da8137 q13: imagem de lowrider moderno com narração sobre 1901. Só em 1 Short, então só observar.
 - onde: seleção de cenas / casamento da tomada com a narração
 - como testar: Se aparecer em >= 2 Shorts históricos, checar no roteiro.txt e nos logs de seleção de tomada se a cena foi escolhida por palavra-chave sem checar época.
+
+## 20/11 20:05 PROPOSTA [GOSTO] Garantir movimento mínimo em cenas com pouca variação visual (zoom/pan contínuo) (gemini-4-argon)
+- prova: Cenas abaixo de ~25% de movimento nos 4 Shorts do lote: sem-obra-ffb8ba q04 (15.5%), sem-obra-95f07b q04 (18.4%), sem-obra-ca9498 q16 (12.3%), sem-obra-826e5d q03 (23.6%). A nota de movimento ficou em 9 a 10, então o efeito sobre a retenção ainda não está provado.
+- onde: Função do render (Python+FFmpeg) que aplica zoom/pan por cena, perto de onde o movimento por cena é medido. Arquivo exato não verificado: localizar em D:\video-fila\linhas\CORTES.
+- como testar: Aplicar punch-in/zoom lento só nas cenas medidas abaixo de 25%, em 5 a 10 Shorts, mantendo o resto igual. Comparar % assistido e nota de retenção contra os Shorts sem a mudança. Não mexer em cenas que já passam de 25%.
+
+## 20/11 20:05 PROPOSTA [GOSTO] Conferir a posição vertical da legenda palavra a palavra e da tarja de gancho em relação à zona da interface (gemini-4-argon)
+- prova: ffb8ba q16 (legenda 'MAS O QUE / LEVA / DOER' na zona inferior), ca9498 q02 (legenda quase no limite inferior, texto 'Hoje eu vou colocar cinco' apertado) e 95f07b q10 (legenda perto da interface e do @inovaremanhwabr). Ocorrência em 3 Shorts. Atenção: a tarja segue a posição da legenda queimada da fonte e a regra fixa proíbe mudar seu tamanho. O ajuste vale só para a NOSSA legenda.
+- onde: Renderizador da legenda palavra a palavra (cálculo do y da caixa de texto em 1080x1920). Arquivo exato não verificado.
+- como testar: Medir o limite inferior da caixa da nossa legenda nos quadros desses 3 Shorts e comparar com ~y 1580 (referência do APRENDIDO). Se ultrapassar, subir a legenda só nesses casos e rodar folha de quadros antes e depois, com um Short sem tarja como controle. Não mexer na tarja.
