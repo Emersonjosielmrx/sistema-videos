@@ -11,16 +11,16 @@
  "aceitar_igual_casa": false,
  "_leia": "Contas do TikTok que postam pelo celular (proxy SOCKS do Redmi, bin/proxy_celular.py) enquanto o túnel estiver vivo e a saída for diferente do IP de casa. São 6 contas 'mortas' (0 views em 48 h em todos os posts recentes, medido 29/10) para o teste da dona. mb_dia = teto de MB por dia no chip. aceitar_igual_casa=false: no Wi-Fi (mesmo IP de casa) o teste não vale e as contas voltam ao caminho normal.",
  "estado": {
-  "atualizado": "2026-11-21T00:14:46",
+  "atualizado": "2026-11-21T03:59:09",
   "celular_alcancavel": true,
   "tunel": false,
   "ip": null,
   "ip_casa": "191.36.137.8",
   "igual_casa": false,
-  "operadora": "TIM S/A",
-  "movel": true,
+  "operadora": "Alternativa Telecom",
+  "movel": false,
   "pais": "BR",
-  "cidade": "Belém",
+  "cidade": "Paragominas",
   "mb_hoje": 0
  },
  "uso_mb": {}

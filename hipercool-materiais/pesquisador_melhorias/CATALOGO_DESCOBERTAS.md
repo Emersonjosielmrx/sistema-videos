@@ -7759,3 +7759,99 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_playlists_series__sonnet_0007.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 00:53 — Tela final, playlist e sessão (`area_fim_playlist`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_fim_playlist__sonnet_0048.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:02 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_shorts_seriados__sonnet_0056.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:11 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_distribuicao__sonnet_0106.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:21 — Ponte Short -> longo (link relacionado, fixado, cards) (`area_dist_ponte_short_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_ponte_short_longo__sonnet_0116.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:31 — Canal novo de longos: arranque com poucas impressões (`area_dist_canal_novo_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_canal_novo_longo__sonnet_0126.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:42 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_impressoes_diagnostico__sonnet_0136.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:47 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_recursos_avancados_recuperar__sonnet_0146.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 01:54 — Crescer canal SEM recursos avançados (`area_yt_crescer_sem_recursos_avancados`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_crescer_sem_recursos_avancados__sonnet_0151.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 02:04 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_conformidade_canal__sonnet_0201.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 02:20 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0211.md`
+
+- [INÉDITO] github.com/hitchabout/Gemini-Pixel-Tracker — ★0, push 2026-04-18, MIT — A standalone Windows widget to track daily image generation limits in Google Gemini.
+
+## 2026-11-21 02:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0221.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 02:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0233.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 02:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0252.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 03:16 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0311.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 03:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0327.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 03:58 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0346.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

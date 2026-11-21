@@ -492,3 +492,26 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Causa provável: Bloqueio temporário do YouTube por volume de requisições / IP da casa, tratado automaticamente pelo sistema de pausas (ytdlp_vez).
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261121_0102 — reserva_status.py passa a ignorar canal retirado (Por Dentro), alerta falso reserva_zero:pordentro (pelo painel)
+- Motivo: o canal Por Dentro foi retirado pela dona em 19/11 (conta removida do cofre; canais_status.json "desativados" id novo_pordentro), mas o rascunho novo_pordentro continuava em canais.json e o medidor o mostrava com 0 agendado e 0 pronto, o que disparava o alerta da vigilância. Não faltava alimentador: dar alimentador seria errado.
+- O que fiz (arquivos): D:\video-fila\reserva_status.py — leitura tolerante da lista "desativados" de canais_status.json (lista ausente ou arquivo ruim = ninguém pulado) e o laço de canais pula quem estiver nela (pelo slug ou pelas creds). Nada mais mudou (canais.json, rede_canais.json e arquivos da vigilância intactos).
+- Como conferi: sintaxe compilou; reserva_status.py rodou e novo_pordentro saiu da tabela, total de 13/32 para 13/31, demais canais com os mesmos números; "resumo" também funciona.
+- Como desfazer: botão "Desfazer" no painel (pedido 20261121_010234_3f69)
+- Obs.: outros canais com 0.0 dias (codigobilhao3d, dentrodascoisas3d, fatochocante, inventoreact, mundoquenaoexiste, esportenoturno) são reais, têm conta e dono, e não fazem parte deste pedido.
+- Estado: RESOLVIDO
+## 20261121_0135 — Parceiro: erro no Kaggle com短-lote no formato madruga_chaves ( 404/rc=1).
+- Motivo / O que achei: O short  (formato ) falhou no Kaggle com  e erro de requisição HTTP 404 ao buscar  no Hugging Face (pesquisa/modelo indisponível ou transiente).
+- Causa provável: Instabilidade temporária da API do Hugging Face ou dependência ausente no ambiente do Kaggle para esse formato de teste ().
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso). O sistema tentará novamente ou o dono ajustará o script do Kaggle se persistir.
+- Estado: NADA A FAZER
+## 20261121_0135 — Parceiro: falha no Kaggle em short no formato madruga_chaves
+- Motivo / O que achei: Trecho do log de `_parceiro_20261121.log`: Short `20261121_012414_0ONNeIWYGr4` falhou no Kaggle com `rc=1` e HTTP 404 do Hugging Face (`openai/clip-vit-base-patch32`).
+- Causa provável: Indisponibilidade transitória ou mudança de endpoint no Hugging Face durante a execução do lote no Kaggle.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso). O pipeline possui tratamento e retentativas automáticas.
+- Estado: NADA A FAZER
+## 20261121_0337 — Vigia do disco: D: com 2.99 GB livres, backup_drive e cache executados, Wise Memory Optimizer ativo
+- Motivo / O que achei (trecho de log): D: com 2.99 GB livres (abaixo do limite mínimo). Processo WiseMemoryOptimizer ativo (PID 3840, ~11.8 MB RSS, RAM livre estável).
+- Causa provável: Acúmulo de arquivos temporários e cache no disco D.
+- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
+- Estado: NADA A FAZER

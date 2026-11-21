@@ -1629,3 +1629,39 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 00:18 — Playlists e séries para longos (`area_dist_playlists_series`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_playlists_series__sonnet_0007.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 00:53 — Tela final, playlist e sessão (`area_fim_playlist`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_fim_playlist__sonnet_0048.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:02 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_shorts_seriados__sonnet_0056.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:11 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_distribuicao__sonnet_0106.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:21 — Ponte Short -> longo (link relacionado, fixado, cards) (`area_dist_ponte_short_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_ponte_short_longo__sonnet_0116.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:31 — Canal novo de longos: arranque com poucas impressões (`area_dist_canal_novo_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_canal_novo_longo__sonnet_0126.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:42 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_dist_impressoes_diagnostico__sonnet_0136.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:47 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_recursos_avancados_recuperar__sonnet_0146.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 01:54 — Crescer canal SEM recursos avançados (`area_yt_crescer_sem_recursos_avancados`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_crescer_sem_recursos_avancados__sonnet_0151.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 02:04 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_conformidade_canal__sonnet_0201.md`
+- (todos os itens desta pesquisa foram reprovados)

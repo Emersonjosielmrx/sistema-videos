@@ -26171,6 +26171,198 @@
         "FFmpeg no Termux para ratear fila de render com os PCs, e liberar disco após o upload"
       ],
       "origem": "area_dist_playlists_series__sonnet_0007.md 2026-11-21"
+    },
+    {
+      "id": "ypp_shorts_10m",
+      "nome": "Nova regra de Shorts 10M/90 dias",
+      "subtemas": [
+        "Ler a página oficial de elegibilidade do YPP e anúncios do blog.youtube sobre o que muda em 01/02/2027 para canal pequeno"
+      ],
+      "origem": "area_fim_playlist__sonnet_0048.md 2026-11-21"
+    },
+    {
+      "id": "titulos_idiomas",
+      "nome": "Título e descrição traduzidos nos longos",
+      "subtemas": [
+        "Páginas oficiais \"Translate videos, subtitles & captions\" (títulos e descrições em outros idiomas) e como o pipeline pode subir isso por canal"
+      ],
+      "origem": "area_fim_playlist__sonnet_0048.md 2026-11-21"
+    },
+    {
+      "id": "recap_parte2",
+      "nome": "gancho de retomada em recap",
+      "subtemas": [
+        "como criadores de recap abrem a parte 2 e fecham a parte 1; padrões de título \"Parte N\" que seguram retenção"
+      ],
+      "origem": "area_shorts_seriados__sonnet_0056.md 2026-11-21"
+    },
+    {
+      "id": "playlist_mista",
+      "nome": "playlist mista Short+longo",
+      "subtemas": [
+        "página oficial do YouTube sobre Shorts relacionados e ponte Short→longo; teste prático de ordem em playlist"
+      ],
+      "origem": "area_shorts_seriados__sonnet_0056.md 2026-11-21"
+    },
+    {
+      "id": "titulo_serie",
+      "nome": "numeração em título/capa de série",
+      "subtemas": [
+        "formatos de título e capa para série (\"Parte 3/10\") em canais grandes de recap, via yt-dlp (só leitura)"
+      ],
+      "origem": "area_shorts_seriados__sonnet_0056.md 2026-11-21"
+    },
+    {
+      "id": "regras_shorts_oficiais",
+      "nome": "Regras oficiais de Shorts e do YPP",
+      "subtemas": [
+        "Reabrir support.google.com/youtube em \"Shorts monetization policies\", \"YouTube Partner Program eligibility\" e \"Related video\", testando outras URLs."
+      ],
+      "origem": "area_distribuicao__sonnet_0106.md 2026-11-21"
+    },
+    {
+      "id": "plataformas_alt_regras",
+      "nome": "Regras de monetização Kwai, Facebook e Dailymotion",
+      "subtemas": [
+        "Ler as páginas oficiais de elegibilidade, pagamento mínimo e conteúdo reutilizado de cada plataforma."
+      ],
+      "origem": "area_distribuicao__sonnet_0106.md 2026-11-21"
+    },
+    {
+      "id": "repeticao_entre_videos",
+      "nome": "Detecção de molde repetido entre postagens do mesmo canal",
+      "subtemas": [
+        "Projetos pequenos em Python que comparam título, abertura e estrutura entre vídeos recentes."
+      ],
+      "origem": "area_distribuicao__sonnet_0106.md 2026-11-21"
+    },
+    {
+      "id": "acesso_avancado",
+      "nome": "Canal novo chegando a recursos avançados",
+      "subtemas": [
+        "ler answer/9891124 (histórico suficiente, prazos) e como evitar perder o acesso"
+      ],
+      "origem": "area_dist_ponte_short_longo__sonnet_0116.md 2026-11-21"
+    },
+    {
+      "id": "idioma_canal",
+      "nome": "Um canal multi-idioma ou um canal por idioma",
+      "subtemas": [
+        "ler 6070467 completo e a página de recursos multi-idioma (áudio e título traduzidos)"
+      ],
+      "origem": "area_dist_ponte_short_longo__sonnet_0116.md 2026-11-21"
+    },
+    {
+      "id": "ordem_postagem",
+      "nome": "Ordem de postagem Short/longo e módulo de inscritos",
+      "subtemas": [
+        "testes de ordem e horário entre Short e longo, e o que dizem os criadores sobre o que o inscrito vê primeiro"
+      ],
+      "origem": "area_dist_ponte_short_longo__sonnet_0116.md 2026-11-21"
+    },
+    {
+      "id": "tema_nicho_demanda",
+      "nome": "Provar demanda antes de recapar",
+      "subtemas": [
+        "página oficial de Tendências/Pesquisa do YouTube Studio e fontes públicas de busca por obra e por país"
+      ],
+      "origem": "area_dist_canal_novo_longo__sonnet_0126.md 2026-11-21"
+    },
+    {
+      "id": "retencao_longo_minutos",
+      "nome": "Retenção em minutos nos longos de 1 a 4 h",
+      "subtemas": [
+        "como ler o relatório de retenção do Studio e onde o público sai nos primeiros minutos"
+      ],
+      "origem": "area_dist_canal_novo_longo__sonnet_0126.md 2026-11-21"
+    },
+    {
+      "id": "upload_serie_ritmo",
+      "nome": "Ritmo de partes de série",
+      "subtemas": [
+        "o que a Ajuda do YouTube e criadores de recap dizem sobre intervalo entre partes e sobre o vídeo antigo voltar a render"
+      ],
+      "origem": "area_dist_canal_novo_longo__sonnet_0126.md 2026-11-21"
+    },
+    {
+      "id": "ponte_shorts_longo",
+      "nome": "Ponte Short→longo",
+      "subtemas": [
+        "achar texto oficial de \"vídeo relacionado\" nos Shorts e como medir no Studio quantos viram o longo (sem API do Cloud)"
+      ],
+      "origem": "area_dist_impressoes_diagnostico__sonnet_0136.md 2026-11-21"
+    },
+    {
+      "id": "shorts_viewed_swiped",
+      "nome": "Shorts: visto × deslizado",
+      "subtemas": [
+        "página oficial atual de \"viewed vs swiped away\" e como ela muda o diagnóstico de impressões de Short"
+      ],
+      "origem": "area_dist_impressoes_diagnostico__sonnet_0136.md 2026-11-21"
+    },
+    {
+      "id": "serie_playlist_binge",
+      "nome": "Série e playlist que fazem ver o próximo",
+      "subtemas": [
+        "regras oficiais e truques de playlist, tela final e ordem de série para canal novo"
+      ],
+      "origem": "area_dist_impressoes_diagnostico__sonnet_0136.md 2026-11-21"
+    },
+    {
+      "id": "yt_longo_idioma",
+      "nome": "Longos em outras línguas",
+      "subtemas": [
+        "regras oficiais do YouTube sobre áudio multi-idioma e títulos/descrições traduzidos (recurso avançado \"multi-language\"), e o que muda por país"
+      ],
+      "origem": "area_yt_recursos_avancados_recuperar__sonnet_0146.md 2026-11-21"
+    },
+    {
+      "id": "metrica_intro",
+      "nome": "Medir retenção dos 30 s nos longos",
+      "subtemas": [
+        "como ler \"Intro %\" e retenção típica do Studio sem a API do Google (aba Analytics > Engajamento, por navegador) e ligar ao teste de abertura"
+      ],
+      "origem": "area_yt_crescer_sem_recursos_avancados__sonnet_0151.md 2026-11-21"
+    },
+    {
+      "id": "mid_roll_longo",
+      "nome": "Mid-roll nos longos de 1–4 h",
+      "subtemas": [
+        "regra oficial de posicionamento automático/manual de anúncios no meio do vídeo e a forma de ligar por upload"
+      ],
+      "origem": "area_yt_crescer_sem_recursos_avancados__sonnet_0151.md 2026-11-21"
+    },
+    {
+      "id": "auditoria_semanal",
+      "nome": "Auditor de canal pelos 6 pontos do revisor",
+      "subtemas": [
+        "scripts pequenos em Python que releiam vídeos mais vistos, metadados e \"Sobre\" de um canal e marquem o risco de reutilizado"
+      ],
+      "origem": "area_yt_conformidade_canal__sonnet_0201.md 2026-11-21"
+    },
+    {
+      "id": "aviso_treinamento",
+      "nome": "Controle de alerta e treinamento de política",
+      "subtemas": [
+        "páginas oficiais do YouTube sobre alertas, advertências, treinamento e recurso, e como registrar prazos de 90 dias"
+      ],
+      "origem": "area_yt_conformidade_canal__sonnet_0201.md 2026-11-21"
+    },
+    {
+      "id": "yt_nao_original",
+      "nome": "Política \"conteúdo não original / inautêntico\"",
+      "subtemas": [
+        "ler a página oficial completa e a do Shorts: exemplos aceitos e recusados em recap, compilado e reação, e o que o YouTube pede como \"comentário original\""
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0346.md 2026-11-21"
+    },
+    {
+      "id": "yt_ponte_shorts",
+      "nome": "Ponte Short para longo e playlists",
+      "subtemas": [
+        "docs oficiais do YouTube sobre \"vídeo relacionado\" e playlists no Short"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0346.md 2026-11-21"
     }
   ],
   "projetos": [

@@ -1064,6 +1064,184 @@ def _subvoz_por_frase(lines, audio_dir, pv, tem=None):
     return out
 
 
+XTTS_VENV = Path(os.environ.get("XTTS_VENV_DIR", "/tmp/venvs_voz/xtts"))
+
+
+def _xtts_versao():
+    """21/11 dona: o XTTS vira o motor principal. config/motor_voz.json {"motor": "xtts", "xtts_versao": "6"} ou
+    MOTOR_VOZ=xtts + XTTS_VERSAO (4, 5, 6 ou "tercos" = o vídeo dividido em 3 partes: 4 / 5 / 6, pra ela comparar
+    num longo). Devolve a versão ou None (XTTS desligado)."""
+    v = (os.environ.get("MOTOR_VOZ") or "").strip().lower()
+    cfg = {}
+    try:
+        cfg = json.loads((Path(__file__).resolve().parent.parent / "config" / "motor_voz.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    try:  # 21/11: o pedido do longo pode ligar sozinho (longo_override {"motor_voz": "xtts", "xtts_versao": ...})
+        ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
+    except ValueError:
+        ovr = {}
+    if not v:
+        v = str(ovr.get("motor_voz") or cfg.get("motor", "")).strip().lower()
+    if v != "xtts":
+        return None
+    return str(os.environ.get("XTTS_VERSAO") or ovr.get("xtts_versao") or cfg.get("xtts_versao") or "6").strip().lower()
+
+
+def _xtts_rvc():
+    """21/11 dona (ouviu xtts6 + RVC): "melhorou muito com o RVC — os próximos longos devem rodar com ele". Padrão LIGADO
+    no XTTS (voz clonada do narrador por cima, firma o timbre); XTTS_RVC=0 ou longo_override "xtts_rvc": false desliga."""
+    if os.environ.get("XTTS_RVC") in ("0", "1"):
+        return os.environ["XTTS_RVC"] == "1"
+    try:
+        ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
+    except ValueError:
+        ovr = {}
+    return bool(ovr.get("xtts_rvc", True))
+
+
+def _xtts_pronto():
+    """Monta o ambiente do XTTS 1x por máquina (torch 2.5.1 + coqui-tts num venv próprio; ~4 min no Kaggle).
+    Falhou = False e a narração segue no Fish/Kitten como antes."""
+    py = XTTS_VENV / "bin" / "python"
+    if os.name == "nt":
+        py = XTTS_VENV / "Scripts" / "python.exe"
+    try:
+        if not py.exists():
+            if os.name == "nt":
+                return False  # nos PCs: venv montado à mão (ver versoes_motor_voz/LEIA.md)
+            uv = "/tmp/uvbin/uv"
+            if not os.path.exists(uv):
+                subprocess.run(["bash", "-c", "mkdir -p /tmp/uvbin && (curl -LsSf https://astral.sh/uv/install.sh | "
+                                "env UV_INSTALL_DIR=/tmp/uvbin UV_NO_MODIFY_PATH=1 sh)"], capture_output=True, timeout=900)
+            subprocess.run([uv, "venv", "--python", "3.11", str(XTTS_VENV)], capture_output=True, timeout=900)
+            subprocess.run([uv, "pip", "install", "--python", str(py), "torch==2.5.1", "torchaudio==2.5.1"],
+                           capture_output=True, timeout=3600)
+            subprocess.run([uv, "pip", "install", "--python", str(py), "coqui-tts", "soundfile", "transformers<4.50"],
+                           capture_output=True, timeout=3600)
+        return subprocess.run([str(py), "-c", "from TTS.api import TTS"], capture_output=True,
+                              timeout=600).returncode == 0
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[xtts] ambiente não montou ({type(e).__name__}: {e})")
+        return False
+
+
+def _narrar_xtts(lines, audio_dir, so=None):
+    """21/11: narra pelo XTTS v2 (bin/xtts_nuvem.py). Versões (testes do gol 20-21/11):
+      4 = frase inteira sem ponto + melhor de 3 + microcortes + velocidade por frase (metade) + S do respeito
+      5 = frase a frase + referência normal+sub-voz do tipo + melhor de 3 + pós da 4 com velocidade 0,8
+      6 = a 5 + cadência quebrada do Q3 (a escolhida pela dona; "4 e 6 iguais ao meu ouvido")
+    Cada audio_i.wav pronto fica e o resto do preparar_clone pula. Nunca levanta."""
+    versao = _xtts_versao()
+    if not versao or _OUTRA:
+        return
+    if not _xtts_pronto():
+        logging.warning("[xtts] sem ambiente — narração segue no Fish/Kitten")
+        return
+    try:
+        voz = os.environ.get("VOZ_CLONADA") or ""
+        pv = _pasta_fish()
+        ref = pv / "referencia_fish.wav"
+        if not ref.exists():
+            logging.warning(f"[xtts] {pv.name} sem trecho real — segue no Fish/Kitten")
+            return
+        ad = Path(audio_dir)
+        ref15 = ad / "_xtts_ref15.wav"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-t", "15", "-ac", "1", "-ar", "24000",
+                        str(ref15)], capture_output=True)
+        tipos = {p.stem.replace("referencia_fish", "") for p in pv.glob("referencia_fish_*.wav")
+                 if "antiga" not in p.stem}
+        subs = _subvoz_por_frase(lines, audio_dir, None, tem=tipos)
+        try:
+            import climas_voz
+            _marcar_gol(lines, climas_voz.escolher([_seguro(x) for x in lines], audio_dir))
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[xtts] gol desligado ({type(e).__name__})")
+        n = len(lines)
+
+        def versao_da(i):
+            if versao == "tercos":  # o vídeo em 3 partes: 4 / 5 / 6
+                return "4" if i < n / 3 else ("5" if i < 2 * n / 3 else "6")
+            return versao
+        itens = []
+        for i, line in enumerate(lines):
+            if so is not None and i not in so:
+                continue
+            out = ad / f"audio_{i}.wav"
+            if out.exists() and out.stat().st_size > 500:
+                continue
+            texto, _riso = _texto_fish(_seguro(line))
+            vi = versao_da(i)
+            refs = [str(ref15)]
+            sub = subs.get(i, "")
+            if vi in ("5", "6") and sub and sub != "_todas" and (pv / f"referencia_fish{sub}.wav").exists():
+                s15 = ad / f"_xtts_ref15{sub}.wav"
+                if not s15.exists():
+                    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{sub}.wav"), "-t",
+                                    "15", "-ac", "1", "-ar", "24000", str(s15)], capture_output=True)
+                refs.append(str(s15))
+            itens.append({"texto": texto, "saida": str(ad / f"audio_{i}.xtts_bruto.wav"), "i": i, "refs": refs,
+                          "temp": 0.6 if vi in ("5", "6") else 0.75, "n": int(os.environ.get("XTTS_TENTATIVAS", "3")),
+                          "frase_inteira": vi == "4", "v": vi})
+        if not itens:
+            return
+        lista = ad / "_xtts.json"
+        lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
+        py = XTTS_VENV / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        t0 = time.time()
+        with open(ad / "_xtts.log", "a", encoding="utf-8") as fh:
+            try:
+                subprocess.run([str(py), str(Path(__file__).with_name("xtts_nuvem.py")), "lote", str(lista)],
+                               stdout=fh, stderr=subprocess.STDOUT, timeout=6 * 3600)
+            except subprocess.TimeoutExpired:
+                logging.warning("[xtts] passou de 6 h — uso as frases que já saíram")
+        feitos = []
+        for it in itens:
+            bruto = Path(it["saida"])
+            if not bruto.exists():
+                continue
+            out = ad / f"audio_{it['i']}.wav"
+            r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(bruto), "-ac", "2", "-ar", "44100", str(out)],
+                               capture_output=True)
+            bruto.unlink(missing_ok=True)
+            if r.returncode != 0:
+                out.unlink(missing_ok=True)
+                continue
+            feitos.append(it["i"])
+            i, vi = it["i"], it["v"]
+            try:
+                narracao_curva.pos_processar(out, 0.0)
+                if vi == "6":
+                    _cadencia_quebrada(out)
+                narracao_curva.microcortes(out)
+                forca = 0.5 if vi == "4" else 0.8
+                kv = 1 + (_vel_por_frase(_seguro(lines[i]), i) - 1) * forca
+                if _frase_lenta(lines[i]):
+                    kv = min(kv, 1.04)
+                tmp = out.with_name(out.stem + ".kv.wav")
+                if abs(kv - 1) > 0.01 and subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(out), "-af",
+                                                          f"atempo={kv:.3f}", "-ac", "2", str(tmp)],
+                                                         capture_output=True).returncode == 0:
+                    os.replace(tmp, out)
+                if _tem_respeito_piada(_seguro(lines[i]), i):
+                    _esticar_s_respeito(out, texto=_seguro(lines[i]))
+                if os.environ.get("XTTS_RVC") == "1":
+                    pass  # RVC por cima: ver _rvc_por_cima_do_fish (teste à parte, dona 21/11)
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[xtts] pós da frase {i} falhou ({type(e).__name__}: {e})")
+            if i == len(lines) - 1:
+                _aplicar_margem_final(out)
+        if feitos and _xtts_rvc():
+            _rvc_por_cima_do_fish(audio_dir, feitos, pv.name)
+        if feitos:
+            (ad / "_voz_online.json").write_text(json.dumps(
+                {"motor": f"xtts_v{versao}", "frases": sorted(feitos), "total": len(itens)}), encoding="utf-8")
+        logging.info(f"[xtts] {len(feitos)}/{len(itens)} frases em {time.time() - t0:.0f}s (versão {versao}, "
+                     f"narrador {pv.name}); o resto no Fish/Kitten")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[xtts] falhou ({type(e).__name__}: {str(e)[:150]}) — segue no Fish/Kitten")
+
+
 def _narrar_fish_nuvem(lines, audio_dir, so=None):
     """Narra pelo Fish Speech na GPU (bin/fish_nuvem.py, num processo só: o motor carrega 1x). Cada audio_i.wav que
     sai fica pronto (sem RVC — o Fish já é a voz do narrador) e o laço do preparar_clone pula. Nunca levanta."""
@@ -1404,6 +1582,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     # 19/11 dona — ordem da voz: Fish Speech na GPU (Kaggle, narrador com trecho original) -> Fish online (Short no
     # PC1, conta com crédito) -> o modo de sempre (Kitten no Kaggle / p3 com mistura nos PCs). Cada um só narra o que
     # ainda não tem audio_i.wav; o que falhar segue para o próximo.
+    _narrar_xtts(lines, audio_dir, so)  # 21/11: XTTS (motor_voz.json "motor": "xtts") vem antes do Fish
     _narrar_fish_nuvem(lines, audio_dir, so)
     _narrar_online(lines, audio_dir, so)
     bases = audio_dir / "_base_clone"

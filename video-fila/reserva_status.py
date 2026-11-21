@@ -59,9 +59,13 @@ def medir():
     for pj in glob.glob(r"D:\hipercool-materiais\videos-comentarios\*\postar.json"):
         if not json.loads(Path(pj).read_text(encoding="utf-8")).get("postado"):
             prontos["comedianoturna"]["comentarios"] += 1
+    try:  # 21/11: canal retirado pela dona (lista "desativados") não conta como reserva zerada
+        desativ = {d.get("id") for d in json.loads(Path(r"D:\postador-de-videos\config\canais_status.json").read_text(encoding="utf-8")).get("desativados") or []}
+    except (OSError, ValueError):
+        desativ = set()
     linhas = []
     for slug, v in cad.items():
-        if v.get("dono") in FORA:
+        if v.get("dono") in FORA or slug in desativ or desativ & set(v.get("creds") or []):
             continue
         c, _ = pol.achar_canal((v.get("creds") or [slug])[0])
         try:

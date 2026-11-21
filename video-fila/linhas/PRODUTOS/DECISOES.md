@@ -3,6 +3,7 @@
 Formato: data | o que mudou | por quê | prova | como desfazer. [GRANDE] = muda o que o público vê/ouve ou a produção.
 Histórico detalhado antes de 26/10 18h: `D:\postador-de-videos\docs\PRODUTO_PROFISSIONAL.md` (tabela "Rodadas de melhoria").
 
+- 21/11 00:50 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_abre_fecha = 0.4 | Nesta conta o formato fica preso entre 4,5 e 6,6, com movimento e diretor travados em 5–6,5. Os 4 últimos vídeos têm a mesma assinatura e o  | modelo cw/claude-sonnet-5-5
 - 20/11 12:58 | [MELHORADOR ensaio — NÃO aplicado] regra_editor  = Legenda karaokê: a palavra falada em roxo deve usar lilás claro ou contorno escuro grosso quando o fundo atrás for escuro, para manter o contraste. Sem caixa ne | A palavra falada em roxo some sobre fundo escuro (camisa azul-marinho, fundo escuro). Uma regra de estilo corrige isso sem mexer no tamanho  | modelo gemini-4-argon
 - 20/11 06:36 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_mesma_foto = 0.5 | O formato repete o mesmo dono, no mesmo plano e com o mesmo fundo, e o júri chama isso de parado. O movimento medido já é alto (10–13%), ent | modelo gemini-4-argon
 - 20/11 00:33 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_tres_veo_final = 0.5 | Achado de FORMATO: o vídeo inteiro ficou no mesmo plano do dono falando, sem tela do produto. A nota foi 4,5, a pior da série, e o movimento | modelo gemini-4-argon

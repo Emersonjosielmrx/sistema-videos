@@ -559,7 +559,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-30T23:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-20T15:08:17",
+     "em": "2026-11-21T01:23:03",
      "tipo": "sessao_expirada",
      "maquina": "pc1"
     },
@@ -1054,7 +1054,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-20T23:18:09",
+     "em": "2026-11-21T02:18:50",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1114,9 +1114,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T11:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-20T17:13:44",
-     "tipo": "sessao_expirada",
-     "maquina": "pc1"
+     "em": "2026-11-21T02:23:16",
+     "tipo": "saude_morto",
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -1299,7 +1299,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-20T18:34:12",
+     "em": "2026-11-21T01:29:12",
      "tipo": "sessao_expirada",
      "maquina": "pc1"
     },
@@ -1569,9 +1569,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T04:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-20T23:22:26",
-     "tipo": "sessao_expirada",
-     "maquina": "pc1"
+     "em": "2026-11-21T01:16:40",
+     "tipo": "saude_morto",
+     "maquina": "x200ma"
     },
     "historico": [
      {
@@ -1604,9 +1604,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-30T23:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-15T02:23:21",
+     "em": "2026-11-21T02:23:16",
      "tipo": "saude_morto",
-     "maquina": "desktop"
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -2204,9 +2204,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-30T23:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-20T06:17:18",
+     "em": "2026-11-21T00:24:25",
      "tipo": "saude_morto",
-     "maquina": "x200ma"
+     "maquina": "sti"
     },
     "historico": [
      {
@@ -2344,7 +2344,7 @@
     "desde": "2026-10-29T23:08:42",
     "ultimo_degrau": "2026-10-29T23:08:42",
     "ultimo_sinal": {
-     "em": "2026-11-20T22:59:17",
+     "em": "2026-11-21T00:30:34",
      "tipo": "sessao_expirada",
      "maquina": "pc1"
     },
@@ -2529,7 +2529,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-20T01:21:56",
+     "em": "2026-11-21T02:18:50",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -4239,9 +4239,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-20T23:22:26",
-    "tipo": "sessao_expirada",
-    "conta": "inovaremanhwaverseing"
+    "em": "2026-11-21T02:23:16",
+    "tipo": "saude_morto",
+    "conta": "filmescomia1"
    },
    "historico": [
     {

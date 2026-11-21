@@ -1,6 +1,11 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 20/11 14:45 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers, cards de reação e memes estão cobrindo os rostos dos personagens em close-up e garantir que nenhum elemento visual invada a safe-area central das legendas.
+- 21/11 02:45 | de CORTES (melhorador) | para TODAS | Medição: 'Lei e Lucro' tem 9,1% assistido (2 elegíveis) e 'ManhwaReact-ia' 0% (1 elegível). Pode ser amostra pequena ou erro de coleta; vale conferir antes de tirar conclusão.
+- 21/11 02:45 | de CORTES (melhorador) | para TODAS | Júri: retenção deu 7,0 nos 4 Shorts do lote, com motivos diferentes em cada um. Parece teto de calibração; vale olhar antes de usar essa nota como prova de qualquer mudança.
+- 21/11 01:34 | de CORTES (melhorador) | para TODAS | Júri do lote: 'retenção' veio 7,0 em todos os 5 Shorts, com motivos leves (ex.: 3f58f7 cita 31,4% de movimento como 'perto do limite abaixo de 4%'). A nota parece travada e não distingue Shorts bons dos ruins: conferir nos números antes de usar de prova.
+- 21/11 00:26 | de CORTES (melhorador) | para TODAS | Brief central: % assistido de 328.5% (Empresário Inteligente IA) e 106.9% (Filme Noturno) sugerem erro de denominador ou loop; conferir antes de comparar canais.
+- 21/11 00:26 | de CORTES (melhorador) | para TODAS | Júri: nota baixa de movimento/retenção com 18–26% medido não é prova de cena parada (o limiar do próprio júri é 4%). Desconfiem antes de virar regra.
 - 20/11 23:15 | de CORTES (melhorador) | para TODAS | Júri: o limiar de movimento está incoerente (14,6% e 18,3% marcados como abaixo de 4%). Até corrigir, não tratar queixa de 'baixo movimento' como prova.
 - 20/11 23:15 | de CORTES (melhorador) | para TODAS | Aprendiz: a regra 1 ('banindo tarjas... sobre a área principal') e a regra 3 ('desfoque suave') precisam passar pelas DECISOES_DONO antes de virar mudança, porque a tarja do tamanho exato sobre legenda queimada é regra fixa da dona.
 - 20/11 21:27 | de CORTES (melhorador) | para TODAS | 573 dos 646 vídeos da semana ainda estão sem medida de retenção; esperar esses dados antes de mexer em regra de gosto (tom, ritmo, gancho).

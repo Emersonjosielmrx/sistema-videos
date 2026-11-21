@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 20/11/2026 22:58. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 21/11/2026 03:43. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -14,11 +14,44 @@ com backup) ou descartar com motivo. Depois:
 Candidato = o dono não respondeu em 24 h e a nota era >= 7: é sugestão, não ordem. Cuidado com o que já existe
 na produção, com humor/visual que derruba monetização e com marca do parceiro (não copiar marca).
 
-## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (0)
+## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (5)
 
-(nenhum)
+### 1. [visual] Enquadramento em primeira pessoa/visão claustrofóbica em túnel curvo com perspectiva de afogamento e subida de nível de água
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Gerar no pipeline de 3D/animação sequências de 'cenário de risco em primeira/terceira pessoa próxima' (espaço confinado, água subindo) para shorts de sobrevivência e curiosidades médicas/extremas.
+- por que é novo: Nosso acervo de hyperframes/fillers foca em batalhas cósmicas, cidades ou cenários abertos; não temos simulação 3D imersiva de perigo físico em espaço confinado com física de fluidos dinâmica.
+- exemplos: https://www.youtube.com/watch?v=eulG1i95JPM seg 13.9 (trecho 66877685.mp4)
+- ids: 66877685
 
-## B. Candidatos (sem resposta em 24 h): 482 grupo(s), os 40 mais fortes
+### 2. [jeito_de_falar] Estrutura narrativa em loop perfeito ligando o desfecho exato à frase de gancho inicial ('quando tá preso num toboágua que tá enchendo...')
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: claude-sonnet
+- como aplicar: Nos roteiros de curiosidades/shorts, fazer a última frase terminar com reticências conectando perfeitamente ao primeiro segundo, aumentando a taxa de retenção por repetição automática.
+- por que é novo: Nossas intros_voz e bordões têm começos e finais estanques (.fim / .ini), sem script planejado para encaixar sintaticamente a última oração direto no gancho do segundo zero.
+- exemplos: https://www.youtube.com/watch?v=eulG1i95JPM seg 26.2 (trecho 27c0b036.mp3)
+- ids: 27c0b036
+
+### 3. [visual] Título central em tipografia rústica texturizada em caixa branca com contorno irregular ('BOIS DO BRASIL')
+- visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
+- como aplicar: Criar templates de títulos estilizados no Photoshop/After Effects para a abertura dos primeiros 3 segundos de vídeos de curiosidades/rankings temáticos.
+- por que é novo: Nosso banco de fontes só possui Bangers, LuckiestGuy, Montserrat e Impact limpas; não temos lettering temático rústico/carimbado com fundo recortado para introduzir o tema do Shorts.
+- exemplos: https://www.youtube.com/watch?v=0ONNeIWYGr4 seg 0.0 (trecho 9963303a.mp4)
+- ids: 9963303a
+
+### 4. [visual] Alternância dinâmica entre tomadas de gado vivo em pasto e cortes da carne preparada (steak/churrasco)
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Nos vídeos de ranking, intercalar imagens de close-up de pratos prontos/carnes suculentas toda vez que mencionar o item avaliado.
+- por que é novo: Associa diretamente o animal vivo à peça de carne correspondente no ponto de cozimento, gerando alto apelo visual e retenção.
+- exemplos: https://www.youtube.com/watch?v=0ONNeIWYGr4 seg 3.1 (trecho 94bb7f3b.mp4)
+- ids: 94bb7f3b
+
+### 5. [visual] Transição direta mostrando o produto pronto e consumido logo no primeiro segundo
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Colocar o prato pronto ou o resultado final bem no frame 0 para prender a atenção nos primeiros segundos dos nossos vídeos de receita/pesca.
+- por que é novo: Cria um gancho visual forte de 'resultado final' (food porn/pesca finalizada) antes de contar a história linear.
+- exemplos: https://www.youtube.com/watch?v=TltsQH256W4 seg 1.4 (trecho 5fde70ac.mp4)
+- ids: 5fde70ac
+
+## B. Candidatos (sem resposta em 24 h): 483 grupo(s), os 40 mais fortes
 
 ### 1. [visual] Gráfico de escala de pH com garrafa e indicador de nível (seta preta apontando para o 7).
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
@@ -300,4 +333,4 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=ON seg 2.8 (trecho ae42b95e.mp4)
 - ids: ae42b95e
 
-(+ 442 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+(+ 443 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

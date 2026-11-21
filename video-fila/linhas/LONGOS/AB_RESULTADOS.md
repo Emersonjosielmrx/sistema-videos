@@ -1,11 +1,11 @@
-# Resultados das variantes dos LONGOS — 21/11 00:08
+# Resultados das variantes dos LONGOS — 21/11 03:38
 
 Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fator (antes disso é ruído).
 
 | fator | variante | n | views/h (mediana) | % assistido (mediana) |
 |---|---|---|---|---|
 | cortes_resumo | A | 23 | 0.05 | 2.2 |
-| cortes_resumo | B | 26 | 0.18 | 0.7 |
+| cortes_resumo | B | 26 | 0.17 | 0.7 |
 | **cortes_resumo** | **vence B** (views/h) | | | |
 | fala_rapida | A | 9 | 0.04 | 0.6 |
 | fala_rapida | B | 13 | 0.02 | 0.9 |
@@ -13,8 +13,8 @@ Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fato
 | fala_rapida | D | 8 | 0.08 | 0.5 |
 | fala_rapida | E | 8 | 0.33 | 2.7 |
 | **fala_rapida** | **vence E** (views/h) | | | |
-| ganchos_15min | A | 14 | 0.18 | 0.6 |
-| ganchos_15min | B | 13 | 0.28 | 2.6 |
+| ganchos_15min | A | 14 | 0.17 | 0.6 |
+| ganchos_15min | B | 13 | 0.27 | 2.6 |
 | ganchos_15min | C | 22 | 0.03 | 0.8 |
 | **ganchos_15min** | **vence B** (views/h) | | | |
 | narradores_modo | com_terciarios | 4 | 0.01 | 36.4 |

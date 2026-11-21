@@ -4747,3 +4747,31 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 00:01 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-20\respostas\area_android_adb_automacao_upload__sonnet_2351.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 02:20 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0211.md`
+- [INÉDITO] github.com/hitchabout/Gemini-Pixel-Tracker — ★0, push 2026-04-18, MIT — A standalone Windows widget to track daily image generation limits in Google Gemini.
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 02:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0221.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 02:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0233.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 02:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0252.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 03:16 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_0311.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 03:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0327.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 03:58 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0346.md`
+- (todos os itens desta pesquisa foram reprovados)

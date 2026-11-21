@@ -478,3 +478,9 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso estrito). Apenas leitura dos logs e registro da ronda.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+## 20261121_0056 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos de verificação a cada 20 minutos (último às 00:47:35 com a mensagem `janela: D: com 4.9 GB livres (< 10) — só o próximo capítulo de cada língua no PC`). O `fila_ciclo.log` aponta ciclos regulares. A tarefa agendada `HipercoolFila` está desativada (`Disabled`), enquanto a postagem segue ativa (`Ready`), operando normalmente com o gerenciamento de espaço em disco e rotinas automáticas.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas leitura de status e logs.
+- CONSERTO PROPOSTO: Nenhum. O fluxo está operacional com o comportamento esperado de restrição de espaço em disco (< 10 GB livres).
+- Estado: NADA A FAZER

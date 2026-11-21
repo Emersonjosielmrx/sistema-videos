@@ -2658,3 +2658,38 @@
 - prova: Brief central: Lei e Lucro 18,2% (5 elegíveis), Imóvel em Foco 37,7% (3 elegíveis). Esporte Noturno, com 13 elegíveis, está em 72,7%. O inovaremanhwabr (29,1%) tem só 1 elegível, então não conta como prova. Nenhum dos 4 Shorts do júri é desses canais, e não há causa provada.
 - onde: roteiro.txt e gancho dos 1ºs segundos dos Shorts de Lei e Lucro e Imóvel em Foco; folha do topo no 1,5 s (D:\tmp\folha_topo.py).
 - como testar: Ler 5 roteiros de cada canal e comparar com os de Esporte Noturno. Só se aparecer o mesmo defeito em >= 2 Shorts, propor 1 regra de roteiro e medir no lote seguinte.
+
+## 21/11 00:26 PROPOSTA [CERTEZA] Conferir se o júri está punindo movimento de 18–26% como 'cena estática' (gemini-4-argon)
+- prova: Nos 4 Shorts do lote o júri cita 'abaixo de 4% é parado' e mesmo assim desconta nota de movimento e retenção por cenas de 18–26% (sem-obra-cf1790 q14: 25.9%; sem-obra-0242fc q13: 23.1%; sem-obra-02d606 q06/q18: 19.5% e 18.2%). Há também inconsistência interna: 11.9% rende movimento 10.0 em sem-obra-1ffe21, e 19.5% rende movimento 7.0 em sem-obra-02d606.
+- onde: prompt do júri em cortes_juri (trecho que descreve o limiar de movimento); o aprendiz também gerou a regra 7 (renovar estímulo a cada 1,5–3,5 s) a partir dessas notas.
+- como testar: Mandar ao júri 5 Shorts já avaliados com a regra 'só acusar movimento abaixo de ~8%' e ver se a nota média e a ordem dos Shorts se mantêm. Enquanto isso, não transformar a regra 7 do aprendiz em mudança no pipeline.
+
+## 21/11 00:26 PROPOSTA [CERTEZA] Medir se a tarja/delogo deixa a legenda queimada da fonte vazar pelas bordas (gemini-4-argon)
+- prova: O júri viu texto pequeno e cortado na borda da tarja em sem-obra-1ffe21 (q04 'so que', q07 'até que depois') e texto desfocado em sem-obra-02d606 (q02 'acc..indo'). Isso não é o que está debaixo da tarja, mas o que sobra fora dela. Confirmar nos quadros antes de agir.
+- onde: função que calcula a caixa da tarja/delogo a partir da leitura de legenda (visão, em cortes_ajustes e no módulo de tarja); ver a altura da caixa e o arredondamento, que costumam ficar folgados ou curtos em resolução baixa.
+- como testar: Gerar folha de quadros em resolução >= 720 px (como D:\tmp\folha_topo.py) de sem-obra-1ffe21 e sem-obra-02d606 nos quadros q04, q07, q10 e q02, comparando a caixa da tarja com a caixa real das letras. Se vazar em >= 2 Shorts, propor margem vertical (+2 a +4 px) à sessão forte, mantendo sempre o 'tamanho exato' da legenda.
+
+## 21/11 00:26 PROPOSTA [GOSTO] Cobertura de medição: 572 de 634 vídeos sem medida e canais inteiros sem elegíveis (gemini-4-argon)
+- prova: Brief de 21/11: Inovare (56 vídeos) e inovaremanhwabr (42) têm 0 elegíveis, e há 572 vídeos sem medida. Empresário Inteligente IA mostra 328.5% de % assistido e Filme Noturno 106.9%. Pode ser loop de Short muito curto ou denominador errado, e isso distorce a mediana de 57.6 usada como termômetro.
+- onde: job que monta o lote do feed e calcula % assistido (central do melhorador, tabela por canal).
+- como testar: Listar 5 vídeos de Inovare e inovaremanhwabr com o motivo de não elegível, e recalcular o % assistido de 3 vídeos do Empresário Inteligente IA à mão (tempo médio assistido / duração). Se o valor passar de 100% por loop, limitar a 100% ou reportar à parte.
+
+## 21/11 01:34 PROPOSTA [GOSTO] Medir a margem inferior e lateral da legenda palavra a palavra antes de mexer (gemini-4-argon)
+- prova: Em 4 de 5 Shorts do lote o júri aponta legenda perto ou além da margem: 873551 q01/q03 ('imec'/'ente' cortados nas bordas e embaixo), 3f58f7 q09 ('as 1.314 estrelas' perto da zona dos botões), one-piece q13 ('JÁ DA PRA IMAGINAR' apertada) e d151a8 q04 (barra amarela rente à zona segura). O júri vê quadros soltos e já errou aqui antes, então a causa pode ser a animação da palavra a meio caminho.
+- onde: Provável: módulo que renderiza a legenda palavra a palavra (posição Y, margem e tamanho da fonte) no pipeline da linha CORTES; confirmar com Grep por 'margem'/'MarginV'/'safe' antes de editar.
+- como testar: Gerar uma folha de quadros da faixa inferior (estilo D:\tmp\folha_topo.py) dos Shorts do dia com resolução >= 720 px. Medir a caixa real das letras e contar quantos passam de y=1580 ou ficam a menos de 60 px da lateral. Só se >= 25% dos Shorts passarem, subir a margem inferior em 1 passo e comparar a nota média do lote seguinte. Antes de adotar o limite do aprendiz (y 150-1580), conferir nas DECISOES_DONO, porque a dona prefere legenda de impacto maior e de lado.
+
+## 21/11 01:34 PROPOSTA [CERTEZA] Conferir se a legenda queimada da fonte ficou à mostra (hardsub não coberto) (gemini-4-argon)
+- prova: Pendente de confirmação no log. one-piece q01 mostra 'EITA, PASSSOU' solta embaixo, sem relação com a primeira palavra falada ('Como'). 3f58f7 q09 mostra legenda em idioma estrangeiro 'evidente no meio da cena'. Podem ser a legenda da fonte sem cobertura, mas isso ainda não está provado.
+- onde: Log do Short (linhas '[hardsub] N/6') e a etapa de detecção/cobertura de legenda queimada, provavelmente a função que decide tarja/delogo.
+- como testar: Abrir o log de one-piece_cap1_20261120 e 3f58f7_cap1_20261120. Se disser '[hardsub] só 0/6' ou '1/6' e o quadro mostrar texto da fonte, é falha de detecção: ampliar para os quadros >= 720 px e testar com controle negativo (vídeo sem legenda). Se o log disser que leu a legenda e a cobriu, é texto nosso ou erro do júri, e o caso se encerra sem mudança.
+
+## 21/11 02:45 PROPOSTA [GOSTO] Testar legenda palavra a palavra fora da área do rosto (mais baixa ou de lado) (gemini-4-argon)
+- prova: Legenda cobrindo rosto/boca em 2 Shorts do lote: be7e9a q01 (BIOLÓGICO na boca/nariz) e q05 (DA EMPRESA nos olhos), 2e5882 q05 (legenda centralizada sobre o rosto). A dona já prefere legenda com palavras de impacto maiores, de lado.
+- onde: Provável: módulo de render da legenda palavra a palavra (estilo ASS ou drawtext: alinhamento/margem vertical/horizontal). Confirmar o arquivo exato; a tarja e a cobertura da legenda queimada NÃO entram no teste.
+- como testar: Gerar o mesmo lote de ~6 Shorts em duas versões (posição atual vs. terço inferior ou lateral, mantendo a zona segura y 150-1580 e margens >= 60 px). Comparar % assistido e as queixas de rosto coberto do júri. Mudar só a posição, uma coisa por vez.
+
+## 21/11 02:45 PROPOSTA [CERTEZA] Conferir o quadro final de todos os Shorts do dia antes de agir no adesivo sobre o CTA (gemini-4-argon)
+- prova: be7e9a q18 (grave): adesivo/personagem de desenho por cima de 'INSCREVER-SE' e 'CURTIR', competindo com o CTA. Aparece em 1 Short; o júri vê 1 em 4.
+- onde: Provável: etapa que monta o encerramento (overlay de CTA + ilustração/adesivo). Gerar folha do último quadro de cada Short do dia, no molde de D:\tmp\folha_topo.py.
+- como testar: Montar uma folha com o último quadro de todos os Shorts do dia (1 imagem). Se >= 2 tiverem elemento sobre o CTA, impedir o overlay nessa região. Se for só 1, descartar como caso isolado.

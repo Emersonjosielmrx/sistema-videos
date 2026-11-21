@@ -1,0 +1,444 @@
+{
+ "marca": "Fábrica de Marketing IA",
+ "produto": "Fábrica de Conteúdo",
+ "publico": "empresas e profissionais que precisam postar conteúdo e aparecer no Google sem tempo",
+ "fatos": [
+  "Automacao Full Post (ideia ate postagem) + Blog SEO + Podcast + Agente de respostas",
+  "Da ideia à postagem automática",
+  "Blog post com SEO, podcast e resposta em comentários. Tudo automatizado."
+ ],
+ "cliente_real": false,
+ "cores": {
+  "marca": "#F472B6",
+  "apoio": "#111827",
+  "fundo_escuro": "#111827",
+  "destaque": "#F472B6",
+  "texto_sobre_marca": "#FFFFFF"
+ },
+ "arroba": "@fabricademarketing.ia",
+ "convite": "Chame no direct",
+ "convite_voz": "Chame a gente no direct.",
+ "titulo": "Da ideia à postagem automática sem agendamento manual",
+ "gancho_tela": "Postagem sem trabalho manual",
+ "duracao_s": 30.38,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.93,
+   "tipo": "pergunta",
+   "fala": "Cansado de parar tudo para subir arte e legenda na rede?",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_0.jpg"
+  },
+  {
+   "n": 1,
+   "ini": 4.58,
+   "fim": 12.23,
+   "tipo": "dono",
+   "fala": "Eu interrompia meu atendimento para subir artes e agendar textos manualmente nas redes.",
+   "rotulo": "O problema",
+   "conversa": null,
+   "video": "dono_1.mp4"
+  },
+  {
+   "n": 2,
+   "ini": 11.88,
+   "fim": 19.62,
+   "tipo": "veo",
+   "fala": "Na Fábrica de Conteúdo, o fluxo vai da ideia inicial direto para a postagem final, sem intervenção manual.",
+   "rotulo": "Como funciona",
+   "conversa": null,
+   "video": "video_2.mp4"
+  },
+  {
+   "n": 3,
+   "ini": 19.27,
+   "fim": 26.79,
+   "tipo": "dono",
+   "fala": "Agora minha empresa publica sem depender da minha mão, enquanto eu cuido dos clientes.",
+   "rotulo": "O resultado",
+   "conversa": null,
+   "video": "dono_3.mp4"
+  },
+  {
+   "n": 4,
+   "ini": 26.44,
+   "fim": 30.38,
+   "tipo": "cartao",
+   "fala": "Chame a gente no direct.",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_4.jpg"
+  }
+ ],
+ "palavras": [
+  {
+   "p": "Cansado",
+   "ini": 0.318,
+   "fim": 0.811,
+   "cena": 0
+  },
+  {
+   "p": "de",
+   "ini": 0.823,
+   "fim": 0.919,
+   "cena": 0
+  },
+  {
+   "p": "parar",
+   "ini": 0.931,
+   "fim": 1.256,
+   "cena": 0
+  },
+  {
+   "p": "tudo",
+   "ini": 1.328,
+   "fim": 1.556,
+   "cena": 0
+  },
+  {
+   "p": "para",
+   "ini": 1.568,
+   "fim": 1.748,
+   "cena": 0
+  },
+  {
+   "p": "subir",
+   "ini": 1.76,
+   "fim": 2.097,
+   "cena": 0
+  },
+  {
+   "p": "arte",
+   "ini": 2.109,
+   "fim": 2.433,
+   "cena": 0
+  },
+  {
+   "p": "e",
+   "ini": 2.445,
+   "fim": 2.47,
+   "cena": 0
+  },
+  {
+   "p": "legenda",
+   "ini": 2.482,
+   "fim": 2.914,
+   "cena": 0
+  },
+  {
+   "p": "na",
+   "ini": 2.926,
+   "fim": 3.034,
+   "cena": 0
+  },
+  {
+   "p": "rede",
+   "ini": 3.046,
+   "fim": 3.467,
+   "cena": 0
+  },
+  {
+   "p": "Eu",
+   "ini": 5.33,
+   "fim": 5.95,
+   "cena": 1
+  },
+  {
+   "p": "interrompia",
+   "ini": 5.95,
+   "fim": 6.59,
+   "cena": 1
+  },
+  {
+   "p": "meu",
+   "ini": 6.59,
+   "fim": 6.71,
+   "cena": 1
+  },
+  {
+   "p": "atendimento",
+   "ini": 6.71,
+   "fim": 7.47,
+   "cena": 1
+  },
+  {
+   "p": "para",
+   "ini": 7.47,
+   "fim": 7.87,
+   "cena": 1
+  },
+  {
+   "p": "subir",
+   "ini": 7.87,
+   "fim": 8.25,
+   "cena": 1
+  },
+  {
+   "p": "artes",
+   "ini": 8.25,
+   "fim": 8.81,
+   "cena": 1
+  },
+  {
+   "p": "e",
+   "ini": 8.81,
+   "fim": 9.09,
+   "cena": 1
+  },
+  {
+   "p": "agendar",
+   "ini": 9.09,
+   "fim": 9.57,
+   "cena": 1
+  },
+  {
+   "p": "textos",
+   "ini": 9.57,
+   "fim": 10.19,
+   "cena": 1
+  },
+  {
+   "p": "manualmente",
+   "ini": 10.19,
+   "fim": 10.85,
+   "cena": 1
+  },
+  {
+   "p": "nas",
+   "ini": 10.85,
+   "fim": 11.05,
+   "cena": 1
+  },
+  {
+   "p": "redes.",
+   "ini": 11.05,
+   "fim": 11.43,
+   "cena": 1
+  },
+  {
+   "p": "Na",
+   "ini": 12.373,
+   "fim": 12.529,
+   "cena": 2
+  },
+  {
+   "p": "Fábrica",
+   "ini": 12.541,
+   "fim": 12.962,
+   "cena": 2
+  },
+  {
+   "p": "de",
+   "ini": 12.974,
+   "fim": 13.058,
+   "cena": 2
+  },
+  {
+   "p": "Conteúdo",
+   "ini": 13.07,
+   "fim": 13.695,
+   "cena": 2
+  },
+  {
+   "p": "o",
+   "ini": 13.9,
+   "fim": 13.96,
+   "cena": 2
+  },
+  {
+   "p": "fluxo",
+   "ini": 13.972,
+   "fim": 14.38,
+   "cena": 2
+  },
+  {
+   "p": "vai",
+   "ini": 14.392,
+   "fim": 14.549,
+   "cena": 2
+  },
+  {
+   "p": "da",
+   "ini": 14.561,
+   "fim": 14.669,
+   "cena": 2
+  },
+  {
+   "p": "ideia",
+   "ini": 14.681,
+   "fim": 14.957,
+   "cena": 2
+  },
+  {
+   "p": "inicial",
+   "ini": 14.969,
+   "fim": 15.414,
+   "cena": 2
+  },
+  {
+   "p": "direto",
+   "ini": 15.426,
+   "fim": 15.847,
+   "cena": 2
+  },
+  {
+   "p": "para",
+   "ini": 15.859,
+   "fim": 16.003,
+   "cena": 2
+  },
+  {
+   "p": "a",
+   "ini": 16.015,
+   "fim": 16.039,
+   "cena": 2
+  },
+  {
+   "p": "postagem",
+   "ini": 16.051,
+   "fim": 16.556,
+   "cena": 2
+  },
+  {
+   "p": "final",
+   "ini": 16.568,
+   "fim": 16.988,
+   "cena": 2
+  },
+  {
+   "p": "sem",
+   "ini": 17.037,
+   "fim": 17.289,
+   "cena": 2
+  },
+  {
+   "p": "intervenção",
+   "ini": 17.301,
+   "fim": 17.83,
+   "cena": 2
+  },
+  {
+   "p": "manual",
+   "ini": 17.842,
+   "fim": 18.323,
+   "cena": 2
+  },
+  {
+   "p": "Agora",
+   "ini": 20.088,
+   "fim": 20.848,
+   "cena": 3
+  },
+  {
+   "p": "minha",
+   "ini": 20.988,
+   "fim": 21.108,
+   "cena": 3
+  },
+  {
+   "p": "empresa",
+   "ini": 21.108,
+   "fim": 21.448,
+   "cena": 3
+  },
+  {
+   "p": "publica",
+   "ini": 21.448,
+   "fim": 22.028,
+   "cena": 3
+  },
+  {
+   "p": "sem",
+   "ini": 22.028,
+   "fim": 22.248,
+   "cena": 3
+  },
+  {
+   "p": "depender",
+   "ini": 22.248,
+   "fim": 22.788,
+   "cena": 3
+  },
+  {
+   "p": "da",
+   "ini": 22.788,
+   "fim": 22.968,
+   "cena": 3
+  },
+  {
+   "p": "minha",
+   "ini": 22.968,
+   "fim": 23.168,
+   "cena": 3
+  },
+  {
+   "p": "mão,",
+   "ini": 23.168,
+   "fim": 23.768,
+   "cena": 3
+  },
+  {
+   "p": "enquanto",
+   "ini": 24.228,
+   "fim": 24.468,
+   "cena": 3
+  },
+  {
+   "p": "eu",
+   "ini": 24.468,
+   "fim": 24.748,
+   "cena": 3
+  },
+  {
+   "p": "cuido",
+   "ini": 24.748,
+   "fim": 24.988,
+   "cena": 3
+  },
+  {
+   "p": "dos",
+   "ini": 24.988,
+   "fim": 25.188,
+   "cena": 3
+  },
+  {
+   "p": "clientes.",
+   "ini": 25.188,
+   "fim": 25.988,
+   "cena": 3
+  },
+  {
+   "p": "Chame",
+   "ini": 26.931,
+   "fim": 27.28,
+   "cena": 4
+  },
+  {
+   "p": "a",
+   "ini": 27.292,
+   "fim": 27.352,
+   "cena": 4
+  },
+  {
+   "p": "gente",
+   "ini": 27.364,
+   "fim": 27.688,
+   "cena": 4
+  },
+  {
+   "p": "no",
+   "ini": 27.7,
+   "fim": 27.796,
+   "cena": 4
+  },
+  {
+   "p": "direct",
+   "ini": 27.809,
+   "fim": 28.422,
+   "cena": 4
+  }
+ ]
+}

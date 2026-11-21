@@ -1,12 +1,12 @@
-# Teste gradual de formatos e vozes — 20/11 23:16
+# Teste gradual de formatos e vozes — 21/11 02:16
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 730.0 de 1302 Shorts medidos passaram da mediana do canal (taxa 0.56). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 730.0 de 1304 Shorts medidos passaram da mediana do canal (taxa 0.56). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| voz:cintilante_she_ra_flavia_saddy | promovido | 58 | 0 | 0 | 40 | 26 | 21.0/31 | 0.67 | 121 | 48% (13) | 57/0 | 0 |
+| voz:cintilante_she_ra_flavia_saddy | promovido | 59 | 0 | 0 | 40 | 26 | 21.0/31 | 0.67 | 121 | 48% (13) | 58/0 | 0 |
 | voz:moana | testando | 13 | 0 | 0 | 6 | 6 | 19.0/29 | 0.65 | 510 | 40% (5) | 13/0 | 0 |
 | voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 4 | 11.5/23 | 0.50 | 903 | 53% (2) | 9/0 | 0 |
 | voz:chamber_valorant | testando | 2 | 0 | 0 | 1 | 1 | 10.0/15 | 0.65 | 1091 | 36% (1) | 2/0 | 0 |
@@ -21,7 +21,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:naruto | testando | 6 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 6/0 | 0 |
 | voz:pato_donald | testando | 3 | 0 | 0 | 3 | 3 | 1.0/4 | 0.33 | 9 | - | 3/0 | 0 |
 | formato:cameo_interrupcao | testando | 3 | 0 | 0 | 2 | 2 | 1.0/3 | 0.40 | 31 | - | 2/0 | 0 |
-| formato:madruga_chaves | testando | 9 | 0 | 0 | 3 | 3 | 2.0/3 | 0.60 | 986 | 70% (2) | 5/0 | 0 |
+| formato:madruga_chaves | testando | 10 | 0 | 0 | 3 | 3 | 2.0/3 | 0.60 | 986 | 70% (2) | 6/0 | 0 |
 | voz:aracy_top_therm | testando | 2 | 0 | 0 | 2 | 2 | 1.5/3 | 0.50 | 13 | - | 2/0 | 0 |
 | voz:bills | testando | 3 | 0 | 0 | 3 | 3 | 1.0/3 | 0.40 | 6 | 81% (1) | 3/0 | 0 |
 | voz:cell | testando | 3 | 0 | 0 | 3 | 3 | 3.0/3 | 0.80 | 1204 | 45% (2) | 3/0 | 0 |

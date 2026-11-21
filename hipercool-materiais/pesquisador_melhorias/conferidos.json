@@ -20263,5 +20263,25 @@
     "arquivado": false,
     "descricao": "猫耳看板娘的系统权限助手：不 Root 也能用特权 API，兼容 Shizuku-API 生态（官方 SDK 应用零改动直连）| A catgirl-mascot privileged-API assistant for Android. Shizuku-API compatib",
     "data": "2026-11-20"
+  },
+  "coder677777/clip-agent": {
+    "ok": true,
+    "nome": "coder677777/clip-agent",
+    "estrelas": 0,
+    "push": "2026-11-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Free clip maker: turns long YouTube videos into Shorts/TikTok clips with hooks, titles, Part 1/2 and word-by-word captions. Runs on your own",
+    "data": "2026-11-21"
+  },
+  "hitchabout/gemini-pixel-tracker": {
+    "ok": true,
+    "nome": "hitchabout/Gemini-Pixel-Tracker",
+    "estrelas": 0,
+    "push": "2026-04-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A standalone Windows widget to track daily image generation limits in Google Gemini.",
+    "data": "2026-11-21"
   }
 }

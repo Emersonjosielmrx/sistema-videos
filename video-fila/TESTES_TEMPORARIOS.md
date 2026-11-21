@@ -5,5 +5,4 @@ Precisa de espaço já? `python D:\video-fila\testes.py encerrar <caminho>` em c
 
 | Caminho | Para quê | Chat | Criado | Vence | Ao limpar |
 |---|---|---|---|---|---|
-| `D:\gemini-argo\captura\dificil_legenda.py` | tarefa dificil legenda (17/11) |  | 2026-11-17T22:55 | 2026-11-20T22:55 | apaga |
-| `D:\gemini-argo\captura\dificil_estado.py` | tarefa real estado dos longos (17/11) |  | 2026-11-17T23:01 | 2026-11-20T23:01 | apaga |
+| (nenhum teste registrado) | | | | | |

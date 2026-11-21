@@ -172,6 +172,22 @@ def main():
                     help="rodada de hora em hora: posta só nas Páginas atrasadas pelo relógio (08-23 h) + horário nobre")
     a = ap.parse_args()
     cfg = _ler(CFG, {})
+    # 21/11: trava por conta — 2 postagens na MESMA conta brigam pelo Chrome (uma fecha enquanto a outra posta ->
+    # "Target page has been closed"). Se já tem outra rodando nesta(s) conta(s), sai.
+    alvo_contas = {a.conta} if a.conta else {v["conta"] for k, v in cfg["paginas"].items()
+                                             if (not a.pagina or k == a.pagina) and not v.get("pausada")}
+    meu = str(os.getpid())
+    outros = subprocess.run(["powershell", "-NoProfile", "-Command",
+                             "Get-CimInstance Win32_Process -Filter \"name='python.exe' or name='pythonw.exe'\" | "
+                             "? { $_.CommandLine -match 'postar_facebook_paginas' } | % { \"$($_.ProcessId)|$($_.CommandLine)\" }"],
+                            capture_output=True, text=True).stdout
+    for linha in outros.splitlines():
+        pid, _, cmd = linha.partition("|")
+        if pid.strip() and pid.strip() != meu:
+            oc = cmd.split("--conta")[1].split()[0] if "--conta" in cmd else None
+            if oc is None or oc in alvo_contas or (not a.conta and not a.pagina):
+                print(f"já tem postagem rodando (pid {pid.strip()}) nesta conta — saio", flush=True)
+                return
     reg = _ler(REG, {})
     paginas = {k: v for k, v in cfg["paginas"].items() if (not a.pagina or k == a.pagina) and not v.get("pausada")
                and (not a.conta or v["conta"] == a.conta)}

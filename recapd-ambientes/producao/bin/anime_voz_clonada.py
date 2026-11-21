@@ -9,6 +9,7 @@ Falhou 2x seguidas no mesmo (narrador, base) = pula essa base por 24 h.
 """
 import json
 import os
+import shutil
 import re
 from datetime import datetime
 from pathlib import Path
@@ -282,14 +283,19 @@ def _vozes_com_fish():
     renovada pelo rclone a cada 6 h; falhou = usa a última (ou vazio = sem preferência)."""
     import subprocess
     import time
-    arq = Path(r"D:\recapd-ambientes\producao\config\vozes_com_fish.txt")
+    # 20/11: o caminho era fixo do PC1 (D:\recapd-ambientes\...) — no PC2 (C:\recapd-e-animes) a lista vinha VAZIA, o
+    # filtro FISH_SO era pulado e 59 Shorts saíram no motor antigo (pato_donald_galvan, moana...). Agora: a pasta config
+    # do próprio projeto e o rclone que existir na máquina.
+    arq = Path(__file__).resolve().parent.parent / "config" / "vozes_com_fish.txt"
+    rclone = next((p for p in (r"D:\tools\rclone.exe", r"C:\tools\rclone.exe", r"C:\recapd-e-animes\tools\rclone.exe",
+                               shutil.which("rclone") or "") if p and os.path.exists(p)), None)
     try:
         velho = not arq.exists() or time.time() - arq.stat().st_mtime > 6 * 3600
     except OSError:
         velho = True
-    if velho:
+    if velho and rclone:
         try:
-            r = subprocess.run([r"D:\tools\rclone.exe", "lsf", "-R", "manhwa-drive:colab_recap/vozes", "--include",
+            r = subprocess.run([rclone, "lsf", "-R", "manhwa-drive:colab_recap/vozes", "--include",
                                 "*/referencia_fish.wav", "--files-only"], capture_output=True, text=True, timeout=90,
                                creationflags=0x08000000 if os.name == "nt" else 0)
             nomes = sorted({ln.split("/")[0] for ln in r.stdout.split() if "/" in ln})
