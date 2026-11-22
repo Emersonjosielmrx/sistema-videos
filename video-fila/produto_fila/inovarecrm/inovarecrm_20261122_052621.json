@@ -1,0 +1,141 @@
+{
+ "conta": "inovarecrm",
+ "produto": "crm_chatwoot",
+ "marca": "Inovare CRM",
+ "titulo": "CRM feito sob medida para seu negócio",
+ "legenda": "Chega de tentar encaixar sua rotina em sistemas engessados. Tenha um CRM sob medida a partir do Chatwoot com IA e suporte integrados.\nConheça no link no perfil 📲\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Seu CRM parece engessado?",
+  "pergunta_cliente": "Cansado de adaptar seu trabalho a ferramentas travadas?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu tentava usar sistemas prontos, mas nenhum se encaixava no processo da minha empresa.",
+    "visual": "apresentador",
+    "cenario_en": "modern and tidy Brazilian business office, well lit, professional desk setting",
+    "destaques": [
+     "sistemas prontos",
+     "processo da minha empresa"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261122_053207_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Desenvolvemos uma solução sob medida com Chatwoot e inteligência artificial para a sua rotina.",
+    "visual": "veo",
+    "prompt_en": "medium shot of a professional Brazilian manager typing on a laptop in a bright contemporary office, cinematic warm light",
+    "destaques": [
+     "solução sob medida",
+     "inteligência artificial"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Vocês ajustam os fluxos para o meu formato de atendimento?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, montamos as etapas e tickets exatamente conforme o seu negócio precisa."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, era essa flexibilidade que faltava."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje tenho histórico completo e suporte integrados exatamente no formato que meu time precisa.",
+    "visual": "apresentador",
+    "cenario_en": "modern and tidy Brazilian business office, well lit, professional desk setting",
+    "destaques": [
+     "histórico completo",
+     "suporte integrados"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261122_053207_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261122_053207_1.png"
+   }
+  ],
+  "legenda": "Chega de tentar encaixar sua rotina em sistemas engessados. Tenha um CRM sob medida a partir do Chatwoot com IA e suporte integrados.\nConheça no link no perfil 📲",
+  "titulo": "CRM feito sob medida para seu negócio",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "solucao_feita_sob_medida",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 252,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecrm_20261122_052621\\dono_3.mp4",
+ "duracao_s": 30.69,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-22T06:32:30",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.44,
+   "fala": "Cansado de adaptar seu trabalho a ferramentas travadas?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.44,
+   "fim": 12.1,
+   "fala": "Eu tentava usar sistemas prontos, mas nenhum se encaixava no processo da minha empresa.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.1,
+   "fim": 18.92,
+   "fala": "Desenvolvemos uma solução sob medida com Chatwoot e inteligência artificial para a sua rotina.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 18.92,
+   "fim": 26.75,
+   "fala": "Hoje tenho histórico completo e suporte integrados exatamente no formato que meu time precisa.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 26.75,
+   "fim": 30.69,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

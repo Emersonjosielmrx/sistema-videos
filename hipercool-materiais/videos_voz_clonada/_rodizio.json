@@ -11967,12 +11967,21 @@
    "config": "1",
    "quando": "21/11 06:37",
    "nicho": "curiosidades"
+  },
+  "buzz_lightyear:francisca:r1.6": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-32bd94_cap1_20261121\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\buzz_lightyear\\v2_r1_francisca_config2_21-11_1117_sem-obra-32bd94_cap1_20261121.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-32bd94_cap1_20261121",
+   "config": "2",
+   "quando": "21/11 11:17",
+   "nicho": "curiosidades"
   }
  },
  "falhas": {
-  "ijax:kokoro:r1": 1
+  "ijax:kokoro:r1": 1,
+  "sam_winchester:kokoro:r1": 1
  },
- "proxima_config": "2",
+ "proxima_config": "1",
  "falhas_em": {
   "thomas_shelby_peaky_blinders:kokoro:r1": "2026-11-02T19:30:51",
   "thomas_shelby_peaky_blinders:francisca:r1": "2026-10-22T05:36:33",
@@ -11991,6 +12000,7 @@
   "patolino:francisca:r1": "2026-11-10T14:40:19",
   "sukuna:kokoro:r1": "2026-11-14T04:55:29",
   "yor_forger:kokoro:r1": "2026-11-16T06:15:54",
-  "bulma:francisca:r1": "2026-11-17T12:14:31"
+  "bulma:francisca:r1": "2026-11-17T12:14:31",
+  "sam_winchester:kokoro:r1": "2026-11-21T21:23:52"
  }
 }

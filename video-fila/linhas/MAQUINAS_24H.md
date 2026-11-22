@@ -1,5 +1,10 @@
 # Máquinas: trabalharam as 24 h? (mais novo em cima)
 
+🖥️ Máquinas nas últimas 24 h (21/11 08:06) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
+⚠️ PC2: trabalhando 69% do tempo (CPU média 73%, RAM 33%, ffmpeg em 57%), parado 18%; horas quase paradas: 05, 06h; medidor só cobriu 87% do dia
+✅ PC1: trabalhando 86% do tempo (CPU média 88%, RAM 60%, ffmpeg em 67%), parado 2%; medidor só cobriu 59% do dia
+• DESKTOP: TimeoutExpired: Command '['C:\\Program Files\\Git\\usr\\bin\\ssh.exe', '-o', 'BatchMode=yes', '-o', 'LogLevel=ERROR', '-o', 'ConnectTime
+
 🖥️ Máquinas nas últimas 24 h (20/11 08:05) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
 ⚠️ PC2: trabalhando 66% do tempo (CPU média 65%, RAM 28%, ffmpeg em 62%), parado 27%; maior parada 39 min desde 21:48; horas quase paradas: 01, 02, 09, 16, 18, 22h
 ✅ PC1: trabalhando 94% do tempo (CPU média 94%, RAM 63%, ffmpeg em 86%), parado 1%; medidor só cobriu 52% do dia

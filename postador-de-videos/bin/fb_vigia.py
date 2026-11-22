@@ -25,7 +25,7 @@ sys.path.insert(0, str(BIN))
 LOG = BIN.parent / "logs" / "fb_vigia.log"
 EST = BIN.parent / "logs" / "fb_vigia.json"
 PY = r"D:\hipercool-videos\venv\Scripts\python.exe"
-TRAVADA_MIN = 18  # 20/11: rodada pendurada (Chrome morreu no upload) travava o nobre; mata mais cedo
+TRAVADA_MIN = 45  # 21/11: rodada com várias Páginas leva 25+ min postando de verdade; 18 matava rodada viva
 SIMULAR = "--simular" in sys.argv
 
 
@@ -87,7 +87,8 @@ def main():
     for pid, criado, pai, cmd in py:
         if any(pid == q[2] for q in py):
             continue  # é o lançador do venv (o filho é quem trabalha); mata pela árvore do filho
-        if (agora - criado) > timedelta(minutes=TRAVADA_MIN) and ("postar_facebook_paginas" in cmd or "fb_criar_fila" in cmd):
+        if (agora - criado) > timedelta(minutes=TRAVADA_MIN) and ("postar_facebook_paginas" in cmd or "fb_criar_fila" in cmd
+                                                                  or "postar_ms_energy" in cmd or "fb_rodada_todas" in cmd):
             log(f"TRAVADA há {int((agora - criado).total_seconds() // 60)} min: pid {pid} {cmd[-80:]} -> mato")
             matar(pai if any(pai == q[0] for q in py) else pid)
             acoes += 1

@@ -1,0 +1,408 @@
+{
+ "marca": "Inovare CRM",
+ "produto": "CRM Chatwoot IA",
+ "publico": "",
+ "fatos": [
+  "CRM personalizado a partir do Chatwoot, integracao CRM e helpdesk/tickets",
+  "CRM personalizado com IA",
+  "Um CRM feito para o seu negócio a partir do Chatwoot, com atendimento, tickets e histórico de cada cliente em um só lugar."
+ ],
+ "cliente_real": false,
+ "cores": {
+  "marca": "#0284C7",
+  "apoio": "#0F172A",
+  "fundo_escuro": "#0F172A",
+  "destaque": "#0284C7",
+  "texto_sobre_marca": "#FFFFFF"
+ },
+ "arroba": "@inovarecrm",
+ "convite": "Chame no direct",
+ "convite_voz": "Chame a gente no direct.",
+ "titulo": "CRM feito sob medida para seu negócio",
+ "gancho_tela": "Seu CRM parece engessado?",
+ "duracao_s": 30.69,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.79,
+   "tipo": "pergunta",
+   "fala": "Cansado de adaptar seu trabalho a ferramentas travadas?",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_0.jpg"
+  },
+  {
+   "n": 1,
+   "ini": 4.44,
+   "fim": 12.45,
+   "tipo": "dono",
+   "fala": "Eu tentava usar sistemas prontos, mas nenhum se encaixava no processo da minha empresa.",
+   "rotulo": "O problema",
+   "conversa": null,
+   "video": "dono_1.mp4"
+  },
+  {
+   "n": 2,
+   "ini": 12.1,
+   "fim": 19.27,
+   "tipo": "veo",
+   "fala": "Desenvolvemos uma solução sob medida com Chatwoot e inteligência artificial para a sua rotina.",
+   "rotulo": "Como funciona",
+   "conversa": null,
+   "video": "video_2.mp4"
+  },
+  {
+   "n": 3,
+   "ini": 18.92,
+   "fim": 27.1,
+   "tipo": "dono",
+   "fala": "Hoje tenho histórico completo e suporte integrados exatamente no formato que meu time precisa.",
+   "rotulo": "O resultado",
+   "conversa": null,
+   "video": "dono_3.mp4"
+  },
+  {
+   "n": 4,
+   "ini": 26.75,
+   "fim": 30.69,
+   "tipo": "cartao",
+   "fala": "Chame a gente no direct.",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_4.jpg"
+  }
+ ],
+ "palavras": [
+  {
+   "p": "Cansado",
+   "ini": 0.318,
+   "fim": 0.799,
+   "cena": 0
+  },
+  {
+   "p": "de",
+   "ini": 0.811,
+   "fim": 0.883,
+   "cena": 0
+  },
+  {
+   "p": "adaptar",
+   "ini": 0.895,
+   "fim": 1.412,
+   "cena": 0
+  },
+  {
+   "p": "seu",
+   "ini": 1.424,
+   "fim": 1.568,
+   "cena": 0
+  },
+  {
+   "p": "trabalho",
+   "ini": 1.58,
+   "fim": 2.001,
+   "cena": 0
+  },
+  {
+   "p": "a",
+   "ini": 2.013,
+   "fim": 2.049,
+   "cena": 0
+  },
+  {
+   "p": "ferramentas",
+   "ini": 2.061,
+   "fim": 2.614,
+   "cena": 0
+  },
+  {
+   "p": "travadas",
+   "ini": 2.626,
+   "fim": 3.323,
+   "cena": 0
+  },
+  {
+   "p": "Eu",
+   "ini": 4.436,
+   "fim": 4.936,
+   "cena": 1
+  },
+  {
+   "p": "tentava",
+   "ini": 4.936,
+   "fim": 5.996,
+   "cena": 1
+  },
+  {
+   "p": "usar",
+   "ini": 5.996,
+   "fim": 6.576,
+   "cena": 1
+  },
+  {
+   "p": "sistemas",
+   "ini": 6.576,
+   "fim": 7.116,
+   "cena": 1
+  },
+  {
+   "p": "prontos,",
+   "ini": 7.116,
+   "fim": 8.216,
+   "cena": 1
+  },
+  {
+   "p": "mas",
+   "ini": 8.576,
+   "fim": 8.716,
+   "cena": 1
+  },
+  {
+   "p": "nenhum",
+   "ini": 8.716,
+   "fim": 9.156,
+   "cena": 1
+  },
+  {
+   "p": "se",
+   "ini": 9.156,
+   "fim": 9.476,
+   "cena": 1
+  },
+  {
+   "p": "encaixava",
+   "ini": 9.476,
+   "fim": 10.316,
+   "cena": 1
+  },
+  {
+   "p": "no",
+   "ini": 10.316,
+   "fim": 10.556,
+   "cena": 1
+  },
+  {
+   "p": "processo",
+   "ini": 10.556,
+   "fim": 11.016,
+   "cena": 1
+  },
+  {
+   "p": "da",
+   "ini": 11.016,
+   "fim": 11.196,
+   "cena": 1
+  },
+  {
+   "p": "minha",
+   "ini": 11.196,
+   "fim": 11.396,
+   "cena": 1
+  },
+  {
+   "p": "empresa.",
+   "ini": 11.396,
+   "fim": 11.736,
+   "cena": 1
+  },
+  {
+   "p": "Desenvolvemos",
+   "ini": 12.597,
+   "fim": 13.342,
+   "cena": 2
+  },
+  {
+   "p": "uma",
+   "ini": 13.354,
+   "fim": 13.559,
+   "cena": 2
+  },
+  {
+   "p": "solução",
+   "ini": 13.571,
+   "fim": 14.124,
+   "cena": 2
+  },
+  {
+   "p": "sob",
+   "ini": 14.136,
+   "fim": 14.388,
+   "cena": 2
+  },
+  {
+   "p": "medida",
+   "ini": 14.4,
+   "fim": 14.809,
+   "cena": 2
+  },
+  {
+   "p": "com",
+   "ini": 14.821,
+   "fim": 14.965,
+   "cena": 2
+  },
+  {
+   "p": "Chatwoot",
+   "ini": 14.977,
+   "fim": 15.614,
+   "cena": 2
+  },
+  {
+   "p": "e",
+   "ini": 15.65,
+   "fim": 15.71,
+   "cena": 2
+  },
+  {
+   "p": "inteligência",
+   "ini": 15.722,
+   "fim": 16.371,
+   "cena": 2
+  },
+  {
+   "p": "artificial",
+   "ini": 16.383,
+   "fim": 17.02,
+   "cena": 2
+  },
+  {
+   "p": "para",
+   "ini": 17.032,
+   "fim": 17.188,
+   "cena": 2
+  },
+  {
+   "p": "a",
+   "ini": 17.2,
+   "fim": 17.224,
+   "cena": 2
+  },
+  {
+   "p": "sua",
+   "ini": 17.236,
+   "fim": 17.429,
+   "cena": 2
+  },
+  {
+   "p": "rotina",
+   "ini": 17.441,
+   "fim": 17.97,
+   "cena": 2
+  },
+  {
+   "p": "Hoje",
+   "ini": 19.666,
+   "fim": 20.286,
+   "cena": 3
+  },
+  {
+   "p": "tenho",
+   "ini": 20.426,
+   "fim": 20.586,
+   "cena": 3
+  },
+  {
+   "p": "histórico",
+   "ini": 20.586,
+   "fim": 21.106,
+   "cena": 3
+  },
+  {
+   "p": "completo",
+   "ini": 21.106,
+   "fim": 21.686,
+   "cena": 3
+  },
+  {
+   "p": "e",
+   "ini": 21.686,
+   "fim": 22.166,
+   "cena": 3
+  },
+  {
+   "p": "suporte",
+   "ini": 22.166,
+   "fim": 22.726,
+   "cena": 3
+  },
+  {
+   "p": "integrados",
+   "ini": 22.726,
+   "fim": 23.606,
+   "cena": 3
+  },
+  {
+   "p": "exatamente",
+   "ini": 23.986,
+   "fim": 24.446,
+   "cena": 3
+  },
+  {
+   "p": "no",
+   "ini": 24.446,
+   "fim": 24.646,
+   "cena": 3
+  },
+  {
+   "p": "formato",
+   "ini": 24.646,
+   "fim": 25.086,
+   "cena": 3
+  },
+  {
+   "p": "que",
+   "ini": 25.086,
+   "fim": 25.226,
+   "cena": 3
+  },
+  {
+   "p": "meu",
+   "ini": 25.226,
+   "fim": 25.346,
+   "cena": 3
+  },
+  {
+   "p": "time",
+   "ini": 25.346,
+   "fim": 25.566,
+   "cena": 3
+  },
+  {
+   "p": "precisa.",
+   "ini": 25.566,
+   "fim": 26.066,
+   "cena": 3
+  },
+  {
+   "p": "Chame",
+   "ini": 27.242,
+   "fim": 27.591,
+   "cena": 4
+  },
+  {
+   "p": "a",
+   "ini": 27.603,
+   "fim": 27.663,
+   "cena": 4
+  },
+  {
+   "p": "gente",
+   "ini": 27.675,
+   "fim": 27.999,
+   "cena": 4
+  },
+  {
+   "p": "no",
+   "ini": 28.011,
+   "fim": 28.107,
+   "cena": 4
+  },
+  {
+   "p": "direct",
+   "ini": 28.12,
+   "fim": 28.733,
+   "cena": 4
+  }
+ ]
+}

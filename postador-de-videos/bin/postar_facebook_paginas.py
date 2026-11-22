@@ -174,20 +174,34 @@ def main():
     cfg = _ler(CFG, {})
     # 21/11: trava por conta — 2 postagens na MESMA conta brigam pelo Chrome (uma fecha enquanto a outra posta ->
     # "Target page has been closed"). Se já tem outra rodando nesta(s) conta(s), sai.
-    alvo_contas = {a.conta} if a.conta else {v["conta"] for k, v in cfg["paginas"].items()
-                                             if (not a.pagina or k == a.pagina) and not v.get("pausada")}
-    meu = str(os.getpid())
-    outros = subprocess.run(["powershell", "-NoProfile", "-Command",
-                             "Get-CimInstance Win32_Process -Filter \"name='python.exe' or name='pythonw.exe'\" | "
-                             "? { $_.CommandLine -match 'postar_facebook_paginas' } | % { \"$($_.ProcessId)|$($_.CommandLine)\" }"],
-                            capture_output=True, text=True).stdout
-    for linha in outros.splitlines():
-        pid, _, cmd = linha.partition("|")
-        if pid.strip() and pid.strip() != meu:
-            oc = cmd.split("--conta")[1].split()[0] if "--conta" in cmd else None
-            if oc is None or oc in alvo_contas or (not a.conta and not a.pagina):
-                print(f"já tem postagem rodando (pid {pid.strip()}) nesta conta — saio", flush=True)
+    # 21/11 13h: a 1ª versão procurava processos e via o PRÓPRIO lançador do venv (pai) como "outra postagem" -> TODAS as
+    # rodadas das 08:20 às 13:20 saíram sem postar. Agora é arquivo de trava por conta (pid + hora); trava de processo
+    # morto ou com > 40 min é liberada sozinha.
+    alvo_contas = sorted({a.conta} if a.conta else {v["conta"] for k, v in cfg["paginas"].items()
+                                                    if (not a.pagina or k == a.pagina) and not v.get("pausada")})
+    travas = []
+    herdada = os.environ.get("FB_TRAVA_HERDADA")  # 1º Reel chamado pela criação: a trava é dela
+    for c in alvo_contas:
+        tv = REG.parent / f"fb_postando_{c}.lock"
+        if c == herdada:
+            continue
+        if tv.exists():
+            try:
+                pid_t, quando_t = tv.read_text(encoding="utf-8").split("|")
+                vivo = str(pid_t) in subprocess.run(["tasklist", "/FI", f"PID eq {pid_t}", "/NH"], capture_output=True,
+                                                    text=True, errors="replace").stdout
+                velha = (datetime.now() - datetime.fromisoformat(quando_t)).total_seconds() > 2400
+            except Exception:
+                vivo, velha = False, True
+            if vivo and not velha:
+                print(f"já tem postagem rodando na conta {c} (pid {pid_t}) — saio", flush=True)
+                for t in travas:
+                    t.unlink(missing_ok=True)
                 return
+        tv.write_text(f"{os.getpid()}|{datetime.now().isoformat(timespec='seconds')}", encoding="utf-8")
+        travas.append(tv)
+    import atexit
+    atexit.register(lambda: [t.unlink(missing_ok=True) for t in travas])
     reg = _ler(REG, {})
     paginas = {k: v for k, v in cfg["paginas"].items() if (not a.pagina or k == a.pagina) and not v.get("pausada")
                and (not a.conta or v["conta"] == a.conta)}

@@ -1665,3 +1665,15 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 02:04 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_yt_conformidade_canal__sonnet_0201.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 00:58 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_fontes_recap_ingles__sonnet_0012.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 06:53 — Política do YouTube: rótulo de conteúdo alterado/sintético (voz clonada) (`area_yt_politica_conteudo_sintetico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_yt_politica_conteudo_sintetico__sonnet_0651.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 07:02 — Política de conteúdo reutilizado e como documentar transformação (`area_yt_politica_conteudo_reutilizado`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_yt_politica_conteudo_reutilizado__sonnet_0656.md`
+- (todos os itens desta pesquisa foram reprovados)

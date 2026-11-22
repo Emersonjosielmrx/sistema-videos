@@ -638,6 +638,12 @@ def main():
             else:
                 print(f"ERRO — {msg[:120]}")
                 total["erros"] += 1
+                # 21/11: o erro é da tela/Chrome, não do vídeo; seguir pro próximo queimava a fila inteira (11:05 ficou
+                # 3 h tentando vídeo atrás de vídeo). Para o Facebook nesta rodada; a próxima tenta de novo.
+                if args.so == "fb":
+                    print("  (FB falhou: paro esta rodada — a próxima tenta de novo)", flush=True)
+                    break
+                fazer_fb = False
 
         # TikTok
         if fazer_tiktok and fazer_tiktok_ok and not log[nome].get("tiktok"):

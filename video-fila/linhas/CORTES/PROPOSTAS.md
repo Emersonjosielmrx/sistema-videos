@@ -2693,3 +2693,98 @@
 - prova: be7e9a q18 (grave): adesivo/personagem de desenho por cima de 'INSCREVER-SE' e 'CURTIR', competindo com o CTA. Aparece em 1 Short; o júri vê 1 em 4.
 - onde: Provável: etapa que monta o encerramento (overlay de CTA + ilustração/adesivo). Gerar folha do último quadro de cada Short do dia, no molde de D:\tmp\folha_topo.py.
 - como testar: Montar uma folha com o último quadro de todos os Shorts do dia (1 imagem). Se >= 2 tiverem elemento sobre o CTA, impedir o overlay nessa região. Se for só 1, descartar como caso isolado.
+
+## 21/11 08:57 PROPOSTA [GOSTO] Abrir o Short numa cena com rosto ou ação, não num plano aberto (gemini-4-argon)
+- prova: the-kings-affection q01 (rosto neutro, retenção 4.0) e sem-obra-039b46 q01 (rosto neutro, 'ENTÃO') mostram gancho visual fraco, e the-thousand-mile-horse q02 (grave) abre numa feira em plano aberto sem destaque.
+- onde: Seleção e ordem de cenas do montador do CORTES (função que escolhe a 1ª cena a partir do movimento medido por cena).
+- como testar: Para a cena inicial, preferir a de maior movimento ou com rosto dentro dos primeiros 8 s da narração. Rodar em 10 Shorts, comparar a nota de retenção do júri e o % assistido nos elegíveis contra o lote atual, uma mudança por vez.
+
+## 21/11 08:57 PROPOSTA [GOSTO] Evitar legenda e destaque sobre olhos e testa (gemini-4-argon)
+- prova: O texto cobre parte do rosto em sem-obra-52ae16 q10 (media), the-thousand-mile-horse q05 (media) e the-kings-affection q01 (leve). Em 039b46 q18 o botão 'Curtir' cobre o rosto, mas parece vir da fonte e não é nosso.
+- onde: Posição vertical da legenda palavra a palavra e das caixas de destaque no renderizador de legenda do CORTES.
+- como testar: Medir a sobreposição entre a caixa da legenda e o rosto numa folha de quadros de 20 Shorts. Deslocar a legenda 80–120 px quando houver rosto sob ela e comparar a nota de legibilidade. Manter margens >= 60 px e a zona segura.
+
+## 21/11 08:57 PROPOSTA [CERTEZA] Conferir 'ELA E ELA ACABOU' no roteiro do the-kings-affection (gemini-4-argon)
+- prova: the-kings-affection q04, grave: erro de português na legenda. Só 1 Short, então ainda não é padrão.
+- onde: roteiro.txt do Short the-kings-affection_cap1_20261121 e a etapa de geração/revisão do roteiro.
+- como testar: Abrir o roteiro.txt. Se o erro estiver lá, é erro de roteiro. Se repetir em outros Shorts, criar uma regra de roteiro contra pronome ou sujeito duplicado ('X E X') e rodar um grep no roteiro dos últimos 3 dias para medir a frequência.
+
+## 21/11 15:50 PROPOSTA [CERTEZA] Texto da fonte vazando nas bordas ou embaixo da tarja (legenda queimada só parcialmente coberta) (gemini-4-argon)
+- prova: Texto da fonte visível e cortado em 4 de 4 Shorts do lote: baa9f1 q13 e q16, o-ceo q13 (margem esquerda), 9584e6 q03, 32bd94 q10 (legenda em inglês inteira à mostra).
+- onde: Detecção da caixa da legenda (visão/hardsub) e geração da tarja, no passo que lê '[hardsub] N/6' e aplica tarja_largura_max. A largura máxima de 0.8 pode estar cortando legendas largas.
+- como testar: 1) Abra o log dos 4 Shorts e confirme que a visão leu legenda ('[hardsub] N/6' com N >= 2). 2) Faça a folha de quadros em >= 720 px dos trechos q13/q16 e meça a caixa real das letras. 3) Se a caixa passa de 80% da largura, a tarja deve usar a largura medida (tamanho exato, nunca faixa grande) em vez do teto. 4) Rode nos 4 Shorts mais um controle negativo (vídeo sem legenda) e confira que não aparece tarja nova.
+
+## 21/11 15:50 PROPOSTA [GOSTO] Legenda palavra a palavra em cima do rosto/boca nos primeiros 2 s (gemini-4-argon)
+- prova: baa9f1 q01 ('BURRO' sobre rosto/boca, marcado grave), o-ceo q01 (legenda parcialmente sobre o rosto, leve) e 9584e6 q01 ('AMOR' com contraste fraco sobre o tênis).
+- onde: Posição vertical da legenda no render (função que desenha a legenda palavra a palavra) e o contraste do contorno/sombra.
+- como testar: Mude uma coisa só: no 1,5 s inicial, deslocar a legenda para a faixa inferior do quadro e reforçar o contorno. Compare a nota de legibilidade/retenção em 8 Shorts antes e depois. Antes de ligar, confira com a dona (ela prefere palavras de impacto maiores, de lado).
+
+## 21/11 23:04 PROPOSTA [CERTEZA] Quadros quase brancos/estourados no meio do Short (gemini-4-argon)
+- prova: sem-obra-711695 q12: trecho quase todo branco, só a palavra 'SEM' visível, nota de movimento 6.0 (grave); sem-obra-7e30fe q06: topo quase estourado, nota de movimento 7.0. Aparece em 2 de 4 Shorts, ambos do dia 21/11.
+- onde: Montagem de cenas no render da linha: filtros de brilho/contraste (eq, curves), transições (xfade/fade) e a primeira tomada de cada cena. Provável flash na emenda ou exposição empurrada demais.
+- como testar: Medir a luminância média por quadro nos Shorts de 21/11 e listar quadros com média > 235. Abrir os quadros nos instantes dos q12 e q06, achar qual filtro ou transição os gera, corrigir e rerrodar os mesmos Shorts. O resultado esperado é 0 quadros estourados e nota de movimento >= 8.
+
+## 21/11 23:04 PROPOSTA [GOSTO] Palavra de impacto/legenda caindo sobre os olhos (gemini-4-argon)
+- prova: sem-obra-8dcba7 q02: 'GÊMEO' cobre o olho direito. sem-obra-746344 q02: legenda cruzando os olhos. 2 Shorts. Combina com a preferência da dona (27/10) por palavras de impacto maiores, de lado.
+- onde: Posicionamento da legenda palavra a palavra e da palavra de impacto no render (função que define o y/x da legenda). Usar a caixa do rosto, se já houver detecção, para empurrar a palavra para o lado ou para o terço inferior.
+- como testar: Passar pelas DECISOES_DONO antes de aplicar. Rodar A/B em ~10 Shorts: a versão com deslocamento contra a atual. Comparar a nota de legibilidade do júri e o % assistido.
+
+## 21/11 23:04 PROPOSTA [GOSTO] Cenas de baixo movimento (18-21%) no gancho e no meio (gemini-4-argon)
+- prova: sem-obra-8dcba7 q01: gancho com 18.1% de movimento. sem-obra-711695 q05: 18.1%. sem-obra-7e30fe q07: 21.2%. 3 Shorts com cena abaixo de ~22%, e retenção em 7.0 nos 4.
+- onde: Etapa de zoom/pan por cena no render: aplicar punch-in ou pan lento quando o movimento medido da cena ficar abaixo de ~25%.
+- como testar: Aplicar só nas cenas abaixo do limiar, medir o movimento depois (esperado >= 25%) e comparar a nota de retenção do júri em 10 Shorts. Mudar uma coisa por vez.
+
+## 22/11 00:52 PROPOSTA [CERTEZA] Palavra de impacto da legenda cortada pelas bordas do quadro (gemini-4-argon)
+- prova: sem-obra-9db147_cap1_20261121 q06: 'DEPOIS' cortada nas laterais e cobrindo mãos e isca (grave). sem-obra-1bffca_cap1_20261121 q01: 'INICIA' cortada/descentralizada na base (grave em retenção). Dois Shorts, mesma família de defeito. 91b65a q11 ('250' sobre focinho e olhos da paca) é parecido, mas só cobre o rosto e não corta nas bordas. A dona prefere palavras de impacto maiores, então o conserto é ajustar ao quadro, não diminuir.
+- onde: Função que desenha a palavra de impacto na legenda palavra a palavra (render/ASS da linha CORTES). Localizar por busca de tamanho de fonte/escala de impacto; não conferi o arquivo, é uma hipótese. Antes de mexer, abrir o quadro q01 do 1bffca: se for o frame inicial de uma animação de entrada (pop-in/escala), o corte pode ser só do instante capturado e o defeito real é só o 'DEPOIS'.
+- como testar: Para cada palavra do roteiro, medir a largura renderizada e reduzir a escala só se passar de 1080 - 2*60 px (margem lateral de 60 px). Re-renderizar 9db147 e 1bffca e extrair o frame da palavra: nenhuma letra pode tocar a borda. Rodar também num Short sem palavra grande para confirmar que nada mudou.
+
+## 22/11 00:52 PROPOSTA [GOSTO] Contraste da cor de destaque contra o fundo atrás da palavra (gemini-4-argon)
+- prova: 9db147 q04 ('ENTRA' azul claro sobre cinza do jig) e q03 (tarja rosa 'PRIMEIRO' com baixa opacidade, dedos aparecendo por trás). 91b65a q10 ('NO MERCADO' com fundo da mesma cor da carne crua). Três quadros em 2 Shorts de 4. Fica como GOSTO porque a dona pediu fontes e cores por personagem; não é pra tirar a cor.
+- onde: Mesma função de legenda/tarja de destaque: onde a cor da palavra e a opacidade da tarja são escolhidas.
+- como testar: Calcular a razão de contraste entre a cor da palavra (ou da tarja) e a luminância mediana da região atrás. Se ficar abaixo de ~3:1, aumentar contorno/sombra ou a opacidade da tarja, sem trocar o matiz. Comparar a nota média do júri em 2 lotes, com e sem a regra.
+
+## 22/11 00:52 PROPOSTA [GOSTO] Cenas com pouco movimento recebem punch-in lento (gemini-4-argon)
+- prova: 9f64de q12: cena 4 com 23.7%. 91b65a q04: cena 2 com 19.2%. 9db147 q07: cena 3 com apenas 7.3%, a mais parada do lote. Três Shorts de 4 têm uma cena abaixo de ~24%. O júri deu nota 9.0 em movimento a todos, então o impacto na retenção é incerto.
+- onde: Passo de montagem que já mede o movimento por cena. Aplicar zoom lento (punch-in) quando o valor medido for < 20%.
+- como testar: Ligar só nas cenas < 20% e comparar o % assistido do mesmo canal em lotes seguintes. Só vale decidir com mais elegíveis: hoje são 17 de 532 vídeos com % assistido medido.
+
+## 22/11 03:34 PROPOSTA [CERTEZA] Limitar largura máxima e aplicar margem segura na legenda palavra a palavra (agy/gemini-3.8-flash-high)
+- prova: sem-obra-9db147_cap1_20261121 q06: a palavra 'DEPOIS' ficou gigante e cortou nas laterais por exceder a tela; sem-obra-1bffca_cap1_20261121 q01: 'INICIA' cortada e descentralizada na base; sem-obra-1bffca_cap1_20261121 q16 e q18: palavras coladas na borda inferior sob risco de cobrir botões do player.
+- onde: Módulo de renderização de legendas dinâmicas (cálculo de tamanho de fonte, escala de destaque e posicionamento x/y em cortes_legenda / gerador ASS).
+- como testar: Implementar restrição de largura máxima (largura da tela menos 120 px de margem lateral de segurança) com redução de escala quando a palavra exceder a área útil, além de clamp vertical mínimo (y >= 150 px do rodapé). Re-renderizar sem-obra-9db147 e sem-obra-1bffca e checar nos frames se 'DEPOIS' e 'INICIA' mantêm respiro de margem.
+
+## 22/11 03:34 PROPOSTA [GOSTO] Garantir contraste e opacidade em palavras de destaque e tarjas sobre fundos concorrentes (agy/gemini-3.8-flash-high)
+- prova: sem-obra-9db147_cap1_20261121 q04 ('ENTRA' em azul claro com leitura fraca sobre fundo cinza) e q03 (tarja rosa com baixa opacidade deixando dedos visíveis por trás); sem-obra-91b65a_cap1_20261121 q10 ('NO MERCADO' competindo com a cor da carne crua na bacia).
+- onde: Estilização de destaque da legenda dinâmica e tarjas gráficas: espessura de borda (stroke), sombra preta e canal alfa das caixas de destaque.
+- como testar: Aumentar a espessura da sombra/contorno preto da fonte para garantir contraste mínimo e definir opacidade mínima de 85% para tarjas de destaque, preservando as cores originais pedidas pela dona. Validar em teste visual nos quadros citados.
+
+## 22/11 03:34 PROPOSTA [GOSTO] Aplicar zoom suave (punch-in) em tomadas com movimento medido inferior a 20% (agy/gemini-3.8-flash-high)
+- prova: sem-obra-9db147_cap1_20261121 q07 (cena 3 com apenas 7.3% de movimento), sem-obra-91b65a_cap1_20261121 q04 (cena 2 com 19.2%) e sem-obra-9f64de_cap1_20261121 q10/q12 (cena 4 com 23.7%).
+- onde: Etapa de montagem de takes e filtros de movimento do render.
+- como testar: Nas cenas identificadas com movimento medido < 20%, ativar escala progressiva suave (100% para 108% ao longo do take) para dinamizar a imagem sem cortar o ponto focal.
+
+## 22/11 05:47 PROPOSTA [GOSTO] Desviar a legenda palavra a palavra do rosto quando a palavra cai sobre olhos ou boca (gemini-4-argon)
+- prova: Júri grave em d0455b q17 e q02, e retenção 6.0 e 7.0 em aea925 q01 e q03 e em d0455b: palavra grande sobre olhos ou boca. Ocorre em 2 de 4 Shorts. Bate com a regra 1 do APRENDIDO (rosto livre), que ainda não foi cruzada com as DECISOES_DONO.
+- onde: Não identifiquei o arquivo: a função do render que define a posição Y e o lado da legenda palavra a palavra (e da tarja de gancho). Uma sessão forte localiza.
+- como testar: Confirmar primeiro nas DECISOES_DONO que mover a legenda não contradiz o gosto da dona (ela prefere palavras de impacto maiores e de lado). Rodar um detector de rosto nos quadros de 15–20 Shorts; quando o rosto cruzar a caixa da legenda, deslocar a legenda para cima ou para baixo, ou para o lado. Comparar a nota média do júri e o % assistido com o grupo sem a mudança. Se a nota média cair, desfazer.
+
+## 22/11 05:47 PROPOSTA [GOSTO] Mais movimento (punch-in ou pan lento) nas cenas finais de baixo movimento (gemini-4-argon)
+- prova: d0455b q13: cena 5 com 7,6%, o menor do Short. 9e385f q16 e q18: cena 6 com 15,6%, o menor do Short. As notas de movimento foram 9.0 e 9.0, então o impacto é pequeno. O júri citou um 'limite de 4%' com 9,2% já acima dele; o critério é inconsistente.
+- onde: Função que escolhe zoom/pan por cena no render, ligada ao movimento medido por cena.
+- como testar: Aplicar punch-in suave só nas cenas abaixo de 15% de movimento em um subconjunto de Shorts e comparar o % assistido no fim do vídeo com o mesmo tipo de Short sem a mudança. Só vale se o retorno aparecer na retenção, não só na nota do júri.
+
+## 22/11 07:06 PROPOSTA [CERTEZA] Folha do topo no 1,5 s dos Shorts do dia para medir o título cortado/borrado (cw/claude-sonnet-5-5)
+- prova: sem-obra-6c188e q01, q02 e q03: título 'JURUPOCA ESPORTIVA SABOR...' repetido ('JURUPO... JURUPO...'), cortado na lateral e colado no limite superior. Só 1 Short no lote, então ainda não é padrão.
+- onde: D:\tmp\folha_topo.py (folha do topo, 1 imagem) e a função que desenha o título/tarja do topo, para conferir margem lateral e o texto duplicado
+- como testar: Rodar a folha do topo em todos os Shorts do dia. Se >= 2 mostrarem título cortado ou duplicado, tratar como defeito de CERTEZA (quebra de linha e margem lateral do título). Se só este aparecer, é caso isolado e se descarta.
+
+## 22/11 07:06 PROPOSTA [GOSTO] Gancho que abre com palavra solta sem contexto ('CINCO') (cw/claude-sonnet-5-5)
+- prova: sem-obra-aaa78b q01 (retenção 4.0, grave): a primeira palavra da legenda aparece sozinha e grande, sem pergunta nem gatilho. Só 1 Short, e o júri às vezes erra o que é intencional.
+- onde: Roteiro: primeira frase do gancho (cortes_ajustes.json:regras_roteiro, só se repetir)
+- como testar: Conferir no roteiro.txt do Short se a 1ª frase realmente começa com número solto. Se >= 2 Shorts do próximo lote abrirem assim, propor 1 regra curta de roteiro: 'Abra com frase completa que gere curiosidade, nunca com número ou palavra solta.' e medir.
+
+## 22/11 07:06 PROPOSTA [GOSTO] Cena final com movimento baixo (15–19%) (cw/claude-sonnet-5-5)
+- prova: sem-obra-9e385f q16/q18 (cena 6, 15.6%) e sem-obra-aaa78b q10 (cena 4, 18.7%). Duas ocorrências leves, em cenas diferentes; não há alavanca de movimento disponível.
+- onde: Função de zoom/pan por cena (punch-in) no pipeline de edição
+- como testar: Aumentar o zoom/pan mínimo em cenas com movimento medido < 20% e comparar o % assistido mediano nos elegíveis (hoje 47.8) antes e depois.

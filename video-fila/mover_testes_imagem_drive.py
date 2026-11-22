@@ -44,6 +44,12 @@ ITENS = [
     (r"D:\hipercool-materiais\teste_capas", "testes de capa antigos"),
     (r"D:\hipercool-materiais\engenharia_reversa\capas_teste_ab", "capas do teste A/B da engenharia reversa"),
     (r"D:\hipercool-materiais\capas_longos_refeitas\_teste_tema_cor", "teste de tema/cor das capas dos longos"),
+    # 21/11 dona: "testes mais antigos que não sejam de hoje de imagem, vídeo etc. — mande pro Drive"
+    # (os caminhos D:\recapd-ambientes\producao\workspace\videos e D:\hipercool-videos\workspace\videos são JUNÇÃO
+    # pra esta mesma pasta — só o caminho real aqui)
+    (r"D:\hipercool-materiais\videos\longo\the-inheritor\_tmp_cap03_hi",
+     "sobra de render (_tmp) do cap 3 do longo The Inheritor"),
+    (r"D:\hipercool-materiais\fluxo-anuncio-api\provas", "provas antigas do fluxo de anúncio pela API"),
 ]
 # arquivos soltos das capas dos longos (folhas de comparação e testes de 02-19/11) -> 1 pasta no Drive
 SOLTOS_DIR = Path(r"D:\hipercool-materiais\capas_longos_refeitas")

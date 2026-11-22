@@ -74,6 +74,9 @@ def categoria(t):
 
 
 EMO = {
+    "qwen3": {"anima": "Fale muito empolgado, como narrador de futebol.", "triste": "Fale triste e decepcionado.",
+              "ri": "Fale rindo, de forma brincalhona.", "frustra": "Fale irritado e frustrado."},
+    "voxcpm2": {"anima": "muito empolgado", "triste": "triste", "ri": "rindo, brincalhão", "frustra": "irritado"},
     "higgs": {"anima": "<|emotion:enthusiasm|>", "triste": "<|emotion:sadness|>", "ri": "<|emotion:amusement|>",
               "frustra": "<|emotion:anger|>"},
     "cosyvoice": {"anima": "Please speak with great excitement.", "triste": "Please speak sadly.",
@@ -162,6 +165,67 @@ for t in tarefas:
         print("ERRO", t["saida"], repr(e)[:300], flush=True)
 """
 
+
+W_QWEN = r"""
+import json, sys, torch, soundfile as sf
+from qwen_tts import Qwen3TTSModel
+ref, reftxt, tarefas = sys.argv[1], open(sys.argv[2], encoding="utf-8").read().strip(), json.load(open(sys.argv[3], encoding="utf-8"))
+m = Qwen3TTSModel.from_pretrained("Qwen/Qwen3-TTS-12Hz-1.7B-Base", device_map="cuda:0", dtype=torch.float16)
+for t in tarefas:
+    try:
+        torch.manual_seed(t["seed"])
+        # 21/11: além da referência inteira (o texto tem que bater com o áudio), limite de tokens pelo tamanho do texto
+        # e penalidade de repetição — o Qwen continuava falando ("diz o roteiro", "espera ele vestir de novo")
+        kw = {"max_new_tokens": max(200, int(len(t["texto"]) * 6)), "repetition_penalty": 1.15}
+        if t["emo"]:
+            kw["instruct"] = t["emo"]
+        wavs = None
+        for tent in (kw, {"max_new_tokens": kw["max_new_tokens"]}, {}):
+            try:
+                wavs, sr = m.generate_voice_clone(text=t["texto"], language="Portuguese", ref_audio=ref,
+                                                  ref_text=reftxt, **tent)
+                break
+            except TypeError:
+                continue
+        sf.write(t["saida"], wavs[0], sr)
+        print("ok", t["saida"], flush=True)
+    except Exception as e:
+        print("ERRO", t["saida"], repr(e)[:300], flush=True)
+"""
+W_VOX = r"""
+import json, sys, soundfile as sf
+from voxcpm import VoxCPM
+ref, reftxt, tarefas = sys.argv[1], open(sys.argv[2], encoding="utf-8").read().strip(), json.load(open(sys.argv[3], encoding="utf-8"))
+m = VoxCPM.from_pretrained("openbmb/VoxCPM2", load_denoiser=False)
+for t in tarefas:
+    try:
+        texto = (("(" + t["emo"] + ")") if t["emo"] else "") + t["texto"]
+        wav = m.generate(text=texto, prompt_wav_path=ref, prompt_text=reftxt, reference_wav_path=ref, cfg_value=2.0,
+                         inference_timesteps=10, seed=t["seed"])
+        sf.write(t["saida"], wav, m.tts_model.sample_rate)
+        print("ok", t["saida"], flush=True)
+    except Exception as e:
+        print("ERRO", t["saida"], repr(e)[:300], flush=True)
+"""
+W_POCKET = r"""
+import json, sys, torch, scipy.io.wavfile
+from pocket_tts import TTSModel
+ref, tarefas = sys.argv[1], json.load(open(sys.argv[3], encoding="utf-8"))
+try:
+    m = TTSModel.load_model(language="portuguese")
+except TypeError:
+    m = TTSModel.load_model()
+st = m.get_state_for_audio_prompt(ref)
+for t in tarefas:
+    try:
+        torch.manual_seed(t["seed"])
+        a = m.generate_audio(st, t["texto"])
+        scipy.io.wavfile.write(t["saida"], m.sample_rate, a.numpy())
+        print("ok", t["saida"], flush=True)
+    except Exception as e:
+        print("ERRO", t["saida"], repr(e)[:300], flush=True)
+"""
+
 W_INDEX = r'''
 import json, os, sys, torch
 os.chdir("/tmp/index-tts"); sys.path.insert(0, "/tmp/index-tts")
@@ -241,6 +305,20 @@ def preparar(motor):
         py = venv("f5", "3.11")
         pip(py, "f5-tts", "soundfile", "huggingface_hub")
         return py, W_F5, False
+    if motor == "qwen3":
+        py = venv("qwen3", "3.11")
+        pip(py, "torch==2.5.1", "torchaudio==2.5.1", t=3600)
+        pip(py, "qwen-tts", "soundfile", t=3600)
+        return py, W_QWEN, True
+    if motor == "voxcpm2":
+        py = venv("voxcpm2", "3.11")
+        pip(py, "torch==2.6.0", "torchaudio==2.6.0", t=3600)  # 21/11: o voxcpm exige torch >= 2.6
+        pip(py, "voxcpm", "soundfile", t=3600)
+        return py, W_VOX, True
+    if motor == "pocket":
+        py = venv("pocket", "3.11")
+        pip(py, "pocket-tts", "scipy", t=3600)
+        return py, W_POCKET, False
     if motor == "xtts2":
         py = venv("xtts", "3.11")
         pip(py, "torch==2.5.1", "torchaudio==2.5.1", t=3600)
@@ -395,7 +473,7 @@ def main():
         ref = vz / voz / "referencia_fish.wav"
         # referência mono 24 kHz e no máx. 15 s (F5/XTTS/IndexTTS cortam ou estouram com referência longa)
         ref15 = vz / voz / "ref_15s.wav"
-        lim = 9 if motor == "f5" else 15
+        lim = 9 if motor == "f5" else (60 if motor == "qwen3" else 15)
         sh(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-t", str(lim), "-ac", "1", "-ar", "24000", str(ref15)])
         reftxt = vz / voz / "referencia_fish.txt"
         if lim < 15:  # texto da referência cortado na mesma proporção (o F5 precisa do texto do trecho)
@@ -473,7 +551,7 @@ def main():
                 posprocessar(ws, linhas, forca=(0.8 if motor == "xtts2" else 0.5), cadencia=(pos == "cad"))
             log(f"{voz} {motor} {nome}: {len(ws)}/18 frases")
             if ws:
-                juntar(ws, S / f"{voz}_{motor}_{nome}.wav")
+                juntar(ws, S / f"{voz}_{motor}{plano.get('sufixo', '')}_{nome}.wav")
     sh(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=64x64:d=1", str(S / "video.mp4")])
     log("FIM")
 

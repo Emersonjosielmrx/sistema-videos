@@ -20363,5 +20363,115 @@
     "arquivado": false,
     "descricao": "Codex skill for layered paper-cut, vintage collage, and 2.5D parallax videos with Remotion.",
     "data": "2026-11-21"
+  },
+  "busraonder/adb-watchdog": {
+    "ok": true,
+    "nome": "BusraOnder/adb-watchdog",
+    "estrelas": 0,
+    "push": "2026-10-05",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Menu bar app that monitors ADB connections and reconnects automatically",
+    "data": "2026-11-21"
+  },
+  "ghost-in-the-droid/android-agent": {
+    "ok": true,
+    "nome": "ghost-in-the-droid/android-agent",
+    "estrelas": 430,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Give any AI agent a real phone: Android over ADB, iPhone over WebDriverAgent. 66 MCP tools, a Skill Hub with 117 skills for 113 apps, and hu",
+    "data": "2026-11-21"
+  },
+  "florianrolke/community-resources": {
+    "ok": true,
+    "nome": "florianrolke/community-resources",
+    "estrelas": 1,
+    "push": "2026-11-17",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Free Claude Code and Codex skills, tools and templates for AI agency owners and creators. One folder per resource.",
+    "data": "2026-11-21"
+  },
+  "temet-ai/ask-kit-phone": {
+    "ok": true,
+    "nome": "temet-ai/ask-kit-phone",
+    "estrelas": 0,
+    "push": "2026-11-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "ask-kit kit: an Android phone reached over adb (USB or wireless, the device set by the PHONE_SERIAL setting or the first one connected) as i",
+    "data": "2026-11-21"
+  },
+  "realjesseyu/anime2stereo": {
+    "ok": true,
+    "nome": "RealJesseYu/anime2stereo",
+    "estrelas": 0,
+    "push": "2026-10-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Lift 2D cel animation into stereoscopic 3D: cel segmentation, clean-plate inpainting, layered depth-image-based rendering",
+    "data": "2026-11-21"
+  },
+  "golanse/easymerger": {
+    "ok": true,
+    "nome": "golanse/easymerger",
+    "estrelas": 4,
+    "push": "2026-09-24",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "EasyMerger — 基于 FFmpeg 的无损视频（短剧/漫剧）合并工具，自动检测并修复参数差异（分辨率/编码/帧率/音频 Profile），PySide6 图形界面EasyMerger — A lossless video (short dramas/comic anim",
+    "data": "2026-11-21"
+  },
+  "xd06/gemini-free-api": {
+    "ok": true,
+    "nome": "XD06/gemini-free-api",
+    "estrelas": 18,
+    "push": "2026-11-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Reverse-engineered the Gemini web interface and turned it into a usable API, supporting streaming responses and simple tool invocation.逆向Gem",
+    "data": "2026-11-21"
+  },
+  "xelth-com/gemini-mcp": {
+    "ok": true,
+    "nome": "xelth-com/gemini-mcp",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Use your local MCP tools from the free Gemini web app — no API key, no paid plan, no cookies. Unofficial.",
+    "data": "2026-11-21"
+  },
+  "vadim-a-yegorov/mcp-gemini-deep-research": {
+    "ok": true,
+    "nome": "vadim-a-yegorov/mcp-gemini-deep-research",
+    "estrelas": 3,
+    "push": "2026-08-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini (webapi) Deep Research MCP server.",
+    "data": "2026-11-21"
+  },
+  "aleixrodriala/adb-qr": {
+    "ok": true,
+    "nome": "aleixrodriala/adb-qr",
+    "estrelas": 2,
+    "push": "2026-06-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "The missing adb pair --qr: pair Android wireless debugging by scanning a QR code in your terminal. Works everywhere adb does, even WSL2.",
+    "data": "2026-11-22"
+  },
+  "akashdeep000/gemini-imagegen-unofficial-api": {
+    "ok": true,
+    "nome": "akashdeep000/gemini-imagegen-unofficial-api",
+    "estrelas": 0,
+    "push": "2026-11-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-22"
   }
 }

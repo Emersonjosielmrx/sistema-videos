@@ -276,6 +276,86 @@ def legenda_criativa(cartoes, vw, vh, cor_cena=AMARELO, eh_abertura=True):
     return estilos, linhas
 
 
+# 21/11 dona (referência vC8wHSjxsg4: a barra do tempo é um RAIO de energia que cresce com uma bola brilhando na ponta;
+# "efeitos assim mostrando o tempo do vídeo, em Shorts e longos, mas embaixo, não no meio da tela"): a linha amarela
+# fina virou barra viva no pé da tela — faixa com brilho (blur) + núcleo claro, bola pulsando na ponta e faíscas em
+# zigue-zague tremendo atrás dela. Estilo por vídeo (raio, fogo, neon; sorteio estável pelo nome do arquivo).
+# ANIME_BARRA=antiga volta a linha amarela; ANIME_BARRA=raio|fogo|neon fixa um estilo.
+BARRA_ESTILOS = {  # brilho, núcleo, faísca (&H00BBGGRR)
+    "raio": ("&H00FF9030", "&H00FFF4DC", "&H00FFE0A0"),
+    "fogo": ("&H000060FF", "&H0080E8FF", "&H0040B0FF"),
+    "neon": ("&H00C828FF", "&H00FFFFFF", "&H00FFFF40"),
+}
+
+
+def _circulo(r):
+    k = r * 0.552
+    return (f"m {r:.0f} 0 b {r + k:.0f} 0 {2 * r:.0f} {r - k:.0f} {2 * r:.0f} {r:.0f} "
+            f"b {2 * r:.0f} {r + k:.0f} {r + k:.0f} {2 * r:.0f} {r:.0f} {2 * r:.0f} "
+            f"b {r - k:.0f} {2 * r:.0f} 0 {r + k:.0f} 0 {r:.0f} b 0 {r - k:.0f} {r - k:.0f} 0 {r:.0f} 0")
+
+
+def barra_criativa(vw, vh, dur, video=None):
+    """Eventos ASS da barra de tempo viva (ou [] = linha amarela antiga)."""
+    escolha = (os.environ.get("ANIME_BARRA") or "").strip().lower()
+    if escolha == "antiga":
+        return []
+    if escolha not in BARRA_ESTILOS:
+        import hashlib
+        nomes = sorted(BARRA_ESTILOS)
+        escolha = nomes[int(hashlib.md5(str(video or dur).encode()).hexdigest(), 16) % len(nomes)]
+    brilho, nucleo, faisca = BARRA_ESTILOS[escolha]
+    import random
+    rnd = random.Random(int(dur * 1000))
+    hh = max(6, vh // 150)                      # espessura da faixa (12 px no Short 1920, 7 no longo 1080)
+    yc = vh - int(hh * 2.4)                     # centro da faixa: no pé, com folga pra bola e o brilho
+    ms = int(dur * 1000)
+    rect = lambda a: f"m 0 0 l {vw} 0 l {vw} {a} l 0 {a}"  # noqa: E731
+    cresce = f"\\fscx0\\t(0,{ms},\\fscx100)"
+    ev = [
+        # trilho apagado (mostra quanto falta)
+        f"Dialogue: 1,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh // 2})\\p1\\c&H000000&\\alpha&HA0&}}"
+        f"{rect(hh)}{{\\p0}}",
+        # brilho largo + núcleo claro, crescendo junto
+        f"Dialogue: 2,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh})\\p1\\c{brilho}\\blur{hh}{cresce}}}"
+        f"{rect(hh * 2)}{{\\p0}}",
+        f"Dialogue: 3,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - max(1, hh // 4)})\\p1\\c{nucleo}"
+        f"\\blur1{cresce}}}{rect(max(2, hh // 2))}{{\\p0}}",
+    ]
+    x_de = lambda t: vw * t / dur  # noqa: E731
+    r = hh * 2.0
+    passo = 1.0
+    t = 0.0
+    while t < dur:  # bola na ponta: anda com a barra e pulsa (1 linha por segundo)
+        t1 = min(dur, t + passo)
+        d = int((t1 - t) * 1000)
+        mov = f"\\move({x_de(t):.0f},{yc},{x_de(t1):.0f},{yc},0,{d})"
+        ev.append(f"Dialogue: 4,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{brilho}\\blur{int(r)}"
+                  f"\\fscx160\\fscy160\\t(0,{d // 2},\\fscx210\\fscy210)\\t({d // 2},{d},\\fscx160\\fscy160)}}"
+                  f"{_circulo(r)}{{\\p0}}")
+        ev.append(f"Dialogue: 5,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{nucleo}\\blur2"
+                  f"\\t(0,{d // 2},\\fscx120\\fscy120)\\t({d // 2},{d},\\fscx100\\fscy100)}}{_circulo(r * 0.7)}{{\\p0}}")
+        t = t1
+    t, passo, cauda = 0.0, (0.25 if dur <= 240 else 0.5), vw * 0.07  # longo: 2 trocas/s (arquivo ASS menor)
+    while t < dur:  # faíscas em zigue-zague atrás da bola, trocando 4x por segundo (treme como eletricidade)
+        t1 = min(dur, t + passo)
+        x1 = x_de((t + t1) / 2)
+        x0 = max(0.0, x1 - cauda)
+        if x1 - x0 > hh * 2:
+            pts, n = [], 7
+            for j in range(n + 1):
+                pts.append((x0 + (x1 - x0) * j / n, yc + (rnd.uniform(-1.6, 1.6) * hh if 0 < j < n else 0)))
+            ida = " ".join(f"{x:.0f} {y:.0f}" for x, y in pts[1:])
+            esp = max(3, hh // 2)  # raio grosso o bastante pra ler no celular
+            volta = " ".join(f"{x:.0f} {y + esp:.0f}" for x, y in reversed(pts))
+            ev.append(f"Dialogue: 3,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{brilho}\\blur{hh}"
+                      f"}}m {pts[0][0]:.0f} {pts[0][1]:.0f} l {ida} {volta}{{\\p0}}")
+            ev.append(f"Dialogue: 3,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{faisca}\\blur1"
+                      f"}}m {pts[0][0]:.0f} {pts[0][1]:.0f} l {ida} {volta}{{\\p0}}")
+        t = t1
+    return ev
+
+
 def extras(gancho_in, video=None, na_legenda=False):
     """na_legenda=True (legenda ASS do longo): a abertura criativa vem da própria legenda falada (fx_subtitles +
     legenda_criativa) e o gancho escrito, que não bate com a fala, não entra."""
@@ -302,10 +382,14 @@ def extras(gancho_in, video=None, na_legenda=False):
             ev.append(f"Dialogue: 3,{_ts(0)},{_ts(min(3.2, dur))},Hook,,0,0,0,,"
                       f"{{\\an8\\pos({vw // 2},{y})\\fad(0,300)}}" + "\\N".join(_linhas(gancho, retrato)))
         if dur > 5:
-            h = max(6, vh // 160)
-            rect = f"m 0 0 l {vw} 0 l {vw} {h} l 0 {h}"
-            ev.append(f"Dialogue: 2,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,"
-                      f"{{\\an7\\pos(0,{vh - h})\\p1\\c{AMARELO}\\fscx0\\t(0,{int(dur * 1000)},\\fscx100)}}{rect}{{\\p0}}")
+            barra = barra_criativa(vw, vh, dur, video)
+            if barra:
+                ev += barra
+            else:
+                h = max(6, vh // 160)
+                rect = f"m 0 0 l {vw} 0 l {vw} {h} l 0 {h}"
+                ev.append(f"Dialogue: 2,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,"
+                          f"{{\\an7\\pos(0,{vh - h})\\p1\\c{AMARELO}\\fscx0\\t(0,{int(dur * 1000)},\\fscx100)}}{rect}{{\\p0}}")
         return estilos, ev
     return fn
 

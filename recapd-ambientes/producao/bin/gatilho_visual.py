@@ -113,7 +113,11 @@ def aplicar(lines, tags):
     ja = re.compile(r"(?i)(respeito|gostos|poderosa|macet|safad|del[ií]cia|acordo|particular|experiência)")
     lines, n, ultimo = list(lines), 0, -99
     for i, tag in sorted(tags.items()):
-        if tag != "sensual" or i >= len(lines) or i - ultimo < 6 or ja.search(lines[i]):
+        # 21/11 dona: "o S do respeito está sendo usado EXCESSIVAMENTE (vídeo do Virjão) — só na primeira vez que a
+        # personagem aparece". Sem saber quem é a personagem na imagem: no máximo 1 a cada 150 frases (~1 por
+        # personagem nova) e nunca se o roteiro já usou "respeito" nas 150 frases antes.
+        if (tag != "sensual" or i >= len(lines) or i - ultimo < 150 or ja.search(lines[i])
+                or any("respeito" in (x or "").lower() for x in lines[max(0, i - 150):i])):
             continue
         frase = lines[i].rstrip()
         fim = frase[-1] if frase and frase[-1] in ".!?" else "."

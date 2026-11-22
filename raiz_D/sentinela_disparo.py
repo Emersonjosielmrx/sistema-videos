@@ -100,6 +100,12 @@ def provedor(modelo):
     m = (modelo or "").lower()
     if "fable" in m:  # 13/11 (dona): Fable 5.2 tem limite próprio nas contas cc; acorda só quando o Fable volta
         return "fable"
+    # 22/11 (dona): Sonnet 5.5 web (cc/claude-sonnet-5-5 vai pela sonnet-fila, que só tem cw/) = crédito próprio
+    if m.startswith(("cw/", "claude-web/")) or m in ("cc/claude-sonnet-5-5", "sonnet-fila"):
+        return "sonnetweb"
+    # 22/11 (dona): "Opus pago+Sonnet web" = fila do opus-auto e, no fim, o Sonnet web
+    if m.startswith("opus-pago-sonnetweb"):
+        return "opus_sonnetweb"
     if m.startswith(("cc/", "claude/")):
         return "claude"
     if "opus-4-6" in m:
@@ -113,7 +119,9 @@ def provedor(modelo):
 
 # 09/11 (dona): modo automático (pago ou grátis) acorda quando QUALQUER Opus 5.5 voltar, não só o cc
 FONTES = {"claude": ("claude",), "antigravity": ("antigravity",), "ag46": ("ag46",), "fable": ("fable",),
-          "auto": ("claude", "antigravity"), None: ("claude", "antigravity", "ag46")}
+          "auto": ("claude", "antigravity"), "sonnetweb": ("sonnetweb",),
+          "opus_sonnetweb": ("claude", "antigravity", "ag46", "sonnetweb"),
+          None: ("claude", "antigravity", "ag46")}
 
 
 def credito(cota, prov):
@@ -148,7 +156,7 @@ def escolher(alvos, cota):
         return sorted(alvos, key=lambda x: x["quando"] or "")
     for a in sorted(alvos, key=lambda x: x["quando"] or ""):
         # poupar/gastar vem das contas cc: só vale para chat que gasta cc
-        poupa = modo == "poupar" and a["prov"] in ("claude", "fable", "auto", "qualquer")
+        poupa = modo == "poupar" and a["prov"] in ("claude", "fable", "auto", "opus_sonnetweb", "qualquer")
         limite = MIN_POR_PROV if poupa else max(MIN_POR_PROV, credito(cota, a["prov"]) or total)
         if por_prov.get(a["prov"], 0) < limite:
             por_prov[a["prov"]] = por_prov.get(a["prov"], 0) + 1
@@ -499,7 +507,8 @@ def main():
         estado = json.loads(ESTADO.read_text(encoding="utf-8"))
     except (ValueError, OSError):
         estado = {}
-    leituras = [sc.consultar("claude"), sc.consultar("antigravity"), sc.consultar("ag46"), sc.consultar("fable")]
+    leituras = [sc.consultar("claude"), sc.consultar("antigravity"), sc.consultar("ag46"), sc.consultar("fable"),
+                sc.consultar("sonnetweb")]
     cota = {p["provider"]: p.get("com_credito", 0) for p in leituras}
     # 2ª camada da leitura: ssh caiu = usa o último crédito lido, em vez de achar que é 0 e não acordar ninguém
     falhas = [p for p in leituras if p.get("erro")]

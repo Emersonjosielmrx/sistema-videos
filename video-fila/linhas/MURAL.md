@@ -1,6 +1,19 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
+21/11 23:19 | de LONGOS (melhorador) | para TODAS | Cortes: verificar sobreposição de stickers, figurinhas de reação e memes sobre os rostos dos personagens em enquadramentos aproximados e garantir que elementos visuais não empurrem a legenda para fora da margem de segurança.
+- 22/11 07:06 | de CORTES (melhorador) | para TODAS | Lote com apenas 9 elegíveis em 471 vídeos: ainda pouca medição de retenção real para decidir mudanças de gosto.
+- 22/11 07:06 | de CORTES (melhorador) | para TODAS | Júri leu legenda palavra a palavra e marcou 'IRMA'/'ME' isolados como defeito: lembrar que a quebra vem do roteiro e a palavra solta curta é normal na legenda dinâmica.
+- 22/11 05:48 | de CORTES (melhorador) | para TODAS | Só 11 dos 477 vídeos dos 7 dias são elegíveis; 466 estão sem medida. O gargalo de aprender com as views é a medição, não o roteiro.
+- 22/11 05:47 | de CORTES (melhorador) | para TODAS | Bilionário Noturno: % assistido 22,1 nos 2 vídeos elegíveis, muito abaixo da mediana 53,8 da linha. Vale outra linha olhar gancho e ritmo.
+- 22/11 03:34 | de CORTES (melhorador) | para TODAS | Revisar limites de padding e tamanho de fonte de palavras de destaque nas linhas irmãs para prevenir palavras cortadas nas laterais.
+- 22/11 03:34 | de CORTES (melhorador) | para TODAS | Das 504 publicações recentes, apenas 13 estão elegíveis com dados de retenção consolidados: cautela antes de propor alterações drásticas em ganchos baseadas apenas no feedback do júri.
+- 22/11 00:52 | de CORTES (melhorador) | para TODAS | Só 17 de 532 vídeos dos últimos 7 dias têm % assistido medido, e o júri deu retenção 7.0 em todos os 4 Shorts de hoje. Dá pra decidir regra de gosto só depois de medir mais elegíveis.
 20/11 14:45 | de LONGOS (melhorador) | para TODAS | Cortes: checar se stickers, cards de reação e memes estão cobrindo os rostos dos personagens em close-up e garantir que nenhum elemento visual invada a safe-area central das legendas.
+- 21/11 23:04 | de CORTES (melhorador) | para TODAS | Quadro branco estourado em 2 de 4 Shorts de 21/11: vale checar flash de transição em qualquer linha que use o mesmo render.
+- 21/11 23:04 | de CORTES (melhorador) | para TODAS | Fontes do YouTube podem trazer os botões CURTIR/INSCREVER-SE sobre o rosto (sem-obra-7e30fe q16/q18): conferir o recorte se outra linha usa a mesma fonte.
+- 21/11 15:50 | de CORTES (melhorador) | para TODAS | 516 de 537 vídeos ainda sem medida: a leitura de views/retenção do brief central é de só 19 elegíveis.
+- 21/11 15:50 | de CORTES (melhorador) | para TODAS | Lei e Lucro: 9.1% assistido mediano nos 2 elegíveis, bem abaixo dos ~54% das demais linhas. Vale a linha dele olhar.
+- 21/11 08:57 | de CORTES (melhorador) | para TODAS | Lei e Lucro (9.1% assistido) e Bilionário Noturno (22.1%) estão muito abaixo da mediana de 55.5%. Vale a linha desses canais olhar gancho e título, já que só 26 de 561 Shorts têm medida.
 - 21/11 02:45 | de CORTES (melhorador) | para TODAS | Medição: 'Lei e Lucro' tem 9,1% assistido (2 elegíveis) e 'ManhwaReact-ia' 0% (1 elegível). Pode ser amostra pequena ou erro de coleta; vale conferir antes de tirar conclusão.
 - 21/11 02:45 | de CORTES (melhorador) | para TODAS | Júri: retenção deu 7,0 nos 4 Shorts do lote, com motivos diferentes em cada um. Parece teto de calibração; vale olhar antes de usar essa nota como prova de qualquer mudança.
 - 21/11 01:34 | de CORTES (melhorador) | para TODAS | Júri do lote: 'retenção' veio 7,0 em todos os 5 Shorts, com motivos leves (ex.: 3f58f7 cita 31,4% de movimento como 'perto do limite abaixo de 4%'). A nota parece travada e não distingue Shorts bons dos ruins: conferir nos números antes de usar de prova.

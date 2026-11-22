@@ -247,7 +247,7 @@ def inventario(cfg, politica, so_aprovados=True):
         # antes eram os 3 mais antigos da rede inteira e o canal novo ficava sem vídeo enquanto o outro tinha fila.
         por_canal = {}
         for _t, it3 in sorted(tres_d, key=lambda t: t[0]):
-            ch3 = (it3.get("so_canais") or ["inventoreact"])[0]
+            ch3 = (it3.get("so_canais") or it3.get("dados", {}).get("canais") or ["inventoreact"])[0]
             if por_canal.get(ch3, 0) >= REDE_3D_POR_DIA:
                 continue
             por_canal[ch3] = por_canal.get(ch3, 0) + 1

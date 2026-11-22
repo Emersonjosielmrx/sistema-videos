@@ -155,6 +155,15 @@ def apply_effects_to_cmd(cmd, transition_type, sfx_file, duration):
         fc_idx += 2
 
         sfx_vol = "1.2" if transition_type == "flash" or "impact" in str(sfx_file) else "0.8"
+        # 21/11 dona (longos): som de transição + memes = som externo demais -> o de transição bem mais baixo
+        _tv = os.environ.get("ANIME_SFX_TRANS_VOL")
+        if _tv:
+            try:
+                from fx_detect import e_som_transicao
+                if e_som_transicao(sfx_file) and 0 < float(_tv) < 1:
+                    sfx_vol = f"{float(sfx_vol) * float(_tv):g}"
+            except (ImportError, ValueError):
+                pass
         # Duração de reprodução do SFX no mix:
         #  - teto pela duração do clip (amix usa duration=first → nunca estende vídeo)
         #  - teto absoluto SFX_PLAY_MAX (default 1.5s) pra um SFX longo (ex:

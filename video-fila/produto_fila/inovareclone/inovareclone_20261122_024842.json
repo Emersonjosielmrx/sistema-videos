@@ -1,0 +1,143 @@
+{
+ "conta": "inovareclone",
+ "produto": "avatar_ia",
+ "marca": "Inovare Clone",
+ "titulo": "Explique seus serviços em vídeo todo dia com Avatar IA",
+ "legenda": "Apresente cada detalhe dos seus serviços sem precisar parar o dia para gravar.\nTenha seu próprio avatar IA postando com consistência nas redes.\nSaiba mais no link do perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Vídeos da sua empresa",
+  "pergunta_cliente": "Falta tempo para explicar seus serviços em vídeo?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu passava o dia atendendo e nunca sobrava tempo para gravar vídeos explicando cada serviço.",
+    "visual": "apresentador",
+    "cenario_en": "standing inside a modern and tidy Brazilian service agency office, bright natural light, professional",
+    "prompt_en": "",
+    "destaques": [
+     "nunca sobrava tempo",
+     "explicando cada serviço"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261122_030239_2.png"
+   },
+   {
+    "rotulo": "A solução",
+    "fala": "Tenha seu próprio avatar IA postando todo dia nas redes. Posturas automáticas, fala em português, cem por cento seu.",
+    "visual": "conversa",
+    "cenario_en": "",
+    "prompt_en": "",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Como vocês conseguem postar explicando cada serviço todo dia?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Usamos nosso próprio avatar IA falando em português."
+     },
+     {
+      "de": "cliente",
+      "texto": "E as posturas ficam naturais no vídeo?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, as posturas automáticas mantêm a apresentação perfeita."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora meus serviços ganham explicações claras nas redes sociais todos os dias, enquanto foco nos atendimentos.",
+    "visual": "apresentador",
+    "cenario_en": "standing inside a bright, well lit and tidy contemporary office, looking directly at the camera with confidence",
+    "prompt_en": "",
+    "destaques": [
+     "explicações claras",
+     "foco nos atendimentos"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261122_030239_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclone_20261122_030239_2.png"
+   }
+  ],
+  "legenda": "Apresente cada detalhe dos seus serviços sem precisar parar o dia para gravar.\nTenha seu próprio avatar IA postando com consistência nas redes.\nSaiba mais no link do perfil.",
+  "titulo": "Explique seus serviços em vídeo todo dia com Avatar IA",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "apresentacao_servicos",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 213,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareclone_20261122_024842\\dono_3.mp4",
+ "duracao_s": 33.11,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-22T03:35:28",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.2,
+   "fala": "Falta tempo para explicar seus serviços em vídeo?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.2,
+   "fim": 12.03,
+   "fala": "Eu passava o dia atendendo e nunca sobrava tempo para gravar vídeos explicando cada serviço.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.03,
+   "fim": 21.34,
+   "fala": "Tenha seu próprio avatar IA postando todo dia nas redes. Posturas automáticas, fala em português, cem por cento seu.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 21.34,
+   "fim": 29.17,
+   "fala": "Agora meus serviços ganham explicações claras nas redes sociais todos os dias, enquanto foco nos atendimentos.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 29.17,
+   "fim": 33.11,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 6.0,
+   "roteiro_marca": 8.0,
+   "diretor": 6.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

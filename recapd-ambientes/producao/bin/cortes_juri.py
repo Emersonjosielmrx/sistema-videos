@@ -342,6 +342,11 @@ def avaliar(pasta_short, com_juri):
             nota = round(sum(v["nota"] for v in vs) / len(vs), 2)
             juri = {"pasta": pasta_short.name, "nota": nota, "verificadores": vs}
             (pasta / "juri.json").write_text(json.dumps(juri, ensure_ascii=False, indent=1), "utf-8")
+            # 21/11 dona (video-fila com 41 mil .jpg do júri = 5,2 GB): depois da nota os quadros q*.jpg não são lidos
+            # de novo (o juri.json só cita o nome); fica a folha.jpg (o resumo visual). JURI_GUARDA_QUADROS=1 mantém.
+            if os.environ.get("JURI_GUARDA_QUADROS") != "1":
+                for q in pasta.glob("q*.jpg"):
+                    q.unlink(missing_ok=True)
             lin.update(nota=nota, notas={v["foco"]: v["nota"] for v in vs},
                        graves=sum(p.get("gravidade") == "grave" for v in vs for p in v["problemas"]))
             _trava_texto_erro(pasta_short, pj, vs, lin)

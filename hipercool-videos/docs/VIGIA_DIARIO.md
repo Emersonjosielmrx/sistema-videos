@@ -484,3 +484,16 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas leitura de status e logs.
 - CONSERTO PROPOSTO: Nenhum. O fluxo está operacional com o comportamento esperado de restrição de espaço em disco (< 10 GB livres).
 - Estado: NADA A FAZER
+## 20261121_1821 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos e regulares a cada 20 minutos (último às 18:12:05 com a mensagem `janela: D: com 3.8 GB livres (< 10) — só o próximo capítulo de cada língua no PC`). A produção está respondendo normalmente dentro do comportamento esperado, com o gerenciamento de espaço em disco ativo.
+- O que fiz: Nenhum arquivo alterado (Modo Só AVISO estrito). Apenas conferência de logs e status da fila.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER
+
+## 20261122_0656 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo ila_postagem.log registra ciclos contínuos a cada 20 minutos (último às 06:46 com "janela: D: com 0.4 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). O Wise Memory Optimizer está rodando (PID 3840). A fila está ativa e operando normalmente, lidando com a restrição de espaço em disco no D:.
+- O que fiz (comandos e arquivos mexidos, com caminho do backup): Modo Só Aviso — nenhum comando de alteração executado, nenhum arquivo modificado.
+- CONSERTO PROPOSTO: Nenhum.
+- Estado: NADA A FAZER

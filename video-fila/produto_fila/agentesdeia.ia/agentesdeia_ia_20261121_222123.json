@@ -1,0 +1,139 @@
+{
+ "conta": "agentesdeia.ia",
+ "produto": "agente_tarefas",
+ "marca": "Agentes de IA",
+ "titulo": "Livre-se das microtarefas que travam sua rotina",
+ "legenda": "Não deixe suas prioridades se perderem no meio das pequenas tarefas da rotina. Delegue a execução diária para um agente inteligente e foque no que importa. Saiba mais no link do perfil.\n\n👉 Chame no direct • link no perfil\n\n#produtividade #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Microtarefas acumuladas no dia?",
+  "pergunta_cliente": "Posso transferir essas pequenas tarefas chatas do dia a dia para ele?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Minhas prioridades ficavam sempre para trás porque as microtarefas acumuladas tomavam todo o meu expediente.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a modern tidy Brazilian office, bright natural light, well organized workspace",
+    "prompt_en": "",
+    "destaques": [
+     "microtarefas acumuladas"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261121_225743_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Você transfere essa rotina para o agente de inteligência artificial, e ele faz as tarefas por você.",
+    "visual": "conversa",
+    "cenario_en": "",
+    "prompt_en": "",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Pode fazer o agendamento da reunião e a pesquisa de mercado?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Claro! Tarefas assumidas. Já estou iniciando a pesquisa e organizando o agendamento."
+     },
+     {
+      "de": "empresa",
+      "texto": "Tudo pronto por aqui. Pesquisa concluída e reunião agendada na sua pauta."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Eu consigo terminar o dia com foco total no negócio, delegando qualquer coisa chata da rotina.",
+    "visual": "apresentador",
+    "cenario_en": "standing beside an organized meeting desk in a clean Brazilian office, soft daylight",
+    "prompt_en": "",
+    "destaques": [
+     "foco total",
+     "delegando qualquer coisa"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261121_225743_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261121_225743_1.png"
+   }
+  ],
+  "legenda": "Não deixe suas prioridades se perderem no meio das pequenas tarefas da rotina. Delegue a execução diária para um agente inteligente e foque no que importa. Saiba mais no link do perfil.",
+  "titulo": "Livre-se das microtarefas que travam sua rotina",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "dor_dia_atropelado",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 194,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\agentesdeia.ia_20261121_222123\\dono_3.mp4",
+ "duracao_s": 31.14,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-21T23:59:25",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.08,
+   "fala": "Posso transferir essas pequenas tarefas chatas do dia a dia para ele?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.08,
+   "fim": 12.75,
+   "fala": "Minhas prioridades ficavam sempre para trás porque as microtarefas acumuladas tomavam todo o meu expediente.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.75,
+   "fim": 19.52,
+   "fala": "Você transfere essa rotina para o agente de inteligência artificial, e ele faz as tarefas por você.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.52,
+   "fim": 27.2,
+   "fala": "Eu consigo terminar o dia com foco total no negócio, delegando qualquer coisa chata da rotina.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.2,
+   "fim": 31.14,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 6.0,
+   "diretor": 6.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

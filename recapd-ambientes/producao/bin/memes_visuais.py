@@ -55,6 +55,38 @@ def _local(arquivo):
     return Path(arquivo)
 
 
+# 21/11 dona (longos): "os memes antigos vou remover alguns pra dar lugar aos NOVOS, que têm prioridade". Os 20 novos
+# com fala (memes_img/memes_novos, até então só no resumo) entram no catálogo com a emoção de cada um e, nas
+# interrupções do meio do vídeo, são escolhidos ANTES dos antigos enquanto houver novo sem usar. MEMES_NOVOS_PRIORIDADE=0
+# volta ao sorteio só entre os antigos. Os que a dona remove (bin/revisar_memes.py) ficam em config/memes_removidos.json
+# e saem de todo sorteio (fx_detect.meme_proibido). Nada é apagado do disco.
+NOVOS_DIR = MEMES_IMG / "memes_novos"
+EMOCAO_NOVOS = {
+    "01": "confusão", "02": "raiva", "03": "deboche", "04": "vergonha", "05": "deboche", "06": "choque",
+    "07": "raiva", "08": "alegria", "09": "raiva", "10": "choque", "11": "choque", "12": "alegria", "13": "deboche",
+    "14": "confusão", "15": "choque", "16": "deboche", "17": "deboche", "18": "deboche", "19": "deboche", "20": "deboche",
+}
+
+
+def _novos():
+    import os
+    if os.environ.get("MEMES_NOVOS_PRIORIDADE", "1") == "0":
+        return []
+    try:
+        lista = json.loads((NOVOS_DIR / "memes.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    from fx_detect import meme_proibido
+    out = []
+    for m in lista:
+        arq = NOVOS_DIR / m["arquivo"]
+        emo = EMOCAO_NOVOS.get(m["arquivo"][:2])
+        if arq.exists() and emo and not meme_proibido(arq):
+            out.append({"file": str(arq), "kind": "video", "duration": m.get("dur"), "has_audio": True,
+                        "desc": m.get("frase", ""), "tags": TAGS.get(emo, [])[:1], "ok": True, "novo": True})
+    return out
+
+
 def catalogo():
     global _cat
     if _cat is None:
@@ -62,7 +94,7 @@ def catalogo():
             raw = json.loads(CATALOGO.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             raw = {}
-        _cat = []
+        _cat = _novos()
         for m in raw.values():
             if m.get("ok"):
                 local = _local(m["file"])
@@ -70,6 +102,15 @@ def catalogo():
                 if (local.exists() and local.suffix.lower() not in (".avif", ".webp")
                         and not meme_proibido(local) and not meme_proibido(m.get("title") or m.get("nome") or "")):
                     _cat.append({**m, "file": str(local)})
+        # 22/11 dona (longos): "quero usar APENAS os memes novos; os antigos continuam sendo muito usados". ANIME_MEMES_SO_NOVOS
+        # (config/longo.json, só vale nos longos): "1" = só os 20 novos em tudo (vídeo e imagem); "video" = só novos nos
+        # vídeos e as imagens antigas continuam. Vazio/0 = como antes. Sem nenhum novo achado (pasta ausente) = não filtra,
+        # pra nunca ficar sem meme. Os arquivos antigos NÃO saem da pasta (os Shorts do hipercool usam os mesmos).
+        import os
+        modo = os.environ.get("ANIME_MEMES_SO_NOVOS", "").strip().lower()
+        if modo in ("1", "video") and any(m.get("novo") for m in _cat):
+            _cat = [m for m in _cat if m.get("novo")
+                    or (modo == "video" and Path(m["file"]).suffix.lower() in IMAGENS)]
     return _cat
 
 
@@ -87,6 +128,9 @@ def escolher(emo, usados, so_com_som=False, rnd=random):
                                     and INTERROMPE_DUR[0] <= float(m.get("duration") or 0) <= INTERROMPE_DUR[1]))]
     da_emocao = [m for m in cand if any(t.lower() in TAGS.get(emo, []) for t in m.get("tags", []))]
     pool = da_emocao or ([] if so_com_som else cand)
+    novos = [m for m in pool if m.get("novo")]  # 21/11 dona: os novos (com fala) primeiro
+    if novos:
+        pool = novos
     if not pool:
         return None
     m = rnd.choice(pool)
@@ -146,12 +190,19 @@ def montar_imagem(meme, out_path, w, h, sfx=None, fps=30):
     if Path(meme["file"]).suffix.lower() == ".gif":
         entrada = ["-ignore_loop", "0", "-t", f"{d:.2f}", "-i", meme["file"]]
     audio = (["-i", str(sfx)] if sfx else ["-f", "lavfi", "-t", f"{d:.2f}", "-i", "anullsrc=r=44100:cl=stereo"])
+    # 21/11 dona (longos): o whoosh do meme de imagem também mais baixo (ANIME_SFX_TRANS_VOL, vazio = como antes)
+    try:
+        import os
+        vol = float(os.environ.get("ANIME_SFX_TRANS_VOL") or 1)
+    except ValueError:
+        vol = 1.0
+    vol_f = f"volume={vol:g}," if sfx and 0 < vol < 1 else ""
     vf = (f"[0:v]fps={fps},format=yuv420p,split[a][b];"
           f"[a]scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},boxblur=20:2[fundo];"
           f"[b]scale={w}:{h}:force_original_aspect_ratio=decrease,"
           f"scale='trunc(iw*(1+0.25*max(0,1-t/0.18))/2)*2':'trunc(ih*(1+0.25*max(0,1-t/0.18))/2)*2':eval=frame[meio];"
           f"[fundo][meio]overlay=(W-w)/2:(H-h)/2,format=yuv420p[v];"
-          f"[1:a]aresample=44100,aformat=channel_layouts=stereo,apad,atrim=duration={d:.2f},"
+          f"[1:a]{vol_f}aresample=44100,aformat=channel_layouts=stereo,apad,atrim=duration={d:.2f},"
           f"afade=t=out:st={d - 0.2:.2f}:d=0.2[au]")
     cmd = ["ffmpeg", "-y", "-v", "error", *entrada, *audio, "-filter_complex", vf, "-map", "[v]", "-map", "[au]",
            "-t", f"{d:.2f}", "-r", str(fps), "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23",

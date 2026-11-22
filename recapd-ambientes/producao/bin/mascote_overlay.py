@@ -286,11 +286,20 @@ def montar_pausa(fonte, t, webm, wav, out_mp4, w, h, k=0, lado=None, amiga=None)
     dur_m = _fim_da_fala(wav)  # só até a última palavra (+1,5 s de margem), sem corte seco
     if dur_m <= 0:
         return False
+    # 21/11 dona (Virjão: "a mascote fica num loop pequeno enquanto fala 'se inscreve aí pra não perder o próximo' e a
+    # fala fica dessincronizada; loop só faz sentido nas aparições SEM áudio"): aqui a voz É a da gravação, então o
+    # vídeo nunca pode ir-e-voltar — a margem de 1,5 s passava do fim da gravação (fala até 7,2 s + 1,5 > 8,0 s) e o
+    # _anda_sempre repetia o trecho 3,2-5,2 s enquanto o áudio seguia. O trecho não passa do tamanho da gravação.
+    L_m = _probe_dur(webm)
+    if L_m > 0:
+        dur_m = min(dur_m, L_m)
     pais = _paisagem(webm)
     amiga = amiga if (amiga and pais and _paisagem(amiga)) else None
     # 31/10 dona: a amiga fala DEPOIS da Maria (antes as duas falavam juntas e uma tampava a outra) — ela entra andando
     # no fim da fala da Maria e o trecho cresce até o fim da fala dela
     ta, dur_a = (max(0.4, dur_m - 0.5), _fim_da_fala(amiga)) if amiga else (0.0, 0.0)
+    if amiga and _probe_dur(amiga) > 0:
+        dur_a = min(dur_a, _probe_dur(amiga))  # 21/11: idem pra amiga (voz dela é a da gravação)
     dur = max(dur_m, ta + dur_a) if amiga else dur_m
     # 30/10: o CTA do fim cai nos últimos segundos do original — faltava imagem, o tpad congelava o último quadro (júri
     # do u7tN: "painel totalmente estático" no fim). Recua o corte pra a cena andar o tempo todo da fala.
@@ -364,6 +373,15 @@ def reacao_no_canto(clip, webm, out_mp4, w, h, k=0):
     if dur_r < 0.8:
         return False
     t0 = max(0.0, min(dur_c - dur_r - 0.1, dur_c * 0.35))  # entra no 1º terço da frase e sai antes do fim
+    total_out = dur_c
+    # 21/11 dona ("a mascote falava junto do narrador; ela tem que falar ENTRE as frases, nas pausas"): a fala dela
+    # começa quando a narração do clipe ACABA (silêncio do fim) e o clipe cresce o que faltar (a cena segura o último
+    # quadro com zoom leve). MASCOTE_CANTO_JUNTO=1 volta a falar por cima da narração.
+    if os.environ.get("MASCOTE_CANTO_JUNTO") != "1":
+        fim_narr = _fim_da_narracao(clip, dur_c)
+        t0 = max(0.0, fim_narr + 0.1)
+        total_out = max(dur_c, t0 + dur_r + 0.15)
+    estende = total_out - dur_c
     # a gravação é a tela toda com ela num pedaço (1º teste: ficou minúscula no canto): recorta a caixa do corpo dela
     # (alfa) no meio do trecho da fala e escala a CAIXA pra 58% da altura do vídeo (45% ainda ficou miúda)
     cx, cy, cw, ch = _caixa_dela(webm, ini + dur_r / 2)
@@ -374,19 +392,40 @@ def reacao_no_canto(clip, webm, out_mp4, w, h, k=0):
           f"crop=iw*{cw:.3f}:ih*{ch:.3f}:iw*{cx:.3f}:ih*{cy:.3f},scale=-2:{alt},fps=30,"
           f"format=yuva420p{flip},fade=t=in:st={t0:.3f}:d=0.15:alpha=1,"
           f"fade=t=out:st={t0 + dur_r - 0.2:.3f}:d=0.2:alpha=1[mm];"
-          f"[0:v][mm]overlay=x='{x}':y=H-h:eof_action=pass:shortest=0[v];"
+          f"[bgx][mm]overlay=x='{x}':y=H-h:eof_action=pass:shortest=0[v];"
           f"[1:a]atrim=start={ini:.3f}:duration={dur_r:.3f},asetpts=PTS-STARTPTS,aresample=44100,volume=0.8,"
           f"adelay={int(t0 * 1000)}:all=1,apad[ra];"
-          f"[0:a]aresample=44100,volume=0.9[na];"
+          f"[0:a]aresample=44100,volume=0.9,apad=whole_dur={total_out:.3f}[na];"
           f"[na][ra]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[a]")
+    # cena: o clipe + (se a fala dela passa do fim) o último quadro segurado com zoom bem leve, sem parecer congelado
+    bg = (f"[0:v]tpad=stop_mode=clone:stop_duration={estende:.3f},"
+          f"zoompan=z='if(gte(in_time,{dur_c:.3f}),1+0.04*(in_time-{dur_c:.3f})/{max(estende, 0.1):.3f},1)':"
+          f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={w}x{h}:fps=30[bgx];" if estende > 0.05
+          else "[0:v]null[bgx];")
+    fc = bg + fc
     cmd = [_ff(), "-y", "-i", str(clip), "-c:v", "libvpx-vp9", "-i", str(webm), "-filter_complex", fc,
            "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20", "-c:a", "aac",
-           "-b:a", "192k", "-t", f"{dur_c:.3f}", str(out_mp4)]
+           "-b:a", "192k", "-t", f"{total_out:.3f}", str(out_mp4)]
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
         return r.returncode == 0 and Path(out_mp4).exists() and Path(out_mp4).stat().st_size > 10000
     except Exception:  # noqa: BLE001
         return False
+
+
+def _fim_da_narracao(clip, dur_c):
+    """Segundo em que a última palavra do narrador termina no clipe (silêncio do fim). Falhou = 75% do clipe."""
+    try:
+        r = subprocess.run([_ff(), "-hide_banner", "-nostats", "-i", str(clip), "-vn", "-af",
+                            "silencedetect=noise=-35dB:d=0.25", "-f", "null", "-"], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=60)
+        ss = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", r.stderr)]
+        se = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", r.stderr)]
+        if ss and (len(ss) > len(se) or se[-1] >= dur_c - 0.15) and ss[-1] > 0.3:
+            return ss[-1]
+        return dur_c
+    except Exception:  # noqa: BLE001
+        return dur_c * 0.75
 
 
 def _caixa_dela(webm, t):

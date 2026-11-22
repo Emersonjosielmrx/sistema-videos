@@ -585,6 +585,13 @@ def _mascote_longo(concat_out, entries, offsets, caps, workspace):
         # (anime_segments -> mascote_overlay.montar_pausa: lado oposto, mesmo tamanho, fala depois da Maria).
         # 29/10 dona: só a mascote nova (gravações vivas dela andando) — as animações MOV antigas nos capítulos saem
         ev = [e for e in ev if e.get("vivo")]
+        # 21/11 dona ("loop só faz sentido nas aparições dela SEM áudio"): aparição em que ela fala (a frase é dela) não
+        # repete a gravação — a boca não bate com a voz em loop. Fica na tela no máximo o tamanho da gravação.
+        for e in ev:
+            if round(e["t"], 3) in fala and e.get("vivo"):
+                L = mascote_overlay._probe_dur(e["vivo"])
+                if L > 0 and e["dur"] > L:
+                    e["dur"] = L
         # 19/11 dona ("às vezes a mascote aparece duplicada, ou a mascote e a amiga falando ao mesmo tempo"): nenhuma
         # aparição dela por cima de um trecho onde ela JÁ está (reação, canto, pausa com a voz dela/amiga), com 3 s de
         # folga. MASCOTE_SEM_DUPLICAR=0 desliga.
@@ -782,8 +789,9 @@ def _memes_resumo(clips, sfx_durs, workspace):
     for k, out in sorted(prontos, key=lambda x: -x[0]):
         novos.insert(k + 1, out)
         sfx2.insert(k + 1, 0.0)
+    ja_no_meio = {Path(m["file"]).name for _k, m in inter}  # 21/11: novo já usado no meio não repete no resumo
     for k in sorted(depois, reverse=True):
-        src = rnd.choice(pool)
+        src = rnd.choice([p for p in pool if p.name not in ja_no_meio] or pool)
         out = Path(workspace) / f"_meme_resumo_{k}.mp4"
         try:
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-f", "lavfi", "-t", "4",

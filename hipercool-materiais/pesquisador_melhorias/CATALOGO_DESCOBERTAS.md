@@ -7948,3 +7948,153 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_eres2net_licenca__sonnet_0807.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 08:23 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_avatares_stop__sonnet_0817.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 08:34 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0826.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 08:53 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0841.md`
+
+- [INÉDITO] github.com/ghost-in-the-droid/android-agent — ★430, push 2026-11-15, MIT — Give any AI agent a real phone: Android over ADB, iPhone over WebDriverAgent. 66 MCP tools, a Skill Hub with 117 skills for 113 apps, and hu
+
+## 2026-11-21 09:10 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0858.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 09:22 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0914.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 10:08 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0957.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 10:24 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1013.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 11:04 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1052.md`
+
+- [INÉDITO] github.com/temet-ai/ask-kit-phone — ★0, push 2026-11-21, MIT — ask-kit kit: an Android phone reached over adb (USB or wireless, the device set by the PHONE_SERIAL setting or the first one connected) as i
+
+## 2026-11-21 11:12 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1106.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 11:34 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1127.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 11:44 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1137.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 12:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1148.md`
+
+- [INÉDITO] github.com/RealJesseYu/anime2stereo — ★0, push 2026-10-30, MIT — Lift 2D cel animation into stereoscopic 3D: cel segmentation, clean-plate inpainting, layered depth-image-based rendering
+
+## 2026-11-21 12:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1208.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 12:44 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1227.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 13:07 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1304.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 15:55 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1322.md`
+
+- [INÉDITO] github.com/golanse/easymerger — ★4, push 2026-09-24, MIT — EasyMerger — 基于 FFmpeg 的无损视频（短剧/漫剧）合并工具，自动检测并修复参数差异（分辨率/编码/帧率/音频 Profile），PySide6 图形界面EasyMerger — A lossless video (short dramas/comic anim
+
+## 2026-11-21 18:11 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1602.md`
+
+- [INÉDITO] github.com/XD06/gemini-free-api — ★18, push 2026-11-19, MIT — Reverse-engineered the Gemini web interface and turned it into a usable API, supporting streaming responses and simple tool invocation.逆向Gem
+
+## 2026-11-21 18:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1816.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-21 21:19 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1835.md`
+
+- [INÉDITO] github.com/vadim-a-yegorov/mcp-gemini-deep-research — ★3, push 2026-08-15, MIT — Gemini (webapi) Deep Research MCP server.
+
+## 2026-11-22 00:58 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_fontes_recap_ingles__sonnet_0012.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 06:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_0351.md`
+
+- [INÉDITO] github.com/aleixrodriala/adb-qr — ★2, push 2026-06-12, MIT — The missing adb pair --qr: pair Android wireless debugging by scanning a QR code in your terminal. Works everywhere adb does, even WSL2.
+
+## 2026-11-22 06:53 — Política do YouTube: rótulo de conteúdo alterado/sintético (voz clonada) (`area_yt_politica_conteudo_sintetico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_yt_politica_conteudo_sintetico__sonnet_0651.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 07:02 — Política de conteúdo reutilizado e como documentar transformação (`area_yt_politica_conteudo_reutilizado`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_yt_politica_conteudo_reutilizado__sonnet_0656.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 07:20 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_0716.md`
+
+- [INÉDITO] github.com/akashdeep000/gemini-imagegen-unofficial-api — ★0, push 2026-11-21, MIT — 
+
+## 2026-11-22 07:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_camera_3d_painel__sonnet_0741.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

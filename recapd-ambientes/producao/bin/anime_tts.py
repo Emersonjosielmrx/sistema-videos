@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -849,7 +850,25 @@ def _duplo_sentido_fala(t):
 _RES_PEITO = re.compile(r"(?i)res+[\s.\-…]*peito")
 
 
+_RESPEITO_FEITOS = []  # índices das frases em que o S do respeito já foi esticado neste vídeo
+
+
 def _tem_respeito_piada(t, i=None):
+    """21/11 dona: "o S do respeito está sendo usado excessivamente — só na primeira vez que a personagem aparece".
+    Mesmo que o roteiro traga vários "com todo respeito", o S esticado só sai no 1º e depois de no mínimo 150 frases
+    do último (proxy de "personagem nova"); os outros ficam "respeito" normal."""
+    if not _tem_respeito_piada_base(t, i):
+        return False
+    if i is not None:
+        if _RESPEITO_FEITOS and (i in _RESPEITO_FEITOS):
+            return True
+        if any(abs(i - j) < 150 for j in _RESPEITO_FEITOS):
+            return False
+        _RESPEITO_FEITOS.append(i)
+    return True
+
+
+def _tem_respeito_piada_base(t, i=None):
     if os.environ.get("FISH_DUPLO_SENTIDO", "1") == "0":
         return False
     marcado = bool(re.search(r"RES+[\s.\-…]*[Pp]eito", t or ""))  # o roteiro marcou a piada (RES-peito)
@@ -860,7 +879,7 @@ def _tem_respeito_piada(t, i=None):
     return i is not None and str(i) in sens and bool(_RESPEITO.search(t or ""))
 
 
-def _esticar_s_respeito(wav, alvo_s=0.45, texto=None):
+def _esticar_s_respeito(wav, alvo_s=0.45, texto=None, enfase=None):
     """20/11 dona aprovou: "C_S_bem_alongado_0.45s — é isso que precisamos". Frase em velocidade NORMAL; só o S de
     "respeito" (o chiado entre "re" e "peito") é esticado pra ~0,45 s, mantendo o chiado (atempo, sem mudar o resto).
     Acha a palavra pelos tempos do Whisper (.words.json, ou mede aqui) e o S pela energia aguda (> 4 kHz)."""
@@ -963,6 +982,15 @@ def _esticar_s_respeito(wav, alvo_s=0.45, texto=None):
         b = max(blocos, key=len)
         s0, s1 = ini + b[0] * 0.005, ini + b[-1] * 0.005 + 0.02
         d = s1 - s0
+        en = (enfase or "s").lower()
+        if en != "s":
+            # 21/11 tarde (dona: "os narradores não só alongam o S, dão ênfase no respeito — falam mais alto o RES, ou
+            # no final o peito"): s = só o S (aprovado 20/11); res = RES mais alto e +1 semitom; peito = "peito" caindo
+            # 1,5 semitom e segurado; tudo = os três; separado = RES alto + pausinha + peito caindo, sem esticar o S
+            if _enfase_respeito(wav, ini, fim, s0, s1, alvo_s if en != "separado" else d, en):
+                Path(str(wav) + ".words.json").unlink(missing_ok=True)
+                logging.info(f"[xtts] 'respeito' com ênfase {en}")
+                return True
         if d <= 0.02 or d >= alvo_s:
             logging.info(f"[fish S] {wav.name}: S com {d:.2f}s — não estico")
             return False
@@ -990,6 +1018,27 @@ def _esticar_s_respeito(wav, alvo_s=0.45, texto=None):
     except Exception as e:  # noqa: BLE001
         logging.warning(f"[fish] esticar S falhou ({type(e).__name__}: {str(e)[:100]})")
     return False
+
+
+_PIADA_CONTADA = re.compile(r"(?i)(\bhein\b|kkk|mentira|brincadeira|particulares|\beu (faria|fazia|aceitaria|toparia|"
+                            r"pegaria)\b|com todo respeito)")
+
+
+def _risada_do_narrador(voz, i):
+    """21/11 v12: uma risadinha REAL do narrador (risada_real/*.wav) pra entrar antes do "Eu faria" (a manha)."""
+    pasta = VOZES_DIR / Path(voz).name / "risada_real"
+    lst = sorted(pasta.glob("*.wav")) if pasta.is_dir() else []
+    curtas = []
+    for w in lst:
+        try:
+            d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                      str(w)], capture_output=True, text=True).stdout or 0)
+        except Exception:  # noqa: BLE001
+            d = 0
+        if 0.5 <= d <= 1.3:  # risadinha, não gargalhada
+            curtas.append(w)
+    lst = curtas or lst
+    return str(lst[i % len(lst)]) if lst else ""
 
 
 def _risada_real(voz, wav):
@@ -1067,6 +1116,235 @@ def _subvoz_por_frase(lines, audio_dir, pv, tem=None):
 XTTS_VENV = Path(os.environ.get("XTTS_VENV_DIR", "/tmp/venvs_voz/xtts"))
 
 
+
+# 21/11 tarde (dona: "regra de sempre reorganizar pra usar as duas placas, de forma que reduza o tempo pra tudo, desde
+# teste a produção de Shorts e longos — claro, quando já houver duas coisas simultâneas rodando, uma em cada placa, aí
+# já está sendo aproveitado o máximo"). Um lote de voz (XTTS, Fish, RVC) é dividido ao meio entre a placa deste
+# trabalho e a OUTRA, só quando a outra está LIVRE (pouca memória usada e parada). Ocupada = 1 placa, como antes.
+# Item que faltar depois do paralelo é refeito na placa própria. DUAS_PLACAS=0 desliga.
+def _placas_para_lote(env=None):
+    """Placas físicas que este lote pode usar: [a minha] ou [a minha, a outra livre]. [None] = não mexe na variável."""
+    env = env or os.environ
+    cvd = str(env.get("CUDA_VISIBLE_DEVICES", "")).strip()
+    minha = cvd if cvd.isdigit() else "0"
+    sozinha = [cvd] if cvd else [None]
+    if env.get("DUAS_PLACAS") == "0" or os.name == "nt" or (cvd and not cvd.isdigit()):
+        return sozinha
+    try:
+        r = subprocess.run(["nvidia-smi", "--query-gpu=index,memory.used,utilization.gpu",
+                            "--format=csv,noheader,nounits"], capture_output=True, text=True, timeout=60)
+        placas = {}
+        for ln in r.stdout.strip().splitlines():
+            a = [x.strip() for x in ln.split(",")]
+            placas[a[0]] = (float(a[1]), float(a[2]))
+    except Exception:  # noqa: BLE001
+        return sozinha
+    outras = [g for g, (mem, uso) in placas.items() if g != minha and mem < 1500 and uso < 15]
+    if not outras:
+        return sozinha
+    trava = Path(f"/tmp/_placa_emprestada_{outras[0]}")
+    try:  # outro lote acabou de pegar a outra placa emprestada (ainda não aparece no nvidia-smi)
+        if trava.exists() and time.time() - trava.stat().st_mtime < 180:
+            return sozinha
+        trava.write_text(str(os.getpid()))
+    except OSError:
+        pass
+    return [minha, outras[0]]
+
+
+def _lote_em_placas(argv, itens, pasta, nome, timeout, env=None, pronto=None):
+    """Roda `argv + [lista.json]` com os itens; divide entre 2 placas se a outra estiver livre. `pronto(item)` diz se
+    o item saiu (padrão: Path(item["saida"]) existe). Log junto em <pasta>/_<nome>.log. Devolve as placas usadas."""
+    pasta = Path(pasta)
+    env = dict(env or os.environ)
+    pronto = pronto or (lambda it: Path(it["saida"]).exists())
+
+    def ok(it):
+        try:
+            return pronto(it)
+        except OSError:
+            return False
+    placas = _placas_para_lote(env) if len(itens) >= 6 else ([env["CUDA_VISIBLE_DEVICES"]]
+                                                             if env.get("CUDA_VISIBLE_DEVICES") else [None])
+
+    def rodar(sub, placa, sufixo):
+        lj = pasta / f"_{nome}{sufixo}.json"
+        lj.write_text(json.dumps(sub, ensure_ascii=False), encoding="utf-8")
+        e = dict(env)
+        if placa is not None:
+            e["CUDA_VISIBLE_DEVICES"] = str(placa)
+        fh = open(pasta / f"_{nome}{sufixo}.log" if sufixo else pasta / f"_{nome}.log", "a", encoding="utf-8")
+        return subprocess.Popen(list(argv) + [str(lj)], stdout=fh, stderr=subprocess.STDOUT, env=e), fh
+
+    t_fim = time.time() + timeout
+    if len(placas) >= 2:
+        logging.info(f"[placas] {nome}: {len(itens)} itens divididos entre as placas {placas}")
+        procs = [rodar(itens[k::2], placas[k], f"_g{k}") for k in range(2)]
+        for pr, fh in procs:
+            try:
+                pr.wait(timeout=max(60, t_fim - time.time()))
+            except subprocess.TimeoutExpired:
+                pr.kill()
+            fh.close()
+        with open(pasta / f"_{nome}.log", "a", encoding="utf-8") as fh:
+            for k in range(2):
+                fh.write((pasta / f"_{nome}_g{k}.log").read_text(encoding="utf-8", errors="ignore"))
+        try:
+            Path(f"/tmp/_placa_emprestada_{placas[1]}").unlink()
+        except OSError:
+            pass
+        falta = [it for it in itens if not ok(it)]
+        if not falta or time.time() > t_fim:
+            return placas
+        logging.warning(f"[placas] {nome}: {len(falta)} itens faltaram no paralelo — refaço na placa própria")
+        itens, placas = falta, placas[:1]
+    pr, fh = rodar(itens, placas[0], "")
+    try:
+        pr.wait(timeout=max(60, t_fim - time.time()))
+    except subprocess.TimeoutExpired:
+        pr.kill()
+        logging.warning(f"[placas] {nome}: passou do tempo — uso o que já saiu")
+    fh.close()
+    return placas
+
+
+# 22/11: mistura XTTS 8 + S2-Pro. Frases de emoção = onde o XTTS não faz o que o narrador real faz (rir, explodir,
+# lamentar). Ordem: a 1ª regra que casa define a etiqueta do S2-Pro.
+_S2_EMO = [(re.compile(r"(?i)(kkk|haha|rsrs|brincadeira|mentira|zoeira|piada|com todo respeito|particulares|\bhein\b|"
+                       r"safad|danad|cen[aá]rio|eu (faria|fazia|aceitaria|toparia))"), "[laughing]"),
+           (re.compile(r"(?i)(\bgol\b|isso!|acert|derrub|venc|explod|incr[ií]vel|absurd|que isso|meu deus|caramba|"
+                       r"finalmente|conseguiu|olha isso)"), "[excited]"),
+           (re.compile(r"(?i)(n[aã]o, n[aã]o|morr|chor|perdeu|acabou pra|triste|sozinh|nunca mais|adeus)"), "[sad]"),
+           (re.compile(r"(?i)(de repente|socorro|cuidado|corre|sangue|monstro|assustad|grit)"), "[shocked]")]
+
+
+def _s2pro_modo():
+    if os.environ.get("S2PRO") == "0" or _OUTRA:
+        return None, "2"
+    try:
+        ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
+    except ValueError:
+        ovr = {}
+    m = str(os.environ.get("S2PRO_MODO") or ovr.get("s2pro") or "").strip().lower()
+    v = str(os.environ.get("S2PRO_VERSAO") or ovr.get("s2pro_versao") or "2").strip()
+    return (m if m in ("misto", "pro") else None), v
+
+
+def _narrar_s2pro(lines, audio_dir, so=None):
+    """22/11: S2-Pro pelo llama.cpp (bin/s2pro_llama.py). Nunca levanta; o que não sair fica pro XTTS."""
+    modo, versao = _s2pro_modo()
+    if not modo:
+        return
+    try:
+        pv = _pasta_fish()
+        ref = pv / "referencia_fish.wav"
+        txt = pv / "referencia_fish.txt"
+        if not ref.exists() or not txt.exists():
+            logging.warning(f"[s2pro] {pv.name} sem trecho real — tudo no XTTS")
+            return
+        ad = Path(audio_dir)
+        dur_ref = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                        str(ref)], capture_output=True, text=True).stdout or 0) or 15.0
+        seg = 30 if versao in ("6", "10") else 15
+        r_ = ad / f"_s2pro_ref{seg}.wav"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-t", str(seg), "-ac", "1", "-ar", "24000",
+                        str(r_)], capture_output=True)
+        palavras = txt.read_text(encoding="utf-8").split()
+        reftxt = " ".join(palavras[:max(4, int(len(palavras) * min(1.0, seg / dur_ref)))])
+        cps_ref = len(" ".join(palavras)) / max(dur_ref, 1.0)
+        itens, n_emo = [], 0
+        teto = max(1, int(len(lines) * 0.25)) if modo == "misto" else len(lines)
+        for i, line in enumerate(lines):
+            if so is not None and i not in so:
+                continue
+            out = ad / f"audio_{i}.wav"
+            if out.exists() and out.stat().st_size > 500:
+                continue
+            texto, _riso = _texto_fish(_seguro(line))
+            if not texto.strip():
+                continue
+            tag = next((t_ for rx, t_ in _S2_EMO if rx.search(texto)), "")
+            if modo == "misto" and not tag:
+                continue
+            if modo == "misto" and n_emo >= teto:
+                continue
+            if not tag and versao in ("4", "5", "6"):
+                tag = "[excited]" if i % 3 == 0 else "[confident]"
+            n_emo += 1
+            v1 = versao == "1"
+            ref_i, txt_i = str(r_), reftxt
+            if versao in ("7", "8", "9", "10") and tag:
+                # 22/11 v7+: referência do TIPO da frase (trecho real do narrador rindo/fazendo piada/tenso...)
+                tipo = {"[laughing]": ("_risada", "_piada"), "[excited]": ("_agudo", "_metralhadora"),
+                        "[sad]": ("_tensao",), "[shocked]": ("_tensao", "_irritado")}.get(tag, ())
+                if re.search(r"(?i)(gostos|atraente|professora|mulher|respeito)", texto):
+                    tipo = ("_mulher",) + tuple(tipo)
+                for x in tipo:
+                    if (pv / f"referencia_fish{x}.wav").exists() and (pv / f"referencia_fish{x}.txt").exists():
+                        rx_ = ad / f"_s2pro_ref15{x}.wav"
+                        if not rx_.exists():
+                            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{x}.wav"),
+                                            "-t", "15", "-ac", "1", "-ar", "24000", str(rx_)], capture_output=True)
+                        ref_i = str(rx_)
+                        txt_i = (pv / f"referencia_fish{x}.txt").read_text(encoding="utf-8").strip()
+                        break
+            # 22/11 v8+: pergunta retórica = 2 pedaços gerados separados (afirmação! / E vocês...?) com pausa
+            partes = None
+            if versao in ("8", "9", "10"):
+                mq = re.search(r"^(.*?[!.])\s+((?:E |Mas )?(?:vocês|você|cês|tu)\b[^?]*\?)\s*$", texto)
+                if mq:
+                    partes = [mq.group(1).strip(), mq.group(2).strip()]
+            itens.append({"texto": texto, "saida": str(ad / f"audio_{i}.s2pro_bruto.wav"), "i": i, "ref": ref_i,
+                          "reftxt": txt_i, "tag": "" if v1 else tag, "partes": partes,
+                          "n": 1 if v1 else (2 if versao in ("2", "3", "7", "8") else 3), "seed": 42,
+                          "cps_alvo": 17 if versao in ("1", "2") else round(cps_ref, 1),
+                          "whisper": versao in ("5", "6", "9", "10"), "versao": versao})
+        if not itens:
+            return
+        lista = ad / "_s2pro.json"
+        lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
+        t0 = time.time()
+        # 22/11: compila o llama.cpp e baixa o modelo UMA vez antes de dividir nas 2 placas (senão os 2 processos
+        # compilam/baixam juntos na mesma pasta e um quebra o outro)
+        prep = subprocess.run([sys.executable, "-c", "import sys; sys.path.insert(0, %r); import s2pro_llama as s; "
+                               "t = s.compilar(); m = s.baixar(); print('PREP', bool(t), bool(m))"
+                               % str(Path(__file__).parent)], capture_output=True, text=True, timeout=3 * 3600)
+        if "PREP True True" not in (prep.stdout or ""):
+            logging.warning(f"[s2pro] llama.cpp/modelo não ficou pronto — tudo no XTTS {(prep.stdout + prep.stderr)[-300:]}")
+            return
+        logging.info(f"[s2pro] llama.cpp + modelo prontos em {time.time() - t0:.0f}s")
+        _lote_em_placas([sys.executable, str(Path(__file__).with_name("s2pro_llama.py")), "lote"], itens, ad, "s2pro",
+                        8 * 3600)
+        feitos = []
+        for it in itens:
+            bruto = Path(it["saida"])
+            if not bruto.exists():
+                continue
+            out = ad / f"audio_{it['i']}.wav"
+            if subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(bruto), "-ac", "2", "-ar", "44100", str(out)],
+                              capture_output=True).returncode != 0:
+                continue
+            bruto.unlink(missing_ok=True)
+            feitos.append(it["i"])
+            try:
+                narracao_curva.pos_processar(out, 0.0)
+                narracao_curva.microcortes(out)
+                if _tem_respeito_piada(_seguro(lines[it["i"]]), it["i"]):
+                    _esticar_s_respeito(out, texto=_seguro(lines[it["i"]]), enfase="tudo")
+                if it["i"] == len(lines) - 1:
+                    _aplicar_margem_final(out)
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[s2pro] pós da frase {it['i']} falhou ({type(e).__name__})")
+        if feitos and _xtts_rvc():
+            _rvc_por_cima_do_fish(audio_dir, feitos, pv.name)
+        if feitos:
+            (ad / "_s2pro_feitas.json").write_text(json.dumps(sorted(feitos)), encoding="utf-8")
+        logging.info(f"[s2pro] modo {modo} v{versao}: {len(feitos)}/{len(itens)} frases em {time.time() - t0:.0f}s "
+                     f"(de {len(lines)}); o resto no XTTS")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[s2pro] falhou ({type(e).__name__}: {str(e)[:150]}) — tudo no XTTS")
+
+
 def _xtts_versao():
     """21/11 dona: o XTTS vira o motor principal. config/motor_voz.json {"motor": "xtts", "xtts_versao": "6"} ou
     MOTOR_VOZ=xtts + XTTS_VERSAO (4, 5, 6 ou "tercos" = o vídeo dividido em 3 partes: 4 / 5 / 6, pra ela comparar
@@ -1085,10 +1363,13 @@ def _xtts_versao():
         v = str(ovr.get("motor_voz") or cfg.get("motor", "")).strip().lower()
     if v != "xtts":
         return None
-    return str(os.environ.get("XTTS_VERSAO") or ovr.get("xtts_versao") or cfg.get("xtts_versao") or "6").strip().lower()
+    # 21/11 tarde (dona): "não vamos usar a XTTS 9, apenas a 8" — 8 vira o padrão (6/7/8 iguais pra ela; a 8 tem a
+    # pior frase melhor no auditor). Pedido "9" vira 8.
+    v_ = str(os.environ.get("XTTS_VERSAO") or ovr.get("xtts_versao") or cfg.get("xtts_versao") or "8").strip().lower()
+    return "8" if v_ == "9" else v_
 
 
-def _audio_pronto_do_drive(audio_dir):
+def _audio_pronto_do_drive(audio_dir, lines=None):
     """21/11 dona (S2-Pro/Qwen3: "divide em sessões"): a voz do longo foi gerada antes, em pedaços paralelos, e está no
     Drive (longo_override "audio_pronto": "manhwa-drive:colab_recap/qwen3_longo/<vid>_<voz>/audio"). Copia os
     audio_<i>.wav pro audio_cache; o preparar_clone pula as frases que já têm áudio e faz o resto (XTTS/Fish/Kitten).
@@ -1112,15 +1393,53 @@ def _audio_pronto_do_drive(audio_dir):
     ad = Path(audio_dir)
     tmp = ad / "_audio_pronto"
     tmp.mkdir(parents=True, exist_ok=True)
-    r = subprocess.run([rcl, "--config", conf, "copy", src, str(tmp), "--include", "audio_*"], capture_output=True,
-                       text=True, timeout=3600)
+    r = subprocess.run([rcl, "--config", conf, "copy", src, str(tmp), "--include", "audio_*", "--include",
+                        "roteiro_audio.txt"], capture_output=True, text=True, timeout=3600)
+    # 22/11 (82ge: legenda não batia com a voz): casa pelo TEXTO — índice do áudio -> índice da frase no vídeo
+    mapa = None
+    if lines:
+        ref_txt = tmp / "roteiro_audio.txt"
+        if not ref_txt.exists():
+            subprocess.run([rcl, "--config", conf, "copyto", src.rstrip("/").rsplit("/", 1)[0] + "/roteiro.txt",
+                            str(ref_txt)], capture_output=True, timeout=600)
+        if not ref_txt.exists():
+            for cand in (ad.parent / "roteiro.txt", ad.parent.parent / "roteiro.txt"):
+                if cand.exists():
+                    shutil.copy(cand, ref_txt)
+                    break
+        if ref_txt.exists():
+            def _nt(x):
+                return re.sub(r"\W+", " ", str(x).lower()).strip()
+            gerados = ref_txt.read_text(encoding="utf-8").splitlines()
+            livres = {}
+            for j, t_ in enumerate(gerados):
+                livres.setdefault(_nt(t_), []).append(j)
+            mapa = {}
+            for k, t_ in enumerate(lines):
+                fila = livres.get(_nt(t_))
+                if fila:
+                    mapa[fila.pop(0)] = k
+            logging.info(f"[audio pronto] casado pelo texto: {len(mapa)}/{len(lines)} frases do vídeo têm áudio pronto "
+                         f"({len(gerados)} gerados); o resto vai pro XTTS")
+        else:
+            logging.warning("[audio pronto] sem roteiro_audio.txt nem roteiro.txt — casando por número (pode desalinhar)")
     n = 0
     feitos = []
+    # 21/11 noite (dona: "XTTS 8 misturado com o S2-Pro — o mais custo-benefício"): "audio_pronto_so" = lista das
+    # frases que vêm do áudio pronto (as de emoção feitas no S2-Pro); o resto o XTTS narra. Sem a chave = todas.
+    so_ = ovr.get("audio_pronto_so")
+    so_ = {int(x) for x in so_} if isinstance(so_, list) else None
     for w in tmp.glob("audio_*.wav"):
         m = re.fullmatch(r"audio_(\d+)\.wav", w.name)
         if not m:
             continue
         i = int(m.group(1))
+        if so_ is not None and i not in so_:
+            continue
+        if mapa is not None:  # 22/11: índice do áudio gerado -> índice da frase no vídeo (pelo texto)
+            if i not in mapa:
+                continue
+            i = mapa[i]
         out = ad / f"audio_{i}.wav"
         if out.exists():
             continue
@@ -1172,6 +1491,15 @@ def _xtts_pronto():
                            capture_output=True, timeout=3600)
             subprocess.run([uv, "pip", "install", "--python", str(py), "coqui-tts", "soundfile", "transformers<4.50"],
                            capture_output=True, timeout=3600)
+        # 21/11 tarde: DeepSpeed (XTTS_DEEPSPEED=1) — acelerador oficial do XTTS; só instala quando pedido
+        if os.environ.get("XTTS_DEEPSPEED") == "1" and subprocess.run([str(py), "-c", "import deepspeed"],
+                                                                      capture_output=True, timeout=300).returncode:
+            subprocess.run(["/tmp/uvbin/uv", "pip", "install", "--python", str(py), "deepspeed==0.16.4", "ninja"],
+                           capture_output=True, timeout=2400)
+        # 21/11 v9: Whisper dentro do melhor de 3 (instala junto; se já existia o venv, instala só isso)
+        if subprocess.run([str(py), "-c", "import faster_whisper, scipy"], capture_output=True, timeout=300).returncode:
+            subprocess.run(["/tmp/uvbin/uv", "pip", "install", "--python", str(py), "faster-whisper", "scipy"],
+                           capture_output=True, timeout=1800)
         return subprocess.run([str(py), "-c", "from TTS.api import TTS"], capture_output=True,
                               timeout=600).returncode == 0
     except Exception as e:  # noqa: BLE001
@@ -1227,14 +1555,39 @@ def _narrar_xtts(lines, audio_dir, so=None):
             vi = versao_da(i)
             refs = [str(ref15)]
             sub = subs.get(i, "")
-            if vi in ("5", "6") and sub and sub != "_todas" and (pv / f"referencia_fish{sub}.wav").exists():
+            if vi in ("7", "8", "8b", "9", "10", "11", "12"):
+                # 21/11 v7: o XTTS só ouvia 15 s. Agora: o trecho normal INTEIRO + até 2 trechos reais de outros jeitos
+                # dele (o do tipo da frase primeiro), 12 s cada — timbre e jeito mais firmes (ANALISE_MELHORAR_XTTS)
+                refs = [str(ad / "_xtts_ref_inteira.wav")]
+                if not Path(refs[0]).exists():
+                    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-t", "30", "-ac", "1", "-ar",
+                                    "24000", refs[0]], capture_output=True)
+                extras = ([sub] if sub and sub != "_todas" else []) + [x for x in ("_piada", "_agudo", "_tensao")
+                                                                      if x != sub]
+                if vi == "12" and _PIADA_CONTADA.search(texto):
+                    # 21/11 v12 (dona: "as piadas têm que parecer contadas, não lidas"): frase de piada ouve primeiro
+                    # o trecho REAL dele rindo/fazendo piada
+                    extras = ["_risada", "_piada"] + [x for x in extras if x not in ("_risada", "_piada")]
+                for x in extras:
+                    if len(refs) >= 3:
+                        break
+                    if (pv / f"referencia_fish{x}.wav").exists():
+                        s12 = ad / f"_xtts_ref12{x}.wav"
+                        if not s12.exists():
+                            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{x}.wav"),
+                                            "-t", "12", "-ac", "1", "-ar", "24000", str(s12)], capture_output=True)
+                        refs.append(str(s12))
+            elif vi in ("5", "6") and sub and sub != "_todas" and (pv / f"referencia_fish{sub}.wav").exists():
                 s15 = ad / f"_xtts_ref15{sub}.wav"
                 if not s15.exists():
                     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{sub}.wav"), "-t",
                                     "15", "-ac", "1", "-ar", "24000", str(s15)], capture_output=True)
                 refs.append(str(s15))
             itens.append({"texto": texto, "saida": str(ad / f"audio_{i}.xtts_bruto.wav"), "i": i, "refs": refs,
-                          "temp": 0.6 if vi in ("5", "6") else 0.75, "n": int(os.environ.get("XTTS_TENTATIVAS", "3")),
+                          "temp": 0.6 if vi in ("5", "6", "7", "8", "8b", "9", "10", "11", "12") else 0.75,
+                          "cadencia_real": vi in ("8", "8b", "9", "10", "11", "12"), "whisper": vi == "9",
+                          "pergunta_publico": vi in ("8", "11", "12"), "manha": vi == "12",  # 8 = 8b + pergunta retórica do 11
+                          "risada": _risada_do_narrador(pv.name, i) if vi == "12" else "", "n": int(os.environ.get("XTTS_TENTATIVAS", "3")),
                           "frase_inteira": vi == "4", "v": vi})
         if not itens:
             return
@@ -1242,12 +1595,10 @@ def _narrar_xtts(lines, audio_dir, so=None):
         lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
         py = XTTS_VENV / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
         t0 = time.time()
-        with open(ad / "_xtts.log", "a", encoding="utf-8") as fh:
-            try:
-                subprocess.run([str(py), str(Path(__file__).with_name("xtts_nuvem.py")), "lote", str(lista)],
-                               stdout=fh, stderr=subprocess.STDOUT, timeout=6 * 3600)
-            except subprocess.TimeoutExpired:
-                logging.warning("[xtts] passou de 6 h — uso as frases que já saíram")
+        # 21/11 tarde: as 2 placas quando a outra está livre (_lote_em_placas); XTTS_DUAS_GPUS=0 desliga só aqui
+        env_x = {**os.environ, **({"DUAS_PLACAS": "0"} if os.environ.get("XTTS_DUAS_GPUS") == "0" else {})}
+        _lote_em_placas([str(py), str(Path(__file__).with_name("xtts_nuvem.py")), "lote"], itens, ad, "xtts",
+                        6 * 3600, env=env_x)
         feitos = []
         for it in itens:
             bruto = Path(it["saida"])
@@ -1264,7 +1615,7 @@ def _narrar_xtts(lines, audio_dir, so=None):
             i, vi = it["i"], it["v"]
             try:
                 narracao_curva.pos_processar(out, 0.0)
-                if vi == "6":
+                if vi in ("6", "7"):  # v8/v9: a cadência vem por sentença no próprio XTTS
                     _cadencia_quebrada(out)
                 narracao_curva.microcortes(out)
                 forca = 0.5 if vi == "4" else 0.8
@@ -1277,7 +1628,9 @@ def _narrar_xtts(lines, audio_dir, so=None):
                                                          capture_output=True).returncode == 0:
                     os.replace(tmp, out)
                 if _tem_respeito_piada(_seguro(lines[i]), i):
-                    _esticar_s_respeito(out, texto=_seguro(lines[i]))
+                    # 21/11 v10+: além do S, a ênfase do narrador real ("RES" mais alto, "peito" caindo)
+                    _esticar_s_respeito(out, texto=_seguro(lines[i]), enfase=(os.environ.get("XTTS_RESPEITO_ENFASE")
+                                        or "tudo") if vi in ("8", "10", "11", "12") else None)  # 8 = 8b + ênfase do respeito do 10
                 if os.environ.get("XTTS_RVC") == "1":
                     pass  # RVC por cima: ver _rvc_por_cima_do_fish (teste à parte, dona 21/11)
             except Exception as e:  # noqa: BLE001
@@ -1354,12 +1707,9 @@ def _narrar_fish_nuvem(lines, audio_dir, so=None):
         lista = Path(audio_dir) / "_fish_nuvem.json"
         lista.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
         t0 = time.time()
-        with open(Path(audio_dir) / "_fish_nuvem.log", "a", encoding="utf-8") as fh:
-            try:  # 19/11 (revisão): estourou o tempo = aproveita o que já saiu (não joga tudo fora)
-                subprocess.run([os.environ["FISH_VENV"], str(Path(__file__).with_name("fish_nuvem.py")), "lote",
-                                str(pv), str(lista)], stdout=fh, stderr=subprocess.STDOUT, timeout=3 * 3600)
-            except subprocess.TimeoutExpired:
-                logging.warning("[fish nuvem] passou de 3 h — uso as frases que já saíram")
+        # 21/11 tarde: 2 placas quando a outra está livre (estourou o tempo = aproveita o que já saiu)
+        _lote_em_placas([os.environ["FISH_VENV"], str(Path(__file__).with_name("fish_nuvem.py")), "lote", str(pv)],
+                        itens, audio_dir, "fish_nuvem", 3 * 3600)
         # 20/11 (longo de teste saiu com 0 Fish e o erro ficou só no _fish_nuvem.log, que não volta do Kaggle): sem
         # nenhuma frase pronta, o fim do log do Fish vai pro pipeline.log
         if not any(Path(it["saida"]).exists() for it in itens):
@@ -1556,13 +1906,16 @@ def _rvc_por_cima_do_fish(audio_dir, feitos, voz):
                           "volume_envelope": 1.0})
         lj = d / "lista.json"
         lj.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
-        r = subprocess.run([os.environ["VOZES_PY_NUVEM"], str(Path(__file__).with_name("voz_clonada_nuvem.py")),
-                            "lote", voz, str(lj)], capture_output=True, text=True, timeout=3 * 3600,
-                           env={**os.environ, "VOZES_DIR": str(VOZES_DIR)})
+        # 21/11 tarde: 2 placas quando a outra está livre
+        _lote_em_placas([os.environ["VOZES_PY_NUVEM"], str(Path(__file__).with_name("voz_clonada_nuvem.py")), "lote",
+                         voz], itens, d, "rvc", 3 * 3600, env={**os.environ, "VOZES_DIR": str(VOZES_DIR)},
+                        pronto=lambda it: Path(it["saida"]).stat().st_mtime > Path(it["entrada"]).stat().st_mtime)
         ok = sum(1 for i in feitos if (Path(audio_dir) / f"audio_{i}.wav").stat().st_mtime >
                  (d / f"audio_{i}.wav").stat().st_mtime)
-        logging.info(f"[fish+rvc] {ok}/{len(feitos)} frases com o RVC de {voz} por cima (rc={r.returncode})"
-                     + ("" if r.returncode == 0 else f" {(r.stdout + r.stderr)[-300:]}"))
+        cauda = ""
+        if ok < len(feitos) and (d / "_rvc.log").exists():
+            cauda = (d / "_rvc.log").read_text(encoding="utf-8", errors="ignore")[-300:]
+        logging.info(f"[fish+rvc] {ok}/{len(feitos)} frases com o RVC de {voz} por cima {cauda}")
         for i in feitos:  # o RVC sai no volume dele: nivela de novo como o resto
             try:
                 narracao_curva.pos_processar(Path(audio_dir) / f"audio_{i}.wav", 0.0)
@@ -1635,7 +1988,8 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     # 19/11 dona — ordem da voz: Fish Speech na GPU (Kaggle, narrador com trecho original) -> Fish online (Short no
     # PC1, conta com crédito) -> o modo de sempre (Kitten no Kaggle / p3 com mistura nos PCs). Cada um só narra o que
     # ainda não tem audio_i.wav; o que falhar segue para o próximo.
-    _audio_pronto_do_drive(audio_dir)  # 21/11: longo com a voz gerada antes, em pedaços (Qwen3/S2-Pro)
+    _audio_pronto_do_drive(audio_dir, lines)  # 21/11: voz gerada antes (Qwen3/S2-Pro); 22/11: casa pelo TEXTO
+    _narrar_s2pro(lines, audio_dir, so)  # 22/11: S2-Pro (misto = só emoção / pro = tudo) antes do XTTS
     _narrar_xtts(lines, audio_dir, so)  # 21/11: XTTS (motor_voz.json "motor": "xtts") vem antes do Fish
     _narrar_fish_nuvem(lines, audio_dir, so)
     _narrar_online(lines, audio_dir, so)
@@ -1864,6 +2218,52 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
         if idx == len(lines) - 1:
             _aplicar_margem_final(out)
     _fechar_clone(lines, audio_dir, so, abertura, voz, resumo, itens, modo, perfil)
+
+
+def _enfase_respeito(wav, ini, fim, s0, s1, alvo_s, en):
+    """Monta re | S | peito com ênfase (ver _esticar_s_respeito). Falhou = False (aí fica só o S)."""
+    try:
+        sr = 44100
+        fmt = f"aformat=sample_fmts=fltp:sample_rates={sr}:channel_layouts=stereo"
+
+        def tom(st_):
+            r_ = 2 ** (st_ / 12)
+            return f"asetrate={sr * r_:.0f},aresample={sr},atempo={1 / r_:.4f}"
+        d = s1 - s0
+        w0 = max(0.02, min(ini, s0 - 0.04))
+        w1 = max(s1 + 0.08, fim)
+        re_f = f",volume=1.5,{tom(1.0)}" if en in ("res", "tudo", "separado") else ""
+        pe_f = f",volume=1.2,{tom(-1.5)},atempo=0.92" if en in ("peito", "tudo", "separado") else ""
+        s_f = ",volume=1.3" if en in ("res", "tudo") else ""
+        cad = []
+        if alvo_s > d + 0.02:
+            f = d / alvo_s
+            while f < 0.5:
+                cad.append("atempo=0.5")
+                f /= 0.5
+            cad.append(f"atempo={f:.4f}")
+        s_chain = ("," + ",".join(cad)) if cad else ""
+        dur_s = max(d, alvo_s)
+        pausa = f"aevalsrc=0|0:d=0.15:s={sr},{fmt}[z];" if en == "separado" else ""
+        fc = (f"[0:a]atrim=0:{w0:.3f},asetpts=PTS-STARTPTS,{fmt}[a0];"
+              f"[0:a]atrim={w0:.3f}:{s0:.3f},asetpts=PTS-STARTPTS{re_f},{fmt}[a1];"
+              f"[0:a]atrim={s0:.3f}:{s1:.3f},asetpts=PTS-STARTPTS{s_chain}{s_f},afade=t=in:d=0.02,"
+              f"afade=t=out:st={max(0, dur_s - 0.03):.3f}:d=0.03,{fmt}[s];" + pausa +
+              f"[0:a]atrim={s1:.3f}:{w1:.3f},asetpts=PTS-STARTPTS{pe_f},{fmt}[b1];"
+              f"[0:a]atrim={w1:.3f},asetpts=PTS-STARTPTS,{fmt}[b2];"
+              f"[a0][a1][s]{'[z]' if pausa else ''}[b1][b2]concat=n={6 if pausa else 5}:v=0:a=1[o]")
+        wav = Path(wav)
+        tmp = wav.with_name(wav.stem + ".enf.wav")
+        r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-filter_complex", fc, "-map", "[o]",
+                            "-ar", str(sr), "-ac", "2", str(tmp)], capture_output=True, text=True)
+        if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 1000:
+            os.replace(tmp, wav)
+            return True
+        logging.info(f"[xtts] ênfase do respeito falhou: {r.stderr[-200:]}")
+        tmp.unlink(missing_ok=True)
+    except Exception as e:  # noqa: BLE001
+        logging.info(f"[xtts] ênfase do respeito falhou ({type(e).__name__}: {e})")
+    return False
 
 
 def _cadencia_quebrada(w):

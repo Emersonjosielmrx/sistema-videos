@@ -184,6 +184,58 @@ SFX_PAGE_TEAR = [
 
 _last_sfx_used = None  # Anti-repetição: nunca repetir o mesmo SFX consecutivo
 
+# 21/11 dona (longos): "muito efeito de transição básico (plip e outros); somado aos memes fica muito som externo —
+# usar efeitos mais criativos que combinem com a transição, sem repetir tanto, ou diminuir bastante". Só os LONGOS
+# (config/longo.json efeitos):
+#   ANIME_SFX_TRANS_CRIATIVO=1 -> o som de transição sai deste banco (transições IN de edição, sino, boom invertido,
+#     risers, whooshes cinematográficos) em vez de click/pop/sparkle/slide; nenhum dos últimos 8 se repete.
+#   ANIME_SFX_TRANS_CADA=N     -> no máximo 1 som genérico de transição a cada N frases (os de ação — soco, espada,
+#     explosão — e os de contexto — sistema, vraa, reprovação — não contam e seguem iguais).
+#   ANIME_SFX_TRANS_VOL=x      -> volume dos sons de transição multiplicado por x (fx_clips.apply_effects_to_cmd e o
+#     whoosh do meme de imagem). Vazio/0 = tudo como antes.
+_SONOROS = Path(__file__).parent.parent / "workspace" / "assets" / "sfx_extras" / "sonoros"
+SFX_TRANS_CRIATIVO = (
+    [_SONOROS / "Transição" / f"{i:02d}(IN).mp3" for i in range(1, 6)]
+    + [_SONOROS / "Transição" / "ESPECIAL.mp3", _SONOROS / "Bell Transition.mp3",
+       _SONOROS / "Reverse Cinematic Boom.mp3", _SONOROS / "Cinematic Whoosh.mp3", _SONOROS / "light-airy-whoosh.mp3",
+       _SONOROS / "Flashback.mp3", _SONOROS / "Reverse Clank Bell.mp3", _SONOROS / "Riser 1.wav",
+       _SONOROS / "Riser 3.wav", _SONOROS / "air-woosh-2.mp3", _SONOROS / "air-woosh-4.mp3"]
+)
+_SFX_BASICOS = {"subtle_click.wav", "pop.wav", "slide.wav", "paper_slide.wav", "swoosh_light.wav", "woosh.wav",
+                "magic_sparkle.wav", "new_transition_1.wav", "new_transition_2.wav", "page_turn.wav"}
+_recentes_trans = []  # últimos sons de transição (anti-repetição em janela de 8)
+_trans = {"frase": 0, "ultimo": -10 ** 6}
+
+
+def _env_float(nome, padrao=0.0):
+    try:
+        return float(os.environ.get(nome) or padrao)
+    except ValueError:
+        return padrao
+
+
+def e_som_transicao(path):
+    """True se o arquivo é um som GENÉRICO de transição (pool antigo ou o banco criativo)."""
+    if not path:
+        return False
+    p = Path(str(path))
+    return p.name in SFX_TRANSITION or p in SFX_TRANS_CRIATIVO or p.parent.name == "Transição"
+
+
+def _pick_transicao_criativa():
+    cands = [p for p in SFX_TRANS_CRIATIVO if p.exists()]
+    # completa com o pack whoosh_cinematic (curadoria aprovada), sem os básicos
+    cands += [SFX_DIR / n for n in SFX_TRANSITION if n not in _SFX_BASICOS and (SFX_DIR / n).exists()]
+    if not cands:
+        return None
+    livres = [p for p in cands if str(p) not in _recentes_trans[-8:]] or cands
+    # o banco criativo pesa 2x (é o que a dona pediu); o pack cinematográfico completa a variedade
+    pesos = [2 if p in SFX_TRANS_CRIATIVO else 1 for p in livres]
+    p = str(random.choices(livres, weights=pesos, k=1)[0])
+    _recentes_trans.append(p)
+    del _recentes_trans[:-16]
+    return p
+
 # TAREFA 18 (curadoria aprovada 2026-07-01): SFX disparados por CONTEXTO da narração.
 # vraa = grito de transformação/virada épica; reprovação = erro/fracasso/"deu ruim".
 # 7 e 5 variações → anti-repetição alterna (regra fixa #9). Ficam em SFX_DIR.
@@ -216,6 +268,11 @@ def pick_sfx(sfx_category=None):
     """Escolhe um SFX aleatório de uma categoria específica (IMPACT, TRANSITION, PAGE_TEAR).
     Garante que nunca repete o mesmo SFX consecutivamente."""
     global _last_sfx_used
+    if sfx_category in (None, "transition") and os.environ.get("ANIME_SFX_TRANS_CRIATIVO") == "1":
+        p = _pick_transicao_criativa()  # 21/11 dona (longos): sem plip/click; não repete os últimos 8
+        if p:
+            _last_sfx_used = p
+            return p
     pool = SFX_TRANSITION # Default
     if sfx_category == "impact":
         pool = SFX_IMPACT
@@ -437,9 +494,25 @@ def _memes_som_ruim():
     return _SOM_RUIM
 
 
+_REMOVIDOS = None
+
+
+def _memes_removidos():
+    """21/11 dona: memes antigos que ela tirou na revisão (bin/revisar_memes.py -> config/memes_removidos.json)."""
+    global _REMOVIDOS
+    if _REMOVIDOS is None:
+        _REMOVIDOS = set()
+        try:
+            arq = Path(__file__).resolve().parent.parent / "config" / "memes_removidos.json"
+            _REMOVIDOS = set(json.loads(arq.read_text(encoding="utf-8")).get("removidos", []))
+        except (OSError, ValueError, AttributeError):
+            pass
+    return _REMOVIDOS
+
+
 def meme_proibido(path):
     return bool(MEMES_PROIBIDOS.search(Path(str(path)).stem.replace("_", " "))) \
-        or Path(str(path)).name in _memes_som_ruim()
+        or Path(str(path)).name in _memes_som_ruim() or Path(str(path)).name in _memes_removidos()
 
 
 def _valid_audio(path):
@@ -506,6 +579,7 @@ def pick_sfx_for_text(text, desc=""):
     if not text:
         return None, None
     text_lower = text.lower()
+    _trans["frase"] += 1  # 21/11: conta frases pra espaçar o som genérico de transição (ANIME_SFX_TRANS_CADA)
 
     # 0. Onomatopeia literal da descrição (prioridade máxima)
     for kws, (kind, fname, vol) in ONOMATOPEIA_SFX:
@@ -535,6 +609,13 @@ def pick_sfx_for_text(text, desc=""):
             foley_path = SFX_FOLEY_DIR / foley_file
             if luta and not foley_path.exists():  # metade dos sons de luta mora em assets/sfx (thud, whoosh, deep_boom...)
                 foley_path = SFX_DIR / foley_file
+            if foley_file == "magic_sparkle.wav" and os.environ.get("ANIME_SFX_TRANS_CRIATIVO") == "1":
+                # 21/11 dona (longos): o mesmo brilho tocava 30x num longo — reveza com outros 2 de magia
+                alt = [p for p in (SFX_DIR / "magic_sparkle.wav", _SONOROS / "21- Mágica.mp3",
+                                   _SONOROS / "Magic_Wand_1.wav") if p.exists() and str(p) not in _recentes_trans[-2:]]
+                if alt:
+                    foley_path = random.choice(alt)
+                    _recentes_trans.append(str(foley_path))
             if _valid_audio(foley_path) and _sfx_fits_scene(desc, foley_path):
                 return str(foley_path), 0.6
             # arquivo quebrado/ausente/vetado → tenta próximas camadas
@@ -570,6 +651,12 @@ def pick_sfx_for_text(text, desc=""):
     for key, config in SFX_CONTEXTUAL_MAP.items():
         for keyword in config["keywords"]:
             if _kw_match(text_lower, keyword):
+                if config["category"] == "transition":
+                    # 21/11 dona (longos): no máximo 1 som genérico de transição a cada N frases
+                    cada = int(_env_float("ANIME_SFX_TRANS_CADA"))
+                    if cada > 0 and _trans["frase"] - _trans["ultimo"] < cada:
+                        return None, None
+                    _trans["ultimo"] = _trans["frase"]
                 sfx = pick_sfx(config["category"])
                 return sfx, config["volume"]
 

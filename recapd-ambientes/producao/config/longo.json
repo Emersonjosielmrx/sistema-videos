@@ -55,7 +55,13 @@
   "ANIME_SFX_GAP": "1",
   "ANIME_SFX_GAP_MAX": "1.2",
   "ANIME_LEGENDA_LEVE": "1",
-  "_leia_04_11_legenda": "04/11 dona: \"a legenda pode simplificar, mas tem que deixar documentado que a outra é melhor e que depois podemos voltar\". ANIME_LEGENDA_LEVE=1 = legenda MIX sem o brilho desfocado (\blur) em volta da palavra, cor chapada no lugar do degradê (2 faixas \\clip) e sem o rastro da palavra anterior. Medido 04/11 (testes_legenda_04nov): 269 s -> 201 s na passada da legenda (-25%; ~-7% no longo). A COMPLETA (=0) É MELHOR VISUALMENTE: voltar pra \"0\" quando a produção folgar. Transições e efeitos NÃO mudam (dona: fazem muita diferença)."
+  "_leia_04_11_legenda": "04/11 dona: \"a legenda pode simplificar, mas tem que deixar documentado que a outra é melhor e que depois podemos voltar\". ANIME_LEGENDA_LEVE=1 = legenda MIX sem o brilho desfocado (\blur) em volta da palavra, cor chapada no lugar do degradê (2 faixas \\clip) e sem o rastro da palavra anterior. Medido 04/11 (testes_legenda_04nov): 269 s -> 201 s na passada da legenda (-25%; ~-7% no longo). A COMPLETA (=0) É MELHOR VISUALMENTE: voltar pra \"0\" quando a produção folgar. Transições e efeitos NÃO mudam (dona: fazem muita diferença).",
+  "ANIME_SFX_TRANS_CRIATIVO": "1",
+  "ANIME_SFX_TRANS_CADA": "6",
+  "ANIME_SFX_TRANS_VOL": "0.45",
+  "ANIME_MEMES_SO_NOVOS": "1",
+  "_22_11_memes_so_novos": "Dona 22/11: 'quero usar APENAS os memes novos; os antigos continuam sendo muito usados'. ANIME_MEMES_SO_NOVOS=1: o catálogo de memes dos longos (vídeo e imagem, memes_visuais.catalogo) fica só com os 20 novos de memes_novos; 'video' = só novos nos vídeos e imagens antigas continuam; vazio/0 = como antes. Só vale nos longos (esta seção); os Shorts do hipercool usam a mesma pasta e NÃO mudam. Os arquivos antigos não saem da pasta.",
+  "_21_11_sfx_transicao": "Dona 21/11: 'muito som de transição básico (plip etc.); somado aos memes fica muito som externo'. CRIATIVO=1: banco de transições de edição (IN/OUT, sino, boom invertido, riser) sem click/pop/sparkle e sem repetir os últimos 8; CADA=6: no máximo 1 som genérico de transição a cada 6 frases (ação/contexto não contam); VOL=0.45: transição a 45% do volume. Vazio = como antes. Backup: config/longo.json.antes_sfx_21nov"
  },
  "por_tipo": {
   "_leia": "manhwa: sem espelho (o espelho inverte o texto dos balões e painéis; os Cortes de manhwa estão sem espelho desde 16/10). Anime segue espelhado (descaracteriza).",

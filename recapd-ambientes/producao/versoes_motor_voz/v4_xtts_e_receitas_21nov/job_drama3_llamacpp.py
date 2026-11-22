@@ -44,8 +44,13 @@ def compilar():
         return tts
     if not LC.exists():
         sh(["git", "clone", "-q", "--depth", "1", "https://github.com/ggml-org/llama.cpp.git", str(LC)], 900)
-    r = sh(["cmake", "-B", "build", "-DGGML_CUDA=ON", "-DCMAKE_CUDA_ARCHITECTURES=75", "-DLLAMA_CURL=ON",
-            "-DCMAKE_BUILD_TYPE=Release"], 1800, cwd=str(LC))
+    # 21/11 (1ª tentativa: "cannot find -lCUDA::cuda_driver"): o Kaggle não tem a libcuda de desenvolvimento no
+    # caminho do cmake — aponta pro stub do toolkit (o driver de verdade é carregado na hora de rodar)
+    stub = next((str(x) for x in Path("/usr/local/cuda/lib64/stubs").glob("libcuda.so")), "")
+    os.environ["LIBRARY_PATH"] = "/usr/local/cuda/lib64/stubs:" + os.environ.get("LIBRARY_PATH", "")
+    r = sh(["cmake", "-B", "build", "-DGGML_CUDA=ON", "-DCMAKE_CUDA_ARCHITECTURES=75", "-DLLAMA_CURL=OFF",
+            "-DCMAKE_BUILD_TYPE=Release", "-DGGML_CUDA_NO_VMM=ON",
+            f"-DCUDA_cuda_driver_LIBRARY={stub}" if stub else "-DGGML_CUDA_NO_VMM=ON"], 1800, cwd=str(LC))
     log(f"cmake rc={r.returncode} {r.stderr[-400:]}")
     r = sh(["cmake", "--build", "build", "--config", "Release", "-j", "4", "--target", "llama-tts"], 5400, cwd=str(LC))
     log(f"build rc={r.returncode} {r.stderr[-600:]}")
@@ -63,10 +68,14 @@ def baixar(repo, padrao):
 
 
 def falar(tts, modelo, extras, texto, ref, reftxt, saida, seed, t=900):
+    if "drama" in str(modelo[0]).lower() and not texto.startswith("<|speaker"):
+        texto = "<|speaker:0|> " + texto
     cmd = [str(tts), "-m", str(modelo[0]), "-p", texto, "--output", str(saida), "--tts-speaker-file", str(ref),
            "--tts-speaker-text", reftxt, "--seed", str(seed)] + extras
-    for m in modelo[1:]:  # codec/vocoder separado, se o repositório tiver
-        cmd += ["-mv", str(m)]
+    for m in modelo[1:]:  # 21/11: o codec vem no mmproj (-mm), doc do llama.cpp
+        if "mmproj" in m.name:
+            cmd += ["-mm", str(m)]
+    cmd += ["-n", "1000"]
     t0 = time.time()
     r = sh(cmd, t)
     return Path(saida).exists() and Path(saida).stat().st_size > 2000, time.time() - t0, (r.stdout + r.stderr)[-800:]
@@ -107,7 +116,7 @@ def main():
         sh(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=64x64:d=1", str(S / "video.mp4")])
         return
     alvos = {"drama3": ("ggml-org/drama-3-GGUF", ["*Q4_K_M*", "*codec*", "*decoder*", "*vocoder*", "*mmproj*"]),
-             "s2pro": ("ggml-org/s2-pro-GGUF", ["*Q8_0*", "*codec*", "*decoder*", "*vocoder*", "*mmproj*"])}
+             "s2pro": ("ggml-org/s2-pro-GGUF", ["*Q4_K_M*", "*Q8_0*", "*codec*", "*decoder*", "*vocoder*", "*mmproj*"])}
     # A) 2 GPUs  B) experts na RAM  C) as duas
     jeitos = [("A_duas_GPUs", ["-ngl", "999", "--tensor-split", "1,1"]),
               ("B_experts_na_RAM", ["-ngl", "999", "--n-cpu-moe", "40"]),

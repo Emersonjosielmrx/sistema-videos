@@ -272,6 +272,34 @@ def conta(email):
         return c
 
 
+def _varrer_orfaos():
+    """Fecha Chrome com a ponte do Fish (--proxy-server=127.0.0.1:185xx) cuja porta CDP não é de nenhuma conta aberta
+    nesta fábrica, com mais de 3 min de vida (o que está abrindo agora fica). Só os da ponte do Fish — Kaggle/Flow/
+    cofre comum têm outra ponte ou nenhuma."""
+    import re as _re
+    import subprocess as _sp
+    with _geral:
+        minhas = {getattr(c, "porta", None) for c in _contas.values()}
+    ps = ("Get-CimInstance Win32_Process -Filter \"Name='chrome.exe'\" | Where-Object { $_.CommandLine -match "
+          "'proxy-server=127\\.0\\.0\\.1:185' -and $_.CommandLine -notmatch '--type=' } | ForEach-Object { "
+          "\"$($_.ProcessId)|$($_.CreationDate.ToString('o'))|$($_.CommandLine)\" }")
+    r = _sp.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, timeout=240,
+                creationflags=0x08000000)  # PC lento: listar processos chegou a levar > 60 s
+    from datetime import datetime as _dt, timezone as _tz
+    for linha in (r.stdout or "").splitlines():
+        try:
+            pid, criado, cmd = linha.split("|", 2)
+            m = _re.search(r"remote-debugging-port=(\d+)", cmd)
+            porta = int(m.group(1)) if m else None
+            idade = (_dt.now(_tz.utc) - _dt.fromisoformat(criado.strip())).total_seconds()
+        except (ValueError, AttributeError):
+            continue
+        if porta in minhas or idade < 180:
+            continue
+        _sp.run(["taskkill", "/PID", pid.strip(), "/T", "/F"], capture_output=True, creationflags=0x08000000)
+        log(f"Chrome órfão do Fish fechado (porta {porta}, {idade / 60:.0f} min aberto)")
+
+
 def soltar(email):
     with _geral:
         c = _contas.pop(email.lower(), None)
@@ -282,8 +310,19 @@ def soltar(email):
 def zelador(srv):
     """Enche as reservas e fecha conta ociosa; sem conta nenhuma por OCIOSO_S, encerra a fábrica."""
     vazio_desde = time.time()
+    ult_varre = 0.0
     while True:
         time.sleep(5)
+        # 21/11 dona ("fecha as abas Fish que não estão sendo usadas; elas não fecham"): Chrome que abriu DEPOIS do
+        # "não abriu a porta em 45 s" (PC lento) ou que sobrou de uma fábrica anterior (que caiu/reiniciou) não estava
+        # em _contas e ninguém fechava. A cada 5 min fecha todo Chrome da ponte do Fish que não é desta fábrica.
+        # FISH_VARRE_ORFAOS=0 desliga.
+        if time.time() - ult_varre > 300 and os.environ.get("FISH_VARRE_ORFAOS", "1") != "0":
+            ult_varre = time.time()
+            try:
+                _varrer_orfaos()
+            except Exception as e:  # noqa: BLE001
+                log(f"varredura de órfãos falhou ({type(e).__name__})")
         for email, c in list(_contas.items()):
             if time.time() - c.uso > OCIOSO_S:
                 soltar(email)

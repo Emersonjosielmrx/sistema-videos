@@ -241,9 +241,15 @@ def _tempos_fish(lines, audio_dir):
     (Whisper small na GPU, ~1 s por frase) — legenda cinética no tempo da fala. Sem GPU/erro = legenda estimada."""
     try:
         marca = Path(audio_dir) / "_voz_online.json"
-        if not marca.exists():
+        if marca.exists():
+            idx = [int(i) for i in json.loads(marca.read_text(encoding="utf-8")).get("frases") or []]
+        elif os.environ.get("TEMPOS_TODA_FRASE", "1") != "0":
+            # 22/11 dona (82ge_com_S2Pro: "a legenda não bate com a narração"): o áudio pronto do Drive (S2-Pro/Qwen3)
+            # e o XTTS chegam SEM .words.json — a legenda caía na estimativa por tamanho e escorregava. Agora toda
+            # frase com áudio e sem tempos é medida aqui (Whisper na GPU). TEMPOS_TODA_FRASE=0 volta ao só-Fish.
+            idx = list(range(len(lines)))
+        else:
             return
-        idx = [int(i) for i in json.loads(marca.read_text(encoding="utf-8")).get("frases") or []]
         falta = [i for i in idx if i < len(lines) and (Path(audio_dir) / f"audio_{i}.wav").exists()
                  and not Path(str(Path(audio_dir) / f"audio_{i}.wav") + ".words.json").exists()]
         if not falta:

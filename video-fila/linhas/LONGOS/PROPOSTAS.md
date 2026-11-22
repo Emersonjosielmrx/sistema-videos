@@ -538,3 +538,18 @@
 - prova: Em ZZ7LeUws7-c (legibilidade 4.5 e movimento 5.0), a transição entre q25 e q26 reteve quadros estáticos da cena anterior sobrepostos ao avião por tempo excessivo, duplicando a marca d'água 'Jinwoo Recap' de forma desalinhada.
 - onde: bin/fx_clips.py (filtros de transição xfade e rotina de queima da marca d'água)
 - como testar: Inspecionar os quadros da transição q25-q26 em ZZ7LeUws7-c garantindo duração máxima de 6 a 8 frames para dissolvências ou forçando corte seco (hard cut) para impedir a persistência de quadros semitransparentes.
+
+## 21/11 23:19 [CERTEZA] Implementar safe-zone facial para stickers, figurinhas e cards de comentários (antigravity/gemini-3.8-flash-tiered)
+- prova: O sticker 'OS GURI?' cobriu integralmente olhos, nariz e boca e 'DIZ' cobriu a testa em 97bBeHddKJI (legibilidade 6.0); o card 'SINCERAMENTE' cobriu boca/queixo e o sticker feminino cobriu o olho em ZZ7LeUws7-c (legibilidade 4.5); o sticker da vaqueira tapou olho e franja em QwY2Kqk7jo8 (legibilidade 5.0).
+- onde: bin/fx_clips.py e bin/mascote_overlay.py (rotina de posicionamento de stickers, memes e cards)
+- como testar: Processar os quadros críticos de 97bBeHddKJI, ZZ7LeUws7-c e QwY2Kqk7jo8 garantindo que os elementos visuais sejam ancorados fora das bounding boxes faciais ou nos terços superiores/laterais desobstruídos.
+
+## 21/11 23:19 [CERTEZA] Corrigir proporção de memes eliminando barra branca/pillarbox assimétrico e manter legenda visível (antigravity/gemini-3.8-flash-tiered)
+- prova: Em QwY2Kqk7jo8 (legibilidade 5.0 e movimento 5.0), a inserção de meme exibiu barra branca vazia no terço esquerdo, centro cortado e desfoque unilateral esticado à direita, além de ocultar a legenda de narração no quadro.
+- onde: bin/fx_clips.py e bin/arsenal_memes.py (composição, redimensionamento e alinhamento de b-rolls e memes em 16:9)
+- como testar: Renderizar o trecho de meme de QwY2Kqk7jo8 garantindo preenchimento 16:9 completo com desfoque bilateral simétrico, eliminação da coluna branca e preservação da legenda de narração no topo da composição.
+
+## 21/11 23:19 [CERTEZA] Evitar alinhamento de crop 16:9 em sarjetas (gutters) e limitar planos estáticos no miolo a no máximo 4s (antigravity/gemini-3.8-flash-tiered)
+- prova: Em 97bBeHddKJI o crop dividiu a tela na linha divisória preta entre dois painéis (dedo no topo e queixo na base) e reteve imagem única por >9s (1434.57s a 1443.57s); em ZZ7LeUws7-c uma mesma imagem estática travou por >9s (629.3s a 638.3s, 12.1% de movimento).
+- onde: bin/fx_clips.py (_movimento e rotina de detecção de gutters/divisórias em manhwa)
+- como testar: Rodar o recorte nos trechos de 97bBeHddKJI e ZZ7LeUws7-c verificando que o algoritmo descarta bordas pretas entre quadros e força corte/zoom dinâmico caso a imagem exceda 4s de tela.

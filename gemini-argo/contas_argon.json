@@ -3,82 +3,82 @@
   {
    "email": "emersonjosiel2029@gmail.com",
    "apelido": "emersonjosiel2029",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:24",
-   "erros_seguidos": 8,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-22T07:27",
+   "erros_seguidos": 0,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1449,
-    "erros": 299,
+    "erros": 318,
     "seg_total": 66914.9
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",12],[\"af.httprm\",12,\"817832203",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "voltou_em": "2026-11-18T17:02",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T07:01"
+   "sem_cota_ate": "2026-11-22T10:30"
   },
   {
    "email": "emersonjosiel2030@gmail.com",
    "apelido": "emersonjosiel2030",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:54",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-21T20:38",
+   "erros_seguidos": 2,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1316,
-    "erros": 311,
+    "erros": 313,
     "seg_total": 61591.2
    },
    "voltou_em": "2026-11-18T09:08",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",16],[\"af.httprm\",16,\"-91936065",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:11"
+   "sem_cota_ate": "2026-11-22T09:53"
   },
   {
    "email": "comoseriasecomia@gmail.com",
    "apelido": "comoseriasecomia",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T05:45",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-22T03:05",
+   "erros_seguidos": 2,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1190,
-    "erros": 222,
+    "erros": 232,
     "seg_total": 44351.8
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",12],[\"af.httprm\",12,\"-34410730",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "voltou_em": "2026-11-17T08:20",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T08:53"
+   "sem_cota_ate": "2026-11-22T09:56"
   },
   {
    "email": "emersonjosiel2033@gmail.com",
    "apelido": "emersonjosiel2033",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:24",
-   "erros_seguidos": 14,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-21T20:44",
+   "erros_seguidos": 2,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1308,
-    "erros": 304,
+    "erros": 316,
     "seg_total": 49138.9
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",15],[\"af.httprm\",14,\"451039227",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "voltou_em": "2026-11-18T17:43",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T06:21"
+   "sem_cota_ate": "2026-11-22T09:57"
   },
   {
    "email": "inovaremanhwaverseesp@gmail.com",
@@ -98,107 +98,107 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:11"
+   "sem_cota_ate": "2026-11-22T10:00"
   },
   {
    "email": "inovaremanhwaversethai@gmail.com",
    "apelido": "inovaremanhwaversethai",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:29",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-21T20:29",
+   "erros_seguidos": 1,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1218,
-    "erros": 320,
+    "erros": 321,
     "seg_total": 46411.3
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",11],[\"af.httprm\",11,\"570214215",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /_/BardChatUi/data/assistant.lam",
    "voltou_em": "2026-11-18T15:16",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:54"
+   "sem_cota_ate": "2026-11-22T10:12"
   },
   {
    "email": "solarmundo195@gmail.com",
    "apelido": "solarmundo195",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:54",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-21T20:45",
+   "erros_seguidos": 2,
    "volta_exata": false,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 800,
-    "erros": 120,
+    "erros": 134,
     "seg_total": 26561.1
    },
    "voltou_em": "2026-11-08T22:05",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",16],[\"af.httprm\",16,\"453689879",
+   "ultimo_erro": "('Connection aborted.', ConnectionAbortedError(10053, 'Uma conexão estabelecida foi anulada pelo software no computador ",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:11"
+   "sem_cota_ate": "2026-11-22T10:03"
   },
   {
    "email": "inovaremanhwabr@gmail.com",
    "apelido": "inovaremanhwabr",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:54",
+   "ultimo_uso": "2026-11-21T18:10",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1248,
-    "erros": 286,
+    "erros": 301,
     "seg_total": 44276.4
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",13],[\"af.httprm\",12,\"-86744564",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "volta_exata": false,
    "voltou_em": "2026-11-17T22:50",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:11"
+   "sem_cota_ate": "2026-11-22T10:12"
   },
   {
    "email": "inovaremanhwaverseing@gmail.com",
    "apelido": "inovaremanhwaverseing",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:11",
-   "erros_seguidos": 11,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-22T03:46",
+   "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 1133,
-    "erros": 304,
+    "erros": 317,
     "seg_total": 47131.2
    },
    "volta_exata": false,
    "voltou_em": "2026-11-18T09:36",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",13],[\"af.httprm\",13,\"532751629",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:24"
+   "sem_cota_ate": "2026-11-22T10:13"
   },
   {
    "email": "aulacomia@gmail.com",
    "apelido": "aulacomia",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:11",
-   "erros_seguidos": 11,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-21T13:08",
+   "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 784,
-    "erros": 309,
+    "erros": 319,
     "seg_total": 28588.3
    },
    "volta_exata": false,
    "voltou_em": "2026-11-17T01:37",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",17],[\"af.httprm\",17,\"-20911691",
+   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",14],[\"af.httprm\",14,\"620942498",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:24"
+   "sem_cota_ate": "2026-11-22T10:15"
   },
   {
    "email": "aulasrevolution@gmail.com",
@@ -222,21 +222,21 @@
    "email": "inovaremultiatendimento@gmail.com",
    "apelido": "inovaremultiatendimento",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:29",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-22T08:09",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 589,
-    "erros": 298,
+    "erros": 302,
     "seg_total": 25927.6
    },
    "volta_exata": false,
    "voltou_em": "2026-11-18T02:33",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n102\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",9],[\"af.httprm\",9,\"-6871927686",
+   "ultimo_erro": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:54"
+   "sem_cota_ate": "2026-11-22T11:09"
   },
   {
    "email": "filmescomia1@gmail.com",
@@ -256,27 +256,27 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T11:11"
+   "sem_cota_ate": "2026-11-22T11:09"
   },
   {
    "email": "msenergypara@gmail.com",
    "apelido": "msenergypara",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:24",
-   "erros_seguidos": 6,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-22T05:21",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 248,
-    "erros": 765,
+    "erros": 782,
     "seg_total": 7809.0
    },
    "volta_exata": false,
    "voltou_em": "2026-11-05T10:02",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
-   "ultimo_erro": "StreamGenerate HTTP 401: )]}'\n\n105\n[[\"er\",null,null,null,null,401,null,null,null,16],[\"di\",13],[\"af.httprm\",13,\"-2819012",
+   "ultimo_erro": "HTTPSConnectionPool(host='accounts.google.com', port=443): Max retries exceeded with url: /info/servicerestricted?es=ABA",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-20T17:54",
+   "sem_cota_ate": "2026-11-22T08:25",
    "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
@@ -302,41 +302,41 @@
    "email": "emersonjosiel1995@gmail.com",
    "apelido": "emersonjosiel1995",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T05:24",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-21T10:46",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 477,
-    "erros": 218,
+    "erros": 230,
     "seg_total": 15323.8
    },
    "volta_exata": false,
    "voltou_em": "2026-11-16T22:39",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",13],[\"af.httprm\",13,\"-81721374",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T08:30"
+   "sem_cota_ate": "2026-11-22T10:21"
   },
   {
    "email": "mentoriaiapro@gmail.com",
    "apelido": "mentoriaiapro",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:24",
-   "erros_seguidos": 8,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-22T05:26",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 394,
-    "erros": 222,
+    "erros": 231,
     "seg_total": 15608.8
    },
    "volta_exata": false,
    "voltou_em": "2026-11-16T23:09",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",11],[\"af.httprm\",10,\"-10017925",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T07:01"
+   "sem_cota_ate": "2026-11-22T08:25"
   },
   {
    "email": "e4487017@gmail.com",
@@ -363,61 +363,61 @@
    "email": "fabricadeautomacoes0@gmail.com",
    "apelido": "fabricadeautomacoes0",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T06:06",
+   "ultimo_uso": "2026-11-21T22:57",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 349,
-    "erros": 182,
+    "erros": 195,
     "seg_total": 10758.4
    },
    "volta_exata": false,
    "voltou_em": "2026-11-17T05:27",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n102\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",9],[\"af.httprm\",8,\"-6383331287",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T09:16"
+   "sem_cota_ate": "2026-11-22T11:10"
   },
   {
    "email": "inovarecap@gmail.com",
    "apelido": "inovarecap",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T06:21",
+   "ultimo_uso": "2026-11-21T20:27",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 226,
-    "erros": 177,
+    "erros": 188,
     "seg_total": 11905.3
    },
    "volta_exata": false,
    "voltou_em": "2026-11-16T16:32",
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",10],[\"af.httprm\",10,\"763177860",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T09:26"
+   "sem_cota_ate": "2026-11-22T10:21"
   },
   {
    "email": "emersongenc@gmail.com",
    "apelido": "emersongenc",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T06:06",
+   "ultimo_uso": "2026-11-21T11:00",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 198,
-    "erros": 162,
+    "erros": 174,
     "seg_total": 8210.7
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n102\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",11],[\"af.httprm\",11,\"192377379",
+   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",14],[\"af.httprm\",14,\"-27610256",
    "volta_exata": false,
    "voltou_em": "2026-11-16T23:27",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T09:16"
+   "sem_cota_ate": "2026-11-22T10:21"
   },
   {
    "email": "emersongencshin@gmail.com",
@@ -437,107 +437,108 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:02"
+   "sem_cota_ate": "2026-11-22T10:29"
   },
   {
    "email": "empressinovare@gmail.com",
    "apelido": "empressinovare",
-   "bloqueada": true,
-   "ultimo_uso": "2026-11-21T08:24",
-   "erros_seguidos": 5,
+   "bloqueada": false,
+   "ultimo_uso": "2026-11-21T20:49",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "volta_exata": false,
    "stats": {
     "ok": 88,
-    "erros": 106,
+    "erros": 116,
     "seg_total": 2562.0
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",13],[\"af.httprm\",12,\"-65831571",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "voltou_em": "2026-11-16T04:49",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T08:01"
+   "sem_cota_ate": "2026-11-22T11:12"
   },
   {
    "email": "fabiovideoseducativos@gmail.com",
    "apelido": "fabiovideoseducativos",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T05:53",
+   "ultimo_uso": "2026-11-21T18:11",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 171,
-    "erros": 131,
+    "erros": 142,
     "seg_total": 8245.9
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",13],[\"af.httprm\",12,\"-57815594",
+   "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "volta_exata": false,
    "voltou_em": "2026-11-16T02:46",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T09:01"
+   "sem_cota_ate": "2026-11-22T08:16"
   },
   {
    "email": "gameoftroneskingsroadbrasil@gmail.com",
    "apelido": "gameoftroneskingsroadbrasil",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:29",
+   "ultimo_uso": "2026-11-22T05:19",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 104,
-    "erros": 123,
+    "erros": 126,
     "seg_total": 3209.5
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n103\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",11],[\"af.httprm\",11,\"572181079",
+   "ultimo_erro": "HTTPSConnectionPool(host='accounts.google.com', port=443): Max retries exceeded with url: /ServiceLogin?passive=1209600&",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "volta_exata": false,
    "voltou_em": "2026-11-16T17:58",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:54"
+   "sem_cota_ate": "2026-11-22T08:51",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "vendeafiliados3@gmail.com",
    "apelido": "vendeafiliados3",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:29",
+   "ultimo_uso": "2026-11-21T21:18",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 67,
-    "erros": 125,
+    "erros": 128,
     "seg_total": 2673.4
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n104\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",16],[\"af.httprm\",16,\"-14374967",
+   "ultimo_erro": "('Connection aborted.', ConnectionAbortedError(10053, 'Uma conexão estabelecida foi anulada pelo software no computador ",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "volta_exata": false,
    "voltou_em": "2026-11-16T03:52",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:54"
+   "sem_cota_ate": "2026-11-22T08:21"
   },
   {
    "email": "en1653964@gmail.com",
    "apelido": "en1653964",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-21T07:29",
+   "ultimo_uso": "2026-11-21T21:19",
    "erros_seguidos": 0,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "stats": {
     "ok": 76,
-    "erros": 114,
+    "erros": 117,
     "seg_total": 2147.5
    },
-   "ultimo_erro": "StreamGenerate HTTP 400: )]}'\n\n102\n[[\"er\",null,null,null,null,400,null,null,null,3],[\"di\",9],[\"af.httprm\",9,\"-7580501588",
+   "ultimo_erro": "HTTPSConnectionPool(host='accounts.google.com', port=443): Max retries exceeded with url: /ServiceLogin?passive=1209600&",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "volta_exata": false,
    "voltou_em": "2026-11-16T05:02",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:55"
+   "sem_cota_ate": "2026-11-22T10:30"
   },
   {
    "email": "emersonjosiel2031@gmail.com",
@@ -557,7 +558,7 @@
    "voltou_em": "2026-11-16T04:49",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:55"
+   "sem_cota_ate": "2026-11-22T08:24"
   },
   {
    "email": "entrevistacomia@gmail.com",
@@ -577,7 +578,8 @@
    "voltou_em": "2026-11-16T19:50",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-21T10:55"
+   "sem_cota_ate": "2026-11-22T08:25",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   }
  ],
  "indice": 11

@@ -16,9 +16,12 @@ FICHAS = Path(r"D:\hipercool-materiais\animes recap\na_nuvem")
 POSTADOS = AQUI / "longos_postados.json"
 LOG = AQUI / "postar_xtts_teste.log"
 PY = r"D:\recapd-ambientes\producao\venv\Scripts\python.exe"
-ALVOS = {"8fM6Ay7OJho": "só KkVirjão", "gJve_WjefZs": "só Mike", "e2nIzNGXvmA": "só Momo",
+ALVOS = {"8fM6Ay7OJho": "só KkVirjão", "gJve_WjefZs": "só Mike", "e2nIzNGXvmA_xtts_momo": "só Momo",
          "kxohroSbgS8": "Momo+Mike+KkVirjão",
-         "82ge1YYkUyA": "só Momo, PREMIUM Qwen3-TTS (21/11)"}
+         # 21/11 noite: os novos têm o MESMO vid de fichas velhas -> o alvo é o nome da ficha nova (recolher_testes.py)
+         # 22/11: Qwen3 e S2-Pro (82ge) TIRADOS — áudio pronto foi gerado sobre as 878 linhas puras e o vídeo tem
+         # ~950 (resumo/CTA/ganchos inseridos) -> voz desalinhada da legenda o vídeo todo. Não postar; refazer.
+         }
 
 
 def log(msg):
@@ -36,6 +39,10 @@ def postados():
     for x in L or []:  # só os postados DEPOIS de liberar o teste (a mesma fonte já saiu antes no motor antigo)
         if isinstance(x, dict) and x.get("vid") and x.get("url") and str(x.get("em") or "") >= "2026-11-21T02":
             out[x["vid"]] = x["url"]
+            if x.get("nome"):
+                for a in ALVOS:  # alvo por nome de ficha (o vid repetido de fichas velhas não conta)
+                    if str(x["nome"]).startswith(a):
+                        out[a] = x["url"]
     return out
 
 
@@ -48,12 +55,12 @@ def main():
         return
     for vid in faltam:
         # ficha NOVA (chegou depois de liberar o teste) — a velha do motor antigo pode ter o mesmo vid no nome
-        fichas = [f for f in FICHAS.glob(f"{vid}_*/nuvem.json")
+        fichas = [f for f in list(FICHAS.glob(f"{vid}_*/nuvem.json")) + list(FICHAS.glob(f"{vid}/nuvem.json"))
                   if datetime.fromtimestamp(f.stat().st_mtime) >= datetime(2026, 11, 21, 2, 0)]
         if not fichas:
             continue
         log(f"{vid} ({ALVOS[vid]}) pronto — postando público")
-        env = dict(os.environ, LONGO_SO_FISH_POSTAR="0", PYTHONIOENCODING="utf-8")
+        env = dict(os.environ, LONGO_SO_FISH_POSTAR="0", LONGO_FOLGA_GB="0.4", PYTHONIOENCODING="utf-8")  # 21/11: D vive apertado; só estes 4
         try:
             r = subprocess.run([PY, "-X", "utf8", str(AQUI / "postar_longos.py"), "--so", vid], env=env,
                                capture_output=True, text=True, timeout=3 * 3600, cwd=str(AQUI),
@@ -70,8 +77,19 @@ def main():
                 avisos.enviar(f"🎙️ Longo de teste XTTS ({ALVOS[vid]}) no ar, público: {url}", "longos")
             except Exception:  # noqa: BLE001
                 pass
-        break  # 1 por volta (o envio leva ~1 h; o próximo vai na volta seguinte)
+        if url:
+            break  # 1 por volta (o envio leva ~1 h; o próximo vai na volta seguinte)
+        # 21/11 manhã: o 8fM6 dava "saiu 0" (ficha com o mesmo nome já postada em 14/11, canal removido) e o break
+        # prendia a tarefa nele — os outros nunca eram tentados. Sem URL = tenta o próximo nesta mesma volta.
 
 
 if __name__ == "__main__":
+    # 21/11: a tarefa de 10 em 10 min abria uma cópia nova enquanto o envio (1 h+) ainda rodava — 3 cópias e 2
+    # "--so" do mesmo longo brigando, nenhum terminava. Trava: se outra cópia está rodando, esta sai.
+    import msvcrt
+    _trava = open(AQUI / "postar_xtts_teste.lock", "w")
+    try:
+        msvcrt.locking(_trava.fileno(), msvcrt.LK_NBLCK, 1)
+    except OSError:
+        sys.exit(0)
     main()

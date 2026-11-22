@@ -102,7 +102,16 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
         if "login" in pg.url:
             return False, "não logado"
         _fechar_avisos(pg)
-        ok_fb, desm, rotulo = _so_facebook(pg, nome_pagina)
+        # 21/11: a tela do composer às vezes não monta (caixa "Postar em" não aparece em 15 s -> a MS Energy queimou a
+        # fila inteira assim). Recarrega 1x antes de desistir.
+        try:
+            ok_fb, desm, rotulo = _so_facebook(pg, nome_pagina)
+        except Exception as ex:
+            print(f"  'Postar em' não montou ({str(ex)[:50]}); recarrego o composer", flush=True)
+            pg.goto(COMPOSER.format(asset_id), wait_until="domcontentloaded", timeout=120000)
+            time.sleep(20)
+            _fechar_avisos(pg)
+            ok_fb, desm, rotulo = _so_facebook(pg, nome_pagina)
         print(f"  postar em: '{rotulo}' (desmarcou {desm})", flush=True)
         if not ok_fb or rotulo.casefold() != nome_pagina.casefold():
             pg.screenshot(path=str(LOG / f"{tag}_erro_postar_em.png"))

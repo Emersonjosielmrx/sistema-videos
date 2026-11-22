@@ -203,28 +203,31 @@ def post_one_cdp(video_path, port, description):
 
         # Publicar so habilita quando o envio termina; clicar antes nao faz nada (3o post do dia sumia em 15/10)
         estado_botao = '(() => { let b = document.querySelector("[data-e2e=post_video_button]"); if(!b) return "sem"; return (b.disabled || b.getAttribute("aria-disabled") === "true" || b.getAttribute("data-disabled") === "true") ? "off" : "on"; })()'
-        for _ in range(60):
+        for _ in range(90):
             if evaluate(browser_ws, estado_botao, session_id) != 'off':
                 break
             time.sleep(2)
-        print(f'  Botao Publicar: {evaluate(browser_ws, estado_botao, session_id)}', flush=True)
+        estado_final = evaluate(browser_ws, estado_botao, session_id)
+        print(f'  Botao Publicar: {estado_final}', flush=True)
 
         print('  Clicking Post...', flush=True)
         posted = False
 
-        result = evaluate(browser_ws, '(() => { let b = document.querySelector("[data-e2e=post_video_button]"); if(b) { b.scrollIntoView(); b.click(); return true; } return false; })()', session_id)
-        if result:
-            posted = True
-            print('  Post clicked via data-e2e!', flush=True)
-
-        if not posted:
-            result = evaluate(browser_ws, '(() => { let bs = document.querySelectorAll(".TUXButton--primary"); if(bs.length) { bs[bs.length-1].click(); return true; } return false; })()', session_id)
+        # So tenta clicar se o botao estiver no estado "on"
+        if estado_final == 'on':
+            result = evaluate(browser_ws, '(() => { let b = document.querySelector("[data-e2e=post_video_button]"); if(b) { b.scrollIntoView(); b.click(); return true; } return false; })()', session_id)
             if result:
                 posted = True
-                print('  Post clicked via TUXButton!', flush=True)
+                print('  Post clicked via data-e2e!', flush=True)
+
+            if not posted:
+                result = evaluate(browser_ws, '(() => { let bs = document.querySelectorAll(".TUXButton--primary"); if(bs.length) { bs[bs.length-1].click(); return true; } return false; })()', session_id)
+                if result:
+                    posted = True
+                    print('  Post clicked via TUXButton!', flush=True)
 
         if not posted:
-            print('  All click methods failed', flush=True)
+            print(f'  All click methods failed (botao: {estado_final})', flush=True)
 
         # So conta como postado quando o TikTok confirma (sai da tela de envio ou mostra a msg de publicado);
         # janela "publicar agora?" (verificacao de conteudo ainda rodando) e confirmada.
@@ -237,7 +240,7 @@ def post_one_cdp(video_path, port, description):
             const ok = /foi publicad|v[ií]deo publicad|publicado com sucesso|has been posted|video posted|your video is being uploaded|gerenciar (suas )?publica|manage your posts|carregar outro|upload another/i.test(t);
             return {url: location.href, bts: bts, ok: ok};
         })()'''
-        for i in range(30 if posted else 0):
+        for i in range(45):
             time.sleep(2)
             st = evaluate(browser_ws, sonda, session_id) or {}
             if (st.get('url'), st.get('bts')) != ultimo:

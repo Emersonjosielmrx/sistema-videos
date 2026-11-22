@@ -26443,6 +26443,214 @@
         "Páginas oficiais sobre metadados e spam/engano, e um teste de similaridade entre títulos do próprio canal com difflib ou rapidfuzz"
       ],
       "origem": "area_eres2net_licenca__sonnet_0807.md 2026-11-21"
+    },
+    {
+      "id": "poli_inautentico",
+      "nome": "Checagem de repetição antes de postar",
+      "subtemas": [
+        "procurar scripts pequenos que comparem títulos, descrições e aberturas entre canais próprios, e relatos de canais de recap que perderam ou mantiveram monetização"
+      ],
+      "origem": "area_avatares_stop__sonnet_0817.md 2026-11-21"
+    },
+    {
+      "id": "dub_idioma",
+      "nome": "Faixas de áudio e idiomas no YouTube",
+      "subtemas": [
+        "buscar o que muda por país (título e descrição localizados) e relatos de uso de áudio alternativo em longos de até 2 h"
+      ],
+      "origem": "area_avatares_stop__sonnet_0817.md 2026-11-21"
+    },
+    {
+      "id": "celular_render",
+      "nome": "FFmpeg no Android sem dependências pesadas",
+      "subtemas": [
+        "buscar snippets de Termux com FFmpeg para dividir render entre celular e PCs e liberar disco, só com repositórios que ainda tenham commit em 2026"
+      ],
+      "origem": "area_avatares_stop__sonnet_0817.md 2026-11-21"
+    },
+    {
+      "id": "mediacodec_termux",
+      "nome": "Render e upscale em Android com h264_mediacodec",
+      "subtemas": [
+        "medir velocidade e qualidade (SSIM/VMAF) de `h264_mediacodec` vs `libx264` no Termux, bitrate e perfil recomendados para Shorts"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0826.md 2026-11-21"
+    },
+    {
+      "id": "adb_wifi_fila",
+      "nome": "Fila e travas para vários celulares por Wi-Fi",
+      "subtemas": [
+        "issues e gists com `adb_allowed_connection_time`, `settings put global`, keep-alive e reconexão automática após reboot, sem root"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0826.md 2026-11-21"
+    },
+    {
+      "id": "share_intent_youtube",
+      "nome": "Fluxo de share intent para o app do YouTube",
+      "subtemas": [
+        "exemplos de `am start -a SEND -p com.google.android.youtube` com content:// e `uiautomator dump` dos botões da tela de upload, sem crash"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0826.md 2026-11-21"
+    },
+    {
+      "id": "fila_por_celular",
+      "nome": "Fila de postagem por dispositivo com trava e reconexão Wi-Fi",
+      "subtemas": [
+        "procurar implementações pequenas de fila persistente por serial ADB, em Python puro, com retry e watchdog"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0841.md 2026-11-21"
+    },
+    {
+      "id": "regras_reutilizado",
+      "nome": "Regras oficiais de conteúdo reutilizado e inautêntico",
+      "subtemas": [
+        "ler a página oficial de \"reused content\" e as de monetização de Shorts na central de ajuda do YouTube; separar o que está escrito do que é interpretação"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1013.md 2026-11-21"
+    },
+    {
+      "id": "phone_lock",
+      "nome": "Fila e travas por celular",
+      "subtemas": [
+        "repos com poucas estrelas que usem lock por serial, heartbeat e retomada de tarefa em ADB Python (busca sem as palavras \"farm\" e \"agent\")"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1106.md 2026-11-21"
+    },
+    {
+      "id": "yt_app_ui",
+      "nome": "Mudanças de UI do app do YouTube",
+      "subtemas": [
+        "issues e commits recentes de repos de automação do app que citem mudança de resource-id, tela de agendar e \"app crashed\" no share"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1106.md 2026-11-21"
+    },
+    {
+      "id": "ritmo_pan_voz",
+      "nome": "Ritmo do pan e zoom por painel",
+      "subtemas": [
+        "casar a duração de cada painel com a duração da frase narrada, em ffmpeg/Python, sem modelo novo"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1127.md 2026-11-21"
+    },
+    {
+      "id": "tira_longa_9x16",
+      "nome": "Rolagem de tira de manhwa em 9:16",
+      "subtemas": [
+        "rolagem com easing por expressão de `crop`/`overlay` no tempo, mais compensação de borda"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1127.md 2026-11-21"
+    },
+    {
+      "id": "compilados_serie",
+      "nome": "Compilados e playlists que levam ao próximo vídeo",
+      "subtemas": [
+        "Truques de ordem, título numerado e tela final em séries de recap, com projetos pequenos em Python e yt-dlp."
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1137.md 2026-11-21"
+    },
+    {
+      "id": "rec_mais_vistos",
+      "nome": "Achar recaps mais vistos por nicho",
+      "subtemas": [
+        "Truques com yt-dlp para listar vídeos por views÷inscritos em canais de recap de manhwa e anime em inglês e espanhol, sem API do Google"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1148.md 2026-11-21"
+    },
+    {
+      "id": "capa_titulo30s",
+      "nome": "Capa, título e primeiros 30 s em recap",
+      "subtemas": [
+        "Padrões de gancho e capa dos recaps campeões de manhwa; como medir retenção dos primeiros 30 s a partir dos números do Studio"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1148.md 2026-11-21"
+    },
+    {
+      "id": "pan_webtoon_crop",
+      "nome": "Pan/scroll vertical de manhwa em ffmpeg",
+      "subtemas": [
+        "exemplos de `crop`/`overlay` com expressão e easing (smoothstep/ease) para scroll em 9:16 sem `zoompan`, e como sincronizar a velocidade do pan com a duração da fala do trecho"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1208.md 2026-11-21"
+    },
+    {
+      "id": "render_termux_android",
+      "nome": "Render ffmpeg em celular Android",
+      "subtemas": [
+        "scripts Termux curtos com `ffmpeg` + `xargs -P`/fila para dividir o render entre PCs e celulares, e limpeza automática de disco"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1208.md 2026-11-21"
+    },
+    {
+      "id": "capas_titulos_recap",
+      "nome": "Capas e títulos de recap campeões",
+      "subtemas": [
+        "Padrões de título e primeiros 30 s dos recaps mais vistos, coletados por yt-dlp (só metadados) em canais grandes de manhwa/anime"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1227.md 2026-11-21"
+    },
+    {
+      "id": "concat_sem_reencode",
+      "nome": "Compilados e partes de série sem reencode",
+      "subtemas": [
+        "scripts pequenos em Python/ffmpeg que checam parâmetros com ffprobe e escolhem entre concat copy e reencode parcial"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1322.md 2026-11-21"
+    },
+    {
+      "id": "gem_quota",
+      "nome": "Limite diário de imagem/vídeo do app Gemini",
+      "subtemas": [
+        "Procurar relatos de 2026 sobre cota por conta (Free/Pro) e como ler a cota restante antes de gerar capas ou imagens em lote."
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1835.md 2026-11-21"
+    },
+    {
+      "id": "gem_401",
+      "nome": "Recuperação de 401/expiração de sessão",
+      "subtemas": [
+        "Procurar issues recentes com \"Cookies invalid\", \"RotateCookies\" e \"SNlM0e/at token\" para montar uma sequência de recuperação (reler a página, regerar o token, trocar de conta)."
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1835.md 2026-11-21"
+    },
+    {
+      "id": "fontes_autorizadas",
+      "nome": "Canais e editoras que autorizam recap",
+      "subtemas": [
+        "Buscar nas páginas oficiais programas de afiliados ou de uso de conteúdo, editoras de manhwa e canais com CC-BY. Só considerar o que estiver escrito por eles."
+      ],
+      "origem": "area_fontes_recap_ingles__sonnet_0012.md 2026-11-22"
+    },
+    {
+      "id": "yt_como_feito",
+      "nome": "YouTube \"How this content was made\"",
+      "subtemas": [
+        "achar a página oficial atual e o que ela exige de recap com voz sintética"
+      ],
+      "origem": "area_yt_politica_conteudo_sintetico__sonnet_0651.md 2026-11-22"
+    },
+    {
+      "id": "tiktok_ia_rotulo",
+      "nome": "Rótulo de IA no TikTok/Reels",
+      "subtemas": [
+        "regra oficial atual de declaração de conteúdo de IA e voz sintética, e o que acontece sem declarar"
+      ],
+      "origem": "area_yt_politica_conteudo_sintetico__sonnet_0651.md 2026-11-22"
+    },
+    {
+      "id": "yt_inautentico_sinais",
+      "nome": "Sinais de conteúdo \"inauthentic\" em canais em série",
+      "subtemas": [
+        "casos e relatos 2025-2026 de canais de recap automatizado desmonetizados e o que os revisores apontaram"
+      ],
+      "origem": "area_yt_politica_conteudo_sintetico__sonnet_0651.md 2026-11-22"
+    },
+    {
+      "id": "yt_ficha_transformacao",
+      "nome": "Ficha de transformação por vídeo",
+      "subtemas": [
+        "script simples com ffprobe e roteiro que registra proporção de voz própria e fonte, para anexar em contestação"
+      ],
+      "origem": "area_yt_politica_conteudo_reutilizado__sonnet_0656.md 2026-11-22"
     }
   ],
   "projetos": [

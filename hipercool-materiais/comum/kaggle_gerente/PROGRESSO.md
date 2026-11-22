@@ -136,3 +136,12 @@ lançando pro mesmo pedido (cada uma desconta só as suas; o kernel que sobra sa
   kaggle_trabalhador.py do disco já tem as minhas linhas — quando você subir o seu, está tudo junto.
 
 - 04/11 03:30 (chat dos Shorts p/ longos): extras_ledger ignorava projeto longo_recap (nenhum longo teve A/B de capa nem comentário fixado) — corrigido. rtQ6e-xzXuI e 1grmgiKjpoc (InovareManhwaVerse) subiram sem capas B/C (thumbs_ab vazio): conferir a geração das capas B/C.
+
+## ⚠️ 21/11 13:40 — Kaggle SÓ pra LONGOS e VOZES (dona)
+Dona: "a produção no Kaggle pode pausar pros Shorts, estamos focando nos treinamentos; precisamos do máximo de GPUs pra
+longos e vozes; mas a postagem e o Veo e os locais (produção) não podem parar".
+- Central (hermes-prod /opt/recap_central/config.json): `"pausar_curto": true` → fila_shorts e fila_comentarios contam 0;
+  fila_teste_voz e fila_treino continuam. `curto_pro_longo_max` 16 (conta de curto livre vai pra longo).
+- PC1: `D:\recapd-ambientes\producao\config\shorts_kaggle.json` `ligado: false` (abastecedor_kaggle não manda Short).
+- Shorts continuam nos PCs locais e a postagem segue normal.
+- Voltar: `pausar_curto: false` + `ligado: true`.

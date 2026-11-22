@@ -317,6 +317,20 @@ def main():
         log("nada a fazer agora (intervalo/limite do dia/conta parada/fila vazia)"); return
     # 1 Chrome da conta aberto o procedimento inteiro (abrir/fechar a cada etapa travava o perfil: ECONNREFUSED);
     # as etapas acham a porta aberta e não fecham. Fecha no fim.
+    # 21/11: mesma trava por conta da postagem (logs/fb_postando_<conta>.lock) — criação e rodada de postagem na MESMA
+    # conta brigavam pelo Chrome (uma fechava o da outra). O 1º Reel da criação roda com FB_TRAVA_HERDADA e passa.
+    trava = BIN.parent / "logs" / f"fb_postando_{item['conta']}.lock"
+    if trava.exists():
+        try:
+            pid_t, quando_t = trava.read_text(encoding="utf-8").split("|")
+            vivo = str(pid_t) in subprocess.run(["tasklist", "/FI", f"PID eq {pid_t}", "/NH"], capture_output=True,
+                                                text=True, errors="replace").stdout
+            if vivo and (datetime.now() - datetime.fromisoformat(quando_t)).total_seconds() < 2400:
+                log(f"conta {item['conta']} postando agora (pid {pid_t}) — criação fica pra próxima"); return
+        except Exception:
+            pass
+    trava.write_text(f"{os.getpid()}|{datetime.now().isoformat(timespec='seconds')}", encoding="utf-8")
+    os.environ["FB_TRAVA_HERDADA"] = item["conta"]
     import fb_contas
     _, proc = fb_contas.abrir(item["conta"])
     try:
@@ -325,6 +339,7 @@ def main():
         log(f"   ERRO {item['chave']}: {str(e)[:300]}")
     finally:
         fb_contas.fechar(proc)
+        trava.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

@@ -131,6 +131,9 @@ _SESSOES = {}  # conta -> (mtime do cookies.json, Session)  29/10 (Fable): 1 Ses
 _trava_sessoes = threading.Lock()
 
 
+_COOKIES_GEMINI = {"OSID", "__Secure-OSID", "COMPASS"}
+
+
 def _carregar_sessao(conta):
     arq = _arq_cookies(conta)
     if not arq.exists():
@@ -142,7 +145,11 @@ def _carregar_sessao(conta):
             return c[1]
         cookies = json.loads(arq.read_text(encoding="utf-8"))
         s = requests.Session()
-        s.cookies.update(cookies)
+        # 21/11: cookies COM domínio. Sem domínio o requests só manda ao host exato e o download da imagem (que passa
+        # por work.fife.usercontent.google.com) dava 403; o OSID é do domínio gemini.google.com (ver sync_cookies).
+        for nome, valor in cookies.items():
+            dom = "gemini.google.com" if nome in _COOKIES_GEMINI else ".google.com"
+            s.cookies.set(nome, valor, domain=dom, path="/")
         s.headers.update({"User-Agent": UA})
         s._carregado = dict(cookies)  # para gravar só o que mudou nesta sessão
         _SESSOES[conta] = (mt, s)
@@ -154,7 +161,11 @@ def _salvar_sessao(conta, sessao):
     que mudaram em relação ao que a sessão carregou — antes regravava todos e um pedido longo desfazia o cookie novo que o
     cofre acabara de gravar (conta voltava a "sem SNlM0e")."""
     base = getattr(sessao, "_carregado", {})
-    novos = {k: v for k, v in sessao.cookies.get_dict().items() if base.get(k) != v}
+    # 21/11: só os dois domínios que o arquivo guarda (o download da imagem traz cookies de outros hosts)
+    nossos = {c.name: c.value for c in sessao.cookies
+              if c.domain in (".google.com", "google.com") or (c.domain.lstrip(".") == "gemini.google.com"
+                                                               and c.name in _COOKIES_GEMINI)}
+    novos = {k: v for k, v in nossos.items() if base.get(k) != v}
     if not novos:
         return
     with _trava_sessoes:
@@ -188,6 +199,9 @@ def _tokens(conta, sessao):
         return m.group(1) if m else None
 
     at, bl, fsid = pega("SNlM0e"), pega("cfb2h"), pega("FdrFJe")
+    # 21/11: a página de LOGIN também tem SNlM0e; com ela o pedido ia deslogado e o cookie passava por vivo
+    if "accounts.google.com" in r.url or (bl and "gemini-web" not in bl):
+        raise AuthFalhou(f"Cookies de {conta} caíram no login (bl={bl}). Rode sync_cookies.py {conta}")
     if not at:
         raise AuthFalhou(f"Cookies de {conta} expiraram (sem SNlM0e). Rode sync_cookies.py {conta}")
     _cache_tokens[conta] = (agora, at, bl, fsid)

@@ -437,7 +437,9 @@ def _jeito_do_narrador(gancho=False):
             linhas.append("- DUPLO SENTIDO (malícia de humano, o público ama): use " + ds.get("quanto", "2 a 5") +
                           ". Quando: " + ds.get("quando", "") + ". SEMPRE sugestivo (a frase também tem sentido "
                           "inocente), NUNCA explícito nem palavrão sexual. OBRIGATÓRIO: mulher bonita/decote na tela "
-                          "→ 'com todo respeito' logo depois do elogio. Repertório: " + " | ".join(ex[:12]) +
+                          "→ 'com todo respeito' logo depois do elogio — SÓ NA PRIMEIRA VEZ que aquela personagem aparece (no "
+                          "máximo 1 vez por personagem no vídeo inteiro; depois disso NUNCA repetir o 'com todo respeito' "
+                          "pra ela). Repertório: " + " | ".join(ex[:12]) +
                           (f". JEITO DELE (prioridade): {' | '.join(dele)}" if dele else "") + ".")
         except (OSError, ValueError, KeyError):
             pass

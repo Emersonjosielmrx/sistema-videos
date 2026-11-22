@@ -1,0 +1,127 @@
+{
+ "conta": "gestaodegrupos.ia",
+ "produto": "gestao_grupos",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Como organizar grupos de WhatsApp no automático",
+ "legenda": "Deixe o spam de lado e acompanhe suas conversas sem estresse. Moderação ativa e atas automáticas para manter sua comunidade organizada.\n\nSaiba mais no link no perfil 📲\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Grupo de WhatsApp organizado",
+  "pergunta_cliente": "Seu grupo virou uma bagunça cheia de conversas perdidas?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu sofria com spam constante e mensagens perdidas nos meus grupos todos os dias.",
+    "visual": "imagem",
+    "prompt_en": "standing in a modern, tidy, well-lit Brazilian office, wearing glasses, confident and professional, no people in focus",
+    "cenario_en": "standing in a modern, tidy, well-lit Brazilian office, wearing glasses, confident and professional",
+    "real_tema": "",
+    "destaques": [
+     "spam constante",
+     "mensagens perdidas"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261121_202646_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A ferramenta ativa a moderação automática e gera atas com o resumo das conversas.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "O que foi decidido sobre o projeto hoje?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Ata gerada: alinhamos o cronograma e os novos prazos de entrega."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, muito mais fácil de acompanhar."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje tenho grupos limpos e organizados, funcionando tudo automático no meu negócio.",
+    "visual": "imagem",
+    "prompt_en": "standing in a bright, clean Brazilian corporate office, calm and smiling to the camera, no people in focus",
+    "cenario_en": "standing in a bright, clean Brazilian corporate office, calm and smiling to the camera",
+    "real_tema": "",
+    "destaques": [
+     "grupos limpos",
+     "tudo automático"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261121_202646_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261121_202646_1.png"
+   }
+  ],
+  "legenda": "Deixe o spam de lado e acompanhe suas conversas sem estresse. Moderação ativa e atas automáticas para manter sua comunidade organizada.\n\nSaiba mais no link no perfil 📲",
+  "titulo": "Como organizar grupos de WhatsApp no automático",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "caos_vs_organizacao",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 76,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": null,
+ "duracao_s": 26.97,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo",
+ "gerado_em": "2026-11-21T22:07:36",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 0,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.72,
+   "fala": "Seu grupo virou uma bagunça cheia de conversas perdidas?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.72,
+   "fim": 10.86,
+   "fala": "Eu sofria com spam constante e mensagens perdidas nos meus grupos todos os dias.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 10.86,
+   "fim": 16.91,
+   "fala": "A ferramenta ativa a moderação automática e gera atas com o resumo das conversas.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 16.91,
+   "fim": 23.02,
+   "fala": "Hoje tenho grupos limpos e organizados, funcionando tudo automático no meu negócio.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 23.02,
+   "fim": 26.97,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ]
+}

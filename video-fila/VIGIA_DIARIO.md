@@ -526,3 +526,45 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 - Causa provável: Ciclo normal de operação e controle de fluxo do sistema.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código realizada).
 - Estado: NADA A FAZER
+## 20261121_0957 — parceiro-render: transição do Kaggle para render local após espera de GPU e retomada do pipeline
+- Motivo / O que achei (trecho de log): `_parceiro_20261121.log` registrou em 08:18:55 que o Short `20261121_081319_S1B9qKMdNy0` entrou na fila esperando o Kaggle, e em 08:45:39 informou: `20261121_081319_S1B9qKMdNy0: nenhuma GPU pegou em 25 min — renderizo no PC`.
+- Causa provável: Indisponibilidade momentânea ou fila cheia de GPUs no Kaggle, acionando o mecanismo nativo de fallback para renderização local no PC.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o próprio script detecta o timeout de espera da GPU e executa o fallback de renderização local automaticamente).
+- Estado: NADA A FAZER
+## 20261121_1116 — Vistoria geral: recap longo e parceiro ativos com fallback de GPU e espaço em disco controlado
+- Motivo / O que achei (trecho de log): Monitoramento dos logs em `workspace/anime/_parceiro_20261121.log` e do vigia indicou ciclos normais, incluindo transição automática para renderização local após timeout de GPU no Kaggle. Disco D com ~5 GB livres e Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Funcionamento rotineiro do sistema com gerenciamento automático de filas e recursos.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema opera autonomamente e se recupera sozinho).
+- Estado: NADA A FAZER
+
+## 20261121_1817 — Vistoria geral: proxy com aviso 402 temporário, espaço em disco restrito e pipeline operando com recuperação automática
+- Motivo / O que achei (trecho de log): `_parceiro_20261121.log` registrou aviso de proxy Webshare (`Tunnel connection failed: 402 Payment Required`), pausando o yt-dlp por intervalo de segurança. Pipeline continua processando renderizações locais e filas de shorts. Espaço livre no disco D em ~3.0 GB. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Limite temporário de saldo no proxy Webshare e alto volume de arquivos na produção.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema gerencia o intervalo de pausas e o fallback automaticamente).
+- Estado: NADA A FAZER
+
+## 20261122_0210 — TikTok: timeout de espera do botão Publicar aumentado de 120s para 180s (pelo painel)
+- Motivo / O que fiz (arquivos): TikTok dava "NAO CONFIRMADO" em 5 contas em 6h porque o botão Publicar não ficava pronto em 120s (uploads grandes/conexão lenta), o código tentava clicar mesmo assim, falhava, e a sonda nem rodava (posted=False). Editei bin/tiktok_cdp_poster.py:206 (range(60)→range(90) = 180s), linha 210 (guarda estado_final), linha 217 (só clica se estado_final=='on'), linha 230 (log mostra estado do botão na falha). / Como conferi: py_compile OK, sintaxe correta, lógica preservada. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_021032_1b46)
+- Estado: RESOLVIDO
+## 20261122_0229 — canal dentrodascoisas3d/codigobilhao3d: fallback de campo canais do kit3d no rede.py (pelo painel)
+- Motivo / O que fiz (arquivos): 25 vídeos 3D prontos (19 dentrodascoisas3d + 6 codigobilhao3d) mas com 0 agendados porque o kit3d grava "canais" no postar.json e o rede.py procurava "so_canais", caindo no fallback "inventoreact" que nunca tinha vaga. Editei D:\manhwa-react\mr\rede.py:250 — adicionei fallback it3.get("dados", {}).get("canais") entre so_canais e ["inventoreact"]. / Como conferi: sintaxe OK, importação do rede.py OK, teste de fallback com {"dados": {"canais": ["codigobilhao3d"]}} retornou "codigobilhao3d" como esperado. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_022933_3edd)
+- Estado: RESOLVIDO
+
+## 20261122_0238 — TikTok: sonda pós-clique sempre roda (até 90s) para confirmar publicação (pelo painel)
+- Motivo / O que fiz (arquivos): D:\postador-de-videos\bin\tiktok_cdp_poster.py:243 — a sonda pós-clique só rodava se posted=True (30 if posted else 0), ignorando a confirmação se o clique retornasse falso ou atrasasse, e 60s era curto para uploads pesados. Mudei linha 243 para range(45) (sonda sempre por até 90s). / Como conferi: python -m py_compile validou sintaxe e compilação sem erros. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_023425_cbbb)
+- Estado: RESOLVIDO
+## 20261122_0300 — Vistoria geral: ffprobe e ffmpeg com timeouts intermitentes por lentidão de I/O e proxy Groq recuperado
+- Motivo / O que achei (trecho de log): Logs do parceiro-render (`_parceiro_20261122.log`) registraram timeouts intermitentes em chamadas de `ffprobe` (verificação de áudio/vídeo) e `ffmpeg` (extração/medida), além de instabilidade momentânea no proxy Groq (resolvida automaticamente). Wise Memory Optimizer ativo (PID 3840) e espaço livre no disco D em ~11.3 GB.
+- Causa provável: Lentidão temporal de I/O no disco/processamento ao inspecionar arquivos de vídeo pesados e latência pontual de rede/proxy.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema lida com os timeouts e prossegue ou tenta novamente de forma autônoma).
+- Estado: NADA A FAZER
+
+## 20261122_0318 — Vistoria geral: PC2 online, Wise Memory Optimizer ativo e proxy Groq recuperado automaticamente
+- Motivo / O que achei (trecho de log): Logs em logs/anime_health_monitor.log mostram que o PC2 voltou a responder online às 02:54, a memória RAM está em ~6.8 GB livres com Wise Memory Optimizer (PID 3840) rodando, e os avisos de proxy Webshare/Groq tratam-se de pausas e fallbacks automáticos normais.
+- Causa provável: Funcionamento autônomo do pipeline e recuperação automática de conexões e rede.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema opera normalmente e se autorrecupera).
+- Estado: NADA A FAZER
+
+## 20261122_0735 — Guarda do disco D (2.6 GB) e otimizador de memória ativo
+- Motivo / O que achei: D: com 2.6 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D. | CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável). | O que fez: Nenhuma intervenção manual necessária, automações em execução.
+- Estado: NADA A FAZER

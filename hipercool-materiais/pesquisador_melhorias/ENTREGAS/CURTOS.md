@@ -4829,3 +4829,59 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 08:12 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_eres2net_licenca__sonnet_0807.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 08:34 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0826.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 08:53 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0841.md`
+- [INÉDITO] github.com/ghost-in-the-droid/android-agent — ★430, push 2026-11-15, MIT — Give any AI agent a real phone: Android over ADB, iPhone over WebDriverAgent. 66 MCP tools, a Skill Hub with 117 skills for 113 apps, and hu
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 09:10 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0858.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 09:22 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0914.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 10:08 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_0957.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 10:24 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1013.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 11:04 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1052.md`
+- [INÉDITO] github.com/temet-ai/ask-kit-phone — ★0, push 2026-11-21, MIT — ask-kit kit: an Android phone reached over adb (USB or wireless, the device set by the PHONE_SERIAL setting or the first one connected) as i
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 11:12 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_android_adb_automacao_upload__sonnet_1106.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 13:07 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1304.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 18:11 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1602.md`
+- [INÉDITO] github.com/XD06/gemini-free-api — ★18, push 2026-11-19, MIT — Reverse-engineered the Gemini web interface and turned it into a usable API, supporting streaming responses and simple tool invocation.逆向Gem
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 18:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1816.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 21:19 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_gemini_web_sessao_cookie__sonnet_1835.md`
+- [INÉDITO] github.com/vadim-a-yegorov/mcp-gemini-deep-research — ★3, push 2026-08-15, MIT — Gemini (webapi) Deep Research MCP server.
+
+## [ ] PENDENTE — 2026-11-22 06:43 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_0351.md`
+- [INÉDITO] github.com/aleixrodriala/adb-qr — ★2, push 2026-06-12, MIT — The missing adb pair --qr: pair Android wireless debugging by scanning a QR code in your terminal. Works everywhere adb does, even WSL2.
+
+## [ ] PENDENTE — 2026-11-22 07:20 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_0716.md`
+- [INÉDITO] github.com/akashdeep000/gemini-imagegen-unofficial-api — ★0, push 2026-11-21, MIT — 

@@ -774,7 +774,14 @@ def rodada(ver=False):
             # 04/11 dona: "se estão com vídeos decolando, poste programado" — não pula mais: sobe agora e abre daqui a
             # PROGRAMAR_VIRAL_H (6 h = a janela em que o decolando é medido), sem abrir na hora pelo publicar_ja
             programar = None
-            if viral:
+            # 21/11 dona (longo de teste do KkVirjão): "pode postar programado, já assisti no PC" — LONGO_PROGRAMAR_H=<h>
+            # força o agendamento mesmo sem vídeo decolando
+            if os.environ.get("LONGO_PROGRAMAR_H"):
+                from datetime import timedelta, timezone
+                h = float(os.environ["LONGO_PROGRAMAR_H"])
+                programar = (datetime.now(timezone.utc) + timedelta(hours=h)).strftime("%Y-%m-%dT%H:%M:%SZ")
+                log(f"{nome_canal}: posta PROGRAMADO pra daqui a {h:.0f} h ({programar}) — pedido da dona")
+            elif viral:
                 from datetime import timedelta, timezone
                 h = float(os.environ.get("PROGRAMAR_VIRAL_H", "6"))
                 programar = (datetime.now(timezone.utc) + timedelta(hours=h)).strftime("%Y-%m-%dT%H:%M:%SZ")

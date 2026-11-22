@@ -560,3 +560,35 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 05:59 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_avatar_3d_comercial__sonnet_0556.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 08:23 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_avatares_stop__sonnet_0817.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 11:34 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1127.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 11:44 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1137.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 12:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1148.md`
+- [INÉDITO] github.com/RealJesseYu/anime2stereo — ★0, push 2026-10-30, MIT — Lift 2D cel animation into stereoscopic 3D: cel segmentation, clean-plate inpainting, layered depth-image-based rendering
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 12:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1208.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 21/11 (automático: nada aproveitável) — 2026-11-21 12:44 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1227.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-21 15:55 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-21\respostas\area_camera_3d_painel__sonnet_1322.md`
+- [INÉDITO] github.com/golanse/easymerger — ★4, push 2026-09-24, MIT — EasyMerger — 基于 FFmpeg 的无损视频（短剧/漫剧）合并工具，自动检测并修复参数差异（分辨率/编码/帧率/音频 Profile），PySide6 图形界面EasyMerger — A lossless video (short dramas/comic anim
+
+## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 07:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_camera_3d_painel__sonnet_0741.md`
+- (todos os itens desta pesquisa foram reprovados)

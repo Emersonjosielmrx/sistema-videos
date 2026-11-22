@@ -2925,3 +2925,17 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - super_slow_ia_20261119_095028_intro.mp4
   - super_slow_ia_20261119_095028_prop.mp4
   - super_slow_ia_20261119_095028_punch.mp4
+
+## 2026-11-21 18:11 — 40 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (40 MB) — 10 arquivos:
+  - fofos_e_absurdo_20261115_131050_final.mp4
+  - fofos_e_absurdo_20261115_131050_imp.mp4
+  - fofos_e_absurdo_20261115_131050_intro.mp4
+  - fofos_e_absurdo_20261115_131050_prop.mp4
+  - fofos_e_absurdo_20261115_131050_punch.mp4
+  - humor_de_ia_20261115_133633_final.mp4
+  - humor_de_ia_20261115_133633_imp.mp4
+  - humor_de_ia_20261115_133633_intro.mp4
+  - humor_de_ia_20261115_133633_prop.mp4
+  - humor_de_ia_20261115_133633_punch.mp4

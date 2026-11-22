@@ -178,3 +178,7 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-20 21:27 | hist_3d-fin-cartao-rotativo__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-cartao-rotativo__codigobilhao3d.png` | backup_drive.py |
 | 2026-11-20 23:44 | hist_3d-fin-banco-cria-dinheiro__codigobilhao3d.mp4 | 18.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-banco-cria-dinheiro__codigobilhao3d.mp4` | backup_drive.py |
 | 2026-11-20 23:44 | hist_3d-fin-banco-cria-dinheiro__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-banco-cria-dinheiro__codigobilhao3d.png` | backup_drive.py |
+| 2026-11-21 18:23 | hist_3d-fin-inflacao__codigobilhao3d.mp4 | 23.8 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-inflacao__codigobilhao3d.mp4` | backup_drive.py |
+| 2026-11-21 18:23 | hist_3d-fin-inflacao__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-inflacao__codigobilhao3d.png` | backup_drive.py |
+| 2026-11-21 23:07 | hist_3d-fin-pix-por-dentro__codigobilhao3d.mp4 | 23.7 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-pix-por-dentro__codigobilhao3d.mp4` | backup_drive.py |
+| 2026-11-21 23:07 | hist_3d-fin-pix-por-dentro__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-pix-por-dentro__codigobilhao3d.png` | backup_drive.py |

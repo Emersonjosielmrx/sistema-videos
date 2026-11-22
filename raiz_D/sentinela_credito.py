@@ -36,6 +36,27 @@ agora=datetime.datetime.now(datetime.timezone.utc)
 agora_s=agora.strftime("%Y-%m-%dT%H:%M:%S")
 PROVIDER="$PROVIDER$"
 TIPO=PROVIDER
+# 22/11: "sonnetweb" = Sonnet 5.5 das contas claude-web; nao tem quota_snapshots, so usage_history:
+# credito = conta ativa cujo ultimo pedido deu 200, ou cujo ultimo 429 tem > 60 min, ou sem uso em 12 h
+# (com 429 em massa, "ativa" sozinho nao diz nada; o "oi" do sentinela confirma antes do continue)
+if TIPO=="sonnetweb":
+    h12=(agora-datetime.timedelta(hours=12)).strftime("%Y-%m-%dT%H:%M:%S")
+    h1=(agora-datetime.timedelta(minutes=60)).strftime("%Y-%m-%dT%H:%M:%S")
+    ativas={r[0]:r[1] for r in db.execute("select id,rate_limited_until from provider_connections where provider='claude-web' and is_active=1")}
+    ult={}
+    for cid,st,ts in db.execute("select connection_id,cast(status as integer),timestamp from usage_history where provider='claude-web' "
+                                "and connection_id is not null and timestamp>? order by timestamp",(h12,)):
+        ult[cid]=(st,ts)
+    com=0
+    for cid,rl in ativas.items():
+        if rl and rl[:19]>agora_s:
+            continue
+        st,ts=ult.get(cid,(None,""))
+        if st!=429 or ts[:19]<h1:
+            com+=1
+    print(json.dumps({"provider":"sonnetweb","contas":len(ativas),"com_credito":com,"voltas":[]}))
+    raise SystemExit
+
 # 09/11: "ag46" = contas Antigravity que ainda tem o Opus 4.6 (e nao ganharam o 5.5)
 if TIPO=="ag46": PROVIDER="antigravity"
 # 13/11: "fable" = contas cc (mesma cota 5h/semanal) sem o limite proprio do Fable 5.2 (429 nas ultimas 5 h sem 200 depois; medido: dura 4-5 h)
