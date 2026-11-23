@@ -116,6 +116,48 @@ def falhou_antes_de_publicar(msg):
     return "Post clicked" not in m and any(x in m for x in ("file input not found", "nao baixou", "envio de"))
 
 
+RELOGIN_FALHAS = Path(__file__).resolve().parent.parent / "logs" / "tiktok_relogin_falhas.json"
+
+
+def _relogin_ler():
+    try:
+        return json.loads(RELOGIN_FALHAS.read_text("utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _relogin_falhou(conta, res):
+    """23/11 (relatório: 98 falhas no TikTok, ~70 da emersonjosielmrx1995 — o relogin pelo Google dava 'o TikTok não
+    confirmou a conta' em TODA máquina, 35x por dia). 3 falhas de relogin no dia = conta fora 24 h + aviso à dona."""
+    try:
+        d = _relogin_ler()
+        hoje = datetime.now().strftime("%Y-%m-%d")
+        e = d.get(conta) or {}
+        if e.get("dia") != hoje:
+            e = {"dia": hoje, "n": 0}
+        e["n"] += 1
+        e["ultimo"] = str(res)[:150]
+        if e["n"] >= int(os.environ.get("TIKTOK_RELOGIN_MAX", "3")) and not e.get("pausa_ate"):
+            e["pausa_ate"] = time.time() + 24 * 3600
+            try:
+                import avisos
+                avisos.enviar(f"TikTok @{conta}: relogin pelo Google falhou {e['n']}x hoje ({e['ultimo'][:80]}) — "
+                              "fora do TikTok por 24 h; precisa logar à mão no Chrome da conta", "postagens",
+                              importante=True, chave=f"tiktok_relogin:{conta}")
+            except Exception:  # noqa: BLE001
+                pass
+        d[conta] = e
+        RELOGIN_FALHAS.write_text(json.dumps(d, ensure_ascii=False, indent=1), "utf-8")
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _relogin_pausado(conta):
+    if os.environ.get("TIKTOK_RELOGIN_MAX") == "0":
+        return False
+    return ((_relogin_ler().get(conta) or {}).get("pausa_ate") or 0) > time.time()
+
+
 def motivo_falha(msg):
     """A linha que explica a falha (antes saía só a 1ª linha da saída: "Chrome disponivel nas portas")."""
     linhas = [l.strip() for l in str(msg).splitlines() if l.strip()]
@@ -336,7 +378,9 @@ def filas(cfg, posted):
         # config, posto por tiktok_pausar_zeradas.py) — só gasta postagem/IP nas que dão view. TIKTOK_PAUSADAS=0 ignora.
         if r.get("pausada") and os.environ.get("TIKTOK_PAUSADAS", "1") != "0":
             continue
-        gap_ip = float(cfg.get("intervalo_ip_min", INTERVALO_IP_MIN))
+        if _relogin_pausado(conta):
+            continue
+        gap_ip =float(cfg.get("intervalo_ip_min", INTERVALO_IP_MIN))
         mi = minutos_desde_ultimo_ip(posted, conta) if gap_ip else None
         if mi is not None and mi < gap_ip:
             continue  # 12/11: outra conta do mesmo IP postou há pouco — esta fica para a próxima rodada
@@ -527,6 +571,7 @@ def main():
                                     msg = "not_logged_in: o GOOGLE deste perfil também está deslogado (precisa da dona)"
                                 else:
                                     msg = f"not_logged_in: relogar pelo Google não deu ({res})"
+                                    _relogin_falhou(conta, res)
                         except Exception as e:  # noqa: BLE001
                             ok, msg = False, f"abrir Chrome: {e}"
                         finally:

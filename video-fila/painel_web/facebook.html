@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facebook — Views</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Painel escuro igual ao :8790 — resumo no topo, gráfico geral, gráfico por página, diagnóstico, tabelas */
+:root{
+  --bg:#050607; --card:#0c0e10; --line:#262b33; --fg:#eef0f2; --mut:#a3aab5;
+  --pri:#23c47e; --pri2:#1b6b4a; --warn:#f5a524; --bad:#e5484d; --info:#3bb3f0;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left,0px)) 40px max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:20px;margin:0}
+h2{font-size:15px;margin:0 0 10px}
+.sub{color:var(--mut);font-size:12.5px}
+a{color:var(--info)}
+button{font:600 13px var(--sans);background:var(--pri);color:#04140c;border:0;border-radius:8px;padding:9px 14px;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font:600 22px var(--mono);font-variant-numeric:tabular-nums}
+.kpi span{color:var(--mut);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}}
+svg text{fill:var(--mut);font:11px var(--mono)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--mut);font-weight:600;cursor:pointer;user-select:none;position:sticky;top:0;background:var(--card)}
+td.n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+th.n{text-align:right}
+.pill{display:inline-block;padding:1px 8px;border-radius:99px;font-size:11.5px;font-weight:600}
+.ok{background:#123c29;color:#5fe0a3}.at{background:#3d2c0b;color:#ffc35c}.mal{background:#43161a;color:#ff8a8f}.cinza{background:#1d2128;color:var(--mut)}
+.diag{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.diag li{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#0a0c0e}
+.diag li b{color:var(--fg)}
+.filtro{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+select,input{background:#0a0c0e;color:var(--fg);border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:13px var(--sans)}
+.barra{height:8px;background:#1a1e24;border-radius:4px;overflow:hidden;min-width:70px}
+.barra i{display:block;height:100%;background:var(--pri)}
+.msg{font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Facebook · visualizações</h1>
+      <div class="sub" id="quando">carregando…</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span class="msg" id="msg"></span>
+      <button id="btnAtualizar" type="button">Atualizar agora</button>
+      <a href="/" class="sub">← painel</a>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <h2>Views totais por dia (todas as páginas)</h2>
+    <div class="scroll"><svg id="gGeral" width="100%" height="220" role="img" aria-label="Views totais por dia"></svg></div>
+  </section>
+
+  <section class="grid2">
+    <div class="card">
+      <h2>Views por página</h2>
+      <div class="scroll"><svg id="gPag" width="100%" role="img" aria-label="Views por página"></svg></div>
+    </div>
+    <div class="card">
+      <h2>Postado x esperado (3 por dia desde o 1º reel)</h2>
+      <div class="scroll"><svg id="gPost" width="100%" role="img" aria-label="Reels postados contra esperados"></svg></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Evolução de cada página</h2>
+    <div class="scroll"><svg id="gLinhas" width="100%" height="260" role="img" aria-label="Views acumuladas por página por dia"></svg></div>
+    <div class="sub" id="legenda" style="display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px"></div>
+  </section>
+
+  <section class="card">
+    <h2>Por que algumas páginas têm pouco</h2>
+    <ul class="diag" id="diag"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Por página</h2>
+    <div class="scroll"><table id="tPag"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>Por vídeo</h2>
+    <div class="filtro">
+      <label for="fPag" class="sub" style="align-self:center">Página</label>
+      <select id="fPag"><option value="">todas</option></select>
+    </div>
+    <div class="scroll" style="max-height:520px"><table id="tVid"></table></div>
+  </section>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const fmt=n=>n==null?'—':Number(n).toLocaleString('pt-BR');
+const CORES=['#23c47e','#3bb3f0','#f5a524','#b083ff','#ff7a90','#5fe0d0','#e8e36b','#ff9f43','#7aa2ff','#c4f06b','#f06bd2','#9aa5b1','#6bf0a0','#f0b46b'];
+let D=null, ordem={t:'tPag',k:'views',d:-1}, ordemV={k:'views',d:-1};
+
+function svgEl(t,a){const e=document.createElementNS('http://www.w3.org/2000/svg',t);for(const k in a)e.setAttribute(k,a[k]);return e}
+
+function grafGeral(){
+  const s=$('#gGeral');s.innerHTML='';const g=D.geral;if(!g.length)return;
+  const W=Math.max(s.clientWidth||600,320),H=220,L=56,R=16,T=14,B=28;s.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const max=Math.max(...g.map(x=>x.views))*1.1||1;
+  const x=i=>L+(g.length===1?(W-L-R)/2:i*(W-L-R)/(g.length-1)), y=v=>T+(H-T-B)*(1-v/max);
+  for(let k=0;k<=4;k++){const v=max*k/4;s.append(svgEl('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1c2027'}));const t=svgEl('text',{x:L-6,y:y(v)+4,'text-anchor':'end'});t.textContent=fmt(Math.round(v));s.append(t)}
+  let area=`M${x(0)},${y(0)} `+g.map((p,i)=>`L${x(i)},${y(p.views)}`).join(' ')+` L${x(g.length-1)},${y(0)} Z`;
+  s.append(svgEl('path',{d:area,fill:'#23c47e',opacity:.15}));
+  s.append(svgEl('path',{d:g.map((p,i)=>(i?'L':'M')+x(i)+','+y(p.views)).join(' '),fill:'none',stroke:'#23c47e','stroke-width':2.5}));
+  g.forEach((p,i)=>{s.append(svgEl('circle',{cx:x(i),cy:y(p.views),r:i===g.length-1?5:3,fill:'#23c47e'}));
+    const t=svgEl('text',{x:x(i),y:H-8,'text-anchor':'middle'});t.textContent=p.dia.slice(8,10)+'/'+p.dia.slice(5,7);s.append(t);
+    const v=svgEl('text',{x:x(i),y:y(p.views)-9,'text-anchor':'middle',style:'fill:#eef0f2'});v.textContent=fmt(p.views);s.append(v)});
+}
+
+function barras(id,itens,val,cor,extra){
+  const s=$(id);s.innerHTML='';const W=Math.max(s.clientWidth||460,300),lh=26,L=150,R=60,H=itens.length*lh+10;
+  s.setAttribute('viewBox',`0 0 ${W} ${H}`);s.setAttribute('height',H);
+  const max=Math.max(...itens.map(i=>Math.max(val(i),extra?extra(i):0)))||1;
+  itens.forEach((it,i)=>{const y=i*lh+6;
+    const t=svgEl('text',{x:L-8,y:y+13,'text-anchor':'end',style:'fill:#eef0f2'});t.textContent=it.nome.length>20?it.nome.slice(0,19)+'…':it.nome;s.append(t);
+    if(extra)s.append(svgEl('rect',{x:L,y:y+2,width:(W-L-R)*extra(it)/max,height:14,fill:'#2a3039',rx:3}));
+    s.append(svgEl('rect',{x:L,y:y+2,width:Math.max((W-L-R)*val(it)/max,1),height:14,fill:cor(it),rx:3}));
+    const v=svgEl('text',{x:L+(W-L-R)*Math.max(val(it),extra?extra(it):0)/max+6,y:y+13});v.textContent=extra?`${val(it)}/${extra(it)}`:fmt(val(it));s.append(v)});
+}
+
+function grafLinhas(){
+  const s=$('#gLinhas');s.innerHTML='';const dias=D.geral.map(g=>g.dia);if(!dias.length)return;
+  const W=Math.max(s.clientWidth||600,320),H=260,L=50,R=16,T=12,B=26;s.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const pags=D.paginas.filter(p=>p.serie.length);const max=Math.max(...pags.flatMap(p=>p.serie.map(x=>x[1])))*1.1||1;
+  const x=d=>{const i=dias.indexOf(d);return L+(dias.length===1?(W-L-R)/2:i*(W-L-R)/(dias.length-1))}, y=v=>T+(H-T-B)*(1-v/max);
+  for(let k=0;k<=4;k++){const v=max*k/4;s.append(svgEl('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1c2027'}));const t=svgEl('text',{x:L-6,y:y(v)+4,'text-anchor':'end'});t.textContent=fmt(Math.round(v));s.append(t)}
+  dias.forEach(d=>{const t=svgEl('text',{x:x(d),y:H-8,'text-anchor':'middle'});t.textContent=d.slice(8,10)+'/'+d.slice(5,7);s.append(t)});
+  const leg=$('#legenda');leg.innerHTML='';
+  pags.forEach((p,i)=>{const c=CORES[i%CORES.length];
+    s.append(svgEl('path',{d:p.serie.map((q,j)=>(j?'L':'M')+x(q[0])+','+y(q[1])).join(' '),fill:'none',stroke:c,'stroke-width':2}));
+    const u=p.serie[p.serie.length-1];s.append(svgEl('circle',{cx:x(u[0]),cy:y(u[1]),r:3.5,fill:c}));
+    const sp=document.createElement('span');sp.innerHTML=`<i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${c};margin-right:5px"></i>${p.nome}`;leg.append(sp)});
+}
+
+function diagnostico(){
+  const ul=$('#diag');ul.innerHTML='';const ativas=D.paginas.filter(p=>!p.pausada);
+  const out=[];
+  const poucos=ativas.filter(p=>p.esperado>0&&p.postados/p.esperado<0.5);
+  if(poucos.length)out.push(`<b>Recebem poucos vídeos.</b> ${poucos.map(p=>`${p.nome} (${p.postados} de ${p.esperado})`).join(', ')} receberam menos da metade dos reels que deveriam. Página com 1 reel não tem como somar views. A causa é a postagem falhando, não o conteúdo.`);
+  const errs=ativas.filter(p=>p.erros>p.postados);
+  if(errs.length)out.push(`<b>Mais erros que postagens.</b> ${errs.map(p=>`${p.nome} (${p.erros} erros, ${p.postados} postados)`).join(', ')}. Os erros foram o upload que não entrava, a tela travando e a ponte de proxy caída (consertada em 23/11 às 15:03).`);
+  const novas=ativas.filter(p=>p.idade_dias<2.5);
+  if(novas.length)out.push(`<b>Páginas novas.</b> ${novas.map(p=>`${p.nome} (${p.idade_dias} dias)`).join(', ')}. Página nova, sem seguidores, ainda está sendo testada pelo Facebook.`);
+  const fracas=ativas.filter(p=>p.reels&&p.media<50);
+  if(fracas.length)out.push(`<b>Reel fraco mesmo postando.</b> ${fracas.map(p=>`${p.nome} (média ${p.media} por reel)`).join(', ')}. O único vídeo não pegou, e só dá para julgar o tema depois de mais reels.`);
+  const ass=ativas.find(p=>p.chave==='assistia');
+  if(ass&&ass.reels>=5&&ass.media<150)out.push(`<b>Assist-IA rende menos por reel</b> (média ${ass.media}, contra ${Math.round(D.totais.views/D.totais.reels)} no geral). Recebe vídeo de anime com legenda de finanças, então o público da página não bate com o vídeo.`);
+  const sem=ativas.filter(p=>!p.seguidores);
+  if(sem.length)out.push(`<b>Sem seguidores:</b> ${sem.length} de ${ativas.length} páginas têm 0 seguidores, e todo view vem da recomendação do Facebook. Postar todo dia é o que mantém a página sendo mostrada.`);
+  out.forEach(h=>{const li=document.createElement('li');li.innerHTML=h;ul.append(li)});
+}
+
+function status(p){
+  if(p.pausada)return '<span class="pill cinza">pausada</span>';
+  if(p.esperado&&p.postados/p.esperado<0.5)return '<span class="pill mal">posta pouco</span>';
+  if(p.media>=200)return '<span class="pill ok">bem</span>';
+  return '<span class="pill at">fraca</span>';
+}
+
+function tabPag(){
+  const cols=[['nome','Página'],['conta','Conta'],['_st','Situação'],['views','Views'],['reels','Reels'],['media','Média/reel'],['ganho24','Ganho 24 h'],['seguidores','Seguidores'],['postados','Postados'],['esperado','Esperado'],['erros','Erros'],['idade_dias','Dias']];
+  const ps=[...D.paginas].sort((a,b)=>{const A=a[ordem.k],B=b[ordem.k];return (typeof A==='string'?String(A).localeCompare(B):(A??-1)-(B??-1))*ordem.d});
+  const max=Math.max(...ps.map(p=>p.views))||1;
+  $('#tPag').innerHTML='<thead><tr>'+cols.map(([k,n])=>`<th data-k="${k}" class="${['nome','conta','_st'].includes(k)?'':'n'}">${n}${ordem.k===k?(ordem.d<0?' ▾':' ▴'):''}</th>`).join('')+'</tr></thead><tbody>'+
+    ps.map(p=>`<tr><td>${p.nome}</td><td class="sub">${p.conta||''}</td><td>${status(p)}</td><td class="n"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${fmt(p.views)}<div class="barra"><i style="width:${100*p.views/max}%"></i></div></div></td><td class="n">${p.reels}</td><td class="n">${fmt(p.media)}</td><td class="n">${p.ganho24==null?'—':(p.ganho24>=0?'+':'')+fmt(p.ganho24)}</td><td class="n">${p.seguidores}</td><td class="n">${p.postados}</td><td class="n">${p.esperado}</td><td class="n">${p.erros}</td><td class="n">${p.idade_dias}</td></tr>`).join('')+'</tbody>';
+  $('#tPag').querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k==='_st')return;ordem={k,d:ordem.k===k?-ordem.d:-1};tabPag()});
+}
+
+function tabVid(){
+  const f=$('#fPag').value;
+  const vs=D.videos.filter(v=>!f||v.chave===f).sort((a,b)=>{const A=a[ordemV.k],B=b[ordemV.k];return (typeof A==='string'?A.localeCompare(B):A-B)*ordemV.d});
+  const max=Math.max(...D.videos.map(v=>v.views))||1;
+  const cols=[['_i','#'],['pagina','Página'],['views','Views'],['por_dia','Views/dia'],['visto_desde','Visto desde'],['id','Reel']];
+  $('#tVid').innerHTML='<thead><tr>'+cols.map(([k,n])=>`<th data-k="${k}" class="${['views','por_dia','_i'].includes(k)?'n':''}">${n}${ordemV.k===k?(ordemV.d<0?' ▾':' ▴'):''}</th>`).join('')+'</tr></thead><tbody>'+
+    vs.map((v,i)=>`<tr><td class="n">${i+1}</td><td>${v.pagina}</td><td class="n"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${fmt(v.views)}<div class="barra"><i style="width:${100*v.views/max}%"></i></div></div></td><td class="n">${fmt(v.por_dia)}</td><td class="sub">${(v.visto_desde||'').slice(8,10)}/${(v.visto_desde||'').slice(5,7)} ${(v.visto_desde||'').slice(11,16)}</td><td><a href="https://www.facebook.com/reel/${v.id}" target="_blank" rel="noopener">abrir</a></td></tr>`).join('')+'</tbody>';
+  $('#tVid').querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k==='_i'||k==='id')return;ordemV={k,d:ordemV.k===k?-ordemV.d:-1};tabVid()});
+}
+
+function desenhar(){
+  const t=D.totais;
+  $('#quando').textContent=`Última medição: ${(D.ultima_medicao||'').replace('T',' ').slice(0,16)} · atualiza sozinho de hora em hora`;
+  const k=[['Views',fmt(t.views)],['Reels no ar',t.reels],['Páginas ativas',t.paginas],['Seguidores',t.seguidores],['Média por reel',fmt(Math.round(t.views/(t.reels||1)))],['Erros de postagem',t.erros]];
+  $('#kpis').innerHTML=k.map(([a,b])=>`<div class="kpi"><b>${b}</b><span>${a}</span></div>`).join('');
+  grafGeral();
+  const at=D.paginas.filter(p=>!p.pausada);
+  barras('#gPag',[...at].sort((a,b)=>b.views-a.views),p=>p.views,p=>p.media>=200?'#23c47e':p.media>=50?'#f5a524':'#e5484d');
+  barras('#gPost',[...at].sort((a,b)=>(a.postados/(a.esperado||1))-(b.postados/(b.esperado||1))),p=>p.postados,p=>p.esperado&&p.postados/p.esperado<0.5?'#e5484d':'#3bb3f0',p=>p.esperado);
+  grafLinhas();diagnostico();tabPag();
+  const sel=$('#fPag'),v=sel.value;sel.innerHTML='<option value="">todas</option>'+D.paginas.filter(p=>p.reels).map(p=>`<option value="${p.chave}">${p.nome}</option>`).join('');sel.value=v;tabVid();
+}
+
+async function carregar(){
+  try{const r=await fetch('fb_views.json?t='+Date.now(),{cache:'no-store'});D=await r.json();desenhar();return D}
+  catch(e){$('#quando').textContent='Não consegui ler os dados (fb_views.json). Rode a tarefa PainelFacebookViews.'}
+}
+
+$('#fPag').onchange=tabVid;
+$('#btnAtualizar').onclick=async()=>{
+  const b=$('#btnAtualizar'),m=$('#msg');b.disabled=true;m.textContent='Medindo no Facebook (cada conta pela saída dela)…';
+  const antes=D&&D.gerado;
+  try{
+    const r=await fetch('/api/fb_atualizar',{method:'POST',headers:{'Content-Type':'application/json','X-Painel':'1'},body:JSON.stringify({motivo:'botão Atualizar agora'})});
+    const j=await r.json();
+    if(j.erro&&!/rodando/.test(j.erro)){m.textContent='Não deu para atualizar: '+j.erro;b.disabled=false;return}
+    for(let i=0;i<60;i++){await new Promise(z=>setTimeout(z,5000));const d=await carregar();if(d&&d.gerado!==antes){m.textContent='Atualizado.';b.disabled=false;return}}
+    m.textContent='Ainda medindo. A página se atualiza sozinha quando terminar.';
+  }catch(e){m.textContent='Não consegui falar com o painel.'}
+  b.disabled=false;
+};
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>D&&desenhar(),200)});
+carregar();setInterval(carregar,5*60*1000);
+</script>
+</body>
+</html>

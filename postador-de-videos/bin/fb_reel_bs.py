@@ -36,9 +36,16 @@ def _botao(pg, *nomes):
         vis = []
         for i in range(loc.count()):
             el = loc.nth(i)
-            if el.is_visible():
-                bb = el.bounding_box() or {"width": 0, "y": 0}
+            try:  # 22/11: com o PC1 pesado is_visible/bounding_box estouravam 30 s e derrubavam a página inteira
+                if not el.is_visible():
+                    continue
+                try:
+                    bb = el.bounding_box(timeout=8000) or {"width": 0, "y": 0}
+                except Exception:
+                    bb = {"width": 0, "y": 0}
                 vis.append((bb["width"] >= 60, bb["y"], el))
+            except Exception:
+                continue
         if vis:
             return max(vis, key=lambda t: (t[0], t[1]))[2]
     return None

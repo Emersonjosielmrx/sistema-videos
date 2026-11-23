@@ -1579,6 +1579,11 @@ def postar(args):
                 log(f"{nome}: nada pronto pra {alvo:%d/%m %H:%M} ({dict(outros) or 'fila vazia'}"
                     + (f"; {len(prontos)} com a fonte já usada nesse dia" if prontos else "") + ")")
                 break
+            # 22/11 dona ("faça o melhor possível"): Tech Noturno perdia a vaga 2x seguidas porque o 1º da fila estava no
+            # Drive e não voltou em 15 min (PC/disco lento) — com 56 prontos no disco. Prontos JÁ NO DISCO vão na frente;
+            # o do Drive só quando não há nenhum local. PARCEIRO_LOCAL_PRIMEIRO=0 volta.
+            if os.environ.get("PARCEIRO_LOCAL_PRIMEIRO", "1") != "0":
+                livres = sorted(livres, key=lambda y: 1 if _na_reserva(y) else 0)
             x = livres[0]
             # 13/11: horário nobre (21-22 h de Brasília) = o pronto com mais chance de render neste canal (nota_pronto);
             # fora dele segue a fila. PARCEIRO_MELHOR_NO_NOBRE=0 desliga.

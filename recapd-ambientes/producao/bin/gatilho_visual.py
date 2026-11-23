@@ -106,21 +106,33 @@ def classificar(video, lines, tempos, pasta):
 _JA_TEM = None
 
 
+_PIADAS = set()  # índices com a piada do respeito (a voz lê via RESPEITO_PIADA)
+
+
 def aplicar(lines, tags):
-    """Frase em cena SENSUAL sem duplo sentido ganha o 'com todo respeito' (máx. 1 a cada 6 frases, pra não
-    repetir); a voz estica o S. Devolve (lines, quantas mudaram)."""
+    """23/11 dona: a piada do RES-peito na 1ª vez que uma mulher bonita aparece (cena sensual pela imagem + frase
+    falando dela), no máximo RESPEITO_MAX (2) por vídeo, longe uma da outra. Devolve (lines, quantas mudaram)."""
     import re
-    ja = re.compile(r"(?i)(respeito|gostos|poderosa|macet|safad|del[ií]cia|acordo|particular|experiência)")
-    lines, n, ultimo = list(lines), 0, -99
+    lines, n = list(lines), 0
+    maxi = int(os.environ.get("RESPEITO_MAX", "2"))
+    ela = re.compile(r"(?i)\b(ela|dela|mulher|moça|garota|menina|esposa|namorada|noiva|rainha|princesa|dama|"
+                     r"senhorita|madame|secretária|professora|enfermeira|chefe|CEO|herdeira|filha|irmã|amiga|"
+                     r"bela|linda|bonita|gata|mina)\b")
+    ja_feitas = [i for i, l in enumerate(lines) if re.search(r"RES+[\s.\-…]*[Pp]eito", l or "")]
+    n_tot = max(1, len(lines))
+    feitas = list(ja_feitas)
     for i, tag in sorted(tags.items()):
-        # 21/11 dona: "o S do respeito está sendo usado EXCESSIVAMENTE (vídeo do Virjão) — só na primeira vez que a
-        # personagem aparece". Sem saber quem é a personagem na imagem: no máximo 1 a cada 150 frases (~1 por
-        # personagem nova) e nunca se o roteiro já usou "respeito" nas 150 frases antes.
-        if (tag != "sensual" or i >= len(lines) or i - ultimo < 150 or ja.search(lines[i])
-                or any("respeito" in (x or "").lower() for x in lines[max(0, i - 150):i])):
+        if len(feitas) >= maxi:
+            break
+        if tag != "sensual" or i >= len(lines) or not ela.search(lines[i] or ""):
+            continue
+        if re.search(r"(?i)respeit", lines[i]) or any(abs(i - j) < n_tot / 3 for j in feitas):
             continue
         frase = lines[i].rstrip()
         fim = frase[-1] if frase and frase[-1] in ".!?" else "."
-        lines[i] = frase.rstrip(".!?") + ", com todo respeito" + fim
-        ultimo, n = i, n + 1
+        lines[i] = frase.rstrip(".!?…") + ", com todo respeito" + fim
+        feitas.append(i)
+        _PIADAS.add(i)
+        n += 1
+    os.environ["RESPEITO_PIADA"] = ",".join(str(x) for x in sorted(_PIADAS | set(ja_feitas)))
     return lines, n

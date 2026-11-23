@@ -20473,5 +20473,85 @@
     "arquivado": false,
     "descricao": "",
     "data": "2026-11-22"
+  },
+  "sanhsien/voxavatar": {
+    "ok": true,
+    "nome": "SanHsien/voxavatar",
+    "estrelas": 2,
+    "push": "2026-11-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Windows-only local-first VRM desktop companion with voice-output lip sync, animations, and MCP controls.｜Windows 本機 VRM 桌面角色陪伴。",
+    "data": "2026-11-22"
+  },
+  "working-codes-demo/parallax-anything": {
+    "ok": true,
+    "nome": "working-codes-demo/parallax-anything",
+    "estrelas": 2,
+    "push": "2026-11-22",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Turn any photo into a cinematic 3D parallax video. Depth Anything V2 + layered inpainting, 7 camera moves, runs on a laptop (CUDA / Apple MP",
+    "data": "2026-11-22"
+  },
+  "freedom-snow/vibe-animation-library": {
+    "ok": true,
+    "nome": "freedom-snow/vibe-animation-library",
+    "estrelas": 1,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Vibe 动画库：Canvas 2D 伪 3D 确定性动画元件（火柴人/深度层/表情/肢体）+ Three.js/SwiftShader 真 3D 渲染管线（1.45fps 软件渲染）。AI动画/伪3D/三维渲染/定格动画/创意编程资产，OpenFilm 产线，MIT 许可。",
+    "data": "2026-11-22"
+  },
+  "stjl/dsh-gemini-web": {
+    "ok": true,
+    "nome": "stJL/dsh-gemini-web",
+    "estrelas": 2,
+    "push": "2026-11-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Multi-site & multi-modal Gemini web quota orchestration plugin for DeepSeek Harness (AI Studio + Google Flow + Gemini Web).",
+    "data": "2026-11-22"
+  },
+  "khs0927/gemini-web-router": {
+    "ok": true,
+    "nome": "khs0927/Gemini-Web-Router",
+    "estrelas": 0,
+    "push": "2026-11-22",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "OpenAI & Anthropic compatible local router for gemini.google.com Pro quota (Gemini 4 Carbon/Neon/Hydrogen) with Aside & Claude Code integrat",
+    "data": "2026-11-22"
+  },
+  "owenlim225/pocket-uploader": {
+    "ok": true,
+    "nome": "owenlim225/pocket-uploader",
+    "estrelas": 0,
+    "push": "2026-11-23",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automate YouTube video uploads directly from your Android phone through ADB-powered UI interactions.",
+    "data": "2026-11-22"
+  },
+  "aleksa-codes/gemini-webapi-image-mcp": {
+    "ok": true,
+    "nome": "aleksa-codes/gemini-webapi-image-mcp",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "AGPL-3.0",
+    "arquivado": false,
+    "descricao": "Generate and edit images with Gemini Nano Banana via MCP. Browser-cookie authentication, no API key required.",
+    "data": "2026-11-23"
+  },
+  "lumia1998/gemini2webapi_cookie_auto": {
+    "ok": true,
+    "nome": "lumia1998/gemini2webapi_cookie_auto",
+    "estrelas": 0,
+    "push": "2026-01-13",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-23"
   }
 }

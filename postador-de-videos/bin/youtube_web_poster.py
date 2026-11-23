@@ -1326,6 +1326,11 @@ def _para_fila_celular(slug, e, a, alvo, maiores_18, canal):
         parte = 0.0
     if parte <= 0 or not e.get("email") or a.ensaio or maiores_18 or not alvo or a.privacy != "public":
         return None
+    # 23/11: a fila dos celulares está PARADA (fila_celulares\PARAR.txt, dona 17/11 depois dos 12 canais encerrados) e
+    # o postador seguia mandando ~20 Shorts/dia pra lá, gravando como "postado" — 180 presos sem nunca sair. Parada = não
+    # enfileira (sobe pelo PC normal).
+    if (Path(r"D:\projeto celular sub controle\fila_celulares") / "PARAR.txt").exists():
+        return None
     if _duracao_video(a.video) > 180:
         return None
     import random

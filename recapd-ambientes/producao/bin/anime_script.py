@@ -263,7 +263,7 @@ def _jeito_do_nicho():
                           "(a cada ~6 frases com ela em cena), CADA UMA COM UM MOLDE DIFERENTE — nunca repita a mesma "
                           "piada no vídeo. Use também o duplo sentido natural da cena (luta = 'macetar', 'pegar de jeito', "
                           "'ficar por cima'; ameaça dela = 'acabar com ele bem devagarinho'; proposta = 'eu faria esse "
-                          "acordo, e você?'). quando 'respeito' for a PIADA escreva exatamente 'RES-peito' (a voz estica o S), no "
+                          "acordo, e você?'). quando 'respeito' for a PIADA (SÓ logo depois de elogiar a BELEZA/corpo/roupa de uma mulher adulta — NUNCA em tapa, briga, ofensa, humilhação ou respeito de verdade) escreva exatamente 'com todo RES-peito' (a voz estica o S), no "
                           "máximo 2 no vídeo e em contextos diferentes. Sempre sem palavra explícita; nunca com menor. "
                           "Moldes extras:")
             for m in extra:
@@ -381,6 +381,23 @@ def _jeito_do_narrador(gancho=False):
                       "...') e emendar o fato na mesma frase — nunca só apresentação sem conteúdo.")
     if g.get("tiradas") and not prota1:
         linhas.append(f"- Comentários/piadas dele: {g['tiradas']}")
+    # 22/11 dona: aprendizado com os vídeos REAIS dele (aprende_roteiro.py) — o original dos próximos vídeos é só
+    # narração; o roteiro INSERE piada/comentário/risada/reação onde ELE faria. ROTEIRO_APRENDIDO=0 desliga.
+    if os.environ.get("ROTEIRO_APRENDIDO", "1") != "0" and not prota1 and not gancho:
+        ex = [e for e in g.get("exemplos_aprendidos") or [] if isinstance(e, dict) and e.get("ele_disse")]
+        if ex:
+            amostra = random.sample(ex, min(8, len(ex)))
+            linhas.append("- INSIRA comentários DELE como nos vídeos reais (o original não tem; você põe onde ele "
+                          "poria): piada, ironia, risada (escreva 'kkk'), reação, pergunta pro público. Exemplos reais "
+                          "dele — copie o JEITO, não a frase: " + " | ".join(
+                              f"depois de '{e.get('depois_de')}' ele disse \"{e['ele_disse']}\"" for e in amostra))
+        for r_ in (g.get("regras_aprendidas") or [])[:8]:
+            linhas.append(f"- {r_}")
+        # 22/11 dona: "se o Virjão fala menos palavrão, tem que falar o tanto que ele fala ou menos, nunca mais" —
+        # o teste de aprendizado mostrou a IA soltando palavrão em quase toda frase (o real fala bem menos)
+        linhas.append("- PALAVRÃO: no MÁXIMO o tanto que ele usa nos exemplos reais acima (na dúvida, menos) — nunca em "
+                      "toda frase, nunca xingando personagem por xingar. O comentário dele é sobre a CENA e o absurdo "
+                      "do roteiro, como um amigo assistindo junto, não agressivo.")
     # 11/11 (dona: "o Patolino chama de 'plateia insignificante' — isso não pode, nem depreciar a plateia como o Kratos
     # faz"): 11 de 80 perfis tinham fala_com_publico ofensiva (idiota, verme, tolo, ignorante, criatura, plebeus...).
     # Filtra a lista e manda a regra pra TODO narrador: o personagem pode ser ranzinza com a HISTÓRIA, nunca com quem
@@ -841,10 +858,23 @@ _COMENTARIO_NARRADOR = (
     "vai precisar dele.'), reação sincera ('Cá entre nós, eu já teria desistido aqui.') ou provocação leve "
     "('Sinceramente, esse cara não aprende, né?'). Nunca invente fato, nunca adiante o que vem depois, sem palavrão. "
     "Use o mesmo [Ns] da frase anterior.\n"
+    # 23/11 dona: piada CONTADA, não lida (vale pra todo narrador)
+    "PIADA DE VIRADA (1 a 2 por trecho, quando a cena pedir): conte em DUAS linhas, como numa conversa. Linha 1 = a "
+    "ameaça ou afirmação exagerada, terminando com 'hein?!' ou reticências, como quem provoca (ex.: 'Se esse moleque "
+    "apanhar de novo, eu paro de narrar essa obra, hein?!...'). Linha 2 = SÓ a virada, curta e animada, começando com "
+    "'Mentiraaa', 'Brincadeira' ou 'Tô zoando' + 'galera'/'molecada' (ex.: 'Mentiraaa, galera! Eu continuo sim, bora "
+    "ver isso!'). Nunca na mesma linha, nunca explicando a piada.\n"
     # L-09 (LONGOS_MELHORIAS, 01/11): narrador "parça" — hJaA ("our boy") e Manhwa Fresh falam do prota como de um amigo
     "TOM DE PARÇA (no trecho todo): fale do protagonista como de um amigo seu, com carinho e zoeira leve — 'o nosso "
     "garoto', 'o coitado', 'o cara' — e reaja como quem assiste junto ('e lá vai ele cair no golpe de novo', 'as red "
-    "flags ali todas piscando'). Isso aparece em pelo menos 2 frases do trecho, sem palavrão e sem inventar fato.\n")
+    "flags ali todas piscando'). Isso aparece em pelo menos 2 frases do trecho, sem palavrão e sem inventar fato.\n"
+    # 23/11 dona: "no 7:17 ele apelida o inimigo de 'alecrim dourado' — foi um avanço, temos que ampliar com
+    # antagonistas e personagens irritantes"
+    "APELIDO DE ZOEIRA (pelo menos 1 no trecho, se houver vilão, rival, mimado, arrogante ou personagem irritante): "
+    "dê a ele um apelido debochado e brasileiro que combine com o jeito dele ('alecrim dourado' pro mimado/filhinho "
+    "de papai, 'o pavão', 'o cabeça de bagre', 'o sem noção', 'a cobra criada', 'o marrento', 'o chorão', 'o "
+    "puxa-saco', 'o Zé Ninguém', 'a madame') — invente outros no mesmo estilo. Use o MESMO apelido pra mesma pessoa "
+    "no vídeo inteiro (vira piada recorrente), alternando com o nome. Nunca no protagonista, nunca ofensivo de verdade.\n")
 # 04/11 (pesquisa, zenstory "deslop_qc"; dona: "a narração tem que ser a melhor possível"): frases-feitas de IA deixam
 # a narração com cara de robô — a lista vai no pedido (não apaga nada depois: cortar no meio quebraria o sentido)
 _SEM_CLICHE = (

@@ -497,3 +497,16 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz (comandos e arquivos mexidos, com caminho do backup): Modo Só Aviso — nenhum comando de alteração executado, nenhum arquivo modificado.
 - CONSERTO PROPOSTO: Nenhum.
 - Estado: NADA A FAZER
+
+## 20261122_1940 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo ila_postagem.log registra ciclos contínuos e regulares a cada 20 minutos (último às 19:27 "janela: D: com 4.5 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). A produção e os ciclos automáticos estão rodando normalmente.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER
+
+## 20261123_1021 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos a cada 20 minutos (último às 10:06 "janela: D: com 9.5 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). Houve um alerta transiente de espaço em disco (`[Errno 28] No space left on device` às 8:16), mas a situação normalizou nas rodadas seguintes (9.5 GB livres às 10:06) com a atuação automática das rotinas de gerenciamento de espaço.
+- O que fiz (comandos e arquivos mexidos, com caminho do backup): Nenhum código ou configuração foi alterado (Modo Só Aviso estrito). Apenas leituras de logs e verificação de processos.
+- CONSERTO PROPOSTO: nenhum (o sistema recuperou o espaço em disco e continuou operando normalmente sem intervenção).
+- Estado: NADA A FAZER

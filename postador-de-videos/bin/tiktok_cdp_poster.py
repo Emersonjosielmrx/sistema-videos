@@ -240,15 +240,31 @@ def post_one_cdp(video_path, port, description):
             const ok = /foi publicad|v[ií]deo publicad|publicado com sucesso|has been posted|video posted|your video is being uploaded|gerenciar (suas )?publica|manage your posts|carregar outro|upload another/i.test(t);
             return {url: location.href, bts: bts, ok: ok};
         })()'''
-        for i in range(45):
+        for i in range(60):
             time.sleep(2)
             st = evaluate(browser_ws, sonda, session_id) or {}
-            if (st.get('url'), st.get('bts')) != ultimo:
-                print(f"  apos clicar: url={st.get('url', '')[:70]} botoes={st.get('bts')}", flush=True)
-                ultimo = (st.get('url'), st.get('bts'))
-            if st.get('ok') or '/upload' not in (st.get('url') or '/upload'):
+            url_atual = st.get('url') or ''
+            if (url_atual, st.get('bts')) != ultimo:
+                print(f"  apos clicar: url={url_atual[:70]} botoes={st.get('bts')}", flush=True)
+                ultimo = (url_atual, st.get('bts'))
+
+            # Detecta confirmação por texto OU por saída válida do /upload
+            if st.get('ok'):
                 confirmado = True
+                print(f"  → confirmado por texto aos {i*2}s", flush=True)
                 break
+
+            # Se saiu do /upload para página válida (não é erro nem está vazio)
+            if '/upload' not in url_atual and url_atual and not any(x in url_atual for x in ['error', 'login']):
+                confirmado = True
+                print(f"  → confirmado por redirecionamento: {url_atual[:50]}", flush=True)
+                break
+
+            # Debug: a cada 15s sem confirmação, mostra trecho do body
+            if i > 0 and i % 7 == 0 and not st.get('ok'):
+                body_sample = evaluate(browser_ws, 'document.body.innerText.slice(0, 200)', session_id) or ''
+                print(f"  [{i*2}s] body sample: {body_sample[:100]}", flush=True)
+
             alvo = next((b for b in st.get('bts') or [] if b.lower() in ('publicar agora', 'postar agora', 'post now', 'publicar', 'postar')), None)
             if alvo:
                 evaluate(browser_ws, f'''(() => {{ const d = Array.from(document.querySelectorAll('[role=dialog], .TUXModal, [class*="modal" i]')).filter(d => d.offsetParent);

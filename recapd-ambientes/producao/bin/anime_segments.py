@@ -345,6 +345,25 @@ def _falas_mascote(lines, originais, audio_dir):
 
 
 
+def _baixar_voz_drive(voz, destino):
+    """23/11 dona (longo eRJ1: 127 falas de personagem saíram com o narrador — 'voz não está nesta máquina'): baixa a
+    voz do cache do Drive (colab_recap/vozes/<voz>) na hora. Fora do Kaggle / sem rclone = nada."""
+    import glob
+    rcl = next((x for x in glob.glob("/kaggle/tmp/**/rclone", recursive=True) + glob.glob("/kaggle/working/**/rclone",
+                                                                                          recursive=True)
+                if os.access(x, os.X_OK)), None)
+    conf = next((c for c in ["/tmp/rclone.conf"] + glob.glob("/kaggle/input/**/rclone.conf", recursive=True)
+                 if os.path.isfile(c)), None)
+    if not rcl or not conf:
+        return
+    try:
+        subprocess.run([rcl, "--config", conf, "copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(destino)],
+                       capture_output=True, timeout=900)
+        logging.info(f"[personagem] voz {voz} baixada do Drive")
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[personagem] voz {voz} não baixou ({type(e).__name__})")
+
+
 def _falas_personagem(lines, originais, audio_dir, impactos):
     """Dona 28/10 (como o Mike: o narrador faz a voz do personagem): ANIME_PERSONAGEM_FALAS = JSON {índice: voz
     clonada} (anime-pipeline._falas_personagem). Cada fala sai com a voz do personagem (Applio, como o revezamento)
@@ -364,7 +383,10 @@ def _falas_personagem(lines, originais, audio_dir, impactos):
     antes = os.environ.get("VOZ_CLONADA")
     try:
         for voz in dict.fromkeys(marc.values()):
-            if not (anime_tts.VOZES_DIR / voz / f"{voz}.pth").exists():
+            pv_ = anime_tts.VOZES_DIR / voz
+            if not (pv_ / f"{voz}.pth").exists() and not (pv_ / "referencia_fish.wav").exists():
+                _baixar_voz_drive(voz, pv_)  # 23/11: o elenco é escolhido aqui dentro; o pedido não trazia as vozes
+            if not (pv_ / f"{voz}.pth").exists() and not (pv_ / "referencia_fish.wav").exists():
                 logging.warning(f"[personagem] voz {voz} não está nesta máquina — falas ficam com o narrador")
                 continue
             os.environ["VOZ_CLONADA"] = voz

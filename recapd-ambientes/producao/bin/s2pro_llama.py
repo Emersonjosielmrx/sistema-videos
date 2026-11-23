@@ -35,10 +35,62 @@ def sh(a, t=3600, cwd=None, env=None):
     return subprocess.run(a, capture_output=True, text=True, timeout=t, cwd=cwd, env=env)
 
 
+
+_CACHE_DRIVE = "manhwa-drive:colab_recap/cache/llama_tts_build_sm75.tar.gz"
+
+
+def _rclone():
+    import glob
+    cands = glob.glob("/kaggle/tmp/**/rclone", recursive=True) + glob.glob("/kaggle/working/**/rclone", recursive=True)
+    rcl = next((x for x in cands if os.access(x, os.X_OK)), None)
+    conf = next((c for c in ["/tmp/rclone.conf"] + glob.glob("/kaggle/input/**/rclone.conf", recursive=True)
+                 if os.path.isfile(c)), None)
+    return (rcl, conf) if rcl and conf else (None, None)
+
+
+def _cache_baixar():
+    """22/11: build pronto do Drive (sm75 = T4). Só vale se o llama-tts roda (--help) — senão cai pra compilação."""
+    try:
+        rcl, conf = _rclone()
+        if not rcl:
+            return False
+        tmp = Path("/tmp/_llama_cache"); tmp.mkdir(exist_ok=True)
+        r = sh([rcl, "--config", conf, "copyto", _CACHE_DRIVE, str(tmp / "b.tar.gz")], 1800)
+        if r.returncode or not (tmp / "b.tar.gz").exists():
+            return False
+        (LC / "build").mkdir(parents=True, exist_ok=True)
+        sh(["tar", "-xzf", str(tmp / "b.tar.gz"), "-C", str(LC / "build")], 1800)
+        tts = LC / "build" / "bin" / "llama-tts"
+        if not tts.exists():
+            return False
+        os.chmod(tts, 0o755)
+        ok = sh([str(tts), "--help"], 120)
+        log(f"s2pro: build pronto do Drive rc={ok.returncode}")
+        return ok.returncode == 0 or "usage" in ((ok.stdout or "") + (ok.stderr or "")).lower()
+    except Exception as e:  # noqa: BLE001
+        log(f"s2pro: cache do build falhou ({type(e).__name__})")
+        return False
+
+
+def _cache_subir():
+    try:
+        rcl, conf = _rclone()
+        if not rcl:
+            return
+        tmp = Path("/tmp/_llama_cache"); tmp.mkdir(exist_ok=True)
+        sh(["tar", "-czf", str(tmp / "b.tar.gz"), "-C", str(LC / "build"), "bin"], 1800)
+        r = sh([rcl, "--config", conf, "copyto", str(tmp / "b.tar.gz"), _CACHE_DRIVE], 3600)
+        log(f"s2pro: build subido pro Drive rc={r.returncode}")
+    except Exception as e:  # noqa: BLE001
+        log(f"s2pro: não subiu o cache do build ({type(e).__name__})")
+
+
 def compilar():
     """llama-tts com CUDA pra T4 (sm75). 1x por sessão (~30 min). Devolve o caminho ou None."""
     tts = LC / "build" / "bin" / "llama-tts"
     if tts.exists():
+        return tts
+    if _cache_baixar() and tts.exists():
         return tts
     if not LC.exists():
         sh(["git", "clone", "-q", "--depth", "1", "https://github.com/ggml-org/llama.cpp.git", str(LC)], 900)
@@ -51,6 +103,8 @@ def compilar():
     log(f"s2pro: cmake rc={r.returncode} {r.stderr[-300:]}")
     r = sh(["cmake", "--build", "build", "--config", "Release", "-j", "4", "--target", "llama-tts"], 5400, cwd=str(LC))
     log(f"s2pro: build rc={r.returncode} {r.stderr[-300:]}")
+    if tts.exists():
+        _cache_subir()
     return tts if tts.exists() else None
 
 
@@ -88,6 +142,17 @@ def falar(tts, modelo, texto, ref, reftxt, saida, seed, extras=None, t=900):
         out = "TIMEOUT"
     ok = Path(saida).exists() and Path(saida).stat().st_size > 2000
     return ok, time.time() - t0, out[-600:]
+
+
+def _expressividade(a, sr):
+    """22/11 v13: variação da energia (desvio/média em janelas de 50 ms, só trechos com voz) — voz reta/triste dá pouco."""
+    import numpy as np
+    win = int(0.05 * sr)
+    if len(a) < win * 10:
+        return 0.0
+    env = np.array([np.sqrt(np.mean(a[k:k + win] ** 2)) for k in range(0, len(a) - win, win)])
+    env = env[env > 0.25 * np.percentile(env, 80)]
+    return float(np.std(env) / (np.mean(env) + 1e-9)) if len(env) > 5 else 0.0
 
 
 def _ler(w):
@@ -178,7 +243,9 @@ def lote(lista_json):
             ok_n += 1
             continue
         t0 = time.time()
-        texto = ((it.get("tag") or "") + " " + it["texto"]).strip()
+        texto = ((it.get("tag") or "") + " " + (it.get("texto_tags") or it["texto"])).strip()
+        if it.get("texto_tags"):
+            texto = it["texto_tags"]  # v13: as tags já vão dentro da frase
         cand = []
         if it.get("partes"):
             # 22/11 v8+: pergunta retórica — afirmação e pergunta geradas separadas, 0,55 s de pausa entre elas
@@ -215,6 +282,8 @@ def lote(lista_json):
             pena = abs(cps - float(it.get("cps_alvo") or 17)) / max(1.0, float(it.get("cps_alvo") or 17))
             if it.get("whisper"):
                 pena += 2 * _wer(it["texto"], w)
+            if str(it.get("versao")) == "13":
+                pena -= 0.4 * _expressividade(a, sr)  # v13: prefere a tentativa mais animada (variação de energia)
             cand.append((pena, w, corte))
         if cand:
             pena, w, corte = min(cand, key=lambda x: x[0])

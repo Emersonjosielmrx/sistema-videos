@@ -139,6 +139,146 @@
    "ideia": "O cliente chama no WhatsApp sem saber o que quer, e o cardápio digital com fotos junto com a IA ajudam a esclarecer dúvidas e fechar o pedido.",
    "pergunta_cliente": "Como a IA lida com o cliente que fica em dúvida no WhatsApp?",
    "criada": "2026-10-25T07:14:07"
+  },
+  {
+   "id": "chama_e_some",
+   "tipo": "dor",
+   "ideia": "O cliente manda um 'oi' no WhatsApp no meio do pico e desiste por falta de retorno, mas a IA responde as dúvidas na hora e apresenta o cardápio digital para ele pedir.",
+   "pergunta_cliente": "Como faço para não perder o cliente que manda mensagem e desiste de esperar?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "cliente_nao_baixa_app",
+   "tipo": "objecao",
+   "ideia": "O dono teme que o cliente precise baixar aplicativo, mas o cardápio digital abre direto no navegador do celular e o pedido vai pelo WhatsApp.",
+   "pergunta_cliente": "Meu cliente precisa instalar algum aplicativo novo no celular para ver o cardápio?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "fluxo_completo",
+   "tipo": "como_funciona",
+   "ideia": "O cliente recebe o link no WhatsApp, visualiza as fotos dos pratos no cardápio digital, tira dúvidas com a IA e confirma o pedido no próprio WhatsApp.",
+   "pergunta_cliente": "Como é o caminho que o cliente faz desde o primeiro 'oi' até fechar o pedido?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "almoco_executivo",
+   "tipo": "caso_de_uso",
+   "ideia": "No restaurante com prato feito no almoço, os trabalhadores consultam o cardápio digital com fotos no celular e enviam o pedido pelo WhatsApp sem fila.",
+   "pergunta_cliente": "Serve para restaurante que trabalha com almoço e prato do dia no WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "fotos_ajudam_vender_b",
+   "tipo": "pergunta_frequente",
+   "ideia": "O cardápio digital exibe fotos nítidas dos itens no celular para orientar a escolha do cliente antes de enviar o pedido pelo WhatsApp.",
+   "pergunta_cliente": "Dá para colocar fotos de cada item do cardápio para o cliente ver no celular?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "mensagem_solta_vs_cardapio",
+   "tipo": "antes_depois",
+   "ideia": "Antes o cliente mandava pedidos confusos e picados em várias mensagens; agora ele escolhe pelo cardápio digital e o pedido chega organizado no WhatsApp.",
+   "pergunta_cliente": "O pedido chega mais organizado no meu WhatsApp em vez de várias mensagens soltas?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "duvida_de_ingrediente",
+   "tipo": "dor",
+   "ideia": "O cliente pergunta no WhatsApp se determinado lanche leva maionese ou cebola, e a IA responde as dúvidas na hora para ele fechar o pedido no cardápio digital.",
+   "pergunta_cliente": "A IA consegue responder dúvidas sobre o que vai nos lanches do cardápio?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "idosos_e_tecnologia",
+   "tipo": "objecao",
+   "ideia": "O dono receia que clientes mais velhos achem difícil, mas o cardápio digital tem fotos intuitivas e todo o processo acontece dentro do WhatsApp que eles já usam.",
+   "pergunta_cliente": "Meus clientes mais tradicionais vão conseguir usar sem achar complicado?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "pizzaria_tamanhos",
+   "tipo": "caso_de_uso",
+   "ideia": "Na pizzaria, o cliente visualiza os sabores com fotos no cardápio digital pelo celular, tira dúvidas com a IA e manda o pedido certo pelo WhatsApp.",
+   "pergunta_cliente": "Funciona bem para quem tem pizzaria e recebe pedidos à noite pelo WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "atendimento_fora_de_hora",
+   "tipo": "como_funciona",
+   "ideia": "Quando o cliente manda mensagem antes do restaurante abrir, a IA responde as dúvidas na hora e ele já consulta o cardápio digital no celular.",
+   "pergunta_cliente": "O que acontece se um cliente chamar fora do horário de funcionamento?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "cardapio_em_texto",
+   "tipo": "antes_depois",
+   "ideia": "Antes o dono enviava blocos gigantescos de texto pelo WhatsApp; agora envia o cardápio digital com fotos para o cliente escolher direto pelo celular.",
+   "pergunta_cliente": "Consigo substituir aquela lista enorme de texto que mando no WhatsApp pelo cardápio com fotos?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "ia_da_conta_sozinha",
+   "tipo": "pergunta_frequente",
+   "ideia": "A IA atende o cliente no WhatsApp tirando as dúvidas imediatas e direciona a escolha com o cardápio digital com fotos.",
+   "pergunta_cliente": "A inteligência artificial realmente responde as dúvidas que os clientes costumam mandar?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "gargalo_atendente_unico",
+   "tipo": "dor",
+   "ideia": "Um único atendente não consegue atender cinco pessoas ao mesmo tempo no balcão e no WhatsApp, mas o cardápio digital com IA acolhe o cliente na hora.",
+   "pergunta_cliente": "Tenho apenas uma pessoa atendendo, isso ajuda a desafogar as mensagens no WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "medo_perder_pedidos",
+   "tipo": "objecao",
+   "ideia": "O dono teme que os pedidos fiquem perdidos em outro sistema, mas o cardápio digital direciona o pedido finalizado diretamente para o seu WhatsApp.",
+   "pergunta_cliente": "O pedido finalizado realmente cai direto na conversa do meu WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "acaiteria_combos",
+   "tipo": "caso_de_uso",
+   "ideia": "Na açaiteria, o cliente confere as fotos das taças e adicionais no cardápio digital, tira dúvidas com a IA e manda o pedido exato pelo WhatsApp.",
+   "pergunta_cliente": "Consigo aplicar no meu delivery de açaí para facilitar os pedidos pelo WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "atualizacao_de_fotos",
+   "tipo": "como_funciona",
+   "ideia": "O cardápio digital apresenta aos clientes as opções visuais com fotos, permitindo que a IA esclareça dúvidas antes do envio do pedido ao WhatsApp.",
+   "pergunta_cliente": "Como o cliente visualiza as fotos dos meus produtos no cardápio digital?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "perguntas_repetitivas",
+   "tipo": "dor",
+   "ideia": "O atendente passa a noite respondendo se o restaurante ainda está entregando, enquanto a IA responde essas dúvidas na hora e libera o cardápio digital.",
+   "pergunta_cliente": "Isso evita que eu passe o dia respondendo as mesmas dúvidas repetidas vezes?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "foto_menu_ilegivel",
+   "tipo": "antes_depois",
+   "ideia": "Antes você tirava foto do cardápio impresso com luz ruim; agora o cliente navega em um cardápio digital com fotos claras no celular e pede pelo WhatsApp.",
+   "pergunta_cliente": "Fica melhor para o cliente do que mandar foto do cardápio de papel?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "compatibilidade_aparelhos",
+   "tipo": "pergunta_frequente",
+   "ideia": "O cardápio digital foi feito para abrir facilmente no celular de qualquer cliente, funcionando em conjunto com o atendimento por IA no WhatsApp.",
+   "pergunta_cliente": "Qualquer cliente com celular comum consegue abrir o cardápio digital e pedir?",
+   "criada": "2026-11-23T14:51:13"
+  },
+  {
+   "id": "hamburgueria_artesanal",
+   "tipo": "caso_de_uso",
+   "ideia": "Na lanchonete, o cliente olha as fotos suculentas dos hambúrgueres no cardápio digital, esclarece pontos com a IA e pede pelo WhatsApp.",
+   "pergunta_cliente": "Funciona bem para lanchonete que vende hambúrguer artesanal pelo WhatsApp?",
+   "criada": "2026-11-23T14:51:13"
   }
  ]
 }

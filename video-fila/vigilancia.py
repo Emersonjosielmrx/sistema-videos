@@ -45,6 +45,15 @@ sys.path.insert(0, r"D:\postador-de-videos\bin")
 
 VIGIA = "agy/gemini-3.8-flash-high"
 CONSERTADORES = ["cw/claude-sonnet-5-5", "gemini-4-argon", "1minopus-sonnetweb", "kr/claude-sonnet-4.5"]
+# 23/11 dona: "o vigia atua de 2 formas: a DETECÇÃO pode ser qualquer modelo; o CONSERTO com o melhor disponível —
+# Argon ou Hydrogen, senão o Sonnet web, senão o Kiro". Detecção = Gemini 3.8 Flash (ilimitado; Sonnet web se ele
+# estiver fora). Conserto = 1º da lista com token, NESSA ORDEM (sem revezamento por placar). VIGIA_CADEIA_ANTIGA=1 volta.
+if os.environ.get("VIGIA_CADEIA_ANTIGA") != "1":
+    VIGIA = "agy/gemini-3.8-flash-high"
+    CONSERTADORES = ["gemini-4-argon", "gemini/gemini-4-hydrogen", "cw/claude-sonnet-5-5", "kr/claude-sonnet-4.5"]
+    ORDEM_FIXA = True
+else:
+    ORDEM_FIXA = False
 SEM_TESTE = set()
 # 04/11: o Argon e o misto 1min+Sonnet só existem na ROTA DO VS CODE (proxy 20133); pelo gateway padrão o 1min dava
 # "Unable to determine provider" e o painel caía no Kiro (4 consertos gastaram Kiro sem contar), e o teste do Argon
@@ -461,6 +470,13 @@ def _volta_em(modelo):
     return agora + 1800
 
 
+def _vigia_vivo(d):
+    """23/11: detecção = qualquer modelo — VIGIA (Gemini 3.8 Flash); fora dele, o Sonnet web."""
+    if not _disponivel(VIGIA, d):
+        return "cw/claude-sonnet-5-5" if VIGIA != "cw/claude-sonnet-5-5" else "agy/gemini-3.8-flash-high"
+    return VIGIA
+
+
 def _disponivel(modelo, d):
     if time.time() < d.get("fora", {}).get(modelo, 0):
         return False
@@ -481,6 +497,8 @@ def _disponivel(modelo, d):
 
 
 def escolher_consertador(d, cat):
+    if ORDEM_FIXA:  # 23/11 dona: o melhor disponível, na ordem
+        return next((m for m in CONSERTADORES if _disponivel(m, d)), None)
     vivos = [m for m in CONSERTADORES if _disponivel(m, d)]
     if not vivos:
         return None
@@ -547,7 +565,7 @@ def andar(d, caso):
             "linha). Termine com uma linha 'VEREDITO: REAL' ou 'VEREDITO: FALSO' e, se real, 'CAUSA: <arquivo:linha — "
             "explicação curta>'.\nLIMITE: no máximo 10 leituras de arquivo/log/comando; depois disso PARE e responda com "
             "o que já achou (na dúvida, VEREDITO: REAL com a melhor CAUSA provável). Sem resposta final = trabalho perdido."),
-            projeto=caso["projeto"], origem="vigilancia", modelo=VIGIA, voltas=45)
+            projeto=caso["projeto"], origem="vigilancia", modelo=_vigia_vivo(d), voltas=45)
         caso.update(etapa="vigia_rodando", job_vigia=j["id"])
         _registro(caso, "vigia", job=j["id"], modelo=VIGIA)
     elif et == "vigia_rodando":

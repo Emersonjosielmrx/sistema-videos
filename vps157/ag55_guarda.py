@@ -76,9 +76,15 @@ def fila(c, modelo, ids):
     # medicao de cota (quota_snapshots): janela do modelo ou semanal esgotada com reset no futuro = sem cota ate la
     agora_s = agora.strftime("%Y-%m-%dT%H:%M:%S")
     volta = {}
+    # 23/11: Gemini (Hydrogen) tem cota propria (janela do modelo + gemini_weekly); antes usava as janelas do Claude/GPT
+    # e tirava da fila 25 de 32 contas com o Hydrogen livre
+    if modelo.startswith("gemini"):
+        janelas = (modelo, "gemini_weekly", "gemini_weekly")
+    else:
+        janelas = (modelo, "claude_gpt_weekly", "gpt-oss-120b-medium")
     for cid, wk, ex, nr in c.execute("SELECT connection_id, window_key, is_exhausted, next_reset_at FROM quota_snapshots "
                                      "WHERE id IN (SELECT max(id) FROM quota_snapshots WHERE provider='antigravity' "
-                                     "AND window_key IN (?, 'claude_gpt_weekly', 'gpt-oss-120b-medium') GROUP BY connection_id, window_key)", (modelo,)):
+                                     "AND window_key IN (?, ?, ?) GROUP BY connection_id, window_key)", janelas):
         if ex and nr and nr[:19] > agora_s:
             volta[cid] = max(volta.get(cid, ""), nr)
     esgotadas = sorted([x for x in ids if x in volta], key=lambda x: volta[x])  # a que renova primeiro 1o

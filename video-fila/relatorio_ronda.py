@@ -15,6 +15,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.request
 from collections import Counter
 from datetime import datetime, timedelta
@@ -1007,6 +1008,93 @@ def sec_hydrogen():
     return out
 
 
+def sec_videos_disco():
+    """23/11 dona ("os vídeos acumulados ninguém via; eu mesma tive que investigar — isso não pode acontecer"): resumo
+    do INVENTARIO_VIDEOS.md (gerente_videos.py, tarefa GerenteVideos 2/2 h) — o que ocupa o disco e por quê, e aviso
+    quando a pasta SEM regra automática passa de 5 GB. RONDA_VIDEOS=0 tira a seção."""
+    if os.environ.get("RONDA_VIDEOS", "1") == "0":
+        return []
+    try:
+        d = json.loads((BASE / "estado" / "inventario_videos.json").read_text("utf-8"))
+    except (OSError, ValueError):
+        return ["## 📦 Vídeos no disco", "- inventário ainda não rodou (gerente_videos.py)"]
+    fila = sum(x["bytes"] for x in d["itens"] if "FILA" in x["regra"])
+    sobra = sum(x["bytes"] for x in d["itens"] if x["regra"].startswith("R"))
+    out = ["## 📦 Vídeos no disco (gerente_videos)",
+           f"- Disco D livre: **{d.get('livre_gb')} GB** (lido {d.get('em', '')[11:16]}). Fila (não postados): "
+           f"{fila / 1e9:.1f} GB · sobras que a próxima limpeza tira: {sobra / 1e9:.1f} GB. Detalhe: INVENTARIO_VIDEOS.md"]
+    # 23/11: assets = banco de clipes/músicas da produção (material, não sobra) — só aparece se crescer muito
+    material = {r"D:\hipercool-materiais\assets": 15e9}
+    grandes = [(o, n, b) for o, (n, b) in (d.get("outras") or {}).items() if b > material.get(o, 5e9)]
+    for o, n, b in grandes:
+        tipo = "material da produção cresceu" if o in material else "SEM regra automática"
+        out.append(f"- ⚠️ `{o}`: {n} vídeos, {b / 1e9:.1f} GB {tipo} — conferir o que é")
+    return out
+
+
+def sec_fish_celular():
+    """23/11 dona ("fish tem que entrar os créditos no relatório"; "posts dos celulares não estão sendo contados"):
+    créditos do Fish (comum/fish_audio/creditos.json: 1 crédito por caractere, 8.000/conta/MÊS, renova dia 18) com
+    gasto real dos últimos 3 dias (cache/*.mp3 x ~110 caracteres) e dias até acabar; e postagens pelos celulares
+    (projeto celular/postagens_celular.jsonl: ok/erro/motivo hoje). RONDA_FISH_CEL=0 tira a seção."""
+    if os.environ.get("RONDA_FISH_CEL", "1") == "0":
+        return []
+    out = ["## 🐟 Fish (créditos) e 📱 postagens pelos celulares"]
+    try:
+        c = json.loads(Path(r"D:\hipercool-materiais\comum\fish_audio\creditos.json").read_text("utf-8"))
+        vivas = {e: x for e, x in c.items() if isinstance(x, dict) and x.get("logado")}
+        resto = sum(int(x.get("restantes") or 0) for x in vivas.values())
+        cache = Path(r"D:\hipercool-materiais\comum\fish_audio\cache")
+        lim = time.time() - 3 * 86400
+        n3 = sum(1 for f in cache.glob("*.mp3") if f.stat().st_mtime > lim) if cache.exists() else 0
+        por_dia = n3 * 110 / 3
+        dias = f"{resto / por_dia:.0f} dias no ritmo dos últimos 3 dias" if por_dia else "sem uso nos últimos 3 dias"
+        out.append(f"- Fish: **{len(vivas)} contas logadas** de {len(c)}, **{resto:_} créditos** (= ~{resto / 1000:.0f} "
+                   f"min de fala; 1 crédito por caractere, 8.000/conta/mês, renova dia 18) · {n3} áudios em 3 dias "
+                   f"(~{por_dia:_.0f} créditos/dia) → {dias}. Produzir TODOS os Shorts com Fish (~100/dia, ~60 s cada)"
+                   f" gastaria ~{100 * 60 * 15:_} créditos/dia = ~{resto / (100 * 60 * 15):.1f} dias.".replace("_", "."))
+    except Exception as e:  # noqa: BLE001
+        out.append(f"- Fish: não li os créditos ({type(e).__name__})")
+    try:
+        hoje = agora.strftime("%Y-%m-%d")
+        ok = err = inc = 0
+        mot = {}
+        for ln in Path(r"D:\projeto celular sub controle\postagens_celular.jsonl").read_text(
+                "utf-8", errors="ignore").splitlines()[-3000:]:
+            try:
+                r = json.loads(ln)
+            except ValueError:
+                continue
+            if not str(r.get("quando", "")).startswith(hoje):
+                continue
+            res = r.get("resultado")
+            ok += res == "ok"
+            inc += res == "incerto"
+            if res == "erro":
+                err += 1
+                m = str(r.get("motivo") or "?")[:60]
+                mot[m] = mot.get(m, 0) + 1
+        top = "; ".join(f"{m} ({n})" for m, n in sorted(mot.items(), key=lambda kv: -kv[1])[:3])
+        out.append(f"- Celulares hoje: **{ok} postados**, {err} erros, {inc} incertos" + (f" — erros: {top}" if top else "")
+                   + ". Views desses posts ainda não são medidas (o app não devolve o ID do vídeo).")
+    except Exception as e:  # noqa: BLE001
+        out.append(f"- Celulares: não li postagens_celular.jsonl ({type(e).__name__})")
+    return out
+
+
+def sec_medico():
+    """23/11 dona ("scripts pra ficar analisando e tomando decisões de melhorias"): resumo do medico_recuperacao.py
+    (MEDICO.md) — decisões do dia e placar das alavancas. RONDA_MEDICO=0 tira a seção."""
+    if os.environ.get("RONDA_MEDICO", "1") == "0":
+        return []
+    p = BASE / "MEDICO.md"
+    if not p.exists():
+        return ["## 🩺 Médico da recuperação", "- ainda não rodou (tarefa MedicoRecuperacao 07:10)"]
+    t = p.read_text(encoding="utf-8", errors="ignore").split("## Decisões desta rodada", 1)
+    titulo = t[0].splitlines()[0].replace("# ", "## ")
+    return [titulo, "## Decisões desta rodada" + t[1]] if len(t) > 1 else [titulo]
+
+
 def sec_recuperacao():
     """19/11 dona ("temos que acompanhar se esses canais vão se recuperar ou vão continuar restringidos"): depois dos 13
     canais removidos em 17-18/11, os VIVOS caíram de alcance. Views ganhas por dia de cada canal vivo (diferença do
@@ -1094,7 +1182,7 @@ def main(gravar):
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
-    for f in (sec_urgente, sec_numeros, sec_recuperacao, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
+    for f in (sec_urgente, sec_numeros, sec_recuperacao, sec_medico, sec_fish_celular, sec_videos_disco, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
               sec_pesquisador, sec_hydrogen, sec_redes, sec_facebook, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()

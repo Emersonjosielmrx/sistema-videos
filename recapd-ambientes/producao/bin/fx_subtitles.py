@@ -846,6 +846,20 @@ def burn_subtitles_ass(video_in, entries, video_out, words_per_card=None,
         _cada_s = 45.0
     _rajada_ini, _rajada_ate, _prox_rajada, _cart_cria = 0.0, 0.0, _criativa_ate + _cada_s / 2, False
     todas = []  # [(início, fim, palavra)] do vídeo todo
+    # 23/11 dona: clima do trecho (cor/tamanho da palavra, barra e tarja) — pré-passada com o tempo estimado
+    try:
+        import clima_tela as _ct
+        _pre, _tt = [], 0.0
+        for _k, (_tx, _du) in enumerate(entries):
+            _tt = float(offsets[_k]) if offsets and _k < len(offsets) and offsets[_k] is not None else _tt
+            _du = max(0.4, float(_du or 0))
+            _ws = str(_tx or '').split()
+            for _j, _w in enumerate(_ws):
+                _pre.append((_tt + _du * _j / max(1, len(_ws)), _tt + _du * (_j + 1) / max(1, len(_ws)), _w))
+            _tt += _du
+        _ct.montar(_pre)
+    except Exception:  # noqa: BLE001
+        _ct = None
     cenas = []  # V-02: início de cada clipe = troca de cena
     t = 0.0
     for i, (text, dur) in enumerate(entries):
@@ -916,6 +930,13 @@ def burn_subtitles_ass(video_in, entries, video_out, words_per_card=None,
                 partes = []
                 for j, w in enumerate(grp):
                     col = ativa if (j == local_idx or g + j in enf) else WHITE
+                    if _ct is not None and _ct.LIGADO and ativa == YELLOW and j == local_idx and g + j not in enf:
+                        # 23/11: cor e tamanho pela palavra + clima do trecho (só no karaokê normal, não no MIX)
+                        _rgb, _esc_p = _ct.palavra(w, w_start, (255, 214, 60))
+                        if _esc_p != 100 or _rgb != (255, 214, 60):
+                            partes.append(r"{\c%s}{\fscx%d\fscy%d}%s{\fscx100\fscy100}" % (
+                                _ct.bgr_ass(_rgb), _esc_p, _esc_p, _ass_escape(w)))
+                            continue
                     if g + j in enf:  # 23/10: ênfase = palavra maior
                         _e = int(100 * float(fx_fala.get("escala", 1.3)))
                         partes.append(r"%s{\fscx%d\fscy%d}%s{\fscx100\fscy100}" % (col, _e, _e, _ass_escape(w)))

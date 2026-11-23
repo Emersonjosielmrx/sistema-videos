@@ -1967,6 +1967,23 @@
    "nicho_fixo": true,
    "_obs": "15/11 dona ('priorizando públicos que tenham dinheiro pra gastar em produtos'): conta emersonjosiel2037 (Kaggle 401); histórias de bilionários/empresas (fontes Magnates Media, How Money Works, ColdFusion, Historiadosgrandes, Spotniks, Curioso Mercado); YouTube pelo IP fixo rnprmtfo-16",
    "_obs_nobre": "21:30 = horário nobre; 07:30 = público de negócio antes do trabalho"
+  },
+  {
+   "canal": "novo_fatochocante",
+   "nome": "Fato Chocante",
+   "handle": "@fatochocante-v4g",
+   "nicho": "fatos",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:00",
+    "19:00",
+    "21:30"
+   ],
+   "horario": "12:00",
+   "por_dia": 1,
+   "fila_alvo": 7,
+   "ativo": true,
+   "_obs": "23/11 conserto vigia: canal criado 18/11, sem alimentador nem entrada no parceiro -> 0 vídeos"
   }
  ],
  "idiomas": {

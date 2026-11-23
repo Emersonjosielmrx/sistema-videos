@@ -30,19 +30,35 @@ def medir(db, prov):
     contas = db.execute('SELECT id, coalesce(email,name), is_active, coalesce(priority,999) FROM provider_connections '
                         'WHERE provider=?', (prov,)).fetchall()
     out = []
+    agora = datetime.datetime.now(datetime.timezone.utc)
     for cid, nome, ativa, pri in contas:
-        s = db.execute("SELECT remaining_percentage, created_at, next_reset_at FROM quota_snapshots WHERE connection_id=? "
-                       "AND window_key LIKE '%7d%' AND created_at>=? ORDER BY id", (cid, desde)).fetchall()
-        s = [x for x in s if x[0] is not None]
-        nosso = db.execute("SELECT count(*) FROM usage_history WHERE connection_id=? AND timestamp>=?",
-                           (cid, desde)).fetchone()[0]
+        # 14/11 (dona): so mede DENTRO do limite em uso agora (janela de 5 h atual). Uso de antes da janela nao conta:
+        # toda conta comeca economica e so libera quando aparece outra pessoa gastando o limite de agora.
+        nr = db.execute("SELECT next_reset_at FROM quota_snapshots WHERE connection_id=? AND window_key LIKE '%5h%' "
+                        "ORDER BY id DESC LIMIT 1", (cid,)).fetchone()
+        inicio = None
+        try:
+            fim = datetime.datetime.fromisoformat(str(nr[0]).replace('Z', '+00:00')) if nr and nr[0] else None
+            if fim and fim > agora:
+                inicio = fim - datetime.timedelta(hours=5)
+        except ValueError:
+            pass
+        desde_c = max(desde, inicio.strftime('%Y-%m-%dT%H:%M:%S')) if inicio else None
+        if desde_c:
+            s = db.execute("SELECT remaining_percentage, created_at, next_reset_at FROM quota_snapshots WHERE connection_id=? "
+                           "AND window_key LIKE '%7d%' AND created_at>=? ORDER BY id", (cid, desde_c)).fetchall()
+            s = [x for x in s if x[0] is not None]
+            nosso = db.execute("SELECT count(*) FROM usage_history WHERE connection_id=? AND timestamp>=?",
+                               (cid, desde_c)).fetchone()[0]
+        else:  # janela de 5 h nao comecou (ninguem usando) ou ja venceu
+            s, nosso = [], 0
         queda = 0.0
         for a, b in zip(s, s[1:]):  # soma só as quedas (a renovação da semana sobe e não conta)
             if b[0] < a[0]:
                 queda += a[0] - b[0]
         resta = s[-1][0] if s else None
         out.append(dict(id=cid, nome=nome, ativa=bool(ativa), pri=pri, nosso=nosso, queda=round(queda, 1),
-                        resta=resta, leituras=len(s)))
+                        resta=resta, leituras=len(s), janela_desde=desde_c))
     # calibra "quanto 1 pedido nosso tira" com as contas que não mostram sinal de outro usuário
     pares = [(c['queda'], c['nosso']) for c in out if c['nosso'] >= 10 and c['queda'] > 0]
     taxa = sorted(q / n for q, n in pares)[len(pares) // 4] if len(pares) >= 3 else PCT_POR_PEDIDO
@@ -51,7 +67,9 @@ def medir(db, prov):
         alheio = c['queda'] - esperado - FOLGA_PCT
         c['esperado'] = round(esperado, 1)
         c['alheio'] = round(max(0.0, alheio), 1)
-        if c['leituras'] < 2:
+        if not c['janela_desde']:
+            c['quem'] = 'ninguém'
+        elif c['leituras'] < 2:
             c['quem'] = 'sem leitura'
         elif c['alheio'] > 0:
             c['quem'] = 'outra pessoa usando'

@@ -1,0 +1,25 @@
+{
+ "conta": "vpsblindada.ia",
+ "marca": "VPS Blindada",
+ "capa": "Gerenciar sua VPS toma muito tempo?",
+ "slides": [
+  {
+   "titulo": "Complexidade na Configuração",
+   "texto": "Montar uma VPS do zero, com Docker, Portainer e Traefik, exige conhecimento técnico e dedicação, consumindo horas valiosas da sua rotina."
+  },
+  {
+   "titulo": "Monitoramento Constante Inviável",
+   "texto": "Verificar manualmente se suas automações ou servidor estão funcionando perfeitamente é quase impossível e pode levar a falhas despercebidas."
+  },
+  {
+   "titulo": "Risco de Perda de Dados",
+   "texto": "Sem um sistema de backup automático, seus fluxos e dados importantes ficam vulneráveis a problemas no servidor ou erros inesperados."
+  },
+  {
+   "titulo": "Suporte e Manutenção Desgastantes",
+   "texto": "Lidar com a manutenção, atualizações e solução de problemas de uma VPS pode desviar seu foco do que realmente importa para seu negócio."
+  }
+ ],
+ "legenda": "Sua infraestrutura de automação não precisa ser uma fonte de estresse.\nDescubra como ter uma VPS pronta para sua automação, com segurança e tranquilidade.",
+ "gerado_em": "2026-11-23T09:24:30"
+}

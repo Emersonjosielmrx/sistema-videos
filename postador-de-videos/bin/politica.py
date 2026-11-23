@@ -478,6 +478,11 @@ def _extra_rampa(canal):
         # 1-4 dias desabam) posta só PUNIDO_POR_DIA (1) por dia até as views voltarem — os outros vídeos vão pros canais
         # que rendem. A escada tira a marca sozinha quando recupera. RAMPA_PUNIDO_1=0 desliga.
         import os as _os
+        # 23/11 (video-fila\medico_recuperacao.py): canal restrito há dias sem reagir entra em DESCANSO — 0 vídeos
+        # abrindo até "descanso_ate". MEDICO_ALAVANCAS=0 desliga as alavancas do médico.
+        if c.get("descanso_ate") and _os.environ.get("MEDICO_ALAVANCAS", "1") != "0" \
+                and str(c["descanso_ate"]) > agora().isoformat():
+            return -politica()["max_uploads_por_canal_dia"]
         if c.get("punido") and _os.environ.get("RAMPA_PUNIDO_1", "1") != "0":
             return int(_os.environ.get("PUNIDO_POR_DIA", "1")) - politica()["max_uploads_por_canal_dia"]
         import rampa_canais
@@ -632,6 +637,15 @@ def horario_publicacao(canal, pedido=None, projeto=None):
     do_dono = [t for t in (_dt(r.get("publish_at")) or _dt(r["ts"]) for r in regs if r.get("projeto") == dono) if t] \
         if res else []
     gap = timedelta(hours=horas)
+    # 23/11 (medico_recuperacao "so_nobre"): canal restrito abre o vídeo SÓ no horário nobre (21h de lá = 8,9x a mediana
+    # em 2160 Shorts, estado\sinais_shorts.json). Fora da janela -> próximo 21:00. MEDICO_ALAVANCAS=0 desliga.
+    _nobre = ((ler_json(RAMPA_FILE, {}).get("canais") or {}).get(canal.get("id")) or {}).get("so_nobre")
+    if _nobre and os.environ.get("MEDICO_ALAVANCAS", "1") != "0":
+        _h0, _h1 = (int(v) for v in str(_nobre).split("-")) if "-" in str(_nobre) else (21, 22)
+        _l = alvo.astimezone(tz)
+        if not (_h0 <= _l.hour < _h1):
+            _d = _l if _l.hour < _h0 else _l + timedelta(days=1)
+            alvo = _d.replace(hour=_h0, minute=0, second=0, microsecond=0)
     for _ in range(40):
         # Longe do VIZINHO mais proximo, nao depois do ULTIMO agendado (16/10): a rede agenda o Veo ate 2 dias a frente,
         # e "depois do ultimo" empurrava o react de hoje para depois de amanha.
@@ -674,6 +688,10 @@ def horario_obrigatorio(canal, pedido=None, projeto=None, tipo=None):
     base = max(base, minimo) if base else minimo
     if tipo == "completo":
         return horario_longo(canal, base) or base
+    # 23/11 (teste_publico_punidos): o teste é "Short aberto HOJE no canal punido"; pela fila do punido (1/dia, cheia)
+    # os 5 primeiros foram parar em 02/12 a 02/01. Com TESTE_PUBLICO_PUNIDO=1 abre no mínimo (agora + 25 min).
+    if os.environ.get("TESTE_PUBLICO_PUNIDO") == "1":
+        return base
     return horario_publicacao(canal, base, projeto) or base
 
 
@@ -1010,7 +1028,10 @@ def checar_upload(canal, arquivo, projeto=None, tipo=None):
     veto = pode_postar(canal, projeto)
     if veto:
         return veto
-    if cota_restante(canal, projeto) <= 0:
+    # 23/11 dona ("pode postar 1 Short em cada um dos punidos agora, já como público"): TESTE_PUBLICO_PUNIDO=1 (só a
+    # chamada do bin\teste_publico_punidos.py) passa por cima da cota do dia — o punido (1/dia) já gastou a vaga com
+    # Short agendado dias antes, e o teste é justamente comparar com um público na hora.
+    if cota_restante(canal, projeto) <= 0 and os.environ.get("TESTE_PUBLICO_PUNIDO") != "1":
         cfg = politica()
         return "cota_diaria", (f"cota do dia esgotada (máx {cfg['max_uploads_por_canal_dia']} uploads/canal hoje, "
                                f"{cfg.get('max_uploads_total_dia')}/dia no total)")

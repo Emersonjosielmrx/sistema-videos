@@ -444,15 +444,23 @@
       "navegador": true,
       "idioma": "pt",
       "fuso": "America/Sao_Paulo",
-      "nicho": "fatos chocantes e curiosidades: ciência, corpo humano, história, natureza, tecnologia e mistérios",
+      "nicho": "fatos",
       "dono": "manhwa-react",
-      "alimentadores": {},
+      "alimentadores": {
+        "parceiro": "livre"
+      },
       "max_dia": 3,
       "horarios_rede": [
         "12:00",
         "19:00",
         "21:30"
-      ]
+      ],
+      "horarios_parceiro": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "reserva_dono": 1
     },
     "filmenoturno": {
       "slug": "filmenoturno",

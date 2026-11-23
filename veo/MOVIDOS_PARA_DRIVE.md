@@ -2939,3 +2939,27 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - humor_de_ia_20261115_133633_intro.mp4
   - humor_de_ia_20261115_133633_prop.mp4
   - humor_de_ia_20261115_133633_punch.mp4
+
+## 2026-11-22 17:28 — 78 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (78 MB) — 20 arquivos:
+  - cerebro_digital_20261115_181526_final.mp4
+  - cerebro_digital_20261115_181526_imp.mp4
+  - cerebro_digital_20261115_181526_intro.mp4
+  - cerebro_digital_20261115_181526_prop.mp4
+  - cerebro_digital_20261115_181526_punch.mp4
+  - recordes_mundia_20261115_195834_final.mp4
+  - recordes_mundia_20261115_195834_imp.mp4
+  - recordes_mundia_20261115_195834_intro.mp4
+  - recordes_mundia_20261115_195834_prop.mp4
+  - recordes_mundia_20261115_195834_punch.mp4
+  - recordes_mundia_20261120_051050_final.mp4
+  - recordes_mundia_20261120_051050_imp.mp4
+  - recordes_mundia_20261120_051050_intro.mp4
+  - recordes_mundia_20261120_051050_prop.mp4
+  - recordes_mundia_20261120_051050_punch.mp4
+  - robos_desastrad_20261120_041012_final.mp4
+  - robos_desastrad_20261120_041012_imp.mp4
+  - robos_desastrad_20261120_041012_intro.mp4
+  - robos_desastrad_20261120_041012_prop.mp4
+  - robos_desastrad_20261120_041012_punch.mp4

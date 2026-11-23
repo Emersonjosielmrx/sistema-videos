@@ -1,0 +1,147 @@
+{
+ "conta": "superchatia.ia",
+ "produto": "superchat",
+ "marca": "SuperChat IA",
+ "titulo": "Conversas que viram contatos no CRM com IA",
+ "legenda": "Cada conversa que começa no WhatsApp, Telegram ou Instagram alimenta o CRM com IA e organiza o contato para você. Mais controle sobre quem fala com a sua empresa. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#atendimentoaocliente #crm #whatsappbusiness #automacao",
+ "roteiro": {
+  "gancho_tela": "Cada conversa vira contato no CRM",
+  "pergunta_cliente": "Perdendo contato de cliente entre WhatsApp e Instagram?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu recebia clientes por vários canais e anotava tudo na mão. Sempre sobrava algum contato sem registro.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit counter of a small Brazilian shop, clean and professional",
+    "real_tema": "dono relata a dor de perder o registro de contatos",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261122_073150_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje, cada conversa que começa no WhatsApp, Telegram ou Instagram já alimenta o CRM com IA sozinha.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a bright, tidy Brazilian office with a laptop on a clean desk, well lit",
+    "real_tema": "conversas dos três canais alimentam o CRM automaticamente",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, vi vocês no Instagram. Vocês atendem hoje?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Atendemos sim. Como posso ajudar?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Quero saber mais sobre o serviço de vocês."
+     },
+     {
+      "de": "empresa",
+      "texto": "Claro! Já registrei o seu contato para a nossa equipe acompanhar."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261122_073150_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261122_073150_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora cada contato fica organizado no CRM, e minha equipe acompanha todos os clientes sem esquecer ninguém.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting in a tidy, well lit Brazilian office with a clean desk and a soft window light",
+    "real_tema": "gestão organizada de todos os contatos no CRM",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261122_073150_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261122_073150_1.png"
+   }
+  ],
+  "legenda": "Cada conversa que começa no WhatsApp, Telegram ou Instagram alimenta o CRM com IA e organiza o contato para você. Mais controle sobre quem fala com a sua empresa. Link no perfil.",
+  "titulo": "Conversas que viram contatos no CRM com IA",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "crm_integrado",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 97,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\superchatia.ia_20261122_073012\\dono_3.mp4",
+ "duracao_s": 31.77,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-22T07:51:26",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.48,
+   "fala": "Perdendo contato de cliente entre WhatsApp e Instagram?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.48,
+   "fim": 12.16,
+   "fala": "Eu recebia clientes por vários canais e anotava tudo na mão. Sempre sobrava algum contato sem registro.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.16,
+   "fim": 20.0,
+   "fala": "Hoje, cada conversa que começa no WhatsApp, Telegram ou Instagram já alimenta o CRM com IA sozinha.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.0,
+   "fim": 27.83,
+   "fala": "Agora cada contato fica organizado no CRM, e minha equipe acompanha todos os clientes sem esquecer ninguém.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.83,
+   "fim": 31.77,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.12,
+  "notas": {
+   "legibilidade": 7.5,
+   "movimento": 6.0,
+   "roteiro_marca": 9.0,
+   "diretor": 6.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

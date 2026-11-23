@@ -295,6 +295,72 @@ def _circulo(r):
             f"b {r - k:.0f} {2 * r:.0f} 0 {r + k:.0f} 0 {r:.0f} b 0 {r - k:.0f} {r - k:.0f} 0 {r:.0f} 0")
 
 
+def _coracao(r):
+    return (f"m {r:.0f} {r * 1.8:.0f} b {-r * 0.2:.0f} {r * 1.1:.0f} {-r * 0.2:.0f} {r * 0.2:.0f} {r * 0.5:.0f} "
+            f"{r * 0.2:.0f} b {r * 0.8:.0f} {r * 0.2:.0f} {r:.0f} {r * 0.5:.0f} {r:.0f} {r * 0.6:.0f} b {r:.0f} "
+            f"{r * 0.5:.0f} {r * 1.2:.0f} {r * 0.2:.0f} {r * 1.5:.0f} {r * 0.2:.0f} b {r * 2.2:.0f} {r * 0.2:.0f} "
+            f"{r * 2.2:.0f} {r * 1.1:.0f} {r:.0f} {r * 1.8:.0f}")
+
+
+def _quadrado(r):
+    return f"m 0 0 l {2 * r:.0f} 0 l {2 * r:.0f} {2 * r:.0f} l 0 {2 * r:.0f}"
+
+
+def _barra_por_clima(vw, vh, dur, trechos, ct, padrao):
+    """23/11 dona: a barra troca de COR e FORMATO conforme o clima do que está sendo narrado (clima_tela). Cada
+    trecho pinta a sua parte do trilho com a cor dele (o que já passou fica com a cor de cada momento, como um mapa
+    do vídeo); a ponta muda de formato: fogo/sombra/chuva = bola, coração, moeda, quadrado digital, pulo (quica)."""
+    hh = max(6, vh // 150)
+    yc = vh - int(hh * 2.4)
+    ms = int(dur * 1000)
+    rect = lambda a: f"m 0 0 l {vw} 0 l {vw} {a} l 0 {a}"  # noqa: E731
+    cresce = f"\\fscx0\\t(0,{ms},\\fscx100)"
+    x_de = lambda t: vw * t / dur  # noqa: E731
+    ev = [f"Dialogue: 7,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh // 2})\\p1\\c&H000000&\\alpha&HA0&}}"
+          f"{rect(hh)}{{\\p0}}"]
+    for a, b, c in trechos:
+        if a >= dur:
+            break
+        br, nu, _fa, _fmt = ct.cor_barra(c) or (padrao[0], padrao[1], padrao[2], "bola")
+        x0, x1 = int(x_de(a)), int(x_de(min(b, dur))) + 1
+        fina = c == "triste"
+        clip = f"\\clip({x0},0,{x1},{vh})"
+        ev.append(f"Dialogue: 8,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh})\\p1\\c{br}\\blur{hh}{clip}"
+                  f"{cresce}}}{rect(hh * (1 if fina else 2))}{{\\p0}}")
+        ev.append(f"Dialogue: 9,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - max(1, hh // 4)})\\p1\\c{nu}"
+                  f"\\blur1{clip}{cresce}}}{rect(max(2, hh // (4 if fina else 2)))}{{\\p0}}")
+    r = hh * 2.0
+    t = 0.0
+    while t < dur:
+        t1 = min(dur, t + 1.0)
+        d = int((t1 - t) * 1000)
+        c = ct.clima_em(t)
+        br, nu, _fa, fmt = ct.cor_barra(c) or (padrao[0], padrao[1], padrao[2], "bola")
+        if fmt == "coracao":
+            forma, rr = _coracao(r * 0.8), r * 0.8
+        elif fmt in ("digital",):
+            forma, rr = _quadrado(r * 0.75), r * 0.75
+        elif fmt == "moeda":
+            forma, rr = _circulo(r * 0.9), r * 0.9
+        else:
+            forma, rr = _circulo(r * 0.7), r * 0.7
+        y0, y1 = yc, yc
+        if fmt == "pulo":  # quica
+            y0 = yc - int(hh * 1.6)
+        mov = f"\\move({x_de(t):.0f},{y0},{x_de(t1):.0f},{y1},0,{d})"
+        pulsa = (f"\\t(0,{d // 2},\\fscx135\\fscy135)\\t({d // 2},{d},\\fscx100\\fscy100)" if fmt != "sombra"
+                 else f"\\t(0,{d},\\alpha&H60&)")
+        ev.append(f"Dialogue: 10,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{br}\\blur{int(r)}"
+                  f"\\fscx160\\fscy160}}{_circulo(r)}{{\\p0}}")
+        ev.append(f"Dialogue: 11,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{nu}\\blur1{pulsa}}}{forma}"
+                  f"{{\\p0}}")
+        if fmt == "moeda":  # cifrão dentro da moeda
+            ev.append(f"Dialogue: 12,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\fs{int(rr * 1.6)}\\b1\\c&H006030&"
+                      f"\\bord0\\shad0}}$")
+        t = t1
+    return ev
+
+
 def barra_criativa(vw, vh, dur, video=None):
     """Eventos ASS da barra de tempo viva (ou [] = linha amarela antiga)."""
     escolha = (os.environ.get("ANIME_BARRA") or "").strip().lower()
@@ -312,14 +378,21 @@ def barra_criativa(vw, vh, dur, video=None):
     ms = int(dur * 1000)
     rect = lambda a: f"m 0 0 l {vw} 0 l {vw} {a} l 0 {a}"  # noqa: E731
     cresce = f"\\fscx0\\t(0,{ms},\\fscx100)"
+    try:
+        import clima_tela as _ct
+        _tr = list(_ct._TRECHOS) if _ct.LIGADO else []
+    except Exception:  # noqa: BLE001
+        _ct, _tr = None, []
+    if _tr:
+        return _barra_por_clima(vw, vh, dur, _tr, _ct, (brilho, nucleo, faisca))
     ev = [
         # trilho apagado (mostra quanto falta)
-        f"Dialogue: 1,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh // 2})\\p1\\c&H000000&\\alpha&HA0&}}"
+        f"Dialogue: 7,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh // 2})\\p1\\c&H000000&\\alpha&HA0&}}"
         f"{rect(hh)}{{\\p0}}",
         # brilho largo + núcleo claro, crescendo junto
-        f"Dialogue: 2,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh})\\p1\\c{brilho}\\blur{hh}{cresce}}}"
+        f"Dialogue: 8,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - hh})\\p1\\c{brilho}\\blur{hh}{cresce}}}"
         f"{rect(hh * 2)}{{\\p0}}",
-        f"Dialogue: 3,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - max(1, hh // 4)})\\p1\\c{nucleo}"
+        f"Dialogue: 9,{_ts(0)},{_ts(dur)},Bar,,0,0,0,,{{\\an7\\pos(0,{yc - max(1, hh // 4)})\\p1\\c{nucleo}"
         f"\\blur1{cresce}}}{rect(max(2, hh // 2))}{{\\p0}}",
     ]
     x_de = lambda t: vw * t / dur  # noqa: E731
@@ -330,10 +403,10 @@ def barra_criativa(vw, vh, dur, video=None):
         t1 = min(dur, t + passo)
         d = int((t1 - t) * 1000)
         mov = f"\\move({x_de(t):.0f},{yc},{x_de(t1):.0f},{yc},0,{d})"
-        ev.append(f"Dialogue: 4,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{brilho}\\blur{int(r)}"
+        ev.append(f"Dialogue: 10,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{brilho}\\blur{int(r)}"
                   f"\\fscx160\\fscy160\\t(0,{d // 2},\\fscx210\\fscy210)\\t({d // 2},{d},\\fscx160\\fscy160)}}"
                   f"{_circulo(r)}{{\\p0}}")
-        ev.append(f"Dialogue: 5,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{nucleo}\\blur2"
+        ev.append(f"Dialogue: 11,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an5{mov}\\p1\\c{nucleo}\\blur2"
                   f"\\t(0,{d // 2},\\fscx120\\fscy120)\\t({d // 2},{d},\\fscx100\\fscy100)}}{_circulo(r * 0.7)}{{\\p0}}")
         t = t1
     t, passo, cauda = 0.0, (0.25 if dur <= 240 else 0.5), vw * 0.07  # longo: 2 trocas/s (arquivo ASS menor)
@@ -348,9 +421,9 @@ def barra_criativa(vw, vh, dur, video=None):
             ida = " ".join(f"{x:.0f} {y:.0f}" for x, y in pts[1:])
             esp = max(3, hh // 2)  # raio grosso o bastante pra ler no celular
             volta = " ".join(f"{x:.0f} {y + esp:.0f}" for x, y in reversed(pts))
-            ev.append(f"Dialogue: 3,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{brilho}\\blur{hh}"
+            ev.append(f"Dialogue: 9,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{brilho}\\blur{hh}"
                       f"}}m {pts[0][0]:.0f} {pts[0][1]:.0f} l {ida} {volta}{{\\p0}}")
-            ev.append(f"Dialogue: 3,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{faisca}\\blur1"
+            ev.append(f"Dialogue: 9,{_ts(t)},{_ts(t1)},Bar,,0,0,0,,{{\\an7\\pos(0,0)\\p1\\c{faisca}\\blur1"
                       f"}}m {pts[0][0]:.0f} {pts[0][1]:.0f} l {ida} {volta}{{\\p0}}")
         t = t1
     return ev

@@ -1,4 +1,8 @@
 {
- "motor": "fish",
- "_leia": "Dona 20/11: 'não descartar como era feita a narração antes do novo motor — era boa, deu trabalho pra ajustar; a nova se imagina ficar melhor mas não é certeza, então deve ser versionado; se não der certo é só voltar ao motor antigo'. Troque para \"antigo\" e rode montar_pacote.py --codigo: TODO o Fish (Kaggle, site, sub-vozes, aceleração do gol, S do respeito) desliga e a narração volta ao motor anterior (Kitten 2/RVC na GPU, p3 com as técnicas nos PCs). O que aprendemos no ROTEIRO (duplo sentido, marcas registradas, vocabulário só dele, gatilho pela imagem) continua valendo nos dois motores. Versões: producao/versoes_motor_voz/ (v1 = antes do Fish, commit 1370e236 de 18/11; v2 = Fish 20/11). Também dá pra forçar por variável: MOTOR_VOZ=antigo."
+ "motor": "xtts",
+ "_leia": "Dona 20/11: 'não descartar como era feita a narração antes do novo motor — era boa, deu trabalho pra ajustar; a nova se imagina ficar melhor mas não é certeza, então deve ser versionado; se não der certo é só voltar ao motor antigo'. Troque para \"antigo\" e rode montar_pacote.py --codigo: TODO o Fish (Kaggle, site, sub-vozes, aceleração do gol, S do respeito) desliga e a narração volta ao motor anterior (Kitten 2/RVC na GPU, p3 com as técnicas nos PCs). O que aprendemos no ROTEIRO (duplo sentido, marcas registradas, vocabulário só dele, gatilho pela imagem) continua valendo nos dois motores. Versões: producao/versoes_motor_voz/ (v1 = antes do Fish, commit 1370e236 de 18/11; v2 = Fish 20/11). Também dá pra forçar por variável: MOTOR_VOZ=antigo.",
+ "xtts_versao": "8",
+ "s2pro": "misto",
+ "s2pro_versao": "13",
+ "_padrao_23nov": "Dona 23/11: padrão = XTTS 8 novo + S2-Pro 13 em MISTO (S2-Pro nas frases de emoção/risada/reação, teto 40%), RVC por cima. O S2-Pro só liga onde tem placa (Kaggle); no PC local fica só o XTTS 8 (motor reserva). Shorts: Fish online 1º (anime_tts._narrar_online, só com crédito); sem crédito -> este mesmo padrão. 'motor':'antigo' volta ao Kitten/RVC/p3."
 }

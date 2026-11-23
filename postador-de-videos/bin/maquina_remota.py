@@ -300,6 +300,24 @@ class Remoto:
         log(f"{self.nome}: {p.name} enviado por HTTP ({p.stat().st_size // 1024} KB)")
         return destino_win
 
+    def baixar_do_drive(self, origem_drive, nome):
+        """23/11 dona ("postagem falha por falta de espaço, principalmente longos — crie um fallback que use outro PC
+        com espaço e a mesma conta válida no cofre dele"): a máquina (Windows com rclone + manhwa-drive:, o desktop)
+        baixa o vídeo DIRETO do Drive pro disco D DELA — o arquivo nunca passa pelo PC1. Devolve o caminho lá."""
+        destino = f"D:\\postador-worker\\entrada\\{int(time.time())}_{nome}"
+        r = self._ps_enc("New-Item -ItemType Directory -Force D:\\postador-worker\\entrada | Out-Null; "
+                         f"& 'D:\\tools\\rclone.exe' copyto '{origem_drive}' '{destino}' --retries 5 "
+                         "--multi-thread-streams 4 --multi-thread-cutoff 256M; "
+                         f"'TAM=' + (Get-Item '{destino}').Length", timeout=5400)
+        m = re.search(r"TAM=(\d+)", self._txt(r))
+        if not m or int(m.group(1)) < 1_000_000:
+            raise RuntimeError(f"{self.nome}: não baixou {origem_drive} do Drive ({' '.join(self._txt(r).split())[-150:]})")
+        log(f"{self.nome}: {nome} baixado do Drive direto lá ({int(m.group(1)) / 1e9:.1f} GB)")
+        return destino
+
+    def apagar_remoto(self, caminho):
+        self._ps_enc(f"Remove-Item -Force '{caminho}' -ErrorAction SilentlyContinue", timeout=60)
+
     def _enviar_win(self, p, nome):
         destino = f"C:/postador-worker/entrada/{int(time.time())}_{nome}"
         if MAQUINAS[self.nome].get("puxar_http"):
@@ -317,6 +335,11 @@ class Remoto:
 
     def enviar(self, arquivo):
         """Manda o arquivo pelo ssh pra ~/postador-worker/entrada e devolve o caminho LÁ (o Chrome lê do disco dele)."""
+        # 23/11: "drive:<remote:caminho>" = o vídeo está só no Drive (PC1 sem espaço) — a máquina baixa direto de lá
+        if str(arquivo).startswith("drive:") and self.win:
+            origem = str(arquivo)[6:]
+            nome = "".join(c if c.isalnum() or c in "._-" else "_" for c in origem.rsplit("/", 1)[-1])[-120:]
+            return self.baixar_do_drive(origem, nome)
         p = Path(arquivo)
         nome = "".join(c if c.isalnum() or c in "._-" else "_" for c in p.name)[-120:]
         if self.win:

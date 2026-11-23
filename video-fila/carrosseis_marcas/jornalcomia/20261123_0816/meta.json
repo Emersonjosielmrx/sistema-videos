@@ -1,0 +1,25 @@
+{
+ "conta": "jornalcomia",
+ "marca": "Jornal com IA",
+ "capa": "Como a IA consegue sintetizar vozes?",
+ "slides": [
+  {
+   "titulo": "Captura de padrões sonoros",
+   "texto": "A tecnologia analisa pequenos trechos de áudio para mapear o tom, o ritmo e a frequência da voz humana em detalhes."
+  },
+  {
+   "titulo": "Reconstrução por elementos",
+   "texto": "Em vez de gravar frases inteiras, a inteligência artificial combina unidades sonoras básicas para formar palavras e orações totalmente novas."
+  },
+  {
+   "titulo": "Entonação e contexto",
+   "texto": "Algoritmos modernos identificam pontuações e o contexto do texto para ajustar o tom de forma suave, imitando a fala natural."
+  },
+  {
+   "titulo": "Processamento em tempo real",
+   "texto": "Modelos avançados conseguem converter texto em áudio quase instantaneamente, permitindo interações fluidas em assistentes virtuais e outras ferramentas."
+  }
+ ],
+ "legenda": "A síntese de voz por inteligência artificial transformou a forma como interagimos com a tecnologia. Entenda os passos que transformam texto em som.",
+ "gerado_em": "2026-11-23T08:19:12"
+}

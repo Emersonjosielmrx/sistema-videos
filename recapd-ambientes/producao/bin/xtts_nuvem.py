@@ -108,6 +108,8 @@ def lote(lista_json):
             if refs not in lat:
                 lat[refs] = m.get_conditioning_latents(audio_path=list(refs))
             gpt, spk = lat[refs]
+            if os.environ.get("XTTS_FP16") == "1" and dev == "cuda":  # 23/11: latentes na mesma precisão do modelo
+                gpt, spk = gpt.half(), spk.half()
             partes = [re.sub(r"\.$", "", x).strip() for x in re.split(r"(?<=[.!?])\s+", limpa(it["texto"]))
                       if x.strip()]
             if it.get("frase_inteira"):  # versão 4: a frase toda de uma vez (só sem ponto)

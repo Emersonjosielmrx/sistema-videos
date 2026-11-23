@@ -8098,3 +8098,135 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_camera_3d_painel__sonnet_0741.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 08:06 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_avatar_3d_comercial__sonnet_0801.md`
+
+- [INÉDITO] github.com/SanHsien/voxavatar — ★2, push 2026-11-22, MIT — Windows-only local-first VRM desktop companion with voice-output lip sync, animations, and MCP controls.｜Windows 本機 VRM 桌面角色陪伴。
+
+## 2026-11-22 08:28 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_parallax_camera_paths__sonnet_0816.md`
+
+- [INÉDITO] github.com/working-codes-demo/parallax-anything — ★2, push 2026-11-22, Apache-2.0 — Turn any photo into a cinematic 3D parallax video. Depth Anything V2 + layered inpainting, 7 camera moves, runs on a laptop (CUDA / Apple MP
+
+## 2026-11-22 08:41 — cenas Three.js leves para CPU (sem sombras, PBR simples, baixo MSAA) (`area_three_cpu_budget`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_three_cpu_budget__sonnet_0834.md`
+
+- [INÉDITO] github.com/freedom-snow/vibe-animation-library — ★1, push 2026-11-15, MIT — Vibe 动画库：Canvas 2D 伪 3D 确定性动画元件（火柴人/深度层/表情/肢体）+ Three.js/SwiftShader 真 3D 渲染管线（1.45fps 软件渲染）。AI动画/伪3D/三维渲染/定格动画/创意编程资产，OpenFilm 产线，MIT 许可。
+
+## 2026-11-22 08:55 — Chrome headless com ANGLE/Vulkan na T4 do Kaggle (Linux sem tela) (`area_three_gpu_t4_headless`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_three_gpu_t4_headless__sonnet_0847.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 09:22 — ERes2Net / 3D-Speaker (`area_eres2net_licenca`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_eres2net_licenca__sonnet_0917.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 10:08 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_avatares_stop__sonnet_0957.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 10:27 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_1018.md`
+
+- [INÉDITO] github.com/stJL/dsh-gemini-web — ★2, push 2026-11-21, MIT — Multi-site & multi-modal Gemini web quota orchestration plugin for DeepSeek Harness (AI Studio + Google Flow + Gemini Web).
+
+## 2026-11-22 10:42 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_1032.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 10:58 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_1046.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 11:16 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_1111.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 11:31 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_1126.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 16:25 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_1609.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 16:56 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_1641.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 18:30 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_gemini_web_sessao_cookie__sonnet_1818.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-22 23:49 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_android_adb_automacao_upload__sonnet_2337.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 00:22 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_gemini_web_sessao_cookie__sonnet_0004.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 06:34 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_gemini_web_sessao_cookie__sonnet_0631.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 06:46 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_gemini_web_sessao_cookie__sonnet_0638.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 07:17 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_android_adb_automacao_upload__sonnet_0704.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 07:59 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_android_adb_automacao_upload__sonnet_0732.md`
+
+- [INÉDITO] github.com/cindulasai/tubeguard — ★0, push 2026-06-29, MIT — Fire TV YouTube watch-time quota daemon. Counts regular videos and Shorts as YouTube time, then blocks YouTube outside your schedule or afte
+
+## 2026-11-23 08:28 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_gemini_web_sessao_cookie__sonnet_0822.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-23 09:52 — reprodutibilidade de float e shader entre drivers (`area_three_threshold_determinism`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-23\respostas\area_three_threshold_determinism__sonnet_0944.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

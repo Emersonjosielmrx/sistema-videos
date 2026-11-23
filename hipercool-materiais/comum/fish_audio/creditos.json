@@ -6,12 +6,12 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-19T04:22"
+  "lido_em": "2026-11-22T16:15"
  },
  "jogoscomia@gmail.com": {
   "logado": true,
   "erro": null,
-  "lido_em": "2026-11-21T11:01",
+  "lido_em": "2026-11-22T16:20",
   "restantes": 3973,
   "total": 8000,
   "gasto_desde_leitura": 0,
@@ -39,7 +39,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T13:10"
+  "lido_em": "2026-11-23T07:45"
  },
  "entrevistacomia@gmail.com": {
   "restantes": 7055,
@@ -55,7 +55,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T07:02"
+  "lido_em": "2026-11-22T10:46"
  },
  "fabricadeautomacoes0@gmail.com": {
   "restantes": 6947,
@@ -87,13 +87,13 @@
   "restantes": 7030,
   "total": 8000,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-22T00:11"
+  "lido_em": "2026-11-23T07:42"
  },
  "inovarecap@gmail.com": {
   "restantes": 7047,
   "total": 8000,
-  "logado": true,
-  "erro": null,
+  "logado": false,
+  "erro": "deslogada",
   "gasto_desde_leitura": 0,
   "lido_em": "2026-11-20T06:34"
  },
@@ -111,7 +111,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T13:50"
+  "lido_em": "2026-11-23T09:34"
  },
  "inovaremanhwaverseviet@gmail.com": {
   "logado": true,
@@ -127,7 +127,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-22T03:52"
+  "lido_em": "2026-11-23T11:38"
  },
  "jornalcomia@gmail.com": {
   "restantes": 6891,
@@ -143,7 +143,7 @@
   "restantes": 7119,
   "total": 8000,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-22T03:56"
+  "lido_em": "2026-11-23T11:41"
  },
  "msenergypara@gmail.com": {
   "restantes": 7419,
@@ -154,12 +154,12 @@
   "lido_em": "2026-11-19T12:45"
  },
  "revolutionemerson1@gmail.com": {
-  "restantes": 7089,
+  "restantes": 6796,
   "total": 8000,
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T10:49"
+  "lido_em": "2026-11-23T10:44"
  },
  "revolutionemerson2@gmail.com": {
   "logado": true,
@@ -167,7 +167,7 @@
   "restantes": 6848,
   "total": 8000,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T09:10"
+  "lido_em": "2026-11-22T10:21"
  },
  "aulacomia@gmail.com": {
   "restantes": 7033,
@@ -175,7 +175,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-22T00:04"
+  "lido_em": "2026-11-23T01:05"
  },
  "canalalucinaai@gmail.com": {
   "restantes": 6845,
@@ -183,7 +183,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T08:16"
+  "lido_em": "2026-11-22T10:24"
  },
  "canalanimescomia@gmail.com": {
   "restantes": 7038,
@@ -191,7 +191,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-22T00:01"
+  "lido_em": "2026-11-23T01:00"
  },
  "canalhistoriacomia@gmail.com": {
   "restantes": 6859,
@@ -199,7 +199,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T00:51"
+  "lido_em": "2026-11-23T08:25"
  },
  "e4487017@gmail.com": {
   "restantes": 6898,
@@ -207,7 +207,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T04:08"
+  "lido_em": "2026-11-22T21:27"
  },
  "emersongenc@gmail.com": {
   "restantes": 7050,
@@ -220,8 +220,8 @@
  "emersongencshin@gmail.com": {
   "restantes": 7046,
   "total": 8000,
-  "logado": true,
-  "erro": null,
+  "logado": false,
+  "erro": "deslogada",
   "gasto_desde_leitura": 0,
   "lido_em": "2026-11-20T08:20"
  },
@@ -247,15 +247,15 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T08:01"
+  "lido_em": "2026-11-23T08:23"
  },
  "emersonjosiel2026@gmail.com": {
   "restantes": 6854,
   "total": 8000,
-  "logado": true,
-  "erro": null,
+  "logado": false,
+  "erro": "sessão vencida",
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T06:00"
+  "lido_em": "2026-11-22T18:14"
  },
  "emersonjosiel2030@gmail.com": {
   "restantes": 6719,
@@ -287,7 +287,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T01:44"
+  "lido_em": "2026-11-23T00:58"
  },
  "emersonjosiel2037@gmail.com": {
   "restantes": 6800,
@@ -295,7 +295,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T19:23"
+  "lido_em": "2026-11-23T09:30"
  },
  "emersonjosiel649@gmail.com": {
   "restantes": 6937,
@@ -311,7 +311,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-21T01:10"
+  "lido_em": "2026-11-23T08:28"
  },
  "inovaremanhwaverse5@gmail.com": {
   "restantes": 7007,
@@ -319,7 +319,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T08:33"
+  "lido_em": "2026-11-23T07:55"
  },
  "inovaremanhwaverse8@gmail.com": {
   "restantes": 6814,
@@ -327,7 +327,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T12:42"
+  "lido_em": "2026-11-23T09:27"
  },
  "inovaremanhwaverse9@gmail.com": {
   "restantes": 6666,
@@ -335,7 +335,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T12:02"
+  "lido_em": "2026-11-22T16:12"
  },
  "mundosolar1995@gmail.com": {
   "restantes": 8000,
@@ -359,7 +359,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T09:02"
+  "lido_em": "2026-11-22T14:09"
  },
  "emersonjosiel2038@gmail.com": {
   "restantes": 6818,
@@ -367,7 +367,7 @@
   "logado": true,
   "erro": null,
   "gasto_desde_leitura": 0,
-  "lido_em": "2026-11-20T10:01"
+  "lido_em": "2026-11-23T09:25"
  },
  "empressinovare@gmail.com": {
   "restantes": 6945,

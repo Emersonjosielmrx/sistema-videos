@@ -112,6 +112,42 @@ VERSOES["melck"] = dict(
             "Dois ar-condicionados inverter inclusos: mais conforto, com a energia vindo do próprio sol.",
             "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano).",
             "Inversor Solis de 8 kW com acompanhamento da geração pelo aplicativo."])
+# 22/11: Melck reduzido para 700 kWh (mesmo inversor Solis 8 kW); Celso 600 kWh e Maria de Fatima 550 kWh, 1 central de ar cada.
+# Preco do solar = interpolacao da tabela de propostas (500 kWh = 13.900; 1.000 kWh = 22.900) + 4.000 pelo(s) ar(es).
+_AR = "AR-CONDICIONADO SPLIT INVERTER 12.000 BTUs"
+_AR_D = "Instalação inclusa · tecnologia inverter, gasta menos energia"
+_TAIL = "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano)."
+VERSOES["melck700"] = dict(
+    VERSOES["melck"], n=9, ger_media=700, consumo=700, valor=21500.00, num="P26-1119-700", cabo_m=40,
+    saida="Proposta MS Energy - Melck Muller de Oliveira Amancio - 700 kWh - 9x625W Solis 8k.pdf",
+    porque=["Gera cerca de 700 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "9 painéis de 625 W (5,625 kWp): pouco peso e poucos furos no telhado.",
+            "Dois ar-condicionados inverter inclusos: mais conforto, com a energia vindo do próprio sol.",
+            _TAIL,
+            "Inversor Solis de 8 kW com folga para aumentar o sistema no futuro e acompanhamento da geração pelo aplicativo."])
+VERSOES["celso"] = dict(
+    VERSOES["melck"], n=8, ger_media=600, consumo=600, valor=19700.00, num="P26-1122A", cabo_m=40,
+    saida="Proposta MS Energy - Celso Soriano - 600 kWh - 8x625W Solis 5k.pdf",
+    cliente="CELSO SORIANO", cliente_doc="", cliente_end="",
+    inversores=[(1, "INVERSOR SOLAR SOLIS 5 kW", "Ligação 220 V · 2 MPPT · monitoramento Wi-Fi pelo celular", "SOLIS")],
+    inv_curto="Solis 5 kW",
+    extras=[(_AR, _AR_D, "PC", 1, "ar")],
+    porque=["Gera cerca de 600 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "8 painéis de 625 W (5 kWp): pouco peso e poucos furos no telhado.",
+            "Um ar-condicionado inverter incluso: mais conforto, com a energia vindo do próprio sol.",
+            _TAIL,
+            "Inversor Solis de 5 kW com acompanhamento da geração pelo aplicativo."])
+VERSOES["maria"] = dict(
+    VERSOES["celso"], n=7, ger_media=550, consumo=550, valor=18800.00, num="P26-1122B", cabo_m=40,
+    saida="Proposta MS Energy - Maria de Fatima Esquerdo de Lima - 550 kWh - 7x625W Solis 4k.pdf",
+    cliente="MARIA DE FÁTIMA ESQUERDO DE LIMA",
+    inversores=[(1, "INVERSOR SOLAR SOLIS 4 kW", "Ligação 220 V · 2 MPPT · monitoramento Wi-Fi pelo celular", "SOLIS")],
+    inv_curto="Solis 4 kW",
+    porque=["Gera cerca de 550 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "7 painéis de 625 W (4,375 kWp): pouco peso e poucos furos no telhado.",
+            "Um ar-condicionado inverter incluso: mais conforto, com a energia vindo do próprio sol.",
+            _TAIL,
+            "Inversor Solis de 4 kW com acompanhamento da geração pelo aplicativo."])
 CHAVE = sys.argv[1] if len(sys.argv) > 1 else "solis"
 V = VERSOES[CHAVE]
 SAIDA = os.path.join(AQUI, V["saida"])
@@ -341,7 +377,7 @@ def reais_curto(v):
     return f"R$ {brl(v/1000, 0)} mil"
 
 
-KWP_TXT = brl(KWP, 0 if KWP >= 100 else 2 if round(KWP * 100) % 10 else 1)
+KWP_TXT = brl(KWP, 0 if KWP >= 100 or KWP == int(KWP) else 3 if round(KWP * 1000) % 10 else 2 if round(KWP * 100) % 10 else 1)
 GER_TXT = f"até {brl(round(GER_MAX/1000),0)} mil kWh/mês" if SO_MAX and GER_MAX >= 10000 else \
     (f"até {brl(GER_MAX,0)} kWh/mês" if SO_MAX else f"{brl(media,0)} kWh/mês")
 GER_ROT = "Geração no mês de mais sol" if SO_MAX else "Geração média estimada por mês"

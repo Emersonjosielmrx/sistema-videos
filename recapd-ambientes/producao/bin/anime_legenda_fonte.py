@@ -15,6 +15,7 @@ IA de visão olha quadros onde a linha apareceu; sem resposta dela, NÃO borra.
 """
 import json
 import logging
+import os
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -241,6 +242,10 @@ def _decidir(res, video, tempos, quadros, usar_visao=True):
         frac = [round(faixa[0] / h, 4), round(faixa[1] / h, 4)]
         if pres >= PRESENCA_SIM:
             res.update(tem=True, faixa=frac, motivo="linha de texto na mesma altura, mudando")
+        elif 0.35 <= (frac[0] + frac[1]) / 2 <= 0.70 and os.environ.get("LEGENDA_MEIO_BAIXA", "0") != "1":
+            # 23/11 dona ("tarja no meio" no longo eRJ1): presença baixa no MEIO da tela = balão/texto do manhwa, não
+            # legenda (legenda queimada fica embaixo). Antes a visão confirmava e borrava o meio do vídeo inteiro.
+            res["motivo"] = "presença baixa no meio da tela (balão/texto da obra): não borra"
         else:
             com = [t for t, ls in zip(tempos, por_quadro) if any(y0 < faixa[1] and y1 > faixa[0] for y0, y1, _a, _b in ls)]
             v = _visao_confirma(video, [com[len(com) // 4], com[len(com) // 2], com[3 * len(com) // 4]], frac) \

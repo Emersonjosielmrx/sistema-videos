@@ -264,6 +264,51 @@ def proxima_renovacao(d, agora):
 
 _CACHE_JSON = {}
 
+def janelas_conta(cid, dias=3):
+    """23/11 dona: histórico de uso de UMA conta por janela de 5 h (a atual e as anteriores): quanto a semana caiu,
+    quantos pedidos foram NOSSOS e quanto sobrou pra outra pessoa. Só lê o banco (nenhuma conta é consultada).
+    Janelas = blocos de 5 h alinhados ao próximo reset da janela de 5 h gravado pelo OmniRoute."""
+    try:
+        taxa = float(json.load(open('/opt/omniroute/vigia_uso_alheio.json')).get('claude', {}).get('pct_por_pedido')
+                     or 0.25)
+    except Exception:
+        taxa = 0.25
+    agora = datetime.datetime.now(datetime.timezone.utc)
+    desde = agora - datetime.timedelta(days=dias)
+    db = sqlite3.connect(f'file:{DB}?mode=ro', uri=True, timeout=10)
+    try:
+        snaps = db.execute("SELECT remaining_percentage, created_at FROM quota_snapshots WHERE connection_id=? "
+                           "AND window_key LIKE '%7d%' AND created_at>=? ORDER BY id", (cid, isoz(desde))).fetchall()
+        r5 = db.execute("SELECT next_reset_at FROM quota_snapshots WHERE connection_id=? AND window_key LIKE '%5h%' "
+                        "AND next_reset_at IS NOT NULL ORDER BY id DESC LIMIT 1", (cid,)).fetchone()
+        pedidos = [dt(r[0]) for r in db.execute("SELECT timestamp FROM usage_history WHERE connection_id=? AND "
+                                                "timestamp>=?", (cid, isoz(desde))).fetchall()]
+    finally:
+        db.close()
+    pedidos = [x for x in pedidos if x]
+    snaps = [(r[0], dt(r[1])) for r in snaps if r[0] is not None and dt(r[1])]
+    ancora = dt(r5[0]) if r5 and r5[0] else agora.replace(minute=0, second=0, microsecond=0) + datetime.timedelta(hours=1)
+    passo = datetime.timedelta(hours=5)
+    while ancora < agora:
+        ancora += passo
+    while ancora - passo > agora:
+        ancora -= passo
+    out, fim = [], ancora
+    while fim > desde:
+        ini = fim - passo
+        s = [x for x in snaps if ini <= x[1] < fim]
+        queda = sum(a[0] - b[0] for a, b in zip(s, s[1:]) if b[0] < a[0])
+        nosso = sum(1 for x in pedidos if ini <= x < fim)
+        a_mais = max(0.0, queda - nosso * taxa - 2)
+        # 23/11 dona: só quem usou a janela — nós, nós + outros, só outros, ninguém (sem leitura = não deu pra medir)
+        outros = a_mais > 0
+        quem = ('sem leitura' if len(s) < 2 and not nosso else 'nós e outros' if nosso and outros else
+                'só nós' if nosso else 'só outros' if outros else 'ninguém')
+        out.append(dict(ini=ini.isoformat(), fim=fim.isoformat(), atual=ini <= agora < fim, quem=quem))
+        fim = ini
+    return {'taxa': round(taxa, 3), 'janelas': out}
+
+
 def dados_json(prov, incluir_hist=True):
     """06/11 dona ("painel muito ruim e pouco interativo"): os dados em JSON para a página nova (desenha no navegador,
     atualiza sem recarregar). Junta: % de cada janela, histórico de 3 dias da semana (1 ponto por hora), nosso uso
@@ -351,6 +396,14 @@ def dados_json(prov, incluir_hist=True):
             "SELECT connection_id, max(timestamp) FROM usage_history WHERE provider='claude' AND model LIKE 'claude-fable%' "
             "AND CAST(status AS INTEGER)=429 AND connection_id IS NOT NULL GROUP BY 1"))
         limite = dict(db.execute("SELECT id, rate_limited_until FROM provider_connections WHERE provider='claude'"))
+        # 23/11 dona: "a aba do Fable conta o do Opus como dele" — só as contas que JÁ aceitaram o Fable (1 pedido 200
+        # em 30 dias) e o estado vem só dos pedidos do Fable (último 200 x último 429), não da cota geral da conta
+        fable_30d = {r[0]: r[1:] for r in db.execute(
+            "SELECT connection_id, sum(CAST(status AS INTEGER)=200), max(CASE WHEN CAST(status AS INTEGER)=200 "
+            "THEN timestamp END), max(CASE WHEN CAST(status AS INTEGER)=429 THEN timestamp END) FROM usage_history "
+            "WHERE provider='claude' AND model LIKE 'claude-fable%' AND connection_id IS NOT NULL AND timestamp>? "
+            "GROUP BY 1", (isoz(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=30)),))}
+        linhas = [l for l in linhas if (fable_30d.get(l['id']) or (0,))[0]]
     entrou = {}
     if base == 'claude':
         try:
@@ -388,8 +441,15 @@ def dados_json(prov, incluir_hist=True):
             if rl and rl > agora and l['ativa']:  # limite curto da conta ("reset after 5m"): volta na hora marcada
                 g, lib = 1, max(rl, lib) if lib else rl
                 info += f' · limite até {br(rl)}'
+            _n, f_ok, f_429 = fable_30d.get(l['id']) or (0, None, None)
+            if f_429 and (not f_ok or f_429 > f_ok):  # último pedido Fable = sem cota: esgotado PRO FABLE
+                g = 1
+                lib = lib or (dt(f_429) + datetime.timedelta(hours=5) if dt(f_429) else None)
+                info = f'Fable sem cota desde {br(dt(f_429))}'
+            elif f_ok:  # último pedido Fable deu certo: segue a cota geral da conta (o Fable gasta a mesma semana)
+                info = f'Fable respondeu {br(dt(f_ok))}' + (' · conta esgotada' if g == 1 else '')
             extra = dict(modelo='Fable 5.2', taxa=round(100 * ok / tot) if tot else None, ok=ok, tot=tot, info=info,
-                         grupo=g, libera=iso(lib), oi=None)
+                         grupo=g, libera=iso(lib), oi=None, ps=None, p5=None)
         e1 = dt(entrou.get(str(l['nome']).lower()))
         if e1:
             rn = proxima_renovacao(e1, agora_e)
@@ -496,7 +556,11 @@ td[data-r^="Modelo"] small{display:block}.tp small,.tp b{display:block;white-spa
 @media (min-width:1001px){.n{min-width:190px;max-width:250px}td[data-r="Quem usa"] small{display:block;max-width:140px}.b{width:96px}svg.sp{width:96px}}
 @media (min-width:1001px) and (max-width:1180px){th[data-k="hist"],td[data-r="3 dias"]{display:none}}
 
-</style></head><body>
+#pop{position:fixed;z-index:20;display:none;background:hsl(var(--card));border:1px solid hsl(var(--border));
+ border-radius:12px;box-shadow:0 12px 40px #0008;padding:12px 14px;width:min(420px,94vw);max-height:70vh;overflow:auto}
+#pop h4{margin:0 0 4px;font-size:13px}#pop table{font-size:12px;margin-top:6px}#pop td,#pop th{padding:4px 6px;white-space:nowrap}
+#pop tr.at td{background:hsl(var(--primary)/.12);font-weight:700}.qu{cursor:pointer}.qu .ver{color:hsl(var(--pri2))}
+</style></head><body><div id="pop"></div>
 <div class="pg"><div class="pg"><div class="pg"><div class="top"><div><h1 id="tit">Créditos das contas</h1><div class="sub" id="sub">carregando…</div></div><div class="abas" id="abas"></div></div>
 <div class="cards" id="cards"></div>
 <div class="barra"><input id="q" placeholder="buscar conta…">
@@ -519,7 +583,7 @@ const barra=(p,r)=>p==null?'<small>sem dado</small>':`<div class="b"><i style="w
 const spark=h=>{if(!h||h.length<2)return'<small>—</small>';const w=96,ht=28,xs=h.map((_,i)=>i*w/(h.length-1)),ys=h.map(x=>ht-2-(x[1]??0)*(ht-4)/100);
  return `<svg class="sp" width="${w}" height="${ht}"><polyline fill="none" stroke="hsl(var(--primary))" stroke-width="1.6" points="${xs.map((x,i)=>x.toFixed(1)+','+ys[i].toFixed(1)).join(' ')}"/></svg><small>3 dias: ${Math.round(h[0][1])}% → ${Math.round(h[h.length-1][1])}%</small>`};
 const QUEM={'outra pessoa usando':['t-alh','outra pessoa usando'],'alheio (1ª vez)':['t-alh','talvez outra pessoa'],'só nós':['t-nos','só nós'],'ninguém':['t-nin','ninguém'],'sem leitura':['t-sem','sem leitura'],'esgotada':['t-esg','esgotada']};
-const TODAS=[{k:'nome',t:'Conta'},{k:'modelo',t:'Modelo'},{k:'ps',t:'Semana'},{k:'p5',t:'Janela 5 h'},{k:'quem',t:'Quem usa'},{k:'taxa',t:'Deu certo (24 h)'},{k:'falhas',t:'Falhas (24 h)'},{k:'info',t:'Situação'},{k:'uso3h',t:'Pedidos 3h/24h'},{k:'libera',t:'Último oi · volta · renova'}];
+const TODAS=[{k:'nome',t:'Conta'},{k:'modelo',t:'Modelo'},{k:'ps',t:'Semana'},{k:'p5',t:'Janela 5 h'},{k:'quem',t:'Quem usa · a mais'},{k:'taxa',t:'Deu certo (24 h)'},{k:'info',t:'Situação'},{k:'libera',t:'Último oi · volta · renova'}];
 let COLS=TODAS;
 const tx=c=>c.taxa==null?'<small>sem pedidos</small>':`<div class="b"><i style="width:${c.taxa}%;background:${cor(c.taxa)}"></i><span>${c.taxa}%</span></div><small>${c.ok} de ${c.tot}</small>`;
 function cab(){$('cab').innerHTML=COLS.map(c=>`<th data-k="${c.k}">${c.t}${ORD.k===c.k?` <span class="s">${ORD.d>0?'▲':'▼'}</span>`:''}</th>`).join('');
@@ -537,7 +601,7 @@ function desenhar(){if(!D)return;const q=$('q').value.toLowerCase();
   const cel={nome:`<td class="n" data-r="Conta">${esc(c.nome)}${esg}${c.ativa?`<small>${c.id&&D.oi?'prioridade '+c.pri+(D.oi&&(idade==null||idade>20)?' · ':''):''}${D.oi&&(idade==null||idade>20)?`<span class="velho">${lida}</span>`:''}</small>`:'<small>desligada</small>'}${c.err&&(c.st!=='active'||!c.ativa)&&!(c.grupo===1&&/429|rate limit|exceed/i.test(c.err))?`<small class="err" title="${esc(c.err)}">${/429|rate limit|exceed/i.test(c.err)?'limite atingido':esc(c.err.slice(0,70))}</small>`:''}${ac?`<div class="acs">${ac}</div>`:''}</td>`,
    modelo:`<td data-r="Modelo"><b>${esc(c.modelo)}</b></td>`,
    ps:`<td data-r="Semana">${barra(c.ps,c.rs)}</td>`,p5:`<td data-r="Janela 5 h">${barra(c.p5,c.r5)}</td>`,hist:`<td data-r="3 dias">${spark(c.hist)}</td>`,
-   quem:`<td data-r="Quem usa"><div><span class="tag ${qm[0]}">${esc(qm[1])}</span>${c.alheio?`<small>${c.alheio} pontos a mais que o nosso uso (3 h)</small>`:''}</div></td>`,
+   quem:`<td data-r="Quem usa"><div class="qu" data-id="${c.id||''}" data-n="${esc(c.nome)}" title="clique ou passe o mouse: histórico por janela de 5 h"><span class="tag ${qm[0]}">${esc(qm[1])}</span>${c.alheio?`<small class="err">+${c.alheio} pontos a mais que o nosso uso</small>`:'<small>nada a mais</small>'}${c.id?'<small class="ver">ver janelas ▾</small>':''}</div></td>`,
    taxa:`<td data-r="Deu certo">${tx(c)}</td>`,falhas:`<td data-r="Falhas">${c.falhas?`<b class="err">${c.falhas}</b>${c.voltou?` <small>voltou ${br(c.voltou)}</small>`:(c.tot?'<small class="err">não voltou ainda</small>':'')}`:'<small>0</small>'}</td>`,info:`<td data-r="Situação"><small>${esc(c.info||'—')}</small></td>`,
    uso3h:`<td data-r="Pedidos 3 h / 24 h"><span><b>${c.uso3h}</b> / ${c.uso24h}</span></td>`,
    libera:`<td data-r="Uso · volta · renova"><div class="tp">${D.oi?(c.oi?`<small class="${c.oi.ultimo==='viva'?'':'err'}">oi ${esc(c.oi.ultimo)} · ${ha(c.oi.ultimo_em+'Z')}</small>`:'<small>sem oi</small>'):''}${c.grupo===1&&c.libera?`<b class="err">volta ${br(c.libera)} · em ${falta(c.libera)}</b>`:''}${c.renova?`<small class="${(new Date(c.renova)-ag)<3*864e5?'err':''}">renova ${new Date(c.renova).toLocaleDateString('pt-BR')} · em ${falta(c.renova)}</small>`:''}</div></td>`};
@@ -550,11 +614,26 @@ function desenhar(){if(!D)return;const q=$('q').value.toLowerCase();
   <div class="card"><b>${t(2)}</b><span>sem leitura / sem uso</span></div>`+(esc_('ps')?'':`<div class="card"><b>${media}%</b><span>média que resta (ativas)</span></div>`)+
   `<div class="card"><b>${prox?falta(prox.libera):'—'}</b><span>próxima a liberar${prox?': '+esc(prox.nome.split('@')[0]):''}</span></div>`+
   (esc_('quem')?'':`<div class="card alh"><b>${alh}</b><span>usadas por outra pessoa agora</span></div>`)+
-  (esc_('uso3h')?`<div class="card"><b>${D.contas.length}</b><span>contas</span></div>`:`<div class="card"><b>${D.contas.reduce((a,c)=>a+c.uso3h,0)}</b><span>nossos pedidos nas últimas 3 h</span></div>`)+
-  (esc_('falhas')?'':(()=>{const tf=D.contas.reduce((a,c)=>a+(c.falhas||0),0),tv=D.contas.filter(c=>c.falhas&&c.voltou).length,tn=D.contas.filter(c=>c.falhas&&!c.voltou).length;return `<div class="card${tf?' zero':''}"><b>${tf}</b><span>falhas (24 h)${tv?` · ${tv} voltaram`:''}${tn?` · <b class="err">${tn} sem voltar</b>`:''}</span></div>`})());
+  `<div class="card"><b>${D.contas.length}</b><span>contas</span></div>`;
+
  $('sub').textContent=`Atualizado ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`+(D.nota?' · '+D.nota:(D.vigia_em?` · o OmniRoute mede cada conta a cada ~5 min · vigia de uso alheio: ${br(D.vigia_em)}`:' · o OmniRoute mede cada conta a cada ~5 min'));
  document.querySelector('.foot').style.display=esc_('quem')?'none':'';
  $('alh').innerHTML=(D.alheio_hist||[]).slice().reverse().slice(0,12).map(h=>`<li>${br(h.em)} — <b>${esc(h.nome)}</b>: ${h.alheio} pontos a mais (nossos pedidos: ${h.nosso})</li>`).join('')||'<li>nenhum uso alheio detectado ainda</li>'}
+const JAN={};let popId=null;
+async function janelas(el){const id=el.dataset.id;if(!id)return;popId=id;const p=$('pop');
+ p.innerHTML='<small>carregando…</small>';p.style.display='block';posPop(el);
+ try{JAN[id]=JAN[id]||await(await fetch(`janelas?k=${K}&id=${id}`)).json()}catch(e){p.innerHTML='<small class="err">falhou</small>';return}
+ if(popId!==id)return;const J=JAN[id];const hh=s=>new Date(s).toLocaleString('pt-BR',{weekday:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+ const COR={'só nós':'t-nos','nós e outros':'t-alh','só outros':'t-alh','ninguém':'t-nin','sem leitura':'t-sem'};
+ p.innerHTML=`<h4>${esc(el.dataset.n)}</h4><small>quem usou em cada janela de 5 h (últimos 3 dias)</small><table><tbody>`+
+ J.janelas.map(w=>`<tr class="${w.atual?'at':''}"><td>${w.atual?'agora · ':''}${hh(w.ini)}–${new Date(w.fim).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</td>
+ <td><span class="tag ${COR[w.quem]||'t-sem'}">${w.quem}</span></td></tr>`).join('')+'</tbody></table>';posPop(el)}
+function posPop(el){const p=$('pop'),r=el.getBoundingClientRect(),w=p.offsetWidth,h=p.offsetHeight;
+ let x=Math.min(r.left,innerWidth-w-8),y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.left=Math.max(8,x)+'px';p.style.top=y+'px'}
+document.addEventListener('mouseover',e=>{const q=e.target.closest('.qu');if(q&&matchMedia('(hover:hover)').matches&&!$('pop').dataset.fixo)janelas(q)});
+document.addEventListener('mouseout',e=>{const q=e.target.closest('.qu');if(q&&!q.contains(e.relatedTarget)&&!$('pop').contains(e.relatedTarget)&&!$('pop').dataset.fixo)$('pop').style.display='none'});
+document.addEventListener('click',e=>{const q=e.target.closest('.qu'),p=$('pop');if(q){p.dataset.fixo='1';janelas(q);return}
+ if(!p.contains(e.target)){p.style.display='none';delete p.dataset.fixo}});
 async function carregar(){try{const r=await fetch(`dados?k=${K}&p=${P}`);D=await r.json();$('tit').innerHTML='Créditos das contas — <em>'+esc(D.titulo)+'</em>';
  COLS=TODAS.filter(c=>!D.esc.includes(c.k)&&(c.k!=='modelo'||new Set(D.contas.map(x=>x.modelo)).size>1)).map(c=>({...c,t:(D.rot||{})[c.k]||c.t}));
  $('abas').innerHTML=D.provs.map(([p,t])=>`<a class="aba${p===D.prov?' on':''}" href="?k=${K}&p=${p}">${esc(t)}</a>`).join('');desenhar()}catch(e){$('sub').textContent='sem conexão com o painel: '+e}}
@@ -800,6 +879,9 @@ class H(BaseHTTPRequestHandler):
                 return self.enviar(200, m, 'application/json; charset=utf-8')
             if u.path.endswith('/dados'):
                 return self.enviar(200, json.dumps(dados_json(p), ensure_ascii=False, default=str),
+                                   'application/json; charset=utf-8')
+            if u.path.endswith('/janelas'):  # 23/11: histórico de uso por janela de 5 h de 1 conta
+                return self.enviar(200, json.dumps(janelas_conta(q.get('id', [''])[0]), ensure_ascii=False),
                                    'application/json; charset=utf-8')
             if u.path.endswith('/externo'):  # 11/11: tabela antiga do AI Studio (detalhe por modelo)
                 return self.enviar(200, pagina_gemini())

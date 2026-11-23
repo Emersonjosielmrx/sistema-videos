@@ -274,7 +274,7 @@ GAP_MICROCORTE = 0.07       # s de silêncio que sobra em cada pausa (env NARRAC
 LIMIAR_SILENCIO_DB = -45.0  # o mesmo do corte de cauda: a fala chega nivelada a -20 LUFS
 
 
-def microcortes(wav, gap_s=None):
+def microcortes(wav, gap_s=None, limiar_db=None):
     """No lugar. Devolve (duração antes, depois) ou None (nada a cortar ou falhou: wav e words.json como vieram)."""
     wav = Path(wav)
     try:
@@ -296,7 +296,9 @@ def microcortes(wav, gap_s=None):
         nq = len(y) // quadro
         mono = y[:nq * quadro].mean(axis=1) / 32768
         db = 10 * np.log10((mono.reshape(nq, quadro) ** 2).mean(axis=1) + 1e-12)
-        som = db > LIMIAR_SILENCIO_DB
+        # 22/11 dona (S2-Pro: 'som de suspiro cortado no meio entre as frases'): limiar_db mais alto trata a
+        # respiração fraca como silêncio — sai inteira em vez de ficar picada
+        som = db > (LIMIAR_SILENCIO_DB if limiar_db is None else limiar_db)
         bordas = np.flatnonzero(np.diff(np.concatenate([[0], som.astype(np.int8), [0]])))
         trechos = [(a * quadro, min(len(y), b * quadro)) for a, b in zip(bordas[::2], bordas[1::2]) if b - a >= 2]
         if not trechos:

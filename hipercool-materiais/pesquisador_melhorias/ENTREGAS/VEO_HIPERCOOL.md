@@ -592,3 +592,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 07:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_camera_3d_painel__sonnet_0741.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-22 08:06 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_avatar_3d_comercial__sonnet_0801.md`
+- [INÉDITO] github.com/SanHsien/voxavatar — ★2, push 2026-11-22, MIT — Windows-only local-first VRM desktop companion with voice-output lip sync, animations, and MCP controls.｜Windows 本機 VRM 桌面角色陪伴。
+
+## [x] AVALIADO 22/11 (automático: nada aproveitável) — 2026-11-22 10:08 — Encerrar tema avatares 3D VRM/GLB (`area_avatares_stop`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-22\respostas\area_avatares_stop__sonnet_0957.md`
+- (todos os itens desta pesquisa foram reprovados)

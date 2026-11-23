@@ -49,9 +49,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T07:08:03",
     "ultimo_sinal": {
-     "em": "2026-11-22T01:03:51",
-     "tipo": "saude_morto",
-     "maquina": "x200ma"
+     "em": "2026-11-23T06:52:48",
+     "tipo": "sessao_expirada",
+     "maquina": "pc1"
     },
     "historico": [
      {
@@ -919,9 +919,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T06:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-21T18:17:28",
+     "em": "2026-11-22T07:20:47",
      "tipo": "saude_morto",
-     "maquina": "sti"
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -1054,7 +1054,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-21T11:18:51",
+     "em": "2026-11-23T07:42:02",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1299,9 +1299,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-21T16:29:52",
-     "tipo": "saude_morto",
-     "maquina": "pc2"
+     "em": "2026-11-22T16:53:37",
+     "tipo": "sessao_expirada",
+     "maquina": "pc1"
     },
     "historico": [
      {
@@ -1544,7 +1544,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-15T21:19:13",
+     "em": "2026-11-23T14:53:09",
      "tipo": "saude_morto",
      "maquina": "desktop"
     },
@@ -1879,9 +1879,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T11:08:03",
     "ultimo_sinal": {
-     "em": "2026-11-18T03:15:47",
-     "tipo": "saude_morto",
-     "maquina": "pc1"
+     "em": "2026-11-23T14:27:34",
+     "tipo": "sessao_expirada",
+     "maquina": "?"
     },
     "historico": [
      {
@@ -2149,7 +2149,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T18:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-22T03:01:16",
+     "em": "2026-11-23T15:30:31",
      "tipo": "saude_morto",
      "maquina": "x200ma"
     },
@@ -2529,7 +2529,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-21T18:17:00",
+     "em": "2026-11-23T14:50:29",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -2818,11 +2818,11 @@
    },
    "emersonjosiel02": {
     "base": 90,
-    "nivel": 2,
-    "teto": 120,
+    "nivel": 3,
+    "teto": 135,
     "estado": "subindo",
     "desde": "2026-11-19T17:08:00",
-    "ultimo_degrau": "2026-11-21T18:09:50",
+    "ultimo_degrau": "2026-11-22T19:10:59",
     "ultimo_sinal": null,
     "historico": [
      {
@@ -2834,6 +2834,11 @@
       "em": "2026-11-21T18:09:50",
       "o_que": "24 h sem sinal: sobe 1 degrau (105 → 120)",
       "teto": 120
+     },
+     {
+      "em": "2026-11-22T19:10:59",
+      "o_que": "24 h sem sinal: sobe 1 degrau (120 → 135)",
+      "teto": 135
      }
     ]
    },
@@ -2841,7 +2846,7 @@
     "base": 90,
     "nivel": 1,
     "teto": 105,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-11-20T08:07:58",
     "ultimo_degrau": "2026-11-21T12:09:10",
     "ultimo_sinal": {
@@ -2869,17 +2874,22 @@
    },
    "inovaremanhwaverse5": {
     "base": 90,
-    "nivel": 1,
-    "teto": 105,
+    "nivel": 2,
+    "teto": 120,
     "estado": "subindo",
     "desde": "2026-11-20T13:08:06",
-    "ultimo_degrau": "2026-11-21T16:08:12",
+    "ultimo_degrau": "2026-11-22T16:08:21",
     "ultimo_sinal": null,
     "historico": [
      {
       "em": "2026-11-21T16:08:12",
       "o_que": "24 h sem sinal: sobe 1 degrau (90 → 105)",
       "teto": 105
+     },
+     {
+      "em": "2026-11-22T16:08:21",
+      "o_que": "24 h sem sinal: sobe 1 degrau (105 → 120)",
+      "teto": 120
      }
     ]
    }
@@ -2893,7 +2903,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T00:08:22",
     "ultimo_sinal": {
-     "em": "2026-11-21T07:59:57",
+     "em": "2026-11-23T07:59:13",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3038,7 +3048,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T00:08:22",
     "ultimo_sinal": {
-     "em": "2026-11-20T07:56:17",
+     "em": "2026-11-23T07:44:27",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3083,7 +3093,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-08T02:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-21T09:13:24",
+     "em": "2026-11-21T07:38:06",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3133,7 +3143,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-08T02:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-21T09:31:38",
+     "em": "2026-11-21T07:40:52",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3448,7 +3458,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:02:20",
+     "em": "2026-11-23T09:25:37",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3493,7 +3503,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:05:01",
+     "em": "2026-11-23T09:32:04",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3528,7 +3538,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:05:44",
+     "em": "2026-11-21T07:56:09",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3563,7 +3573,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-20T11:12:47",
+     "em": "2026-11-21T08:00:09",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3628,7 +3638,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:38:56",
+     "em": "2026-11-21T08:04:30",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3648,7 +3658,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:42:56",
+     "em": "2026-11-21T08:04:51",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3825,7 +3835,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:52:33",
+     "em": "2026-11-21T08:08:20",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3860,7 +3870,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T11:08:53",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:53:02",
+     "em": "2026-11-22T08:08:38",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3895,7 +3905,7 @@
     "desde": "2026-10-30T16:08:04",
     "ultimo_degrau": "2026-11-04T06:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-21T10:53:35",
+     "em": "2026-11-22T08:09:10",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -4144,7 +4154,7 @@
     "base": 5,
     "nivel": 3,
     "teto": 8,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-11-02T16:08:00",
     "ultimo_degrau": "2026-11-07T06:07:57",
     "ultimo_sinal": {
@@ -4171,6 +4181,11 @@
      {
       "em": "2026-11-21T16:08:12",
       "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
+      "teto": 8
+     },
+     {
+      "em": "2026-11-22T10:10:08",
+      "o_que": "janela limpa: volta a subir",
       "teto": 8
      }
     ]
@@ -4269,9 +4284,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-22T06:12:51",
-    "tipo": "sessao_expirada",
-    "conta": "inovaremanhwaverse"
+    "em": "2026-11-23T15:30:31",
+    "tipo": "saude_morto",
+    "conta": "seebotsia"
    },
    "historico": [
     {

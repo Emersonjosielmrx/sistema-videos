@@ -182,3 +182,5 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-21 18:23 | hist_3d-fin-inflacao__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-inflacao__codigobilhao3d.png` | backup_drive.py |
 | 2026-11-21 23:07 | hist_3d-fin-pix-por-dentro__codigobilhao3d.mp4 | 23.7 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-pix-por-dentro__codigobilhao3d.mp4` | backup_drive.py |
 | 2026-11-21 23:07 | hist_3d-fin-pix-por-dentro__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-pix-por-dentro__codigobilhao3d.png` | backup_drive.py |
+| 2026-11-22 16:32 | hist_3d-fin-bilionario-emprestimo__codigobilhao3d.mp4 | 20.1 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-bilionario-emprestimo__codigobilhao3d.mp4` | backup_drive.py |
+| 2026-11-22 16:32 | hist_3d-fin-bilionario-emprestimo__codigobilhao3d.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/hist_3d-fin-bilionario-emprestimo__codigobilhao3d.png` | backup_drive.py |

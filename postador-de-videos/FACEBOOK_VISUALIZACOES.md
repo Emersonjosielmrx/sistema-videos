@@ -2,14 +2,16 @@
 
 | Página | Seguidores | Reels | Views (soma) | Ganho desde a anterior | Medido |
 |---|---|---|---|---|---|
-| Dorama Noturno | 2 | 4 | 1757 | +17 | 2026-11-21 20:26 |
-| Filme Noturno | 0 | 3 | 692 | +0 | 2026-11-21 20:26 |
-| Anime Noturno | 0 | 3 | 663 | +1 | 2026-11-21 20:24 |
-| Curiosidades Noturnas | 5 | 4 | 651 | +7 | 2026-11-21 20:26 |
-| Bicho Noturno | 0 | 1 | 385 | +0 | 2026-11-21 20:27 |
-| Assist-IA Investimentos | 0 | 4 | 235 | +81 | 2026-11-21 15:29 |
-| Invento React | 0 | 1 | 220 | +3 | 2026-11-21 20:27 |
-| Mistérios Noturnos | 4 | 1 | 11 | +0 | 2026-11-21 20:27 |
+| Dorama Noturno | 3 | 5 | 2222 | +0 | 2026-11-23 15:59 |
+| Curiosidades Noturnas | 6 | 7 | 1422 | +92 | 2026-11-23 15:59 |
+| Anime Noturno | 0 | 6 | 1372 | +0 | 2026-11-23 15:59 |
+| Esporte Noturno | 1 | 3 | 978 | +0 | 2026-11-23 15:59 |
+| Filme Noturno | 0 | 4 | 914 | +222 | 2026-11-23 15:59 |
+| Assist-IA Investimentos | 0 | 7 | 754 | +59 | 2026-11-23 15:59 |
+| Cartucho React | 0 | 2 | 722 | +0 | 2026-11-23 15:59 |
+| Mistérios Noturnos | 4 | 4 | 532 | +23 | 2026-11-23 15:59 |
+| Bicho Noturno | 0 | 1 | 385 | +0 | 2026-11-23 15:59 |
+| Invento React | 0 | 1 | 221 | +0 | 2026-11-23 15:59 |
+| Comédia Noturna | 0 | 1 | 10 | +0 | 2026-11-23 15:59 |
 | Cena React | 0 | 1 | 6 | +1 | 2026-11-20 12:24 |
-| Esporte Noturno | 0 | 0 | 0 | +0 | 2026-11-21 20:26 |
-| Comédia Noturna | 0 | 0 | 0 | +0 | 2026-11-21 20:27 |
+| Fio da Meada | 0 | 2 | 3 | +0 | 2026-11-23 15:59 |

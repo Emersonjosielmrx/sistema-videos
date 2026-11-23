@@ -59,6 +59,8 @@ _ROMANOS = {"II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "I
 # som certo, SÓ no texto falado (a legenda continua com o roteiro). Acrescente aqui o que aparecer.
 _PRONUNCIA = [
     (re.compile(r"\b([Cc])oco(s?)\b"), r"\1ôco\2"),          # coco (fruta), nunca "cocô"
+    # 22/11 dona (vídeo misto): "debaixo do braço" saiu "brasonom" no S2-Pro — "rasso" força o som "bra-sso"
+    (re.compile(r"\b([Bb])ra[çc]o(s?)\b"), r"\1rasso\2"),
 ]
 
 
@@ -872,11 +874,25 @@ def _tem_respeito_piada_base(t, i=None):
     if os.environ.get("FISH_DUPLO_SENTIDO", "1") == "0":
         return False
     marcado = bool(re.search(r"RES+[\s.\-…]*[Pp]eito", t or ""))  # o roteiro marcou a piada (RES-peito)
-    if marcado or (bool(_CTX_CORPO.search(t or "")) and bool(_RESPEITO.search(t or ""))):
+    # 23/11 dona: o roteiro pôs "Com todo RESSS-peito" num TAPA — só vale com beleza/corpo/aparência na frase
+    _sem_resp = re.sub(r"(?i)res+[\s.\-…]*peito", " ", t or "")  # o "peito" do próprio RES-peito não conta
+    if marcado and not (_CTX_CORPO.search(_sem_resp) or re.search(
+            r"(?i)\b(bonit|lind|gat[ao]|charm|sexy|vestid|decote|curva|corpo|beleza|maravilh|deus[ao]|musa|"
+            r"rainha|figura|ampulheta|elegante|deslumbr)", _sem_resp)):
+        marcado = False
+    # 23/11: o gatilho visual escolheu esta frase (1ª aparição de mulher bonita) — legenda fica "respeito" normal
+    marcado = marcado or (i is not None and str(i) in os.environ.get("RESPEITO_PIADA", "").split(",")
+                          and bool(re.search(r"(?i)\bcom todo respeito\b", t or "")))
+    if marcado or (bool(_CTX_CORPO.search(t or ""))
+                   and bool(re.search(r"(?i)\bcom (todo|o maior|muito) respeito\b", t or ""))):
         return True
     # 20/11: a IMAGEM daquela cena foi marcada sensual (gatilho_visual -> GATILHO_SENSUAL) e a frase tem "respeito"
+    # 22/11 dona: "o respeito com S alongado foi usado fora do contexto — é trocadilho pros SEIOS, não respeito de
+    # verdade". Pela imagem só vale com "com todo/o maior respeito" (a forma da piada), nunca "respeita"/"respeitar".
     sens = {x for x in os.environ.get("GATILHO_SENSUAL", "").split(",") if x}
-    return i is not None and str(i) in sens and bool(_RESPEITO.search(t or ""))
+    # 23/11 (3ª): a cena sensual agora chega MARCADA (RES-peito, gatilho_visual) — sem marcador não estica
+    return (False and i is not None and str(i) in sens and bool(_CTX_CORPO.search(t or ""))
+            and bool(re.search(r"(?i)\bcom (todo|o maior|muito) respeito\b", t or "")))
 
 
 def _esticar_s_respeito(wav, alvo_s=0.45, texto=None, enfase=None):
@@ -1218,6 +1234,75 @@ _S2_EMO = [(re.compile(r"(?i)(kkk|haha|rsrs|brincadeira|mentira|zoeira|piada|com
            (re.compile(r"(?i)(de repente|socorro|cuidado|corre|sangue|monstro|assustad|grit)"), "[shocked]")]
 
 
+
+_UN = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze",
+       "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"]
+_DZ = ["", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"]
+_CT = ["", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos",
+       "novecentos"]
+
+
+def _num_pt(n):
+    """22/11 v13 (dona: o modelo não sabe contar): número inteiro por extenso em português (até 999 999)."""
+    if n < 20:
+        return _UN[n]
+    if n < 100:
+        d, u = divmod(n, 10)
+        return _DZ[d] + (" e " + _UN[u] if u else "")
+    if n == 100:
+        return "cem"
+    if n < 1000:
+        c, r = divmod(n, 100)
+        return _CT[c] + (" e " + _num_pt(r) if r else "")
+    m, r = divmod(n, 1000)
+    pre = "mil" if m == 1 else _num_pt(m) + " mil"
+    return pre + ((" e " if (r < 100 or r % 100 == 0) else " ") + _num_pt(r) if r else "")
+
+
+def _numeros_por_extenso(t):
+    return re.sub(r"(?<![\w.,])\d{1,6}(?![\w.,]\d)", lambda m: _num_pt(int(m.group(0))), t)
+
+
+def _s2_tags_v13(texto, est, i):
+    """22/11 v13: tags do S2-Pro DENTRO da frase, onde encaixam. Risada com intervalo mínimo (não é o coringa),
+    reação no máximo de 2 em 2 frases, e tom animado nas frases normais (o modelo soava triste/obrigado)."""
+    t = _numeros_por_extenso(texto)
+    pre = ""
+    gap_riso = i - est.get("riso", -99) >= 3
+    gap_rea = i - est.get("rea", -99) >= 2
+    if re.search(r"(?i)\bhein\b", t) and gap_riso and not re.search(r"(?i)hein\s*\?!?\s*(\.{2,}|…)?\s*$", t):
+        t = re.sub(r"(?i)\b(hein)([.!?]?)", r"[emphasis] \1\2 [chuckle]", t, count=1)
+        est["riso"] = i
+    if re.search(r"(?i)com todo respeito", t):
+        t = re.sub(r"(?i)(com todo respeito)", r"[laughing tone] \1 [short pause]", t, count=1)
+        est["riso"] = i
+    if re.match(r"(?i)\s*(brincadeira|mentira|zoeira|t[oô] zoando|t[oô] brincando)", t):
+        # 23/11 dona: a VIRADA da piada é contada rindo, não lida — sem trava de intervalo (é o momento dela)
+        pre = "[laughing] [excited tone] " if os.environ.get("PIADA_CONTADA", "1") != "0" else "[laughing] "
+        est["riso"] = i
+    elif re.search(r"(?i)hein\s*\?!?\s*(\.{2,}|…)?\s*$", t) and os.environ.get("PIADA_CONTADA", "1") != "0":
+        # a provocação antes da virada: ênfase no fim e uma pausa curta (o "tempo" da piada)
+        t = re.sub(r"(?i)(hein\s*\?!?)", r"[emphasis] \1 [short pause]", t, count=1)
+    if re.search(r"(?i)\bcoitad", t) and gap_rea and not pre:
+        pre = "[sigh] "
+        est["rea"] = i
+    if re.search(r"(?i)(isso,? \w+,? isso|\bgol\b|acert\w+ em cheio)", t):
+        pre = "[shouting] "
+    elif re.search(r"(?i)(parte pra cima|de repente|do nada|treme|avan[cç]a)", t) and gap_rea and not pre:
+        pre = "[excited] " if os.environ.get("S2PRO_INHALE") != "1" else "[inhale] "  # 22/11 dona: som de suspiro cortado entre frases — sem [inhale]
+        est["rea"] = i
+    if re.search(r"(?i)n[aã]o, n[aã]o", t):
+        pre = "[sad] "
+    if re.search(r"(?i)(sussurr|segredo|ningu[eé]m (pode|sabe))", t):
+        pre = "[whisper] "
+    if not pre and not re.search(r"\[", t):
+        est["n"] = est.get("n", 0) + 1
+        if est["n"] % 2 == 0:
+            pre = "[excited tone] "
+    return (pre + t).strip()
+
+
+
 def _s2pro_modo():
     if os.environ.get("S2PRO") == "0" or _OUTRA:
         return None, "2"
@@ -1225,8 +1310,15 @@ def _s2pro_modo():
         ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
     except ValueError:
         ovr = {}
-    m = str(os.environ.get("S2PRO_MODO") or ovr.get("s2pro") or "").strip().lower()
-    v = str(os.environ.get("S2PRO_VERSAO") or ovr.get("s2pro_versao") or "2").strip()
+    # 23/11 dona: padrão = misto XTTS 8 + S2-Pro 13 (config/motor_voz.json); o S2-Pro só onde tem placa (Kaggle)
+    try:
+        cfg = json.loads((Path(__file__).resolve().parent.parent / "config" / "motor_voz.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        cfg = {}
+    m = str(os.environ.get("S2PRO_MODO") or ovr.get("s2pro") or cfg.get("s2pro") or "").strip().lower()
+    v = str(os.environ.get("S2PRO_VERSAO") or ovr.get("s2pro_versao") or cfg.get("s2pro_versao") or "13").strip()
+    if m and not os.environ.get("S2PRO_MODO") and not ovr.get("s2pro") and (os.name == "nt" or not Path("/kaggle").exists()):
+        m = ""  # PC local sem placa: S2-Pro leva ~190 s/frase — fica só o XTTS 8
     return (m if m in ("misto", "pro") else None), v
 
 
@@ -1245,7 +1337,7 @@ def _narrar_s2pro(lines, audio_dir, so=None):
         ad = Path(audio_dir)
         dur_ref = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
                                         str(ref)], capture_output=True, text=True).stdout or 0) or 15.0
-        seg = 30 if versao in ("6", "10") else 15
+        seg = 30 if versao in ("6", "10", "12", "13") else 15
         r_ = ad / f"_s2pro_ref{seg}.wav"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(ref), "-t", str(seg), "-ac", "1", "-ar", "24000",
                         str(r_)], capture_output=True)
@@ -1253,7 +1345,10 @@ def _narrar_s2pro(lines, audio_dir, so=None):
         reftxt = " ".join(palavras[:max(4, int(len(palavras) * min(1.0, seg / dur_ref)))])
         cps_ref = len(" ".join(palavras)) / max(dur_ref, 1.0)
         itens, n_emo = [], 0
-        teto = max(1, int(len(lines) * 0.25)) if modo == "misto" else len(lines)
+        _EST13 = {}
+        # 22/11 dona ("nesses vídeos temos que usar bastante risada, piada e as coisas novas que só o S2-Pro faz"):
+        # na v13 o misto manda pro S2-Pro também as frases com reação/risada/intensidade das tags novas, teto 40%
+        teto = max(1, int(len(lines) * (0.40 if versao == "13" else 0.25))) if modo == "misto" else len(lines)
         for i, line in enumerate(lines):
             if so is not None and i not in so:
                 continue
@@ -1264,16 +1359,18 @@ def _narrar_s2pro(lines, audio_dir, so=None):
             if not texto.strip():
                 continue
             tag = next((t_ for rx, t_ in _S2_EMO if rx.search(texto)), "")
+            if modo == "misto" and not tag and versao == "13" and "[" in _s2_tags_v13(texto, {}, 999):
+                tag = "[excited]"  # 22/11: casou só com as tags novas (reação/risada/intensidade) — vai pro S2-Pro
             if modo == "misto" and not tag:
                 continue
             if modo == "misto" and n_emo >= teto:
                 continue
-            if not tag and versao in ("4", "5", "6"):
+            if not tag and versao in ("4", "5", "6", "12"):
                 tag = "[excited]" if i % 3 == 0 else "[confident]"
             n_emo += 1
             v1 = versao == "1"
             ref_i, txt_i = str(r_), reftxt
-            if versao in ("7", "8", "9", "10") and tag:
+            if versao in ("7", "8", "9", "10", "11", "12", "13") and tag:
                 # 22/11 v7+: referência do TIPO da frase (trecho real do narrador rindo/fazendo piada/tenso...)
                 tipo = {"[laughing]": ("_risada", "_piada"), "[excited]": ("_agudo", "_metralhadora"),
                         "[sad]": ("_tensao",), "[shocked]": ("_tensao", "_irritado")}.get(tag, ())
@@ -1290,15 +1387,16 @@ def _narrar_s2pro(lines, audio_dir, so=None):
                         break
             # 22/11 v8+: pergunta retórica = 2 pedaços gerados separados (afirmação! / E vocês...?) com pausa
             partes = None
-            if versao in ("8", "9", "10"):
+            if versao in ("8", "9", "10", "11", "12", "13"):
                 mq = re.search(r"^(.*?[!.])\s+((?:E |Mas )?(?:vocês|você|cês|tu)\b[^?]*\?)\s*$", texto)
                 if mq:
                     partes = [mq.group(1).strip(), mq.group(2).strip()]
             itens.append({"texto": texto, "saida": str(ad / f"audio_{i}.s2pro_bruto.wav"), "i": i, "ref": ref_i,
                           "reftxt": txt_i, "tag": "" if v1 else tag, "partes": partes,
-                          "n": 1 if v1 else (2 if versao in ("2", "3", "7", "8") else 3), "seed": 42,
+                          "n": 1 if v1 else (2 if versao in ("2", "3", "7", "8", "11") else 3), "seed": 42,
                           "cps_alvo": 17 if versao in ("1", "2") else round(cps_ref, 1),
-                          "whisper": versao in ("5", "6", "9", "10"), "versao": versao})
+                          "whisper": versao in ("5", "6", "9", "10"), "versao": versao,
+                          "texto_tags": _s2_tags_v13(texto, _EST13, i) if versao == "13" else ""})
         if not itens:
             return
         lista = ad / "_s2pro.json"
@@ -1328,7 +1426,13 @@ def _narrar_s2pro(lines, audio_dir, so=None):
             feitos.append(it["i"])
             try:
                 narracao_curva.pos_processar(out, 0.0)
-                narracao_curva.microcortes(out)
+                # 22/11 v11 (dona: "a S2-Pro não tem os microcortes como o XTTS"): = v8 com corte mais agressivo
+                # (pausa que sobra 0,03 s em vez de 0,07) e 2 passadas
+                if versao in ("11", "12", "13"):
+                    narracao_curva.microcortes(out, 0.04, limiar_db=float(os.environ.get("S2PRO_LIMIAR_DB", "-38")))
+                    narracao_curva.microcortes(out, 0.04, limiar_db=float(os.environ.get("S2PRO_LIMIAR_DB", "-38")))
+                else:
+                    narracao_curva.microcortes(out)
                 if _tem_respeito_piada(_seguro(lines[it["i"]]), it["i"]):
                     _esticar_s_respeito(out, texto=_seguro(lines[it["i"]]), enfase="tudo")
                 if it["i"] == len(lines) - 1:

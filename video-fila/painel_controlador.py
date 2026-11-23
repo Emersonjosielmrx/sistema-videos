@@ -1560,6 +1560,16 @@ def api_tarefa_rodar(corpo):
     return {"ok": True, "nome": nome}
 
 
+def api_fb_atualizar(corpo):
+    """23/11 dona: botão "Atualizar agora" da página facebook.html. Roda SÓ a tarefa PainelFacebookViews (mede por HTTP,
+    cada conta pela saída fixa dela, e regera painel_web/fb_views.json). Não usa _tarefas(): listar ~155 tarefas travava."""
+    import subprocess
+    subprocess.Popen(["schtasks", "/Run", "/TN", "PainelFacebookViews"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                     creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    _registrar("rodar tarefa", nome="PainelFacebookViews", motivo=corpo.get("motivo"))
+    return {"ok": True}
+
+
 # ─── bots do Telegram ────────────────────────────────────────────────────────
 def _bots():
     import urllib.request
@@ -3192,7 +3202,7 @@ def api_desktop_camera(corpo):
     return {"ok": True, "msg": f"desktop OCUPADO até {ate:%H:%M}", "ate": ate.isoformat(timespec="minutes")}
 
 
-ROTAS_POST = {"/api/desktop_camera": api_desktop_camera, "/api/controle": api_controle_mudar, "/api/abrir": api_abrir, "/api/tarefa_rodar": api_tarefa_rodar,
+ROTAS_POST = {"/api/fb_atualizar": api_fb_atualizar, "/api/desktop_camera": api_desktop_camera, "/api/controle": api_controle_mudar, "/api/abrir": api_abrir, "/api/tarefa_rodar": api_tarefa_rodar,
               "/api/modelos_central": api_modelos_central_mudar, "/api/bancada_rodar": api_bancada_rodar,
               "/api/er_prioridade": api_er_prioridade,
               "/api/aprendizado_marcar": api_aprendizado_marcar, "/api/ia_pedir": api_ia_pedir, "/api/ia_acao": api_ia_acao,

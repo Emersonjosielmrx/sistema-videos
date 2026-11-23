@@ -326,6 +326,33 @@ def _progresso(pid, titulo, local, log, parar):
             print(f"progresso falhou: {e}", flush=True)
 
 
+_PUXADOR = []
+
+
+def _puxador_de_codigo():
+    """22/11 dona ("trocar as peças do carro em movimento: o Kaggle vai pegando no Drive conforme precisa, sem
+    atrasar o vídeo"): thread em segundo plano que, a cada 3 min, copia só os .py/.json NOVOS de bin e config do Drive
+    pra pasta de produção. Cada etapa do longo que roda em processo próprio (S2-Pro, XTTS, RVC, legenda...) já abre
+    a versão nova. Um rclone por vez, nice, nunca para o vídeo. PUXADOR_CODIGO=0 desliga."""
+    if _PUXADOR or os.environ.get("PUXADOR_CODIGO", "1") == "0":
+        return
+    import threading
+
+    def loop():
+        while True:
+            time.sleep(180)
+            for parte in ("bin", "config"):
+                try:
+                    subprocess.run(["nice", "-n", "15", str(RC), "--config", str(CONF), "copy", "--update",
+                                    "--include", "*.py", "--include", "*.json",
+                                    f"manhwa-drive:colab_recap/raiz/D/recapd-ambientes/producao/{parte}",
+                                    str(PRODUCAO / parte)], capture_output=True, timeout=600)
+                except Exception:  # noqa: BLE001 — puxador nunca derruba o vídeo
+                    pass
+    _PUXADOR.append(threading.Thread(target=loop, daemon=True))
+    _PUXADOR[0].start()
+
+
 def fazer(pid, gpu=None):
     local = TRABALHO / pid
     shutil.rmtree(local, ignore_errors=True)
@@ -337,6 +364,7 @@ def fazer(pid, gpu=None):
             print(f"[{_agora()}] {pid}: original não baixou: {e}", flush=True)
     for parte in ("bin", "config", "secrets"):  # código novo do PC
         rc("copy", f"manhwa-drive:colab_recap/raiz/D/recapd-ambientes/producao/{parte}", str(PRODUCAO / parte))
+    _puxador_de_codigo()
     # 29/10: as gravações da mascote (e o texto de cada uma) crescem todo dia (tarefa MascoteProducao); antes só
     # vinham quando a GPU ligava e o longo saía sem a pausa com a voz dela
     try:

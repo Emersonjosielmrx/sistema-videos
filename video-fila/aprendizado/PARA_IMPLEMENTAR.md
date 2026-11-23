@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 22/11/2026 08:00. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 23/11/2026 15:41. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -14,11 +14,44 @@ com backup) ou descartar com motivo. Depois:
 Candidato = o dono não respondeu em 24 h e a nota era >= 7: é sugestão, não ordem. Cuidado com o que já existe
 na produção, com humor/visual que derruba monetização e com marca do parceiro (não copiar marca).
 
-## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (0)
+## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (5)
 
-(nenhum)
+### 1. [jeito_de_falar] Estrutura de guia rápido estilo 'checklist binário' (Entidade X -> Requisito A + Requisito B)
+- visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
+- como aplicar: Adotar o formato 'Qual [item] usar pra cada [situação]?' em roteiros tutoriais rápidos (ex: qual software/configuração/estratégia pra cada objetivo).
+- por que é novo: Nossos roteiros costumam focar em narrativa ou curiosidades soltas; essa fórmula de pareamento direto e prático (Qual X para cada Y: 'Pra X, vara A e isca B') gera alto salvamento/compartilhamento.
+- exemplos: https://www.youtube.com/watch?v=GTUW7cbj9rI seg 0.0 (trecho 3b2e209d.mp3)
+- ids: 3b2e209d
 
-## B. Candidatos (sem resposta em 24 h): 528 grupo(s), os 40 mais fortes
+### 2. [visual] Split-screen temático 50/50 com cena de entrevista na sauna em cima e foto/contexto do jogador embaixo
+- visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
+- como aplicar: Quando narrar bastidores de atletas ou criadores, dividir a tela exatamente ao meio: topo com a gravação do podcast/entrevista e base com imagem de arquivo em alta da notícia/lance
+- por que é novo: Nossos cortes utilizam layouts verticais cheios ou recortes de mascote/memes sobrepostos, sem essa divisão simétrica 50/50 separando o bate-papo informal da matéria/jogada em questão
+- exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 2.5 (trecho 159b89de.mp4)
+- ids: 159b89de
+
+### 3. [visual] Popup PiP centralizado/inferior com bordas bem arredondadas (squircle) e contorno branco grosso
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Criar template de moldura squircle com stroke branco de 6-8px para fazer fade/pop-in no centro-inferior da tela ao introduzir rostos citados pelo narrador sem cobrir todo o vídeo
+- por que é novo: Nosso acervo de hyperframes e memes não tem esse card flutuante arredondado com borda sólida branca para ilustrar personagens citados (como o técnico/dirigente)
+- exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 7.4 (trecho 188e2265.mp4)
+- ids: 188e2265
+
+### 4. [visual] Miniaturas flutuantes redondas com borda branca mostrando fotos dos jogadores/técnicos citados (ex: Nuno Espírito Santo, escalação em campo)
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Adicionar assets de fotos de jogadores/clubes dentro de um container circular com borda branca grossa e sombra projetada (drop shadow) flutuando dinamicamente na tela quando forem mencionados.
+- por que é novo: Uso de imagens recortadas em círculos com borda branca e sombra suave flutuando para ilustrar o contexto da história sem ocupar a tela inteira.
+- exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 2.5
+- ids: 4dd92ea1
+
+### 5. [visual] Uso de painel de controle industrial (botão de acionamento) em close-up para marcar o início de uma ação mecânica pesada.
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Inserir shots de close-up operando botões, alavancas ou telas touch em vídeos de processos industriais ou tecnologia antes de uma reviravolta ou corte dinâmico.
+- por que é novo: Mostra a interação física humana direta com o comando da máquina de forma imersiva e tátil, o que gera expectativa para a ação.
+- exemplos: https://www.youtube.com/watch?v=sVORL2G36OM seg 21.2 (trecho 16bdb1eb.mp4)
+- ids: 16bdb1eb
+
+## B. Candidatos (sem resposta em 24 h): 534 grupo(s), os 40 mais fortes
 
 ### 1. [visual] Gráfico de escala de pH com garrafa e indicador de nível (seta preta apontando para o 7).
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
@@ -223,81 +256,81 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=fyQTRywBafk seg 26.2 (trecho 184b416b.mp4)
 - ids: 184b416b
 
-### 30. [jeito_de_falar] Narração esportiva empolgada estilo Galvão Bueno aplicada a tema financeiro sério
+### 30. [outro] Revelação progressiva de um objeto escondido/anômalo dentro da natureza (pedra com entalhes dentro de uma árvore oca).
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Criar conteúdos focados em 'achados impossíveis' ou mistérios naturais com zoom progressivo para gerar curiosidade.
+- por que é novo: Ganha alto engajamento pelo formato de 'enigma arqueológico ou mistério na floresta' que força o usuário a assistir até o fim.
+- exemplos: https://www.youtube.com/watch?v=S1B9qKMdNy0 seg 1.6 (trecho c14a696b.mp4)
+- ids: c14a696b
+
+### 31. [visual] Corte dinâmico combinando filmagem real subaquática com animação em 3D dos peixes no mesmo habitat
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Utilizar cenas de stock subaquáticas intercaladas com closes de iscas e peixes para ilustrar comportamentos de pesca.
+- por que é novo: Mistura imagens reais de pescaria com renders subaquáticos detalhados dos personagens apresentados.
+- exemplos: https://www.youtube.com/watch?v=SDvVwZbXoPU seg 3.1 (trecho e1be19b4.mp4)
+- ids: e1be19b4
+
+### 32. [jeito_de_falar] Narração esportiva empolgada estilo Galvão Bueno aplicada a tema financeiro sério
 - visto em 1 vídeo(s) · nota máx. 8.5 · modelos: claude-sonnet
 - como aplicar: Roteirizar tópicos densos de finanças/negócios com locução e vocabulário de narração esportiva de clássico de futebol nos primeiros 30-40 segundos.
 - por que é novo: Usa metáforas de futebol ('Haja coração', 'avançando no campo', 'tabela rápida', 'pressão total na área', 'golaço tá armando') para explicar uma operação técnica de M&A entre FIIs, criando contraste cômico e retenção alta sem parecer aula chata.
 - exemplos: https://www.youtube.com/watch?v=GKjI-xCZJx8 seg 2.6 (trecho dbc46ca0.mp3)
 - ids: dbc46ca0
 
-### 31. [piada] Dica final anti-clímax que quebra a lógica do filme com conselho prático da vida real ('Arrume um emprego')
+### 33. [piada] Dica final anti-clímax que quebra a lógica do filme com conselho prático da vida real ('Arrume um emprego')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Em vídeos de 'como sobreviver / como derrotar vilão de filme', fechar com dica realista/moral cômica acompanhada de meme ou homem de terno para gerar humor por quebra de expectativa.
 - por que é novo: Estrutura de roteiro humorístico onde a última dica de sobrevivência em filme de assalto/invasão ignora o perigo imediato e ataca a causa raiz dos personagens serem ladrões.
 - exemplos: https://www.youtube.com/watch?v=uEibbO00qvg seg 28.0 (trecho 19f17dea.mp3)
 - ids: 19f17dea
 
-### 32. [jeito_de_falar] Hook contra-intuitivo de quebra de objeção emocional ('E antes de você sentir raiva ou inveja, vou te mostrar o que isso significa para você')
+### 34. [jeito_de_falar] Hook contra-intuitivo de quebra de objeção emocional ('E antes de você sentir raiva ou inveja, vou te mostrar o que isso significa para você')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Em roteiros polêmicos sobre bilionários, riqueza ou privilégio, estruturar os primeiros 3 segundos desarmando o julgamento moral do espectador para focar na utilidade prática para a vida dele.
 - por que é novo: Nossos scripts de intro focam em curiosidade direta ou choque; antecipar a emoção negativa do espectador (inveja/revolta) e redirecioná-la imediatamente para benefício próprio é uma técnica de retenção que ainda não aplicamos na copywriting.
 - exemplos: https://www.youtube.com/watch?v=JGGdTT7rxdE seg 0.0 (trecho 746b7a80.mp3)
 - ids: 746b7a80
 
-### 33. [visual] Uso de imagens de arquivo reais de eventos e palestras reais (como a Nasdaq/SpaceX) como b-roll de fundo
+### 35. [visual] Uso de imagens de arquivo reais de eventos e palestras reais (como a Nasdaq/SpaceX) como b-roll de fundo
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Integrar trechos curtos de vídeos públicos reais de anúncios ou eventos corporativos ao ilustrar notícias de grandes empresas.
 - por que é novo: Dá autoridade e aspecto jornalístico/documental ao vídeo em vez de usar apenas memes ou imagens genéricas de banco.
 - exemplos: https://www.youtube.com/watch?v=JGGdTT7rxdE seg 9.0 (trecho fa72b2fd.mp4)
 - ids: fa72b2fd
 
-### 34. [visual] Texto com contorno amarelo e fonte arredondada conversacional ('Jennie's skirt blew up...')
+### 36. [visual] Texto com contorno amarelo e fonte arredondada conversacional ('Jennie's skirt blew up...')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Aplicar legenda central com fonte grossa (ex: LuckiestGuy ou Montserrat Black), contorno preto forte e cor amarela.
 - por que é novo: Legenda centralizada chamativa típica de edits virais do TikTok com destaque em cor contrastante.
 - exemplos: https://www.youtube.com/watch?v=kpOcL4dgh80 seg 2.6 (trecho e8cd84ff.mp4)
 - ids: e8cd84ff
 
-### 35. [visual] Texto cursor/destaque humorístico com asteriscos ('*Her shy smile*', '*notice* 👀')
+### 37. [visual] Texto cursor/destaque humorístico com asteriscos ('*Her shy smile*', '*notice* 👀')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Inserir caixas de texto curtas no topo central com asteriscos para narrar o pensamento do editor ou o foco da cena.
 - por que é novo: Adiciona comentário irônico em formato de pensamento/narração interna no topo da tela.
 - exemplos: https://www.youtube.com/watch?v=kpOcL4dgh80 seg 7.7 (trecho 541173a5.mp4)
 - ids: 541173a5
 
-### 36. [visual] Uso de setas coloridas dinâmicas apontando para a boca/comida e círculos vermelhos enfatizando os exageros
+### 38. [visual] Uso de setas coloridas dinâmicas apontando para a boca/comida e círculos vermelhos enfatizando os exageros
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Inserir setas e círculos vermelhos/verdes pontuais para guiar o olhar do espectador para detalhes cômicos em vídeos de reação.
 - por que é novo: Destaca com setas e círculos minimalistas de edição rápida a forma engraçada como os ídolos comem.
 - exemplos: https://www.youtube.com/watch?v=kHe8oWuoU8o seg 1.6 (trecho 0c6db3cc.mp4)
 - ids: 0c6db3cc
 
-### 37. [visual] Infográfico minimalista estilo 2D vetorizado com escala de pH colorida (1 a 14) e ponteiro indicador ao lado do objeto
+### 39. [visual] Infográfico minimalista estilo 2D vetorizado com escala de pH colorida (1 a 14) e ponteiro indicador ao lado do objeto
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Criar templates de infográficos dinâmicos (ex: termômetro, escala de nível, régua comparativa) em fundo com textura sutil e ponteiro animado para momentos explicativos/didáticos dos shorts.
 - por que é novo: Temos recortes de memes e hyperframes com números grandes ou badges, mas não temos overlays infográficos verticais didáticos em estética vetor limpo/sketch para explicar métricas ou comparações técnicas de forma direta.
 - exemplos: https://www.youtube.com/watch?v=MaL4mZoNZ5A seg 27.0 (trecho c10fb495.mp4)
 - ids: c10fb495
 
-### 38. [piada] Conselhos absurdos/literais de sobrevivência contra clichês de terror ('dormir na rua porque não tem porta pra bater', 'tacar fogo na casa')
+### 40. [piada] Conselhos absurdos/literais de sobrevivência contra clichês de terror ('dormir na rua porque não tem porta pra bater', 'tacar fogo na casa')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Roteirizar shorts com guias de sobrevivência zombando de clichês de animes ou filmes famosos que cobrimos
 - por que é novo: Formato de lista satírica de 'como derrotar [filme/monstro] em 30 segundos' desconstruindo clichês clássicos do gênero com soluções burras/extremas
 - exemplos: https://www.youtube.com/watch?v=p4F3hWc-VUQ seg 4.9 (trecho 25b636e0.mp3)
 - ids: 25b636e0
 
-### 39. [visual] HUD/Tela diegética militar sci-fi com tipografia pixelada, radar e log de sistema simulando visor quebrado
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Criar templates de overlay no Remotion/FFmpeg com máscara de CRT/scanlines, radar circular verde e texto em fonte monospace vermelha/verde para cortes de contexto tecnológico, IA ou batalha futurista.
-- por que é novo: Nossos assets têm apenas dividers elétricos/fogo e hyperframes comuns; não temos overlays diegéticos de HUD sci-fi militar com texto de telemetria/radar dinâmico integrado ao storytelling.
-- exemplos: https://www.youtube.com/watch?v=BcOEA3k2C-E seg 14.0 (trecho 07d6b4df.mp4)
-- ids: 07d6b4df
-
-### 40. [jeito_de_falar] Gancho trágico-narrativo com paradoxo humano/máquina ('Este homem está morto há centenas de anos, mas este bombardeiro continua voando')
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Adotar no primeiro segundo do roteiro frases de antítese radical ('[Sujeito] já morreu há séculos, mas [máquina/entidade] ainda executa a mesma ordem') para retenção imediata em resumos de filmes/jogos.
-- por que é novo: Nossas intros em intros_voz focam em bordões e reações; falta essa fórmula de gancho com quebra conceitual dramática em histórias de ficção/resumos de animação.
-- exemplos: https://www.youtube.com/watch?v=BcOEA3k2C-E seg 0.0 (trecho b9dbc82f.mp3)
-- ids: b9dbc82f
-
-(+ 488 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+(+ 494 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

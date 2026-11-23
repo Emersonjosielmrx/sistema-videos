@@ -222,7 +222,53 @@ def e_som_transicao(path):
     return p.name in SFX_TRANSITION or p in SFX_TRANS_CRIATIVO or p.parent.name == "Transição"
 
 
-def _pick_transicao_criativa():
+def _banco_sons_transicao():
+    """23/11: D:\\sons-transicao (no Kaggle: <raiz>/D/sons-transicao) — {tema: [arquivos]}."""
+    for base in (Path(r"D:\sons-transicao"), Path(__file__).resolve().parents[3] / "sons-transicao",
+                 Path("/kaggle/working/raiz/D/sons-transicao")):
+        try:
+            if base.is_dir():
+                return {d.name: sorted(d.glob("*.mp3")) for d in base.iterdir() if d.is_dir()}
+        except OSError:
+            pass
+    return {}
+
+
+_BANCO_TRANS = None
+_TEXTO_ATUAL = {}
+_TEMA_PALAVRAS = {
+    "fogo": r"fogo|chama|queim|incend|inferno|brasa|explos",
+    "gelo": r"gelo|congel|frio|neve|gelad",
+    "raio": r"raio|trov|el[eé]tric|rel[aâ]mpago|choque",
+    "agua": r"[aá]gua|mar\b|oceano|rio\b|chuva|lago|piscina|afog|molhad",
+    "magia": r"magia|m[aá]gic|feiti|encanta|mana\b|runa|brilh",
+    "foto": r"foto|c[aâ]mera|flash|celular|print",
+    "papel": r"papel|carta|livro|contrato|documento|p[aá]gina|bilhete",
+    "glitch": r"sistema|janela|status|n[ií]vel|hack|computador|tela\b",
+    "impactos": r"soco|golpe|bat|chut|estrond|pancad|caiu|desab",
+}
+
+
+def _pick_transicao_criativa(frase=None):
+    global _BANCO_TRANS
+    import re as _re
+    if _BANCO_TRANS is None:
+        _BANCO_TRANS = _banco_sons_transicao() if os.environ.get("SFX_BANCO_NOVO", "1") != "0" else {}
+    if _BANCO_TRANS:
+        tema = None
+        for t, rx in _TEMA_PALAVRAS.items():
+            if frase and _re.search(rx, frase, _re.I) and _BANCO_TRANS.get(t):
+                tema = t
+                break
+        cands = list(_BANCO_TRANS.get(tema) or []) if tema else \
+            list(_BANCO_TRANS.get("whoosh", [])) + list(_BANCO_TRANS.get("impactos", [])) + \
+            [p for p in SFX_TRANS_CRIATIVO if p.exists()]
+        livres = [p for p in cands if str(p) not in _recentes_trans[-20:]] or cands
+        if livres:
+            p = str(random.choice(livres))
+            _recentes_trans.append(p)
+            del _recentes_trans[:-40]
+            return p
     cands = [p for p in SFX_TRANS_CRIATIVO if p.exists()]
     # completa com o pack whoosh_cinematic (curadoria aprovada), sem os básicos
     cands += [SFX_DIR / n for n in SFX_TRANSITION if n not in _SFX_BASICOS and (SFX_DIR / n).exists()]
@@ -269,7 +315,7 @@ def pick_sfx(sfx_category=None):
     Garante que nunca repete o mesmo SFX consecutivamente."""
     global _last_sfx_used
     if sfx_category in (None, "transition") and os.environ.get("ANIME_SFX_TRANS_CRIATIVO") == "1":
-        p = _pick_transicao_criativa()  # 21/11 dona (longos): sem plip/click; não repete os últimos 8
+        p = _pick_transicao_criativa(_TEXTO_ATUAL.get("t"))  # 21/11 sem plip/click; 23/11 tema da cena + banco novo
         if p:
             _last_sfx_used = p
             return p
@@ -733,6 +779,7 @@ def get_transition_and_sfx(panel_idx, descriptions):
         return None, None
 
     desc = descriptions[panel_idx] if panel_idx < len(descriptions) else ""
+    _TEXTO_ATUAL["t"] = desc  # 23/11: o som de transição casa o tema (fogo/gelo/água...) com a cena
     impact = is_impact_panel(desc)
     tension = is_tension_panel(desc)
 

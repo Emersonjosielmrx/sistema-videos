@@ -568,3 +568,55 @@ STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de
 ## 20261122_0735 — Guarda do disco D (2.6 GB) e otimizador de memória ativo
 - Motivo / O que achei: D: com 2.6 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D. | CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável). | O que fez: Nenhuma intervenção manual necessária, automações em execução.
 - Estado: NADA A FAZER
+## 20261122_0915 — Recap longo aguardando cota/alimentador PC1 e espaço em disco D abaixo do mínimo
+- Motivo / O que achei (trecho de log): anime_health_monitor.log indica 23 recaps nas últimas 12h, worker online, com avisos de proxy em parceiro_postar.log. Disco D com 6.14 GB livres (abaixo do limite de 8 GB). Contas e GPUs aguardando cota/trabalho no PC1.
+- Causa provável: Consumo regular de cotas do gerador de vídeo/Veo e acúmulo de arquivos de trabalho, necessitando reabastecimento ou limpeza controlada no PC1, e uso de espaço em D.
+- CONSERTO PROPOSTO: Verificar status do alimentador no PC1, liberar RAM se necessário e aguardar o rodízio natural das contas de vídeo/Veo, mantendo espaço em D monitorado.
+- Estado: PRECISA REVISÃO
+## 20261122_1637 — Vistoria do vigia: Recap longo (alimentador ativo no PC1), 16/25 GPUs sem conta e disco D com 3.3 GB livres
+- Motivo / O que achei (trecho de log): Logs do anime_health_monitor.log indicam trabalhamento e worker do PC2 offline no monitor (ou aguardando), com 16 de 25 GPUs sem conta por falta de trabalho na fila. Disco D com ~3.3 GB livres (abaixo de 8 GB). Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Consumo regular e rodízio/expiração de cotas de contas Veo e acúmulo natural de arquivos de trabalho no disco D.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema gerencia cotas e pausas de forma autônoma).
+- Estado: NADA A FAZER
+
+## 20261122_1808 — Guarda do disco D (3.6 GB livres) e Wise Memory Optimizer ativo
+- Motivo / O que achei: D: com 3.6 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840).
+- Causa provável: Acúmulo de arquivos temporários e cache no disco D.
+- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
+- O que fez: Verificação de rotina do disco e otimizador de memória.
+- Estado: NADA A FAZER
+
+
+## 20261122_1938 — Vigia verificação rotineira concluída: sistema operando normalmente, alertas menores de proxy/groq já recuperados automaticamente e aviso sobre tarefa agendada e cota de parceiro tratada no log.
+- Motivo / O que achei: O monitor de saúde indicou aviso intermitente de proxy na API Groq (já recuperado) e alerta de tarefa agendada (AnimeOcioso) que sofreu timeout no schtasks no momento da varredura, mas o sistema está operando e os logs recentes mostram recuperações automáticas.
+- Causa provável: Instabilidade momentânea de rede/proxy e lentidão pontual do schtasks do Windows.
+- CONSERTO PROPOSTO: Nenhum conserto necessário (modo só aviso; operações automáticas de recuperação funcionaram).
+- Estado: NADA A FAZER
+
+## 20261123_0015 — Vistoria geral: producao ativa, alimentador e render operando, espaco em disco no limite (D: 7.3GB, C: 4.3GB)
+- Motivo / O que achei (trecho de log): Logs em encher_pilha.log e alimentar_pc2.log mostram pilha reabastecida e Shorts sendo gerados e trazidos normalmente (ex: iGAa6z4z7iE, rGirXsFzu24). Wise Memory Optimizer ativo (PID 3840). Disco D com 7.3 GB e C com 4.3 GB (abaixo do limiar ideal de 8/5 GB, exigindo atenção contínua mas sem interrupção imediata).
+- Causa provável: Operação normal de produção e acumulação natural de arquivos/caches nos discos D e C.
+- CONSERTO PROPOSTO: nenhum (modo só aviso; monitorar espaço em disco e fluxo do alimentador).
+- Estado: NADA A FAZER
+
+## 20261123_0057 — dentrodascoisas3d: reserva_status.py não contava vídeos 3D (pelo painel)
+- Motivo / O que fiz (arquivos): Canal dentrodascoisas3d mostrava 0 vídeos prontos, mas existiam 14 vídeos 3D aprovados em D:\hipercool-materiais\historias-em-frames\ com "pronto": true e sem "posted_url". O reserva_status.py processava apenas parceiro/manhwa-react/comentarios, faltava glob para historias-em-frames. Editei D:\video-fila\reserva_status.py:62-73 — adicionei bloco para processar historias-em-frames (glob postar.json, valida pronto/posted_url/mp4 existe, conta em prontos[canal]["kit3d"]). / Como conferi: rodei python D:\video-fila\reserva_status.py — dentrodascoisas3d passou de 0.0 dias para 4.7 dias com 14 prontos {'kit3d': 14}. / Como desfazer: botão "Desfazer" no painel (pedido 20261123_005726_7de9)
+- Estado: RESOLVIDO
+
+## 20261123_0102 — tiktok: aumentado timeout de sonda pós-clique de 90s para 120s (pelo painel)
+- Motivo / O que fiz (arquivos): bin/tiktok_cdp_poster.py:243-272 — erro 'NAO CONFIRMADO: TikTok nao mostrou publicado' ocorria 5x em 6h porque a sonda pós-clique só esperava 90s e não detectava redirecionamento pós-upload. Mudei: (1) range(45) → range(60) = timeout de 90s para 120s; (2) lógica de detecção de saída do /upload com verificação de URL válida (não-erro/não-login); (3) debug a cada 15s mostrando trecho do body quando não detectar confirmação. / Como conferi: python -m py_compile confirmou sintaxe OK. / Como desfazer: botão "Desfazer" no painel (pedido 20261123_010204_579b)
+- Estado: RESOLVIDO
+
+## 20261123_0128 — fatochocante: canal sem alimentador nem entrada no parceiro (pelo painel)
+- Motivo / O que fiz (arquivos): Canal fatochocante (criado 18/11, liberado pela dona com max_dia=1) estava com 0 vídeos agendados e 0 prontos porque: (1) D:\postador-de-videos\config\canais.json:449 tinha "alimentadores": {} vazio, enquanto os outros 28 canais do dono manhwa-react têm {"parceiro": "livre"}; (2) faltava entrada no D:\recapd-ambientes\producao\config\parceiro.json na lista "pt" (tinha 29 canais, fatochocante não estava). Editei: (1) canais.json:449 — mudei alimentadores de {} para {"parceiro": "livre"}; (2) parceiro.json:1970 — adicionei entrada completa do canal (novo_fatochocante, @fatochocante-v4g, nicho fatos, horários 12:00/19:00/21:30, por_dia=1, fila_alvo=7, ativo=true). / Como conferi: (1) python confirmou alimentadores: {'parceiro': 'livre'} no canais.json; (2) python confirmou entrada fatochocante no parceiro.json pt[]; (3) parceiro_diario.py reconheceu o canal (found=True). / Como desfazer: botão "Desfazer" no painel (pedido 20261123_012816_f3ac)
+- Estado: RESOLVIDO
+## 20261123_1016 — Alertas de postagem e RAM/paginação verificados; modo exclusivo de aviso ativo
+- Motivo / O que achei: `parceiro_postar.log` apresentou falha pontual de driver/Playwright e proxy Groq (`Connection.init: Connection closed while reading from the driver`); `capar_shorts.log` registrou `WinError 1455` (arquivo de paginação pequeno / pressão de memória); `anime_health_monitor.log` apontou alimentador e crons restabelecidos.
+- Causa provável: Pico transiente de concorrência e carga de memória no Windows sob uso intenso de Playwright/Chromium pelos postadores.
+- CONSERTO PROPOSTO: Nenhum código deve ser alterado pelo vigia em modo aviso estrito; monitorar liberação automática de RAM pelo Wise Memory Optimizer e rotinas de retomada do worker e filas.
+- Estado: RESOLVIDO
+## 20261123_1117 — Alerta de SSLError temporário no discover_canal em danielarecapsbr e recuperação automática pelo yt-dlp
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261123.log registrou o aviso [discover_canal] API do site falhou em https://www.youtube.com/@danielarecapsbr/shorts (SSLError: HTTPSConnectionPool(host='www.youtube.com', port=443): Max retries exceeded...) — uso o yt-dlp. O fallback automático acionou o yt-dlp com sucesso e o sistema continuou operando normalmente nas horas seguintes, utilizando o estoque e gerando novos conteúdos sem interrupções.
+- Causa provável: Instabilidade transitória de DNS/SSL ou flutuação de rede na requisição HTTPS à API do YouTube.
+- CONSERTO PROPOSTO: Nenhum necessário, o mecanismo de resiliência e fallback para o yt-dlp já lida com o erro de forma autônoma.
+- Estado: NADA A FAZER

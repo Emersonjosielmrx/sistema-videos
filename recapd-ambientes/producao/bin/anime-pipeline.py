@@ -844,6 +844,70 @@ def _nome_personagem(nome, fem):
     return n.split(" ")[0]  # "Kai Shin" e "Kai" = o mesmo
 
 
+def _elenco_por_aparencia(itens, lines, vozes, workspace):
+    """23/11 dona: "os homens têm que variar de maneira inteligente — a feição do personagem combinar com a voz".
+    A IA lê o que o roteiro diz de cada personagem MASCULINO (idade, porte, jeito, papel) e escolhe, da lista de vozes
+    (com a descrição de cada uma), a que combina; vozes diferentes pra personagens diferentes. Cache elenco.json.
+    Falhou = {} (fica o sorteio de antes). ELENCO_IA=0 desliga."""
+    if os.environ.get("ELENCO_IA", "1") == "0":
+        return {}
+    arq = Path(workspace) / "elenco.json"
+    try:
+        if arq.exists():
+            return json.loads(arq.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    homens = {}
+    for it in itens:
+        if not str(it.get("genero", "m")).lower().startswith("f"):
+            n = _nome_personagem(it.get("personagem"), False)
+            homens.setdefault(n, {"papel": it.get("papel"), "falas": []})["falas"].append(str(it.get("fala"))[:80])
+    if len(homens) < 1:
+        return {}
+    descr = {}
+    vdir = Path(r"D:\hipercool-materiais\models\rvc\vozes")
+    try:
+        import anime_tts
+        vdir = anime_tts.VOZES_DIR
+    except Exception:  # noqa: BLE001
+        pass
+    for v in dict.fromkeys(vozes):
+        try:
+            pj = json.loads((vdir / v / "personagem.json").read_text(encoding="utf-8"))
+            descr[v] = f"{pj.get('nome', v)} (tom {pj.get('f0', '?')} Hz)"
+        except (OSError, ValueError):
+            descr[v] = v
+    import re
+    texto = " ".join(lines)
+    ctx = {}
+    for n in homens:
+        frs = [l for l in lines if n.lower() in l.lower()][:8]
+        ctx[n] = " / ".join(x[:140] for x in frs)
+    prompt = ("Você escala vozes para um recap de manhwa narrado. Para cada personagem MASCULINO abaixo, escolha a voz "
+              "da lista que COMBINA com a aparência e o jeito dele (idade, porte físico, se é frio, arrogante, bobo, "
+              "nobre, velho, jovem, gigante, monstro...). Personagens diferentes = vozes diferentes. Ex.: velho "
+              "patriarca = voz grave e madura; jovem arrogante = voz jovem debochada; brutamontes = grave; nerd = "
+              "voz fina.\nVOZES: " + json.dumps(descr, ensure_ascii=False) + "\nPERSONAGENS: " + json.dumps(
+                  {n: {"papel": h["papel"], "falas": h["falas"][:3], "no_roteiro": ctx.get(n, "")}
+                   for n, h in homens.items()}, ensure_ascii=False)[:9000] +
+              '\nResponda SÓ JSON {"Nome": "voz", ...} usando os nomes exatos das vozes.')
+    try:
+        import claude_client
+        resp, _m, _t = claude_client.generate_text_vivo(prompt, claude_client.CADEIA_TEXTO_LONGO, max_tokens=1500,
+                                                        temperature=0.3, timeout=120, rodadas=2)
+        m = re.search(r"\{.*\}", resp or "", re.S)
+        el = {k: v for k, v in (json.loads(m.group(0)) if m else {}).items() if v in descr}
+    except Exception as e:  # noqa: BLE001
+        logging.warning(f"[longo] elenco por aparência falhou ({type(e).__name__}) — sorteio")
+        el = {}
+    logging.info(f"[longo] elenco por aparência: {el}")
+    try:
+        arq.write_text(json.dumps(el, ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError:
+        pass
+    return el
+
+
 def _falas_personagem(lines, tempos, workspace):
     """Dona 28/10 ("adicionar falas de personagens como o Mike faz: hora ele narra, hora faz a voz do personagem; nesse
     caso podemos usar outra voz de verdade"): a IA escolhe frases em que alguém FALA (diz/grita/responde...), ~1 a cada
@@ -913,6 +977,7 @@ def _falas_personagem(lines, tempos, workspace):
     rnd = random.Random(str(workspace))  # sorteio fixo por vídeo: refazer o mesmo vídeo dá as mesmas vozes
     for p in (vm, vf, vmonstro, vvilao, vcrianca):
         rnd.shuffle(p)  # antes saía sempre a 1ª da lista (Vegeta/Jett): sorteio dá vez a todas e permite medir
+    elenco_ia = _elenco_por_aparencia(itens, lines, vm + vvilao + vmonstro, workspace)
     voz_de, falas, ultimo = {}, {}, -10 ** 6
     # 12/11 dona ("falas dos personagens o máximo possível"): o piso de 5 frases (~25 s) segurava o a_cada_s 15;
     # agora PERSONAGEM_DIST_MIN (3) frases — permite diálogo curto. PERSONAGEM_DIST_MIN=5 volta.
@@ -933,6 +998,11 @@ def _falas_personagem(lines, tempos, workspace):
             pool = vvilao
         else:
             pool = vf if fem and vf else (vm or vf)
+        if fem and not papel.startswith("crian") and cfg.get("voz_mulheres", "darkness"):
+            # 23/11 dona: "as vozes das mulheres com a voz da Darkness"
+            voz_de.setdefault(nome, cfg.get("voz_mulheres", "darkness"))
+        elif nome not in voz_de and nome in elenco_ia and elenco_ia[nome] in pool:
+            voz_de[nome] = elenco_ia[nome]  # 23/11: a IA casou a aparência/jeito dele com a voz
         if nome not in voz_de:  # mesma voz pro mesmo personagem no vídeo inteiro
             usadas = [v for v in voz_de.values() if v in pool]
             livres = [v for v in pool if v not in usadas] or pool
@@ -1061,6 +1131,14 @@ def _resumo_longo(lines, tempos, workspace, video_path):
             "X, e até ontem ele era...\"), depois conte em poucas frases rápidas a queda dele e as viradas mais fortes "
             "(o poder que ganha, as vitórias mais marcantes), SEM contar o final, e feche com uma frase-gancho que "
             "volta pro início (ex.: \"Mas pra entender como ele chegou aqui, a gente precisa voltar pro começo.\"). "
+            # 23/11 dona: "falta contexto inicial — o poder dele apareceu sem explicação"
+            "DEPOIS da frase-gancho, mais 2 a 4 frases de AMBIENTAÇÃO (linha 0 em todas): quem é o protagonista "
+            "(nome, o que ele é, a situação dele no começo da história), quem são as pessoas principais em volta "
+            "dele e, se ele tem PODER/sistema/habilidade/segredo, diga claramente qual é e como ganhou (se o "
+            "roteiro não conta como ganhou, diga só \"ele tem o poder de ...\"). Ex.: \"Esse é o Alexander, noivo da "
+            "Chloe, que vive sendo trocado pelo falso herdeiro. Só que ele tem um segredo: consegue ouvir o "
+            "pensamento das pessoas.\" Essas frases vêm por ÚLTIMO no JSON (depois da virada) e a história "
+            "começa logo após elas. "
             "A frase do choque também aponta pro número da frase do roteiro que mostra aquele momento.\n"
             f"Regras: {int(rcfg.get('min', 5))} a {int(rcfg.get('max', 8))} frases no total; cada frase com até 22 "
             "palavras, ritmo de trailer, linguagem falada do Brasil, sem palavrão, sem citar o nome da obra. Cada "
@@ -1099,7 +1177,7 @@ def _resumo_longo(lines, tempos, workspace, video_path):
             momentos = [x["linha"] for x in itens[:-1]]
             espalhado = momentos and sum(m >= len(lines) // 2 for m in momentos) * 2 >= len(momentos) \
                 and sum(m < len(lines) // 10 for m in momentos) <= 1
-            if int(rcfg.get("min", 5)) <= len(itens) <= int(rcfg.get("max", 8)) + 2 and (espalhado or _tentativa == 2):
+            if int(rcfg.get("min", 5)) <= len(itens) <= int(rcfg.get("max", 8)) + 6 and (espalhado or _tentativa == 2):
                 break
             itens = None
         if not itens:
@@ -1114,12 +1192,17 @@ def _resumo_longo(lines, tempos, workspace, video_path):
     # trava de spoiler (teste 28/10: com "SEM contar o final" no prompt a IA ainda usou a frase 521 de 556, o desfecho):
     # momento nos últimos 12% do roteiro sai do resumo; a virada final fica
     corte = int(n * 0.88)
-    itens = [x for x in itens[:-1] if int(x.get("linha") or 0) < corte] + itens[-1:]
+    # 23/11: a virada + a ambientação (linha 0) ficam no fim e mostram o começo da história
+    _fim = 1
+    while _fim < len(itens) and int(itens[-_fim - 1].get("linha") or 0) == 0:
+        _fim += 1
+    itens = [x for x in itens[:-_fim] if int(x.get("linha") or 0) < corte] + itens[-_fim:]
     novas, novos_t = [], []
     for j, it in enumerate(itens):
-        ultima = j == len(itens) - 1
-        # imagem: o momento citado (2 s depois do começo da frase); a virada final já mostra o início da história
-        i = 0 if ultima else min(max(int(it["linha"]), 0), n - 1)
+        ultima = j >= len(itens) - _fim
+        # imagem: o momento citado (2 s depois do começo da frase); a virada e a ambientação mostram o começo
+        i = (j - (len(itens) - _fim)) * 3 if ultima else int(it["linha"])
+        i = min(max(i, 0), n - 1)
         novas.append(it["frase"])
         novos_t.append(float(tempos[i]) + (0.0 if ultima else 2.0))
     os.environ["ANIME_RESUMO_N"] = str(len(novas))  # anime_segments._inicios: o resumo pode "voltar no tempo"

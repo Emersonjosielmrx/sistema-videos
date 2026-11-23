@@ -53,6 +53,8 @@ def argon(agora):
             g, info = 0, "pronta"
         if c.get("ultimo_erro") and g:
             info += " · " + c["ultimo_erro"][:60]
+        if g:  # 23/11 dona: login vencido não mostra porcentagem (a taxa antiga parecia crédito)
+            t, ok, tot = None, 0, 0
         out.append(dict(nome=c["email"], grupo=g, ativa=not c.get("bloqueada"), taxa=t, ok=ok, tot=tot, info=info,
                         modelo="Gemini web (Argon)", quando=utc(c.get("ultimo_uso")),
                         libera=utc(c["sem_cota_ate"] if sem else (c["cookies_mortos_ate"] if mortos else None))))
@@ -73,9 +75,14 @@ def genspark(agora):
             g, info = 3, "sem Opus no grátis"
         elif sem or cred < 3:
             g, info = 1, "sem crédito hoje"
+        elif (c.get("erros_seguidos") or 0) >= 2:
+            g, info = 1, "não responde no chat · " + str(c.get("ultimo_erro") or "")[:60]  # 23/11 dona
         else:
             g, info = 0, "pronta"
-        out.append(dict(nome=c["email"], grupo=g, ativa=not c.get("bloqueada"), ps=float(cred), taxa=t, ok=ok, tot=tot,
+        if g:  # 23/11 dona: parada/sem resposta não mostra crédito nem taxa
+            t, ok, tot = None, 0, 0
+        out.append(dict(nome=c["email"], grupo=g, ativa=not c.get("bloqueada"), ps=float(cred) if g == 0 else None,
+                        taxa=t, ok=ok, tot=tot,
                         info=info, modelo="Opus 5.5 grátis", quando=utc(c.get("ultimo_uso")),
                         libera=utc(c["sem_cota_ate"]) if sem else None))
     return out

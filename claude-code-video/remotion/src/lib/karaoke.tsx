@@ -14,7 +14,14 @@ import {movimento, Movimento} from './efeitos';
 //   falante + cores: quem fala muda a cor do destaque e começa bloco novo (diálogo, entrevista, debate)
 //   caixa     false = sem a caixa escura, com contorno na letra (para cima de foto clara)
 
-export type PalavraK = {p: string; ini: number; fim: number; falante?: string}; // segundos absolutos no vídeo
+export type PalavraK = {
+  p: string;
+  ini: number;
+  fim: number;
+  falante?: string;
+  novoBloco?: boolean;
+  quebraLinha?: boolean;
+}; // segundos absolutos no vídeo
 export type Palavra = PalavraK; // nome antigo: vídeos de 27/10 importam assim e o editor copia deles
 
 type Props = {
@@ -34,6 +41,7 @@ type Props = {
   cores?: Record<string, string>; // falante -> cor do destaque
   caixa?: boolean;
   maiusculas?: boolean;
+  duracaoAposUltima?: number;
 };
 
 const blocos = (ps: PalavraK[], maxLetras: number, pausa: number) => {
@@ -44,7 +52,8 @@ const blocos = (ps: PalavraK[], maxLetras: number, pausa: number) => {
     const pausaAntes = i > 0 && w.ini - ps[i - 1].fim > pausa;
     const fimFrase = i > 0 && /[.!?]$/.test(ps[i - 1].p);
     const trocaFalante = i > 0 && (w.falante ?? '') !== (ps[i - 1].falante ?? '');
-    if (atual.length && (letras + w.p.length > maxLetras || pausaAntes || fimFrase || trocaFalante)) {
+    const novoBloco = w.novoBloco === true;
+    if (atual.length && (novoBloco || letras + w.p.length > maxLetras || pausaAntes || fimFrase || trocaFalante)) {
       out.push(atual);
       atual = [];
       letras = 0;
@@ -73,14 +82,15 @@ export const Karaoke: React.FC<Props> = ({
   cores,
   caixa = true,
   maiusculas = true,
+  duracaoAposUltima = 0.6,
 }) => {
   const {fps} = useVideoConfig();
   const t = useCurrentFrame() / fps;
   const bs = blocos(palavras, maxLetras, pausaQuebra);
-  // bloco visível: do início da 1ª palavra (−0,1 s) até o início do próximo bloco (ou 0,6 s depois da última)
+  // bloco visível: do início da 1ª palavra (−0,1 s) até o início do próximo bloco (ou duracaoAposUltima depois da última)
   const i = bs.findIndex((b, k) => {
     const ini = b[0].ini - 0.1;
-    const fim = k + 1 < bs.length ? bs[k + 1][0].ini - 0.1 : b[b.length - 1].fim + 0.6;
+    const fim = k + 1 < bs.length ? bs[k + 1][0].ini - 0.1 : b[b.length - 1].fim + duracaoAposUltima;
     return t >= ini && t < fim;
   });
   if (i < 0) return null;
@@ -120,7 +130,7 @@ export const Karaoke: React.FC<Props> = ({
         }}
       >
         {bloco.map((w, k) => {
-          const ativa = t >= w.ini && t <= w.fim + 0.05;
+          const ativa = t >= (k === 0 ? Math.min(w.ini, bloco[0].ini - 0.08) : w.ini) && t <= w.fim + 0.05;
           const dita = t > w.fim;
           const cor = corDe(w);
           const pilula = (modo === 'pilula' && ativa) || (modo === 'trilha' && (ativa || dita));
@@ -155,16 +165,21 @@ export const Karaoke: React.FC<Props> = ({
             transform: entra && entra.transform !== 'none' ? entra.transform : esc !== 1 ? `scale(${esc})` : undefined,
           };
           return (
-            <span key={k} style={estilo}>
-              {w.p.slice(0, nVis)}
-              {nVis < w.p.length && <span style={{color: 'transparent', textShadow: 'none'}}>{w.p.slice(nVis)}</span>}
-              {modo === 'varrer' && (dita || ativa) && (
-                <span aria-hidden style={{position: 'absolute', left: 10, top: 2, color: cor, textShadow: contorno,
-                  clipPath: `inset(0 ${(dita ? 0 : 1 - pVarre) * 100}% 0 0)`}}>
-                  {w.p.slice(0, nVis)}
-                </span>
+            <React.Fragment key={k}>
+              {w.quebraLinha && (
+                <div style={{flexBasis: '100%', width: '100%', height: 0}} />
               )}
-            </span>
+              <span style={estilo}>
+                {w.p.slice(0, nVis)}
+                {nVis < w.p.length && <span style={{color: 'transparent', textShadow: 'none'}}>{w.p.slice(nVis)}</span>}
+                {modo === 'varrer' && (dita || ativa) && (
+                  <span aria-hidden style={{position: 'absolute', left: 10, top: 2, color: cor, textShadow: contorno,
+                    clipPath: `inset(0 ${(dita ? 0 : 1 - pVarre) * 100}% 0 0)`}}>
+                    {w.p.slice(0, nVis)}
+                  </span>
+                )}
+              </span>
+            </React.Fragment>
           );
         })}
       </div>

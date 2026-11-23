@@ -15,11 +15,43 @@ from pathlib import Path
 FILA = Path(r"D:\video-fila\produto_fila")
 
 
+RCLONE = r"D:\tools\rclone.exe"
+
+
+def _drive_da_pasta(pasta):
+    """23/11 (dona: "pode mover e postar de lá, os produtos também"): os .mp4 foram pro Drive e o .json ficou aqui com
+    um _NO_DRIVE.txt que diz o destino. Devolve o caminho no Drive ou None."""
+    t = pasta / "_NO_DRIVE.txt"
+    if not t.exists():
+        return None
+    m = re.search(r"Destino:\s*(\S+)", t.read_text("utf-8", "ignore"))
+    return m.group(1) if m else None
+
+
+def _trazer(mp4, log=print):
+    """Baixa só ESTE vídeo do Drive (uns 20 MB) na hora de postar. True = está no disco."""
+    if mp4.exists():
+        return True
+    origem = _drive_da_pasta(mp4.parent)
+    if not origem:
+        return False
+    import subprocess
+    r = subprocess.run([RCLONE, "copyto", f"{origem}/{mp4.name}", str(mp4), "--retries", "3"],
+                       capture_output=True, text=True, timeout=900)
+    if r.returncode or not mp4.exists():
+        log(f"  {mp4.name}: não baixou do Drive ({(r.stderr or '').strip()[-120:]})")
+        return False
+    log(f"  {mp4.name}: baixado do Drive pra postar ({mp4.stat().st_size // 1_000_000} MB)")
+    return True
+
+
 def pendentes(conta):
     pasta = FILA / conta
     if not pasta.exists():
         return []
-    return sorted((p for p in pasta.glob("*.mp4") if p.with_suffix(".json").exists()), key=lambda p: p.stat().st_mtime)
+    no_drive = _drive_da_pasta(pasta) is not None
+    js = [j for j in pasta.glob("*.json") if j.with_suffix(".mp4").exists() or no_drive]
+    return sorted((j.with_suffix(".mp4") for j in js), key=lambda p: (p if p.exists() else p.with_suffix(".json")).stat().st_mtime)
 
 
 CCV = Path(r"D:\claude-code-video")
@@ -92,14 +124,20 @@ def itens(conta, vagas, log=print):
         log(f"  [{conta}] claude-code-video: {type(e).__name__}: {str(e)[:120]}")
         out = []
     vagas -= len(out)
-    for mp4 in pendentes(conta)[:max(0, vagas)]:
+    for mp4 in pendentes(conta):
+        if sum(1 for o in out if not o.get("ccv")) >= vagas:
+            break
         try:
             side = json.loads(mp4.with_suffix(".json").read_text("utf-8"))
         except Exception:  # noqa: BLE001
             continue
+        veio_drive = not mp4.exists()
+        if not _trazer(mp4, log):
+            continue
         out.append({"caminho": str(mp4), "nome": mp4.name, "bytes": mp4.stat().st_size, "projeto": "produto",
                     "origem": "", "no_pc": True, "drive": None, "tipo": "final", "postagens": [], "reserva": None,
-                    "conta_reuso": conta, "legenda": side.get("legenda") or side.get("titulo") or ""})
+                    "conta_reuso": conta, "legenda": side.get("legenda") or side.get("titulo") or "",
+                    "veio_drive": veio_drive})
         log(f"  [{conta}] vídeo profissional de produto: {mp4.name} ({side.get('formato')})")
     return out
 
@@ -116,6 +154,9 @@ def usado(v, log=print):
     dest.mkdir(parents=True, exist_ok=True)
     for p in (mp4, mp4.with_suffix(".json")):
         if p.exists():
+            if p.suffix == ".mp4" and v.get("veio_drive"):
+                p.unlink()  # 23/11: a cópia fica no Drive; aqui só o .json em _postados (o melhorador mede por ele)
+                continue
             shutil.move(str(p), str(dest / p.name))
     try:
         j = dest / mp4.with_suffix(".json").name

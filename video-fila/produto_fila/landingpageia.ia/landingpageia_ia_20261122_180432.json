@@ -1,0 +1,152 @@
+{
+ "conta": "landingpageia.ia",
+ "produto": "landing_page",
+ "marca": "Landing Page e Comunicação",
+ "titulo": "Pare de explicar seu produto um por um no direct",
+ "legenda": "Explicar o mesmo produto o dia todo tira o seu tempo de vender. Uma página de vendas pronta, com vídeo de demonstração, apresenta o produto por você. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Cansado de explicar tudo no direct?",
+  "pergunta_cliente": "Por que eu repito as mesmas respostas no WhatsApp o dia inteiro?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu passava o dia respondendo as mesmas dúvidas no WhatsApp, explicando meu produto para cada cliente, um por um.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit modern office desk of a small Brazilian business, clean background",
+    "real_tema": "dono explica a dor de repetir respostas no WhatsApp",
+    "destaques": [
+     "mesmas dúvidas",
+     "um por um"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261122_180855_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje uso uma página de vendas pronta, com vídeo de demonstração que apresenta o produto por mim.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit bright office of a small Brazilian company, clean shelves in the background",
+    "real_tema": "dono explica a página pronta com vídeo de demonstração",
+    "destaques": [
+     "página de vendas pronta",
+     "vídeo de demonstração"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, como funciona o seu produto?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Veja a página com o vídeo de demonstração."
+     },
+     {
+      "de": "cliente",
+      "texto": "Entendi tudo pelo vídeo. Quero comprar."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261122_180855_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261122_180855_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora o cliente já chega entendendo o produto, e eu uso meu tempo para vender, não para explicar.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit counter of a small Brazilian shop, organized and clean",
+    "real_tema": "dono fala do resultado: tempo para vender",
+    "destaques": [
+     "já chega entendendo",
+     "tempo para vender"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261122_180855_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261122_180855_1.png"
+   }
+  ],
+  "legenda": "Explicar o mesmo produto o dia todo tira o seu tempo de vender. Uma página de vendas pronta, com vídeo de demonstração, apresenta o produto por você. Link no perfil.",
+  "titulo": "Pare de explicar seu produto um por um no direct",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "explica_sem_fim",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 207,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\landingpageia.ia_20261122_180432\\dono_3.mp4",
+ "duracao_s": 31.8,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-22T18:47:53",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.82,
+   "fala": "Por que eu repito as mesmas respostas no WhatsApp o dia inteiro?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.82,
+   "fim": 12.65,
+   "fala": "Eu passava o dia respondendo as mesmas dúvidas no WhatsApp, explicando meu produto para cada cliente, um por um.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.65,
+   "fim": 20.02,
+   "fala": "Hoje uso uma página de vendas pronta, com vídeo de demonstração que apresenta o produto por mim.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.02,
+   "fim": 27.86,
+   "fala": "Agora o cliente já chega entendendo o produto, e eu uso meu tempo para vender, não para explicar.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.86,
+   "fim": 31.8,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 9.0,
+   "diretor": 6.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

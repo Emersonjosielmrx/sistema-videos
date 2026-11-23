@@ -124,6 +124,7 @@ _ANTI_BAN = [
     (r"fod[êe]-?l[oa]", "pegar com tudo"),
     (r"\bfode\b", "pega pesado"),
     (r"fodendo", "pegando pesado"),
+    (r"vai se f[ou]der", "vai se ferrar" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "vai ver se eu tô na esquina"),  # 22/11: antes do "foder" genérico
     (r"foder", "amar intensamente"),
     (r"(?<!se )metendo|meteu(?! nessa)|\bmeter\b(?!\s+nessa|\s+nesse|\s+nisso)", "mandando ver"),
     (r"cavalgando|cavalga\w*", "no comando"),
@@ -251,14 +252,15 @@ _ANTI_BAN = [
     (r"traficante", "comerciante ilegal"),
 
     # --- palavrões genéricos ---
-    (r"\bcacetes?\b", "caramba"),  # 23/10: "cacetete" virava "carambate"
-    (r"caralhos", "carambas"),
-    (r"caralho", "caramba"),
-    (r"\bporra\b", "poxa"),
-    (r"filh[oa]\s+da\s+puta", "filhote do capeta"),
+    (r"puta\s+que\s+(?:o\s+)?pariu|puta\s+merda", "ponte que partiu" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "nossa senhora"),  # 22/11 dona: disfarce que soa igual
+    (r"\bcacetes?\b", "caraca" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "caramba"),  # 23/10: "cacetete" virava "carambate"
+    (r"caralhos", "baralhos" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "carambas"),
+    (r"caralho", "baralho" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "caramba"),
+    (r"\bporra\b", "porcaria" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "poxa"),
+    (r"filh[oa]\s+da\s+puta", "filho da mãe" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "filhote do capeta"),
     (r"\bputa\b", "dama"),
-    (r"\bmerda\b", "droga"),
-    (r"vai se f[ou]der", "vai ver se eu tô na esquina"),
+    (r"\bmerda\b", "meleca" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "droga"),
+    (r"vai se f[ou]der", "vai se ferrar" if os.environ.get("PALAVRAO_SUAVE", "1") != "0" else "vai ver se eu tô na esquina"),
     (r"desgra[çc]ad[oa]|desgra[çc]a\b", "infeliz"),
     (r"fodid[oa]|fudid[oa]", "ferrado"),
     (r"\bputo\b", "irritado"),

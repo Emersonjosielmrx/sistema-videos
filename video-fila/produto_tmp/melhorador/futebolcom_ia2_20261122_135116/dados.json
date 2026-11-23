@@ -1,0 +1,355 @@
+{
+ "video": "futebolcom_ia2_20261122_135116.mp4",
+ "conta": "futebolcom.ia2",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio Digital para o almoço corrido do restaurante",
+ "formato": "cinco_veo",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "reprovado",
+ "juri": {
+  "nota": 5.5,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 6.0,
+   "roteiro_marca": 6.0,
+   "diretor": 4.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    5.03
+   ],
+   [
+    1,
+    "imagem",
+    17.77
+   ],
+   [
+    2,
+    "veo",
+    13.98
+   ],
+   [
+    3,
+    "dono",
+    13.55
+   ],
+   [
+    4,
+    "cartao",
+    3.38
+   ]
+  ],
+  "graves": 7,
+  "reprovar": true,
+  "motivo": "Inversão narrativa e dessincronia: aos 15.99s a fala conclui 'e faz o pedido pelo WhatsApp', mas a tela regride para a v"
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A legenda 'O pedido chega' perdeu o contorno preto espesso e a caixa/tarja escura de fundo presentes nos quadros anteriores (q10 e q11), exibindo letras cinza-claras semitransparentes diretamente sobre o porta-guardanapo branco e o balcão claro, gerando baixíssimo contraste e tornando o texto praticamente ilegível no celular.",
+   "como_corrigir": "Restaurar o estilo padrão da legenda karaoke usado nos quadros q10 e q11: aplicar a tarja preta semitransparente de fundo e o contorno preto sólido ao redor de 'O pedido chega' para assegurar legibilidade imediata sobre elementos claros."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "A legenda 'WhatsApp' foi sobreposta diretamente à tela do smartphone segurado pelo cliente, cobrindo os textos da interface de confirmação do pedido e gerando conflito visual ('dois textos brigando' e elemento cobrindo texto da demonstração).",
+   "como_corrigir": "Ajustar o enquadramento do celular para posicioná-lo um pouco mais acima no quadro ou deslocar ligeiramente a legenda para que não cubra a tela e a mensagem de confirmação do pedido."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena completamente parada por quase 4 segundos (q04 a q06) usando foto estática com forte aspecto de banco de imagem genérico. O buffet vazio e sem pessoas contradiz a narrativa de 'almoço corrido' e 'fila de mensagens crescendo'.",
+   "como_corrigir": "Substituir a foto por um b-roll em vídeo de restaurante cheio/correria ou aplicar animação com movimento contínuo (slow push-in) complementado por elementos animados de notificações de mensagens acumulando na tela."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Entrada sem animação dos tópicos 'fila de mensagens' e 'atender todo mundo', que simplesmente surgem estáticos sobrepostos à imagem, sem dinâmica de motion.",
+   "como_corrigir": "Aplicar animação de entrada com escala e elasticidade (pop-in com bounce/overshoot) ou slide-in lateral com leve motion blur e efeito sonoro sutil de pop."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Cena parada no gancho inicial. A imagem de fundo e o cartão de pergunta ficam completamente congelados por mais de 3 segundos (q01 a q03), tornando o ritmo do hook arrastado.",
+   "como_corrigir": "Inserir animação de entrada no cartão da pergunta (pop com amortecimento) e adicionar um movimento contínuo de slow zoom-in na cena para prender a atenção imediata."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Inversão narrativa e dessincronia: aos 13.95s a fala narra 'vê as fotos dos pratos', porém a tela exibe a legenda 'WhatsApp' e a imagem do celular já com a tela final de pedido confirmado (ícone de check verde). O clipe e a legenda foram adiantados indevidamente.",
+   "como_corrigir": "Trocar a posição deste clipe com o de q09.jpg, colocando aqui o momento em que os clientes visualizam e apontam para as fotos dos pratos no cardápio, acompanhado da legenda 'as fotos dos'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Inversão narrativa e dessincronia: aos 15.99s a fala conclui 'e faz o pedido pelo WhatsApp', mas a tela regride para a visualização de fotos de comida no cardápio com a legenda 'as fotos dos', quebrando a ordem lógica da demonstração.",
+   "como_corrigir": "Posicionar neste ponto (15.99s) o trecho que mostra a tela de confirmação/pedido do WhatsApp com a legenda destacando 'WhatsApp' (atualmente exibido precocemente em q08.jpg)."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Contradição entre o texto visual e a fala: sob o tópico '1 O problema', surge o cartão '✓ atender todo mundo', contradizendo a fala do locutor que afirma explicitamente 'eu não conseguia atender todo mundo com calma'. O card sugere um resultado positivo ou sucesso onde havia dificuldade.",
+   "como_corrigir": "Ajustar o texto do segundo cartão para refletir a dor narrada, utilizando por exemplo 'não conseguia atender' ou 'atraso no atendimento'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos é passivo e não retém o usuário no Reels: o fundo mostra uma cliente tranquila já com a refeição servida na mesa mexendo no celular e o cartão de pergunta é estático, sem movimento de câmera, dinamismo ou tensão que transmita a correria do almoço.",
+   "como_corrigir": "Na Cena 0, substituir a cena estática e calma por um vídeo dinâmico que ilustre a dor real do horário de pico (ex: balcão movimentado ou celular acumulando notificações de pedidos), aplicando push-in de câmera e efeito sonoro de alerta logo nos primeiros 2 segundos para prender a atenção antes do scroll."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "A cena transmite forte aspecto de slide de PowerPoint amador: utiliza foto estática de um buffet self-service totalmente vazio e sem clientes (contradizendo o texto 'ALMOÇO LOTADO') e insere itens de problema ('fila de mensagens', 'atender todo mundo') acompanhados de ícones de checkmark (✓) vermelhos, o que gera confusão semiótica direta, pois check comunica sucesso e conclusão, não dor.",
+   "como_corrigir": "Na Cena 1, substituir a foto estática do buffet vazio por gravação em movimento de salão cheio ou da fila de conversas acumuladas na tela do celular. Trocar os ícones de checkmark (✓) por ícones semióticos adequados para dor/alerta (como ⚠️ ou ❌) ou remover os marcadores, eliminando o visual de apresentação de slides."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ausência da demonstração do WhatsApp e do atendimento com IA: a locução promete que o cliente 'faz o pedido pelo WhatsApp', mas a tela do celular exibe apenas um aplicativo genérico desconhecido com tela branca e checkmark verde. O WhatsApp com a IA — proposta central do anúncio e prevista no formato — não aparece em momento algum.",
+   "como_corrigir": "Na Cena 2, exibir em destaque a tela da conversa de WhatsApp com o selo 'Simulação', mostrando a IA respondendo dúvidas instantaneamente e confirmando o pedido na tela, tangibilizando a promessa do produto para gerar confiança no lead."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Ruptura brusca de universo visual e linguagem estética: a Cena 2 exibe um casal em bistrô sofisticado com estética cinematográfica gerada por IA, enquanto a Cena 3 corta para uma selfie caseira com luz crua dentro de uma lanchonete popular com estufa de salgados. Essa desconexão de perfis e de qualidade de produção faz o anúncio parecer uma colcha de retalhos sem identidade de marca.",
+   "como_corrigir": "Na Cena 3, alinhar a ambientação das cenas geradas por IA para o mesmo universo do apresentador (restaurantes e lanchonetes do dia a dia) e melhorar a captação do dono com câmera em suporte estável, iluminação difusa adequada e inserção de cortes rápidos mostrando a operação do software."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final sem força visual e com elemento solto: há um traço vermelho horizontal flutuando no topo sem função ou alinhamento com a marca, a barra de progresso superior desapareceu prematuramente, o fundo é uma foto estática escurecida sem energia e falta um logotipo vetorizado profissional além do texto puro 'Cardápio Digital'.",
+   "como_corrigir": "Na Cena 4, eliminar a linha vermelha flutuante residual, manter a barra de progresso no topo até o último quadro e aplicar uma cartela com o logotipo profissional da solução e fundo com sutil movimento ou transição suave."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "agentesdeia_ia_20261121_222123.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261122_024842.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_mesma_foto",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecrm_20261122_052621.mp4",
+   "conta": "inovarecrm",
+   "formato": "quatro_veo",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "superchatia_ia_20261122_073012.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.12,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261122_135116.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "cinco_veo",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "cinco_veo+editor",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "cinco_veo+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261122_180432.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.38,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.5,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   12,
+   1
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   7,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

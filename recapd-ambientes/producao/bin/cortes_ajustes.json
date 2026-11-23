@@ -2,7 +2,6 @@
  "_leia": "Ajustes da linha CORTES que o MELHORADOR (cortes_melhorador.py) pode mudar sem tocar em código. Lido por anime_script (regras_roteiro), seo_generator (regras_titulo) e parceiro_marca (tarja_*). Cada mudança fica no historico com o porquê e volta sozinha se a nota do júri cair. Vazio = comportamento padrão.",
  "regras_roteiro": [
   "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
-  "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
   "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
   "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
   "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
@@ -10,7 +9,8 @@
   "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
   "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa.",
   "Elimine qualquer palavrão ou termo chulo vindo da transcrição ('porra', 'merda', 'caralho'): substitua por termos limpos de impacto sem perder a tensão da frase.",
-  "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural."
+  "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural.",
+  "Abra a 1ª frase com conflito, número ou pergunta concreta da cena, em até 8 palavras; nunca com substantivo solto ('Um município...') nem revelando o final."
  ],
  "regras_titulo": [
   "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
@@ -1038,6 +1038,64 @@
    "antes": "ab",
    "depois": "A",
    "porque": "T11 fechado: A (NINGUÉM ESPERAVA liberado) — B (proibido) pior que A no placar"
+  },
+  {
+   "em": "2026-11-23T10:15",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa.",
+    "Elimine qualquer palavrão ou termo chulo vindo da transcrição ('porra', 'merda', 'caralho'): substitua por termos limpos de impacto sem perder a tensão da frase.",
+    "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa.",
+    "Elimine qualquer palavrão ou termo chulo vindo da transcrição ('porra', 'merda', 'caralho'): substitua por termos limpos de impacto sem perder a tensão da frase.",
+    "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural."
+   ],
+   "porque": "Abre vaga no teto de 10 itens. Esta regra repete a 1ª (confirmar o gênero antes de narrar) e nenhum Short deste lote mostra erro de gênero. A 1ª regra continua cobrindo o caso."
+  },
+  {
+   "em": "2026-11-23T10:15",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa.",
+    "Elimine qualquer palavrão ou termo chulo vindo da transcrição ('porra', 'merda', 'caralho'): substitua por termos limpos de impacto sem perder a tensão da frase.",
+    "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa.",
+    "Elimine qualquer palavrão ou termo chulo vindo da transcrição ('porra', 'merda', 'caralho'): substitua por termos limpos de impacto sem perder a tensão da frase.",
+    "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural.",
+    "Abra a 1ª frase com conflito, número ou pergunta concreta da cena, em até 8 palavras; nunca com substantivo solto ('Um município...') nem revelando o final."
+   ],
+   "porque": "GOSTO, 1 regra só, para medir. A abertura fraca repete em 2 Shorts (f38972 q01 'UM MUNICÍPIO', 778ee4 q02 'FREGUÊS CARO'). A regra não pede saudação nem bordão do narrador e não contradiz as regras fixas. O spoiler do final continua proibido."
   }
  ]
 }

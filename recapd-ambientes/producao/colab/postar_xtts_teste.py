@@ -19,9 +19,10 @@ PY = r"D:\recapd-ambientes\producao\venv\Scripts\python.exe"
 ALVOS = {"8fM6Ay7OJho": "só KkVirjão", "gJve_WjefZs": "só Mike", "e2nIzNGXvmA_xtts_momo": "só Momo",
          "kxohroSbgS8": "Momo+Mike+KkVirjão",
          # 21/11 noite: os novos têm o MESMO vid de fichas velhas -> o alvo é o nome da ficha nova (recolher_testes.py)
-         # 22/11: Qwen3 e S2-Pro (82ge) TIRADOS — áudio pronto foi gerado sobre as 878 linhas puras e o vídeo tem
-         # ~950 (resumo/CTA/ganchos inseridos) -> voz desalinhada da legenda o vídeo todo. Não postar; refazer.
-         }
+         # 23/11 dona: "não precisa refazer o longo 82ge com Qwen3 e S2-Pro, pode postar assim mesmo"
+         "82ge1YYkUyA_qwen3_momo": "só Momo, PREMIUM Qwen3-TTS (21/11)",
+         "82ge1YYkUyA_s2pro_momo": "só Momo, PREMIUM S2-Pro (21/11)",
+         "RzoyNcnlIj8_misto_xtts8_s2pro_momo": "só Momo, MISTO XTTS 8 + S2-Pro 2 (22/11)"}
 
 
 def log(msg):
@@ -53,6 +54,11 @@ def main():
         log("os 4 já postados — apago a tarefa")
         subprocess.run(["schtasks", "/delete", "/tn", "PostarXttsTeste", "/f"], capture_output=True)
         return
+    # 23/11 (dona: "coloque pelo menos o último como público"): o MAIS NOVO primeiro e UM por rodada — antes subiam em
+    # série e cada um só tentava no intervalo do outro
+    faltam = sorted(faltam, key=lambda v: max([f.stat().st_mtime for f in FICHAS.glob(f"{v}_*/nuvem.json")] +
+                                             [f.stat().st_mtime for f in FICHAS.glob(f"{v}/nuvem.json")] + [0]),
+                    reverse=True)[:1]
     for vid in faltam:
         # ficha NOVA (chegou depois de liberar o teste) — a velha do motor antigo pode ter o mesmo vid no nome
         fichas = [f for f in list(FICHAS.glob(f"{vid}_*/nuvem.json")) + list(FICHAS.glob(f"{vid}/nuvem.json"))
@@ -63,11 +69,11 @@ def main():
         env = dict(os.environ, LONGO_SO_FISH_POSTAR="0", LONGO_FOLGA_GB="0.4", PYTHONIOENCODING="utf-8")  # 21/11: D vive apertado; só estes 4
         try:
             r = subprocess.run([PY, "-X", "utf8", str(AQUI / "postar_longos.py"), "--so", vid], env=env,
-                               capture_output=True, text=True, timeout=3 * 3600, cwd=str(AQUI),
+                               capture_output=True, text=True, timeout=8 * 3600, cwd=str(AQUI),
                                creationflags=0x08000000)
             log(f"{vid}: saiu {r.returncode} | {(r.stdout or '')[-300:].strip()}")
         except subprocess.TimeoutExpired:
-            log(f"{vid}: passou de 3 h — tento na próxima")
+            log(f"{vid}: passou de 8 h — tento na próxima")  # 23/11: 3 h matava o envio de 5 GB (~3,5 h) — 3x seguidas
         url = postados().get(vid)
         if url:
             log(f"{vid} ({ALVOS[vid]}) NO AR: {url}")

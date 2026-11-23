@@ -26651,6 +26651,102 @@
         "script simples com ffprobe e roteiro que registra proporção de voz própria e fonte, para anexar em contestação"
       ],
       "origem": "area_yt_politica_conteudo_reutilizado__sonnet_0656.md 2026-11-22"
+    },
+    {
+      "id": "ytpol_atual",
+      "nome": "Regras YouTube 2026",
+      "subtemas": [
+        "Páginas oficiais atuais (support.google.com/youtube, blog.youtube) sobre conteúdo reutilizado/não original em recaps, Shorts e várias faixas de áudio em longos. A página que li pode estar defasada."
+      ],
+      "origem": "area_three_gpu_t4_headless__sonnet_0847.md 2026-11-22"
+    },
+    {
+      "id": "shorts_android_termux",
+      "nome": "Render de shorts no celular Android",
+      "subtemas": [
+        "FFmpeg em Termux com encoder de hardware (MediaCodec), fila de render entre PC e celular, e liberar disco após o upload"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1018.md 2026-11-22"
+    },
+    {
+      "id": "regras_youtube_conteudo_reutilizado",
+      "nome": "Regras oficiais de conteúdo reutilizado/inautêntico",
+      "subtemas": [
+        "Texto atual da política de monetização para recaps e vídeos automáticos em vários idiomas, citando a página e a data"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1018.md 2026-11-22"
+    },
+    {
+      "id": "shorts_to_longo",
+      "nome": "Ponte Short→longo",
+      "subtemas": [
+        "como canais novos ligam Short a vídeo longo (playlist, card, tela final) e o que as regras oficiais do YouTube permitem hoje"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1818.md 2026-11-22"
+    },
+    {
+      "id": "rec_top",
+      "nome": "Recaps mais vistos por nicho",
+      "subtemas": [
+        "formas de achar, via yt-dlp e páginas públicas, os recaps de anime e manhwa com mais views por inscrito, para escolher o que recapar"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0638.md 2026-11-23"
+    },
+    {
+      "id": "longo_idioma",
+      "nome": "Longo em outras línguas",
+      "subtemas": [
+        "o que muda por país em título, capa e horário ao traduzir o roteiro de recaps de 1 a 4 h"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0638.md 2026-11-23"
+    },
+    {
+      "id": "adb_share_mediastore",
+      "nome": "Share de vídeo via MediaStore",
+      "subtemas": [
+        "Buscar exemplos de `content://media` com `--eu EXTRA_STREAM` e `-p com.google.android.youtube`, e problemas abertos sobre crash ou permissão no share"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0704.md 2026-11-23"
+    },
+    {
+      "id": "adb_fila_reconexao",
+      "nome": "Fila por celular com reconexão Wi-Fi",
+      "subtemas": [
+        "Buscar padrões de trava por serial e retry de `adb connect` em Python puro, sem Docker"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0704.md 2026-11-23"
+    },
+    {
+      "id": "youtube_regras_reuso",
+      "nome": "Política oficial de conteúdo reutilizado/inautêntico",
+      "subtemas": [
+        "ler a seção exata em support.google.com/youtube (pt-BR e en), com data e citação literal"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0732.md 2026-11-23"
+    },
+    {
+      "id": "termux_mediacodec",
+      "nome": "Encoder de hardware Android no Termux",
+      "subtemas": [
+        "issues e READMEs de ffmpeg no Termux sobre h264_mediacodec, build do FFmpeg com mediacodec e fallback seguro para libx264"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0944.md 2026-11-23"
+    },
+    {
+      "id": "zoompan_subpixel",
+      "nome": "Movimento suave de imagem estática em PC fraco",
+      "subtemas": [
+        "variantes baratas de Ken Burns sem tranco (pré-escala 2x, crop em subpixel, scale com `flags=` e `eval=frame`)"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0944.md 2026-11-23"
+    },
+    {
+      "id": "render_android_fila",
+      "nome": "Dividir o render entre PCs e celulares",
+      "subtemas": [
+        "scripts que distribuem trabalhos de ffmpeg entre vários dispositivos e liberam disco após cada render"
+      ],
+      "origem": "area_three_threshold_determinism__sonnet_0944.md 2026-11-23"
     }
   ],
   "projetos": [

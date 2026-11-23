@@ -1,0 +1,4 @@
+Os videos desta pasta foram transferidos com sucesso para o Drive em 23/11/2026.
+Destino: manhwa-drive:arquivo-pc1/produto_fila_23nov/landingpageia.ia
+Para restaurar esta pasta:
+D:\tools\rclone.exe copy "manhwa-drive:arquivo-pc1/produto_fila_23nov/landingpageia.ia" "D:\video-fila\produto_fila\landingpageia.ia"

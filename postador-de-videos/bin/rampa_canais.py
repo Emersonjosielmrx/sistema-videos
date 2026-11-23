@@ -345,6 +345,8 @@ def rodar(simular=False):
             elif not punido and cc.get("punido") and m.get("_de") == "recente":
                 cc.pop("punido", None)
                 mudancas.append((chave, 1, base + extra_atual, f"saiu da punição (mediana recente {m.get('mediana')})"))
+        if (punido or any((d["canais"].get(cr) or {}).get("punido") for cr in x["creds"])) and not fraco:  # 22/11: punido (1/dia) nunca sobe — só sai da punição
+            continue
         if fraco:
             ult = c.get("ultima_mudanca")
             recente = False
@@ -397,6 +399,15 @@ def rodar(simular=False):
         if any(_pegou_limite(cr) for cr in x["creds"]):
             continue
         teto_atual = base + extra_atual
+        # 22/11 dona ("garanta as postagens"): Tech Noturno (o melhor canal vivo, ~1.000/Short) ficava preso em 3/dia
+        # com 117 prontos: o max_dia do cadastro (2) + a rampa dá 3, mas "encheu o teto" comparava com 4 (base da
+        # política) — nunca enchia, nunca subia. O teto que vale é o do postador (teto_canal, com o max_dia).
+        # RAMPA_TETO_REAL=0 volta.
+        if os.environ.get("RAMPA_TETO_REAL", "1") != "0":
+            try:
+                teto_atual = min(teto_atual, politica.teto_canal({"id": cid}))
+            except Exception:  # noqa: BLE001
+                pass
         dias = {}
         for cr in x["creds"]:
             for dia, n in (por_dia.get(cr) or {}).items():

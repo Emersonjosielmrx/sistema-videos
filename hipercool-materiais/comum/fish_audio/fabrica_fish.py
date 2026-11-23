@@ -126,7 +126,18 @@ class Conta:
         self.reserva = []                  # [(criado_em, token)]
         self.uso = time.time()
         self.proc = None
-        self._abrir()
+        try:
+            self._abrir()
+        except BaseException:
+            # 23/11 (dona: abas do Fish ficavam abertas): falha ao abrir ("reCAPTCHA não carregou", deslogada) deixava
+            # o Chrome que NÓS abrimos vivo até a varredura de órfãos (30+ min); agora fecha na hora
+            if self.proc is not None:
+                try:
+                    self.cofre._fechar_porta(self.porta)
+                    log(f"{self.email}: abertura falhou, Chrome fechado (porta {self.porta})")
+                except Exception:  # noqa: BLE001
+                    pass
+            raise
 
     def _abrir(self):
         _, e = self.cofre.conta(self.email)
@@ -272,7 +283,7 @@ def conta(email):
         return c
 
 
-def _varrer_orfaos():
+def _varrer_orfaos(idade_min=180):
     """Fecha Chrome com a ponte do Fish (--proxy-server=127.0.0.1:185xx) cuja porta CDP não é de nenhuma conta aberta
     nesta fábrica, com mais de 3 min de vida (o que está abrindo agora fica). Só os da ponte do Fish — Kaggle/Flow/
     cofre comum têm outra ponte ou nenhuma."""
@@ -280,13 +291,37 @@ def _varrer_orfaos():
     import subprocess as _sp
     with _geral:
         minhas = {getattr(c, "porta", None) for c in _contas.values()}
-    ps = ("Get-CimInstance Win32_Process -Filter \"Name='chrome.exe'\" | Where-Object { $_.CommandLine -match "
-          "'proxy-server=127\\.0\\.0\\.1:185' -and $_.CommandLine -notmatch '--type=' } | ForEach-Object { "
-          "\"$($_.ProcessId)|$($_.CreationDate.ToString('o'))|$($_.CommandLine)\" }")
-    r = _sp.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, timeout=240,
-                creationflags=0x08000000)  # PC lento: listar processos chegou a levar > 60 s
-    from datetime import datetime as _dt, timezone as _tz
-    for linha in (r.stdout or "").splitlines():
+    # 23/11: o PowerShell (Get-CimInstance) estourava os 240 s com a CPU cheia (496 falhas x 371 fechados) e os
+    # órfãos sobravam 30+ min. wmic com filtro no WQL só devolve os Chrome da ponte do Fish: bem mais leve.
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    linhas = []
+    try:
+        r = _sp.run(["wmic", "process", "where",
+                     "name='chrome.exe' and CommandLine like '%proxy-server=127.0.0.1:185%' "
+                     "and not CommandLine like '%--type=%'",
+                     "get", "ProcessId,CreationDate,CommandLine", "/format:list"],
+                    capture_output=True, text=True, timeout=120, creationflags=0x08000000)
+        bloco = {}
+        for l in (r.stdout or "").splitlines() + [""]:
+            l = l.strip()
+            if not l:
+                if {"ProcessId", "CreationDate", "CommandLine"} <= bloco.keys():
+                    c = bloco["CreationDate"]  # 20261123131655.123456-180
+                    criado = _dt.strptime(c[:14], "%Y%m%d%H%M%S").replace(
+                        tzinfo=_tz(_td(minutes=int(c[21:]) if len(c) > 21 else 0)))
+                    linhas.append(f"{bloco['ProcessId']}|{criado.isoformat()}|{bloco['CommandLine']}")
+                bloco = {}
+            elif "=" in l:
+                k, v = l.split("=", 1)
+                bloco[k] = v
+    except (OSError, _sp.TimeoutExpired, ValueError):
+        ps = ("Get-CimInstance Win32_Process -Filter \"Name='chrome.exe'\" | Where-Object { $_.CommandLine -match "
+              "'proxy-server=127\\.0\\.0\\.1:185' -and $_.CommandLine -notmatch '--type=' } | ForEach-Object { "
+              "\"$($_.ProcessId)|$($_.CreationDate.ToString('o'))|$($_.CommandLine)\" }")
+        r = _sp.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, timeout=240,
+                    creationflags=0x08000000)
+        linhas = (r.stdout or "").splitlines()
+    for linha in linhas:
         try:
             pid, criado, cmd = linha.split("|", 2)
             m = _re.search(r"remote-debugging-port=(\d+)", cmd)
@@ -294,7 +329,7 @@ def _varrer_orfaos():
             idade = (_dt.now(_tz.utc) - _dt.fromisoformat(criado.strip())).total_seconds()
         except (ValueError, AttributeError):
             continue
-        if porta in minhas or idade < 180:
+        if porta in minhas or idade < idade_min:
             continue
         _sp.run(["taskkill", "/PID", pid.strip(), "/T", "/F"], capture_output=True, creationflags=0x08000000)
         log(f"Chrome órfão do Fish fechado (porta {porta}, {idade / 60:.0f} min aberto)")
@@ -332,6 +367,13 @@ def zelador(srv):
             vazio_desde = time.time()
         elif time.time() - vazio_desde > OCIOSO_S:
             log("fábrica ociosa: encerrando")
+            # 23/11 (dona: "as abas do Fish só abrem e não fecham"): a varredura de órfãos só roda com a fábrica VIVA —
+            # Chrome que sobrou (abriu depois do "não abriu a porta em 45 s") ficava até a próxima fábrica subir
+            # (88-98 min no log de 14:48). Varre uma última vez antes de sair.
+            try:
+                _varrer_orfaos()  # 3 min de folga: o login manual da dona (fish_audio.py) usa a mesma ponte
+            except Exception as e:  # noqa: BLE001
+                log(f"varredura final falhou ({type(e).__name__})")
             srv.shutdown()
             return
 

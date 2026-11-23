@@ -123,7 +123,15 @@ def _eventos(caps, p, rotulo, vw, vh, dur):
             continue
         s, e = _ts(ini), _ts(fim)
         # placa: pisca amarelo e pulsa (sempre >= 100%: nunca descobre a legenda deles); a 1ª entra direto
-        anim = (f"\\c{AMARELO}\\fscx103\\fscy110\\t(60,420,\\c&HFFFFFF&\\fscx100\\fscy100)" if k else "\\c&HFFFFFF&")
+        base = "&HFFFFFF&"
+        try:  # 23/11 dona: a placa ganha o tom do clima do capítulo (núcleo claro: o título preto segue legível)
+            import clima_tela as _ct
+            _cb = _ct.cor_barra(_ct.clima_dominante(ini, fim)) if _ct.LIGADO else None
+            if _cb:
+                base = _cb[1].replace("&H00", "&H")
+        except Exception:  # noqa: BLE001
+            pass
+        anim = (f"\\c{AMARELO}\\fscx103\\fscy110\\t(60,420,\\c{base}\\fscx100\\fscy100)" if k else f"\\c{base}")
         ev.append(f"Dialogue: 1,{s},{e},TarjaPlaca,,0,0,0,,{{\\an5\\pos({cx},{cy})\\p1\\bord2\\3c&H000000&\\shad0{anim}}}"
                   f"{desenho_placa}{{\\p0}}")
         # selo "CAPÍTULO N": pílula preta + texto amarelo, entram estalando

@@ -59,6 +59,18 @@ def medir():
     for pj in glob.glob(r"D:\hipercool-materiais\videos-comentarios\*\postar.json"):
         if not json.loads(Path(pj).read_text(encoding="utf-8")).get("postado"):
             prontos["comedianoturna"]["comentarios"] += 1
+    for pj in glob.glob(r"D:\hipercool-materiais\historias-em-frames\*\postar.json"):
+        try:
+            d = json.loads(Path(pj).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not d.get("pronto") or d.get("posted_url"):
+            continue
+        mp4 = Path(pj).parent / d.get("arquivo", "")
+        if not mp4.exists() or str(mp4).casefold() in subidos:
+            continue
+        for canal in d.get("canais") or []:
+            prontos[cred2slug.get(canal, canal)]["kit3d"] += 1
     try:  # 21/11: canal retirado pela dona (lista "desativados") não conta como reserva zerada
         desativ = {d.get("id") for d in json.loads(Path(r"D:\postador-de-videos\config\canais_status.json").read_text(encoding="utf-8")).get("desativados") or []}
     except (OSError, ValueError):
