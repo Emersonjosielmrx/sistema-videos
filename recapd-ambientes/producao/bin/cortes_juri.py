@@ -33,7 +33,8 @@ LOG = LINHA / "juri.log"
 TRAVA = LINHA / ".juri.lock"
 CFG_CCV = Path(r"D:\claude-code-video\config.json")  # só leitura: gateway e chave (não entra no sys.path)
 MODELO = "antigravity/gemini-3-flash"
-MODELO_RESERVA = "antigravity/gemini-3-flash"
+MODELO_RESERVA = "agy/gemini-3.8-flash-high"  # 25/11 (levantamento): reserva era IGUAL ao principal -> o timeout de 900 s
+# se repetia (23 vezes 21-23/11); o 3.8 é o do texto/vigia (98,6% ok em modelo_texto.jsonl)
 MOV_MIN = 4          # % de mudança entre 20% e 80% da cena: abaixo = cena PARADA (calibrado no claude-code-video)
 N_CENAS = 6          # o Short não guarda o roteiro com tempo: 6 pedaços iguais
 JURI_CADA = 4        # júri em 1 a cada 4 Shorts (muito volume)
@@ -380,7 +381,11 @@ def rodar(max_videos=6):
         # 12/11: um Short com erro derrubava a rodada inteira e voltava em 1º na próxima (preso pra sempre). Agora o
         # erro fica nele: registra no evolucao.jsonl com "erro" (não é tentado de novo) e segue pros outros.
         try:
-            j = avaliar(p, com_juri=(not lingua and (argon or n_total % JURI_CADA == 1)))
+            # 25/11 (levantamento modelos-ia): 'Argon = júri sempre' valia quando Argon era minoria; hoje 88% dos Shorts
+            # são Argon, então o JURI_CADA=4 estava anulado (768 de 774 Shorts com 4 sessões de IA cada). Agora o
+            # júri roda em 1 a cada JURI_CADA também nos do Argon. CORTES_JURI_TODO_ARGON=1 volta ao jeito antigo.
+            todo_argon = os.environ.get('CORTES_JURI_TODO_ARGON') == '1'
+            j = avaliar(p, com_juri=(not lingua and ((argon and todo_argon) or n_total % JURI_CADA == 1)))
         except Exception as e:  # noqa: BLE001
             log(f"{p.name}: júri falhou ({type(e).__name__}: {str(e)[:150]}) — marcado e segue pro próximo")
             with EVOL.open("a", encoding="utf-8") as f:

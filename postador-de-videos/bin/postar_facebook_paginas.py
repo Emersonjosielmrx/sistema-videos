@@ -307,7 +307,7 @@ def carregar_catalogo(max_h=2):
     return catalogo.sincronizar(salvar=False)
 
 
-NOBRE = (19, 22)  # 24/11 dona: no FB os reels de 18-21 h e da madrugada renderam mais que os de 21-24 h -> nobre a partir das 19 h (antes 21). 13/11 (Shorts de parceiro): o 1º post das 21-22 h rende ~100x nos canais fracos — 1 por Página/dia
+NOBRE = (18, 21)  # 25/11 análise de 85 Reels: 18-21 h rende 427 views/Reel, 21-24 h só 190 (pior faixa); 24/11 era 19-22, antes 21-22
 INICIO, FIM = 8, 23
 
 

@@ -18,6 +18,7 @@ Dados: _analise/metricas_studio.json.   Log: logs/metricas_rede.log
 """
 import argparse
 import json
+import os
 import statistics
 import sys
 import time
@@ -364,6 +365,18 @@ def coletar_lote(max_canais, so=None):
     ordem = sorted((c for c in alvos if c not in recente), key=lambda c: (lote.get(c, ""), -len(alvos[c])))
     if so:  # só esses canal_id (teste / rodada na mão)
         ordem = [c for c in alvos if c in so]
+    # 25/11 (levantamento aprendizado: leituras do Studio 33/dia -> 1/dia): canal SEM perfil de navegador (os do
+    # celular: SegredosRevelados, OcultoMundial...) nunca entra no "lido", então ficava SEMPRE no topo e ocupava as
+    # max_canais vagas — a rodada lia 0. Agora os sem perfil saem da fila antes de escolher. LOTE_PULA_SEM_PERFIL=0 volta.
+    if os.environ.get("LOTE_PULA_SEM_PERFIL", "1") != "0" and not so:
+        com = []
+        for c in ordem:
+            try:
+                yw._canal_e_mapa(c)
+                com.append(c)
+            except Exception:  # noqa: BLE001
+                pass
+        ordem = com
     log(f"lote: {sum(len(x) for x in alvos.values())} video(s) sem views em {len(alvos)} canal(is); "
         f"lendo {min(max_canais, len(ordem))} ({len(recente & set(alvos))} lido(s) nas ultimas {LOTE_RELER_H} h)")
     preenchidos = 0

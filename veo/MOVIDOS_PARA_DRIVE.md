@@ -2977,3 +2977,18 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - segredos_do_oce_20261120_080548_intro.mp4
   - segredos_do_oce_20261120_080548_prop.mp4
   - segredos_do_oce_20261120_080548_punch.mp4
+
+## 2026-11-25 17:13 — 68 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (68 MB) — 11 arquivos:
+  - recenas_ia_20261116_042658_final.mp4
+  - recenas_ia_20261116_042658_imp.mp4
+  - recenas_ia_20261116_042658_intro.mp4
+  - recenas_ia_20261116_042658_prop.mp4
+  - recenas_ia_20261116_042658_punch.mp4
+  - robos_desastrad_20261121_175438_final.mp4
+  - robos_desastrad_20261121_175438_imp.mp4
+  - robos_desastrad_20261121_175438_intro.mp4
+  - robos_desastrad_20261121_175438_prop.mp4
+  - robos_desastrad_20261121_175438_punch.mp4
+  - super_slow_ia_20261116_040229_punch.mp4

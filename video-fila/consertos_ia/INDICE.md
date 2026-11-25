@@ -1697,3 +1697,7 @@
 - 2026-11-25 14:54 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): _parceiro_20261125.log: mesmo erro 5x EVIDÊNCIA: D:\hipercool-materiais\anime\_pa → [20261125_145051_eda6.md](20261125_145051_eda6.md)
 - 2026-11-25 15:05 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem  → [20261125_150055_7a9c.md](20261125_150055_7a9c.md)
 - 2026-11-25 15:56 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 → [20261125_155046_b9b0.md](20261125_155046_b9b0.md)
+- 2026-11-25 16:24 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): celulares: 2 celulares fora do adb EVIDÊNCIA: fora: 100.117.134.73:5555, 100.103. → [20261125_162106_9b1a.md](20261125_162106_9b1a.md)
+- 2026-11-25 16:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia se → [20261125_164053_a8f9.md](20261125_164053_a8f9.md)
+- 2026-11-25 16:47 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia s → [20261125_164053_06aa.md](20261125_164053_06aa.md)
+- 2026-11-25 17:35 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) EVIDÊNCIA: D:\po → [20261125_173112_1e68.md](20261125_173112_1e68.md)

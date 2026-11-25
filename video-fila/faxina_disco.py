@@ -273,22 +273,6 @@ def main(simular=False):
                 log(f"cache do uv {d or '(C:)'}: {(r.stderr or r.stdout).strip().splitlines()[-1][:120]}")
             except Exception as e:  # noqa: BLE001
                 log(f"cache do uv {d or '(C:)'}: {type(e).__name__}")
-    # 23/10 (dona): vozes RVC paradas (.index) e fontes do anime já usadas vão pro Drive; voltam sozinhas quando usadas
-    if r"D:\hipercool-materiais\bin" not in sys.path:
-        sys.path.append(r"D:\hipercool-materiais\bin")
-    # 25/10 (dona): + sobras de treino/teste de voz (amostras_drive); tudo anotado no _NO_DRIVE.md de cada pasta
-    for nome in ("vozes_drive", "fontes_drive", "amostras_drive"):
-        try:
-            mod = __import__(nome)
-            (mod.subir_paradas if nome == "vozes_drive" else mod.subir)(simular)
-        except Exception as e:  # noqa: BLE001
-            log(f"{nome}: {type(e).__name__}: {e}")
-    if not simular:  # 23/10 (dona): mapa do Drive atualizado pra achar e pegar algo à mão (MAPA_DRIVE.md)
-        try:
-            import mapa_drive
-            mapa_drive.main()
-        except Exception as e:  # noqa: BLE001
-            log(f"mapa_drive: {type(e).__name__}: {e}")
     # 02/11 (dona): upscale que morreu no meio (2,8 GB em 2 arquivos) — parado há 6 h não está mais sendo escrito
     l = 0
     for raiz in TMP_UPSCALE:
@@ -351,6 +335,25 @@ def main(simular=False):
     livre = {u: shutil.disk_usage(u).free / 1e9 for u in ("C:\\", "D:\\")}
     log(f"TOTAL {'(simulado) ' if simular else ''}{total / 1e9:.1f} GB | livre agora: C: {livre['C:\\']:.1f} GB, "
         f"D: {livre['D:\\']:.1f} GB")
+    # 25/11 (levantamento disco-arquivos): as subidas ao Drive (vozes/fontes/amostras/mapa; 76 min de timeout em
+    # 23/11) vinham ANTES das limpezas locais e a faxina não chegava ao fim desde 22/11 (cache_reuso com vídeos de
+    # 04/11). Agora: limpezas locais primeiro, TOTAL, e as subidas por último.
+    # 23/10 (dona): vozes RVC paradas (.index) e fontes do anime já usadas vão pro Drive; voltam sozinhas quando usadas
+    if r"D:\hipercool-materiais\bin" not in sys.path:
+        sys.path.append(r"D:\hipercool-materiais\bin")
+    # 25/10 (dona): + sobras de treino/teste de voz (amostras_drive); tudo anotado no _NO_DRIVE.md de cada pasta
+    for nome in ("vozes_drive", "fontes_drive", "amostras_drive"):
+        try:
+            mod = __import__(nome)
+            (mod.subir_paradas if nome == "vozes_drive" else mod.subir)(simular)
+        except Exception as e:  # noqa: BLE001
+            log(f"{nome}: {type(e).__name__}: {e}")
+    if not simular:  # 23/10 (dona): mapa do Drive atualizado pra achar e pegar algo à mão (MAPA_DRIVE.md)
+        try:
+            import mapa_drive
+            mapa_drive.main()
+        except Exception as e:  # noqa: BLE001
+            log(f"mapa_drive: {type(e).__name__}: {e}")
 
 
 if __name__ == "__main__":

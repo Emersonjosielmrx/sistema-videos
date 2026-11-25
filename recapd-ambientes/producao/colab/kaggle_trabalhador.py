@@ -456,8 +456,11 @@ def fazer(pid, gpu=None):
         try:
             destino_voz = RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz
             # 26/10: vozes ficam num cache único do Drive (colab_recap/vozes/<voz>); pedido antigo ainda traz a dele
+            # 25/11: vozes/<voz>/xtts_ft = modelo XTTS 88 treinado (1,8-5,6 GB) — só baixa se o pedido for 88
+            _quer88 = str((pedido.get("longo_override") or {}).get("xtts_versao") or "").startswith("88")
+            _sem88 = [] if _quer88 else ["--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**"]
             try:
-                rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(destino_voz))
+                rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(destino_voz), *_sem88)
             except RuntimeError:
                 pass
             if not (destino_voz / f"{voz}.pth").exists():
@@ -471,14 +474,15 @@ def fazer(pid, gpu=None):
             for v in pedido.get("vozes_lista") or []:
                 dv = RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v
                 try:
-                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(dv))
+                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(dv), *_sem88)
                 except RuntimeError:
                     pass
                 if (dv / f"{v}.pth").exists() and (dv / f"{v}.index").exists():
                     lista.append(v)
             for v in pedido.get("vozes_extra") or []:  # 28/10: vozes de personagem (anime-pipeline._falas_personagem)
                 try:
-                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v))
+                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v),
+                       "--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**")  # 25/11: personagem não usa o 88
                 except RuntimeError:
                     print(f"[{_agora()}] {pid}: voz de personagem {v} não baixou — essas falas ficam com o narrador",
                           flush=True)
@@ -693,7 +697,8 @@ def fazer_comentario(pid):
     cfg = json.loads((local / "pedido.json").read_text(encoding="utf-8"))
     for voz in {f["voz"] for f in cfg["falas"]}:
         try:
-            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz))
+            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz),
+               "--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**")  # 25/11: comentários não usam o 88
         except RuntimeError:
             pass
     cache = COM_DIR / "tmp" / cfg["cache"]
@@ -789,9 +794,11 @@ def fazer_short(pid):
     shutil.rmtree(local, ignore_errors=True)
     rc("copy", f"{FILA_SH}/{pid}", str(local))
     ped = json.loads((local / "pedido.json").read_text(encoding="utf-8"))
+    _q88 = str((ped.get("longo_override") or {}).get("xtts_versao") or ped.get("xtts_versao") or "").startswith("88")
     for voz in ped.get("vozes") or []:
         try:
-            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz))
+            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz),
+               *([] if _q88 else ["--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**"]))  # 25/11
         except RuntimeError:
             pass
     env_ped = {k: str(v) for k, v in (ped.get("env") or {}).items()}

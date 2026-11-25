@@ -69,6 +69,7 @@ DISPENSA = 9         # aprovações nas últimas 10 da categoria (e nada voltou)
 CASOS_DIA_MAX = 12   # teto de consertos automáticos por dia (todos os modelos)
 KIRO_DIA_MAX = 30    # 04/11 dona: Kiro renova 1x/mês e a quantidade é muito grande (o vigia antigo rodou o mês quase todo)
 REPETIDO_H, VOLTOU_H = 6, 24
+ETAPAS_ABERTAS = {"vigia", "vigia_rodando", "consertar", "consertando", "revisar", "revisando"}
 REGRAS_CONSERTO = (
     "REGRAS QUE NÃO SE QUEBRAM: nunca 2 contas no mesmo IP (nem em teste); nada abre janela na tela (rodar_oculto.vbs, "
     "CREATE_NO_WINDOW); não mexer nos workers do PC2 (hipercool); nunca postar público direto (agendado); 1080p mínimo; "
@@ -605,6 +606,12 @@ def abrir_casos(d, achados, agora):
         ch = a["chave"]
         ult = d["alarmes"].get(ch)
         if ult and (agora - datetime.fromisoformat(ult["em"])).total_seconds() < REPETIDO_H * 3600:
+            continue
+        # 25/11 (levantamento: 195 casos 'consertar' presos, reserva_zero do mesmo canal reaberto a cada 6 h — 23,5 h de
+        # IA gastas): já existe caso ABERTO com essa chave = não abre outro (o aberto segue andando). VIGIA_DEDUP=0 volta.
+        if os.environ.get("VIGIA_DEDUP", "1") != "0" and any(
+                c.get("chave") == ch and c.get("etapa") in ETAPAS_ABERTAS for c in d["casos"].values()):
+            d["alarmes"][ch] = {"em": agora.isoformat(timespec="seconds"), "titulo": a["titulo"]}
             continue
         # reapareceu < 24 h depois de um conserto aprovado = voltou (conta contra quem consertou)
         for c in d["casos"].values():

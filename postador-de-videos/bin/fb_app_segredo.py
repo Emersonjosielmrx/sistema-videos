@@ -40,8 +40,9 @@ def rodar(conta, modo):
         # Senha só pela variável FB_SENHA (nunca em arquivo/log). 1 tentativa só (errar várias trava a conta).
         import os
         # o FB mantém diálogos escondidos na página: clica só no "Confirmar" VISÍVEL do "Confirmar com senha"
-        if pg.get_by_text("Confirmar com senha").count():
-            cf = pg.locator("div[role=button]:visible, button:visible").filter(has_text="Confirmar")
+        if "senha" in (pg.inner_text("body") or "").casefold():
+            cf = pg.get_by_text("Confirmar", exact=True).locator("visible=true")
+            print(f"   botões 'Confirmar' visíveis: {cf.count()}", flush=True)
             if cf.count():
                 cf.last.click(timeout=15000); time.sleep(8)
         pg.screenshot(path=foto.replace(".png", "_pos_confirmar.png"))

@@ -46,8 +46,8 @@ def _ler(p, padrao):
 def processos():
     """[(pid, criado_em(datetime), linha_de_comando)] de python/chrome que interessam."""
     ps = ("Get-CimInstance Win32_Process | ? { ($_.Name -match 'python') -and $_.CommandLine -match "
-          "'postar_facebook_paginas|fb_criar_fila|fb_medir|services.facebook|postar_ms_energy|fb_token_assistido' -or ($_.Name -eq 'chrome.exe' "
-          "-and $_.CommandLine -match 'remote-debugging-port=(9798|9401)' -and $_.CommandLine -notmatch '--type=') } | "
+          "'postar_facebook_paginas|fb_criar_fila|fb_medir|services.facebook|postar_ms_energy|fb_token_assistido|fb_login_janela' -or ($_.Name -eq 'chrome.exe' "
+          "-and $_.CommandLine -match 'remote-debugging-port=(9798|9401|9746|9711)' -and $_.CommandLine -notmatch '--type=') } | "
           "% { \"$($_.ProcessId)|$($_.CreationDate.ToString('yyyy-MM-ddTHH:mm:ss'))|$($_.ParentProcessId)|$($_.CommandLine)\" }")
     out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, encoding="utf-8",
                          errors="replace").stdout

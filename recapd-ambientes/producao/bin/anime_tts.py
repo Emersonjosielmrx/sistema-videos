@@ -1660,7 +1660,13 @@ def _narrar_xtts(lines, audio_dir, so=None):
         # NÃO vira XTTS 8 escondido: avisa alto, grava marca e deixa a frase pro próximo motor.
         _v88 = os.environ.get("VOZ_CLONADA") or ""
         _ck88 = VOZES_DIR / Path(_v88).name / "xtts_ft"
-        if not (_v88 and (_ck88 / "model.pth").exists()):
+        if not (_ck88 / "model.pth").exists() and so is not None and os.environ.get("XTTS88_REVEZ_SEM_TREINO", "1") == "1":
+            # 25/11: revezamento (vários narradores no vídeo, so = só as frases desta voz): a voz SEM treino narra no
+            # XTTS 8 normal (avisa no log) em vez de travar o vídeo inteiro. Vídeo solo sem treino continua = erro.
+            logging.warning(f"[xtts88] {_v88} sem modelo treinado — no revezamento narra no XTTS 8 normal")
+            os.environ.pop("XTTS_CKPT", None)
+            versao = "8"
+        elif not (_v88 and (_ck88 / "model.pth").exists()):
             logging.error(f"[xtts88] {_v88 or 'sem narrador'} NÃO tem modelo treinado em {_ck88} — "
                           "XTTS 88 exige treino do narrador; treine a voz antes (job_xtts_finetune.py)")
             try:
@@ -1669,8 +1675,9 @@ def _narrar_xtts(lines, audio_dir, so=None):
             except OSError:
                 pass
             return
-        os.environ["XTTS_CKPT"] = str(_ck88)
-        versao = "8"  # mesma receita do 8 (receita 4/5/6 final entra aqui depois da escolha da dona)
+        else:
+            os.environ["XTTS_CKPT"] = str(_ck88)
+            versao = "8"  # mesma receita do 8 (receita 4/5/6 final entra aqui depois da escolha da dona)
     if not _xtts_pronto():
         logging.warning("[xtts] sem ambiente — narração segue no Fish/Kitten")
         return
@@ -2128,6 +2135,8 @@ def _narrar_online(lines, audio_dir, so=None):
                 voz_site = None
             if not voz_site:
                 return
+        pos_on = os.environ.get("FISH_ONLINE_POS", "1") != "0"
+        risos = {}
         ped = []
         for i, line in enumerate(lines):
             if so is not None and i not in so:
@@ -2135,15 +2144,44 @@ def _narrar_online(lines, audio_dir, so=None):
             out = Path(audio_dir) / f"audio_{i}.wav"
             if out.exists() and out.stat().st_size > 500:
                 continue
-            texto = _seguro(line)
+            # 25/11 (levantamento narracao-shorts-fish): o texto ia CRU pro Fish online (kkk = risada de robô, "..."
+            # imprevisível, letras repetidas pagas). Agora o MESMO _texto_fish dos longos; a risada real entra depois.
+            # FISH_ONLINE_POS=0 volta ao texto cru e sem pós.
+            if pos_on:
+                texto, riso = _texto_fish(_seguro(line))
+                risos[i] = riso
+            else:
+                texto = _seguro(line)
             if texto.strip():
                 ped.append((i, texto, str(out)))
         if not ped:
             return
+        if pos_on:  # aceleração do gol (sequências de tensão/ação aceleram até o desfecho), igual aos longos
+            try:
+                import climas_voz
+                _marcar_gol(lines, climas_voz.escolher([_seguro(x) for x in lines], audio_dir))
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[online] aceleração do gol pulada ({type(e).__name__})")
         feitos = fish_lote.gerar(ped, log=lambda m: logging.info(m), voz=voz_site)
         if feitos:
+            textos = {i: t for i, t, _ in ped}
+            impactos = _impactos_do(audio_dir) if pos_on else []
+            voz_nome = Path(os.environ.get("VOZ_CLONADA") or "").name
             for i in feitos:  # nivela + efeito da voz; mesma cauda/margem das outras bases na última frase
                 _acabamento_fish(Path(audio_dir) / f"audio_{i}.wav", os.environ.get("VOZ_CLONADA") or "")
+                if pos_on:  # 25/11: o pós do Fish dos longos (aprovado pela dona 20/11), só atempo/asetrate no código
+                    out = Path(audio_dir) / f"audio_{i}.wav"
+                    try:
+                        _ritmo_fish(out, voz_nome, textos.get(i, ""), i, impactos, len(lines))
+                        g_ = _GOL_CTX.get(i)
+                        if g_ and g_[0] in ("gol", "falha"):
+                            _desfecho_gol(out, g_[0], voz_nome)
+                        if _tem_respeito_piada(textos.get(i, ""), i):
+                            _esticar_s_respeito(out, texto=textos.get(i, ""))
+                        if risos.get(i):
+                            _risada_real(voz_nome, out)
+                    except Exception as e:  # noqa: BLE001
+                        logging.warning(f"[online] pós da frase {i} falhou ({type(e).__name__}: {str(e)[:80]})")
                 if i == len(lines) - 1:
                     _aplicar_margem_final(Path(audio_dir) / f"audio_{i}.wav")
             (Path(audio_dir) / "_voz_online.json").write_text(json.dumps(

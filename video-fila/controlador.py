@@ -756,11 +756,53 @@ def _agora(procs, jobs, rod_pc1, hiper_pc2, est):
     return {"pc1": pc1, "pc2": pc2}
 
 
+def _central_reserva_orfa():
+    """25/11 (postagem parada 30 h em 23-25/11 e de novo das 11:31 às 20h de 25/11): a CENTRAL-RESERVA do desktop grava
+    POSTAGEM_DESLIGADA.json no PC1 ("o DESKTOP é a central") e o desktop — o MacBook sendo formatado — some. Se o
+    botão é da central-reserva e o desktop não responde ao ssh por 2 rodadas seguidas (~20 min), o PC1 devolve a
+    central sozinho (renomeia o arquivo, nunca apaga) e avisa. CENTRAL_RESERVA_AUTO=0 desliga."""
+    arq = Path(r"D:\postador-de-videos\config\POSTAGEM_DESLIGADA.json")
+    if os.environ.get("CENTRAL_RESERVA_AUTO", "1") == "0" or not arq.exists():
+        return
+    try:
+        txt = arq.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return
+    if "CENTRAL-RESERVA" not in txt:
+        return  # botão desligado por outro motivo (a dona): não mexe
+    r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "desktop", "echo ok"],
+                       capture_output=True, text=True, timeout=25, creationflags=0x08000000)
+    marca = BASE / "estado" / "central_reserva_fora.txt"
+    if "ok" in (r.stdout or ""):
+        marca.unlink(missing_ok=True)
+        return  # o desktop está vivo: ele é mesmo a central
+    if not marca.exists():
+        marca.write_text(datetime.now().isoformat(timespec="seconds"), encoding="utf-8")
+        log("[!] postagem DESLIGADA pela central-reserva e o desktop não responde — se seguir assim, devolvo a central")
+        return
+    destino = arq.with_name(f"POSTAGEM_DESLIGADA.json.central_reserva_orfa_{datetime.now():%Y%m%d_%H%M}")
+    arq.replace(destino)
+    marca.unlink(missing_ok=True)
+    log(f"[!] central-reserva sem o desktop há 2+ rodadas: postagem RELIGADA no PC1 ({destino.name})")
+    try:
+        import avisos
+        avisos.enviar("🔌 A postagem estava desligada pela CENTRAL-RESERVA do desktop, mas o desktop não responde. "
+                      "O PC1 religou a postagem sozinho. Se o desktop voltar a ser a central, rode o ASSUMIR de lá.",
+                      "controlador", importante=True, html_ok=False)
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def rodada(simular=False):
     ok, motivo = controle.ligado("controlador", "producao")
     if not ok:
         log(f"desligado: {motivo}")
         return
+    if not simular:
+        try:
+            _central_reserva_orfa()
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] checagem da central-reserva falhou ({type(e).__name__})")
     est = _ler_estado()
     if not simular:  # 06/11: batimento no INÍCIO — a rodada que espera o ssh do PC2 fora do ar passava de 25 min e o
         _gravar({**est, "inicio_rodada": datetime.now().isoformat(timespec="seconds")})  # painel acusava "parado"

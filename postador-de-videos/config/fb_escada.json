@@ -69,7 +69,8 @@
   "degrau": 0
  },
  "misterios_noturnos": {
-  "degrau": 0
+  "degrau": 0,
+  "viral_desde": "2026-11-25T19:29:22"
  },
  "inventoreact": {
   "degrau": 0
@@ -124,8 +125,16 @@
   "degrau": 0
  },
  "tech_noturno": {
-  "degrau": 0,
-  "segurar_ate": "2026-11-27T12:08:05"
+  "degrau": 1,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T20:02:16",
+  "historico": [
+   {
+    "quando": "2026-11-25T20:02:16",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "manhwa_hindi": {
   "degrau": 0

@@ -228,3 +228,23 @@ casa: Instagram 1 conta por IP) — dar IP rnprmtfo livre por conta (livres: 1,2
 completo de Short nas máquinas; (4) HP/MacBook sem Fish; (5) rodizio_longos preso no desktop.
 Da dona: rascunho cPQnT-EZuxE no Fio da Meada; login do YouTube nos notebooks rápidos; canais em descanso (o médico
 decide sozinho); vinheta do Lemo; teto diário do TikTok.
+
+## 25/11 tarde/noite — "faça tudo que você pode fazer só" (dona)
+- rodizio_longos: desktop fora = STI (`_maquina()`; RODIZIO_MAQUINA força).
+- Instagram x IP: os 100 IPs rnprmtfo já têm dono (Kaggle/Fish/TikTok) — NÃO há IP livre pra dar 1 por conta do
+  Instagram sem cruzar com conta do Kaggle (regra do banimento). Fica: fakenews.ia4 + iapro.mentoria no IP 2 grátis (a
+  exceção do TikTok). Precisa de IPs novos (Webshare paga ou conta grátis nova) -> decisão da dona.
+- PLANO_MELHORIAS.md escrito (levantamento\, 128 achados em fila por impacto/esforço). Feitos desta fila:
+  * faxina_disco: limpezas locais primeiro, subidas ao Drive por último (antes travava 76 min e não chegava ao fim).
+  * cortes_juri: júri em 1 a cada 4 também nos do Argon (era 768/774) + reserva agy/gemini-3.8 (era igual ao principal).
+  * vigilancia: não reabre caso com a mesma chave aberto; 222 duplicados fechados (270 -> 48 problemas reais).
+  * FocoShorts: limite 20 -> 60 min (era cortado antes de gravar o aprendizado).
+  * metricas_rede: lote pulava sempre nos canais de celular sem perfil -> lia 0; agora pula antes (teste: 30 de 30).
+  * decisor_ab.py + tarefa DecisorAB 06:20: fecha A/B prontos/empatados sem IA. Fechou: gancho_remotion=B (venceu),
+    gancho_meio/mascote/fala_rapida/saudacao=A (empate com ~400 por braço). bkp cortes_ajustes.json.bkp_decisor_*.
+  * anime_tts._narrar_online (Shorts): _texto_fish (sem kkk/... cru, menos crédito) + ritmo/gol/desfecho/respeito/
+    risada real dos longos. FISH_ONLINE_POS=0 desliga.
+  * anime-pipeline._lista_json_ia: JSON cortado da IA aproveita os itens completos (36/124 longos saíam sem falas e
+    sem ganchos). Subido pro Kaggle (montar_pacote --codigo, conferido no Drive).
+- HP: Fish NÃO funciona — reCAPTCHA Enterprise recusa (HTTP 400 "verification failed" 6/6); CPU AMD Turion sem SSE4.2.
+  Contas devolvidas ao PC1, fábrica desligada lá. Fish fica em STI/asusx/itau.

@@ -28,14 +28,14 @@
  "texto_video_modelo": "gemini-4-argon",
  "texto_video_reserva": "agy/gemini-3.8-flash-high",
  "texto_video_timeout_s": 120,
- "gancho_remotion": "ab",
- "gancho_meio": "ab",
+ "gancho_remotion": "B",
+ "gancho_meio": "A",
  "fx_choque": "B",
- "mascote": "ab",
+ "mascote": "A",
  "curto": "B",
- "fala_rapida": "ab",
+ "fala_rapida": "A",
  "fala_delta": 15,
- "saudacao": "ab",
+ "saudacao": "A",
  "ninguem_esperava": "A",
  "horario_fraco": "ab",
  "_variantes": "30/10: testes A/B/C/D… pelo bin\\variantes.py. Valor \"ab\"/\"abc\"/\"abcd\" ou lista [\"x\",\"y\",\"z\"] = teste com N braços (sorteio estável md5 por vídeo); valor fixo (\"A\", \"B\", \"lateral\"…) = sem teste. Placar: bin\\placar_variantes.py -> D:\\video-fila\\linhas\\CORTES\\placar_cortes_testes.json/.md. Decidir só pela régua D1/D3 do FABLE_DECISOES.md, nunca pelo júri.",
@@ -1096,6 +1096,46 @@
     "Abra a 1ª frase com conflito, número ou pergunta concreta da cena, em até 8 palavras; nunca com substantivo solto ('Um município...') nem revelando o final."
    ],
    "porque": "GOSTO, 1 regra só, para medir. A abertura fraca repete em 2 Shorts (f38972 q01 'UM MUNICÍPIO', 778ee4 q02 'FREGUÊS CARO'). A regra não pede saudação nem bordão do narrador e não contradiz as regras fixas. O spoiler do final continua proibido."
+  },
+  {
+   "em": "2026-11-25T17:17",
+   "quem": "decisor_ab",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "A",
+   "porque": "EMPATE: 408+ medidos por braço sem diferença (P<0,95); fica o padrão A; n por braço {'A': 441, 'B': 408}"
+  },
+  {
+   "em": "2026-11-25T17:17",
+   "quem": "decisor_ab",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "B",
+   "porque": "placar PRONTO (D3+D16): ['B'] melhor que A; n por braço {'A': 397, 'B': 432}"
+  },
+  {
+   "em": "2026-11-25T17:17",
+   "quem": "decisor_ab",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "A",
+   "porque": "EMPATE: 416+ medidos por braço sem diferença (P<0,95); fica o padrão A; n por braço {'A': 416, 'B': 421}"
+  },
+  {
+   "em": "2026-11-25T17:17",
+   "quem": "decisor_ab",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "A",
+   "porque": "EMPATE: 414+ medidos por braço sem diferença (P<0,95); fica o padrão A; n por braço {'A': 414, 'B': 414}"
+  },
+  {
+   "em": "2026-11-25T17:17",
+   "quem": "decisor_ab",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "A",
+   "porque": "EMPATE: 390+ medidos por braço sem diferença (P<0,95); fica o padrão A; n por braço {'A': 390, 'B': 400}"
   }
  ]
 }

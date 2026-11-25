@@ -47,6 +47,31 @@ _FORMATS = {
 }
 
 
+
+def _lista_json_ia(resp):
+    """25/11 (levantamento narracao-longos: 36 de 124 longos saíram com 0 falas e 0 ganchos por JSONDecodeError — a IA
+    corta o JSON no meio quando pede centenas de itens). Lê a lista inteira; se quebrou, aproveita os itens COMPLETOS
+    até o último '}' ou '"' fechado antes do corte. Nada aproveitável = []. JSON_TOLERANTE=0 volta ao estrito."""
+    m = re.search(r"\[.*\]", resp or "", re.S)
+    bruto = m.group(0) if m else (resp or "")[(resp or "").find("["):] if "[" in (resp or "") else ""
+    if not bruto:
+        return []
+    try:
+        return json.loads(bruto)
+    except ValueError:
+        if os.environ.get("JSON_TOLERANTE", "1") == "0":
+            raise
+    for fecho in ("}", '"'):
+        k = bruto.rfind(fecho)
+        while k > 0:
+            try:
+                r = json.loads(bruto[:k + 1].rstrip().rstrip(",") + "]")
+                logging.warning(f"[longo] JSON da IA veio cortado — aproveitados {len(r)} item(ns) completos")
+                return r
+            except ValueError:
+                k = bruto.rfind(fecho, 0, k)
+    return []
+
 def parse_txt_script(script_path):
     """Lê o roteiro .txt (1 frase por linha) e devolve a lista de frases não-vazias.
     Cada frase vira um clipe: é narrada (TTS) e mapeada sobre uma fatia do vídeo."""
@@ -1002,8 +1027,7 @@ def _falas_personagem(lines, tempos, workspace):
                                                                        max_tokens=max(3000, qtd * 60), temperature=0.7,
                                                                        timeout=180,
                                                                        rodadas=3)
-            m = re.search(r"\[.*\]", resp, re.S)
-            itens = [x for x in (json.loads(m.group(0)) if m else []) if isinstance(x, dict) and x.get("fala")]
+            itens = [x for x in _lista_json_ia(resp) if isinstance(x, dict) and x.get("fala")]
         except Exception as e:  # noqa: BLE001
             logging.warning(f"[longo] falas de personagem: IA falhou ({type(e).__name__}) — sem falas")
             itens = []
@@ -1232,7 +1256,7 @@ def _resumo_longo(lines, tempos, workspace, video_path):
                 resp = ""
             m = re.search(r"\[.*\]", resp, re.S)
             try:
-                bruto = json.loads(m.group(0)) if m else []
+                bruto = _lista_json_ia(resp)
                 itens = [{"frase": str(x["frase"]).strip(), "linha": int(x.get("linha") or 0)} for x in bruto
                          if isinstance(x, dict) and str(x.get("frase") or "").strip()]
             except (ValueError, TypeError, KeyError):
@@ -1311,8 +1335,7 @@ def _ganchos_longo(lines, tempos, workspace):
         try:
             resp, _m, tent = claude_client.generate_text_vivo(prompt, claude_client.CADEIA_TEXTO_LONGO, max_tokens=1500,
                                                               temperature=0.7, timeout=120, rodadas=2)
-            m = re.search(r"\[.*\]", resp or "", re.S)
-            itens = [str(x).strip() for x in (json.loads(m.group(0)) if m else []) if str(x).strip()]
+            itens = [str(x).strip() for x in _lista_json_ia(resp) if str(x).strip()]
         except Exception as e:  # noqa: BLE001
             logging.warning(f"[longo] ganchos: IA falhou ({type(e).__name__}) — sem ganchos")
             itens = []

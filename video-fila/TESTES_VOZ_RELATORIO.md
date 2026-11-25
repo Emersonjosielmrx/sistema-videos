@@ -1,8 +1,8 @@
-# Teste gradual de formatos e vozes — 25/11 15:35
+# Teste gradual de formatos e vozes — 25/11 18:35
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 784.5 de 1487 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 790.0 de 1504 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -37,7 +37,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 53% (1) | 2/0 | 0 |
 | voz:pan_dbz | testando | 2 | 0 | 0 | 1 | 1 | 1.0/2 | 0.50 | 0 | - | 2/0 | 0 |
-| voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2007 | 48% (2) | 2/0 | 0 |
+| voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2007 | 49% (2) | 2/0 | 0 |
 | voz:ram | testando | 2 | 0 | 0 | 1 | 1 | 0.5/2 | 0.38 | 0 | - | 2/0 | 0 |
 | voz:seu_madruga | testando | 2 | 0 | 0 | 2 | 1 | 1.0/2 | 0.50 | 83 | 35% (1) | 2/0 | 0 |
 | formato:trio_chaves | testando | 4 | 0 | 0 | 1 | 1 | 0.5/1 | 0.50 | 0 | - | 2/0 | 0 |

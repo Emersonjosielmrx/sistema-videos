@@ -2174,7 +2174,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T18:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-25T13:16:47",
+     "em": "2026-11-25T19:16:21",
      "tipo": "saude_morto",
      "maquina": "x200ma"
     },
@@ -2554,7 +2554,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-25T07:21:46",
+     "em": "2026-11-25T19:17:35",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -2845,7 +2845,7 @@
     "base": 90,
     "nivel": 5,
     "teto": 165,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-11-19T17:08:00",
     "ultimo_degrau": "2026-11-25T00:08:51",
     "ultimo_sinal": {
@@ -2908,6 +2908,11 @@
       "em": "2026-11-25T16:08:07",
       "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
       "teto": 165
+     },
+     {
+      "em": "2026-11-25T19:07:58",
+      "o_que": "janela limpa: volta a subir",
+      "teto": 165
      }
     ]
    },
@@ -2943,11 +2948,11 @@
    },
    "inovaremanhwaverse5": {
     "base": 90,
-    "nivel": 4,
-    "teto": 150,
+    "nivel": 5,
+    "teto": 165,
     "estado": "subindo",
     "desde": "2026-11-20T13:08:06",
-    "ultimo_degrau": "2026-11-24T17:25:20",
+    "ultimo_degrau": "2026-11-25T18:07:59",
     "ultimo_sinal": null,
     "historico": [
      {
@@ -2969,6 +2974,11 @@
       "em": "2026-11-24T17:25:20",
       "o_que": "24 h sem sinal: sobe 1 degrau (135 → 150)",
       "teto": 150
+     },
+     {
+      "em": "2026-11-25T18:07:59",
+      "o_que": "24 h sem sinal: sobe 1 degrau (150 → 165)",
+      "teto": 165
      }
     ]
    }
@@ -4363,9 +4373,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-25T15:22:07",
+    "em": "2026-11-25T19:17:35",
     "tipo": "saude_morto",
-    "conta": "emersonjosiel02"
+    "conta": "emersonjosiel2030"
    },
    "historico": [
     {

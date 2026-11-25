@@ -1,0 +1,148 @@
+{
+ "conta": "inovareagenda",
+ "produto": "agenda_ia",
+ "marca": "Inovare Agenda",
+ "titulo": "Agenda IA atende o cliente que chama de madrugada",
+ "legenda": "Cliente que escreve de madrugada não precisa esperar até amanhã. A Agenda IA atende, agenda e confirma direto no WhatsApp, 24 horas por dia. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Cliente chama de madrugada?",
+  "pergunta_cliente": "Perdendo cliente que chama de madrugada no WhatsApp?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia cliente que escrevia à noite. Ele queria horário para o dia seguinte e ninguém respondia.",
+    "visual": "imagem",
+    "prompt_en": "standing at the tidy, well lit reception counter of a small Brazilian clinic, no people in focus",
+    "cenario_en": "standing at the tidy, well lit reception counter of a small Brazilian clinic",
+    "real_tema": "dono falando da dor do cliente que chama à noite",
+    "destaques": [
+     "escrevia à noite",
+     "ninguém respondia"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261125_164148_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje a Agenda IA responde no WhatsApp, oferece o horário livre e marca para o cliente sozinha.",
+    "visual": "imagem",
+    "prompt_en": "sitting at a clean, organized desk in a bright Brazilian salon office, tidy, well lit, no people in focus",
+    "cenario_en": "sitting at a clean, organized desk in a bright Brazilian salon office, tidy, well lit",
+    "real_tema": "dono explicando como a IA agenda sozinha",
+    "destaques": [
+     "oferece o horário livre"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Boa noite! Tem horário amanhã de manhã?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Boa noite! Tenho 9h ou 10h30 livres. Qual prefere?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode ser às 10h30."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pronto, agendado para amanhã às 10h30. Até lá!"
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261125_164148_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261125_164148_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora o cliente chama quando quiser e acorda com o horário marcado. Eu não preciso responder na hora.",
+    "visual": "imagem",
+    "prompt_en": "standing in a tidy, well lit Brazilian barbershop, clean counter behind him, no people in focus",
+    "cenario_en": "standing in a tidy, well lit Brazilian barbershop, clean counter behind him",
+    "real_tema": "dono falando do resultado para o negócio",
+    "destaques": [
+     "chama quando quiser",
+     "horário marcado"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261125_164148_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareagenda_20261125_164148_1.png"
+   }
+  ],
+  "legenda": "Cliente que escreve de madrugada não precisa esperar até amanhã. A Agenda IA atende, agenda e confirma direto no WhatsApp, 24 horas por dia. Link no perfil.",
+  "titulo": "Agenda IA atende o cliente que chama de madrugada",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "msg_madrugada",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 22,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "glitch",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": null,
+ "duracao_s": 29.66,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo",
+ "gerado_em": "2026-11-25T18:17:47",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.29,
+   "fala": "Perdendo cliente que chama de madrugada no WhatsApp?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.29,
+   "fim": 11.03,
+   "fala": "Eu perdia cliente que escrevia à noite. Ele queria horário para o dia seguinte e ninguém respondia.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 11.03,
+   "fim": 18.9,
+   "fala": "Hoje a Agenda IA responde no WhatsApp, oferece o horário livre e marca para o cliente sozinha.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 18.9,
+   "fim": 25.71,
+   "fala": "Agora o cliente chama quando quiser e acorda com o horário marcado. Eu não preciso responder na hora.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 25.71,
+   "fim": 29.66,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.33,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ }
+}
