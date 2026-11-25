@@ -1,0 +1,95 @@
+{
+  "resumo_area": "Postagem e recuperação (levantamento de 24/11, 01:30, só leitura). Pela ronda de 23/11 (D:\\tmp\\ronda_tarde.txt), 12 de 20 canais seguem restritos (abaixo de 30% da média de antes). Só 4 estão recuperados: Mistérios Noturnos com 7.336 views/dia, Vendas que Escalam com 1.174, Anime Noturno com 3.101 e Bilionário Noturno. O maior gargalo não é a política. É a esteira de envio, que desperdiça produção: dos Shorts gerados em 23/11, 46 de 92 foram para o Fato Chocante, canal cujo perfil no PC1 está deslogado desde 20/11 (56 tentativas 'morto' sem bloqueio). Em envios_por_maquina.jsonl a taxa de acerto no PC caiu para 5 ok contra 21 falhas em 23/11, e 2/27 em 22/11. As alavancas do médico (so_nobre) foram ligadas às 11:33 de 23/11, mas quase não valem: os Shorts já agendados ficam fora das 21-22 h, o reagendar_nobre falha nesses canais e ainda mexeu nos canais de CONTROLE do experimento. Com punido = 1 vídeo/dia e uma fila cheia, o agendador empurra vídeos para 30/12 e até 15/02. Os recuperados e parciais (Anime Noturno, inovare manhwa br, Tech/Mistérios) perdem vagas porque o vídeo voltou ao Drive e o envio pula ('sem video.mp4', 35 casos em 23/11). O que mais acelera: (1) parar de produzir e enviar para o canal sem login e mandar essas vagas aos recuperados; (2) fazer o so_nobre valer também nos já agendados, sem tocar nos canais de controle; (3) colocar um teto de dias à frente para canal punido; (4) trazer do Drive antes da hora os vídeos dos canais que rendem.",
+  "achados": [
+    {
+      "titulo": "Metade da produção do dia vai para o Fato Chocante, que não consegue subir nada (perfil deslogado desde 20/11)",
+      "problema": "O youtube_web_poster devolve 'morto: perfil do navegador não está logado' para o Fato Chocante desde 20/11. Nada marca o canal como bloqueado, então a produção (parceiro.json, fila_alvo 7) e o postador continuam mandando vídeos para ele todo dia. O canal tem 5 vídeos e 8 views no total. Enquanto isso, os canais que se recuperaram ficam sem vídeo.",
+      "evidencia": "D:\\tmp\\ronda_tarde.txt: 'Shorts gerados hoje ... por canal: Fato Chocante 46, Mistérios Noturnos 17, Anime Noturno 15' (46 de 92). D:\\postador-de-videos\\logs\\envios_por_maquina.jsonl (desde 20/11): fatochocante = morto 56, erro 7, ok 1. Por dia, 'não está logado': 20/11 21, 21/11 15, 22/11 8, 23/11 12; último registro 23/11 17:09. estado\\canais_views_hist.jsonl 24/11 00:14: Fato Chocante 'views': 8, 'videos': 5. youtube_web_poster.py:450 levanta Falha('morto', ...), mas grep 'marcar_canal|token_morto' em youtube_web_poster.py dá 0 ocorrências: só o youtube_poster.py (API, linha 281) chama politica.tratar_erro. Há 11 video.mp4 pendentes do novo_fatochocante em animes recap\\shorts (postar.json). D:\\recapd-ambientes\\producao\\config\\parceiro.json: Fato Chocante 'ativo': true, 'fila_alvo': 7 (conserto do vigia em 23/11).",
+      "proposta": "(a) No youtube_web_poster, quando o mesmo canal der 'morto' (perfil não logado / sem login no cofre) 2 vezes em 24 h, chamar politica.marcar_canal(canal, 'token_morto', ...). O bloqueio cai sozinho no relogin pelo token_hash. Se o hash não servir para o web, criar uma lista 'login_pendente' com validade de 24 h. O parceiro_diario já consulta pol.motivo_bloqueio (parceiro_diario.py:1394), então a produção para sozinha. (b) Avisar a dona uma vez (Telegram) que o Fato Chocante precisa de --logar, e só com ela: a conta é comprada/vietnamita e não pode ser logada de outro IP. (c) Mandar as vagas de produção desse canal para Anime Noturno, Mistérios e Tech, que estão recuperados.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Existe para a API: politica.tratar_erro marca token_morto (politica.py:1087-1096). Para o poster web não existe. O vigia (vigilancia.py) não tem caso para 'perfil não logado'."
+    },
+    {
+      "titulo": "Esteira de envio pelo PC quase parada: 5 ok contra 21 falhas em 23/11, e só o PC1 acerta",
+      "problema": "Fora o Fato Chocante, as falhas são timeouts do Playwright no Studio (Locator.click/wait_for) e o longo do Fio da Meada, que falha em todas as máquinas: 10 erros e 1 ok. O ledger mostra que os uploads do youtube_web_poster caíram de 117 (17/11) para 17-18/dia (21-22/11). Os canais recuperados não usam a rampa toda porque o envio não dá conta.",
+      "evidencia": "envios_por_maquina.jsonl, ok/falha por dia: 17/11 13/22, 18/11 4/52, 19/11 11/41, 20/11 12/26, 21/11 2/18, 22/11 2/27, 23/11 5/21. Falhas desde 17/11: pc1 'Locator.click: Timeout' 42, 'Locator.wait_for: Timeout' 26, 'idioma do Studio vi-vn' 14. ok por máquina: pc1 30, x200ma 12, hp 5, acer 1, pc2 1. logs\\uploads_ledger.jsonl, youtube_web_poster.py por dia: 117, 71, 79, 63, 18, 17, 29 (17-23/11). Fio da Meada em 23/11: pc2 'TimeoutExpired ssh' (6,4 min, 3402 MB) e pc1 'Locator.wait_for ytcp-uploads-dialog' (124,8 min, 3,64 Mbps).",
+      "proposta": "Separar a medida por classe: tirar 'morto' (achado 1) e o longo do Fio da Meada de 3,4 GB, que ocupa o PC1 por 2 h. Para o longo: recomprimir para menos de 1,5 GB antes de subir (1080p mínimo mantido) ou só tentar na máquina com mais banda. Os 42+26 timeouts de seletor precisam de print no momento da falha (logs\\envios_falhos já existe, politica.py:1326) para identificar o seletor quebrado. É um conserto de código no poster, com teste fora do PC1.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "Já existe: registro por máquina (_registrar_envio), envios_falhos, e o ?hl=pt-BR para o Studio em vietnamita (youtube_web_poster.py:442). Ainda assim o 'vi-vn' deu 14 erros em 19/11; não há esse erro depois de 19/11 no log."
+    },
+    {
+      "titulo": "O so_nobre do médico vale só para upload novo, e os Shorts já agendados dos canais tratados continuam fora das 21-22 h",
+      "problema": "horario_publicacao (politica.py:640-648) só empurra o horário pedido de upload NOVO. Esses canais já têm Shorts agendados para os próximos dias fora do nobre, e o reagendar_nobre falha justamente neles. O médico mede o efeito 3 dias depois (DIAS_AVALIAR=3) e vai concluir que 'so_nobre não funciona' sem a alavanca ter valido. Esse rótulo vai para est['nao_funciona'] e desliga a alavanca para sempre (medico_recuperacao.py:183).",
+      "evidencia": "Ledger, Shorts que abrem entre 24 e 28/11 (calculado do publish_at): HistoriasEmFrames (so_nobre desde 23/11 11:33) tem 2 no nobre e 5 fora; Filme Noturno (so_nobre) 1 no nobre e 2 fora; Imóvel em Foco (so_nobre) 2 e 1. logs\\reagendar_nobre.log 23/11 18:21: 'HistoriasEmFrames: DlClp8f5nTo ... metadata_update falhou' e 'Filme Noturno: ... cookies mortos'; 13:26: 'HistoriasEmFrames ... SSLError'. medico_recuperacao.py:43-45: DIAS_AVALIAR=3. Linhas 182-183: 'so_nobre' not in est['nao_funciona'].",
+      "proposta": "(a) O médico só começa a contar os 3 dias quando todos os Shorts agendados do canal estiverem no nobre ou depois do último agendado fora dele: gravar 't0_efetivo' na decisão. (b) Marcar como 'não aplicada' (em vez de 'não funciona') a alavanca cujo canal ainda tinha Shorts fora do nobre no período medido. (c) Para os que já estão agendados, priorizar o reagendar_nobre nos canais com so_nobre: hoje ele ordena por rendimento e pula o que não tem post no dia.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "Já existem o reagendar_nobre.py (tarefa ReagendarNobre 08:20/13:20/18:20) e o so_nobre em politica.horario_publicacao. Ainda não existe ligação entre o médico e o que já está agendado."
+    },
+    {
+      "titulo": "O reagendar_nobre mexeu nos canais de CONTROLE do experimento do médico duas horas depois do sorteio",
+      "problema": "O médico escolheu como CONTROLE (sem mexer) o CenaReact, o Curiosidades Noturnas, o Fio da Meada e o AssistIA às 11:33. Às 13:22 o reagendar_nobre levou 7 Shorts do Curiosidades Noturnas e 1 do CenaReact para 21-22 h. O controle passou a receber o mesmo tratamento, e a comparação 'alavanca vs controle' (vs_controle >= 1,3) vai dar falso 'não melhorou'.",
+      "evidencia": "D:\\video-fila\\MEDICO.md: 'Curiosidades Noturnas: controle_so_nobre ... CONTROLE (não mexo, comparo)' e 'CenaReact: controle_so_nobre' (23/11 11:33). logs\\reagendar_nobre.log: '[23/11 13:22:54] OK Curiosidades Noturnas: 3FONnkUd69U 24/11 13:30 -> 24/11 22:00' e mais 6 até 30/11, e '[23/11 13:24:51] OK CenaReact: fwbFz4n3S8c 26/11 11:00 -> 26/11 21:00'. grep 'controle|so_nobre|medico' em reagendar_nobre.py: nenhuma ocorrência. medico_recuperacao.py:266-268 calcula vs_controle.",
+      "proposta": "No reagendar_nobre.candidatos(), pular os canais cujo rampa_canais.json tem 'medico' começando com 'controle_' enquanto a medição não termina. Alternativa: o médico ignora como controle o canal que teve reagendamento no período (cruzando com o log). Para esta rodada, registrar em medico_recuperacao.json que o controle de Curiosidades e CenaReact foi contaminado.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não existe."
+    },
+    {
+      "titulo": "Canal punido (1 por dia) com fila cheia agenda Shorts até 3 meses à frente (30/12, 02/01, 15/02)",
+      "problema": "Com punido = 1/dia (PUNIDO_POR_DIA), o laço de horario_publicacao (até 40 dias, politica.py:649-666) empurra o vídeo para o primeiro dia livre, e o parceiro aceita mesmo assim. O vídeo é enviado agora, fica privado meses, gasta upload (o 'limite diário' conta envio) e trava o estoque. Quando o canal sair da punição, a agenda continua presa nesses horários. A regra de DIAS_FRENTE = 7 do parceiro (parceiro_diario.py:41) não segura isso.",
+      "evidencia": "recapd-ambientes\\producao\\logs\\parceiro_postar_auto.log: '[2026-11-21 23:10:52] Bilionário Noturno: AGENDADO ... -> 15/02 07:30 lá (pedido 06/01 07:30)', '[2026-11-22 23:57:42] Empresário Inteligente IA: ... -> 15/02 09:30', '[2026-11-23 00:13:57] Clínica Lucrativa IA: ... -> 15/02 09:30'. uploads_ledger: 39 Shorts com publish_at mais de 7 dias à frente (Dorama Noturno 25, Curiosidades 3, Bilionário 2, Empresário 2, Clínica 2, HistoriasEmFrames 1 com 2026-12-30, AssistIA 1 com 2027-01-02, CodigoInteligente 1 com 2027-01-01). fila_celulares\\pendentes tem pedidos para 2026-12-30 e 2027-01-01 (historiasemframes, clinicalucrativaia, imovelemfoco, vendasqueescalam).",
+      "proposta": "Em politica.horario_obrigatorio/checar_upload: se o horário calculado passar de agora + AGENDA_MAX_DIAS (ex.: 7), devolver 'cota' (não sobe agora). O vídeo fica no estoque (Drive) e vai para um canal que rende, ou espera o canal sair da punição. Chave nova AGENDA_MAX_DIAS, com 0 desligando.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Só existe o DIAS_FRENTE=7 do parceiro_diario, para planejar. Não há teto no politica.horario_publicacao, e os logs mostram vídeos agendados para 15/02."
+    },
+    {
+      "titulo": "Canais recuperados perdem vagas: o envio pula Shorts 'prontos mas sem video.mp4' (estão no Drive)",
+      "problema": "Anime Noturno (3.101 views/dia contra 58 antes) e inovare manhwa br (parcial, 37%) têm rampa alta (extra 4), mas abriram só 3 e 2 Shorts em 23/11. Na rodada, o parceiro_postar varre dezenas de pastas que estão no Drive e pula. Só o escolhido volta do Drive na hora (_trazer_do_drive), e em canal com intervalo de 45 min entre envios (rajada) a vaga se perde.",
+      "evidencia": "parceiro_postar_auto.log em 23/11: 35 linhas 'está pronto mas sem video.mp4 — pulado' (Anime Noturno 15, inovare manhwa br 14, Inovaremanhwaversethai 4, Tech Noturno 2); 'Anime Noturno: último envio do canal às 17:06 — o próximo só depois de 17:51'. uploads_ledger, aberturas por dia: Anime Noturno 22/11 4, 23/11 3; inovare manhwa br 7 (14/11) caindo para 2 (23/11). rampa_canais.json: novo_animenoturno extra 3 + max_dia 3 (cadastro mostra extra=4 por canais.json); hNQrW5ouNe0Ni5Me extra 4. parceiro_diario.py:1498-1500 ('só o ESCOLHIDO volta do Drive, na hora de subir').",
+      "proposta": "Pré-busca: uma vez por hora, para os canais com rendimento alto (recuperado ou parcial na ronda), trazer do Drive os N video.mp4 das próximas vagas do dia (N = teto - abertos), fora do caminho do upload. Usa o _trazer_do_drive que já existe, com uma chave PARCEIRO_PREBUSCA=0 para desligar. Ocupa pouco disco (cerca de 25 MB por Short).",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Já existe _trazer_do_drive (parceiro_diario.py:954), mas só na hora do envio. A reserva de 1 mês no Drive (estoque_drive) é a causa."
+    },
+    {
+      "titulo": "A agenda dos celulares e o cadastro ainda usam 15 h, hora marcada como EVITAR, e deixam de lado a 7 h (RECEITA)",
+      "problema": "Os sinais medidos em 2.160 Shorts dizem: 21 h = 8,9 vezes a mediana; 15 h = EVITAR (razão 0,53 e 0,70 nas duas metades); 7 h = RECEITA (1,5 e 1,8). Mesmo assim, o noite_encher planeja 15:00 em todo canal de celular, a escada usa EXTRAS=['15:00','18:00'], e 4 canais do cadastro têm horário de 15 h. A faixa 16-20 h também rende abaixo da mediana (0,67 a 0,8).",
+      "evidencia": "D:\\video-fila\\estado\\sinais_shorts.json: hora 21 razao_med 8.9 (n 70); receitas hora 15 'EVITAR' (razao_antigos 0.53, recentes 0.7, n 77/78); hora 7 'RECEITA' (1.5/1.8); hora 16 0.67, 19 0.8, 20 0.78. D:\\projeto celular sub controle\\canal_pronto\\noite_encher.py:33 HORARIOS = ['10:30','12:30','15:00','18:00','21:05']. escada_celulares.py: EXTRAS = ['15:00','18:00']. postagens_celular.jsonl, posts ok desde 20/11 por hora agendada: 15 h = 6, 18 h = 8. config\\canais.json, horarios_parceiro/rede às 15 h: animescomia, filmenoturno, inovare_thai, manhwareact.",
+      "proposta": "Trocar 15:00 por 07:30 ou 22:30 no noite_encher.HORARIOS e na escada EXTRAS, e tirar o 15:xx de animescomia, filmenoturno e manhwareact no cadastro. É só configuração, com o comentário de data e o sinal que justifica. Não muda o número de posts por dia.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O sinal está medido (sinais_shorts.json, 22/11) e o so_nobre/reagendar_nobre cuida das 21 h. Nada aplica o 'EVITAR 15 h' nem o 'RECEITA 7 h' na agenda."
+    },
+    {
+      "titulo": "Fila dos celulares: de cada 3 tentativas, 2 dão erro (troca de conta e câmera sem botão de importar)",
+      "problema": "Postar pelo celular (canal_pronto e escada) deu 18 ok e 38 erros em 23/11. Os erros vêm quase todos de dois aparelhos e de três telas: a troca de conta não abre (app do YouTube ou lista de Contas), a câmera do Shorts não tem o botão de importar, e o título não aparece no canal. Sem ID do vídeo, as views desses posts não são medidas, então o médico e a rampa não enxergam esses canais.",
+      "evidencia": "D:\\projeto celular sub controle\\postagens_celular.jsonl, por dia (ok/erro/incerto): 20/11 13/34/5, 21/11 15/3/5, 22/11 4/10/1, 23/11 18/38/1. Erros desde 20/11: 100.92.36.34 (A2) 'lista de Contas não abriu' 15, 'não vi o título no canal' 12, 'câmera do Shorts sem botão de importar' 9, 'app do YouTube não abriu' 8; 100.117.134.73 'app do YouTube não abriu' 13; 100.75.139.24 (G20) 'câmera sem botão de importar' 7; 2 casos 'NameError name forcar is not defined'. ronda_tarde.txt: 'Views desses posts ainda não são medidas (o app não devolve o ID do vídeo)'.",
+      "proposta": "(1) Corrigir o NameError 'forcar' (bug de código, aparece em 2 aparelhos). (2) No A2, que soma 47 dos erros, cortar a troca de conta: deixar 1 canal por aparelho e mandar os outros para aparelhos com 1 conta. Isso também reduz o risco do padrão de 17/11 (várias contas num aparelho). (3) Depois do 'ok', gravar o ID lido na lista 'Seus vídeos' no uploads_ledger para entrar na medição. Não religar a fila geral (PARAR.txt da dona).",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "fila_celulares\\PARAR.txt (dona 17/11) segue valendo, e devolver_fila_celular.py devolveu 166 pedidos. O canal_pronto/escada é outro caminho e está ativo. A2 com 2 contas (2035 e 2042) e A3 com 2 (2054 e mrx) foram autorizados pela dona em 20/11 (comentário em escada_celulares.py:37-41)."
+    },
+    {
+      "titulo": "Ficam 14 pedidos velhos em fila_celulares\\pendentes, alguns com data já passada (20/11) e outros para 30/12 e 01/01",
+      "problema": "A fila geral está parada (PARAR.txt), mas o pendentes ainda tem 14 pedidos que o devolver_fila_celular não devolveu (pulou: o posted_url é outro ou não há postar.json). Três são de 20/11 (inovaremanhwabr), quatro de 21/11 (cenareact) e outros agendados para 30/12 e 01/01. O distribuidor sobe de novo a cada ~30 min e para no PARAR. Se a dona tirar o PARAR, sobem Shorts velhos em horário vencido ou meses à frente.",
+      "evidencia": "fila_celulares\\pendentes (14 arquivos): 20261118_024505...json inovaremanhwabr agendar '2026-11-20 08:30' (3 assim); 20261119_*.json cenareact '2026-11-21 08:30' (4); 20261123_091720...json historiasemframes '2026-12-30 07:30'; clinicalucrativaia '2026-12-30 09:30'; imovelemfoco e vendasqueescalam '2027-01-01 09:30'. fila.log 24/11 00:14 a 01:08: 'distribuidor de pé' e logo depois 'PARAR.txt — distribuidor parado', 4 vezes.",
+      "proposta": "Rodar a limpeza (o devolver_fila_celular.py já faz isso) com um critério a mais: pedido com 'agendar' vencido ou mais de 7 dias à frente vai para devolvidos_23nov, e o vídeo original volta para a fila normal. Fazer isso antes de qualquer decisão de religar a fila. Só com o OK da dona, porque mexe em estado.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Já existe devolver_fila_celular.py (23/11), que devolveu 166 pedidos (pasta devolvidos_23nov) mas pulou estes 14."
+    }
+  ]
+}

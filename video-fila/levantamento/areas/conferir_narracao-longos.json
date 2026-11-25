@@ -1,0 +1,71 @@
+{
+ "area": "narracao-longos",
+ "conferido_em": "2026-11-24",
+ "vereditos": [
+  {
+   "titulo": "O motor novo da narração não tem medida de retenção e as views caíram",
+   "valido": true,
+   "motivo": "Os dados conferem. Em colab/views_longos.json: WEmcyeDuSxc 1, dMPo1zvSyCs 0, yOrT3vgoa4U 1, _r_CMoP9Hyw 16, t8tD4RSqdJs 2, Xiw0GwqrJXo 2 e RhT093bQeNw 3, contra AjgJG8HAfLk 204, SPThI7oMKGw 143 e ozdALiyIDVY 115. Em postador-de-videos/_analise/metricas_studio.json, RhT093bQeNw, t8tD4RSqdJs, Xiw0GwqrJXo, _r_CMoP9Hyw e yOrT3vgoa4U não aparecem, e dMPo1zvSyCs tem 'erro: TimeoutError'. As chaves de longos_postados.json são ab, canal, canal_nome, duracao_s, em, estilo_titulo, experimento, narradores_modo, nome, seo_versao, tags, titulo, url, variante e vid: não há motor_voz. A conclusão 'as views caíram por causa do motor' está exagerada, por dois motivos. Primeiro, a idade: os antigos foram postados de 13 a 15/11 e os novos de 19 a 22/11. Segundo, o grupo 'motor novo' mistura Fish e XTTS: WEmcyeDuSxc (Jjd71), dMPo1zvSyCs (GoFY) e yOrT3vgoa4U (QwY2) saíram 100% Fish pelos pipeline.log.",
+   "correcao": "Manter a proposta (gravar motor_voz/versão/% S2-Pro na ficha e incluir os vídeos novos na leitura do Studio). Comparar com a mesma idade, por exemplo views e dur_media com 48 h, e separar Fish de XTTS e de S2-Pro. A leitura do Studio fala como conta e só pode sair pela saída fixa da conta."
+  },
+  {
+   "titulo": "O padrão XTTS 8 + S2-Pro 13 nunca foi produzido: o único misto é v2 e pegou 8% das frases",
+   "valido": true,
+   "motivo": "Confere. O config/motor_voz.json tem s2pro_versao '13' e _padrao_23nov 'teto 40%'. No RzoyNcnlIj8, o TESTE_NARRADORES.txt diz s2pro_versao '2'. O pipeline.log:89 mostra 'llama.cpp + modelo prontos em 2062s', o :178 mostra 'modo misto v2: 54/54 frases em 2879s (de 653)' e o :780 mostra 'xtts 597/597 em 3105s'. O teto está em anime_tts.py:1351 (0.40 na v13, 0.25 nas outras). Ele não limitou nada: 54 é bem menos que 25% de 653. Quem limitou foi a detecção _S2_EMO (linha 1229). A pasta mais recente de na_nuvem é a RzoyNcnlIj8, de 22/11: não existe longo v13.",
+   "correcao": "Detalhe: na v2 o gargalo foi a regex _S2_EMO, não o teto. Na v13, a linha 1362 também usa _s2_tags_v13. Rodar o teste no Kaggle, nunca no PC1."
+  },
+  {
+   "titulo": "As falas de personagem saem com a voz do narrador e a CONFERENCIA marca OK",
+   "valido": true,
+   "motivo": "Confere. A CONFERENCIA do e2nIzNGXvmA_xtts_momo mostra '✅ 135 falas marcadas' com 26 vozes, e o pipeline.log do mesmo longo tem 26 linhas 'não está nesta máquina'. Doze pipeline.log em na_nuvem têm essa linha, e nenhum tem 'baixada do Drive'. O anime_segments.py foi modificado em 23/11 11:03, depois do último longo (RzoyNcnlIj8, 22/11 13:41), então o conserto ainda não rodou em nenhum longo.",
+   "correcao": "O _baixar_voz_drive (anime_segments.py:348-363) grava 'voz X baixada do Drive' mesmo quando o rclone falha: o subprocess.run não confere o returncode. A prova certa é a falta de 'não está nesta máquina', como a proposta diz, e não a presença de 'baixada'. Vale também conferir o returncode antes de gravar no log."
+  },
+  {
+   "titulo": "A IA devolve JSON quebrado e o longo sai sem falas e sem ganchos, sem aviso à dona",
+   "valido": true,
+   "motivo": "Confere em parte. Há 36 CONFERENCIA com 0 falas e 36 com 0 mini-ganchos, mas só 4 casos de falas e 2 de ganchos vêm de JSONDecodeError. Nas outras cerca de 31, o log não registra JSONDecodeError antes de 'faltou falas' (exemplo: 0w1FjXmgX0w pipeline.log:33): a cadeia de modelos voltou vazia. O aviso que não sai foi confirmado: 37 pipeline.log têm \"aviso de 'faltou ...' não saiu (ModuleNotFoundError)\", e o claude_client.py:815-825 importa avisos de D:\\video-fila. Os números de a_cada_s 15 (config/longo.json:144) e max_tokens qtd*60 (anime-pipeline.py:986-990) também conferem.",
+   "correcao": "(a) O JSONDecodeError explica a minoria dos casos. A maior parte é a cadeia de IA vazia, então recuperar JSON cortado resolve pouco. Pedir em lotes menores ajuda nos dois casos. (b) O registrar_faltou já grava faltou.json na pasta (claude_client.py:785-797), mas nenhuma pasta de na_nuvem tem faltou.json e o colab/postar_longos.py não lê 'faltou'. A proposta é trazer o faltou.json do Kaggle junto com o pacote e fazer o postar_longos ler esse arquivo e avisar. Não é preciso criar o arquivo, ele já existe."
+  },
+  {
+   "titulo": "Imagem parada de 55 a 62 s passa no QA e é postada",
+   "valido": true,
+   "motivo": "Confere. O qa.json do e2nIzNGXvmA_xtts_momo tem 'imagem parada 2820–2881 s (61.7 s)', o do 8pWoAFAT49w tem '496–553 s (57.4 s)' e o do Qet3goTGf0Q tem '3042–3097 s (55.0 s)'. A regra está em postar_longos.py:339-358 ('avisa e POSTA, só censura trava') e o limite de 6 s em qa_video.py:6. Mas o impacto está exagerado. Pelo achado 8, o público assiste de 37 a 248 s em média, então congelamentos em 2820 s e 3042 s quase ninguém vê. Só o de 496 s (8pWo) cai perto da zona que ainda tem público. Além disso, e2nIzNGXvmA_xtts_momo é um teste solo.",
+   "correcao": "Impacto médio, não alto. Priorizar o conserto (zoom ou deriva, ou troca de painel) nos primeiros 5 a 10 min, onde está o público. O limite de 15 s quem decide é a dona."
+  },
+  {
+   "titulo": "A mascote fala com a voz do narrador em todos os longos XTTS",
+   "valido": true,
+   "motivo": "Confere. Oito pipeline.log (7 de 21/11 e 1 de 22/11) têm 'sem voz clonada da mascote nesta máquina'. Antes disso, 105 logs têm 'falas com a voz clonada', ou seja, no motor antigo funcionava. O voz_clone é 'moana' (config/longo.json:131). O RzoyNcnlIj8 CONFERENCIA marca '✅ 4 reações'.",
+   "correcao": "A condição da anime_segments.py:326 junta três coisas com OR: ANIME_MASCOTE_CLONE vazio, clone_ligado() falso (VOZ_CLONADA vazia, anime_tts.py:89-90) e .pth ausente. No modo XTTS a causa pode ser a VOZ_CLONADA vazia, e não o arquivo faltando. Nesse caso, baixar do Drive não resolve. Antes de copiar o _baixar_voz_drive, gravar no log qual das três condições falhou."
+  },
+  {
+   "titulo": "Longo de 3,4 GB leva 6,7 h para subir e falha no fim, travando a fila",
+   "valido": true,
+   "motivo": "Confere em colab/postar_longos.log. A linha 7586 tem 'envio: 3402 MB em 401 min', a 7587 tem 'TimeoutError ... 60000ms', a 7588 tem 'erro DEPOIS de subir (406 min) — pode ter ficado rascunho; preso ao Fio da Meada' e a 7609 tem '[24/11 01:01] preparando RzoyNcnlIj8' de novo. No postar_longos.py não achei checagem de duplicado ou rascunho antes de reenviar: o grep por 'duplic' não deu nada, só existe o LONGO_PRESO_AO_CANAL da linha 970. O render final usa crf 20 e 23 sem teto de bitrate (anime-pipeline.py:377, 433, 466, 785, 831). A conta 3402 MB em 3545 s dá cerca de 7,7 Mbps.",
+   "correcao": "A conferência do rascunho no Studio fala como conta: só pela saída fixa da conta (cofre.saida_kaggle ou proxy dela), nunca de casa. O teto de bitrate tem de manter 1080p e ser conferido com ffprobe. O 'travando a fila' está exagerado: no mesmo log, os outros canais já estavam TRAVADOS ou encerrados."
+  },
+  {
+   "titulo": "A retenção dos longos é de 1 a 4 min: o começo decide e o experimento do resumo está parado",
+   "valido": false,
+   "motivo": "O diagnóstico de retenção confere (ylUd-_4-GQ8 dur_media 185,7 e pct 3,4 no metricas_studio.json; ronda_tarde.txt:147 'A 0 / B 0'). A proposta falha em dois pontos. (1) A marcação A/B já existe: longos_postados.json tem os campos experimento e variante, e o kxohroSbgS8 já está como resumo_curto_gancho A. O experimento não anda porque o melhorador está PAUSADO pela dona, e não porque falte marcação. (2) 'Pôr o S2-Pro concentrado no 1º minuto' não tem prova nenhuma: não existe longo v13 (achado 2) nem leitura de retenção por motor (achado 1), então a proposta é palpite. Fazer o experimento andar sem o melhorador contorna a pausa que a dona decidiu."
+  },
+  {
+   "titulo": "A Fish na nuvem falhava calada e caía no Kitten (0/345)",
+   "valido": true,
+   "motivo": "Confere. O iWIgK8o9pxE pipeline.log tem nas linhas 50, 743 e 1066 '[fish nuvem] 0/345', '0/160' e '0/161 ... o resto no kitten_tudo', e o ZaWVmJcOjfo tem 0/25 e 0/149. O ZaWVmJcOjfo foi POSTADO em 20/11 08:12 (longos_postados.json, vid _r_CMoP9Hyw no views_longos), ou seja, a queda calada chegou ao canal. A CONFERENCIA não tem linha de motor.",
+   "correcao": "Usar como base o achado 4 corrigido: o faltou.json já é gravado, falta trazer de volta e ler no PC1."
+  },
+  {
+   "titulo": "Os testes solo dão alarme falso de revezamento",
+   "valido": true,
+   "motivo": "Confere. 29 de 124 CONFERENCIA têm 'Narradores por grupo ❌'. O render.json do e2nIzNGXvmA_xtts_momo tem narradores_modo 'solo', e a RzoyNcnlIj8 CONFERENCIA mostra '❌ (sem revezamento)'. Também não achei o gerador da CONFERENCIA em producao/bin nem em colab/*.py. Impacto baixo, como o achado já diz.",
+   "correcao": "Nem todos os 29 são solo. A linha só deve sair n/a quando narradores_modo for 'solo'. O gerador da CONFERENCIA precisa ser achado no pacote do Kaggle."
+  },
+  {
+   "titulo": "A legenda escorrega no XTTS e no S2-Pro: conserto de 22/11 ainda sem prova",
+   "valido": true,
+   "motivo": "Confere e há prova a mais. O TEMPOS_TODA_FRASE existe em anime_segments.py:246-249. O RzoyNcnlIj8 pipeline.log não tem nenhuma linha '[fish] tempos por palavra na GPU' nem 'tempos na GPU falharam', que o código grava quando roda (anime_segments.py, logs da função _tempos_fish). Ou seja, no único longo depois de 22/11 a medição não rodou: ou o pacote ainda não tinha o conserto, ou a função saiu cedo.",
+   "correcao": "No próximo longo, a prova é a linha '[fish] tempos por palavra na GPU: N/M frases' com N perto de M. Rodar no Kaggle, não no PC1."
+  }
+ ]
+}

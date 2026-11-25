@@ -169,6 +169,19 @@ sem re-marcar); nenhuma recusa/limite nova hoje; uploads HTTP normais. `test_adv
   (token errado só faria o upload_http renovar), mas evita gravar sobre o token bom de outro canal.
   Teste `TestCapturaTokenCanalCerto.test_token_usa_documenturl_do_pedido` (37 OK no pc1). `.bak_20261101_documenturl`.
 
+### 9ª rodada (23/11, DESKTOP) — testes em dia com o código de 13–23/11 + espelho do gemini-argo
+O código evoluiu desde 01/11 (outra sessão) e 2 testes ficaram para trás — não era bug da produção:
+- `bin/test_advertencias.py`: desde 14/11 o `_subir_http` desvia conta do Kaggle (IP fixo) ANTES do Enviador; com
+  email vazio o "na dúvida, não sobe por HTTP" devolvia None e o teste nem chegava no aviso. O teste agora simula
+  `_conta_no_kaggle = False` (a regra do Kaggle continua intacta). 12 OK (1 skipped) no pc1.
+- `tests/test_offline.py`: desde 13/11 o `upload_http._hd` usa `youtube_http.autorizacao()` (SAPISID 1P/3P); o
+  youtube_http simulado ganhou `autorizacao`. 37 OK no pc1. Backups `.bak_20261123_testes` no pc1.
+- `D:\ferramentas\central-reserva\sincronizar_do_pc1.ps1` (desktop): o espelho do `D:\gemini-argo` falhava TODA
+  rodada ("0 de ~60 trazidos" desde 30/10) — o lote inteiro era refeito a cada tentativa e um arquivo que o pc1
+  reescreve o tempo todo deixava tudo "incompleto". Agora cada tentativa pede só os que ainda não bateram e conta os
+  que vieram certos. Testado offline (0/1/vários divergentes) + ENSAIO.ps1 23 ok. Ainda sem rodada real: o pc1 caiu
+  ~20:05 e o desktop ASSUMIU a central às 22:26 (espelho parado enquanto for a central).
+
 ## Achado para a dona (não é código)
 - **Instagram em rajada (29/10):** pelo `logs/instagram_postagens.jsonl`, 11 contas postaram 5 a 8 Reels em menos de
   30 min no dia 29 (landingpageia.ia: 10 no dia, 8 em 30 min; gestaodegrupos.ia 8; mentoriasia.ia 7; agentesdeia,

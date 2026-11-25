@@ -1,0 +1,105 @@
+{
+  "resumo_area": "D: com 6,3 GB livres (D:\\limpeza_c\\serie.tsv 24/11 06:17; o guardião alerta abaixo de 12 GB). Isso há horas. Os maiores ralos de agora: D:\\tmp\\cenas3d_longo, com 10,4 GB de longos 3D que ninguém limpa; o GerenteVideos travado desde 04:01, com o inventário parado em 02:59; a faxina_disco, que não termina desde 22/11 (o cache_reuso deixou de ser limpo); 3,4 GB do mesmo longo guardados em duas cópias; D:\\caches\\c_movido, com 14 GB de histórico de chats automáticos; estudo_voz, com 3,8 GB e crescendo sem dono. O trabalho noturno de 24/11 (D:\\limpeza_c\\noite, C1-C6) já fez a trava, a escrita atômica, o hardlink da fila_celulares e as regras R9-R12. Mas R9-R12 rodaram uma vez só, como scripts soltos, e não entraram no gerente.",
+  "achados": [
+    {
+      "titulo": "D:\\tmp\\cenas3d_longo: 10,4 GB de longos 3D sem ninguém para limpar, e o laço de tentativas segura os arquivos até 36 h",
+      "problema": "O cenas3d_no_longo.py baixa o final_anime_deitado.mp4 do Drive (~5 GB) para D:\\tmp\\cenas3d_longo\\<pid>\\final.mp4 e só apaga quando dá PRONTO. Quando o scp ou o ssh para o desktop falha (exit 255), o arquivo fica. O rodar_cenas3d.py repete por até 36 h, e já há dois longos de 5 GB parados.",
+      "evidencia": "du: 5,5 GB em 20261122_215730_eRJ1kFR196s e 4,9 GB em 20261123_111119_eRJ1kFR196s_C. Os final.mp4 têm 5.897.833.709 e 5.252.534.143 bytes. Em D:\\recapd-ambientes\\producao\\bin\\cenas3d_no_longo.py:119-122, o unlink só roda no caminho de sucesso (`if r_.returncode == 0`). Em D:\\tmp\\cenas3d_auto.log (23/11 22:50 a 24/11 01:45), todas as tentativas falharam (scp 255, 'desktop não baixou o vídeo', timeout no rclone do roteiro). Em D:\\tmp\\estudo_voz\\rodar_cenas3d.py:14, `fim = time.time() + 36 * 3600`. Em D:\\limpeza_c\\donos.json, D:\\tmp\\cenas3d_longo tem 'limpa: NINGUÉM (24/11 01:50: 10,4 GB)'. O ULTIMO_ALERTA.txt das 02:24 lista os dois como as maiores gravações em 48 h.",
+      "proposta": "(1) Em cenas3d_no_longo.py, envolver o trecho do scp até o final num try/finally que apaga o `loc` local depois que o scp para o desktop terminar (o original continua no Drive em fila_src). (2) No gerente_videos, criar a regra R13: D:\\tmp\\cenas3d_longo\\*\\final*.mp4 parado há mais de 12 h é apagado só se o rclone lsjson de fila_src/<pid>/final_anime_deitado.mp4 tiver o mesmo tamanho. (3) Ou baixar direto no desktop (`rclone copyto` lá), mas o comentário de 23/11 diz que o rclone do desktop aponta para outra conta. Por isso a saída é (1)+(2).",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não. O donos.json marca 'NINGUÉM' e o gerente só conta D:\\tmp na tabela 'Outras pastas', sem regra (gerente_videos.py:48-50; INVENTARIO_VIDEOS.md: D:\\tmp com 101 vídeos e 13,05 GB)."
+    },
+    {
+      "titulo": "GerenteVideos travado: python órfão desde 04:01 segura a trava, a rodada das 05:53 morreu e o inventário está parado em 02:59",
+      "problema": "A tarefa tem limite de 2 h (ExecutionTimeLimit PT2H). Quando o Windows encerra a tarefa, ele mata o wscript do rodar_oculto.vbs, mas o python.exe filho continua vivo. Esse processo segura D:\\limpeza_c\\travas\\gerente_videos.lock, e as rodadas seguintes saem sem fazer nada até a trava ficar com mais de 3 h (trava.py VELHA_S). Na prática, a limpeza fica 4 h ou mais sem rodar justo com o disco em 6 GB.",
+      "evidencia": "O schtasks GerenteVideos mostra a última execução em 24/11 05:53:26 com resultado 267014 (encerrada), MultipleInstances=IgnoreNew e ExecutionTimeLimit=PT2H. O processo 17388 (`python gerente_videos.py --limpar`) foi criado às 04:01:27; às 06:30 tinha CPU de 11 s e I/O parado (ReadOperationCount 4830 igual em duas leituras com 5 s de intervalo) e não tinha filho além do conhost. O gerente_videos.lock contém '17388 1795503777' (04:02). INVENTARIO_VIDEOS.md e inventario_videos.json são de 02:59. A última linha do logs\\gerente_videos.jsonl é de 2026-11-24T01:56:28. Em D:\\limpeza_c\\trava.py, VELHA_S = 3 * 3600.",
+      "proposta": "(1) Pôr um timeout em toda operação que pode pendurar: rclone com `--timeout 60s --contimeout 20s`; o subprocess.run do R8 já tem 120 s, mas o rclone_move_conferido tem 7200 s por arquivo. Para o rglob das OUTRAS (inclui D:\\tmp com 10 GB), usar um os.walk que pula pastas gigantes ou que tem limite de tempo. (2) Fazer o main gravar uma batida (`hora`) dentro do lock e fazer a trava considerar velha a rodada sem batida há 45 min, e não só depois de 3 h. (3) Colocar no rodar_oculto ou no próprio script um teto (por exemplo, sair sozinho aos 100 min) abaixo do PT2H, para não deixar órfão. Antes de mexer, conferir com py-spy/faulthandler onde o 17388 está parado.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "A trava C1 foi feita em 24/11 01:42 (D:\\limpeza_c\\noite\\C1\\progresso.md). Ela resolveu a sobreposição, mas criou este efeito: o processo órfão bloqueia por até 3 h. Não existe timeout global nem batida."
+    },
+    {
+      "titulo": "faxina_disco não chega ao fim desde 22/11: o cache_reuso (e outras faxinas) parou de ser limpo",
+      "problema": "O main() da faxina_disco.py roda vozes_drive/fontes_drive (rclone moveto, que pode levar mais de 1 h) ANTES de limpar o cache_reuso, os *.tmp.mp4 e os testes vencidos. Desde 22/11 o log mostra só as primeiras etapas, e a linha 'TOTAL' não aparece mais.",
+      "evidencia": "Em D:\\video-fila\\logs\\faxina_disco.log, o último 'TOTAL' é de [22/11 07:07:31]. Em 23/11 aparecem 'vozes_drive: TimeoutExpired ... timed out after 4571 seconds' (08:20) e 'fontes_drive: TimeoutExpired' (08:53), e depois nada de cache_reuso. Em 24/11 só existe a linha '06:23:37 longos com envio falho'. Na ordem do faxina_disco.py:242-317, as etapas VELHOS_EXTRA vêm na linha 317, depois do vozes_drive na linha 280. D:\\postador-de-videos\\cache_reuso tem 758 MB em 22 arquivos, inclusive 1c4d81ab_video.mp4 de 04/11, 22a382d2 de 06/11 e bf95b369 de 09/11, apesar da regra de apagar acima de 1 dia (faxina_disco.py:49, FAXINA_REUSO_DIAS=1). Também há 6 *.partial do rclone (até 52 MB, de 23/11).",
+      "proposta": "Mudar a ordem no main(): primeiro as limpezas locais rápidas (VELHOS_EXTRA, tmp.mp4, upscale_de_postados, testes, orphan_) e por último as subidas ao Drive (vozes/fontes/amostras/mapa_drive). Dar a cada uma um timeout menor (por exemplo 15 min) e `--timeout 60s`. Incluir '*.partial' com mais de 6 h na varredura do cache_reuso e da pasta animes recap\\shorts.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O cache_reuso tem dono declarado (faxina_disco VELHOS_EXTRA, e catalogo.liberar em catalogo.py:504). O mecanismo existe, mas não roda porque a função trava antes de chegar lá."
+    },
+    {
+      "titulo": "Mesmo longo de 3,4 GB guardado em duas cópias independentes (_longos_postar e LONGO_PARA_CONFERIR)",
+      "problema": "O longo_para_conferir.py baixa do Drive outra cópia do longo que o postar_longos já baixou para _longos_postar. As duas não são hardlink, então ocupam 3,4 GB em dobro com o disco a 6 GB.",
+      "evidencia": "D:\\hipercool-materiais\\_longos_postar\\RzoyNcnlIj8_misto_xtts8_s2pro_momo\\final_anime_deitado.mp4 e D:\\hipercool-materiais\\LONGO_PARA_CONFERIR\\RzoyNcnlIj8_misto_xtts8_s2pro_momo.mp4 têm os dois 3.402.299.732 bytes. O `fsutil hardlink list` de cada um mostra só o próprio nome (não são o mesmo arquivo). Em D:\\recapd-ambientes\\producao\\colab\\longo_para_conferir.py:95, `rclone copyto d['drive'] tmp`. Em D:\\limpeza_c\\noite\\C4\\progresso.md 02:23, _longos_postar estava com 0 GB (o caso apareceu depois).",
+      "proposta": "Em longo_para_conferir.py, antes do rclone copyto, procurar o mesmo nome em _longos_postar\\<nome>\\*.mp4 com o tamanho igual ao do Drive e usar os.link (fallback: baixar). Fazer o mesmo no sentido contrário no postar_longos (se LONGO_PARA_CONFERIR tem o arquivo, faz o link). O gerente R8 e a troca do longo_para_conferir apagam só um nome, sem risco.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A C4 (noite 24/11) tratou o hardlink entre _longos_postar e 'videos laterais' (faxina_disco.py:189-239), mas não o LONGO_PARA_CONFERIR."
+    },
+    {
+      "titulo": "D:\\caches\\c_movido: 14 GB, a maior parte de sessões de chats AUTOMÁTICOS (lapidar/produto_fila), marcada como 'NUNCA apagar'",
+      "problema": "A LimpezaDiariaC move o histórico de chats parados do C: para D:\\caches\\c_movido\\claude_projects por junction, e ninguém limpa lá. Das 723 pastas, quase todas são sessões de trabalhos automáticos (lapidar r1/r2/r3, produto_fila, CORTES juri), não conversas da dona. Ocupam 13 GB num disco com 6 GB livres.",
+      "evidencia": "du: c_movido = 14 GB (claude_projects 13 GB, .rembg 1,3 GB). 723 subpastas; C:\\Users\\Haylla\\.claude\\projects tem 723 junções que apontam para lá. Por prefixo: 14 de claude-code-video-trabalhos-advance-novoestrela (lapidar-r1..r3), 7 de video-fila-produto-fila-futebolcom, 7 de msenergycap etc. A maior é D--postador-de-videos-remotion, com 1,7 GB. D:\\limpeza_c\\DISCO_LEIA_PRIMEIRO.md §3 diz 'Nunca: ... D:\\caches\\c_movido (histórico dos chats)'. donos.json: 'limpa: NUNCA apagar (histórico)'.",
+      "proposta": "Decisão da dona. Sugestão: separar as sessões de JOB automático (padrão '-trabalhos-*-lapidar-r', '-produto-fila-', '-linhas-CORTES-juri-' com mais de 7 dias) e mandá-las ao Drive com rclone move + check (manhwa-drive:arquivo-pc1/claude_jobs), deixando um _NO_DRIVE.md. Chats humanos continuam. O .rembg (1,3 GB de modelos) não é histórico: conferir se o rembg ainda usa esse caminho.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "Existe a regra 'NUNCA apagar' (DISCO_LEIA_PRIMEIRO.md). Não há nada que diferencie sessão de job de chat da dona. Só a dona pode liberar."
+    },
+    {
+      "titulo": "D:\\tmp\\estudo_voz: 3,8 GB crescendo (1.166 arquivos novos em 3 dias) sem dono, com o registro de testes vazio",
+      "problema": "Os experimentos de voz (jobs, coleta_volta, iter_volta, cega_volta, replica_volta) gravam em D:\\tmp\\estudo_voz e ninguém limpa. A regra de registrar teste (testes.py, que deixa a faxina limpar sozinha quando vence) não está sendo usada.",
+      "evidencia": "du: estudo_voz = 3,8 GB (jobs 1,1 GB com 76 pastas; coleta_volta 801 MB; iter_volta 739 MB; cega_volta 559 MB; replica_volta 369 MB). Datas dos arquivos: 22/11 = 406, 23/11 = 3.046, 24/11 = 434. D:\\video-fila\\TESTES_TEMPORARIOS.md tem '(nenhum teste registrado)'. donos.json: 'D:\\tmp\\estudo_voz' com 'limpa: NINGUÉM (manual / arquivo_testes_voz no Drive)'. Em D:\\tmp também estão coleta_narradores (432 MB), previas_tela (253 MB) e prev7_*.mp4 (128 MB, de 23/11).",
+      "proposta": "Não criar nada novo: fazer os scripts que geram estudo_voz/jobs chamarem `testes.py registrar <pasta> --dias 3` (o mecanismo que já existe e que a faxina limpa). Para o que já está lá, aplicar a regra da memória 'Limpar testes de voz no fim': mover as subpastas de 21-22/11 (gol, xtts_*, s2v_*, qwen3_*, tempos_*) para o Drive arquivo_testes_voz com rclone check, como pede a dona. Só funciona se a faxina voltar a terminar (achado 3).",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "testes.py e TESTES_TEMPORARIOS.md existem (faxina_disco.py:327-331 chama testes.limpar), mas ninguém registra. A regra da memória project_limpeza_testes_voz também existe e ainda não foi executada."
+    },
+    {
+      "titulo": "R9-R12 e DISCO_MIN_GB ficaram fora do gerente: rodaram uma vez à noite como scripts soltos",
+      "problema": "O plano C5 pedia regras novas NO gerente e o uso de DISCO_MIN_GB 'de verdade'. Foram feitos D:\\limpeza_c\\noite\\C5\\r9_juri.py e r10_r12.py, executados uma vez (1,10 GB). O gerente_videos.py não tem R9-R12 nem DISCO_MIN_GB (aparece só no docstring), então ms-energy\\videos, veo\\beta\\videos(_pos) e canal_pronto voltam a acumular.",
+      "evidencia": "grep em gerente_videos.py: 'DISCO_MIN_GB' só na linha 17 (docstring) e nenhuma ocorrência de R9/R10/R11/R12. D:\\limpeza_c\\noite\\C5\\progresso.md 05:04: 'R10-R12 aplicado: 107/107 movidos ... 1,10 GB'. D:\\limpeza_c\\noite\\PLANO.md (C5): 'Usar DISCO_MIN_GB de verdade: se D: < 12 GB, a rodada roda as regras R9-R12 primeiro'. donos.json: canal_pronto\\videos com 'limpa: NINGUÉM (GerenteVideos R12 proposto em C5)'. D:\\veo\\beta\\videos = 1,9 GB e videos_pos = 960 MB (du).",
+      "proposta": "Importar r10_r12.py/r9_juri.py como funções em gerente_videos.limpar(), mantendo as mesmas salvaguardas (prova no ledger/log, parado há mais de 2 h, copyto + check 0, _NO_DRIVE.md), e rodar antes das demais regras quando shutil.disk_usage('D:').free < 12 GB. O CSV da A4 é estático, então a prova precisa vir do ledger e do postagem_log a cada rodada (o r10_r12 já revalida por PROVAS).",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "Os scripts existem e foram testados em D:\\limpeza_c\\noite\\C5 (simular e aplicar), mas não estão ligados a nenhuma tarefa agendada."
+    },
+    {
+      "titulo": "O RELATORIO_MANHA.md do trabalho noturno não foi gerado: as decisões pendentes de disco não chegaram à dona",
+      "problema": "O plano noturno termina com um relatório para a dona com o que só ela pode decidir (node_modules 1,7 GB duplicado, c_movido, amostras_voz, rvc). O arquivo não existe, e as decisões continuam espalhadas em 7 resultado.md.",
+      "evidencia": "`ls D:\\limpeza_c\\noite\\RELATORIO_MANHA.md` retorna 'No such file'. Em PLANO.md, 'Fim (07:50) — RELATORIO_MANHA.md'. A6\\progresso.md 06:00: 'Resto (node_modules remotion 1,7 GB, __pycache__..., log 82 MB do drive_central) fica para decisão da dona no RELATORIO_MANHA'. A6\\resultado.md §3: D:\\claude-code-video\\remotion\\node_modules e D:\\postador-de-videos\\remotion\\node_modules com 847,89 MB cada, cópias exatas.",
+      "proposta": "Consolidar num relatório só, a partir dos resultado.md A1-A7 e C1-C6, com a lista de decisões: hardlink ou junção do node_modules do remotion (847 MB), D:\\tools\\drive_central\\logs\\inovaremanhwabr.log (82 MB, parado desde 12/11), c_movido, amostras_voz e models\\rvc. Se o cron noturno já fechou às 08:00, alguém precisa gerar à mão.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Previsto no PLANO.md, mas ainda não executado (às 06:30 de 24/11)."
+    },
+    {
+      "titulo": "Logs grandes: um morto (82 MB) e um crescendo sem rotação (34 MB). Os do video-fila estão sob controle",
+      "problema": "Nas pastas do mapa não há log acima de 100 MB. Fora delas, há um log morto que pode sair e um jsonl de saúde que só cresce.",
+      "evidencia": "find -size +20M em video-fila, postador, recapd (bin/colab/logs), comum, manhwa-react/logs, kit3d e hipercool-videos/logs: só D:\\tools\\drive_central\\logs\\inovaremanhwabr.log (86.471.675 bytes, parado em 12/11) e D:\\projeto-navegador-sem-navegador\\logs\\saude.jsonl (35.633.320 bytes, gravado em 24/11). Em video-fila\\estado, os maiores são avisos.jsonl (4,98 MB), uso_maquinas.jsonl (2,9 MB) e canais_views_hist.jsonl (1,6 MB). logs\\faxina.jsonl tem 8 MB.",
+      "proposta": "Compactar ou apagar o inovaremanhwabr.log (com a decisão da dona, já listada no A6). No escritor do saude.jsonl, rotacionar quando passar de 10 MB (renomear para .1 e manter um). Os demais não precisam de ação agora.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Já apontado em D:\\limpeza_c\\noite\\A6\\resultado.md §2, sem ação aplicada."
+    },
+    {
+      "titulo": "O gerente ignora *.partial do rclone nas pastas de Short e as sobras .tmp do estado",
+      "problema": "Quando um download ou upload do rclone é interrompido, fica um <arq>.<hash>.partial dentro da pasta do Short. O inventário do gerente só olha .mp4/.mov/.mkv/.webm, então essas sobras não aparecem e não saem.",
+      "evidencia": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-15dbe0_cap1_20261122\\video.mp4.aaf6fe74.partial (23,5 MB, 23/11 18:23). No cache_reuso há 6 *.partial (52 MB, 17,8 MB e outros, de 23-24/11). Em video-fila\\estado há 6 celulares_medida.<pid>.tmp de 0 byte (18/11 a 23/11). gerente_videos.py:52, VID = ('.mp4', '.mov', '.mkv', '.webm').",
+      "proposta": "Em inventario(), tratar '*.partial' com mais de 6 h nas pastas de Short como uma regra R2b (apagar), porque o rclone não retoma o .partial dele. No celulares.py, apagar o .tmp quando a escrita atômica falhar (try/finally).",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A R2 cobre só capa_tmp e *.tmp.mp4 (gerente_videos.py:116-117)."
+    }
+  ]
+}

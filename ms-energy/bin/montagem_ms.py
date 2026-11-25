@@ -14,6 +14,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 import glob as _glob
+import os
 import json as _json
 import random as _random
 
@@ -891,13 +892,29 @@ def montar(clip, roteiro, palavras, out_path, foto_fundo=None, log=print, karaok
                                                  "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt",
                                                  "yuv420p", "-r", "30", "-c:a", "aac", "-b:a", "160k",
                                                  "-movflags", "+faststart", str(out_path)]
-    try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, encoding="utf-8", errors="replace")
-    except subprocess.TimeoutExpired:
-        # 20/11: em 16/11 o ffmpeg passou de 600 s e o TimeoutExpired derrubou o reel com o clipe do Veo já aprovado —
-        # agora vira falha de montagem e cai nos refazimentos abaixo
-        log("  [MONTAGEM] ffmpeg passou de 600 s")
-        r = subprocess.CompletedProcess(cmd, -1, "", "timeout 600s")
+    # 24/11 dona ("tudo que der em outros PCs, pro PC1 ficar o mais livre possível"): a montagem (encode do reel) vai
+    # primeiro pros notebooks/celulares (video-fila\celulares.rodar_ffmpeg); recusado/falhou = roda aqui como antes.
+    # MS_MONTAGEM_FORA=0 desliga.
+    r = None
+    if os.environ.get("MS_MONTAGEM_FORA", "1") != "0":
+        try:
+            import importlib.util as _ilu
+            _sp = _ilu.spec_from_file_location("celulares", r"D:\video-fila\celulares.py")
+            _cel = _ilu.module_from_spec(_sp)
+            _sp.loader.exec_module(_cel)
+            if _cel.rodar_ffmpeg(["ffmpeg"] + cmd[1:], timeout=600, rotulo="msenergy reel"):
+                log("  [MONTAGEM] encode feito fora do PC1")
+                r = subprocess.CompletedProcess(cmd, 0, "", "")  # segue o fluxo normal (confere o arquivo abaixo)
+        except Exception as _e:  # noqa: BLE001
+            log(f"  [MONTAGEM] fora do PC1 não deu ({type(_e).__name__}) — monta aqui")
+    if r is None:
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, encoding="utf-8", errors="replace")
+        except subprocess.TimeoutExpired:
+            # 20/11: em 16/11 o ffmpeg passou de 600 s e o TimeoutExpired derrubou o reel com o clipe do Veo já
+            # aprovado — agora vira falha de montagem e cai nos refazimentos abaixo
+            log("  [MONTAGEM] ffmpeg passou de 600 s")
+            r = subprocess.CompletedProcess(cmd, -1, "", "timeout 600s")
     ok = r.returncode == 0 and Path(out_path).exists() and Path(out_path).stat().st_size > 200_000
     if not ok:
         log(f"  [MONTAGEM] ffmpeg falhou (exit {r.returncode}): {r.stderr[-600:]}")

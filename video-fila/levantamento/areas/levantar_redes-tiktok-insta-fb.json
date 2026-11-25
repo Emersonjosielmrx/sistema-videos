@@ -1,0 +1,115 @@
+{
+  "resumo_area": "TikTok (58 contas, 27 pausadas, teto 4/dia, 53 posts em 23/11), Instagram (só 4 contas em foco x 2 Reels = 8/dia) e Reels do Facebook (14 Páginas, 8 hoje). O volume não está travado por falta de vídeo: está mal distribuído. O estoque do TikTok (571 disponíveis pelo catálogo salvo; 232 deles em contas pausadas) está concentrado em contas com 0 view: revolutionemerson1 tem 82 e 0 views em 48 vídeos, revolutionemerson2 tem 58 e 0 em 24. Já as contas que dão view ficam sem vídeo: doramanoturno teve '1 de 1 disponível', aulasrevolution, a 3ª maior com 4270 views, ficou 0 posts de 21 a 23/11, e emersonjosiel649 teve 3 a 5 disponíveis. As decisões automáticas usam medições ruins. A medição do TikTok de 23/11 travou com 6 de 58 contas e mesmo assim tirou o teto 6 das contas fortes. O vigia de IP pausou a 2ª e a 5ª contas mais fortes (seebotsia 2878 e inovaremanhwaversehindi 1583) e não despausa sozinho. No Facebook o escada soma as views dos reels visíveis, então uma leitura errada (793 para 19 no mesmo reel) vira bônus de post. No Instagram há um risco de regra: as contas IG usam o mapa de IPs do TikTok e dividem o IP com 3 a 9 outras contas, mas a regra da dona é 1 conta por IP no Instagram. Ver o 1º achado.",
+  "achados": [
+    {
+      "titulo": "Instagram posta pelo IP compartilhado do TikTok (3-9 contas por IP), contra a regra 1-conta-por-IP do Instagram",
+      "problema": "A exceção da dona (12/11) de dividir IP vale SÓ para o TikTok; no Instagram continua 1 conta por IP. Mas postar_insta_auto._ip_insta usa proxy_tiktok.ip_da_conta, o mesmo mapa de 10 IPs grátis do TikTok, onde cada IP tem ~9 contas. As contas em foco no Instagram saem pelo mesmo IP de várias contas do TikTok e de outras do Instagram.",
+      "evidencia": "postar_insta_auto.py:129-139 (_ip_insta -> proxy_tiktok.ip_da_conta) e 163-166, 279-282; comentário em postar_insta_auto.py ~l.159: 'o mesmo mapa do TikTok: proxy_tiktok.ip_da_conta'. config/proxy_tiktok.json: IP 4 = sintetizerisada (IG em foco) + canalhistoriacomia, crmchatwoot.ia, emerson20308.ia (IG) + emersonjosiel1995, emersonjosiel649, emersonjosiel2031, gameoftroneskingsroadbrasil, emersongencshin, inovaremanhwaverseing (TikTok); IP 2 = fakenews.ia4 + iapro.mentoria + inovareclaw.ia (3 IG) + jogoscomia, inovaremanhwabr, inovaremanhwaverseviet etc. Memória project_tiktok_ips_compartilhados.md: 'Kaggle, Google, YouTube e Instagram continuam 1 conta por IP'. proxy_tiktok.ip_da_conta (proxy_tiktok.py:63-70) aloca conta nova no IP menos usado, sem olhar a rede.",
+      "proposta": "Não mexer sozinho: levar à dona com esta prova. Opções: (a) dar às 4-5 contas do foco Instagram IPs Webshare próprios das contas novas com banda (há 16 no pool desde 19/11, ver memória project_webshare_contas_banda.md), com um mapa separado (ex.: config/proxy_instagram.json); (b) se a dona quiser estender a exceção do TikTok ao Instagram, registrar isso por escrito no reuso_plataformas.json. Até decidir, no mínimo fazer ip_da_conta recusar conta IG em IP que já tem outra conta IG.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "Proxy por conta já existe (INSTA_PROXY, PROXY_FORA), mas o mapa é o compartilhado do TikTok."
+    },
+    {
+      "titulo": "Estoque do TikTok parado em contas mortas enquanto as contas com view ficam sem vídeo",
+      "problema": "catalogo._conta prende cada vídeo à 1ª conta cujo 'postados_em'/tema bate (canal do YouTube de origem). Contas ligadas a canais que produzem muito, mas com 0 view no TikTok, acumulam dezenas de vídeos. As contas que dão view ficam com 0 a 5. O teto (4/dia, 6 nas fortes) não se aplica porque não há o que postar. A reserva Veo só completa com Veo, e só quando sobra.",
+      "evidencia": "Catálogo salvo (config/catalogo_videos.json via catalogo.disponiveis('tiktok')): 571 disponíveis; revolutionemerson1 82, revolutionemerson2 58, emersonjosiel2027 51, emersonjosiel2033 25. logs/tiktok_views/2026-11-22.json: revolutionemerson1 0 views/48 vídeos, revolutionemerson2 0/24, emersonjosiel2033 0/24, curiosidadesnoturnas 0/24. Na mesma medição: doramanoturno 5765, aulasrevolution 4270, emersonjosiel649 2419. logs/tiktok_20261123.log 00:08: 'doramanoturno 1 de 1', 'emersonjosiel649 3 de 3', 'revolutionemerson1 4 de 91'. Posts em 23/11: doramanoturno 1, revolutionemerson1/2 4 cada. catalogo.py:328-347 (_conta: 1ª regra que bate ganha).",
+      "proposta": "No filas() de postar_tiktok_auto.py, depois de montar cand, mover o excedente: conta com views==0 e zerados==videos na última medição VÁLIDA (ver achado 3) fica com no máximo 1/dia, e o resto do estoque dela vai para as contas fortes do mesmo tema/afinidade, na ordem de views. Reaproveitar o padrão do reserva_veo.completar (rodízio) para qualquer projeto, não só Veo. Chave para desligar, ex.: TIKTOK_REDISTRIBUIR=0. O vídeo continua único por rede (catalogo já impede repetir). Respeitar o 'vídeo único por canal'.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "TIKTOK_AMPLIFICAR (teto 6 para quem tem >=300 views, postar_tiktok_auto.py:352-372) e reserva_veo.completar (só Veo, reserva_veo.py:93-150). Nenhum dos dois move estoque de conta morta para conta forte."
+    },
+    {
+      "titulo": "Medição parcial do TikTok (6 de 58) derruba o teto das contas fortes no mesmo dia",
+      "problema": "TIKTOK_AMPLIFICAR lê sempre o arquivo mais recente de logs/tiktok_views, sorted(glob)[-1]. Em 23/11 o medir_tiktok travou: o arquivo tem só 6 contas e não há 'exit=' no log. A partir dele nenhuma conta forte foi achada, e filmenoturno, inovarecap e fabricadeautomacoesia voltaram a 4/dia. O tiktok_pausar_zeradas, o vigia_tiktok_ip e o relatório também leem esse arquivo.",
+      "evidencia": "postar_tiktok_auto.py:359-366: `ult = sorted(...glob('*.json'))[-1]`. logs/tiktok_views/2026-11-23.json: 6 contas, só 2 com abriu=True (jornalcomia, emersonjosiel2026), lido até 09:48. logs/medir_tiktok.log: '[23/11/2026 7:34:09] === medir tiktok ===' e depois só TimeoutNegativeWarning, sem exit=. Posts no tiktok_20261123.log: filmenoturno 4, contra 6 em 21/11 e 22/11. 00:08 de 23/11 (ainda com o arquivo de 22/11): 'fabricadeautomacoesia 6 de 19', 'filmenoturno 6 de 27'.",
+      "proposta": "Em filas(): usar o arquivo mais recente com cobertura >= 80% (abriu em >= 0,8 x contas da config) e, por conta, o último valor com abriu=True nos últimos 3 dias, em vez de [-1]. Fazer o mesmo nos leitores (vigia_tiktok_ip._med, tiktok_pausar_zeradas.ler_views, medir_tiktok.main 'anteriores'). No medir_tiktok.py, pôr um prazo total (ex.: 90 min) e gravar 'parcial': true quando parar. Chave, ex.: TIKTOK_MEDICAO_MINIMA=0.8.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "TIKTOK_MEDIR_ROBUSTO e MAX_FALHAS (medir_tiktok.py:78-79) param após 6 falhas, mas o arquivo parcial passa a valer como medição do dia para todos."
+    },
+    {
+      "titulo": "vigia_tiktok_ip pausou contas fortes e nunca despausa; lista de 'boas' congelada em 12/11",
+      "problema": "Quando uma conta 'boa' cai 2 dias, o vigia pausa TODAS as outras do mesmo IP, inclusive contas fortes. Não há volta automática quando a boa se recupera. A lista _boas é de 12/11 e não inclui contas que cresceram depois (seebotsia, aulasrevolution, inovaremanhwaversehindi). Além disso, o 'normal' de fabricadeautomacoesia é julgado com dias em que a medição dela falhou ou foi parcial.",
+      "evidencia": "config/reuso_plataformas.json: seebotsia e emersonjosiel2030 pausadas em '21/11: vigia_tiktok_ip — a boa inovarecap do IP 8 caiu'; inovaremanhwaversehindi, canalalucinaai, inovaremultiatendimento e inovaremanhwaverseind pausadas por 'a boa fabricadeautomacoesia do IP 3 caiu'. logs/tiktok_views/2026-11-21.json: seebotsia 2878 views (2ª maior), inovaremanhwaversehindi 1583 (5ª). logs/vigia_tiktok_ip.json: 22/11 'IP 8 inovarecap: hoje 315 | normal 336.4 | ok' (recuperou), mas as pausas continuam. vigia_tiktok_ip.py:101-110 só põe 'pausada', nunca tira. proxy_tiktok.json _boas 'em': '20261112_0753'. Estoque preso: seebotsia 38 vídeos.",
+      "proposta": "(1) Não pausar conta cujo ganho próprio, medido por vídeo como ganho(), é >= o da boa ou >= MIN_NORMAL. (2) Quando a boa voltar a 'ok' por 2 dias, tirar só as pausas com motivo 'vigia_tiktok_ip' daquele IP e avisar. (3) Recalcular _boas a cada 7 dias com o ganho por vídeo, 1 por IP. Fazer dentro do mesmo script, guardando backup como já faz (.bkp_vigia_*). Despausar exige o OK da dona, pela regra da memória 'não pausar/consertar sem falar com a dona': levar a proposta a ela.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "Vigia existe (VigiaTikTokIP, VIGIA_TIKTOK_IP=0 desliga); falta a volta e a atualização das boas."
+    },
+    {
+      "titulo": "aulasrevolution (3ª maior do TikTok) ficou 3 dias sem post: conta VIVA do Kaggle sem fonte própria",
+      "problema": "A conta só recebe vídeo pela reserva Veo (sem temas, projetos ou postados_em). Desde que virou conta viva do Kaggle, só pode postar no PC1 pela ponte. Em 20/11 o post saiu depois de 3 máquinas recusarem. De 21 a 23/11 ela nem entrou na fila. Situação parecida: doramanoturno (2ª maior, sem_proxy) recebe 1 vídeo por dia porque depende só do canal Dorama Noturno.",
+      "evidencia": "config/reuso_plataformas.json l.482-492: aulasrevolution só tem cofre, _obs 'Veo de reserva' e maquina. logs/tiktok_20261120.log 08:38: 'desktop/x200ma/acer: aulasrevolution é conta VIVA do Kaggle — não abre Chrome fora do IP fixo dela' e depois 'OK #2 (aulasrevolution)'. grep aulasrevolution: 0 linhas em tiktok_20261121/22/23.log. tiktok_views/2026-11-22.json: aulasrevolution 4270 views (era 1945 em 15/11). Log 23/11: 'doramanoturno 1 de 1 disponiveis'.",
+      "proposta": "Dar a aulasrevolution e doramanoturno uma fonte fixa ('postados_em' ou 'projetos' de canais afins com estoque), junto com a redistribuição do achado 2. Para aulasrevolution, tirar 'maquina' remota da lista (já é recusada) para não gastar 3 tentativas, e deixar só o PC1 pela ponte (cofre.saida_kaggle). Mudar o que a conta posta é decisão da dona: perguntar qual tema.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Trava Kaggle em maquina_remota.py:216 e postar_tiktok_auto.py:209 (correta); falta a fonte de vídeo."
+    },
+    {
+      "titulo": "Facebook: rodada estoura 55 min tentando baixar do Drive vídeos que não existem mais",
+      "problema": "postar_facebook_paginas.postar_um tenta até 15 candidatos. Cada um chama catalogo.baixar (rclone até 120 s). As cópias de parceiro/2_tiktok e _postados_lote_1011 falham sempre e, diferente do TikTok, não são marcadas como puladas. Resultado: a rodada passa do prazo e a Página posta 0.",
+      "evidencia": "logs/facebook_paginas.log (desde 20/11): 192 'não baixou' (112 de parceiro/2_tiktok, 66 de _postados_lote_1011, 8 de 3_instagram); 12 '(rodada passou de 55 min — encerrada)'; as mesmas sem-obra-5b80bf e sem-obra-6b7df3 falham em 17:21 e 23:27 de 23/11; '[Bicho Noturno] ... hoje 0/3'. postar_facebook_paginas.py:118-126: `except Exception as e: print('não baixou:', str(e)[:150]); continue`, sem registrar. O TikTok já resolve isso: postar_tiktok_auto.py ~l.494-502 (catalogo.pular quando 'directory not found') e drive_falhas >= 3 = só vídeos do PC.",
+      "proposta": "Copiar a mesma lógica para o FB: no except, se a cópia não existe, gravar reg['pulados'][caminho] (que candidatos() já lê, l.66) e, após 3 falhas do Drive na rodada, só candidatos com no_pc. Gravar a mensagem inteira (não cortar em 150) para saber o motivo. Chave, ex.: FB_PULA_DRIVE_FORA=0.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Feito no TikTok (07/11 e 03/11), não no Facebook."
+    },
+    {
+      "titulo": "Escada do Facebook decide com a soma dos reels visíveis: leitura errada vira bônus de post e falso 'viral'",
+      "problema": "fb_escada._ganho usa a soma das views dos reels lidos na medição (1 a 8 visíveis). Se o número de reels lidos muda, ou se um reel vem com valor errado (play_count_reduced), o ganho fica negativo ou explode. Isso dispara 'estagnou, +1 Reel' ou 'Reel decolando, segura'. O leitor HTTP lê só o HTML inicial da aba Reels, sem paginação. Quando a Página passar de ~8 reels, os antigos somem da soma.",
+      "evidencia": "logs/fb_views.jsonl (261 linhas): 88 medições com 1 reel, 36 com 2, máximo 8. curiosidades, mesmo reel 1185451154437599: 793 views às 19:54 de 23/11 e 19 às 00:41 de 24/11. logs/fb_escada.log l.106: '[curiosidades] estagnou (+-773 x média 76): +1 Reel hoje', e config/fb_escada.json curiosidades com viral_desde 23:41 e bonus_dia 24/11 ao mesmo tempo. fb_escada.py:65-84 (soma por medição). services/facebook/paginas.py:39-57 (só o GET de profile.php?sk=reels_tab, sem cursor).",
+      "proposta": "Calcular o ganho reel a reel, como vigia_tiktok_ip.ganho: reel nos 2 dias = max(0, diferença); reel novo = o que já fez; reel que sumiu não conta. Ignorar queda > 50% no mesmo id (leitura ruim) em vez de usar. Para medir mais de 8 reels, guardar o último valor de cada id visto, em vez de exigir que apareça de novo, ou seguir o cursor da aba. Não fala com a conta além do que já é lido.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A medição HTTP já existe (services/facebook/medir.py, fonte 'http' em 251 linhas); falta o ganho por reel."
+    },
+    {
+      "titulo": "Instagram: foco congelado em 14/11 mantém conta com 0 view e deixa de fora as que dão view",
+      "problema": "O config/instagram_foco.json fixa 5 contas escolhidas por seguidores em 14/11, a no máximo 2 Reels/dia. fakenews.ia4, a de mais views, está pausada como 'inactive' até 26/11. futebolcom.ia2 segue no foco com 0 views nos últimos 12 reels. canalhistoriacomia e emerson.josiel.cu dão mais views e estão paradas. O teto da rampa já subiu (5 a 8/dia), mas o foco corta para 2, então o total fica em 8/dia.",
+      "evidencia": "config/instagram_foco.json: contas ['sintetizerisada','fakenews.ia4','_lucrocomia_','iapro.mentoria','futebolcom.ia2'], max_dia 2. D:/projeto-navegador-sem-navegador/logs/instagram_metricas.jsonl (última leitura por conta): fakenews.ia4 views_12 1566; emerson.josiel.cu 1000 (13/11); sintetizerisada 732; canalhistoriacomia 617, seguidores 1->3 (23/11); iapro.mentoria 23; futebolcom.ia2 0. logs/instagram_20261123.log: '[fakenews.ia4] em pausa até 26/11 00:20: conta inativa', '[sintetizerisada] teto da rampa: 8/dia ... restam 6'. instagram_auto_posted.json: 2/dia em cada uma das 4 de 20 a 23/11. postar_insta_auto.py:370-379 (foco corta para max_dia 2).",
+      "proposta": "Recalcular o foco 1x por semana a partir do instagram_metricas.jsonl (views_12 e ganho de seguidores), trocando conta com views_12 < 30 pela próxima com mais views. Na conta em foco que ganha view, deixar valer o teto da rampa (tetos.py), mantendo o intervalo de 4 h, em vez do 2 fixo. Mudar quais contas postam é decisão da dona (INSTAGRAM_ESTRATEGIA.md): levar a tabela a ela. E só depois de resolver o IP do achado 1.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "INSTA_FOCO (14/11) e tetos.py (rampa) existem; um anula o outro e a lista não se atualiza."
+    },
+    {
+      "titulo": "Relatório mostra 'Instagram: 0 leituras hoje' lendo um arquivo parado desde 14/11",
+      "problema": "A ronda lê D:/video-fila/estado/instagram_publico.jsonl (página pública com IP rotativo), que não é gravado desde 14/11. As métricas reais de views do Instagram estão em outro arquivo, gravado a cada post na sessão da própria conta. A dona não vê views do Instagram no relatório.",
+      "evidencia": "relatorio_ronda.py:760-766 lê estado/instagram_publico.jsonl. Últimas linhas desse arquivo: 'em': '2026-11-14T11:37' (62 linhas, 24 'null'). ronda_tarde.txt l.280: '- Instagram (contas de IA): 0 leituras hoje'. O arquivo bom: D:/projeto-navegador-sem-navegador/logs/instagram_metricas.jsonl, 234 linhas, última 23/11 09:19, com views_12/curtidas_12 (services/instagram/postar.py:375-399, IG_MEDIR). Nenhum .py de video-fila ou postador lê instagram_metricas.",
+      "proposta": "Em relatorio_ronda.sec_insta_http, ler instagram_metricas.jsonl: última leitura por conta, views_12, seguidores e ganho desde a anterior, no mesmo formato da tabela do Facebook. Manter o arquivo antigo como alternativa. Só leitura local.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A coleta já existe (IG_MEDIR=1); falta mostrar."
+    },
+    {
+      "titulo": "TikTok mede views 1x por dia, de uma vez, pelo Chrome de uma conta (msenergypara) e trava",
+      "problema": "medir_tiktok abre os 58 perfis em sequência no Chrome do cofre msenergypara (07:23). Nos dias em que trava ou o TikTok não abre, todas as decisões do dia seguinte ficam sem dado (amplificar, pausar zeradas, vigia). O 'abriu' de fabricadeautomacoesia, uma das 'boas', falha com frequência, e o vigia não pode julgar.",
+      "evidencia": "cron_medir_tiktok.bat (07:23, msenergypara). medir_tiktok.log: 19/11 '6 não abriram' (terminou às 11:14), 23/11 sem exit. tiktok_views/2026-11-23.json: fabricadeautomacoesia abriu=False 'TikTok - Make Your Day', emersonjosiel2027 'erro TimeoutError | about:blank'. vigia_tiktok_ip.json histórico: 'medição falhou hoje' em várias boas (IP 2 em 19, 20 e 21/11, IP 7 em 20 e 21/11).",
+      "proposta": "Ler a perfil público em várias passadas curtas ao longo do dia, ex.: 10 contas por vez, e reaproveitar o 'refaz só as que falharam' que já existe (medir_tiktok.py:64-66), com prazo total. Avaliar ler o perfil público por HTTP sem login (como medir_instagram_publico.py) pelo IP rotativo, sem sessão de conta. Não falar como conta: hoje o Chrome é da msenergypara lendo perfis alheios, confirmar com a dona que isso é aceito pela regra do IP. Teste fora do PC1 (teste_remoto.py).",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "Refazer as falhas (15/11) e TIKTOK_MEDIR_MAX_FALHAS já existem; falta prazo total e o fatiamento."
+    },
+    {
+      "titulo": "TikTok: contas paradas por máquina sem disco e Chrome remoto caído entram em toda rodada",
+      "problema": "Várias falhas de 23/11 são da máquina, não da conta: o desktop sem espaço em disco e o CDP recusando. A conta tenta, falha, e o post vai para a próxima rodada, 90 min depois. Hoje só o relogin tem uma trava de 3 falhas (feita em 23/11).",
+      "evidencia": "logs/tiktok_20261123.log: 4x 'falhou no desktop (abrir Chrome: [WinError 112] Espaço insuficiente no disco)', 3x 'connect_over_cdp: socket hang up', 2x 'ECONNREFUSED', 2x 'ERROR: file input not found after 120s'. 98 falhas no dia (ronda_tarde.txt l.194). A trava do relogin (postar_tiktok_auto.py:128-157, TIKTOK_RELOGIN_MAX) é só para login.",
+      "proposta": "Na rodada, guardar as máquinas que falharam com erro de máquina (WinError 112, ECONNREFUSED, ssh) e tirá-las da rodada, como já se faz com ip_fora (postar_tiktok_auto.py ~l.445-460). Avisar o disco cheio do desktop uma vez, pelo avisos.py. Chave, ex.: TIKTOK_PULA_MAQUINA_FORA=0.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "TIKTOK_PULA_IP_FORA (19/11) para o IP; nada parecido para a máquina."
+    }
+  ]
+}

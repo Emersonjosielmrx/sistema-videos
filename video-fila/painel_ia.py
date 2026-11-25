@@ -40,6 +40,7 @@ PY_HOOK = Path(r"D:\veo\venv\Scripts\python.exe")
 TRAVAS_VIGIAS = [BASE / "estado" / "vigia_agente.lock", Path(r"D:\hipercool-videos\workspace\vigia_agente.lock")]
 TRAVA_VIGIA_MIN = 42  # os vigias consideram a trava viva por 40 min + 2
 SEM_JANELA = 0x08000000
+ABAIXO_NORMAL = 0x00004000  # 24/11 (dona: PC1 livre pro VS Code): o claude.exe do vigia/painel e o rg dele rodam em prioridade baixa
 EDICAO = ["Edit", "Write", "MultiEdit", "NotebookEdit"]
 
 PROJETOS = {  # id -> (nome, pasta de trabalho do agente)
@@ -51,6 +52,7 @@ PROJETOS = {  # id -> (nome, pasta de trabalho do agente)
     "veo": ("Veo", r"D:\veo"),
     "voz": ("Voz clonada", r"D:\hipercool-materiais"),
     "geral": ("Geral (controlador, fila, painel)", r"D:\video-fila"),
+    "celulares": ("Celulares (canal_pronto: postar pelos celulares)", r"D:\projeto celular sub controle"),  # 23/11
 }
 VOLTAS = {"pergunta": 15, "propor": 40, "aplicar": 40}
 # 24/10: pergunta 15 -> 25 min (as leituras das melhorias agora têm 40 passos e o Kiro raciocina antes de cada um)
@@ -681,7 +683,7 @@ def _executar(cmd, cwd, env, job, limite_min, ao_linha, sem_linha_min=SEM_LINHA_
     """Roda o agente com o _Vigia de olho; entrega cada linha (não vazia) do stdout a ao_linha(linha).
     Se o vigia matou, grava job["detalhe"] com o motivo. -> motivo do vigia ou None."""
     proc = subprocess.Popen(cmd, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                            stdin=subprocess.DEVNULL, creationflags=SEM_JANELA)
+                            stdin=subprocess.DEVNULL, creationflags=SEM_JANELA | ABAIXO_NORMAL)
     job["pid"] = proc.pid
     _gravar(job)
     vigia = _Vigia(proc, limite_min, sem_linha_min, intervalo)

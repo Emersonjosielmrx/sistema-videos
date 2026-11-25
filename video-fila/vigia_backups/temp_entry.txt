@@ -1,0 +1,5 @@
+﻿## 20261124_0302 — Alerta parceiro-render falha ffmpeg e disco baixo
+- Motivo / O que achei: parceiro-render falhou com TimeoutExpired no ffmpeg (-ss 1.28) e disco D: com apenas 6.05 GB livres (limite de segurança 8 GB).
+- Causa provável: Sobrecarga temporária no corte/cobertura do vídeo e acúmulo de arquivos temporários/espaço em disco baixo na partição D.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso). Caso necessário futuramente, verificar se o ffmpeg possui travamento por arquivo corrompido e liberar espaço temporário em D.
+- Estado: PRECISA REVISÃO

@@ -307,7 +307,6 @@ details.dobra > summary svg.lucide { color: hsl(var(--primary)); width: 17px; he
     <div><b>Central de Vídeos</b><small>PC1 + PC2 + Desktop · todos os projetos</small></div></div>
   <div class="busca" style="margin:4px 4px 10px"><i data-lucide="search"></i><input type="search" id="busca-geral" placeholder="buscar vídeo, canal, título ou ID (Enter)"></div>
   <nav class="menu" id="menu"></nav>
-  <a class="side-foot" href="/facebook.html" style="text-decoration:none"><i data-lucide="bar-chart-3"></i><span>Facebook · views por página e por vídeo</span></a>
   <a class="side-foot" href="https://clientes.opus-sem-limites.com.br/" target="_blank" rel="noopener" style="text-decoration:none"><i data-lucide="briefcase"></i><span>Painel de Clientes (Precioso, MS Energy, produtos)</span></a>
   <div class="side-foot"><span class="dot on" id="dot-ctrl"></span><span id="status">carregando...</span></div>
 </div></aside>
@@ -525,6 +524,12 @@ details.dobra > summary svg.lucide { color: hsl(var(--primary)); width: 17px; he
   <div><h2 class="tit" style="margin-top:0"><i data-lucide="trending-down"></i>Piores</h2><div class="glass tabela" id="t-piores"></div></div></div>
 </section>
 
+<section class="section" id="sec-medfacebook">
+  <div class="hero anim-in"><div class="bg-ic"><i data-lucide="facebook"></i></div><div class="row">
+    <div><h1><i data-lucide="facebook"></i><span class="grad-text">Medições Facebook</span></h1><p>Views por página e por vídeo, postado x esperado e evolução de cada página. Mede sozinho de hora em hora (tarefa PainelFacebookViews); o botão "Atualizar agora" mede na hora.</p></div>
+    <a class="btn" href="/facebook.html" target="_blank" rel="noopener">abrir em tela cheia</a></div></div>
+  <iframe id="f-facebook" title="Medições Facebook" style="width:100%;height:82vh;border:0;border-radius:14px;background:#050607"></iframe>
+</section>
 <section class="section" id="sec-rede">
   <div class="hero anim-in"><div class="bg-ic"><i data-lucide="network"></i></div><div class="row">
     <div><h1><i data-lucide="network"></i><span class="grad-text">Rede (aprendizado)</span></h1><p>Painel dos canais da rede do manhwa-react (tarefa PainelCanais, a cada 3 h) — antes era um HTML à parte.</p></div></div></div>
@@ -838,7 +843,7 @@ const MENU = [['Geral', [['geral', 'Visão geral', 'layout-dashboard'], ['produc
   ['Resultados', [['postagens', 'Postagens', 'send'], ['agenda', 'Agenda dos canais', 'calendar-days'], ['canais', 'Canais hoje', 'tv'],
     ['contas', 'Contas e canais', 'users'], ['views', 'Views e desempenho', 'trophy'],
     ['tendencias', 'Tendências 30 dias', 'line-chart'],
-    ['medtiktok', 'Medições TikTok', 'music-2'], ['medinsta', 'Medições Instagram', 'instagram'], ['recaplongo', 'Recap longo (Kaggle)', 'film'],
+    ['medtiktok', 'Medições TikTok', 'music-2'], ['medinsta', 'Medições Instagram', 'instagram'], ['medfacebook', 'Medições Facebook', 'facebook'], ['recaplongo', 'Recap longo (Kaggle)', 'film'],
     ['aprendizado', 'Aprendizado (parceiros)', 'lightbulb'], ['er', 'Engenharia reversa', 'flask-conical'], ['telaolike', 'Telão: like e comentário', 'thumbs-up'], ['rede', 'Rede (aprendizado)', 'network']]],
   ['Ajuda', [['docs', 'Como funciona', 'book-open']]]];
 let aba = 'geral';
@@ -859,7 +864,8 @@ function abrir(id) {
   const sub = VIEWS_SUB.some(x => x[0] === id) ? id : null;
   if (!sub && !MED_SUB[id] && ![].concat(...MENU.map(m => m[1])).some(x => x[0] === id)) id = 'geral';
   aba = id; location.hash = id;
-  if (id !== 'rede' && $('f-rede').getAttribute('src')) $('f-rede').removeAttribute('src');  // o painel da rede escondido seguia carregando
+  if (id !== 'rede' && $('f-rede').getAttribute('src')) $('f-rede').removeAttribute('src');
+  if (id !== 'medfacebook' && $('f-facebook') && $('f-facebook').getAttribute('src')) $('f-facebook').removeAttribute('src');  // o painel da rede escondido seguia carregando
   const sec = id.startsWith('p-') ? 'proj' : MED_SUB[id] ? 'medicoes' : id;
   document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + sec));
   document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === (sub ? 'views' : id)));
@@ -868,7 +874,7 @@ function abrir(id) {
   if (MED_SUB[id]) { $('med-bloco-tiktok').style.display = MED_SUB[id] === 'tiktok' ? '' : 'none'; $('med-bloco-insta').style.display = MED_SUB[id] === 'insta' ? '' : 'none'; }
   $('main').scrollTop = 0; window.scrollTo(0, 0);
   ({geral: loadGeral, producao: loadProducao, controle: loadControle, postagens: loadPostagens, canais: () => loadCanais(false),
-    views: loadViews, inscritos: loadCV, placar: loadPlacar, rede: () => { $('f-rede').src = '/rede?' + Date.now(); },
+    views: loadViews, inscritos: loadCV, placar: loadPlacar, rede: () => { $('f-rede').src = '/rede?' + Date.now(); }, medfacebook: () => { $('f-facebook').src = '/facebook.html?' + Date.now(); },
     ia: () => loadIA(), tarefas: loadTarefas, avisos: loadAvisos, aprendizado: loadAprendizado, agenda: loadAgenda,
     desempenho: loadDesempenho, contas: loadContas, voz: loadVoz, tendencias: loadTendencias, saude: loadSaude,
     medicoes: loadMedicoes, medtiktok: loadMedicoes, medinsta: loadMedicoes, recaplongo: loadRecapLongo, modelos: loadModelos, nsn: loadNsn, er: loadER, celular: loadCelular, telaolike: loadTelaoLike}[id] || (id.startsWith('p-') ? () => loadProjeto(id.slice(2)) : () => {}))();

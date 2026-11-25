@@ -20,7 +20,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 ARQ = BASE / "estado" / "uso_maquinas.jsonl"
 RES = Path(r"D:\postador-de-videos\config\notebooks_reservados.json")
-MAQS = ("pc1", "pc2", "desktop", "sti", "hp", "asus", "acer", "x200ma", "s20", "s20ultra", "g20")  # 13/11 dona: Moto G20 e HP Pavilion na medição
+MAQS = ("pc1", "pc2", "desktop", "asusx", "itau", "sti", "hp", "asus", "acer", "x200ma", "s20", "s20ultra", "g20")  # 24/11: asusx e itau (Omarchy)  # 13/11 dona: Moto G20 e HP Pavilion na medição
 
 
 def _reservas():
@@ -72,7 +72,7 @@ def amostra():
     for m in MAQS:
         o = {"m": m, "t": datetime.now().isoformat(timespec="minutes"), "cpu": None, "fazendo": "", "trab": False}
         try:
-            if m in ("sti", "hp", "s20", "s20ultra", "g20"):
+            if m in ("asusx", "itau", "sti", "hp", "s20", "s20ultra", "g20"):
                 import celulares
                 md = celulares.medir(m, vale_s=240)
                 o["cpu"] = md.get("cpu")

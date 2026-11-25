@@ -385,8 +385,84 @@ def med_sem_sucesso(agora):
     return out
 
 
+def med_celulares(agora):
+    """23/11 dona: vigiar também a postagem pelos celulares (canal_pronto / noite_encher), sem chat aberto.
+    Laços parados, nenhum post OK há horas no dia, conferência acumulada, mesmo erro repetido, celular fora do adb."""
+    import json as _j
+    import subprocess as _sp
+    pasta = Path(r"D:\projeto celular sub controle")
+    cp = pasta / "canal_pronto"
+    out = []
+
+    def caso(chave, titulo, evidencia, urgente=False):
+        out.append({"chave": f"celulares:{chave}", "categoria": "postagem-celulares", "projeto": "celulares",
+                    "titulo": titulo, "evidencia": evidencia[:600], "urgente": urgente})
+
+    # 1) laços vivos (o garantir_noite religa; aqui só aponta se ficaram mortos)
+    try:
+        r = _sp.run(["powershell", "-NoProfile", "-Command",
+                     "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | ForEach-Object { $_.CommandLine }"],
+                    capture_output=True, text=True, timeout=90, creationflags=0x08000000)
+        linhas = [l.strip().rstrip('"').strip() for l in (r.stdout or "").splitlines() if "noite_encher" in l]
+        for modo in ("laco", "laco_postar", "laco_conferir"):
+            if r.stdout and not any(l.endswith(" " + modo) or l.endswith('" ' + modo) for l in linhas):
+                caso(f"laco_morto:{modo}", f"celulares: laço {modo} do noite_encher não está rodando",
+                     f"nenhum processo 'noite_encher.py {modo}'; garantir_noite (tarefa CelularesEncher) deveria religar",
+                     urgente=True)
+    except Exception:  # noqa: BLE001
+        pass
+    # 2) posts: nenhum OK há 3 h entre 10h e 23h, com pedido pendente na fila
+    try:
+        tent = []
+        for l in (pasta / "postagens_celular.jsonl").read_text("utf-8", errors="replace").splitlines()[-400:]:
+            try:
+                tent.append(_j.loads(l))
+            except ValueError:
+                pass
+        hoje = [t for t in tent if str(t.get("quando", "")).startswith(f"{agora:%Y-%m-%d}")]
+        oks = [t for t in hoje if t.get("resultado") == "ok"]
+        pend = sum(1 for a in (cp / "pedidos").glob("*.json")
+                   if '"estado": "pendente"' in a.read_text("utf-8", errors="replace"))
+        ult = max((datetime.strptime(t["quando"][:16], "%Y-%m-%d %H:%M") for t in oks), default=None)
+        if 10 <= agora.hour < 23 and pend and (ult is None or (agora - ult).total_seconds() > 3 * 3600) and len(hoje) >= 3:
+            caso("sem_post_ok", f"celulares: nenhum post OK há 3 h+ ({len(oks)} ok de {len(hoje)} hoje, {pend} na fila)",
+                 f"último ok: {ult}; postagens_celular.jsonl; log canal_pronto\\noite_encher.log")
+        # 3) mesmo erro 4x+ nas últimas 6 h
+        from collections import Counter
+        recentes = [t for t in tent if t.get("resultado") != "ok" and t.get("quando")
+                    and (agora - datetime.strptime(t["quando"][:16], "%Y-%m-%d %H:%M")).total_seconds() < 6 * 3600]
+        for motivo, n in Counter(str(t.get("motivo"))[:80] for t in recentes).most_common(2):
+            if n >= 4:
+                caso(f"erro:{motivo[:50]}", f"celulares: mesmo erro {n}x em 6 h",
+                     f"postagens_celular.jsonl motivo: {motivo}; prints em {pasta}\\prints")
+    except Exception:  # noqa: BLE001
+        pass
+    # 4) conferência acumulada (vídeo pronto esperando olho humano/agente)
+    try:
+        conf = [a.stem for a in (cp / "pedidos").glob("*.json")
+                if '"estado": "conferir"' in a.read_text("utf-8", errors="replace")]
+        if len(conf) >= 6:
+            caso("conferir_acumulado", f"celulares: {len(conf)} vídeos esperando conferência da troca da @",
+                 "pedidos em estado conferir: " + ", ".join(conf[:8]))
+    except Exception:  # noqa: BLE001
+        pass
+    # 5) celular fora do adb (todos os 5 do canal_pronto)
+    try:
+        r = _sp.run([r"D:\tools\platform-tools\adb.exe", "devices"], capture_output=True, text=True, timeout=30,
+                    creationflags=0x08000000)
+        ok = {l.split()[0] for l in (r.stdout or "").splitlines() if l.endswith("\tdevice")}
+        fora = [s for s in ("100.92.36.34:5555", "100.75.139.24:5555", "100.87.168.9:5555", "100.117.134.73:5555",
+                            "100.103.218.7:5555") if s not in ok]
+        if len(fora) >= 2:
+            caso("adb_fora", f"celulares: {len(fora)} celulares fora do adb",
+                 "fora: " + ", ".join(fora) + " — reconectar com `adb connect <ip>:5555` (nunca kill-server)")
+    except Exception:  # noqa: BLE001
+        pass
+    return out
+
+
 MEDIDORES = (med_postagem, med_facebook, med_sem_sucesso, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
-             med_capas_longos, med_qa_longos)
+             med_capas_longos, med_qa_longos, med_celulares)
 
 
 def medir(agora):

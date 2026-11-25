@@ -1014,12 +1014,12 @@ def fazer_short(cand, target_lines, dry_run, use_worker=False,
             logging.warning("[auto|short] extra do Kaggle sem vídeo do Kaggle — não renderiza no PC (SHORTS_SO_KAGGLE)")
             return False
         if r is None:
-            r = subprocess.run(cmd, env=env)
+            r = subprocess.run(cmd, env=env, timeout=14400)
             if r.returncode != 0 and os.environ.get("SHORTS_NO_KAGGLE") == "1":
                 # 02/11: o render do PC logo depois do Kaggle saiu rc=1 em 6 min sem traceback no log (ZtABfk1NGxA) —
                 # 1 nova tentativa antes de perder o Short (o estado do workspace mexido pelo lote pode ter atrapalhado)
                 logging.warning("[auto|short] render no PC falhou depois do Kaggle — 1 nova tentativa")
-                r = subprocess.run(cmd, env=env)
+                r = subprocess.run(cmd, env=env, timeout=14400)
         if teste:  # teste gradual: o que se ouve no Short pronto confere com o roteiro? (anime_testes.conferir)
             q = anime_testes.conferir(work, vf) if r.returncode == 0 and vf.exists() else \
                 {"ok": None, "motivo": f"pipeline rc={r.returncode}"}
@@ -1042,7 +1042,7 @@ def fazer_short(cand, target_lines, dry_run, use_worker=False,
                     env.update(VOZ_CLONADA=clone[0], VOZ_CLONADA_BASE=clone[1], VOZ_CLONADA_VERSAO="2",
                                VOZ_CLONADA_CONFIG=config_clone, VOZ_CLONADA_RESUMO=str(resumo_clone))
                 logging.warning(f"[auto|short] formato refeito no SOLO ({clone[0] if clone else 'voz normal'})")
-                r = subprocess.run(cmd, env=env)
+                r = subprocess.run(cmd, env=env, timeout=14400)
                 if rc_formato != 0 and r.returncode == 0:  # o solo saiu: a culpa era do formato, não da fonte/máquina
                     anime_testes.contar_falha(item_formato, f"pipeline rc={rc_formato}")
         if r.returncode != 0:

@@ -1,0 +1,16 @@
+{
+  "T1": "range(len(valores) - janela + 1) — o laço perde a última janela (linha 4)",
+  "T2": 175395,
+  "T3": "não existe (vigia só tem limite_mb)",
+  "T4": {
+    "mais": "429 rate limited",
+    "vezes": 37,
+    "total_error": 95
+  },
+  "T5": "t5_main.py linha 6: argumentos trocados -> return pausar(conta, 20, \"limite\")",
+  "T6": [
+    "cw/claude-sonnet-5-5",
+    "claude-web/claude-sonnet-5",
+    "claude-web/claude-sonnet-4-5"
+  ]
+}

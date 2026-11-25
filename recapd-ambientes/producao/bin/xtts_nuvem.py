@@ -80,6 +80,31 @@ def lote(lista_json):
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(dev)
     m = tts.synthesizer.tts_model
+    # 24/11 noite: XTTS_CKPT=<pasta com model.pth do fine-tune do narrador> troca só os pesos do GPT/decoder pelos do
+    # fine-tune (mesmo config/vocab do base). Sem a variável = modelo base de sempre. Falhou = segue no base.
+    ck = os.environ.get("XTTS_CKPT")
+    if ck and (Path(ck) / "model.pth").exists():
+        try:
+            sd = torch.load(str(Path(ck) / "model.pth"), map_location=dev, weights_only=False)
+            sd = sd.get("model", sd)
+            # 25/11: o checkpoint do treino (GPTTrainer) guarda as chaves com o prefixo "xtts." e leva o dvae/mel junto;
+            # sem tirar o prefixo o strict=False não carregava NADA (silencioso).
+            if hasattr(m, "get_compatible_checkpoint_state_dict"):
+                sd = m.get_compatible_checkpoint_state_dict(str(Path(ck) / "model.pth"))
+            else:
+                sd = {k[5:] if k.startswith("xtts.") else k: v for k, v in sd.items()
+                      if not k.startswith(("dvae.", "torch_mel_spectrogram", "xtts.dvae.", "xtts.torch_mel_spectrogram"))}
+            meu = set(m.state_dict())
+            casou = len(meu & set(sd))
+            faltou, sobrou = m.load_state_dict(sd, strict=False)
+            print(f"XTTS_CKPT {ck} carregado: {casou}/{len(meu)} camadas do modelo trocadas "
+                  f"(faltou {len(faltou)}, sobrou {len(sobrou)})", flush=True)
+            if casou < len(meu) * 0.5:
+                raise RuntimeError(f"só {casou} camadas casaram — checkpoint incompatível")
+        except Exception as e:  # noqa: BLE001
+            print(f"XTTS_CKPT falhou ({type(e).__name__}: {str(e)[:120]}) — recarrega o base", flush=True)
+            tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(dev)  # pesos meio carregados = descarta
+            m = tts.synthesizer.tts_model
     # 21/11 tarde (dona: "veja o acelerador DeepSpeed, quanto pode acelerar e se não perde qualidade"): XTTS_DEEPSPEED=1
     # troca o GPT do XTTS pelo kernel de inferência do DeepSpeed (o acelerador oficial do Coqui). Falhou = segue normal.
     if os.environ.get("XTTS_DEEPSPEED") == "1" and dev == "cuda":
@@ -154,7 +179,7 @@ def lote(lista_json):
                                 audio += [rw.astype(np.float32), np.zeros(int(24000 * 0.08), np.float32)]
                             except Exception as e:  # noqa: BLE001
                                 print(f"XTTS risada falhou {e}", flush=True)
-                    o = m.inference(frase, "pt", gpt, spk, temperature=float(it.get("temp", 0.6)), top_p=0.8,
+                    o = m.inference(frase, "pt", gpt, spk, temperature=float(it.get("temp", 0.6)), top_p=float(os.environ.get("XTTS_TOP_P", "0.8")),
                                     top_k=40, repetition_penalty=10.0, length_penalty=1.0, speed=vel,
                                     enable_text_splitting=False)
                     audio.append(np.asarray(o["wav"], dtype=np.float32))

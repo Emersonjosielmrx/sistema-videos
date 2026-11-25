@@ -55,6 +55,10 @@ MAQUINAS = {"x200ma": {"ssh": "emerson@100.87.195.108", "porta": 9460,
             # quem confere é o chrome_conta.py de lá ("OCUPADO gravando"); entra na conta só depois do `ativar`
             # 30/10 (D39): puxar_http = arquivos vão/voltam por HTTP temporário do PC1 (o sshd do desktop derruba scp)
             "desktop": {"ssh": "desktop", "porta": 9460, "win": True, "puxar_http": True},
+            # 25/11 (dona: "todos workers"): notebooks Omarchy (Arch + Hyprland/Wayland), os mais rápidos. Por ora SÓ a
+            # fábrica do Fish (chrome_conta --proxy-fish + ponte na máquina); nenhuma conta de YouTube/TikTok ativada.
+            "asusx": {"ssh": "emerson@100.121.199.93", "porta": 9460},
+            "itau": {"ssh": "emerson@100.100.73.28", "porta": 9460},
             # 23/10 (dona): o PC2 também, "deixe pronto pra quando eu for logar" — sem conta ativada não recebe nada
             # (as tentativas só passam por máquina ativada na conta). Ele renderiza o anime: fica atrás dos notebooks.
             "pc2": {"ssh": "pc2", "porta": 9460, "win": True, "lento": True,
@@ -211,11 +215,83 @@ class Remoto:
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=SEM_JANELA)
         time.sleep(4)  # o ssh sobe e registra os encaminhamentos lá
 
-    def abrir(self, perfil, url="about:blank", comando="abrir", sem_espera=False, espera_s=960, tunel=True, proxy_n=None):
+    def _ponte_fish_la(self, n):
+        """25/11: a ponte do Fish RODANDO NA MÁQUINA (~/postador-worker/ponte_proxy_fixo.py N 18500+N -> rnprmtfo-N, o
+        MESMO IP fixo da conta que no PC1). Pelo túnel reverso até o PC1 o fish.audio dava ERR_TIMED_OUT/CONNECTION_CLOSED
+        (o Chrome abre dezenas de conexões); direto de lá carrega em 1 s. Só Linux com a ponte instalada; senão None
+        (usa o túnel). FISH_PONTE_LA=0 desliga."""
+        if self.win or os.environ.get("FISH_PONTE_LA", "1") == "0":
+            return None
+        n = int(n)
+        porta = 18500 + n
+        cmd = (f"cd ~/postador-worker 2>/dev/null && test -f ponte_proxy_fixo.py && test -f secrets/proxies.txt || "
+               f"{{ echo SEM_PONTE; exit 0; }}; "
+               f"curl -s -m 5 -o /dev/null http://127.0.0.1:{porta}/ 2>/dev/null; "
+               f"if ! ss -ltn 2>/dev/null | grep -q ':{porta} '; then "
+               f"setsid nohup python3 ponte_proxy_fixo.py {n} {porta} > /tmp/ponte{n}.log 2>&1 < /dev/null & sleep 3; fi; "
+               f"for i in 1 2 3; do c=$(curl -s -o /dev/null -w '%{{http_code}}' -m 60 -x http://127.0.0.1:{porta} "
+               f"https://fish.audio/robots.txt); [ \"$c\" = 200 ] && {{ echo PONTE_LA_OK; exit 0; }}; sleep 3; done; "
+               f"echo PONTE_LA_FORA")
+        saida = self._txt(self._ssh(cmd, timeout=240))
+        return "PONTE_LA_OK" in saida
+
+    def _abrir_tunel_fish(self, n):
+        """24/11 dona ("loga os Fish nos outros PCs"; "sim" pra saída nova): túnel REVERSO da ponte do Fish deste PC
+        (fish_audio._subir_ponte: 127.0.0.1:18500+n = IP rnprmtfo-n da conta, sem senha) — o Chrome do Fish lá sai pelo
+        MESMO IP fixo que usa no PC1. A ponte sobe aqui antes (fish_audio._subir_ponte)."""
+        sys.path.insert(0, r"D:\hipercool-materiais\comum\fish_audio")
+        import fish_audio as _fa
+        porta = _fa._subir_ponte(int(n))
+        self.tunel_proxy = subprocess.Popen(
+            [SSH, "-o", "BatchMode=yes", "-o", "LogLevel=ERROR", "-o", "ServerAliveInterval=15", "-N",
+             "-R", f"{porta}:127.0.0.1:{porta}", *self.opts, self.alvo],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=SEM_JANELA)
+        time.sleep(4)
+
+    def abrir(self, perfil, url="about:blank", comando="abrir", sem_espera=False, espera_s=960, tunel=True, proxy_n=None,
+              proxy_fish=None):
         if conta_kaggle_viva(perfil):  # com proxy_n também: o Webshare N é OUTRO IP, não o rnprmtfo fixo do Kaggle
             raise RuntimeError(f"{self.nome}: {perfil} é conta VIVA do Kaggle — não abre Chrome fora do IP fixo dela "
                                "(3º banimento 12/11: animescomia). Só no PC1 pela ponte rnprmtfo dela.")
+        if proxy_fish is not None:
+            return self._abrir_fish(perfil, url, espera_s, tunel, proxy_fish)
         return self._abrir(perfil, url, comando, sem_espera, espera_s, tunel, proxy_n)
+
+    def _abrir_fish(self, perfil, url, espera_s, tunel, n):
+        """Chrome do Fish lá pelo IP fixo da conta: túnel reverso da ponte + chrome_conta --proxy-fish=n, que confere a
+        ponte e só então abre (PROXY_OK n). Sem a confirmação = fecha e falha (nunca pelo IP de casa)."""
+        if not self._ponte_fish_la(n):  # sem ponte lá (Windows, não instalada, fora) = túnel até a ponte do PC1
+            self._abrir_tunel_fish(n)
+        r = self._ssh(f"{self.run} abrir {_q(perfil, self.win)} {self.porta} {_q(url, self.win)} --proxy-fish={int(n)}",
+                      timeout=espera_s)
+        saida = self._txt(r)
+        if f"PROXY_OK {int(n)}" not in saida:
+            if "PRONTO" in saida:
+                self.aberto = True
+                self.fechar()
+            else:
+                self._fechar_tunel_proxy()
+            raise RuntimeError(f"{self.nome}: Chrome do Fish sem confirmação do IP {n} — não abro "
+                               f"({' '.join(saida.split())[-120:]})")
+        self.aberto = True
+        self.aberto_em = time.time()
+        if not tunel:
+            return None
+        with socket.socket() as s:
+            s.bind(("127.0.0.1", 0))
+            self.porta_local = s.getsockname()[1]
+        self.tunel = subprocess.Popen([SSH, "-o", "BatchMode=yes", "-o", "LogLevel=ERROR", "-o", "ExitOnForwardFailure=yes",
+                                       "-o", "ServerAliveInterval=15", "-N", "-L",
+                                       f"{self.porta_local}:127.0.0.1:{self.porta}", *self.opts, self.alvo],
+                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=SEM_JANELA)
+        for _ in range(40):
+            try:
+                urllib.request.urlopen(f"http://127.0.0.1:{self.porta_local}/json/version", timeout=3)
+                return self.porta_local
+            except Exception:  # noqa: BLE001
+                time.sleep(1)
+        self.fechar()
+        raise RuntimeError(f"{self.nome}: túnel até o Chrome do Fish não abriu")
 
     def _abrir(self, perfil, url="about:blank", comando="abrir", sem_espera=False, espera_s=960, tunel=True, proxy_n=None):
         """Abre o Chrome do perfil lá e o túnel aqui. Devolve a porta LOCAL (use como se o Chrome fosse deste PC).

@@ -94,6 +94,7 @@ def run_one(video_path, script_path, orient, out_name, max_panels):
     if orient == "landscape":
         lines, tempos = _cta_longo(lines, tempos, Path(video_path).parent.name)
         lines, tempos = _resumo_longo(lines, tempos, workspace, video_path)  # depois do CTA: o "depois da frase 4" segue na história
+        lines, tempos = _onde_parou(lines, tempos, video_path)  # 24/11: série em partes — "no episódio anterior"
         lines, tempos = _ganchos_longo(lines, tempos, workspace)
         lines, tempos = _falas_personagem(lines, tempos, workspace)
         _marcar_falas_mascote(lines)
@@ -695,8 +696,11 @@ def _memes_resumo(clips, sfx_durs, workspace):
         try:
             import memes_visuais
             com_serie = {k for k, _w in series}
+            # 23/11: era só "não na MESMA frase" — série na frase 10 e meme na 11 saíam colados. Agora >= 3 frases
+            # de distância (MEMES_CONTEXTO=0 volta ao antigo)
+            longe = 3 if os.environ.get("MEMES_CONTEXTO", "1") != "0" else 1
             inter = [(k, m) for k, m in memes_visuais.escolher_interrupcoes(_ENTRIES_TEXTO, inicio=n_res + 2, rnd=rnd)
-                     if k not in com_serie]
+                     if all(abs(k - s) >= longe for s in com_serie)]
         except Exception as e:  # noqa: BLE001
             logging.warning(f"[longo] memes visuais indisponíveis ({type(e).__name__}: {e})")
     prontos = []  # (frase, clipe) — séries e memes visuais entram juntos, do fim pro começo (posição não desloca)
@@ -790,8 +794,31 @@ def _memes_resumo(clips, sfx_durs, workspace):
         novos.insert(k + 1, out)
         sfx2.insert(k + 1, 0.0)
     ja_no_meio = {Path(m["file"]).name for _k, m in inter}  # 21/11: novo já usado no meio não repete no resumo
+    ctx_memes = os.environ.get("MEMES_CONTEXTO", "1") != "0"
+    usados_resumo = []
     for k in sorted(depois, reverse=True):
-        src = rnd.choice([p for p in pool if p.name not in ja_no_meio] or pool)
+        livres = [p for p in pool if p.name not in ja_no_meio] or pool
+        src = None
+        if ctx_memes and len(_ENTRIES_TEXTO) > k:
+            # 23/11: no resumo também vale a ficha (o meme que a frase pede); sem casar = o menos usado nos últimos vídeos
+            try:
+                import memes_visuais
+                cand = [{"file": str(p), "has_audio": True, "duration": 2.0} for p in livres]
+                esc = memes_visuais._por_contexto(_ENTRIES_TEXTO[k], cand, memes_visuais.emocao(_ENTRIES_TEXTO[k]), rnd,
+                                                  _ENTRIES_TEXTO[k - 1] if k else "")
+                if esc:
+                    src = Path(esc["file"])
+                elif memes_visuais.triste(_ENTRIES_TEXTO[k]) or (k and memes_visuais.triste(_ENTRIES_TEXTO[k - 1])):
+                    continue  # 24/11: cena de morte/luto também fica sem meme no resumo
+                else:
+                    menos = memes_visuais._menos_usados(cand)
+                    src = Path(rnd.choice(menos)["file"])
+            except Exception:  # noqa: BLE001
+                src = None
+        if src is None:
+            src = rnd.choice(livres)
+        ja_no_meio.add(src.name)  # 23/11: os 2 memes do resumo eram sorteados um a um e podiam sair IGUAIS
+        usados_resumo.append(str(src))
         out = Path(workspace) / f"_meme_resumo_{k}.mp4"
         try:
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-f", "lavfi", "-t", "4",
@@ -800,7 +827,10 @@ def _memes_resumo(clips, sfx_durs, workspace):
                             f"gblur=sigma=25[bg];[b]scale=-2:{H}[fg];[bg][fg]overlay=(W-w)/2:0,fps=30,format=yuv420p[v];"
                             # 14/11 (A18): normalize=0 — a 2ª entrada é só silêncio (garante trilha de áudio) e o
                             # amix dividia o som do meme por 2 (-6 dB)
-                            "[0:a][1:a]amix=inputs=2:duration=first:normalize=0[au]",
+                            # 23/11: loudnorm igual ao meme do meio (montar_clip) — o do resumo saía mais alto/baixo
+                            # que o resto (MEMES_CONTEXTO=0 tira)
+                            "[0:a][1:a]amix=inputs=2:duration=first:normalize=0"
+                            + (",loudnorm=I=-16:TP=-2" if ctx_memes else "") + "[au]",
                             "-map", "[v]", "-map", "[au]", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23",
                             "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2", "-shortest",
                             "-t", f"{MEME_RESUMO_MAX_S + 0.5:.1f}", str(out)],  # trava final: nunca passa do teto
@@ -810,6 +840,12 @@ def _memes_resumo(clips, sfx_durs, workspace):
             continue
         novos.insert(k + 1, str(out))
         sfx2.insert(k + 1, 0.0)
+    # 23/11: guarda os memes deste vídeo — o próximo dá preferência aos que não saíram agora (memes_visuais._uso_recente)
+    try:
+        import memes_visuais
+        memes_visuais.registrar_uso(workspace, [m for _k, m in inter] + usados_resumo)
+    except Exception:  # noqa: BLE001
+        pass
     # índices finais dos memes na lista do concat
     idx = {i for i, c in enumerate(novos) if Path(str(c)).name.startswith("_meme_resumo_")}
     # 19/11 dona ("às vezes a mascote aparece duplicada, ou a mascote e a amiga com vozes ao mesmo tempo"): posições
@@ -1078,6 +1114,24 @@ def _marcar_falas_mascote(lines):
         os.environ.setdefault("ANIME_MASCOTE_TOM", m.get("tom") or "+6%,+22Hz")
         os.environ.setdefault("ANIME_MASCOTE_CLONE", m.get("voz_clone") or "")  # 28/10: edge puro nunca
         logging.info(f"[longo] mascote fala as frases {', '.join(idx)} ({os.environ['ANIME_MASCOTE_VOZ']})")
+
+
+def _onde_parou(lines, tempos, video_path):
+    """24/11 dona (vídeo de 20 h dividido em partes de 30 min): cada parte abre com um resumo curto de onde parou, pra
+    não ficar corte abrupto. O pedido.json traz "resumo_anterior" (lista de frases em PT, já no tom do narrador); elas
+    entram no começo, mostrando os primeiros segundos da própria parte. Sem o campo = nada muda."""
+    try:
+        ped = json.loads((Path(video_path).parent / "pedido.json").read_text(encoding="utf-8"))
+        frases = [str(x).strip() for x in (ped.get("resumo_anterior") or []) if str(x).strip()][:8]
+    except (OSError, ValueError):
+        return lines, tempos
+    if not frases:
+        return lines, tempos
+    logging.info(f"[longo] onde parou: {len(frases)} frases na abertura (parte {ped.get('parte', '?')})")
+    novas = frases + ["Bora pra continuação!"]
+    if tempos:
+        tempos = [0.0] * len(novas) + list(tempos)
+    return novas + list(lines), tempos
 
 
 def _resumo_longo(lines, tempos, workspace, video_path):

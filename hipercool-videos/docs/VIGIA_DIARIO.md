@@ -510,3 +510,22 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz (comandos e arquivos mexidos, com caminho do backup): Nenhum código ou configuração foi alterado (Modo Só Aviso estrito). Apenas leituras de logs e verificação de processos.
 - CONSERTO PROPOSTO: nenhum (o sistema recuperou o espaço em disco e continuou operando normalmente sem intervenção).
 - Estado: NADA A FAZER
+## 20261124_0305 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): 
+  - `fila_postagem.log` registra ciclos contínuos e normais da fila (último às 03:07:58 "janela: D: com 6.4 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já").
+  - `fila_ciclo.log` registra execuções periódicas e nota informativa padrão "fila de capítulos terminada — adicione a próxima obra em config/fila.json".
+  - Processos Python em execução normal e controlada.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. A produção está rodando normalmente nos ciclos automatizados.
+- Estado: NADA A FAZER
+
+## 20261125_0254 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): 
+  - `fila_postagem.log` registra ciclos contínuos e normais da fila (último às 02:47:30 "Shorts em pt: canal parado, sai já").
+  - `fila_ciclo.log` registra execuções periódicas e nota informativa padrão "fila de capítulos terminada — adicione a próxima obra em config/fila.json".
+  - Processos Python em execução normal e controlada (sem travamentos ou processos órfãos consumindo CPU excessiva).
+- O que fiz: Nenhum código ou configuração alterado (Modo Só Aviso estrito). Apenas leituras de logs, verificação de processos e registro no diário.
+- CONSERTO PROPOSTO: nenhum.
+- Estado: NADA A FAZER

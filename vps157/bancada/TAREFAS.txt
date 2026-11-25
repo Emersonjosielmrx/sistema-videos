@@ -1,0 +1,8 @@
+BANCADA DE AJUDANTES — 6 tarefas. Os arquivos estão em D:\vps157\bancada\. Responda TODAS.
+T1. O arquivo t1_media.py devia imprimir [1.5, 2.5, 3.5, 4.5]. Qual é o defeito e qual é a linha corrigida exata?
+T2. No t2_videos.csv, qual é a soma da coluna views das linhas com canal "Verse" E status "postado"? (número exato)
+T3. No t3_config.json, qual é o valor de vigia.pausa_max?
+T4. No t4_gateway.log, qual erro aparece mais vezes nas linhas ERROR, e quantas vezes? Dê também o total de linhas ERROR.
+T5. t5_main.py devia imprimir "conta7 pausada 20 min: limite". Qual é o defeito (arquivo e linha) e a linha corrigida?
+T6. Quais destes nomes casam com o regex ^(cw|claude-web)/claude-sonnet-\d+(-\d+)?$ ? ['cw/claude-sonnet-5-5', 'claude-web/claude-sonnet-5', 'cc/claude-sonnet-5-5', 'cw/claude-sonnet-5-5-high', 'claude-web/claude-sonnet-4-5', 'cw/claude-opus-5-5']
+Responda numerado T1..T6, uma resposta curta por tarefa.

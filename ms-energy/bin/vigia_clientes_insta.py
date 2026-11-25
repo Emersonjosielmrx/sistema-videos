@@ -239,6 +239,20 @@ def main():
     print(f"{datetime.now():%d/%m %H:%M} avisos: {len(avisos)}")
 
 
+def _arquivar_mesmo_assim():
+    """24/11 (noite-disco): token do Instagram com HTTP 400 derrubava o main() antes do arquivamento (linha ~226) e
+    os vídeos da MS Energy pararam de ir pro Drive desde 22/11. Arquivar não depende da API do Instagram."""
+    try:
+        import arquivar_drive_ms
+        arquivar_drive_ms.arquivar_dia()
+    except Exception as e:  # noqa: BLE001
+        print(f"arquivar no Drive falhou: {type(e).__name__}: {e}")
+
+
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    main()
+    try:
+        main()
+    except Exception:
+        _arquivar_mesmo_assim()
+        raise

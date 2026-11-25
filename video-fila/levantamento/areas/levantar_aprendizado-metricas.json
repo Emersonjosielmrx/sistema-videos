@@ -1,0 +1,115 @@
+{
+ "resumo_area": "O sistema mede muito e decide pouco. Há 4 laços de medição: (1) analise_sinais_shorts + inteligencia_ajustada (FocoShorts, diário), que já mexem de forma automática no peso de fonte e de voz e na hora nobre; (2) placar_variantes, o A/B dos Shorts, que só escreve e nunca decide; (3) o A/B dos longos (melhorador_longo._resumo_variantes, hoje PAUSADO); (4) medico_recuperacao, o único com grupo controle e com o 'nao_funciona' que aprende. O gargalo número 1 é o ALIMENTO: a leitura do Studio (metricas_rede) caiu de 125 vídeos/dia (15/11) para 7 (24/11), com 573 vídeos na fila sem views. O FocoShorts morre no limite de 20 min antes do --aplicar desde 23/11, e por isso sinais_shorts.json, fontes_por_canal.json e narradores_ajustado.json estão parados em 22/11. O gargalo número 2 é o FECHAMENTO: os testes A/B com 300+ elegíveis por braço ficam 'sem diferença' para sempre, ninguém roda o placar desde 17/11 e o motor de voz (Fish/XTTS), que é a maior aposta atual, nem entra como sinal. Loop mínimo proposto: alimentar com a API pública quando o Studio falhar → um placar diário oculto → um decisor no molde do médico (braço vencedor, empate, controle e nao_funciona) que grava em cortes_ajustes.json e config/longo.json com linha no histórico, com chave que desliga e aviso no relatório.",
+ "achados": [
+  {
+   "titulo": "Leitura do Studio em colapso: o aprendizado inteiro está sem alimento",
+   "problema": "Todo o aprendizado dos Shorts (sinais, receitas, nota de fonte e de voz, placar A/B, avaliar_testes_voz) usa só metricas_studio.json, e a leitura dele quase parou. Os Shorts novos (Fish, canais em recuperação) não entram em nenhuma conta.",
+   "evidencia": "postador-de-videos/logs/metricas_rede.log, leituras ok por dia: 20/11=33, 21/11=17, 22/11=7, 23/11=2, 24/11=1. Falhas: 18x 'Locator.inner_text: Timeout 30000ms' e 5x 'Page.goto Timeout 90000ms' em 23-24/11. Último lote: '573 video(s) sem views em 43 canal(is); lendo 4 (0 lido(s) nas ultimas 6 h)'. metricas_studio.json, lido_em por dia: 15/11=125 … 23/11=21, 24/11=7; ret_lista teve leitura em massa só em 16-17/11 (591+1660). Uploads de 17-21/11: 348 no uploads_ledger, 287 sem métrica do Studio.",
+   "proposta": "(a) Fallback de views pela API pública já coletada: em analise_sinais_shorts.carregar() e placar_variantes, quando o vídeo não está no Studio, usar views de video-fila/estado/videos_canais.json (cobre 163 dos 287 que faltam). A razão views/mediana do canal funciona igual; só 'continuaram' fica None. Chave SINAIS_VIEWS_API=0 desliga. (b) Diagnosticar o timeout do Studio (mudou o seletor 'ytcp-'?) fora do PC1 e pela saída fixa de cada conta, sem laço de contas no mesmo IP.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "videos_canais.py (API pública, cache de 1 h) já grava views por vídeo, mas o aprendizado não usa. metricas_rede existe e está falhando."
+  },
+  {
+   "titulo": "FocoShorts morre antes do --aplicar: notas de fonte, voz e receitas paradas desde 22/11",
+   "problema": "A tarefa tem limite de 20 min e o script passou a imprimir as tabelas e ser morto antes do bloco que grava. As decisões automáticas (peso da fonte no parceiro_diario, ranking de voz, RECEITAS) usam dados de 2 dias atrás, e cada dia piora.",
+   "evidencia": "Get-ScheduledTask FocoShorts: ExecutionTimeLimit PT20M, LastTaskResult 267014 (0x41306, encerrada). logs/foco_shorts.log: a última linha 'fontes por canal' é a 2109 (rodada de 22/11); a rodada de 24/11 (linha 2130, '2177 Shorts…') termina nas tabelas CANAL x TIPO, sem 'fontes por canal' nem 'ajustado pelo horário'. mtimes: estado/sinais_shorts.json, RECEITAS_DO_SUCESSO.md, recapd/estado/fontes_por_canal.json e narradores_ajustado.json = 22/11 05:42-05:43. O CSV de 23 e 24/11 foi escrito (06:00 e 05:57), o que mostra que o script rodou e foi cortado depois.",
+   "proposta": "Pôr o bloco --aplicar (fontes_por_canal, inteligencia_ajustada.gravar, gravar_receitas, aplicar) ANTES das impressões longas, ou subir o limite para PT45M. Gravar também sinais_shorts.json completo (hoje o --json do analise_sinais_shorts só roda à mão; gravar_receitas só atualiza 'receitas'). Adicionar ao relatorio_ronda um alerta 'dado de aprendizado com mais de 36 h'.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "FOCO_RECEITAS=0 desliga as receitas. Não há alerta de dado velho."
+  },
+  {
+   "titulo": "A/B dos Shorts nunca fecha sozinho: placar parado desde 17/11 e testes 'sem diferença' eternos",
+   "problema": "O placar_variantes só escreve o .md e diz 'Não muda nada sozinho'. Nenhuma tarefa o roda: só 3 testes foram fechados, à mão, em 17/11. Seis testes seguem 'ab' com 300+ elegíveis por braço e 'sem diferença clara', ou seja, gastam sorteio para sempre sem decidir. horario_fraco ainda sorteia, embora o médico e o politica já forcem a hora nobre.",
+   "evidencia": "linhas/CORTES/placar_cortes_testes.json 'gerado': '2026-11-17 20:44'. bin/placar_variantes.py:12 'Não muda nada sozinho'. Nenhuma tarefa agendada chama placar_variantes (busca nas Actions). cortes_ajustes.json: gancho_meio/gancho_remotion/mascote/fala_rapida/saudacao/horario_fraco = 'ab'. Placar: gancho_meio A 346 x B 322 elegíveis, P_ajustado(B>A)=0.78; saudacao 299/310, P=0.83; fala_rapida 323/324, P=0.35. O histórico de cortes_ajustes mostra fx_choque→B, curto→B e ninguem_esperava→A em '2026-11-17T20:55' pelo 'chat ronda'.",
+   "proposta": "Tarefa diária oculta (rodar_oculto.vbs) 'DecisorAB': roda placar_variantes e aplica a régua que já existe. PRONTO (D3+D16, P>=0,95) → grava o braço vencedor. Com n>=200 por braço e 0,2<P<0,8 → EMPATE, fixa o braço A (o padrão, mais barato) e libera a vaga. Grava em cortes_ajustes.json com linha no 'historico' (quem='decisor_ab', porque=número) e avisa no relatório. Chave DECISOR_AB=0. Não é o melhorador (pausado): é uma regra fixa, sem LLM.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "medio",
+   "ja_existe": "A régua D1/D3/D16 e o cálculo de P existem em placar_variantes.py. Falta rodar e aplicar."
+  },
+  {
+   "titulo": "Motor de voz (Fish x antigo) não é sinal medido em nenhum placar",
+   "problema": "Fish é a voz primária dos Shorts desde 19/11 e gasta crédito pago, mas a análise que diz 'o que dá view' não olha o motor. A gravação do campo também é falha: postar.json pós-19/11 mostra motor_voz só em parte dos Shorts.",
+   "evidencia": "analise_sinais_shorts.py:27-30, a tupla CAMPOS não tem 'motor_voz'. bin/anime_publish.py:575 grava 'motor_voz': _motor_voz(video), que devolve None quando falta audio_cache/_voz_online.json (linhas 350-363). Nos 400 últimos uploads_ledger com postar.json legível, entre os de 20/11 em diante: 54 com a chave motor_voz e 63 sem. Nos lidos, o valor 'motor' veio None em 351 de 351 (Counter por get('motor')).",
+   "proposta": "Gravar sempre motor_voz = {'motor': 'fish'|'xtts'|'kitten'|'p3'} no postar.json (sem marca = gravar o motor que de fato narrou, não None). Incluir 'motor_voz_motor' (texto) em CAMPOS do analise_sinais_shorts e em receita_ou_sorte. Com o fallback de views da API (achado 1), em ~3 dias dá para saber se o crédito Fish se paga.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "parceiro_diario.py:982-985 lê motor_voz só para pôr na frente da fila, não para medir."
+  },
+  {
+   "titulo": "Posts pelos celulares ficam fora da medição (sem video_id)",
+   "problema": "Os celulares postam todo dia em canais próprios (Oculto Mundial, Segredos Revelados, Curioso Demais, Curiosidades do Mundo 3d, Dentro das Coisas 3D), mas nenhum desses posts entra no ledger com ID. Sem view, não dá para decidir se o celular ou esses canais valem o esforço (38 erros/dia).",
+   "evidencia": "D:\\projeto celular sub controle\\postagens_celular.jsonl: 66 'ok' e nenhum com video_id (campos: titulo, email, troca.canal, agendado_para…). uploads_ledger.jsonl: só 2 registros 'celular:<serial>' (18 e 19/11). relatorio_ronda.py:1079 diz 'Views desses posts ainda não são medidas'. Na ronda_tarde, a tabela kit3d mostra links 'youtu.be/celular:@dentrodascoisas3d:…'. metricas_rede.log: 'lote OcultoMundial: sem perfil… canal não encontrado'. Teste local: casando título normalizado com videos_canais.json, 9 dos 66 casam; os canais Oculto/Segredos/Curioso não estão na lista da API (nenhum slug deles).",
+   "proposta": "Script de reconciliação (só leitura de API pública, sem conta): pôr o yt_id desses canais em rede_canais.json para o videos_canais coletar, e casar cada post 'ok' do celular por (canal, título normalizado, publishAt ±30 min). Gravar o video_id no postagens_celular.jsonl e no uploads_ledger (projeto='celular'). A partir daí entram no sinais e no placar como 'origem=celular'.",
+   "impacto": "medio",
+   "esforco": "medio",
+   "risco": "baixo",
+   "ja_existe": "videos_canais.py já lê uploads por canal via API pública; falta o casamento e o cadastro dos canais."
+  },
+  {
+   "titulo": "A/B dos longos: amostra impossível e 'vencedores' de ruído",
+   "problema": "Cada pedido de longo sorteia 4 fatores juntos (5x3x2x2 = 60 combinações). Com ~122 longos postados na vida, o AB_RESULTADOS declara vencedor com n=4-10 e views/h de 0,01-0,21, o que é ruído. Além disso o resumo só era gerado pelo melhorador_longo, que está PAUSADO, então parou em 23/11. O experimento 'resumo_curto_gancho' está aberto desde 17/11 com 4 x 4 e não fecha mais.",
+   "evidencia": "config/longo.json ab_fatores: fala_rapida A-E, ganchos_15min A-C, cortes_resumo A/B, titulo_triade A/B (colab/cliente.py:333-349, md5 por fator). colab/longos_postados.json 'postados' = 122. linhas/LONGOS/AB_RESULTADOS.md (23/11 11:38): 'fala_rapida vence E' com n=10 e 0,13 views/h; 'narradores_modo vence so_primarios' com 0,21 views/h. melhorador_longo.py:388 'Só aponta vencedor com n >= 4'. Tarefa RecapMelhoradorLongo = Disabled. linhas/LONGOS/experimento.json: ativo=true, enviados A 4 / B 4, aberto 2026-11-17.",
+   "proposta": "Testar UM fator por vez nos longos (os outros fixos em A) e usar como métrica principal horas assistidas/longo (a mesma do pesar_fila), com mínimo de 12 por braço e mesmo canal. Tirar _resumo_variantes do melhorador para um script só-leitura diário (não religa o melhorador). Fechar como 'sem conclusão' o experimento.json parado.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "pesar_fila.py (PesarFilaLongos, 3/3 h) já pesa tema por horas e views/dia e funciona (res 0). O A/B por fator existe, mas é amplo demais."
+  },
+  {
+   "titulo": "Longos não registram o motor de voz: XTTS x Kitten x Fish nunca vai ter placar",
+   "problema": "A decisão do motor dos longos (XTTS v2 como principal, 21/11) foi tomada por ouvido. O registro do longo postado não guarda qual motor narrou, então não dá para confirmar com views e horas.",
+   "evidencia": "colab/longos_postados.json 'postados': as chaves presentes em 122 itens são nome, vid, canal, canal_nome, url, titulo, em, duracao_s, seo_versao, estilo_titulo, tags, narradores_modo, ab, variante e experimento. Não há motor_voz. colab/postar_longos.py:143-149 só copia ('ab', 'narradores_modo', 'experimento', 'variante'). O teste XTTS foi postado à parte (colab/postar_xtts_teste.py), sem grupo de comparação.",
+   "proposta": "Em postar_longos (linha 149) copiar também 'motor_voz' e 'xtts_versao' do render.json/longo_override para longos_postados.json, e incluir os dois como fator no placar de longos (achado 6).",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O longo_override já carrega motor_voz/xtts_versao (memória project_modos_de_voz). Falta gravar na postagem."
+  },
+  {
+   "titulo": "Médico da recuperação: bom molde, mas ainda não rodou pela tarefa e só cobre 2 alavancas",
+   "problema": "É o único laço com grupo controle e com aprendizado do que não funciona, e por isso deve virar o modelo dos outros. Hoje: a tarefa nunca rodou sozinha (a rodada de 23/11 foi manual), o controle é escolhido alternando a lista (não por sorteio) e só existem as alavancas so_nobre e descanso.",
+   "evidencia": "Get-ScheduledTaskInfo MedicoRecuperacao: LastRunTime 30/11/1999 (nunca), NextRun 24/11 07:10. estado/medico_recuperacao.json: 9 decisões em 2026-11-23T11:33 (5 so_nobre, 4 controle_so_nobre), nao_funciona=[]. rampa_canais.json: so_nobre '21-23' nos 5 canais tratados e None nos 4 de controle. medico_recuperacao.py:177-189 compara com o controle e marca melhorou com vs_controle>=1,3; DIAS_AVALIAR=3.",
+   "proposta": "Conferir amanhã que a rodada das 07:10 gravou sozinha. Extrair o núcleo (decidir → controle → avaliar em N dias → nao_funciona) para um módulo reaproveitável que o DecisorAB (achado 3) e o placar de longos usem. Sortear o controle (md5 do canal + data) em vez de alternar pela ordem de media_pre_ban.",
+   "impacto": "medio",
+   "esforco": "medio",
+   "risco": "baixo",
+   "ja_existe": "medico_recuperacao.py completo, MEDICO_ALAVANCAS=0 e estado/medico_recuperacao.off desligam."
+  },
+  {
+   "titulo": "Receitas 'SORTE' nunca viram teste: o cruzamento acha hipótese e ninguém confirma",
+   "problema": "O receita_ou_sorte separa RECEITA/EVITAR/SORTE, mas SORTE (20 dos 26 vereditos) só vai para um .md. Nenhum processo dá mais amostra a esses valores para confirmar ou descartar, então a lista não converge.",
+   "evidencia": "estado/sinais_shorts.json 'receitas': 6 RECEITA, 4 EVITAR, 16 SORTE (ex.: narrador mike 0,44→2,67; iki 0,84→3,05; hora 22 1,02→3,56). Fora do próprio analise_sinais_shorts.py, nenhum .py lê 'receitas' (grep em video-fila, recapd bin, postador bin). RECEITAS_DO_SUCESSO.md é só para leitura.",
+   "proposta": "No DecisorAB, transformar cada SORTE de narrador ou fonte com n_recentes>=9 em 'teste dirigido': peso x1,5 na escolha (parceiro_diario._escolher_fonte / ranking de voz) por 7 dias, depois reclassificar. Se não repetir, volta ao peso normal. Chave RECEITAS_TESTE=0.",
+   "impacto": "medio",
+   "esforco": "medio",
+   "risco": "medio",
+   "ja_existe": "EVITAR já chega de forma indireta: fontes_por_canal 'geral' tem grananerd-k3r 0,4 e papodebixo 0,7 (via inteligencia_ajustada)."
+  },
+  {
+   "titulo": "Testes sem dado vivo continuam sorteando (abertura abcd e horario_fraco)",
+   "problema": "O teste 'abertura' (4 braços) tem 0-1 elegível por braço e divide a amostra em 4. 'horario_fraco' segue 'ab' embora a política de hora já tenha sido decidida (nobre primeiro e so_nobre do médico), então mede algo que o sistema já sobrescreve.",
+   "evidencia": "placar_cortes_testes.json: abertura contraste 0/15, custo 0/19, fato 0/17, pergunta 1/14 elegíveis, 'esperando dados'. horario_fraco: 'dá pra olhar (só indício)'. cortes_ajustes.json: abertura='abcd', horario_fraco='ab'. politica.py:641-648 força 21-23 h nos canais com so_nobre. parceiro_diario.py:1051+ põe o nobre primeiro.",
+   "proposta": "Fechar horario_fraco (fixar o valor que a política já usa). Reduzir abertura a 2 braços (fato x pergunta) até ter 12 elegíveis por braço. Regra no DecisorAB: no máximo 3 testes 'ab' ativos por vez nos Shorts.",
+   "impacto": "baixo",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "variantes.py aceita 'A' fixo para fechar (linha 19: 'Para fechar: \"x\": \"B\"')."
+  },
+  {
+   "titulo": "Loop mínimo proposto: medição → decisão automática (amarra os achados)",
+   "problema": "Cada medidor escreve um .md diferente para a dona ou o melhorador ler, e com o melhorador pausado ninguém decide. As decisões que de fato mudaram algo desde 17/11 foram manuais (histórico de cortes_ajustes.json) ou do médico.",
+   "evidencia": "Saídas só-leitura: placar_cortes_testes.md, AB_RESULTADOS.md, RECEITAS_DO_SUCESSO.md, TESTES_VOZ_RELATORIO.md, MEDICO.md. Decisores automáticos ativos: inteligencia_ajustada (peso de fonte e voz), foco aplicar (canal x tipo) e medico_recuperacao. Os três dependem de metricas_studio.json, que está em colapso (achado 1).",
+   "proposta": "Um único job diário oculto, após o MedicoRecuperacao (≈07:30): 1) atualizar views (Studio, ou API pública como reserva) → 2) analise_sinais_shorts --json + placar_variantes + placar de longos → 3) decisor com régua fixa (vencedor, empate, 'nao_funciona', controle sorteado) gravando em cortes_ajustes.json e config/longo.json com histórico, sempre reversível → 4) bloco 'Decisões automáticas de hoje' no relatorio_ronda, com o número que justificou cada uma. Sem LLM e sem conta, só arquivos locais. Chave geral DECISOR_AUTO=0.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "medio",
+   "ja_existe": "As peças existem (placar_variantes, analise_sinais_shorts, medico, inteligencia_ajustada). Falta o orquestrador e a escrita da decisão."
+  }
+ ]
+}

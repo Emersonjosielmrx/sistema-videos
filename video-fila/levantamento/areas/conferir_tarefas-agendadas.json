@@ -1,0 +1,76 @@
+{
+  "vereditos": [
+    {
+      "titulo": "Renders longos no PC1 por tarefa com limite de 72 h e IgnoreNew prendem a fila",
+      "valido": true,
+      "motivo": "Confirmado (COM 24/11 07:2x). ComentariosProducao (PT2H), CaparShorts (PT15M) e Cortes_Juri (PT30M) estão com IgnoreNew, sem ExecutionTimeLimit no XML (vale o padrão de 72 h) e com resultado 0x800710E0. Processos vivos: capar_shorts.py desde 24/11 00:17 e cortes_juri.py rodar desde 01:16. matar_travados.py:30 só pega 'hiper-pipeline|hiper-longo|anime-pipeline|anime_auto'. controlador.py:72-73 (PESADOS_PC1) não tem nenhum dos três. O prioridade_vscode.ps1 (linha 15) só cobre capar_shorts. producao.log mostra 'rclone lsf/copy falhou 3x (timeout)' entre 02:26 e 05:56. Às 07:2x o producao.py ciclo já não estava rodando.",
+      "correcao": "Não há prova de quanto dura uma rodada normal, então um limite fixo de 1 h ou 2 h pode matar uma rodada legítima no meio. Melhor colocar os três no regex do matar_travados.py, que já exige 6 h de vida e CPU parada, e só baixar o ExecutionTimeLimit depois de medir a duração real nos logs. Pôr também 'cortes_juri|producao.py ciclo' no $pesados do prioridade_vscode.ps1."
+    },
+    {
+      "titulo": "36 tarefas com 0x800710E0: disparos recusados viram ruído e escondem falha real",
+      "valido": true,
+      "motivo": "O efeito existe, mas o tamanho está exagerado. Às 07:2x eram 24 de 190 tarefas ligadas com 0x800710E0, não 36, e o EncherPilha estava com resultado 0. O 0x800710E0 com IgnoreNew é benigno: só diz que a rodada anterior ainda rodava. Os 'processos duplicados' (controlador.py 07:00:41/07:01:21, capar_shorts 00:17/00:18, cortes_juri 01:16/01:17) aparecem em pares do venv\\Scripts\\pythonw.exe, o que bate com o lançador do venv (pai mais filho), não com duas rodadas. Os ~615 disparos por hora não foram conferidos.",
+      "correcao": "Impacto médio, não alto. A parte útil é só esta: no vigia/relatório, tratar 0x800710E0 como 'ainda rodando' e alertar quando a mesma instância passar de N vezes o intervalo. ControladorVideos (PT10M, limite PT30M) estava com instância viva desde 07:00 às 07:22, o que vale olhar. Não citar duplicação de processo como prova."
+    },
+    {
+      "titulo": "DriveChaveRenovar falha desde 16/11: a chave do Drive não renova",
+      "valido": true,
+      "motivo": "Confirmado. drive_chave.log:43-44 traz 'FALHOU renovar: rclone authorize não deu o link' em 16/11 e 21/11, e a última renovação OK foi em 11/11 11:32. COM: DriveChaveRenovar 0x00000001. O raise está em drive_chave.py:121. Duas partes da proposta erram. (1) 'Avisar no Telegram já na 1ª falha' JÁ EXISTE: drive_chave.py:195-201 chama avisos.enviar(..., importante=True) quando a renovação falha. (2) DriveChaveConferir não serve para pegar isso: drive_chave.py:168-178 só confere se o client_id continua no conf, não se o token vale.",
+      "correcao": "Tirar o item 'avisar no Telegram' (já existe) e, se for o caso, ver por que o aviso não chegou (avisos segura erro 30 min). O conserto real é o passo 'rclone authorize --auth-no-open-browser' (drive_chave.py:110-121), que não devolve o link. Para conferir se o token ainda vale, usar 'drive_chave.py testar', que é local e só lê (lsf). Não há prova de que os timeouts do producao.log venham do token."
+    },
+    {
+      "titulo": "KaggleSaudeContas_0800 e _2130 apontam para script apagado",
+      "valido": true,
+      "motivo": "Confirmado. As duas estão ligadas com resultado 0x00000002 (última em 23/11 08:00 e 21:30), e a ação é pythonw ... D:\\tmp_logs\\kaggle_verificar\\saude_contas.py. A pasta D:\\tmp_logs\\kaggle_verificar não existe. Um script 'saude_contas' que varre contas do Kaggle vai contra a regra de não fazer laço sobre contas.",
+      "correcao": "Pedir à dona para apagar (ou pelo menos desligar) as duas, de modo que o script não volte a rodar sozinho se for restaurado."
+    },
+    {
+      "titulo": "Medidores TikTok_MedirViews, Marcas_Carrossel e MSEnergy_Metricas morrem no meio (0x8007042B)",
+      "valido": true,
+      "motivo": "Confirmado em parte. TikTok_MedirViews (última 23/11 07:23) e MSEnergy_Metricas (23/11 09:07) estão com 0x8007042B. medir_tiktok.log termina em '[23/11/2026 7:34:09] === medir tiktok ===' seguido de um TimeoutNegativeWarning do node, sem 'exit='. metricas.log tem 'HTTP Error 400: Bad Request' e '[23/11 9:19:01] exit=1'. Marcas_Carrossel já está diferente: rodou de novo em 24/11 07:13 (0x00041301, rodando, log '[24/11 7:19:35] inicio'), então o 0x8007042B citado não vale mais para ela. A ligação com o LimpezaChrome é só hipótese.",
+      "correcao": "Tirar Marcas_Carrossel da lista de falhas ou acompanhar a rodada de hoje. No TikTok, o TimeoutNegativeWarning do node pode ser a pista (um timeout calculado negativo). Investigar a causa antes de mexer na faxina do Chrome."
+    },
+    {
+      "titulo": "'1min visita diaria' falha todo dia e não grava nada desde 31/10",
+      "valido": true,
+      "motivo": "Confirmado. Última rodada 24/11 06:10 com 0x00000001. A última linha do visitas.jsonl é de 2026-10-31T23:49:45. Como o laço grava até os erros (visita_diaria.py:142-149), o script deve estar quebrando antes do laço, talvez no import de cofre/umin. A proposta tem um problema grave: visita_diaria.py:139-141 diz '31/10: visita TODAS as contas do rodízio, uma por vez' e contas_do_rodizio() (linha 108) devolve todas as contas do umin_contas.json, abrindo o Chrome do cofre de cada uma em sequência no PC1. É o laço sobre contas que a regra proíbe, e não há proxy no script (grep 'proxy' sem resultado).",
+      "correcao": "NÃO rodar à mão. Desligar a tarefa e perguntar à dona se o 1min ainda é usado (a memória diz 'só opus-auto'). Se for manter, só com uma conta e pela saída fixa dela, nunca com o laço contas_do_rodizio()."
+    },
+    {
+      "titulo": "ZeladorSonnet trava em ssh de 120 s e falha todo dia",
+      "valido": true,
+      "motivo": "Confirmado. ZeladorSonnet com 0x00000001 (última 24/11 04:20). O fim do zelador_sonnet_saida.log mostra TimeoutExpired em 'ssh ... hermes-bloqueio python3 /opt/omniroute/sonnet_estado.py' após 120 s. O comando chama um script que já está na VPS (não há script embutido), então a regra de 'scp de .sh' não se aplica aqui.",
+      "correcao": "Tratar o TimeoutExpired como 'não conferi' sem quebrar a tarefa, e conferir se a VPS/host hermes-bloqueio responde. Tirar a menção à regra de script embutido, que não vale neste caso."
+    },
+    {
+      "titulo": "11 tarefas de 'uma vez' já vencidas seguem ligadas (lixo de testes e lembretes)",
+      "valido": true,
+      "motivo": "Conferido por amostra. HipercoolReligar_0211 (ligada, última 02/11 01:00, ação 'controle.py ligar hipercool producao \"religado sozinho 02/11 ...\"'), LembreteFacebook21Nov (ligada, última 21/11) e AmostraGanchoDona (ligada, última 30/10) existem como descrito. O risco é baixo: com TimeTrigger único vencido, nada dispara sozinho, só à mão. A lista completa das 11 não foi refeita.",
+      "correcao": "Juntar com o achado do AmostraGanchoDona (é a mesma limpeza) e entregar uma lista única para a dona apagar."
+    },
+    {
+      "titulo": "AmostraGanchoDona aponta para o scratchpad de um chat no C:",
+      "valido": false,
+      "motivo": "O fato confere (ligada, 0x00000001, última 30/10, ação aponta para C:\\Users\\Haylla\\AppData\\Local\\Temp\\claude\\...\\scratchpad\\amostra_gancho.bat), mas é uma duplicata do achado das tarefas de 'uma vez' vencidas, que já inclui AmostraGanchoDona. O trigger é único e já passou, então ela não 'falha desde 30/10' de forma repetida. Rodou uma vez só.",
+      "correcao": "Juntar ao achado das 11 tarefas vencidas."
+    },
+    {
+      "titulo": "MonitorOpus roda python.exe direto (sem rodar_oculto) a cada 10 min",
+      "valido": true,
+      "motivo": "Confirmado. A ação é ...Python313\\python.exe D:\\monitor_opus.py, sem wscript nem rodar_oculto, e está ligada com limite PT10M. Com S4U não abre janela, então o impacto é quase nulo. É só questão de padrão.",
+      "correcao": "Trocar para pythonw.exe. Prioridade mínima."
+    },
+    {
+      "titulo": "Tarefas de estudo e teste já encerradas seguem ligadas (AcompanharNoite21Nov, InstalarPC3, ArgonManterLogon)",
+      "valido": true,
+      "motivo": "Confirmado em parte. AcompanharNoite21Nov está ligada (última 23/11 18:45, resultado 0) e acompanhar_noite.log termina em 'NaoConferi: manhwa-drive:baixador/prontos/e2nIzNGXvmA'. InstalarPC3 está ligada com 0x00000001 desde 27/10. ArgonManterLogon roda o mesmo argon_manter.py, mas é provável que seja o gatilho de logon e o ArgonManter o periódico, um padrão comum que não prejudica (IgnoreNew). 'Duplicada' não procede como defeito.",
+      "correcao": "Manter as propostas sobre AcompanharNoite21Nov (perguntar à dona) e InstalarPC3 (apagar). Tirar o ArgonManterLogon, que serve para religar no logon."
+    },
+    {
+      "titulo": "12 tarefas desligadas há mais de 30 dias, algumas com caminho quebrado",
+      "valido": true,
+      "motivo": "Confirmado por amostra: MegaEngageMonitor está desligada, com última rodada em 17/07/2026. O resto vem do estado_tarefas.txt do levantamento e não foi reconferido um por um. O impacto é só de organização.",
+      "correcao": "Baixa prioridade. Exportar os XML antes de apagar e não tocar nas tarefas do pesquisador e dos melhoradores pausados."
+    }
+  ]
+}

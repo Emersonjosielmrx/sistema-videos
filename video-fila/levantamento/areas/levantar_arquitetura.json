@@ -1,0 +1,105 @@
+{
+  "resumo_area": "Mapa real (grep nos .py de recapd/bin, recapd/colab, postador/bin, video-fila, comum, manhwa-react, kit3d): os projetos se ligam por sys.path com caminho fixo (sys.path.insert com r\"D:\\logins-google\" 68x, r\"D:\\video-fila\" 61+13x, r\"D:\\postador-de-videos\\bin\" 24+6+6x, r\"D:\\hipercool-materiais\\comum\" 20+5x, fish_audio 16x, recapd bin 12x). So video-fila cita 'hipercool-materiais' 512x, 'postador-de-videos' 277x, 'veo' 187x, 'recapd-ambientes' 125x. O nucleo de fato e: video-fila <-> postador/bin (ciclo: video-fila importa politica em 29 arquivos, catalogo em 21; o postador importa avisos em 27 e controle do video-fila), logins-google/cofre.py (citado em 85 arquivos), recapd/colab/kaggle_pool.json (13 leitores fora do colab). O que JA existe e funciona: recursos.py + comum/recursos.json (22 modulos com copia identica, conferido por cmp), controle.py (liga/desliga unico), politica.cadastro() (canais.json regerado sozinho), sitecustomize sem janela. Nao existe modulo central de caminhos/config (nenhum caminhos.py/raiz). Nenhum dos 6 projetos tem .git (so D:\\github_sistema, espelho). Alvo incremental: (1) comum/caminhos.py com as raizes e URLs, distribuido pelo proprio recursos.py; (2) migrar leitores por ordem de risco (kaggle_pool, OmniRoute, interpretadores); (3) quebrar o ciclo video-fila<->postador com modulos-contrato pequenos; (4) aposentar estados mortos. Nada de big-bang: cada passo mantem o caminho antigo valendo.",
+  "achados": [
+    {
+      "titulo": "Nao existe um ponto unico de caminhos: centenas de 'D:\\...' fixos e o Colab precisa de gambiarra para traduzir",
+      "problema": "Cada script monta seu sys.path e seus caminhos na mao. Mover/renomear qualquer pasta (ou rodar em outra maquina) quebra dezenas de arquivos em silencio. O proprio Colab ganhou um sitecustomize que reescreve 'D:\\' para /content/raiz porque o codigo nao tem raiz configuravel.",
+      "evidencia": "Contagem de sys.path.insert/append distintos (grep nos 7 projetos): r\"D:\\logins-google\" 68, r\"D:\\video-fila\" 61 (+13 append, +3 'D://video-fila'), r\"D:\\postador-de-videos\\bin\" 24+6+6, r\"D:\\hipercool-materiais\\comum\" 20+5, r\"D:\\hipercool-materiais\\comum\\fish_audio\" 16, r\"D:\\recapd-ambientes\\producao\\bin\" 12. video-fila/*.py cita 'hipercool-materiais' 512x e 'postador-de-videos' 277x. controlador.py:41-51 tem 11 constantes Path(r\"D:\\...\"). recapd/colab/sitecustomize.py:1-2: 'o codigo do PC tem caminhos fixos D:\\... e C:\\...; aqui eles viram /content/raiz/D/...'. Busca por modulo de caminhos (caminhos.py/raiz/CAMINHOS) em comum e video-fila: nenhum.",
+      "proposta": "PRIMEIRO PASSO CONCRETO: criar D:\\hipercool-materiais\\comum\\caminhos.py (so constantes + os.environ override, ex.: RAIZ=os.environ.get('SISTEMA_RAIZ','D:\\\\'); VIDEO_FILA, POSTADOR_BIN, RECAPD, COMUM, FISH, LOGINS, KAGGLE_POOL, OMNIROUTE_URL, PY_HIPER/PY_VEO/PY_MR, VBS) e registra-lo no recursos.json com 'recursos.py subir caminhos.py --de recapd' para que cada bin/ receba copia identica (mesmo mecanismo que ja funciona para 22 modulos; PC2/desktop recebem pelo sync de bin). Nenhum import existente muda neste passo. Depois migrar 1 constante por vez nos arquivos, comecando pelos de maior contagem.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "recursos.py (D:\\hipercool-materiais\\bin\\recursos.py:1-20) ja distribui copias identicas e confere hash; falta so o modulo de caminhos. Colab tem traducao propria em colab/sitecustomize.py."
+    },
+    {
+      "titulo": "Ciclo de dependencia video-fila <-> postador/bin (e cofre/kaggle_pool como hubs ocultos)",
+      "problema": "Orquestracao e postador se importam mutuamente por caminho fixo; mexer em politica.py/catalogo.py (postador) derruba o controlador, e mexer em avisos.py/controle.py (video-fila) derruba o postador. Nao ha fronteira clara de quem e dono de que.",
+      "evidencia": "Matriz de imports (grep '^from X import|import X'): politica = 31 arquivos no postador, 29 no video-fila, 4 manhwa-react, 4 hipercool-videos; catalogo = 9 postador, 21 video-fila; youtube_web_poster = 6 postador, 8 video-fila, 3 manhwa-react, 2 recapd/bin; avisos (mora so em video-fila/avisos.py) = 27 no postador, 7 recapd/bin, 5 colab, 4 comum; controle (video-fila) = 2 recapd/bin, 1 postador. cofre.py mora em D:\\logins-google (fora do mapa) e 'logins-google' aparece em 85 arquivos. colab/kaggle_pool.json e lido por 13 arquivos fora do colab.",
+      "proposta": "Nao mover nada ainda. Passo 2 (apos caminhos.py): declarar 4 'contratos' com dono fixo e importar so por eles: avisos+controle (dono video-fila), politica+catalogo (dono postador), cofre.saida_kaggle (dono logins-google), kaggle_pool (dono colab). Escrever em D:\\video-fila\\aprendizado\\LEIA_ANTES_DE_MELHORAR.md a tabela 'modulo -> dono -> quem pode importar'. So depois, um a um, mover o modulo-contrato para comum\\ deixando no lugar antigo um arquivo de 2 linhas 'from comum_x import *' (o import antigo continua valendo).",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "controle.py (video-fila/controle.py:1-20) ja e o liga/desliga unico; nao ha documento de dono por modulo."
+    },
+    {
+      "titulo": "39 modulos com MESMO nome e conteudo DIFERENTE entre recapd/bin e postador/bin (risco de sombra no sys.path)",
+      "problema": "Script que poe os dois bins no sys.path importa a versao que vier primeiro, nao a mais nova. Hoje isso funciona por sorte da ordem do insert.",
+      "evidencia": "Comparacao md5 por nome entre os bins: 39 nomes divergentes, ex. claude_client.py (recapd 16/11 32193 B x postador 13/11 17221 B), gemini_llm.py (recapd 16/11 19384 B x postador 21/10 24403 B), censura_visual.py, narration_ensemble.py, motion_director.py, omniroute_tts.py, postagem_meta.py, curadoria.py. video-fila/reagendar_nobre.py:39 insere recapd/bin na posicao 0 e :76 insere postador/bin na posicao 1; video-fila/vitrine.py:119 (recapd/bin) e :474 (postador/bin) idem. Nestes dois nao achei import direto dos nomes divergentes (grep), entao hoje e risco, nao bug medido.",
+      "proposta": "Rodar 'python D:\\hipercool-materiais\\bin\\recursos.py' (painel, so leitura) e usar a secao SEPARADOS como lista de trabalho; para os que nenhum outro projeto importa (test_*, omniroute_* antigos do postador de 07-09), marcar o nome com sufixo do projeto quando for mexer. Regra nova no LEIA_ANTES: script que poe 2 bins no sys.path tem que importar com 'import importlib.util' pelo caminho (como politica.py:274-277 ja faz) ou usar so modulos COMUM.",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "recursos.py tem painel 'SEPARADOS' (recursos.py:272-279) que lista exatamente isso; mas so 22 modulos entraram no comum."
+    },
+    {
+      "titulo": "Copia COMUM desatualizada: narracao_curva.py do hipercool-videos esta parada em 13/11",
+      "problema": "O mecanismo de copia identica tem buraco: a copia do hipercool nao recebeu a versao de 24/11 e ninguem foi avisado. A narracao do hipercool roda codigo velho achando que e o comum.",
+      "evidencia": "cmp: comum/narracao_curva.py 42724 B (24/11 00:30) = recapd/bin (24/11 00:29), mas hipercool-videos/bin/narracao_curva.py 41590 B (13/11 13:16) DIFERENTE, com o cabecalho '# COMUM — fonte unica'. recursos.json registra narracao_curva.py com projetos ['hipercool','historias','recapd'] (de recapd, em 2026-10-22). Existe ate narracao_curva.py.antes_sync_1113_1316 no comum (sync do GitHub mexeu fora do recursos.py).",
+      "proposta": "Decidir com a dona se o hipercool deve receber a versao de 24/11 (rodar 'recursos.py subir narracao_curva.py --de recapd --testar' primeiro). Para nao repetir: o vigia (VigilanciaSistema, ja ativo) pode chamar o painel do recursos.py 1x/dia e mandar aviso so quando houver 'MUDOU la'/copia divergente de modulo registrado (sem religar melhorador). Tambem: sincronizar_github.py deve passar pelo recursos.py quando o arquivo for COMUM.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "recursos.py detecta 'MUDOU la' (recursos.py:252-253), mas so quando alguem roda o painel; nao ha rotina."
+    },
+    {
+      "titulo": "Estado do Kaggle espalhado em 5 arquivos, 3 deles mortos e um ainda usado como reserva",
+      "problema": "Mesmo dado (contas e horas do Kaggle) em varios JSON com idades diferentes; o maquinas.py cai num arquivo de 23 dias quando a central falha e mostra horas falsas no painel.",
+      "evidencia": "python lendo os JSON: colab/kaggle_pool.json = 87 contas (27 nao banidas); video-fila/estado/kaggle_horas.json em=2026-11-01T06:36 (58 contas); estado/colab_contas.json em=2026-10-24; estado/abastecedor_kaggle.json em=2026-11-21 (3 vivos); estado/balanco_kaggle.json em=2026-11-24 01:10. Tarefa \\KaggleHoras = Desabilitado (schtasks). maquinas.py:203-209 usa kaggle_horas.json como reserva ('quebrado em 02/11: 401 em quase todas') sem checar idade.",
+      "proposta": "Fonte unica = kaggle_pool.json (contas) + estado da central (horas). No maquinas.py:204, ignorar kaggle_horas.json com 'em' mais velho que 48 h (mostrar 'sem medida' em vez de numero velho). Renomear kaggle_horas.json e colab_contas.json para *.morto_<data> SO depois de confirmar com grep que o unico leitor e maquinas.py/kaggle_horas.py (confirmado hoje). Nenhuma consulta a conta envolvida.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Comentario em maquinas.py:203 ja admite que a reserva quebrou em 02/11; nao foi tirada."
+    },
+    {
+      "titulo": "Cadastro de canais em 5 arquivos + credenciais OAuth em JSON aberto lido por 23 scripts",
+      "problema": "O dado 'canal' tem 5 donos: config/canais.json (gerado), rede_canais.json, canais_status.json, rampa_canais.json e D:\\credenciais-canais\\youtube_canais.json. O gerador depende por caminho fixo de arquivos de OUTROS projetos. As credenciais (clientSecret/refresh_token) ficam em texto puro e sao lidas direto por muitos scripts em vez de passar pelo cofre.",
+      "evidencia": "postador/config/canais.json: 43 canais, '_leia': 'Cadastro UNICO... se refaz sozinho' ; rede_canais.json: 34 canais, '_leia': 'Mapa da rede de canais (fonte unica)' (duas 'fontes unicas'). politica.py:262-264 FONTES_CADASTRO inclui Path(r\"D:\\recapd-ambientes\\producao\\config\\parceiro.json\") e Path(r\"D:\\hipercool-videos\\config\\fila.json\"). youtube_canais.json = lista de 71 entradas com clientId/clientSecret/refresh_token; 'youtube_canais.json' aparece em 23 arquivos .py; parceiro.json do recapd e lido por 11 arquivos fora do recapd.",
+      "proposta": "Manter politica.cadastro() como a unica porta de leitura (ja existe) e trocar, aos poucos, leitura direta de rede_canais/canais_status por politica.cadastro_do_canal()/estado_do_cadastro(). Para credenciais: um acessor unico (ex. politica.carregar_creds(), que ja existe) e grep periodico para leituras diretas novas. Ajustar o _leia do rede_canais.json para 'fonte de origem do cadastro' (texto, sem mudar logica).",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "politica.cadastro() regera canais.json quando a origem muda (politica.py:267-281) e estado_do_cadastro calcula bloqueio na hora (politica.py:293-296)."
+    },
+    {
+      "titulo": "Postador nao tem venv proprio: roda no Python do projeto veo (e 4 interpretadores fixos espalhados)",
+      "problema": "Postagem depende do venv de outro projeto; atualizar pacote no veo (ou apagar D:\\veo) quebra a postagem. Interpretador e escolhido por caminho fixo em dezenas de arquivos.",
+      "evidencia": "controlador.py:41 PY_POST = Path(r\"D:\\veo\\venv\\Scripts\\python.exe\"); 18 arquivos de video-fila/postador citam veo\\venv\\Scripts\\python; contagem de interpretadores fixos: hipercool-videos\\venv ~52, veo\\venv ~34, manhwa-react\\.venv ~13, hipercool-materiais\\python\\venv 2. ls: D:\\postador-de-videos\\venv e .venv nao existem; recursos.py:47 usa sys.executable para 'postador'.",
+      "proposta": "Colocar PY_POST/PY_HIPER/PY_MR/PY_RECAPD em caminhos.py (passo 1) e trocar primeiro o controlador.py:41-43. Nao criar venv novo agora (memoria: NUNCA mover python\\venv); so centralizar o nome para que uma troca futura seja de 1 linha.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Nao."
+    },
+    {
+      "titulo": "URL do OmniRoute fixa em 68 arquivos",
+      "problema": "Troca de IP/porta da VPS 157 exige editar 68 arquivos; ja ha um IP antigo (62.171.128.241) sobrando no comum.",
+      "evidencia": "grep 'http://157.173.207.22:20128' = 68 arquivos .py nos projetos do mapa; 65 arquivos tambem leem OMNIROUTE_URL/OMNI_URL do ambiente (ou seja, o padrao com override ja existe pela metade). comum/teste_salvar_github.py:82 cita http://62.171.128.241:20128.",
+      "proposta": "OMNIROUTE_URL em caminhos.py com o mesmo default; migrar os 68 por substituicao mecanica em lotes pequenos (por projeto), conferindo py_compile em cada lote.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Variavel de ambiente OMNIROUTE_URL ja usada em 65 arquivos, cada um com seu default."
+    },
+    {
+      "titulo": "16 arquivos falam direto com a API do Telegram, por fora do avisos.py",
+      "problema": "A regra 'Telegram so erro nao consertado, espera 30 min' vive no avisos.py; quem chama api.telegram.org direto escapa dela e de qualquer controle de duplicidade.",
+      "evidencia": "grep 'api.telegram.org/bot': video-fila/avisos.py, bots_conversa.py, painel_controlador.py, plantao.py; postador/bin/notificar_telegram.py, vigia_melhorias.py, _tg_safe.py; recapd/bin/anime_health_monitor.py, _tg_safe.py (+2 copias em _snapshots, 1 em _BACKUP_20260707); colab/vps_central.py; comum/notificar.py, _tg_safe.py, teste_salvar_github.py. _tg_safe.py esta no recursos.json (copia identica), notificar.py tambem.",
+      "proposta": "Nao mudar quem ja e o 'cano' (_tg_safe/notificar). Para os chamadores diretos (anime_health_monitor.py, vigia_melhorias.py, plantao.py, painel_controlador.py, vps_central.py) checar se mandam aviso de erro; se sim, trocar pela chamada do avisos.py. Um por vez.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "avisos.py e importado em 27 arquivos do postador e 37 do video-fila; falta fechar os desvios."
+    },
+    {
+      "titulo": "Nenhum dos 6 projetos tem historico de versao local; protecao e por .bak solto",
+      "problema": "Sem git local, toda reorganizacao (inclusive a incremental proposta aqui) fica sem rede de seguranca e sem diff; a memoria da dona ja registra o trauma de git reset na producao, e o que sobrou foram arquivos .bak/.antes_sync espalhados.",
+      "evidencia": "Nenhum .git em recapd-ambientes/producao, postador-de-videos, video-fila, hipercool-materiais, manhwa-react, kit3d-producao (so D:\\github_sistema/.git, ultimo commit 2026-11-23 'atualizacao automatica'). 20 arquivos *.bak*/*.antes* nos bins de recapd/postador/video-fila (ls). comum tem narracao_curva.py.antes_sync_1113_1316 e .bak_20261022_reacoes.",
+      "proposta": "Usar o espelho que ja existe: antes de cada passo de migracao, rodar o salvar_github.py (ja existente) e citar o commit no documento do passo, em vez de criar .bak. Git dentro da producao: so se a dona aprovar, e sem reset/checkout (regra dela).",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "D:\\github_sistema + comum/salvar_github.py e sincronizar_github.py (espelho e merge 3 vias)."
+    }
+  ]
+}

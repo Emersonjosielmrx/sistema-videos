@@ -1,33 +1,30 @@
-# Vigilância 24 h — 2026-11-23T16:00:57
+# Vigilância 24 h — 2026-11-25T12:00:49
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (8)
-- Carrossel MS Energy: sem sucesso há 65 h (limite 60 h)
+## Alarmes desta volta (17)
+- facebook: mesmo erro 6x em 6 h
+- Carrossel MS Energy: sem sucesso há 109 h (limite 60 h)
+- Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 47 h (limite 30 h)
 - canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- _parceiro_20261125.log: mesmo erro 5x
+- _parceiro_20261125.log: mesmo erro 5x
+- celulares: mesmo erro 5x em 6 h
+- celulares: 3 celulares fora do adb
 
-## Casos abertos (166)
-- [revisar] tiktok: mesmo erro 8x em 6 h (1minopus-sonnetweb)
-- [consertar] tiktok: mesmo erro 5x em 6 h (1minopus-sonnetweb)
-- [revisar] reel_globo: clipe do Veo aprovado e a montagem morreu (gemini-4-argon)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] tiktok: mesmo erro 5x em 6 h (1minopus-sonnetweb)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [revisar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (1minopus-sonnetweb)
-- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (270)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
+- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] tiktok: mesmo erro 5x em 6 h (-)
 - [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -179,26 +176,142 @@
 - [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 66 h (limite 60 h) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] facebook: mesmo erro 11x em 6 h (-)
+- [consertar] TikTok: sem sucesso há 8 h (limite 8 h) (-)
+- [consertar] facebook: mesmo erro 6x em 6 h (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Facebook Bicho Noturno: 0 Reels hoje (-)
+- [consertar] Facebook Invento React: 0 Reels hoje (-)
+- [consertar] Facebook Comédia Noturna: 0 Reels hoje (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: nenhum post OK há 3 h+ (18 ok de 57 hoje, 5 na fila) (-)
+- [consertar] celulares: 5 celulares fora do adb (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 72 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 0 posts até 00:30, normal ~9 (-)
+- [consertar] Gemini sem navegador (imagem/vídeo): sem sucesso há 6 h (limite 6 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 78 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 0 posts até 06:30, normal ~53 (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] instagram: 0 posts até 10:51, normal ~8 (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 85 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [vigia_rodando] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: laço laco_conferir do noite_encher não está rodando (-)
+- [consertar] tiktok: 0 posts até 12:40, normal ~74 (-)
+- [consertar] Longos no YouTube: sem sucesso há 36 h (limite 36 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: nenhum post OK há 3 h+ (5 ok de 14 hoje, 1 na fila) (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] instagram: 0 posts até 17:01, normal ~8 (-)
+- [consertar] celulares: 5 celulares fora do adb (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 91 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 0 posts até 18:42, normal ~76 (-)
+- [consertar] Longos no YouTube: sem sucesso há 42 h (limite 36 h) (-)
+- [consertar] Rede: reagendar pro horário nobre: sem sucesso há 30 h (limite 30 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: nenhum post OK há 3 h+ (5 ok de 14 hoje, 1 na fila) (-)
+- [consertar] Facebook Assist-IA Investimentos: 0 Reels hoje (-)
+- [consertar] Facebook Curiosidades Noturnas: 0 Reels hoje (-)
+- [consertar] Facebook Filme Noturno: 0 Reels hoje (-)
+- [consertar] Facebook Invento React: 0 Reels hoje (-)
+- [consertar] Facebook Cartucho React: 0 Reels hoje (-)
+- [consertar] Facebook Inovare Manhwa BR: 0 Reels hoje (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] instagram: 0 posts até 23:10, normal ~8 (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 97 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 0 posts até 00:50, normal ~12 (-)
+- [consertar] Longos no YouTube: sem sucesso há 48 h (limite 36 h) (-)
+- [consertar] Rede: reagendar pro horário nobre: sem sucesso há 36 h (limite 30 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] _parceiro_20261125.log: mesmo erro 5x (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] facebook: mesmo erro 7x em 6 h (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: 2 celulares fora do adb (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 103 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 5 posts até 06:50, normal ~51 (-)
+- [consertar] Longos no YouTube: sem sucesso há 54 h (limite 36 h) (-)
+- [consertar] Rede: reagendar pro horário nobre: sem sucesso há 42 h (limite 30 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: mesmo erro 4x em 6 h (-)
+- [consertar] _parceiro_20261125.log: mesmo erro 5x (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: 3 celulares fora do adb (-)
+- [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] Carrossel MS Energy: sem sucesso há 109 h (limite 60 h) (-)
+- [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [dona] longo SjQHP-0GKJs_1_11__His_Girlfriend_Cheated_on_Him saiu com problema de qualidade — cw/claude-sonnet-5-5 / -
-- [sem_mudanca] instagram: 5 posts até 04:20, normal ~12 — gemini-4-argon / -
+- [falso] facebook: mesmo erro 9x em 6 h — - / -
+- [falso] celulares: 5 celulares fora do adb — - / -
+- [falso] instagram: 0 posts até 04:50, normal ~6 — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] celulares: 5 celulares fora do adb — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] instagram: 0 posts até 05:10, normal ~7 — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
 - [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
-- [falso] Shorts no PC2: sem sucesso há 30 h (limite 24 h) — - / -
+- [falso] facebook: mesmo erro 5x em 6 h — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
-- [dona] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
-- [dona] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
-- [falso] Shorts no PC2: sem sucesso há 36 h (limite 24 h) — - / -
-- [falso] Shorts no PC2: sem sucesso há 42 h (limite 24 h) — - / -
-- [dona] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — 1minopus-sonnetweb / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
-- [falso] Facebook Cartucho React: mesmo erro 3x em 6 h — - / -
 
 ## Placar dos consertadores
-- **gemini-4-argon**: 13 casos, nota 15% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/3 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/2 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 0/1 (voltou 0)
-- **gemini/gemini-4-hydrogen**: 0 casos, nota 0%
+- **gemini-4-argon**: 21 casos, nota 14% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/10 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/2 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/1 (voltou 0)
+- **gemini/gemini-4-hydrogen**: 1 casos, nota 0% — postagem-tiktok: 0/1 (voltou 0)
 - **cw/claude-sonnet-5-5**: 32 casos, nota 6% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0), qualidade-longo: 0/4 (voltou 0)
 - **kr/claude-sonnet-4.5**: 2 casos, nota 100% — capa-longo: 1/1 (voltou 0), solar-montagem: 1/1 (voltou 0)

@@ -1009,7 +1009,34 @@ def _virtual_livre_gb():
     return m.ap / 2 ** 30
 
 
+def _render_fora(t, out):
+    """24/11 (dona: "tudo que consumir CPU e der pra mandar pra outro PC deve ser feito no outro"): o render do
+    Remotion vai pela fila invisível (D:\\video-fila\\despacho.py) pra uma máquina livre que tenha o Remotion (asusx).
+    Não fala com conta nenhuma: só leva src/lib, src/videos/<id> e public, e traz o mp4. False = renderiza aqui.
+    RENDER_FORA=0 desliga."""
+    import os
+    if os.environ.get("RENDER_FORA", "1") == "0":
+        return False
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("despacho_videofila", r"D:\video-fila\despacho.py")
+        despacho = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(despacho)
+        ok, motivo = despacho.remotion(REMOTION, t.e["id"], _pub(t), out,
+                                       args=["--log=error", "--crf=18", "--concurrency=2", "--timeout=120000"],
+                                       timeout=2400, rotulo=t.e["id"])
+    except Exception as e:  # noqa: BLE001 — a fila nunca pode parar a produção
+        ok, motivo = False, f"{type(e).__name__}: {e}"
+    if ok and out.exists():
+        log(f"  [render] feito FORA do PC1 (despacho)")
+        return True
+    log(f"  [render] fora do PC1 não deu ({str(motivo)[:200]}) — renderizo aqui")
+    return False
+
+
 def _render(t, out):
+    if _render_fora(t, out):
+        return True, ""
     saida = ""
     for tentativa in (1, 2):           # o Chrome do Remotion às vezes trava (26/10: 2h20 parado); 2ª tentativa limpa
         ini = time.time()

@@ -1399,7 +1399,10 @@
    "ativo": true,
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
    "_obs_nobre": "13/11: 20:10 -> 21:05 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)",
-   "_obs_nobre2": "13/11: 1 só horário nobre por dia (2º post da noite nunca rendeu: 0 de 10); 22:40->15:10"
+   "_obs_nobre2": "13/11: 1 só horário nobre por dia (2º post da noite nunca rendeu: 0 de 10); 22:40->15:10",
+   "nichos_foco": {
+    "manhwa": 66.0
+   }
   },
   {
    "canal": "novo_manhwareact_ia",
@@ -1465,7 +1468,7 @@
    "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
    "nichos_foco": {
     "pesca": 1066.5,
-    "manhwa": 302.0
+    "manhwa": 293.0
    },
    "_horarios_antes_1711": [
     "13:00",
@@ -1602,7 +1605,7 @@
    "teste_rede": true,
    "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
    "nichos_foco": {
-    "fatos": 1229.0,
+    "fatos": 1212.5,
     "dorama": 1159.5
    },
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
@@ -1820,7 +1823,7 @@
    "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
    "_obs_nobre": "13/11: 23:10 -> 21:25 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)",
    "nichos_foco": {
-    "dorama": 222.5
+    "dorama": 372.0
    },
    "nicho_antes": "tecnologia",
    "tema_nota": "15/11 dona ('os temas vc escolhe conforme o que ta dando visualizacao'): placar_nicho_canal"
@@ -1863,10 +1866,7 @@
    "ativo": true,
    "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
    "nicho_fixo": true,
-   "_obs_nobre": "13/11: + 21:12 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)",
-   "nichos_foco": {
-    "saude": 127.0
-   }
+   "_obs_nobre": "13/11: + 21:12 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_imovelemfoco",
@@ -2126,5 +2126,5 @@
  "tipo_fonte": "manhwa",
  "_linguas_obs": "17/10 13:25: línguas pausadas (ainda saem com o borrão antigo e roubam render do teste dos 12 canais pt)",
  "_reserva_obs": "02/11 dona: TODO projeto mantém reserva de 1 SEMANA (7 dias x por_dia) — se a produção parar 1 semana, os canais seguem postando. fila_alvo pt = 7 x por_dia (antes 6-9). Doc: hipercool docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md (Novidades 02/11).",
- "_nichos_foco_obs": "22/11 05:47 analise_shorts_foco.py --aplicar: tipo com mediana >= 100 views NO canal (Studio). Recalcular: rodar de novo."
+ "_nichos_foco_obs": "25/11 05:42 analise_shorts_foco.py --aplicar: tipo com mediana >= 100 views NO canal (Studio). Recalcular: rodar de novo."
 }

@@ -46,7 +46,7 @@ def _ler(p, padrao):
 def processos():
     """[(pid, criado_em(datetime), linha_de_comando)] de python/chrome que interessam."""
     ps = ("Get-CimInstance Win32_Process | ? { ($_.Name -match 'python') -and $_.CommandLine -match "
-          "'postar_facebook_paginas|fb_criar_fila|fb_medir|services.facebook|postar_ms_energy' -or ($_.Name -eq 'chrome.exe' "
+          "'postar_facebook_paginas|fb_criar_fila|fb_medir|services.facebook|postar_ms_energy|fb_token_assistido' -or ($_.Name -eq 'chrome.exe' "
           "-and $_.CommandLine -match 'remote-debugging-port=(9798|9401)' -and $_.CommandLine -notmatch '--type=') } | "
           "% { \"$($_.ProcessId)|$($_.CreationDate.ToString('yyyy-MM-ddTHH:mm:ss'))|$($_.ParentProcessId)|$($_.CommandLine)\" }")
     out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, encoding="utf-8",
@@ -83,6 +83,17 @@ def main():
     chromes = [p for p in procs if "chrome.exe" in p[3].lower()]
     acoes = 0
 
+    # 0. (23/11) saúde: ponte de proxy caída é religada e trava de processo morto é apagada (fb_saude.py). Foi o que
+    # parou o Facebook das 12h às 15h de 23/11 sem ninguém ver. Não posta nada; só conserta o caminho.
+    if not SIMULAR:
+        try:
+            import fb_saude
+            for conta, c in fb_saude.contas_ativas().items():
+                fb_saude.ponte(conta, c.get("saida"))
+                fb_saude.trava(conta)
+        except Exception as e:  # noqa: BLE001
+            print(f"[saude] falhou: {e}", flush=True)
+
     # 1. travadas
     for pid, criado, pai, cmd in py:
         if any(pid == q[2] for q in py):
@@ -90,6 +101,23 @@ def main():
         if (agora - criado) > timedelta(minutes=TRAVADA_MIN) and ("postar_facebook_paginas" in cmd or "fb_criar_fila" in cmd
                                                                   or "postar_ms_energy" in cmd or "fb_rodada_todas" in cmd):
             log(f"TRAVADA há {int((agora - criado).total_seconds() // 60)} min: pid {pid} {cmd[-80:]} -> mato")
+            matar(pai if any(pai == q[0] for q in py) else pid)
+            acoes += 1
+    # 1b. (24/11) criação PARADA: o log fb_criar_<conta>.log sem escrever há > 15 min e o processo vivo há > 15 min =
+    # presa esperando o Facebook (24/11 22:47-23:12 segurou as 2 contas e nada postou). Só a criação: a postagem fica
+    # muito tempo sem imprimir durante o upload, então segue com o limite de 45 min acima.
+    import re as _re
+    for pid, criado, pai, cmd in py:
+        if "fb_criar_fila" not in cmd or any(pid == q[2] for q in py):
+            continue
+        m = _re.search(r"--conta\s+(\S+)", cmd)
+        lg = BIN.parent / "logs" / f"fb_criar_{m.group(1)}.log" if m else None
+        try:
+            parado = lg and lg.exists() and (time.time() - lg.stat().st_mtime) > 15 * 60
+        except OSError:
+            parado = False
+        if parado and (agora - criado) > timedelta(minutes=15):
+            log(f"CRIAÇÃO PARADA (log sem mexer há 15 min): pid {pid} {cmd[-60:]} -> mato e libero a conta")
             matar(pai if any(pai == q[0] for q in py) else pid)
             acoes += 1
     procs = processos() if acoes and not SIMULAR else procs

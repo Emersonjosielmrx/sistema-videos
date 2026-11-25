@@ -199,9 +199,87 @@ def opus_sonnetweb(c):
     log(f"opus-pago-sonnetweb: {metodo} {urllib.request.urlopen(req, timeout=30).status}")
 
 
+STUDIO = ["gemini/gemini-3.5-flash", "gemini/gemini-2.5-flash", "gemini/gemini-2.5-flash-lite", "gemini/gemini-3.6-flash"]
+
+
+def haiku_fila(c):
+    """23/11: haiku-fila = contas da gemini-fila (Gemini 3.8 Antigravity) + Kiro Haiku no fim. Antes era uma copia
+    fixa e ficava com contas velhas quando a gemini-fila (ordenar_contas_gemini.py, 2 min) mudava."""
+    base = c.execute("SELECT data FROM combos WHERE name='gemini-fila'").fetchone()
+    linha = c.execute("SELECT id, data FROM combos WHERE name='haiku-fila'").fetchone()
+    if not base or not linha:
+        return
+    passos = [{k: m[k] for k in ("kind", "model", "providerId", "connectionId", "weight") if k in m}
+              for m in json.loads(base[0]).get("models", []) if str(m.get("model", "")).startswith("antigravity/")]
+    novos = passos + [{"kind": "model", "model": "kr/claude-haiku-4.5", "providerId": "kiro", "weight": 0}]
+    if [(m.get("model"), m.get("connectionId")) for m in json.loads(linha[1]).get("models", [])] == \
+            [(m.get("model"), m.get("connectionId")) for m in novos]:
+        return
+    log(f"haiku-fila: {len(passos)} conta(s) do Gemini 3.8 + Kiro Haiku no fim")
+    if SIMULAR:
+        return
+    req = urllib.request.Request(f"{BASE}/api/combos/{linha[0]}", data=json.dumps({"models": novos}).encode(),
+                                 method="PUT", headers={"Content-Type": "application/json", "Cookie": f"auth_token={login()}"})
+    log(f"haiku-fila: PUT {urllib.request.urlopen(req, timeout=30).status}")
+
+
+def opus_ajudante(c):
+    """24/11: opus-ajudante-fila tinha o 4.6 SEM conta fixa no 1o passo; o gateway escolhia a glauciajustino, que
+    responde 200 "Claude Opus 4.6 is no longer available" (140/140) e o ajudante nunca caia no Gemini. Agora:
+    contas do opus46-direto (combo_opus_fila: so as que ainda tem o 4.6) + as contas da gemini-fila."""
+    linha = c.execute("SELECT id, data FROM combos WHERE name='opus-ajudante-fila'").fetchone()
+    l46 = c.execute("SELECT data FROM combos WHERE name='opus46-direto'").fetchone()
+    gem = c.execute("SELECT data FROM combos WHERE name='gemini-fila'").fetchone()
+    if not linha or not gem:
+        return
+    pega = lambda d, pref: [{k: m[k] for k in ("kind", "model", "providerId", "connectionId", "weight") if k in m}
+                            for m in json.loads(d).get("models", [])
+                            if str(m.get("model", "")).startswith(pref) and m.get("connectionId")]
+    novos = (pega(l46[0], "antigravity/claude-opus-4-6") if l46 else []) + pega(gem[0], "antigravity/")
+    if not novos or [(m.get("model"), m.get("connectionId")) for m in json.loads(linha[1]).get("models", [])] == \
+            [(m.get("model"), m.get("connectionId")) for m in novos]:
+        return
+    log(f"opus-ajudante-fila: {len(novos)} passos (Opus 4.6 so nas contas vivas + Gemini 3.8)")
+    if SIMULAR:
+        return
+    req = urllib.request.Request(f"{BASE}/api/combos/{linha[0]}", data=json.dumps({"models": novos}).encode(),
+                                 method="PUT", headers={"Content-Type": "application/json", "Cookie": f"auth_token={login()}"})
+    log(f"opus-ajudante-fila: PUT {urllib.request.urlopen(req, timeout=30).status}")
+
+
+def gemini_studio(c):
+    """23/11 (dona: "deixe funcionando o melhor que der"): pedidos ao AI Studio (gemini/gemini-3.5-flash e parecidos)
+    acertavam 3-53%. Combo gemini-studio-fila = contas Antigravity da gemini-fila (Gemini 3.8, ~100%) e o AI Studio
+    por ultimo; os nomes de STUDIO sao mapeados para ele (model_combo_mappings). Copia a gemini-fila a cada rodada."""
+    base = c.execute("SELECT data FROM combos WHERE name='gemini-fila'").fetchone()
+    if not base:
+        return
+    passos = [{k: m[k] for k in ("kind", "model", "providerId", "connectionId", "weight") if k in m}
+              for m in json.loads(base[0]).get("models", []) if str(m.get("model", "")).startswith("antigravity/")]
+    novos = passos + [{"kind": "model", "model": m, "providerId": "gemini", "weight": 0} for m in STUDIO]
+    linha = c.execute("SELECT id, data FROM combos WHERE name='gemini-studio-fila'").fetchone()
+    if linha and [(m.get("model"), m.get("connectionId")) for m in json.loads(linha[1]).get("models", [])] == \
+            [(m.get("model"), m.get("connectionId")) for m in novos]:
+        return
+    log(f"gemini-studio-fila: {len(passos)} conta(s) do Gemini 3.8 + {len(STUDIO)} do AI Studio no fim")
+    if SIMULAR:
+        return
+    token = login()
+    if linha:
+        rota, metodo, corpo = f"/api/combos/{linha[0]}", "PUT", {"models": novos}
+    else:
+        rota, metodo, corpo = "/api/combos", "POST", {"name": "gemini-studio-fila", "strategy": "priority", "models": novos}
+    req = urllib.request.Request(BASE + rota, data=json.dumps(corpo).encode(), method=metodo,
+                                 headers={"Content-Type": "application/json", "Cookie": f"auth_token={token}"})
+    log(f"gemini-studio-fila: {metodo} {urllib.request.urlopen(req, timeout=30).status}")
+
+
 if __name__ == "__main__":
     con = sqlite3.connect(DB, timeout=30)
     apelidos(con)
     combos(con)
     opus_auto(con)
     opus_sonnetweb(con)
+    gemini_studio(con)
+    haiku_fila(con)
+    opus_ajudante(con)

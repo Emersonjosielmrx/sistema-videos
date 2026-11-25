@@ -93,7 +93,12 @@ def candidatos(chave, pag, cat, reg):
             if not tags or tags[0] not in {t.casefold() for t in pag["tags"]}:
                 continue
         out.append(dict(v, quando_yt=max(p["quando"] or "" for p in yt), **({"limpo": str(veo)} if veo else {})))
+    # 23/11: vídeo pequeno primeiro (todo upload que falhou no dia tinha > 38 MB; todo que passou, <= 38 MB). Os grandes
+    # continuam na fila, só vão para o fim. FB_GRANDE_MB muda o corte.
+    corte = float(os.environ.get("FB_GRANDE_MB", "38")) * 1e6
     out.sort(key=lambda v: (v["no_pc"], v["quando_yt"]), reverse=True)
+    # 24/11: no PC primeiro (não baixa do Drive lento), depois pequeno primeiro; o sort de 23/11 passava por cima do no_pc
+    out.sort(key=lambda v: (not v["no_pc"], (v.get("bytes") or 0) > corte))
     return out
 
 
@@ -125,22 +130,53 @@ def postar_um(chave, pag, cfg, cat, reg, preview=False):
             reg.setdefault("pulados", {})[v["caminho"]] = f"duração {d}"; _gravar(reg)
             catalogo.liberar(mp4); continue
         conta = pag["conta"]
-        porta, proc = fb_contas.abrir(conta)
-        try:
+        # 25/11 (dona: "postar pela API"): com token da Página o Reel sai pela Graph API (sem Chrome; ~2 min/post; 1º teste
+        # Invento React + Assist-IA ok). Sem token / erro de token ou permissão = cai no Chrome como antes. FB_SEM_API=1 desliga.
+        via, vid = "chrome", None
+        ok = None
+        if os.environ.get("FB_SEM_API") != "1":
+            try:
+                import fb_reel_api
+                if fb_reel_api.token_pagina(conta, pag["asset_id"]):
+                    ok, msg, vid = fb_reel_api.postar_api(conta, pag["asset_id"], str(mp4), legenda)
+                    via = "api"
+                    if not ok and any(x in msg for x in ("190/", "200/", "10/", "sem token", "start:", "OAuth")):
+                        print(f"   API recusou ({msg[:80]}); tento pelo Chrome", flush=True)
+                        ok, via = None, "chrome"
+            except Exception as e:  # noqa: BLE001
+                print(f"   API falhou ({str(e).splitlines()[0][:80] if str(e) else type(e).__name__}); tento pelo Chrome", flush=True)
+                ok, via = None, "chrome"
+        if ok is None and os.environ.get("FB_SO_API") == "1":
+            catalogo.liberar(mp4)
+            return False, "API indisponível e o Chrome está com a criação de Página — fica para a próxima rodada"
+        if ok is not None:
+            catalogo.liberar(mp4)
+        else:
+          porta, proc = fb_contas.abrir(conta)
+          try:
             with sync_playwright() as p:
                 ctx = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}").contexts[0]
                 # 20/11: troca pelo cookie i_user (instantâneo); o menu da foto fica só de reserva
                 ok_troca = fb_entrar_como.entrar_como_cookie(ctx, pag.get("id"), pag["nome"])
                 if not ok_troca:
                     pg = ctx.new_page(); pg.set_viewport_size({"width": 1366, "height": 900})
-                    ok_troca = fb_entrar_como.entrar_como(pg, pag["nome"]); pg.close()
+                    try:  # 23/11: facebook.com não abrindo em 90 s derrubava a RODADA inteira (mundosolar1995 18:2x)
+                        ok_troca = fb_entrar_como.entrar_como(pg, pag["nome"])
+                    except Exception as ex:  # noqa: BLE001
+                        print(f"   troca de perfil falhou ({str(ex).splitlines()[0][:80]})", flush=True)
+                        ok_troca = False
+                    finally:
+                        try:
+                            pg.close()
+                        except Exception:  # noqa: BLE001
+                            pass
                 if not ok_troca:
                     return False, "não conseguiu entrar como a Página"
                 ok, msg = fb_reel_bs.postar(ctx, pag["asset_id"], pag["nome"], str(mp4), legenda, tag=f"fb_{chave}")
-        finally:
+          finally:
             fb_contas.fechar(proc)
             catalogo.liberar(mp4)
-        print(f"   {'OK' if ok else 'ERRO'} {v['caminho'][-70:]} — {msg}", flush=True)
+        print(f"   {'OK' if ok else 'ERRO'} {v['caminho'][-70:]} — {msg} [{via}]", flush=True)
         if not ok:  # 20/11 escada: guarda o erro; bloqueio/restrição do Facebook = desce e segura 24 h
             reg.setdefault("erros", {}).setdefault(chave, {})[datetime.now().isoformat(timespec="seconds")] = msg[:300]
             _gravar(reg)
@@ -150,7 +186,7 @@ def postar_um(chave, pag, cfg, cat, reg, preview=False):
         if ok:
             reg.setdefault("postados", {}).setdefault(chave, []).append(
                 {"caminho": v["caminho"], "quando": datetime.now().isoformat(timespec="seconds"), "legenda": legenda[:200],
-                 "duracao": round(d, 1)})
+                 "duracao": round(d, 1), "via": via, **({"video_id": vid} if vid else {})})
             _gravar(reg)
             try:  # rede nova nas etapas (Drive por etapa)
                 import etapas
@@ -194,6 +230,15 @@ def main():
             except Exception:
                 vivo, velha = False, True
             if vivo and not velha:
+                # 25/11: a trava é da CRIAÇÃO de Página (usa o Chrome da conta 20-40 min) -> posta só pela API (não abre
+                # o Chrome). Antes a rodada pulava a conta e a postagem não andava (25/11 11:20). Outra POSTAGEM = sai.
+                dono = subprocess.run(["powershell", "-NoProfile", "-Command",
+                                       f"(Get-CimInstance Win32_Process -Filter 'ProcessId={pid_t}').CommandLine"],
+                                      capture_output=True, text=True, errors="replace").stdout
+                if "fb_criar_fila" in dono:
+                    print(f"conta {c} criando Página (pid {pid_t}) — posto SÓ pela API, sem Chrome", flush=True)
+                    os.environ["FB_SO_API"] = "1"
+                    continue
                 print(f"já tem postagem rodando na conta {c} (pid {pid_t}) — saio", flush=True)
                 for t in travas:
                     t.unlink(missing_ok=True)
@@ -229,7 +274,21 @@ def main():
         viral = fb_escada.segurar_viral(k)
         if viral and not a.pagina:
             print(f"[{pag['nome']}] segura: {viral}"); continue
-        r = postar_um(k, pag, cfg, cat, reg)
+        # 24/11 (noite, robustez.1): exceção dentro de postar_um (cofre PermissionError, Chrome sem porta, erro que escapa
+        # do composer) derrubava a RODADA inteira e as Páginas seguintes da conta ficavam sem post. Agora registra e segue.
+        # SystemExit (saída/proxy errado em fb_contas._conferir_saida) continua parando tudo — de propósito.
+        try:
+            r = postar_um(k, pag, cfg, cat, reg)
+        except Exception as e:  # noqa: BLE001
+            msg = f"{type(e).__name__}: {str(e).splitlines()[0][:200] if str(e) else ''}"
+            print(f"   ERRO [{pag['nome']}] — {msg} (sigo para a próxima Página)", flush=True)
+            try:
+                reg = _ler(REG, {})
+                reg.setdefault("erros", {}).setdefault(k, {})[datetime.now().isoformat(timespec="seconds")] = msg[:300]
+                _gravar(reg)
+            except Exception:  # noqa: BLE001
+                pass
+            r = (False, msg)
         if a.um and r and r[0]:
             break
         if i < len(ordem) - 1 and not a.horario:
@@ -248,7 +307,7 @@ def carregar_catalogo(max_h=2):
     return catalogo.sincronizar(salvar=False)
 
 
-NOBRE = (21, 22)  # 13/11 (Shorts de parceiro): o 1º post das 21-22 h rende ~100x nos canais fracos — 1 por Página/dia
+NOBRE = (19, 22)  # 24/11 dona: no FB os reels de 18-21 h e da madrugada renderam mais que os de 21-24 h -> nobre a partir das 19 h (antes 21). 13/11 (Shorts de parceiro): o 1º post das 21-22 h rende ~100x nos canais fracos — 1 por Página/dia
 INICIO, FIM = 8, 23
 
 

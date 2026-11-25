@@ -1,0 +1,105 @@
+{
+  "resumo_area": "Visual dos Shorts (Cortes): desde 01/11 o Short queima a legenda pelo libass (ANIME_SHORT_MIX padrão 1, anime_captions.py:75-76). Os três efeitos visuais em teste (T5 gancho Remotion, T6 fx de raio/fogo, T7 mascote) e a palavra de impacto lateral (T3) só existem no caminho PNG antigo (fx_subtitles.render_subtitles_short e anime_captions.py:105-137), que não roda mais. Nas pastas, fx_choque real cai de 68 vídeos (31/10) para 0 a partir de 02/11, e entre os 1.223 Shorts dos últimos 5 dias há 0 _testes_usados.json. Por isso os vencedores medidos 'fx raio azul 1,31x' e 'legenda lateral 1,1x' estão ligados no cortes_ajustes.json (fx_choque=B, legenda_impacto=lateral), mas não aparecem em nenhum vídeo. O placar de 17/11 que fechou T6 em B contou cerca de 1.100 vídeos 'B' sem efeito nenhum. Além disso, cerca de 40% dos Shorts de 22-23/11 ainda sorteiam testes já fechados (curto, fx_choque, ninguem_esperava), o que indica uma cópia antiga da config ou do código em outra máquina. Hora 21-22 h e delogo já estão ligados por padrão. Os sinais de saudação A, fala rápida A, gancho_meio B e capa B:drama não são vencedores firmes: o placar diz 'sem diferença clara', ou a amostra é pequena (capa B:drama).",
+  "achados": [
+    {
+      "titulo": "Efeitos T5/T6/T7 e impacto lateral NÃO são renderizados desde 01/11 (vivem só no caminho PNG morto)",
+      "problema": "O Short usa sempre o libass (legenda MIX). Os efeitos de raio/fogo (T6), a mascote nas pausas (T7), o gancho Remotion (T5) e a palavra de impacto lateral (T3) só são aplicados no caminho PNG (render_subtitles_short + burn_subtitles), que só roda se o libass falhar. O braço B é sorteado e gravado no postar.json, mas o vídeo sai igual ao braço A.",
+      "evidencia": "anime_captions.py:75-76 (short_mix = ANIME_SHORT_MIX padrão '1' -> libass, return na linha 87); CORTES_FX_CHOQUE só é lido em fx_subtitles.py:1435, dentro de render_subtitles_short (def na 1340); CORTES_LEGENDA_ESTILO só em fx_subtitles.py:1433; no caminho ASS o impacto é sempre centralizado: fx_subtitles.py:1026-1032 (\\an5\\pos(vw//2, vh*0.42)); a mascote T7 fica em anime_captions.py:105-116 (depois do caminho libass); o gancho Remotion fica em anime_gancho.queimar, chamado só em anime_captions.py:137 (ramo PNG). Contagem nas pastas de 'animes recap/shorts' por data: fx_choque real = 68 em 31/10, 9 em 01/11 e 0 de 02/11 a 24/11 (só 1 caso em 06/11), com fx_sort_B entre 22 e 132 por dia; mascote real = 76 em 31/10 e depois ~0; nos últimos 5 dias, 0 de 1.223 pastas têm _testes_usados.json.",
+      "proposta": "Portar para o caminho libass (burn_subtitles_ass) o que já existe: (1) os quadros PNG de raio/fogo de _fx_choque como overlay na mesma passada do ffmpeg, onde a mascote do CTA já entra (fx_subtitles.py:1162-1196); (2) o impacto lateral (rotação \\frz e posição de lado no Dialogue do impacto, linha 1031) quando CORTES_LEGENDA_ESTILO=lateral; (3) a camada Remotion do gancho como input extra. Até portar, marcar no placar que os braços B desses testes são placebo desde 02/11.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "O código dos efeitos existe (fx_subtitles._fx_choque, cortes_mascote.aplicar, anime_gancho._camada_remotion) e os assets também (D:\\hipercool-materiais\\assets\\cortes_fx com impacto_/varredura_ raio_00d1ff, raio_ffc83d, fogo_ff2a1a). Só não estão ligados ao caminho que roda."
+    },
+    {
+      "titulo": "Placar fechou T6 (fx_choque=B) e T8/T11 comparando braços placebo; sinal 'raio azul 1,31x' vem só de 28/10-01/11",
+      "problema": "O placar_variantes pega o braço do dicionário 'variantes' quando o _testes_usados.json não existe. Assim, cerca de 1.100 Shorts sem efeito contaram como 'fx B'. O 'PRONTO PARA DECIDIR' de fx_choque (p=0,954) é ruído entre dois grupos iguais. O 1,31x do raio_00d1ff em sinais_shorts.json vem dos únicos ~52 vídeos em que o efeito realmente saiu (28/10 a 01/11, com veredito 'SORTE' em receitas).",
+      "evidencia": "placar_variantes.py:118-123 (v = vdict[nome]; só troca por tu[campo] se _testes_usados.json tiver valor) e :133-134. placar_cortes_testes.json (gerado em 17/11 20:44): fx_choque B n_medidos=551, p_melhor_que_ref_ajustado=0,954, 'PRONTO PARA DECIDIR'. cortes_ajustes.json historico 2026-11-17T20:55: 'fx_choque ab -> B | T6 fechado'. sinais_shorts.json: fx_choque raio_00d1ff n=52 razao_med=1,31; receitas: fx_choque raio_00d1ff veredito 'SORTE' (n_antigos 42, n_recentes 10).",
+      "proposta": "No placar_variantes, para os campos de CAMPO_RENDER (fx_choque, mascote, gancho_remotion), contar como B só os vídeos com _testes_usados.json, ou seja, efeito realmente renderizado. Sem esse arquivo, o vídeo vai como 'nao_renderizado' e fica fora da comparação. Reabrir T6 depois de portar o efeito (achado 1) e registrar no historico do cortes_ajustes que o fechamento de 17/11 foi feito sobre placebo.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O placar já trata o 'A_falhou' do render (nota em gancho_remotion/mascote), mas não trata a falta do arquivo."
+    },
+    {
+      "titulo": "Cerca de 40% dos Shorts de 22-23/11 ainda sorteiam testes FECHADOS (curto, fx_choque, ninguem_esperava): config ou código antigo em outra máquina",
+      "problema": "No PC1, o cortes_ajustes.json fixa curto=B e ninguem_esperava=A desde 17/11. Mesmo assim, uma parte grande dos Shorts novos ainda sai com curto=A (versão longa, perdedora) e com 'NINGUÉM ESPERAVA' proibido (braço B, perdedor). Esses vídeos também não têm o teste T13 'abertura', o que bate com uma cópia antiga do variantes.py e do cortes_ajustes.json no produtor.",
+      "evidencia": "cortes_ajustes.json (PC1): \"curto\": \"B\", \"ninguem_esperava\": \"A\", \"fx_choque\": \"B\". Pastas *_20261122 e *_20261123: 219 com variantes = abertura,fala_rapida,gancho_meio,gancho_remotion,mascote,saudacao (config atual, curto=B 219/219) e 151 com variantes = curto,fala_rapida,fx_choque,gancho_meio,gancho_remotion,mascote,ninguem_esperava,saudacao (config antiga: curto A=72/B=79, ninguem_esperava A=91/B=60; 103 das 151 sem 'abertura'). Nos últimos 5 dias: curto A=348 de 1.223 e ninguem_esperava B=308. _sync_bin.py:8-12 sincroniza para o PC2 (C:\\recapd-e-animes\\bin) só 7 .py, sem cortes_ajustes.json e sem variantes.py.",
+      "proposta": "Descobrir qual produtor grava os 151 (PC2/desktop/Kaggle/celulares, a partir do log de cada máquina e não por ssh em rajada) e incluir cortes_ajustes.json e variantes.py na sincronização do bin dessas máquinas. Também gravar no postar.json a máquina que renderizou e a versão do cortes_ajustes (hoje nenhum metadata.json/postar.json diz a origem).",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "_sync_bin.py existe, mas com lista fixa curta (FILES) que não inclui a config dos testes."
+    },
+    {
+      "titulo": "Mascote T7 e gancho Remotion T5 estão 'ab' há 3 semanas sem nenhum vídeo B real",
+      "problema": "Os dois testes continuam sorteando e gastando metade da amostra num braço que não renderiza (achado 1). O placar diz 'dados suficientes, sem diferença clara', o que é esperado, já que os dois braços são idênticos. Isso polui a leitura dos outros testes e o sinais_shorts.",
+      "evidencia": "cortes_ajustes.json: \"mascote\": \"ab\", \"gancho_remotion\": \"ab\". Últimos 5 dias: mascote sorteado B=582 e renderizado B=4; gancho_remotion sorteado B=615 e renderizado 2 ('fora'). Pastas por data: masc_real = 76 em 31/10, 13 em 01/11 e depois 0-1. placar_cortes_testes.json: mascote B n=556 e gancho_remotion B n=528 com 'sem diferença clara ainda'.",
+      "proposta": "Ou portar o efeito para o libass (achado 1) e recomeçar a contagem a partir da data do porte, ou pôr \"mascote\": \"A\" e \"gancho_remotion\": \"A\" até o porte, com uma linha no historico explicando o motivo.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não. O historico não tem nenhuma linha sobre o caminho PNG ter saído do Short em 01/11."
+    },
+    {
+      "titulo": "'Legenda lateral' está fixada mas não é aplicada, e o próprio placar diz que lateral é PIOR em retenção",
+      "problema": "O melhorador fixou legenda_impacto=lateral em 30/10 'sem views' (o próprio placar avisa isso). No libass o impacto sai sempre no centro, então o valor fixo não muda nada. O sinal 1,1x de 'lateral' em sinais_shorts vem de 666 postar.json que só carregam o rótulo. Os vídeos de antes de 30/10, que tinham lateral de verdade, dão pct_ge65 de 16% contra 36% no centro.",
+      "evidencia": "cortes_ajustes.json historico 2026-10-30T04:44 'legenda_impacto ab -> lateral' (motivo: impacto cobrindo rostos, sem views). placar_cortes_testes.json legenda_impacto: nota 'fechado em lateral pelo melhorador em 30/10 04:44 (sem views)'; centro pct_ge65=0,36 vs lateral 0,162; p_melhor_que_ref_pct65 lateral=0,023; sugestao \"['lateral'] pior que centro\". Postar.json dos últimos 5 dias: legenda_estilo lateral=1.222/1.223, com impacto centralizado em fx_subtitles.py:1031.",
+      "proposta": "Não ligar o lateral como 'vencedor'. Registrar no cortes_ajustes que o rótulo 'lateral' não representa o vídeo desde 01/11 e trocar o campo legenda_estilo para o que o libass realmente faz. Se a dona quiser o lateral, portar para o ASS (\\frz) e reabrir como teste 'ab'.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O valor 'lateral' já está fixado, mas sem efeito no vídeo."
+    },
+    {
+      "titulo": "Placar dos testes parado desde 17/11: gancho_meio, saudação e fala rápida sem decisão há uma semana",
+      "problema": "O placar_variantes.py não roda sozinho: o arquivo é de 17/11 e não há tarefa agendada com esse nome. Os testes T4 (gancho_meio), T9 (fala_rapida), T10 (saudação) e T13 (abertura, 1 vídeo medido) seguem 'ab'/'abcd' sem reavaliação. Os sinais de 22/11 apontam saudação A 1,29x, fala rápida A 1,2x e gancho_meio B 1,12x, mas o placar mais recente não confirma nenhum deles (por exemplo, saudação B p=0,826 no ajustado e p=0,207 no pct65).",
+      "evidencia": "ls: placar_cortes_testes.json/.md com data 17/11 20:44. 'schtasks /query' filtrado por placar|variante|sinais não devolveu nada. sinais_shorts.json (_quando 2026-11-22T05:43): saudacao A 1,29 vs B 1,2; fala_rapida A 1,2 vs B 1,0; gancho_meio B 1,12 vs A 1,06. placar_cortes_testes.json: gancho_meio, fala_rapida e saudacao 'dados suficientes, sem diferença clara ainda'; abertura 'esperando dados' (pergunta n=1).",
+      "proposta": "Agendar o placar_variantes.py (só lê e grava placar) uma vez por dia de forma oculta (rodar_oculto.vbs), depois do medidor de 48 h, e mandar o resumo para a ronda. Decidir saudação, fala rápida e gancho_meio só pela régua D1/D3 do placar, não pela razão crua do sinais_shorts.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O script já existe (bin\\placar_variantes.py); o que falta é rodar de forma recorrente."
+    },
+    {
+      "titulo": "Capa: 'pesca' (maior mídia, 1,23x) e negócios/saúde ficam fora do CaparShorts; 71% dos Shorts saem sem capa/1º quadro",
+      "problema": "O CaparShorts só capa anime/manhwa e os de QUADRO_REAL (dorama, filme_sem_voz, fatos). Pesca é a maior produção (433 de 1.223 em 5 dias) e um dos melhores sinais de mídia, mas nunca ganha o 1º quadro chamativo. Além disso, a tarefa perde vídeos por timeout de ffprobe/ffmpeg e o teste do quadro real tem um teto de 2 por rodada.",
+      "evidencia": "capar_shorts.py:33 QUADRO_REAL = ('dorama','filme_sem_voz','fatos'); :80-82 filtro por midia; :290-291 limites CAPA_QUADRO_REAL_POR_RODADA=2 e CAPAR_POR_RODADA=4. Postar.json dos últimos 5 dias: thumb False=874/1.223, capa_no_inicio True=309, midia pesca=433. sinais_shorts.json midia: pesca razao 1,23 (zerado 27%), fatos 1,28. logs/capar_shorts.log 23/11: 4 TimeoutExpired (17:17, 17:25, 23:50, 23:54) e 'rodada: 0 Short(s)'.",
+      "proposta": "Pôr 'pesca' (e talvez negocios/saude) em QUADRO_REAL como variante 'ab' pelo variantes.py (capa no 1º quadro x sem capa), medida no placar. Subir o teto de quadro real quando a fila de anime/manhwa estiver vazia.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O CaparShorts e o quadro real (D:/fabrica-poses) já funcionam para dorama/fatos/filme_sem_voz. Pesca não está na lista."
+    },
+    {
+      "titulo": "Tratamento de capa B (receita 'B:drama' 2,0x/1,38x) está desligado: CAPA_TRATAMENTO nunca é definido",
+      "problema": "O _tratar_capa devolve 'A' sempre que CAPA_TRATAMENTO for diferente de '1', e nenhum script, .bat ou JSON define essa variável. A receita B:drama não volta a ser produzida e a amostra fica parada em 9+14. A dona pediu em 01/11 'capas sempre coloridas e não dark', o que pesa contra a C, mas não necessariamente contra a B, que só tinge de leve.",
+      "evidencia": "anime_publish.py:257-260 (comentário de 01/11 da dona + 'if os.environ.get(\"CAPA_TRATAMENTO\") != \"1\": return \"A\"'). grep CAPA_TRATAMENTO em bin/colab/config e em D:/video-fila: só a própria linha 259. Postar.json dos últimos 5 dias: capa_variante A=39, B:romance=1, vazio=1.183. sinais_shorts.json receitas: capa_variante B:drama RECEITA razao_antigos 2,0 (n 9), razao_recentes 1,38 (n 14).",
+      "proposta": "Perguntar à dona se a B (tinta de gênero com alfa 0,45, sem escurecer) entra na regra 'colorida, não dark'. Se entrar, ligar só A/B (sem a C) com CAPA_TRATAMENTO=1 restrito a A/B. A amostra é pequena (23), então continua como teste.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "O código existe e está desligado de propósito desde 01/11 (decisão da dona sobre capas escuras)."
+    },
+    {
+      "titulo": "Shorts renderizam em 720x1280 e são esticados para 1080: ANIME_RENDER_1080 nunca é ligado",
+      "problema": "Todo o motor de efeitos roda em 720x1280 e só no fim sobe para 1080 (scale + unsharp). A regra do 1080p mínimo é cumprida, mas o texto da legenda e o que vem do quadro saem reamostrados. O _fx_choque também exige exatamente 720x1280. O comentário de 31/10 diz que a comparação de custo/qualidade do render nativo nunca foi concluída.",
+      "evidencia": "fx_assets.py:41-45 (_HD = ANIME_RENDER_1080 == '1'; senão W,H = 720,1280). grep ANIME_RENDER_1080 em bin/colab/config: só fx_assets.py:41. fx_subtitles.py:1127-1151 (upscale para 1080x1920 com unsharp quando min(vw,vh) < 1080). fx_subtitles.py:309 (_fx_choque só funciona com (W,H) == (720,1280)).",
+      "proposta": "Testar fora do PC1 (teste_remoto.py --tipo render) um Short com ANIME_RENDER_1080=1 contra o padrão: medir tempo e conferir a nitidez da legenda por print. Se o custo couber, virar variante 'ab' no variantes.py. Os quadros de fx precisariam de versão 1080 ou de um scale no overlay.",
+      "impacto": "baixo",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "A chave existe (31/10) e está desligada; não há registro da comparação."
+    },
+    {
+      "titulo": "Já ligados por padrão (não propor de novo): hora 21-22 h, delogo, Short curto, 'NINGUÉM ESPERAVA' liberado",
+      "problema": "Para fechar o cruzamento com o sinais_shorts: os vencedores de horário e cobertura já estão no padrão. O curto=B e o ninguem_esperava=A também, mas só no PC1 (ver achado 3).",
+      "evidencia": "parceiro_diario.py:973-975 horas_nobres() padrão HORARIO_NOBRE_BR='21,22' e :1051-1073 (nobre primeiro na fila); sinais_shorts hora 21 = 8,9x (receita 20,25x recente). cortes_ajustes.json \"cobertura_legenda\": \"delogo\" (sinal delogo 1,11x; postar.json 5 dias: delogo 887, nada 335). cortes_ajustes \"curto\": \"B\", \"ninguem_esperava\": \"A\" (historico 17/11 20:55). ronda_tarde.txt:57-65: canais em so_nobre/controle_so_nobre ainda com só 0-9 Shorts às 21-22 h em 20-44.",
+      "proposta": "Nada a ligar aqui. O ponto aberto é de quantidade: canais com poucos Shorts às 21-22 h (ronda 23/11), o que já é acompanhado pelo médico da recuperação.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Sim: HORARIO_NOBRE_BR, cobertura_legenda=delogo, curto=B, ninguem_esperava=A."
+    }
+  ]
+}

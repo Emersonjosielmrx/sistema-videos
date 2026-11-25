@@ -30,6 +30,16 @@ def _ledger(nome):
     return d if isinstance(d, list) else []
 
 
+def _ledger_facebook():
+    """23/11: o Facebook entra no mesmo vigia (registro logs/facebook_paginas.json: postados -> página -> [{quando}])."""
+    try:
+        d = json.loads((LOGS / "facebook_paginas.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return [{"timestamp": e.get("quando", "")} for ps in (d.get("postados") or {}).values() for e in ps
+            if isinstance(e, dict)]
+
+
 def ritmo(posts, agora):
     """(hoje_ate_agora, mediana_7d_ate_a_mesma_hora)."""
     hm = agora.strftime("%H:%M:%S")
@@ -81,6 +91,20 @@ def erros_repetidos(agora, janela_h=6, minimo=5):
             if h and m and h.group(1) >= desde:
                 c[re.sub(r"\d+", "N", m.group(1))[:90]] += 1
         out += [(plat, motivo, n) for motivo, n in c.most_common(3) if n >= minimo]
+    # 23/11: Facebook — rodadas gravam "   ERRO <vídeo> — <motivo>" nos logs fb_*.log do dia
+    import glob
+    import os
+    c = Counter()
+    for f in glob.glob(str(LOGS / "fb_*.log")) + [str(LOGS / "facebook_paginas.log")]:
+        try:
+            if os.path.getmtime(f) < ini.timestamp():
+                continue
+            txt = open(f, encoding="utf-8", errors="ignore").read()
+        except OSError:
+            continue
+        for m in re.finditer(r"^\s+ERRO .*? — (.+)$", txt, re.M):
+            c[re.sub(r"\d+", "N", m.group(1))[:90]] += 1
+    out += [("facebook", motivo, n) for motivo, n in c.most_common(3) if n >= minimo]
     return out
 
 
@@ -89,6 +113,7 @@ def main(simular=False):
     alertas = []
     for nome, (hoje, normal) in (("TikTok", ritmo(_ledger("tiktok_auto_posted.json"), agora)),
                                  ("Instagram", ritmo(_ledger("instagram_auto_posted.json"), agora)),
+                                 ("Facebook", ritmo(_ledger_facebook(), agora)),
                                  ("Solares", solares(agora))):
         if normal >= 5 and hoje < 0.5 * normal:
             alertas.append(f"⚠️ {nome}: só {hoje} posts até agora ({agora:%H:%M}); o normal até esta hora é ~{normal:.0f}")

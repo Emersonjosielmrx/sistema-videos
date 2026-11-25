@@ -166,7 +166,7 @@ function diagnostico(){
   const fracas=ativas.filter(p=>p.reels&&p.media<50);
   if(fracas.length)out.push(`<b>Reel fraco mesmo postando.</b> ${fracas.map(p=>`${p.nome} (média ${p.media} por reel)`).join(', ')}. O único vídeo não pegou, e só dá para julgar o tema depois de mais reels.`);
   const ass=ativas.find(p=>p.chave==='assistia');
-  if(ass&&ass.reels>=5&&ass.media<150)out.push(`<b>Assist-IA rende menos por reel</b> (média ${ass.media}, contra ${Math.round(D.totais.views/D.totais.reels)} no geral). Recebe vídeo de anime com legenda de finanças, então o público da página não bate com o vídeo.`);
+  if(ass&&ass.reels>=5&&ass.media<150)out.push(`<b>Assist-IA rende menos por reel</b> (média ${ass.media}, contra ${Math.round(D.totais.views/D.totais.reels)} no geral). O tema está certo (vídeos de dinheiro e negócios dos canais Assist-IA, Bilionário Noturno, Lei e Lucro). Dinheiro tem menos público no Reels do que dorama/anime; ela precisa de mais reels por dia para crescer.`);
   const sem=ativas.filter(p=>!p.seguidores);
   if(sem.length)out.push(`<b>Sem seguidores:</b> ${sem.length} de ${ativas.length} páginas têm 0 seguidores, e todo view vem da recomendação do Facebook. Postar todo dia é o que mantém a página sendo mostrada.`);
   out.forEach(h=>{const li=document.createElement('li');li.innerHTML=h;ul.append(li)});

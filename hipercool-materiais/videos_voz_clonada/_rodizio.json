@@ -12023,11 +12023,30 @@
    "config": "2",
    "quando": "23/11 11:01",
    "nicho": "esportes"
+  },
+  "d_va_overwatch:francisca:r1.10": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-384039_cap1_20261125\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\d_va_overwatch\\v2_r1_francisca_config1_25-11_0841_sem-obra-384039_cap1_20261125.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-384039_cap1_20261125",
+   "config": "1",
+   "quando": "25/11 08:41",
+   "nicho": "curiosidades"
+  },
+  "luiz_carlos_persy:kokoro:r1.19": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-4968d4_cap1_20261125\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\luiz_carlos_persy\\v2_r1_kokoro_config2_25-11_1023_sem-obra-4968d4_cap1_20261125.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-4968d4_cap1_20261125",
+   "config": "2",
+   "quando": "25/11 10:23",
+   "nicho": "juridico"
   }
  },
  "falhas": {
   "ijax:kokoro:r1": 1,
-  "guugou:francisca:r1": 1
+  "guugou:francisca:r1": 1,
+  "naruto:francisca:r1": 1,
+  "homem_de_ferro_tony_stark:kokoro:r1": 1,
+  "julius:kokoro:r1": 2
  },
  "proxima_config": "1",
  "falhas_em": {
@@ -12050,6 +12069,10 @@
   "yor_forger:kokoro:r1": "2026-11-16T06:15:54",
   "bulma:francisca:r1": "2026-11-17T12:14:31",
   "sam_winchester:kokoro:r1": "2026-11-21T21:23:52",
-  "guugou:francisca:r1": "2026-11-23T14:49:53"
+  "guugou:francisca:r1": "2026-11-23T14:49:53",
+  "naruto:francisca:r1": "2026-11-24T01:15:27",
+  "homem_de_ferro_tony_stark:kokoro:r1": "2026-11-24T08:14:05",
+  "julius:kokoro:r1": "2026-11-24T22:39:17",
+  "d_va_overwatch:francisca:r1": "2026-11-25T06:17:38"
  }
 }

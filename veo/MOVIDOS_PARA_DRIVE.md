@@ -2963,3 +2963,17 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - robos_desastrad_20261120_041012_intro.mp4
   - robos_desastrad_20261120_041012_prop.mp4
   - robos_desastrad_20261120_041012_punch.mp4
+
+## 2026-11-23 17:10 — 82 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (82 MB) — 10 arquivos:
+  - curiosidades_ia_20261116_032730_final.mp4
+  - curiosidades_ia_20261116_032730_imp.mp4
+  - curiosidades_ia_20261116_032730_intro.mp4
+  - curiosidades_ia_20261116_032730_prop.mp4
+  - curiosidades_ia_20261116_032730_punch.mp4
+  - segredos_do_oce_20261120_080548_final.mp4
+  - segredos_do_oce_20261120_080548_imp.mp4
+  - segredos_do_oce_20261120_080548_intro.mp4
+  - segredos_do_oce_20261120_080548_prop.mp4
+  - segredos_do_oce_20261120_080548_punch.mp4

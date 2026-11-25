@@ -1,0 +1,125 @@
+{
+ "resumo_area": "O vigia mede bem (med_sem_sucesso pegou o carrossel MS Energy em 60 h), mas o que vem depois da medição falha em três pontos. (1) O aviso não chega: o URGENTE da vigilância cai no resumo porque o texto 'sem sucesso há' não bate com ERRO_RX; o notificar_telegram está preso desde 03:14, então liberar_esperas não roda e o aviso de disco a 6 GB ficou 'em espera'. (2) O conserto não anda: 191 casos estão parados em 'consertar' (150 são reserva_zero) e não expiram. Os 12 consertos do dia são gastos às 00:04 com casos de 16-18/11, que vão primeiro por serem os mais antigos, e o Hydrogen caiu no Kiro (sem_token) nos 11 casos que voltaram (o 12º falhou). Não há conserto aprovado desde 11/11. Problemas que precisam da dona (checkpoint) são reabertos e diagnosticados de 6 em 6 h. (3) Há lacunas e mentiras no relatório: não existe medidor de disco, de longo reenviado 19 vezes nem de fila de celular 'parado'. O relatório mostra disco de 22-28 GB quando hoje há 6 GB, diz 'Pesquisador LIGADO' com a tarefa desabilitada, infla os acertos da vigilância, publica links youtu.be/celular:... quebrados e mantém uma seção fixa de 27/10.",
+ "achados": [
+  {
+   "titulo": "URGENTE da vigilância nunca sai na hora: cai no resumo das 9/14/21 h",
+   "problema": "O aviso '🚨 URGENTE: <processo>: sem sucesso há N h' passa por avisos.enviar com importante=True, mas o portão só segura e manda erro quando o texto bate com ERRO_RX. 'sem sucesso' não bate, então vira importante=False e vai pro resumo. O carrossel MS Energy (66 h → 78 h) nunca chegou como alerta imediato.",
+   "evidencia": "D:\\video-fila\\estado\\avisos.jsonl: 23/11 10:40:40 e 22:56:25 'URGENTE: Carrossel MS Energy' situacao=\"resumo\"; 16:40:47 e 24/11 05:02:20 situacao=\"repetido\". Mesmo destino para 'URGENTE: Shorts no PC2', 'TikTok' e 'Gemini sem navegador' (resumo). avisos.py:183 ERRO_RX (erro|falh|parou|caiu...; sem 'sem sucesso'); avisos.py:511-512 'if not _e_erro: importante = False'; vigilancia.py:620-621 manda o URGENTE.",
+   "proposta": "Mandar o URGENTE por uma origem que sai sempre (pôr 'vigilancia-urgente' em SEMPRE_NA_HORA) ou incluir 'sem sucesso há' / '🚨' no ERRO_RX. Deixar uma chave de ambiente pra voltar ao comportamento antigo (ex.: VIGIA_URGENTE_DIRETO=0).",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O URGENTE existe desde 20/11 (vigilancia.py:618), mas na prática fica mudo por causa do filtro AVISOS_SO_ERRO_ABERTO de 11/11."
+  },
+  {
+   "titulo": "notificar_telegram preso desde 03:14: liberar_esperas não roda e o aviso de disco a 6 GB ficou retido",
+   "problema": "liberar_esperas() só é chamada dentro de despachar_resumo(), e quem chama é a tarefa NotificarTelegram. A execução das 03:14 não terminou (2 pythonw vivos com CreationDate 03:14 e telegram.log parado em 03:15). As seguintes são recusadas porque a anterior ainda roda. Resultado: a fila 'espera' acumula, incluindo 'Disco D com apenas 6.05 GB livres' das 03:09 e 5 alertas de TikTok 0 posts. Nada vai pro Telegram e nada vigia esse travamento.",
+   "evidencia": "Get-ScheduledTaskInfo NotificarTelegram: LastRunTime 05:34, LastTaskResult 2147946720 (0x800710E0, instância recusada); Win32_Process pythonw notificar_telegram.py PIDs 24632/22884 criados 24/11 03:14:00; D:\\postador-de-videos\\logs\\telegram.log última linha [24/11 03:15]; D:\\video-fila\\estado\\avisos_estado.json 'espera' com 6 itens de 03:08 a 05:09 (vídeos: Disco D 6.05 GB; vigia-postagem TikTok 0 posts); avisos.py:665-666 (único chamador de liberar_esperas).",
+   "proposta": "Tirar liberar_esperas do processo pesado: chamar a função na própria volta do vigilancia.py ou numa tarefa leve separada. Pôr um prazo (timeout) no notificar_telegram e cadastrar 'telegram.log' em config_processos_vigiados.json com max_h=1. Essa vigilância precisa sair por outro caminho, que não dependa do Telegram travado.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "A espera de 30 min existe desde 11/11 (avisos.py:513-515, ESPERA_ERRO_MIN), mas nada vigia quem a esvazia."
+  },
+  {
+   "titulo": "Fila de conserto entupida: 191 casos 'consertar' sem prazo, teto diário gasto em caso velho",
+   "problema": "Casos nunca expiram e andar() percorre do mais antigo pro mais novo. Os 12 consertos do dia (CASOS_DIA_MAX) são gastos logo depois da meia-noite em casos de 16-18/11, quase todos reserva_zero repetidos. O carrossel e os alertas de hoje nunca chegam ao consertador. Hoje o Hydrogen recebeu 12 casos às 00:04 e o painel caiu no Kiro em 11 (sem_token); o 12º falhou. Não há conserto aprovado desde 11/11.",
+   "evidencia": "D:\\video-fila\\estado\\vigilancia.json: etapas = consertar 191, falso 74, sem_mudanca 21, dona 4; dia={'data':'2026-11-24','consertos':12}. Chaves em 'consertar': reserva_zero 150 (dentrodascoisas3d 21, fatochocante 19, inventoreact 19...). vigilancia_casos.jsonl 24/11 00:04:35-37: 12x consertando gemini/gemini-4-hydrogen nos casos 20261116_005034_212...20261118_234034_243; 00:31-00:50: 11x sem_token usado=kr/claude-sonnet-4.5; 00:21:57: 1x falhou. 'aprovado' total = 9, o último em 2026-11-11. vigilancia.py:791 (ordem por 'aberto'), 690 (teto), 61 CASOS_DIA_MAX=12.",
+   "proposta": "(a) Fechar como 'vencido' o caso com mais de 48 h, ou fundir com o caso mais novo da mesma chave (hoje a mesma chave abre um caso novo a cada 6 h e o velho fica). (b) Ordenar 'consertar' por urgente, depois mais novo. (c) Se o painel cair pra outro modelo, não contar no teto do dia. (d) reserva_zero é falta de produção, não bug de código: tirar do consertador e mandar pro relatório.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "baixo",
+   "ja_existe": "O teto e a ordem fixa Argon→Hydrogen→Sonnet→Kiro são de 23/11 (vigilancia.py:47-55). Não há expiração de caso."
+  },
+  {
+   "titulo": "Problema que precisa da dona (checkpoint) é reaberto e rediagnosticado a cada 6 h",
+   "problema": "O carrossel MS Energy está parado por checkpoint do Instagram (precisa de login humano). O próprio carrossel_ms.py já sabe disso, grava checkpoint_ig.json e pausa. Mesmo assim, o vigia abriu 4 casos (10:40, 16:40, 22:56, 05:02) e gastou o Gemini 4 vezes pra chegar sempre a 'REAL — checkpoint'. Depois mandou pro consertador de código, que não tem como resolver. O caminho certo seria 'dona' + aviso humano.",
+   "evidencia": "vigilancia_casos.jsonl: casos 20261123_104034_300, _164034_300, _225055_300 e 20261124_050044_300 com diagnóstico 'carrossel_ms.py:423 — checkpoint (OAuthException 190)'. vigilancia.json: os 3 primeiros estão em etapa=consertar. D:\\ms-energy\\bin\\carrossel_ms.py:493-529 (marca checkpoint_ig.json + aviso). vigilancia.py:575-577 (REPETIDO_H=6 abre caso novo).",
+   "proposta": "No med_sem_sucesso, se existir marca de pausa humana (checkpoint_ig.json ou um campo 'pausa_humana' no config_processos_vigiados.json), abrir direto em etapa 'dona' com 1 aviso _humano_ok ('conta @msenergycap precisa de login') e não reabrir enquanto a marca existir. O mesmo vale quando o diagnóstico do vigia trouxer checkpoint/login/senha.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O carrossel_ms manda aviso de checkpoint 1 vez (avisos.jsonl 23/11 18:42), mas ele também caiu em situacao=\"resumo\"."
+  },
+  {
+   "titulo": "Sem medidor de disco no vigia, e o relatório mostra disco errado (22-28 GB contra 6 GB reais)",
+   "problema": "vigilancia.py não tem medidor de disco. A ronda mostra 'Disco D livre 22,7 GB' nos Números e '28.3 GB (lido 16:02)' no gerente. Hoje o D: está com 6,3 GB (abaixo do mínimo de 8 GB). O inventário das 02:59 já dizia 6.5 GB e D:\\tmp sozinho ocupa 13 GB 'SEM regra automática'. O único alerta veio do vigia_geral e ficou preso na espera (achado 2).",
+   "evidencia": "df /d: 6.3G livres (167G). D:\\video-fila\\estado\\inventario_videos.json em=2026-11-24T02:59:50 livre_gb=6.5, outras['D:\\\\tmp']=(101 vídeos, 13.0 GB). grep 'disco|disk' em vigilancia.py = 0 ocorrências. relatorio_ronda.py:1011-1032 (sec_videos_disco só mostra a hora da leitura, sem alerta de mínimo).",
+   "proposta": "Criar med_disco: livre < 10 GB vira alarme urgente com o top 3 pastas do inventario_videos.json, e o caso vai direto pro faxina/gerente_videos, sem IA. Na ronda, pôr '🔴 abaixo de 8 GB' na linha do disco e mostrar a idade da leitura do inventário quando passar de 2 h.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Existem gerente_videos.py (GerenteVideos 2/2 h) e o incidente 'disco' do avisos.py (avisos.py:105), que só fecha. O alarme de disco abaixo de 8 GB está no vigia_geral, preso na espera."
+  },
+  {
+   "titulo": "Longo reenviado 19 vezes sem ninguém avisar: só existe o prazo de 36 h pro último ok",
+   "problema": "O processo 'Longos no YouTube' só alarma após 36 h sem 'ok: https'. Como algum longo sobe a cada 1-2 dias, o alarme nunca dispara, enquanto o mesmo título é reenviado dezenas de vezes e cai em 'erro DEPOIS de subir (406 min) — pode ter ficado rascunho'. Isso gasta o PC1 por horas e pode deixar rascunhos duplicados. Nenhum medidor conta tentativas por título.",
+   "evidencia": "D:\\recapd-ambientes\\producao\\colab\\postar_longos.log 17-24/11: 'subindo: ELE FOI REJEITADO pela amiga...' 19x, 'ELE FOI TRATADO COMO SERVO...' 9x, 'HUMILHADO PELA NAMORADA...' 5x; 5 'erro DEPOIS de subir' entre 20 e 24/11 (ex.: [23/11 22:58] RzoyNcnlIj8... 406 min). Só 7 'ok: https' de 20 a 24/11. config_processos_vigiados.json: Longos max_h=36.",
+   "proposta": "Criar med_longos_tentativas: o mesmo título com 3 ou mais 'subindo' em 48 h sem 'ok', ou qualquer 'erro DEPOIS de subir', abre alarme com o título e o canal. Na ronda, uma linha 'Longos tentando subir: N títulos, maior X tentativas'.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Só o prazo de 36 h (config_processos_vigiados.json). LONGOS_MELHORIAS.md não foi conferido por este achado."
+  },
+  {
+   "titulo": "Fila do celular: 113 pedidos 'parado' (38 com vídeo pronto, 1 GB) que nenhum medidor nem relatório mostra",
+   "problema": "med_celulares só olha 'pendente', 'conferir', laços e adb. Pedidos 'parado' se acumulam: 28 por 'horário passou antes de postar' (vídeo renderizado e desperdiçado), 14 'nenhum Short Fish de esportes' no A3 e 5 'A3 sem chip'. A planificação continua mandando trabalho pro A3, que tem 42 parados. A ronda mostra só ok/erro do postagens_celular.jsonl.",
+   "evidencia": "D:\\projeto celular sub controle\\canal_pronto\\pedidos\\*.json: estados parado 113, PRONTO 60, preparar 10, aguardando 9, pendente 5. Por celular: A3 42, A2 22, S20U 17, S20 17, G20 15 parados. 38 parados com video_final existente = 1.06 GB; pasta videos\\ = 1.9 GB. Motivos: 'horário passou antes de postar' 28, \"nenhum Short pronto inédito da mídia 'esportes' com voz Fish\" 14. vigilancia.py:399-472 (med_celulares sem 'parado'). relatorio_ronda.py:1035-1082.",
+   "proposta": "Em med_celulares: 'parado' criados nas últimas 24 h ≥ 8, ou 'horário passou' ≥ 3, abre alarme por celular. A mídia sem estoque Fish deve parar de planejar pro celular. Na ronda, uma tabela por celular com pendente/PRONTO/parado (motivo principal) e o GB de vídeo parado.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Em 23/11, noite_encher.py:136-170 passou a reabrir 'parado' por erro passageiro (Command/post:). Não cobre 'horário passou' nem falta de estoque."
+  },
+  {
+   "titulo": "A tabela 'Vigilância' do relatório infla acertos e esconde que nada foi consertado",
+   "problema": "Na tabela, 'Acertou' = consertando + falso + real. Pedido enviado ao consertador e diagnóstico contam como acerto. A ronda mostrou 'Acertou 34 / Errou 1' e '12 consertos hoje', mas os 12 foram tentativas que caíram no Kiro ou falharam (sem_token 11), e não há aprovado desde 11/11. A lista de últimos eventos filtra passos que não existem ('consertou', 'conserto'), então só aparecem os 'falso'.",
+   "evidencia": "relatorio_ronda.py:543-545 (ok_v = consertando+consertou; Acertou = ok_v+falso+real); 503 (filtro com 'consertou','conserto'). ronda_tarde.txt: '| Vigilância | 98 | 34 | 1 |' e 'passos hoje: ... consertando 12, sem_token 11'. vigilancia_casos.jsonl: último 'aprovado' em 2026-11-11T15:10:37.",
+   "proposta": "Contar acerto só como aprovado (não 'voltou') e erro como falhou + desfeito + voltou. Mostrar à parte 'casos parados em consertar: N (mais velho de dd/mm)' e 'tentativas desviadas pro Kiro/sem token: N'. No filtro de eventos, trocar por ('aprovado', 'desfeito', 'dona', 'falhou', 'sem_token').",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O placar por agente é de 14/11 (RELATORIO_PLACAR_IA). A fórmula é a mesma desde então."
+  },
+  {
+   "titulo": "Relatório diz 'Pesquisador: Motor LIGADO', mas a dona pausou a tarefa",
+   "problema": "sec_pesquisador lê 'Motor: **LIGADO**' do PAINEL_PESQUISADOR.md. O painel parou de ser gerado em 23/11 11:41, quando a tarefa foi desabilitada, então o texto fica congelado como LIGADO e engana quem lê a ronda. A seção também mostra a fila do melhorador como '✅ em dia', também pausada.",
+   "evidencia": "schtasks MotorPesquisador: Status 'Desabilitado'. PAINEL_PESQUISADOR.md cabeçalho '— 23/11 11:41' e 'Motor: **LIGADO**'. ronda_tarde.txt: '- Motor LIGADO | hoje 19 pesquisas'. relatorio_ronda.py:581-590.",
+   "proposta": "Ler o estado real da tarefa (Get-ScheduledTask MotorPesquisador/MelhoradorCentral). Desabilitada = uma linha só, '⏸️ pausado pela dona em 23/11', sem números. Também mostrar a idade do painel.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Não. A regra de pausa está no CLAUDE.md (23/11), mas o relatório não sabe dela."
+  },
+  {
+   "titulo": "Evidência do sem_sucesso perde o erro mais repetido (precedência do ternário)",
+   "problema": "Em med_sem_sucesso, o texto '; erro mais repetido 12 h (Nx): ...' entra só no ramo else do ternário, ou seja, só quando nunca houve sucesso. No caso comum (já teve sucesso e parou), o alarme, o Telegram e o topo da ronda chegam sem o motivo. Por isso o vigia precisa de IA pra descobrir um checkpoint que estava escrito no log.",
+   "evidencia": "D:\\video-fila\\vigilancia.py:382-384: f\"{f}: último ... {ultimo_ok:%d/%m %H:%M}\" if ultimo_ok else f\"{f}: nenhum ...\" + f\"; erro mais repetido...\". ronda_tarde.txt topo: '— D:\\ms-energy\\logs\\carrossel.log: último 'PUBLICADO' em 20/11 22:40' (sem o erro).",
+   "proposta": "Pôr parênteses no ternário: (A if ultimo_ok else B) + '; erro mais repetido...'.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Não."
+  },
+  {
+   "titulo": "Seção 3D publica links quebrados 'youtu.be/celular:@...' como se fossem vídeos",
+   "problema": "Shorts 3D postados pelo celular gravam no ledger um id falso do tipo 'celular:@handle:data'. A ronda monta 'https://youtu.be/' + id, gerando 5 links inválidos (um com ':None'), e conta esses Shorts como 'postados' sem ID real nem views.",
+   "evidencia": "relatorio_ronda.py:965; ronda_tarde.txt: 'https://youtu.be/celular:@dentrodascoisas3d:2026-11-20 21:10', '...:None' (3d-geladeira-v2).",
+   "proposta": "Se o id começar com 'celular:', mostrar 'postado pelo celular dd/mm hh:mm (sem ID)' em vez do link. Contar esses à parte de 'postados com ID'.",
+   "impacto": "baixo",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Não."
+  },
+  {
+   "titulo": "Seção 'Outras línguas' fixa em 2 IDs de 27/10: ocupa espaço e roda rclone à toa",
+   "problema": "sec_frentes consulta, toda ronda, 2 pastas fixas da fila do Drive criadas em 27/10 (vietnamita e inglês) e sempre responde 'saiu da fila (pronto/postado)'. São duas chamadas rclone lsf por ronda sem informação nova.",
+   "evidencia": "relatorio_ronda.py:432-436 (pids fixos 20261027_000010_PDPOK7xOyas e 20261027_000011_dLd0uCJVaEc); ronda_tarde.txt 'Longo em vietnamita: saiu da fila' e 'Longo em inglês: saiu da fila'.",
+   "proposta": "Tirar essas 2 linhas, ou trocar por contagem dinâmica de longos não-pt na fila. Deixar só a 'Lista de prioridade'.",
+   "impacto": "baixo",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Não."
+  }
+ ]
+}

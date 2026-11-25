@@ -1,0 +1,132 @@
+{
+ "conta": "landingpageia.ia",
+ "produto": "landing_page",
+ "marca": "Landing Page e Comunicação",
+ "titulo": "O que vem incluso: página, vídeo e comunicação",
+ "legenda": "Landing page pronta, vídeo de demonstração e comunicação em uma estrutura só, para apresentar seu produto e transformar visita em cliente. Sem juntar vários profissionais separados. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Página e vídeo prontos para vender",
+  "pergunta_cliente": "Cansado de pagar vários profissionais só para apresentar seu produto?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Para apresentar meu produto, eu precisava de designer, redator e editor de vídeo. Cada um num canto, tudo desencontrado.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern office with a clean desk and a laptop, professional and bright",
+    "real_tema": "dono de negócio que precisava contratar vários profissionais separados",
+    "destaques": [
+     "designer, redator",
+     "editor de vídeo"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261124_205834_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Você recebe a landing page pronta, o vídeo de demonstração e a comunicação. Tudo em uma estrutura só, feita para apresentar seu produto.",
+    "visual": "veo",
+    "prompt_en": "a small Brazilian business owner's tidy desk with a laptop showing a clean web page, warm natural light, a hand pressing play on a demo video, commercial photography, no readable text, person seen from behind",
+    "cenario_en": "",
+    "real_tema": "estrutura completa de página, vídeo e comunicação",
+    "destaques": [
+     "landing page pronta",
+     "vídeo de demonstração"
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje minha página de vendas já está pronta, o vídeo apresenta o produto e a visita vira cliente.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a bright, tidy consulting office with a neat desk and large window, tidy, well lit",
+    "real_tema": "resultado: página pronta e vídeo apresentando o produto",
+    "destaques": [
+     "visita vira cliente"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261124_205834_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_landingpageia.ia_20261124_205834_1.png"
+   }
+  ],
+  "legenda": "Landing page pronta, vídeo de demonstração e comunicação em uma estrutura só, para apresentar seu produto e transformar visita em cliente. Sem juntar vários profissionais separados. Link no perfil.",
+  "titulo": "O que vem incluso: página, vídeo e comunicação",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "etapas_entrega",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 16,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\landingpageia.ia_20261124_205742\\dono_3.mp4",
+ "duracao_s": 33.67,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-24T22:36:00",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.01,
+   "fala": "Cansado de pagar vários profissionais só para apresentar seu produto?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.01,
+   "fim": 12.85,
+   "fala": "Para apresentar meu produto, eu precisava de designer, redator e editor de vídeo. Cada um num canto, tudo desencontrado.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.85,
+   "fim": 21.89,
+   "fala": "Você recebe a landing page pronta, o vídeo de demonstração e a comunicação. Tudo em uma estrutura só, feita para apresentar seu produto.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 21.89,
+   "fim": 29.72,
+   "fala": "Hoje minha página de vendas já está pronta, o vídeo apresenta o produto e a visita vira cliente.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 29.72,
+   "fim": 33.67,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.25,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.0,
+   "diretor": 5.0
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

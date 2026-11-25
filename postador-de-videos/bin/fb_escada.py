@@ -128,6 +128,22 @@ def descer(chave, motivo):
     e.setdefault("historico", []).append({"quando": e["mudou_em"], "delta": -1, "motivo": motivo[:200]})
     _gravar(d)
     _log(f"[{chave}] DESCEU (degrau {e['degrau']}), segura {SEGURAR_H} h: {motivo[:150]}")
+    # 25/11: 368 = limite de frequência da CONTA (não da Página). Segura as outras Páginas da mesma conta 6 h (sem descer
+    # degrau); senão a rodada segue nelas e o Facebook endurece o bloqueio.
+    if "368" in (motivo or ""):
+        try:
+            cfg = json.loads(CFG.read_text(encoding="utf-8"))["paginas"]
+            conta = (cfg.get(chave) or {}).get("conta")
+            ate = (datetime.now() + timedelta(hours=6)).isoformat(timespec="seconds")
+            for k, p in cfg.items():
+                if p.get("conta") == conta and k != chave:
+                    x = d.setdefault(k, {})
+                    if not x.get("segurar_ate") or x["segurar_ate"] < ate:
+                        x["segurar_ate"] = ate
+            _gravar(d)
+            _log(f"[{conta}] 368 na conta: as outras Páginas seguradas até {ate}")
+        except Exception as ex:  # noqa: BLE001
+            _log(f"[{chave}] 368: não consegui segurar a conta ({ex})")
 
 
 def _views_por_pagina():

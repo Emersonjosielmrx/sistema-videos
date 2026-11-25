@@ -83,7 +83,8 @@
  "narrador_chris": {
   "id": "4b215a58407c4def88e0892def6421b2",
   "titulo": "NARRADOR DO TODO MUNDO ODEIA O CHRIS",
-  "papel": "narrador"
+  "papel": "narrador",
+  "sumiu_25nov": true
  },
  "sukuna": {
   "id": "3a164c7d00b2437682042ebd01755521",
@@ -368,5 +369,10 @@
   "titulo": "Ludmilla",
   "papel": "personagem",
   "achado": "19/11 busca no site (pt, mais usada) — conferir ouvindo"
+ },
+ "narrador_chris_novo": {
+  "id": "ac63ad94686b41b3a8e526cc82a99587",
+  "titulo": "Todo mundo odeia o Chris (substituto 25/11)",
+  "papel": "narrador"
  }
 }

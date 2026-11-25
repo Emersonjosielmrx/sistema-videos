@@ -1,0 +1,125 @@
+{
+  "resumo_area": "Levantamento SÓ LEITURA (24/11). Como medi: lista de 224 tarefas agendadas (schtasks /query /fo csv /v, salva em %TEMP%\\claude\\tarefas_cm.csv) + índice de palavras de 1.245 .py/.bat/.vbs/.ps1/.cmd nas 5 pastas vivas (producao\\bin, producao\\colab, video-fila, postador-de-videos\\bin, hipercool-materiais\\comum, até 2 níveis). Depois conferi pelo nome do arquivo também em D:\\ raiz, hipercool-videos\\bin, logins-google, tools, kit3d-producao, manhwa-react\\scripts e pesquisador_melhorias. Resultado: 254 .py vivos (sem contar snapshots) que ninguém chama (~1,15 MB). Além deles: 17 pastas de snapshot do manhwa antigo, um fork esquecido do trabalhador do Kaggle, cerca de 180 arquivos .bak/.bkp, 70 MB em vigia_backups sem rodízio e cerca de 50 módulos copiados à mão entre bin, postador e comum. Ressalva: um script chamado à mão (pela dona ou por um chat) não aparece no grep. Por isso a proposta é sempre MOVER para uma pasta _arquivo ou para o Drive, e não apagar. Os arquivos de diagnóstico e teste podem valer como histórico.",
+  "achados": [
+    {
+      "titulo": "Fork esquecido do trabalhador do Kaggle: kaggle_trabalhador_VPS_fish.py (87 KB) já divergiu do oficial",
+      "problema": "Existem 4 versões do trabalhador em colab. Só kaggle_trabalhador.py é enviado ao Kaggle. O _VPS_fish tem o lote de teste de voz, e o oficial não tem. O oficial tem o puxador de código de 22/11, e o _VPS_fish não tem. Se alguém subir a VPS com o fork, roda código de 19/11 sem as correções de 20 a 22/11.",
+      "evidencia": "colab\\kaggle_lancar.py:63 copia só \"kaggle_trabalhador.py\". O grep por 'VPS_fish'/'kaggle_trabalhador_' nos .py/.bat/.sh de colab e nas tarefas dá 0 chamadas. Funções que só existem de um lado (diff de 'def'): _puxador_de_codigo (kaggle_trabalhador.py:332, 22/11) contra lote_teste_voz (kaggle_trabalhador_VPS_fish.py:961, 17/11; 'fila_teste_voz' aparece 5 vezes no fork e 0 no oficial). Mais 2 forks sem uso: kaggle_trabalhador_NO_AR.py (10,5 KB) e kaggle_trabalhador_ROBUSTEZ_nao_testado.py (17,7 KB), ambos de 26/10.",
+      "proposta": "Decidir se o lote_teste_voz ainda serve (os testes de voz estão pausados, segundo a memória). Se servir, passar a função para o kaggle_trabalhador.py atrás de TESTE_VOZ=0, como o próprio docstring do fork prevê. Depois mover os 3 forks para colab\\_arquivo\\ com uma nota de 1 linha.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não existe nota de decisão sobre o fork. O montar_pacote.py:20 não exclui esses arquivos do pacote (FORA só tira _SNAPSHOT*, _BACKUP*, _snapshots, *.bak*, *.bkp*), então os 3 forks vão junto em todo pacote."
+    },
+    {
+      "titulo": "254 scripts .py que nada chama (nenhuma tarefa, import, .bat ou .vbs)",
+      "problema": "Scripts de uso único, sondas e testes ficaram na pasta de produção. Atrapalham o grep e a leitura dos chats e dos auditores, e alguns falam como conta se forem rodados por engano (por exemplo fb_tentar_login.py, kaggle_ver_conta.py, _tmp_ver_kaggle_conta.py, logar_pool_noite.py).",
+      "evidencia": "Saída da varredura: 254 arquivos com 0 menções pelo nome e ausentes das 224 tarefas. Grupos principais: video-fila\\_tmp_*.py = 34 arquivos (129 KB, de 07/11 a 17/11). postador\\bin\\fb_*.py = cerca de 33 sem uso dos 50 fb_*.py (os .bat do Facebook só chamam fb_escada, fb_medir e fb_saturacao, segundo cron_facebook_inteligencia.bat). fish_audio\\: capturar_fish, criar_fish_proton, criar_fish_temp, criar_proton_fish, fazer_referencia, logar_dona, logar_pool_noite, mao_real, relatorio_fish, importar_token_desktop. comum\\_drive_*.py (8 arquivos de 11/11) + drive_chave_cloud.py (20 KB). producao\\bin\\: audit_*.py (8), patch_*.py (4), teste_*.py (11, de 13/11), postar_lote_inovaremanhwabr.py, postar_todos_canais_manhwa.py, postar_deitados_todos13.py e postar_animes_ate_bloquear.py. colab\\: abrir_colab, abrir_prontos, kaggle_contas_novas, kaggle_abrir_conta e vps_baixador.",
+      "proposta": "Mover em lote (só depois do OK da dona) para <pasta>\\_arquivo\\AAAA-MM\\, guardando a lista. Os scripts que falam como conta (fb_*login*, kaggle_*conta*, logar_*) vão primeiro, porque assim ninguém roda por engano um caminho que não passa por cofre.saida_kaggle. Não apagar.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "Não há pasta _arquivo nessas pastas e nenhuma rotina move _tmp_*. A memória 'Testes temporários' (testes.py) cobre testes de imagem, não scripts _tmp_."
+    },
+    {
+      "titulo": "Cópia antiga do pipeline manhwa dentro do postador: 80 módulos com o mesmo nome do producao\\bin, 42 já diferentes",
+      "problema": "postador-de-videos\\bin guarda a cadeia manhwa de julho (hiper-pipeline, queue-runner, night-shift-driver, dual-pipeline, claude_client...). Os nomes são iguais aos do producao\\bin com conteúdo diferente. Quem fizer import com o sys.path errado pega a versão velha, e o grep de um auditor ou chat cai no arquivo errado.",
+      "evidencia": "Comparação md5: producao\\bin x postador\\bin têm 80 nomes em comum, 38 idênticos e 42 diferentes. Exemplos: claude_client.py tem 32.193 B (bin, 16/11) contra 17.221 B (postador), e censura_visual.py tem 21.358 B contra 15.893 B. Nenhuma das 224 tarefas roda queue-runner, night-shift-driver, dual-pipeline ou o hiper-pipeline do postador (grep no CSV vazio). postador\\bin\\fix_indent.py:1 abre 'D:/hipercool-inferior-fix/bin/hiper-pipeline.py', pasta que não existe mais. narration_ensemble.py tem 0 referências, e claude_client.py só é usado por gemini_llm, haiku_helpers e narration_ensemble.",
+      "proposta": "Marcar o grupo manhwa-julho do postador (hiper-*, queue-runner, night-shift-driver, dual-pipeline, tia-fetcher, narration_ensemble, fix_indent, panel-splitter, landscape-compiler e o que só eles importam) e mover para postador\\bin\\_arquivo_manhwa_jul\\. Antes, conferir que o postador ativo (youtube_web_poster, politica, produto\\) não importa nada dali. Já sei que gemini_llm é usado por curadoria.py e postar_tudo_hoje.py, então é preciso olhar caso a caso.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "Não existe nota de decisão sobre isso."
+    },
+    {
+      "titulo": "Módulos comuns copiados à mão em 3 lugares (bin, postador e comum)",
+      "problema": "chaves_gemini, _tg_safe, edge_tts_engine, content_analyzer, contextual_motion, effects_memory e outros existem em 2 ou 3 cópias. Hoje estão iguais, mas uma correção feita numa cópia não chega nas outras, como já aconteceu com claude_client e censura_visual.",
+      "evidencia": "md5: producao\\bin x comum têm 19 nomes em comum, os 19 idênticos. postador\\bin x comum têm 13 em comum, os 13 idênticos. Exemplos: chaves_gemini.py com fd6f9694 nas 3 pastas e edge_tts_engine.py com c2e999ca nas 3 (bin modificado em 16/11, os outros em 30/10). Nenhum script de sincronização copia essas cópias: o único sincronizar_*.py do comum é sincronizar_github.py, que também não tem uso.",
+      "proposta": "Deixar a fonte em hipercool-materiais\\comum e trocar as cópias por import, com sys.path.append ao FIM e nunca na frente (regra da memória 'pasta alheia nunca na frente'). Começar pelos 19 idênticos de bin x comum. Exceção: módulo que vai no pacote do Kaggle continua copiado pelo montar_pacote.",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "A memória 'Código comum' (reference_codigo_comum.md, recursos.py) já define o comum como fonte, mas as cópias continuam lá."
+    },
+    {
+      "titulo": "17 snapshots + 2 backups do manhwa de julho em producao\\bin (7,7 MB, 20 cópias de hiper-pipeline.py)",
+      "problema": "As pastas _snapshots\\ (17 versões de 29/06 a 03/07), _BACKUP_20260707 e _SNAPSHOT_ANIME_20260712_2200 repetem os módulos de produção com o mesmo nome. Um grep por anime_tts, fx_clips ou effects_engine devolve até 20 resultados.",
+      "evidencia": "du: _snapshots = 6,3 MB, _BACKUP_20260707 = 1,3 MB, _SNAPSHOT_ANIME_20260712_2200 = 141 KB. Na lista de nomes repetidos, hiper-pipeline.py e effects_engine.py aparecem em 20 pastas, e fx_clips.py e anime_tts.py também no _SNAPSHOT_ANIME. Fora do filtro do montar_pacote.py:20 (FORA = '_SNAPSHOT*/**', '_BACKUP*/**', '_snapshots/**'), nenhum .py ou .bat referencia essas pastas.",
+      "proposta": "Compactar as 3 pastas num zip, mandar para o Drive (manhwa-drive: arquivo) e, depois do rclone check, tirar do bin, seguindo a regra 'rm só após rclone check'.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Só existe a exclusão no montar_pacote.py:20, que tira essas pastas do pacote do Kaggle. No disco e no grep elas continuam."
+    },
+    {
+      "titulo": "vigia_backups com 140 pastas e 70 MB, sem rodízio",
+      "problema": "O vigia_geral manda copiar o original antes de editar, mas nada apaga as cópias. As pastas trazem anime_fetch.py, anime_tts.py e claude_client.py antigos com o mesmo nome dos de produção.",
+      "evidencia": "video-fila\\vigia_geral.py:367: 'Antes de editar QUALQUER arquivo, copie o original para D:\\\\video-fila\\\\vigia_backups\\\\{hora}\\\\'. A tarefa VigiaVideos está Habilitada (CSV). du -sh vigia_backups = 70M, com 140 pastas, a mais recente 20261114_0256. Repetições vistas: anime_fetch.py em 5 pastas, de 20261018_1415 a 20261021_1415.",
+      "proposta": "Juntar as pastas com mais de 7 dias em zip mensal e mandar para o Drive, ou aplicar o rodízio da 'Reserva de 1 semana'. Uma regra de 5 linhas no próprio vigia_geral resolve, com a chave VIGIA_BACKUP_DIAS=7 e 0 para desligar.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não tem rodízio. A última pasta é de 14/11, então o vigia parou de gravar backups ou parou de editar, o que vale conferir à parte."
+    },
+    {
+      "titulo": "Cerca de 180 arquivos .bak/.bkp nas pastas vivas, 50 só do kaggle_pool.json",
+      "problema": "Cópias de estado e de código se acumulam ao lado do arquivo vivo. Isso leva a erro de leitura ('qual pool vale?') e o kaggle_pool.json.bak_* guarda contas antigas, inclusive banidas.",
+      "evidencia": "find -name '*.bak*': producao = 84 arquivos (3,3 MB), video-fila = 47 (2,9 MB), postador = 51 (0,9 MB), comum = 4. Em colab há 52 arquivos kaggle_pool*: 1 vivo, 11 .bak_* (340 KB, de bak_02nov_ban a bak_23nov_desktop) e cerca de 40 .bkp_* (de bkp_20261029_0923 a bkp_20261108_0150_46). Em bin ficam anime_tts.py.bak_20261119_165331_melhorador, fx_clips.py.bak_20261120_160147_melhorador (126 KB) e _PRE_SPLIT_effects_engine.py.bak (173 KB). Os .bkp do pool aparecem em kaggle_token_cofre.py, kaggle_token_proxy.py e pesar_fila.py.",
+      "proposta": "Uma regra só: .bak/.bkp com mais de 7 dias vão para <pasta>\\_bak\\ e daí para o Drive. Para o kaggle_pool, guardar só os 3 mais recentes no PC. Antes, conferir se kaggle_token_cofre, kaggle_token_proxy e pesar_fila apenas CRIAM os .bkp ou se também os LEEM, porque se leem não se pode mover.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O montar_pacote.py:20 já tira *.bak* e *.bkp* do pacote. Não há limpeza no disco."
+    },
+    {
+      "titulo": "Chave ANIME_MASCOTE_TOM é gravada e nunca lida",
+      "problema": "O tom ou velocidade da mascote configurado em mascote.tom não tem efeito. A voz da mascote hoje sai da pausa gravada ou do clone, e a chave ficou da época do edge.",
+      "evidencia": "recapd-ambientes\\producao\\bin\\anime-pipeline.py:1111 faz os.environ.setdefault(\"ANIME_MASCOTE_TOM\", m.get(\"tom\") or \"+6%,+22Hz\"). Os únicos leitores das irmãs estão em anime_segments.py:285 (FALAS), :288 (VOZ) e :326 (CLONE). Grep de 'MASCOTE_TOM' em bin e comum: só a linha 1111 e o docstring de anime_segments.py:282.",
+      "proposta": "Tirar a linha 1111 e o campo 'tom' do config da mascote, ou anotar que é só legado. Também vale confirmar se ANIME_MASCOTE_VOZ (pt-BR-FranciscaNeural, edge) ainda é usada fora da pausa, já que edge puro é proibido pela memória 'Vozes'.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não."
+    },
+    {
+      "titulo": "43 tarefas Desativadas continuam registradas, com scripts que já viraram legado",
+      "problema": "Tarefas desligadas há semanas apontam para scripts que ninguém mais chama, como video-fila\\ocioso.py, colab\\kaggle_lancar.py manter, hipercool-videos\\bin\\fila.py e recapd\\cron_anime_*.bat. Fica difícil saber o que é pausa (decisão da dona) e o que está morto.",
+      "evidencia": "CSV das tarefas: 43 linhas com 'Desativado', entre elas AnimeOcioso (D:\\video-fila\\ocioso.py), KaggleRecapManter, KaggleBaixador, KaggleHoras, HipercoolFila, HipercoolReligarProducao, HipercoolShorts2h, HipercoolVigia, AnimeRecapMonitor, AnimeRecapNoturno, PostarMedieval15, VeoProducaoDiaria7h, TrocarVenvUnico, AgendadorVO3, SupervisorMelhorador e VigiaMelhorias. Em video-fila\\estado há também ocioso.py.bak_20261030_0135 e _0405.",
+      "proposta": "Não religar nem apagar. Escrever um TAREFAS_DESLIGADAS.md em video-fila com 1 linha por tarefa: 'pausa da dona' (MotorPesquisador, CobradorPesquisador, MelhoradorCentral, RecapMelhoradorLongo) ou 'aposentada em DATA porque X'. A dona aprova a lista de aposentadas, e só depois os scripts delas vão para _arquivo.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O CLAUDE.md lista só as 4 pausadas do pesquisador e dos melhoradores. Para as outras 39 não achei decisão escrita."
+    },
+    {
+      "titulo": "Chaves FLOW_* no cron_produto_videos.bat sem leitor na cadeia do postador (conferir)",
+      "problema": "O .bat da tarefa Produto_Videos define FLOW_HEADLESS, FLOW_ASPECT, FLOW_MODEL e FLOW_DURATION. Nenhum .py do postador ou do comum lê essas chaves, só o D:\\veo\\beta. Se o caminho atual não passa pelo veo\\beta\\config, a configuração é ilusória.",
+      "evidencia": "postador-de-videos\\bin\\cron_produto_videos.bat:6-10. Grep das 4 chaves em postador\\bin e comum: 0 leitores. Leitores existem em D:\\veo\\beta\\config.py, gera_auto.py, cron_gerar_video_llm.py e monitor_recursos.py. produto\\video.py:639 e :711 fazem sys.path.insert(0, r\"D:\\veo\\beta\"), então PODE chegar ao config.py. Por isso o caso fica como 'conferir', não como morto confirmado. O log produto_videos.log mostra a tarefa viva às 15:00 de hoje.",
+      "proposta": "Ler produto\\video.py nas linhas 630-720 e confirmar se a função importada de veo\\beta usa FLOW_MODEL e FLOW_DURATION. Se não usar, tirar as 4 linhas do .bat ou passar os valores explicitamente.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não."
+    },
+    {
+      "titulo": "Scripts de diagnóstico e engenharia reversa soltos em video-fila (testes\\ 12, engenharia_reversa\\ 10, estado\\*.py 8)",
+      "problema": "Ficam .py dentro de estado\\ (pasta de JSON), entre eles ocioso.py.bak e ytdlp_vez.py.bak, e scripts de teste de leads de 01/11 que nada chama. Isso confunde quem procura o código vivo do ytdlp_vez e do ocioso.",
+      "evidencia": "Sem referência: video-fila\\estado\\_conta_prioridade.py, _semear_leads.py, _teste_lead_real.py, _teste_leads_whatsapp.py, _teste_portao_leads.py, _teste_vigia_leads.py, _ver_ponte.py e esperar_desktop_telao.py. Em testes\\, 12 sem uso (teste_guarda.py 39 KB, teste_camada_opus.py 24 KB, todos de 24/10). Em engenharia_reversa\\, 10 sem uso (de 29 a 30/10). Em estado\\ também: ocioso.py.bak_20261030_0135/_0405 e ytdlp_vez.py.bak_20261030_1120.",
+      "proposta": "Mover os .py de estado\\ para testes\\_arquivo\\ e deixar estado\\ só com dados. A engenharia_reversa fica onde está porque é análise, conforme a memória 'Engenharia reversa = análise', mas ganha um LEIA.md dizendo que não roda em produção.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não."
+    },
+    {
+      "titulo": "Utilitários vivos que parecem mortos: teste_remoto.py, memes_pt_baixar.py e cenas3d_no_longo.py (NÃO mover)",
+      "problema": "A varredura também marca scripts chamados só à mão ou recém-criados. Movê-los quebraria regras da dona. Ficam aqui como lista de exceção para quem fizer a limpeza.",
+      "evidencia": "video-fila\\teste_remoto.py tem 0 referências em código, mas é a ferramenta obrigatória do CLAUDE.md global ('python D:\\video-fila\\teste_remoto.py --tipo ...'). memes_pt_baixar.py e producao\\bin\\cenas3d_no_longo.py foram modificados em 24/11, hoje. mover_testes_imagem_drive.py (21/11) é citado pela memória 'Testes de imagem no Drive'.",
+      "proposta": "Na limpeza dos achados 2 e 11, pular estes e qualquer arquivo modificado nos últimos 7 dias ou citado em CLAUDE.md, MEMORY.md ou LEIA_*.md.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não existe lista de exceção."
+    }
+  ]
+}

@@ -116,48 +116,6 @@ def falhou_antes_de_publicar(msg):
     return "Post clicked" not in m and any(x in m for x in ("file input not found", "nao baixou", "envio de"))
 
 
-RELOGIN_FALHAS = Path(__file__).resolve().parent.parent / "logs" / "tiktok_relogin_falhas.json"
-
-
-def _relogin_ler():
-    try:
-        return json.loads(RELOGIN_FALHAS.read_text("utf-8"))
-    except (OSError, ValueError):
-        return {}
-
-
-def _relogin_falhou(conta, res):
-    """23/11 (relatório: 98 falhas no TikTok, ~70 da emersonjosielmrx1995 — o relogin pelo Google dava 'o TikTok não
-    confirmou a conta' em TODA máquina, 35x por dia). 3 falhas de relogin no dia = conta fora 24 h + aviso à dona."""
-    try:
-        d = _relogin_ler()
-        hoje = datetime.now().strftime("%Y-%m-%d")
-        e = d.get(conta) or {}
-        if e.get("dia") != hoje:
-            e = {"dia": hoje, "n": 0}
-        e["n"] += 1
-        e["ultimo"] = str(res)[:150]
-        if e["n"] >= int(os.environ.get("TIKTOK_RELOGIN_MAX", "3")) and not e.get("pausa_ate"):
-            e["pausa_ate"] = time.time() + 24 * 3600
-            try:
-                import avisos
-                avisos.enviar(f"TikTok @{conta}: relogin pelo Google falhou {e['n']}x hoje ({e['ultimo'][:80]}) — "
-                              "fora do TikTok por 24 h; precisa logar à mão no Chrome da conta", "postagens",
-                              importante=True, chave=f"tiktok_relogin:{conta}")
-            except Exception:  # noqa: BLE001
-                pass
-        d[conta] = e
-        RELOGIN_FALHAS.write_text(json.dumps(d, ensure_ascii=False, indent=1), "utf-8")
-    except Exception:  # noqa: BLE001
-        pass
-
-
-def _relogin_pausado(conta):
-    if os.environ.get("TIKTOK_RELOGIN_MAX") == "0":
-        return False
-    return ((_relogin_ler().get(conta) or {}).get("pausa_ate") or 0) > time.time()
-
-
 def motivo_falha(msg):
     """A linha que explica a falha (antes saía só a 1ª linha da saída: "Chrome disponivel nas portas")."""
     linhas = [l.strip() for l in str(msg).splitlines() if l.strip()]
@@ -208,7 +166,7 @@ def abrir_conta(conta, r, proxy_n=None):
         porta, proc = cofre.abrir(r["cofre"], extra=extra)
         # 15/11: conta VIVA do Kaggle — o cofre.abrir já fecha e reabre pela ponte um Chrome aberto sem ela; se devolveu
         # um Chrome já aberto, é porque ele ESTÁ na ponte do IP fixo: pode usar (antes recusava e a conta não postava)
-        if extra and not proc and cofre.saida_kaggle(cofre.conta(r["cofre"])[0]) and cofre._chrome_com_ponte(porta):
+        if extra and not proc and cofre.saida_kaggle(r["cofre"]) and cofre._chrome_com_ponte(porta):
             return porta, proc
         if extra and not proc:
             # aberto por outro projeto SEM o proxy desta conta: usar seria sair por outro IP
@@ -378,9 +336,7 @@ def filas(cfg, posted):
         # config, posto por tiktok_pausar_zeradas.py) — só gasta postagem/IP nas que dão view. TIKTOK_PAUSADAS=0 ignora.
         if r.get("pausada") and os.environ.get("TIKTOK_PAUSADAS", "1") != "0":
             continue
-        if _relogin_pausado(conta):
-            continue
-        gap_ip =float(cfg.get("intervalo_ip_min", INTERVALO_IP_MIN))
+        gap_ip = float(cfg.get("intervalo_ip_min", INTERVALO_IP_MIN))
         mi = minutos_desde_ultimo_ip(posted, conta) if gap_ip else None
         if mi is not None and mi < gap_ip:
             continue  # 12/11: outra conta do mesmo IP postou há pouco — esta fica para a próxima rodada
@@ -442,26 +398,7 @@ def main():
     def _ja_no_pc(v):
         return bool(v.get("limpo") and Path(v["limpo"]).exists()) or bool(v["no_pc"] and Path(v["caminho"]).exists())
 
-    ip_fora = {}  # 19/11: IP Webshare testado nesta rodada -> abriu?
-
     def um_post(conta, r, cand):
-            # 19/11 dona ("por que tantos erros no TikTok se temos tantos PCs desocupados?"): 71 de 72 contas da
-            # Webshare sem banda (402); o IP 2 não abre túnel desde 04:20 e jogoscomia/inovaremanhwabr tentavam toda
-            # rodada — baixavam vídeo, esperavam e davam ERRO (50 dos ~70 erros do dia). Agora o IP da conta é testado
-            # ANTES (1 CONNECT, guardado na rodada): fora = a conta só sai desta rodada, sem erro e sem baixar nada.
-            # TIKTOK_PULA_IP_FORA=0 desliga.
-            if (os.environ.get("TIKTOK_PULA_IP_FORA", "1") != "0" and not r.get("sem_proxy")
-                    and (catalogo._ler(catalogo.REUSO, {}).get("tiktok") or {}).get("proxy_webshare")):
-                try:
-                    n_ip = proxy_tiktok.ip_da_conta(conta)
-                    with trava:
-                        if n_ip not in ip_fora:
-                            ip_fora[n_ip] = not (proxy_tiktok.garantir() and proxy_tiktok.pronto(n_ip))
-                    if ip_fora[n_ip]:
-                        log(f"  {conta}: IP {n_ip} da Webshare fora nesta rodada — fica pra próxima (sem contar erro)")
-                        return
-                except Exception:  # noqa: BLE001 — na dúvida segue o caminho normal (que já recusa sem proxy)
-                    pass
             while cand:
                 v = cand.pop(0)
                 if drive_falhas[0] >= 3 and not _ja_no_pc(v):
@@ -571,7 +508,6 @@ def main():
                                     msg = "not_logged_in: o GOOGLE deste perfil também está deslogado (precisa da dona)"
                                 else:
                                     msg = f"not_logged_in: relogar pelo Google não deu ({res})"
-                                    _relogin_falhou(conta, res)
                         except Exception as e:  # noqa: BLE001
                             ok, msg = False, f"abrir Chrome: {e}"
                         finally:

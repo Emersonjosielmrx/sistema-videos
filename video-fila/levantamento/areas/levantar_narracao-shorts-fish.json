@@ -1,0 +1,115 @@
+{
+  "resumo_area": "O Fish online deveria ser a voz principal dos Shorts, mas parou de ser usado na prática desde 21/11. O cache do Fish tem 212 mp3 em 19/11, 167 em 20/11, 22 em 21/11, 0 em 22/11 e 3 em 23/11. Os últimos 300 postar.json têm motor_voz=None e voz_base kokoro 209, francisca 72 e misto 15. Mesmo assim sobram cerca de 270-330 mil créditos parados em 40 contas logadas (creditos.json e ronda_tarde.txt:76). Quando funciona, o caminho do Fish nos Shorts (anime_tts._narrar_online, linhas 2041-2090) só nivela o volume. Todas as técnicas que já valem nos longos (Fish nuvem / XTTS 8 / S2-Pro 13) ficam de fora: texto limpo para o Fish, aceleração do gol, frase lenta por conteúdo, desfecho/fecho grosso, S do respeito, risada real, tags de emoção e piada contada em 2 linhas. A reserva prometida no PC ('sem crédito = XTTS 8') também não existe no PC1: não há venv do XTTS, então a reserva cai no p3. Ordem: 1) fazer o Fish voltar a narrar; 2) portar as técnicas, que custam 0 crédito (pós-processamento local leve); 3) testar tags de emoção no Drama 3 gastando pouco; 4) limitar o gasto por dia até o dia 18. Conta: 40 x 8.000 = 320 mil/mês, cerca de 450 caracteres por Short, dá uns 700 Shorts/mês (~23/dia). Não dá para todos os ~100/dia.",
+  "achados": [
+    {
+      "titulo": "Fish online parou de narrar os Shorts desde 21/11, com 270-330 mil créditos parados",
+      "problema": "A regra da dona (Fish online primeiro nos Shorts) não está acontecendo. Os Shorts recentes saíram no p3 (kokoro/francisca + RVC). Os créditos estão sobrando, e eles vencem: a cota grátis renova no dia 18 sem acumular.",
+      "evidencia": "Cache do Fish (D:\\hipercool-materiais\\comum\\fish_audio\\cache, mtime): 18/11=47, 19/11=212, 20/11=167, 21/11=22, 22/11=0, 23/11=3. workspace\\anime\\_parceiro_2026112X.log: 'frases online em' = 17 em 20/11, 7 em 21/11 e 0 em 22, 23 e 24/11. Antes, todas eram pelo caminho do lote do Kaggle (lote_shorts_kaggle._fish_antes), que foi pausado em 21/11 13:40 (LONGOS_MELHORIAS.md:453, shorts_kaggle.json ligado=false). Últimos 300 animes recap\\shorts\\*\\postar.json: motor_voz=None em todos; voz_base kokoro 209, francisca 72, misto 15. Os workspaces recentes (Jd5Drpvup 23/11, GTUW7 23/11, XMbSf 24/11) têm audio_cache\\_base_clone\\lista.json com 4-5 frases no lote do RVC e nenhum _voz_online.json. fabrica_fish.log de 23-24/11 tem vários 'Chrome da conta ... não abriu a porta em 45 s (PC lento?)' e 'reCAPTCHA Enterprise não carregou'. O jCV32N2H09M (22/11) caiu no RVC com 'DefaultCPUAllocator: not enough memory' (_base_clone\\clone.log).",
+      "proposta": "Antes de portar qualquer técnica: (1) descobrir por que _narrar_online não gera no caminho LOCAL do anime_auto. A saída do anime-pipeline não aparece no _parceiro_*.log de 22-24/11, então falta um log: gravar uma linha '[online] Fish: N/M' também no parceiro_producao.log. (2) A fábrica falha por RAM/CPU do PC1 (Chrome que não abre em 45 s): aquecer a conta só quando a RAM livre for maior que ~1,5 GB e preferir contas com sessão HTTP já guardada (sessoes.json). (3) Pôr na ronda o número 'Shorts com Fish hoje / total' lido do postar.json motor_voz, em vez de contar o cache. Sem isso, nada do que vem abaixo chega ao ar.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "O caminho existe (anime_auto.py:987-995 põe VOZ_ONLINE=fish; anime_segments.py:556 também chama sem clone). O marcador motor_voz existe (anime_publish.py:350). O que falta é o diagnóstico e o aviso."
+    },
+    {
+      "titulo": "Portar para o Fish dos Shorts o pós-processamento do Fish dos longos (gol, lento, desfecho, S do respeito, risada real)",
+      "problema": "No caminho dos longos (Fish nuvem), cada frase passa por _ritmo_fish (curva do locutor + frase lenta por conteúdo + aceleração do gol), _desfecho_gol (gol rápido / falha triste / fecho grosso), _esticar_s_respeito e _risada_real. No caminho online dos Shorts só roda _acabamento_fish (volume -20 LUFS + efeito + fim que sobe). Resultado: o Short no Fish fica numa velocidade só, sem o clímax acelerando, e com o RES-peito lido 'normal'.",
+      "evidencia": "anime_tts.py:1776-1781 (_marcar_gol no fish nuvem), 1867 (_ritmo_fish), 1869-1876 (desfecho, respeito, risada). Já anime_tts.py:2080-2085 (_narrar_online) só tem _acabamento_fish + margem final. As técnicas foram aprovadas pela dona em 20/11 (memória feedback_narradores_jeito_de_falar: ACELERAÇÃO DO GOL, 'piada = devagar sempre', 'tensão nunca devagar').",
+      "proposta": "Em _narrar_online, depois de fish_lote.gerar: chamar climas_voz.escolher + _marcar_gol(lines, climas) e, para cada frase feita, _ritmo_fish(out, <nome da voz>, texto, i, _impactos_do(audio_dir), len(lines)) + _desfecho_gol + _tem_respeito_piada/_esticar_s_respeito + _risada_real quando o texto tinha kkk. São as mesmas funções, sem código novo de áudio, e são só ffmpeg atempo/asetrate. Custo: 0 crédito e poucos segundos de CPU por Short. Ritmo SEMPRE pelo código (atempo), nunca por prosody.speed do Fish. Motivos: a dona disse em 20/11 que 'o Fish se atrapalha ao acelerar por ele' (anime_tts.py:1786-1789), e velocidade diferente de 1 deixa de reaproveitar o histórico grátis (fish_http.py:127). Chave para desligar: FISH_ONLINE_POS=0. Teste: 1 Short em narração contínua (regra 'homogeneidade > técnica isolada' de 20/11).",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "As funções existem e são usadas no Fish nuvem, no Kitten sub (anime_tts.py:2287-2304) e no XTTS (1736). Só o caminho online dos Shorts não chama nenhuma delas."
+    },
+    {
+      "titulo": "Texto do Fish online sai cru: sem _texto_fish (kkk vira risada de robô, '...' imprevisível, pergunta ao público errada)",
+      "problema": "_narrar_online manda _seguro(line) direto para o Fish. A limpeza que a dona pediu em 20/11 para o Fish fica de fora: tirar kkk/haha ('risada de robô'), letra repetida no máximo 2x, tirar '...' do meio (silêncio longo ou sílaba repetida no Fish), 'Eu faria esse acordo! ... E vocês, fariam?' e RES-peito voltando a 'respeito'.",
+      "evidencia": "anime_tts.py:2074 'texto = _seguro(line)' (online). Já anime_tts.py:796-810 (_texto_fish) é usado em 1358 (S2-Pro), 1667 (XTTS) e 1806 (Fish nuvem), nunca no online. O roteiro dos Shorts escreve 'com todo RES-peito' (anime_script.py:266), e o Fish online lê o hífen do jeito que vier.",
+      "proposta": "Em _narrar_online: 'texto, riso = _texto_fish(_seguro(line))' e guardar o riso para pôr _risada_real depois. Isso também economiza crédito, porque kkk, letras repetidas e reticências são caracteres pagos (1 crédito por caractere). Chave: reusar FISH_DUPLO_SENTIDO / FISH_RISADA_REAL, que já existem.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "_texto_fish existe (anime_tts.py:796). _pronuncia e o palavrão disfarçado já entram pelo _seguro (anime_tts.py:79-86, viralizador.py tem PALAVRAO_SUAVE)."
+    },
+    {
+      "titulo": "Efeito e 'fim que sobe' de OUTRA voz aplicados por cima da voz do Chris",
+      "problema": "O Fish online narra com a voz do nicho (narrador do Chris, Neymar ou Iberê), mas o acabamento usa VOZ_CLONADA, que é o narrador clonado escolhido para o Short (ex.: d_va_overwatch, momo, mike). Com isso, o efeito próprio dessa voz (ex.: tremido) e o +st do 'fim que sobe' do Mike/Momo/KkVirjão são aplicados na voz do Chris.",
+      "evidencia": "anime_tts.py:2083 '_acabamento_fish(..., os.environ.get(\"VOZ_CLONADA\"))'. A voz real vem de fish_lote.voz_do_nicho (fish_lote.py:166-172; voz_por_nicho.json padrao=4b215a58... Chris). _acabamento_fish chama aplicar_efeito_voz(voz) e _fim_que_sobe(voz) (anime_tts.py:459-482), e FISH_FIM_ST={'mike':1.5,'momo':0.8,'kkvirjao':1.0} (anime_tts.py:485-490). Log de 23/11: 'voz clonada: d_va_overwatch', 'guugou', 'seu_madruga' em Shorts com VOZ_ONLINE=fish.",
+      "proposta": "Passar para _acabamento_fish o nome da voz QUE O FISH USOU: a chave de vozes_site.json do id usado, ou 'narrador_chris' quando for o padrão. Efeito e fim que sobe só se essa voz tiver cadastro. Também gravar no _voz_online.json qual voz do site foi usada, para o postar.json e o sinais_shorts mostrarem 'narrador real = Chris' (hoje o campo narrador diz 'momo' em Short narrado pelo Chris, o que confunde a análise de receita do narrador).",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não."
+    },
+    {
+      "titulo": "Reserva 'sem crédito = XTTS 8 no PC' não existe no PC1: cai no p3",
+      "problema": "O padrão de 23/11 diz: Shorts = Fish online 1º; sem crédito, XTTS 8 (PC). No Windows o XTTS só liga com um venv montado à mão em XTTS_VENV_DIR, e nenhum está montado. Por isso todo Short sem Fish sai no p3 (kokoro/francisca + RVC), que é o motor antigo.",
+      "evidencia": "anime_tts.py:1132 XTTS_VENV padrão '/tmp/venvs_voz/xtts'. anime_tts.py:1594-1596 'if os.name == \"nt\": return False  # nos PCs: venv montado à mão'. D:\\tmp\\venvs_voz não existe, e XTTS_VENV_DIR só aparece em anime_tts.py (grep em bin, config, colab e video-fila). MOTOR_DE_VOZ_PADRAO_23NOV.md: 'PC local (reserva) = XTTS 8 sozinho'. postar.json recentes: voz_base kokoro/francisca.",
+      "proposta": "Não montar XTTS no PC1 (regra 'PC1 livre pro VS Code'; o XTTS na CPU é pesado). Duas saídas: (a) a reserva sem crédito vai para a máquina de render remota (desktop/PC2) com o XTTS 8 montado lá, testado com teste_remoto.py --tipo pesado; ou (b) aceitar o p3 como reserva e corrigir o doc MOTOR_DE_VOZ_PADRAO_23NOV.md e a memória project_modos_de_voz (hoje dizem algo que não acontece). A decisão é da dona; registrar no doc.",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "baixo",
+      "ja_existe": "O código do XTTS existe e funciona no Kaggle. O que falta no PC é o venv, e a regra do PC1 desaconselha montar lá."
+    },
+    {
+      "titulo": "Créditos: 320 mil/mês dão ~23 Shorts/dia, não 100. Falta um teto por dia até o dia 18 e uma ordem de prioridade",
+      "problema": "Sem teto, o Fish gasta tudo no ritmo que vier e acaba no meio do mês, ou (como agora) não gasta e perde a cota no dia 18. A ronda calcula o gasto com um número fixo (n_mp3 x 110), conta como gasto o mp3 que só foi reaproveitado do cache (os.utime) e soma 'restantes' sem descontar o gasto_desde_leitura.",
+      "evidencia": "creditos.json: 48 contas, 40 logadas, soma de restantes 330.923, lido_em entre 19/11 e 23/11. ronda_tarde.txt:76: 270.557 créditos, '100 Shorts/dia x ~900 car = 90.000/dia = ~3 dias'. creditos.py:21 MINIMO=300 ('um Short tem ~450 caracteres'). fish_http.py:130 os.utime(cache) no reaproveitamento. relatorio_ronda.py:1047-1050 (n3*110, soma 'restantes' crua). COMO_OPERAR.md:146-152: 1 crédito por caractere, 8.000/mês, renova dia 18.",
+      "proposta": "Conta: 40 x 8.000 = 320.000/mês; ~450 car/Short dá ~710 Shorts/mês, ~23/dia. Teto do dia = saldo_estimado_total / dias_até_o_próximo_dia_18, calculado no fish_lote.disponivel(). Passou do teto, o Short vai para a reserva. Prioridade dentro do teto: (1) Shorts agendados para 21-22 h (memória: horário nobre rende ~100x; sinais_shorts receitas hora 21 RECEITA 20,25); (2) canais com receita; (3) o resto. Economia sem perder qualidade: _texto_fish (achado 3) e roteiro curto (sinais 'curto' A=1,13 x B=1,06, n≈330 cada). Não usar prosody.speed≠1, que perde o histórico grátis. Não usar misto por frase Fish+p3 no mesmo Short: a dona reprovou emendas de motores diferentes ('parecem vários áudios emendados, até de pessoas diferentes', 20/11). Na ronda, ler o gasto real em creditos.json (gasto_desde_leitura) em vez de n_mp3 x 110. Nunca consultar saldo em laço de contas: só a conta escolhida, pelo IP dela, como já faz o fish_http.escolher.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A escolha por crédito, o cache e o histórico grátis existem (fish_http.py:256-366, 124-143). Teto diário e prioridade não existem (grep teto/por_dia em fish_lote, fish_http e creditos: só o teto do cache)."
+    },
+    {
+      "titulo": "Tags de emoção do S2-Pro 13 ([laughing], [excited tone], [sigh], [shouting], [chuckle]) não passam para o Fish online",
+      "problema": "Nos longos, o S2-Pro 13 faz as frases de emoção com tags dentro do texto, e foi isso que fez a 'piada contada, não lida'. O Fish online (backend drama-3) recebe só o texto, então piada, suspiro e grito saem lidos.",
+      "evidencia": "anime_tts.py:1266-1300 (_s2_tags_v13: '[laughing] [excited tone]' na virada, ênfase no 'hein'). MOTOR_DE_VOZ_PADRAO_23NOV.md (seção S2-Pro 13 e 'Piada contada'). fish_http.py:147-157 manda parameters {text, model_id, latency, backend drama-3, normalize false}, sem nenhuma tag. Memória project_modos_de_voz: S1-mini aceita (excited)(laughing) e S2-Pro aceita [laughing]; o Drama 3 do site não foi testado com tags.",
+      "proposta": "Teste pequeno e barato antes de ligar: 1 conta, 4 frases (~250 créditos) com o mesmo texto com e sem _s2_tags_v13, pela ponte da própria conta. Para comparar: auditor Whisper (a tag não pode ser LIDA em voz alta) e ouvido da dona. Se o Drama 3 aceitar: em _narrar_online usar _s2_tags_v13 só nas frases de piada/virada/'coitado'/'isso!' (as tags custam caracteres; limitar a no máximo 2 por Short). Chave FISH_ONLINE_TAGS=0. Se ler a tag em voz alta: reprovar e registrar.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "As tags existem só no S2-Pro do Kaggle. No Fish online, nunca foram testadas."
+    },
+    {
+      "titulo": "Piada de virada em 2 linhas ('...hein?!' / 'Mentiraaa, galera!') só existe no roteiro do longo",
+      "problema": "A técnica de 23/11 que fez a piada soar contada, e não lida, depende do roteiro trazer a provocação e a virada em linhas separadas. Nos Shorts, o roteiro usa os moldes do repertório (1 tirada por trecho), sem esse formato. Assim o Fish recebe a piada inteira numa frase e lê tudo direto.",
+      "evidencia": "anime_script.py:849-870 (_COMENTARIO_NARRADOR com a PIADA DE VIRADA) é usado só em rewrite_longo_com_tempo (anime_script.py:907/977). O roteiro dos Shorts (_jeito_do_nicho, anime_script.py:178-275) tem moldes_piada/duplo sentido, mas não o formato de 2 linhas. PIADA_CONTADA está em anime_tts.py:1281-1283.",
+      "proposta": "Para Short de anime/manhwa (_TIPOS_COM_PIADA) com 5 frases ou mais: permitir no máximo 1 piada de virada em 2 linhas (a 2ª linha curta, 'Mentiraaa, galera!'). No Fish, a pausa vem do ponto final entre as frases (é assim que o _texto_fish já trata as pausas). A linha da virada ganha o _ritmo rápido do gol, e a tag [laughing] só se o achado 7 aprovar. Chave: PIADA_CONTADA (já existe), aplicada também ao Short.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "medio",
+      "ja_existe": "Existe no longo (anime_script._COMENTARIO_NARRADOR + anime_tts._s2_tags_v13). No Short, não."
+    },
+    {
+      "titulo": "Short com narrador parceiro (Momo, Mike, Pie...) sai na voz do Chris: falta voz do narrador no site",
+      "problema": "No Short, o narrador escolhido pelo nicho só ganha voz própria no Fish se existir em vozes_site.json. Os 13 parceiros com referencia_fish.wav (Momo, Mike, KkVirjão, Pie...) não estão no site, então o Fish online usa a voz do Chris e o 'narrador' do Short perde a identidade. Os sinais mostram que o narrador importa: pie = RECEITA (1,56 → 1,88).",
+      "evidencia": "anime_tts.py:2052-2069: só fala de PERSONAGEM procura vozes_site.json, e o narrador vai para voz_do_nicho (Chris). COMO_OPERAR.md:366-368: 'narrador sem voz no site (parceiros: momo, guugou...) = não usa o site'. vozes_site.json: 66 entradas, só personagens e narradores públicos (ibere, cid...). sinais_shorts.json receitas: narrador pie RECEITA, n 12/16.",
+      "proposta": "Sem gastar crédito à toa (a regra de 19/11 proíbe gerar áudio no site só para ter referência): conferir no site se CRIAR um modelo privado a partir do referencia_fish.wav já existente cobra crédito. Teste em 1 conta, pela ponte dela, com 1 narrador (pie, que é receita). Se não cobrar e o modelo ficar visível para as outras contas (público ou não listado), cadastrar o id em vozes_site.json com papel 'narrador' e fazer _narrar_online usar a voz do narrador quando existir. Se o modelo valer só na conta que criou, NÃO fazer: obrigaria login em várias contas, e o risco de ligar as contas não compensa. Consentimento: só narradores em CONSENTIMENTOS.json / parceiros autorizados.",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "medio",
+      "ja_existe": "A colheita de referência de PERSONAGEM sem gastar existe (fish_lote._colher, colher_referencias.py). Narrador parceiro no site, não."
+    },
+    {
+      "titulo": "Whisper dos tempos das palavras roda na CPU do PC1 no caminho local do Fish",
+      "problema": "Depois de gerar, o fish_lote roda faster-whisper 'small' na CPU para a legenda cinética. Em 19/11 isso levou 75 min para 3 frases e travou a produção. O desligamento (FISH_TEMPOS=0) só é aplicado no caminho do lote do Kaggle, que está pausado. No caminho local, padrão FISH_TEMPOS=1, o Whisper volta a rodar no PC1.",
+      "evidencia": "fish_lote.py:84-96 (comentário de 19/11 sobre os 75 min; WhisperModel small cpu int8). lote_shorts_kaggle.py:157-161 é o único lugar que põe FISH_TEMPOS=0. shorts_kaggle.json ligado=false. LONGOS_MELHORIAS.md:363: sem words.json a legenda escorrega para o SFX.",
+      "proposta": "No Fish online já se sabe o texto exato. Usar alinhamento barato: o Whisper 'tiny' com 2 threads só quando a CPU estiver abaixo de 70% (mesma regra do INTRO_CPU_MAX) e, se não, a estimativa por sílaba dentro da duração real do mp3, deixando fx_subtitles esconder a legenda no SFX (LEGENDA_ESCONDE_NO_SFX já existe). Chave FISH_TEMPOS_MODO=tiny|estimar.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "FISH_TEMPOS=0 existe, mas só no lote do Kaggle. A estimativa por tamanho existe como reserva da legenda."
+    },
+    {
+      "titulo": "Velocidade base: não acelerar o Fish por igual (o teste fala_rapida mostra que o +15% rende menos)",
+      "problema": "É tentador ligar prosody.speed 1,1-1,15 em tudo para 'ficar dinâmico'. Os dados dos Shorts dizem o contrário, e a dona também: nos longos, o que funcionou foi variar por frase (gol acelera, piada desacelera), não acelerar tudo.",
+      "evidencia": "sinais_shorts.json (22/11, n=2160): fala_rapida A (normal) razao_med 1,2, acerto 39 (n=321) x B (+15% fala, anime_publish.py:586) 1,0, acerto 35 (n=324). Memória feedback_narradores_jeito_de_falar: o Fish já vem na velocidade natural (Momo 227 ppm x 221 real); 'piada = devagar sempre'; piso 0,92 na frase lenta.",
+      "proposta": "Manter o Fish online em speed 1 (de quebra, reaproveita o histórico grátis) e deixar toda a variação para o _ritmo_fish (achado 2). Desligar o braço B do teste fala_rapida quando o Short for narrado pelo Fish. Não registrar como proposta nova de religar nenhum melhorador (estão pausados).",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O teste fala_rapida existe (variantes.py:40, CORTES_FALA_RAPIDA). A ligação com o motor de voz, não."
+    }
+  ]
+}

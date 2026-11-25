@@ -14,6 +14,16 @@ if sys.stdout:
 
 cfg = json.loads(CFG.read_text(encoding="utf-8"))
 contas = sorted({p["conta"] for p in cfg["paginas"].values() if not p.get("pausada")} - {"msenergypara"})
+# 23/11: antes de disparar, conserta sozinho (ponte caída, trava morta) e pula a conta que já tem rodada no ar
+# (dona: "quero poder fechar o chat e saber que tudo vai receber postagem"). FB_SEM_SAUDE=1 pula esta etapa.
+if os.environ.get("FB_SEM_SAUDE") != "1":
+    try:
+        sys.path.insert(0, str(BIN))
+        import fb_saude
+        prontas = fb_saude.conferir()
+        contas = [c for c in contas if prontas.get(c, True)]
+    except Exception as e:  # noqa: BLE001
+        print(f"[saude] falhou ({e}); sigo com todas", flush=True)
 print("contas na rodada:", contas, flush=True)
 procs = {}
 for c in contas:
@@ -30,3 +40,18 @@ for c, p in procs.items():
     linhas = [l for l in out.splitlines() if not l.startswith("catalogo:")]
     print(f"--- {c} ---", flush=True)
     print("\n".join(linhas[-25:]), flush=True)
+
+# 24/11 (noite, criacao.2): a criação de Página perdia a vez porque a tarefa de 50 min caía com a conta postando
+# (9x em 4 dias). Logo que a rodada da conta termina, dispara o criador SÓ dela, solto (não segura a próxima rodada).
+# O próprio fb_criar_fila respeita limite do dia (3), intervalo de 3 h, trava da conta e bloqueio — nada sobe aqui.
+# FB_SEM_CRIAR_APOS=1 desliga.
+if os.environ.get("FB_SEM_CRIAR_APOS") != "1":
+    for c in procs:
+        try:
+            subprocess.Popen([PY, "-u", str(BIN / "fb_criar_fila.py"), "--conta", c], cwd=str(BIN),
+                             stdout=open(BIN.parent / "logs" / f"fb_criar_{c}.log", "a", encoding="utf-8"),
+                             stderr=subprocess.STDOUT, env=dict(os.environ, PYTHONUTF8="1"),
+                             creationflags=0x08000000 | 0x01000000, close_fds=True)
+            print(f"[criar] {c}: criador disparado após a rodada", flush=True)
+        except Exception as e:  # noqa: BLE001
+            print(f"[criar] {c}: não disparou ({e})", flush=True)

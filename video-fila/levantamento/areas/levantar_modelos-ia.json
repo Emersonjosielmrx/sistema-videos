@@ -1,0 +1,95 @@
+{
+  "resumo_area": "Texto dos Shorts (Argon -> Gemini 3.8) funciona: 1239 chamadas Argon + 1042 Gemini em 7 dias (workspace\\modelo_texto.jsonl), mas o Argon gasta 4,6 h esperando timeouts de 120 s. O maior desperdício está nos AGENTES: a vigilância manda pro LLM um alarme que é determinístico (reserva_zero de canal), reabre o mesmo canal a cada 6 h sem fechar o caso anterior (195 casos presos em 'consertar', 24 só do dentrodascoisas3d) e gastou 23,5 h de Gemini 3.8 em 'pergunta'. Quando o consertador pedido (Hydrogen/1min) não está, o painel_ia cai pro Kiro (cfg modelo = kr/claude-sonnet-4.5), o Kiro FAZ e APLICA o conserto, e a vigilância descarta como 'sem_token' e pede de novo (41 jobs Kiro em 7 dias, fora do teto KIRO_DIA_MAX). Na caixa do recap (melhorador dos longos, pausado), cc-sobra/ag-opus-5-5/ag-hydrogen entregaram 1 de 50 tentativas; só o Gemini 3.8 entrega (9/11). O júri dos Cortes roda em quase todo Short (768 de 774 entre 17 e 24/11) porque o gatilho 'Short com Argon = júri sempre' virou 88% dos Shorts.",
+  "achados": [
+    {
+      "titulo": "Kiro gasto escondido: painel_ia cai pro Kiro, aplica o conserto e a vigilância joga fora e pede de novo",
+      "problema": "Quando a vigilância pede um consertador (gemini/gemini-4-hydrogen, 1minopus-sonnetweb) e ele não pega, painel_ia usa ia_reserva.modelos(cfg['modelo']) = kr/claude-sonnet-4.5 (conserto=True e kiro_para_consertos=true). O Kiro roda até o fim e até APLICA, mas vigilancia.py vê usado != consertador, marca 'sem_token' e devolve o caso pra 'consertar' — o trabalho conta como perdido e é refeito. Esses jobs não entram no d['dia']['kiro'] (só soma quando m começa com kr/), então o teto KIRO_DIA_MAX=30 não vale para eles.",
+      "evidencia": "estado\\painel_ia\\*.json desde 17/11: 15 jobs modelo_fixo=gemini/gemini-4-hydrogen -> modelo=kr/claude-sonnet-4.5 (custo_usd somado 54,6), 15 de 1minopus-sonnetweb -> kr (40,5), 5 de gemini-4-argon -> kr (18,4); 39 jobs da vigilância com fallback = 1141 voltas. Ex.: job 20261124_000435_22d4 (caso 20261118_065033_232) tem aplicado_em=20261124_003327_6ad1, e vigilancia_casos.jsonl:1976 registra 'sem_token pedido=gemini/gemini-4-hydrogen usado=kr/claude-sonnet-4.5' e o caso segue em etapa 'consertar' no vigilancia.json. Código: painel_ia.py:727-731 (fixo só vale se não estiver _fora; senão fica o kr do claude_proxy.json), vigilancia.py:686-692 (descarta) e 678-679 (só conta kiro se m.startswith('kr/')). claude_proxy.json: modelo=kr/claude-sonnet-4.5.",
+      "proposta": "No pedido da vigilância com modelo_fixo, passar ao painel 'sem reserva' (ex.: job['so_fixo']=True): fixo fora = job termina 'sem_token' em ~1 s, sem chamar Kiro. Alternativa mínima: na vigilância, se usado começa com kr/ e o job tem aplicado_em, aceitar o resultado (seguir pra revisão) e somar d['dia']['kiro'] em vez de descartar.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não. kiro_conta_gota.json tem consertos_kiro_por_dia=6, mas só vigia_geral.py:465 lê; vigilancia.py tem KIRO_DIA_MAX=30 que não pega esses fallbacks."
+    },
+    {
+      "titulo": "Alarme 'reserva_zero' reabre o mesmo canal a cada 6 h sem fechar o anterior: 195 casos presos e 23,5 h de Gemini",
+      "problema": "med_reserva_zero gera um alarme por canal zerado; abrir_casos só olha d['alarmes'][chave] (6 h) e não se já existe caso ABERTO com a mesma chave. Resultado: o mesmo canal vira dezenas de casos, cada um passa pelo vigia LLM (pergunta com até 45 voltas) e depois por um consertador. O problema é de estoque/produção (canal sem vídeo, canal encerrado ainda ativo), não de código: o LLM só redescobre o que reserva_status.py já diz.",
+      "evidencia": "estado\\vigilancia.json: 300 casos, 206 não fechados, 195 em 'consertar'; chaves: reserva_zero:dentrodascoisas3d 24, fatochocante 19, inventoreact 19, mundoquenaoexiste 18, esportenoturno 18, codigobilhao3d 13. vigilancia_casos.jsonl desde 17/11: 169 passos 'vigia' só de reserva-canal (de 238 no total). painel_ia desde 17/11: 234 jobs 'pergunta' agy/gemini-3.8-flash-high, mediana 222 s, 23,5 h somadas. Código: vigilancia.py:177-187 (med_reserva_zero), :603-608 (dedup só por tempo, REPETIDO_H=6 em :71).",
+      "proposta": "Em abrir_casos, pular a chave se já existir caso com essa chave em etapa não final (vigia, vigia_rodando, consertar, consertando, revisar). Para categoria reserva-canal, não chamar o vigia LLM: o medidor já é a prova (ir direto para aviso/fila de produção, ou um diagnóstico sem IA: canal encerrado em contas_travadas.json, alimentador vazio em canais.json). Fechar em lote os 195 casos duplicados mantendo 1 por canal.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Só o filtro de 6 h (REPETIDO_H). Os próprios diagnósticos do vigia (vigilancia_casos.jsonl 24/11 04:33-05:51) apontam causas de cadastro (canais.json:159, :1084, contas_travadas.json:50) que não se resolvem com conserto de código."
+    },
+    {
+      "titulo": "Júri dos Cortes roda em quase todo Short (JURI_CADA=4 anulado) com 4 sessões claude.exe cada",
+      "problema": "cortes_juri.py faz júri se o Short tem texto do Argon ('medir Argon x Gemini', 27/10). Hoje o Argon é o padrão (cortes_ajustes.json texto_video_modelo=gemini-4-argon), então quase todo Short tem texto_modelo e o 'júri em 1 a cada 4' deixou de existir. Cada júri = 4 verificadores em paralelo, cada um um claude.exe -p com até 30 turnos e timeout de 900 s.",
+      "evidencia": "juri.log 17-24/11: 774 Shorts com movimento medido, 768 com '| júri' (ex.: 20/11 191/188; 17/11 162/161). postar.json em D:\\hipercool-materiais\\animes recap\\shorts: 3895 de 4433 com texto_modelo='gemini-4-argon'. Código: cortes_juri.py:375-383 (argon or n_total % JURI_CADA == 1), :37 (JURI_CADA = 4), :98-107 (claude.exe -p --max-turns), :339 (4 em paralelo). As notas ficam concentradas em 7,5-9,25 (juri.log: 8,25=50, 8,5=69, 8,75=55, 9,0=52), quase sem diferença entre os Shorts.",
+      "proposta": "Trocar o gatilho para 'argon E sorteio' ou só n_total % JURI_CADA == 1 (a comparação Argon x Gemini já não tem grupo de controle: 88% é Argon). Corte de ~75% nas chamadas do júri. Chave nova CORTES_JURI_TODO_ARGON=1 volta ao jeito atual.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "JURI_CADA=4 existe, mas está anulado pela regra do Argon (comentário de 27/10 em cortes_juri.py:376)."
+    },
+    {
+      "titulo": "Argon do texto dos Shorts: timeout de 120 s custa 4,6 h por semana; o sucesso responde em 5-36 s",
+      "problema": "_texto_video espera até TEXTO_VIDEO_TIMEOUT=120 s antes de cair pro Gemini 3.8. Quando o Argon trava ele quase sempre bate exatamente no teto, e o render fica parado esperando. A mediana do sucesso é 5,3 s e o p95 é 36 s.",
+      "evidencia": "D:\\recapd-ambientes\\producao\\workspace\\modelo_texto.jsonl desde 17/11: gemini-4-argon 1239 chamadas, 176 falhas (136 TimeoutError, 32 HTTP 429, 6 RemoteDisconnected); dos timeouts, 103 em 120 s e 21 em 121 s; tempo somado nas falhas = 17941 s (4,6 h só nos timeouts). Sucessos: p50 5,3 s, p75 11,3 s, p90 21,4 s, p95 36,2 s, p99 97 s. Código: claude_client.py:466-467 (timeout), anime_auto.py:710-712, cortes_ajustes.json:28-30 (texto_video_timeout_s=120).",
+      "proposta": "Baixar texto_video_timeout_s para 45 s em bin\\cortes_ajustes.json (pega cerca de 96% dos sucessos e corta de 120 para 45 s cada travada). Volta: pôr 120 de novo.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O teto existe e é configurável (texto_video_timeout_s); o valor 120 é de 27/10, quando a mediana medida era 71 s (comentário em claude_client.py:466). Hoje a mediana é 5,3 s."
+    },
+    {
+      "titulo": "Caixa do recap: cc-sobra, ag-opus-5-5 e ag-hydrogen entregaram 1 de 50 tentativas e gastam 3,2 h antes do Gemini 3.8",
+      "problema": "A cadeia do conserto de código do melhorador dos longos (melhorador_longo.json codigo: modelo=cc-sobra, reservas=[ag-opus-5-5, ag-hydrogen, agy/gemini-3.8-flash-high]) tenta sempre os 3 primeiros, que voltam '429/503 all targets were skipped ... reset after 44m' ou '(sem resposta)'. Só o Gemini 3.8 entrega. Cada passada perde de 5 a 25 min antes de chegar nele.",
+      "evidencia": "estado\\placar_modelos.jsonl (19-23/11): cc-sobra 19 tentativas, 1 entregou, 3202 s; ag-opus-5-5 17/0, 5415 s; ag-hydrogen 14/0, 3139 s; agy/gemini-3.8-flash-high 11/9. resumo_gemini.txt em D:\\hipercool-materiais\\_melhorador_caixa\\20261123_*: 'API Error: Request rejected (429) ... reset after 46m 14s', '503 ... claude-opus-5-5-high 100%'. Relatório 23/11 (D:\\tmp\\ronda_tarde.txt:167-169): Hydrogen 0/14; OmniRoute Hydrogen 0/53. Código: melhorador_longo.py:622-641, caixa_gemini.py:20 (padrão Hydrogen primeiro).",
+      "proposta": "Antes de cada modelo da cadeia, um teste de 5 tokens (ia_reserva.testar já faz isso) e, se a resposta trouxer 'reset after Xm', guardar o modelo fora até essa hora (como ia_reserva._ate). Com o placar atual, pôr o Gemini 3.8 em 1º no codigo.reservas e deixar Hydrogen fora da caixa até voltar a entregar. Não religa nada: vale quando a dona religar o RecapMelhoradorLongo.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "O placar existe (comum\\placar_modelos.py, 18/11) e mostra o resultado no relatório, mas nada o lê para mudar a ordem. melhorador_longo.py:636 só passa pro próximo modelo pela resposta; não guarda 'fora até'. Tarefa RecapMelhoradorLongo está Desabilitada (pausa da dona)."
+    },
+    {
+      "titulo": "Hydrogen passa no teste de 5 tokens mas falha no trabalho real e segue como 2º consertador da vigilância",
+      "problema": "vigilancia.py (23/11) põe gemini/gemini-4-hydrogen em 2º em CONSERTADORES. _disponivel usa ia_reserva.testar (5 tokens), que passa, mas os pedidos reais caem na reserva (Kiro) ou falham. Resultado: 12 casos de uma vez foram para o Hydrogen às 00:04 de 24/11 e todos caíram pro Kiro ou falharam.",
+      "evidencia": "vigilancia_casos.jsonl 24/11 00:04:35-00:04:37: 12 'consertando' com gemini/gemini-4-hydrogen; 00:21:57 'falhou'; 00:31-00:50 10 'sem_token pedido=gemini/gemini-4-hydrogen usado=kr/claude-sonnet-4.5'. painel_ia desde 17/11: Hydrogen pedido 16 vezes, só 1 rodou nele mesmo. Relatório 23/11 (ronda_tarde.txt:169): no OmniRoute 'Hydrogen: 0/53 ok'. Código: vigilancia.py:53 e :556-571.",
+      "proposta": "Tirar o Hydrogen dos CONSERTADORES até o placar do OmniRoute mostrar acerto (ou testar com um pedido real curto com ferramenta, não 5 tokens). Também limitar o lote: no máximo 2-3 consertos novos por volta para o mesmo modelo, para não queimar 12 de uma vez.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "A ordem é decisão da dona de 23/11 (comentário em vigilancia.py:48-51, 'Argon ou Hydrogen, senão o Sonnet web, senão o Kiro'). Mudar a ordem precisa do OK dela; o limite de lote não existe."
+    },
+    {
+      "titulo": "Júri dos Cortes: modelo de reserva igual ao principal, então o timeout de 900 s se repete",
+      "problema": "MODELO e MODELO_RESERVA são o mesmo (antigravity/gemini-3-flash), mas o docstring diz agy/gemini-3.8-flash-high com reserva automática. Quando o 3-flash trava (900 s), o verificador tenta o MESMO modelo de novo, até 30 min por foco, 4 focos em paralelo.",
+      "evidencia": "cortes_juri.py:35-36 (MODELO = MODELO_RESERVA = 'antigravity/gemini-3-flash'); :7 do docstring cita 'agy/gemini-3.8-flash-high, reserva automática'; :232-238 (laço pelos dois). juri.log: 23 'timeout 900s' entre 21 e 23/11 (21/11: 7, 22/11: 11, 23/11: 5), ex.: '[23/11 05:50:41] [verificador historia] antigravity/gemini-3-flash falhou: timeout 900s'.",
+      "proposta": "MODELO_RESERVA = 'agy/gemini-3.8-flash-high' (o mesmo usado no texto e no vigia, 98,6% ok em modelo_texto.jsonl) e timeout do verificador em 300 s.",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não; o comentário do topo diz que já era assim, mas o código não está."
+    },
+    {
+      "titulo": "Pausa de 15 min do Argon depois de UMA falha manda 866 textos para a reserva sem nem tentar",
+      "problema": "Qualquer erro do Argon (inclusive um 429 ou um RemoteDisconnected isolado) grava argon_pausa.txt por 900 s, e todo texto desse período vai direto pro Gemini 3.8. Isso não é desperdício de cota, mas tira o Argon de 866 textos numa semana: o modelo escolhido pela dona para o texto do vídeo não é usado, e a comparação Argon x Gemini fica torta.",
+      "evidencia": "modelo_texto.jsonl desde 17/11: as 1042 chamadas do agy/gemini-3.8-flash-high são todas reserva; reserva_de='pausa' 866, Timeout 136, 429 32. Código: claude_client.py:476-480 (pausa 900 s em qualquer erro).",
+      "proposta": "Pausar só depois de 2 falhas seguidas, ou pausa curta (3 min) no 1º erro e 15 min a partir do 2º. Vale junto com o timeout menor (achado 4).",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Pausa fixa de 15 min (27/10). Não tem contagem de falhas seguidas no _texto_video (o ia_saude.json do generate_text_vivo já conta falhas_seguidas, mas não é usado aqui)."
+    },
+    {
+      "titulo": "Vigilância: 'pergunta' do vigia com mediana de 222 s e até 45 voltas para confirmar alarme simples",
+      "problema": "O vigia (Gemini 3.8 via claude.exe) recebe voltas=45 e lê logs para confirmar cada alarme. Para categorias em que o medidor já é a prova (reserva-canal, postagem-facebook com 20 vigias, sem-sucesso-*), isso é caro e sem ganho: o 'falso' saiu só 24 vezes em 238 vigias na semana.",
+      "evidencia": "painel_ia desde 17/11: 223 'pergunta' agy/gemini-3.8-flash-high terminou + 11 erro, mediana 222 s. vigilancia_casos.jsonl desde 17/11: 238 'vigia', 24 'falso', 199 'real'. Código: vigilancia.py:637-644 (voltas=45, LIMITE de 10 leituras só no texto do prompt).",
+      "proposta": "Por categoria, uma lista 'sem_vigia_llm' (começando por reserva-canal) que vai direto para 'real' com a evidência do medidor; para as outras, voltas=15.",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo",
+      "ja_existe": "Não. O limite de 10 leituras está só no texto do prompt; o teto real é voltas=45."
+    }
+  ]
+}

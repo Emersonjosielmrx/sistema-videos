@@ -55,7 +55,7 @@ def classificar(texto):
         c = len(rx.findall(texto or ""))
         if c > n:
             melhor, n = k, c
-    return melhor if n >= 2 else "normal"
+    return melhor if n >= int(__import__("os").environ.get("CLIMA_MIN_HITS", "1")) else "normal"  # 24/11: 2 -> 1
 
 
 def montar(todas):
@@ -99,19 +99,35 @@ def cor_barra(clima):
     return (v[1], v[2], v[3], v[4]) if v else None
 
 
+# 24/11 dona ("não vi a legenda colorida"): no longo real só 3,8% das palavras coloriam (metade do vídeo é "normal").
+# Agora: qualquer palavra de clima (de QUALQUER clima, não só o do trecho) pinta na cor dela; no trecho "normal" as palavras
+# fortes ganham o tom quente do canal; nomes e números sempre destacam. CLIMA_CORES_FORTE=0 volta ao de antes.
+_FORTE_NORMAL = (255, 150, 40)
+_EMOCAO = __import__("re").compile(r"(?i)^(nunca|jamais|tudo|nada|todo|toda|ninguém|absurd\w*|incr[íi]vel|imposs[íi]vel|"
+                                   r"chocad\w*|furios\w*|humilh\w*|vingan[çc]a|traiu|trai[çc][ãa]o|segredo|verdade|"
+                                   r"mentira|perigo|desesper\w*|lend[áa]ri\w*|poderos\w*|gigante|enorme|maluc\w*|doid\w*)$")
+
+
 def palavra(w, t, padrao_rgb):
     """(cor RGB, escala %) da palavra ativa do karaokê."""
     if not LIGADO:
         return padrao_rgb, 100
     c = clima_em(t)
     lw = (w or "").strip(".,!?;:…\"'").lower()
+    forte = __import__("os").environ.get("CLIMA_CORES_FORTE", "1") != "0"
     if _NUM.match(lw):
         return (70, 230, 110), 125
     if c != "normal" and _RX[c].search(lw):
         return CLIMAS[c][5], 135
+    if forte:
+        for k, rx in _RX.items():  # palavra de clima fora do trecho dela também pinta (soco numa cena "normal")
+            if len(lw) >= 4 and rx.search(lw):
+                return CLIMAS[k][5], 125
     if (w or "")[:1].isupper() and len(lw) > 3:
-        return (CLIMAS[c][5] if c != "normal" else padrao_rgb), 115
-    if c != "normal" and len(lw) >= 7:
+        return (CLIMAS[c][5] if c != "normal" else (_FORTE_NORMAL if forte else padrao_rgb)), 115
+    if forte and _EMOCAO.match(lw):
+        return (CLIMAS[c][5] if c != "normal" else _FORTE_NORMAL), 125
+    if c != "normal" and len(lw) >= (6 if forte else 7):
         return CLIMAS[c][5], 108
     return padrao_rgb, 100
 

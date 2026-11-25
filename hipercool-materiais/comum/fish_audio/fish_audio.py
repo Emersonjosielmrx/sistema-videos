@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, r"D:\logins-google")
 CONTA_PADRAO = "vendeafiliados3@gmail.com"
-VOZ_PADRAO = "4b215a58407c4def88e0892def6421b2"  # NARRADOR DO TODO MUNDO ODEIA O CHRIS
+VOZ_PADRAO = "ac63ad94686b41b3a8e526cc82a99587"  # 25/11: o 4b215a58 (Narrador do Chris) sumiu do Fish (404) — substituto APROVADO pela dona em 25/11 ("Chris novo é muito melhor")
 MAX_CHARS = 480  # grátis aceita até 500 por geração; folga
 FFMPEG = r"D:\hipercool-materiais\bin\ffmpeg.exe"
 PARAR = ("recaptcha", "não sou um robô", "hcaptcha", "turnstile", "verify you are human")

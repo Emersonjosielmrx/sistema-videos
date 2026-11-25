@@ -1,0 +1,60 @@
+{
+  "area": "postagem-recuperacao",
+  "conferido_em": "2026-11-24",
+  "vereditos": [
+    {
+      "titulo": "Metade da produção do dia vai para o Fato Chocante, que não consegue subir nada (perfil deslogado desde 20/11)",
+      "valido": true,
+      "motivo": "Os números conferem. envios_por_maquina.jsonl desde 20/11, Fato Chocante: morto 56, erro 7, ok 1. 'Não está logado' por dia: 20/11 21, 21/11 15, 22/11 8, 23/11 12. Último registro 23/11T17:09. ronda_tarde.txt:21 dá 'Fato Chocante 46' de 92. canais_views_hist.jsonl 24/11 06:38: views 8, videos 5. parceiro.json: novo_fatochocante ativo:true, fila_alvo:7. youtube_web_poster.py:450 levanta Falha('morto'). O único chamador de politica.tratar_erro é youtube_poster.py:281 (API). Fato Chocante não está em canais_status.json. Só o postar_tudo_hoje.py:415 bloqueia o canal, e só durante a rodada (bloqueados.add). O parceiro_diario não grava nada. Portanto o motivo_bloqueio (parceiro_diario.py:1394) nunca barra esse canal.",
+      "correcao": "(a) O desbloqueio do token_morto é pelo token_hash (politica.py:168, 256), que é da API. Usar direto essa lista num canal só web pode prender o canal para sempre. Melhor criar a lista 'login_pendente' com validade de 24 h, ou registrar o hash do perfil do cofre. (b) e (c) estão certos: logar só com a dona, pela saída fixa da conta."
+    },
+    {
+      "titulo": "Esteira de envio pelo PC quase parada: 5 ok contra 21 falhas em 23/11, e só o PC1 acerta",
+      "valido": true,
+      "motivo": "Confere com envios_por_maquina.jsonl. ok/falha por dia de 17/11 a 23/11: 13/22, 4/52, 11/41, 12/26, 2/18, 2/27, 5/21. ok por máquina: pc1 30, x200ma 12, hp 5, acer 1, pc2 1. O uploads_ledger do youtube_web_poster.py dá 117, 71, 79, 63, 18, 17, 29. Fio da Meada: 3402 MB, pc2 TimeoutExpired e pc1 124,8 min. O vi-vn só aparece em 19/11 (14). A contagem do achado está um pouco abaixo da real: considerando todas as máquinas desde 17/11, são 47 'Locator.click' e 30 'wait_for'.",
+      "correcao": "Os prints/saída da falha já são gravados em logs\\envios_falhos (politica.py:1324-1328). Antes de criar algo novo, vale ler o que já está lá. Investigar e testar o seletor fora do PC1."
+    },
+    {
+      "titulo": "O so_nobre do médico vale só para upload novo, e os Shorts já agendados dos canais tratados continuam fora das 21-22 h",
+      "valido": true,
+      "motivo": "O mecanismo confere. politica.py:640-648 só ajusta o alvo do upload novo, e reagendar_nobre.py não lê so_nobre, controle nem medico (grep sem resultado). Pelo ledger, entre 24 e 28/11: HistoriasEmFrames 2 no nobre e 5 fora, Filme Noturno 1 e 2, Imóvel em Foco 2 e 1. reagendar_nobre.log 23/11 tem falhas de SSLError, cookies mortos e metadata_update. O risco de rotular é real: medico_recuperacao.py:275-276 põe a alavanca em nao_funciona com ruim>=2 e bom==0. Ressalva: o médico rodou de novo em 24/11 07:17 e mudou os canais. HistoriasEmFrames passou para 'descanso' e Filme Noturno para 'controle_descanso' (rampa_canais.json). Os exemplos citados já estão desatualizados, mas o defeito continua.",
+      "correcao": "Aplicar o (a)/(b) a todas as alavancas que dependem de horário. Detalhe que o achado não pegou: a rampa continua com so_nobre '21-23' em novo_filmenoturno e novo_historias_em_frames depois da troca de alavanca. O médico precisa limpar o so_nobre ao mudar a decisão."
+    },
+    {
+      "titulo": "O reagendar_nobre mexeu nos canais de CONTROLE do experimento do médico duas horas depois do sorteio",
+      "valido": true,
+      "motivo": "Confere. MEDICO.md (23/11 11:33) tem Curiosidades Noturnas e CenaReact como controle_so_nobre. reagendar_nobre.log 23/11 13:22-13:24 mostra 7 OK do Curiosidades (24 a 30/11, 13:30 -> 22:00) e 1 do CenaReact (26/11 11:00 -> 21:00). reagendar_nobre.py não tem nenhuma referência a controle ou medico. Mas a contaminação citada já perdeu o efeito: em 24/11 07:17 o médico passou Curiosidades e CenaReact para so_nobre (medico_recuperacao.json, rampa_canais.json). Os controles de agora são AssistIA, CodigoInteligente, Fio da Meada e Filme Noturno (controle_descanso, ainda com so_nobre 21-23 na rampa, ou seja, também contaminado). O defeito continua valendo para eles.",
+      "correcao": "A trava do reagendar_nobre deve ler D:\\postador-de-videos\\config\\rampa_canais.json (campo 'medico' começando com 'controle_') e valer para os controles atuais. Também é preciso tirar o so_nobre do novo_filmenoturno, que é controle_descanso. Registrar a contaminação de 23/11 deixou de ser útil, porque essas decisões já foram trocadas."
+    },
+    {
+      "titulo": "Canal punido (1 por dia) com fila cheia agenda Shorts até 3 meses à frente (30/12, 02/01, 15/02)",
+      "valido": true,
+      "motivo": "Confere, e o problema é maior do que o achado diz. O log certo é parceiro_postar.log, não o parceiro_postar_auto.log. Nele estão Bilionário 15/02 07:30 (pedido 06/01), Empresário 15/02 09:30 e Clínica 15/02 09:30, que também aparecem no uploads_ledger com publish_at 2027-02-15. O ledger tem 71 Shorts com publish_at mais de 7 dias à frente, não 39: Dorama Noturno 41, Curiosidades 19, mais CenaReact, ForjaReact, Codigo, HistoriasEmFrames e AssistIA até 02/01. politica.horario_publicacao (649-670) não tem teto de dias, e não existe AGENDA_MAX em lugar nenhum. O próprio comentário em politica.py (horario_obrigatorio) reconhece que '5 primeiros foram parar em 02/12 a 02/01'.",
+      "correcao": "Corrigir a evidência: o log é parceiro_postar.log e a contagem é 71. Há outro detalhe: o pedido já sai em 06/01, então o parceiro está pedindo longe antes mesmo da política. O teto deve valer também no pedido, não só no horario_publicacao. Manter a exceção do TESTE_PUBLICO_PUNIDO."
+    },
+    {
+      "titulo": "Canais recuperados perdem vagas: o envio pula Shorts 'prontos mas sem video.mp4' (estão no Drive)",
+      "valido": true,
+      "motivo": "O sintoma é real (35 'sem video.mp4 — pulado' em 23/11 no parceiro_postar_auto.log), mas o diagnóstico e a proposta estão errados. Os itens pulados não são do grupo que volta do Drive. _na_reserva (parceiro_diario.py:1498-1500) e _trazer_do_drive (954) só reconhecem _NO_DRIVE.txt. As pastas puladas (ex.: blackie-your-imaginary-friend_cap1_20261114, chainsaw-man_cap1_20261106, sem-obra-210449_cap1_20261122) têm _MOVIDOS_PARA_DRIVE.txt e _NO_DRIVE.md, gravados pelo backup_drive.py/registro_drive.py e apontando para manhwa-drive:videos-backup/parceiro/2_tiktok/... Por isso nunca voltam e são puladas em toda rodada. Não se trata de vaga perdida por tempo. Contei cerca de 120 Shorts de parceiro sem posted_url nesse estado, por exemplo novo_manhwanoturno 10, hNQrW5ouNe0Ni5Me 8, historias_em_frames 7 e novo_animenoturno 5. Pré-buscar não resolve, porque o _trazer_do_drive não sabe ler esse marcador.",
+      "correcao": "Fazer o _na_reserva/_trazer_do_drive aceitarem também _MOVIDOS_PARA_DRIVE.txt (linha 'video.mp4 -> manhwa-drive:...'), trazendo só o escolhido na hora de subir, como já é a regra de 13/11. A pré-busca fica dispensada."
+    },
+    {
+      "titulo": "A agenda dos celulares e o cadastro ainda usam 15 h, hora marcada como EVITAR, e deixam de lado a 7 h (RECEITA)",
+      "valido": true,
+      "motivo": "Confere. sinais_shorts.json (22/11, n=2160) tem receitas hora 15 EVITAR (0,53/0,70, n 77/78), hora 7 RECEITA (1,5/1,8) e hora 21 razao_med 8,9. noite_encher.py:33 HORARIOS inclui '15:00' e escada_celulares.py:35 EXTRAS = ['15:00','18:00']. Ressalvas: na tabela geral a hora 15 tem razao_med 0,89 (n 121), então o efeito é moderado. A 22 h é 'SORTE' (não confirmada), não receita. Não conferi as 15 h no canais.json.",
+      "correcao": "Usar 07:30 como substituto principal. A 22:30 não tem receita confirmada (veredito SORTE). Em celular com 2-3 canais, conferir se a troca não junta horários perto do NOBRE_2."
+    },
+    {
+      "titulo": "Fila dos celulares: de cada 3 tentativas, 2 dão erro (troca de conta e câmera sem botão de importar)",
+      "valido": true,
+      "motivo": "Os números conferem com postagens_celular.jsonl. Por dia: 20/11 13 ok/34 erro/5 incerto, 21/11 15/3/5, 22/11 4/10/1, 23/11 18/38/1. A2 (100.92.36.34) tem 47 erros, com 'lista de Contas não abriu' 15, câmera 9 e app 8. Duas correções: o NameError 'forcar' ocorreu só em 20/11 (15:29 e 16:08), e hoje postar_celular.py tem forcar como parâmetro (linhas 380, 420, 433; arquivo alterado em 23/11), então parece já consertado. E 'não vi o título' aparece como 'incerto' (12), não como erro.",
+      "correcao": "Tirar o item (1), que já foi consertado. O item (2) só com OK da dona: ela autorizou 3 canais no A2 em 20/11 (escada_celulares.py:37-41). Fica a sugestão, sem mudança automática. O item (3), gravar o ID, está correto."
+    },
+    {
+      "titulo": "Ficam 14 pedidos velhos em fila_celulares\\pendentes, alguns com data já passada (20/11) e outros para 30/12 e 01/01",
+      "valido": true,
+      "motivo": "Confere. D:\\projeto celular sub controle\\fila_celulares\\pendentes tem 14 pedidos. São 3 inovaremanhwabr (20/11 08:30), 4 cenareact (21/11), 3 fiodameada (23/11 e 24/11), historiasemframes e clinicalucrativaia (30/12), imovelemfoco e vendasqueescalam (01/01). O fila.log de 24/11 mostra 'distribuidor de pé' e logo depois 'PARAR.txt — distribuidor parado' várias vezes. O impacto é baixo enquanto o PARAR.txt (17/11) continuar valendo.",
+      "correcao": "Incluir os 3 da fiodameada, que já estão vencidos, na limpeza. Fazer só com OK da dona, como o achado já diz."
+    }
+  ]
+}

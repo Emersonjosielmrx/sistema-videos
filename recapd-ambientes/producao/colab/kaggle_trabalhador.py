@@ -1297,7 +1297,9 @@ def _bx_baixar(p):
     d.mkdir(parents=True)
     t0 = time.time()
     fmt = f"bv*[aspect_ratio<0.9][width<={mh}]+ba/bv*[height<={mh}]+ba/b[height<={mh}]/b"
-    r = subprocess.run([sys.executable, "-m", "yt_dlp", url, "-f", fmt, "-S", "res,vcodec:h264",
+    # 24/11 dona (vídeo de 20 h em partes de 30 min): "trecho": "HH:MM:SS-HH:MM:SS" baixa só aquele pedaço
+    extra = ["--download-sections", "*" + str(p["trecho"])] if p.get("trecho") else []
+    r = subprocess.run([sys.executable, "-m", "yt_dlp", url, "-f", fmt, "-S", "res,vcodec:h264", *extra,
                         "--merge-output-format", "mp4", "-o", str(d / "source.%(ext)s"), "--no-warnings",
                         "--no-playlist"], capture_output=True, text=True, timeout=1800)
     video = next((f for f in d.glob("source.*") if f.suffix.lower() in (".mp4", ".mkv", ".webm")), None)

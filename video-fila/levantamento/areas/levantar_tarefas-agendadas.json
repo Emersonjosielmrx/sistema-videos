@@ -1,0 +1,125 @@
+{
+  "resumo_area": "234 tarefas no Agendador do PC1 (190 ligadas, 44 desligadas; fonte: C:\\Windows\\System32\\Tasks lido em xml.json e COM Schedule.Service em 24/11 06:2x; o schtasks /query /fo csv /v levou mais de 6 min e deu 615 linhas). As ligadas com repetição disparam umas 615 vezes por hora (22 tarefas a cada 1-5 min). Há ~401 processos python/wscript/cmd vivos, 94 deles ponte_proxy_fixo. O problema mais sério: 36 tarefas ligadas têm como último resultado 0x800710E0. Esse código quer dizer que a execução nova foi recusada porque a anterior ainda estava rodando (MultipleInstancesPolicy=IgnoreNew). E há renders de horas (ComentariosProducao, CaparShorts, Cortes_Juri) com limite de 72 h. Falhas reais: DriveChaveRenovar (rclone authorize sem link desde 16/11), KaggleSaudeContas (script apagado), 3 medidores do Instagram/TikTok mortos no meio (0x8007042B), 1min visita (nada gravado desde 31/10) e ZeladorSonnet (ssh com timeout). Também sobrou lixo: 11 tarefas de 'uma vez' já vencidas, 1 tarefa que aponta pro scratchpad de um chat e 12 desligadas há mais de 30 dias.",
+  "achados": [
+    {
+      "titulo": "Renders longos no PC1 por tarefa com limite de 72 h e IgnoreNew prendem a fila",
+      "problema": "ComentariosProducao (ciclo de 2 h), CaparShorts (15 min) e Cortes_Juri (30 min) rodam no PC1 com ExecutionTimeLimit de 72 h. Uma rodada fica viva por 5 a 7 h, e todo disparo seguinte é recusado. O PC1 fica ocupado a madrugada toda, o oposto da regra 'PC1 livre pro VS Code'. Nenhum dos três entra no MatarTravados, que só olha hiper-pipeline/hiper-longo/anime-pipeline/anime_auto, nem no PESADOS_PC1 do controlador, então o controlador nem conta esses processos como render.",
+      "evidencia": "Processos vivos às 06:25 de 24/11 (Win32_Process): 'producao.py ciclo' desde 23/11 22:52, 'capar_shorts.py' desde 24/11 00:14 e 'cortes_juri.py rodar' desde 01:16. COM: ComentariosProducao, CaparShorts e Cortes_Juri com LastTaskResult 0x800710E0. XML: <ExecutionTimeLimit>PT72H nos três. D:\\video-fila\\matar_travados.py:27 (regex 'hiper-pipeline|hiper-longo|anime-pipeline|anime_auto'). D:\\video-fila\\controlador.py:72-73 (PESADOS_PC1 sem producao.py, capar_shorts e cortes_juri). D:\\videos-comentarios\\logs\\producao.log, 05:56: 'rclone copy falhou 3x (timeout)', ou seja, o ciclo fica parado esperando o Drive.",
+      "proposta": "Baixar o ExecutionTimeLimit para o tempo real de uma rodada (por exemplo 2 h no ComentariosProducao, 1 h no CaparShorts e no Cortes_Juri). Pôr 'producao.py ciclo|capar_shorts|cortes_juri' no PESADOS_PC1 e no regex do matar_travados (só mata se a CPU estiver parada, como já faz). O render pesado de comentários pode ir para fora do PC1 (teste_remoto/desktop).",
+      "ja_existe": "prioridade_vscode.ps1 já baixa a prioridade de capar_shorts (linha 17), mas não cobre producao.py ciclo nem cortes_juri, e não impede a fila travada.",
+      "impacto": "alto",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "36 tarefas com 0x800710E0: disparos recusados viram ruído e escondem falha real",
+      "problema": "Mais de 1/3 das tarefas ligadas mostra 'último resultado' diferente de 0 só porque a rodada anterior ainda estava viva. Isso inclui ControladorVideos, EncherPilha, AlimentarPC2/PC3, BackupDriveVideos, HipercoolPostagem, ParceiroKaijinre-Postagem, LimpezaChrome e NotificarTelegram. Quem lê o Agendador (ou um vigia que cheque Último resultado) não distingue isso de erro. Somado aos ~615 disparos por hora, sobra muito processo wscript+cmd+python de curta duração no PC1.",
+      "evidencia": "estado_tarefas.txt (COM Schedule.Service, 24/11 06:2x): 36 linhas com 0x800710E0. Tarefas a cada 1-2 min: PlantaoTelegram (PT1M), LiberarRamVigia, PrioridadeVSCode e TunelCelularVPS (PT2M); a cada 5 min: mais 18 (xml.json). Processos duplicados na lista: 'controlador.py' duas vezes (06:00 e 06:02), 'encher_pilha.py' duas vezes (06:07 e 06:12).",
+      "proposta": "Para as de 5 min com rodada mais longa que o intervalo (ControladorVideos tem limite de 30 min com intervalo de 10, EncherPilha 20 min com intervalo de 5), alinhar intervalo e limite, ou juntar num laço só. No relatório ou vigia, tratar 0x800710E0 como 'ainda rodando' e não como falha, e alertar só quando a mesma instância passar de N vezes o intervalo.",
+      "ja_existe": "",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "DriveChaveRenovar falha desde 16/11: a chave do Drive não renova",
+      "problema": "A tarefa de 5 em 5 dias que renova o token do rclone (manhwa-drive/conta32) falhou nas duas últimas rodadas. Se o token vencer, Drive, backup, reserva de Shorts e Kaggle param juntos. Isso pode explicar os 'rclone copy falhou (timeout)' de hoje, mas isso não está provado.",
+      "evidencia": "D:\\hipercool-materiais\\comum\\drive_chave.log: '[16/11 04:22] FALHOU renovar: rclone authorize não deu o link' e '[21/11 04:21] FALHOU renovar: rclone authorize não deu o link'; a última OK foi em '[11/11 11:32] renovada (vale 7 dias)'. COM: DriveChaveRenovar com 0x00000001. Próxima rodada em 26/11.",
+      "proposta": "Conferir à mão se o token ainda vale (a tarefa DriveChaveConferir existe) e consertar o passo 'rclone authorize' em drive_chave.py renovar (perto da linha 122, login_hint). Avisar no Telegram já na 1ª falha. Fazer isso pela saída correta da conta 32, nunca de outro IP de conta.",
+      "ja_existe": "DriveChaveConferir (ligada, 0x41306 = rodando) existe, mas não pegou nem avisou a falha da renovação.",
+      "impacto": "alto",
+      "esforco": "medio",
+      "risco": "medio"
+    },
+    {
+      "titulo": "KaggleSaudeContas_0800 e _2130 apontam para script apagado",
+      "problema": "Duas tarefas ligadas rodam todo dia D:\\tmp_logs\\kaggle_verificar\\saude_contas.py, que não existe mais, e falham com 'arquivo não encontrado'. Pelo nome, um 'saude_contas' que varre contas do Kaggle no PC1 é o tipo de laço que a regra proíbe. Se alguém restaurar o script, ele volta a rodar sozinho.",
+      "evidencia": "Último resultado 0x00000002 nas duas (COM). XML: '...pythonw.exe -X utf8 D:\\tmp_logs\\kaggle_verificar\\saude_contas.py' com CalendarTrigger 08:00 e 21:30. ls D:\\tmp_logs\\kaggle_verificar -> 'No such file or directory'.",
+      "proposta": "Pedir à dona para apagar as duas tarefas. A saúde do Kaggle já é coberta pelo gerente/abastecedor, pela saída de cada conta.",
+      "ja_existe": "",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "Medidores TikTok_MedirViews, Marcas_Carrossel e MSEnergy_Metricas morrem no meio (0x8007042B)",
+      "problema": "Os três diários da manhã terminaram em 23/11 com o processo morto de fora (0x8007042B). O .bat não chegou a gravar o 'exit'. O MSEnergy_Metricas também deu HTTP 400. Resultado: as métricas de TikTok e Instagram de 23/11 ficaram sem medir. O horário bate com a faxina das 07-08 h (LimpezaChrome a cada poucos min fecha Chrome com mais de 3 h), mas isso não está provado.",
+      "evidencia": "COM: TikTok_MedirViews, Marcas_Carrossel e MSEnergy_Metricas com 0x8007042B. D:\\postador-de-videos\\logs\\medir_tiktok.log: '[23/11/2026 7:34:09] === medir tiktok ===' sem 'exit=' depois (nos dias 20-22 terminou 'exit=0'). D:\\postador-de-videos\\logs\\carrossel_marca_tarefa.log: '[23/11 7:22:11] inicio' sem 'fim'. D:\\ms-energy\\logs\\metricas.log: 'HTTPError: HTTP Error 400' e '[23/11 9:19:01] exit=1' (em 02/11, 09/11 e 16/11 deu exit=0).",
+      "proposta": "Ver nos logs do LimpezaChrome/matar/liberar_ram de 23/11 07-10 h quem matou o processo. Marcar o Chrome desses medidores como 'em uso' para a faxina não fechar. Para o HTTP 400 do metricas_insta.py, ver o token ou o endpoint.",
+      "ja_existe": "",
+      "impacto": "medio",
+      "esforco": "medio",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "'1min visita diaria' falha todo dia e não grava nada desde 31/10",
+      "problema": "A tarefa diária que resgata os 15 mil créditos do 1min.ai sai com código 1, e o arquivo de visitas não muda desde 31/10. Os créditos diários não estão sendo resgatados, ou estão, mas sem registro. Ela também roda com pythonw direto, sem rodar_oculto, e fala como conta (aulacomia): o caminho de saída precisa ser conferido.",
+      "evidencia": "COM: '1min visita diaria' 0x00000001, última 24/11 06:10. D:\\opus-gratis-v2-desktop\\umin\\visitas.jsonl: 22 linhas, modificado em 'Oct 31 23:50'; a última linha é de 2026-10-31T23:49:45. visita_diaria.py:30 LOG = AQUI / 'visitas.jsonl'.",
+      "proposta": "Rodar à mão uma vez (pela saída fixa da conta) para ver o erro, ou desligar se o 1min não é mais usado (a memória diz 'só opus-auto').",
+      "ja_existe": "",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "medio"
+    },
+    {
+      "titulo": "ZeladorSonnet trava em ssh de 120 s e falha todo dia",
+      "problema": "O zelador do Sonnet web chama ssh hermes-bloqueio e estoura o tempo. A tarefa termina com erro (código 1). Ele não cuida do Sonnet web, que é o único modelo que o vigia usa hoje.",
+      "evidencia": "COM: ZeladorSonnet 0x00000001 (última 24/11 04:20). D:\\sonnet web\\zelador_sonnet_saida.log (fim): \"subprocess.TimeoutExpired: Command '[...ssh.exe', ..., 'hermes-bloqueio', 'python3 /opt/omniroute/sonnet_estado.py']' timed out after 120 seconds\".",
+      "proposta": "Tratar o TimeoutExpired, registrar 'não conferi' (sem quebrar) e ver se o host hermes-bloqueio ainda é o certo. A regra 'ssh com script embutido trava' também pede um .sh por scp, não comando inline.",
+      "ja_existe": "",
+      "impacto": "medio",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "11 tarefas de 'uma vez' já vencidas seguem ligadas (lixo de testes e lembretes)",
+      "problema": "Tarefas de disparo único que já passaram continuam ligadas e poluem a lista e o relatório: AmostraGanchoDona, GeminiChavesRetentativa, HipercoolReligar_0211, LembreteFacebook21Nov, LembreteKaggleTelefone, LembreteTikTokIPs e 5 NSN_CapturaFB_* de 20/11. A HipercoolReligar_0211 é perigosa: se alguém a disparar à mão, ela religa a produção do hipercool 'religado sozinho 02/11'.",
+      "evidencia": "xml.json: TimeTrigger sem repetição, StartBoundary entre 2026-10-23 e 2026-11-21, Enabled=true. HipercoolReligar_0211, ação: 'controle.py ligar hipercool producao \"religado sozinho 02/11 01:00 (pausa da dona por disco cheio)\"'. As NSN_CapturaFB_criar_1337/1637/1937 rodam o mesmo 'capturar_passivo.py 45' (duplicadas).",
+      "proposta": "Listar para a dona apagar (ou desligar) as 11.",
+      "ja_existe": "",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "AmostraGanchoDona aponta para o scratchpad de um chat no C:",
+      "problema": "A tarefa ligada roda um .bat dentro de AppData\\Local\\Temp\\claude\\...\\scratchpad, uma pasta temporária de sessão que já não existe. Falha desde 30/10 e infringe a regra 'nada no C'.",
+      "evidencia": "xml.json: AmostraGanchoDona, '\"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Temp\\claude\\D--hermes-pc-base\\af3c5b53-...\\scratchpad\\amostra_gancho.bat\"' (o arquivo não existe, conforme a checagem os.path.exists). COM: 0x00000001, última execução em 30/10.",
+      "proposta": "Apagar a tarefa (com o OK da dona).",
+      "ja_existe": "",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "MonitorOpus roda python.exe direto (sem rodar_oculto) a cada 10 min",
+      "problema": "É a única tarefa ligada que usa python.exe (com console) e não passa pelo rodar_oculto.vbs nem usa pythonw. Com LogonType S4U não deve abrir janela, mas fica fora do padrão 'sempre oculto' e abre janela se o tipo de logon mudar.",
+      "evidencia": "C:\\Windows\\System32\\Tasks\\MonitorOpus: <Command>...Python313\\python.exe</Command> <Arguments>D:\\monitor_opus.py</Arguments>, <Interval>PT10M</Interval>, <LogonType>S4U</LogonType>. Processo vivo às 06:16: 'python.exe D:\\monitor_opus.py'.",
+      "proposta": "Trocar para pythonw.exe, ou passar pelo wscript rodar_oculto.vbs como as demais.",
+      "ja_existe": "",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "Tarefas de estudo e teste já encerradas seguem ligadas (AcompanharNoite21Nov, InstalarPC3, ArgonManterLogon)",
+      "problema": "AcompanharNoite21Nov foi feita para 'a noite 21/11' e roda a cada 20 min desde 21/11 (rclone no Drive). O log mostra NaoConferi repetido. InstalarPC3 ficou ligada com falha (código 1) desde 27/10. ArgonManterLogon duplica o ArgonManter (mesmo argon_manter.py, que já roda a cada 5 min e deu 0x800710E0).",
+      "evidencia": "AcompanharNoite21Nov: docstring de D:\\tmp\\estudo_voz\\acompanhar_noite.py:1 'Acompanhamento da noite 21/11'; TimeTrigger 2026-11-21 rep=PT20M, ligada; acompanhar_noite.log termina em 'NaoConferi: manhwa-drive:baixador/prontos/e2nIzNGXvmA'. InstalarPC3: COM 0x00000001, última 27/10. ArgonManter/ArgonManterLogon: os dois apontam para D:\\gemini-argo\\argon_manter.py (an.py == DUP).",
+      "proposta": "Perguntar à dona se o acompanhamento de 21/11 acabou e, se sim, desligar. Apagar InstalarPC3. Manter só o ArgonManter.",
+      "ja_existe": "",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo"
+    },
+    {
+      "titulo": "12 tarefas desligadas há mais de 30 dias, algumas com caminho quebrado",
+      "problema": "Desligadas antigas que só poluem a lista: MegaEngageMonitor (desde 17/07), HistoriasEmFrames-Producao (28/07, 0xFFFFFFFF), VeoProducaoDiaria7h (31/08), AgendadorVO3 (16/10), AnimeRecapNoturno, HipercoolFila, HipercoolShorts2h, TrocarVenvUnico, HipercoolVigia, AnimeOcioso, AnimeRecapMonitor e Trader Binance - limpeza de dados. Algumas apontam para arquivos que não existem: Trader Binance (venv e limpeza_dados.py), Atlas sincronizar/vigia (rodar_oculto.vbs do atlas), Laboratorio - papeis, VozFidelidadePiloto. Cinco nunca rodaram (Cortes_Agente, Cortes_Melhorador, HipercoolReligarProducao, MSEnergy_Gerar, MelhoradorProdutos). Pesquisador e melhoradores pausados pela dona ficam como estão.",
+      "evidencia": "estado_tarefas.txt (COM, Enabled=False, ordenado por LastRunTime): MegaEngageMonitor 2026-07-17, HistoriasEmFrames-Producao 2026-07-28 0xFFFFFFFF, VeoProducaoDiaria7h 2026-08-31 0x8007042B, AgendadorVO3 2026-10-16 etc.; as 5 com '1999-11-30' (nunca rodaram). Saída 'MISSING' do an.py: D:\\trader_binance\\atlas\\rodar_oculto.vbs, D:\\trader_binance\\trader_binance\\deploy\\limpeza_dados.py, D:\\hipercool-materiais\\amostras_voz\\clone2\\fidelidade\\piloto_fidelidade.py e laboratorio\\papel\\rodar_papeis_oculto.vbs, todos inexistentes.",
+      "proposta": "Entregar a lista à dona para apagar as que têm caminho quebrado ou nunca rodaram, e exportar o XML das demais para uma pasta de arquivo antes de apagar. Não tocar em MotorPesquisador, CobradorPesquisador, MelhoradorCentral e RecapMelhoradorLongo (pausados por decisão dela).",
+      "ja_existe": "",
+      "impacto": "baixo",
+      "esforco": "baixo",
+      "risco": "baixo"
+    }
+  ]
+}

@@ -44,6 +44,11 @@ SSH = r"C:\Program Files\Git\usr\bin\ssh.exe" if Path(r"C:\Program Files\Git\usr
 
 # Ordem = preferência (o Ultra tem 14 GB e encoda 1080x1920 ~30% mais rápido). Alias em C:\Users\Haylla\.ssh\config.
 HOSTS = {
+    # 24/11 dona ("temos um novo PC pra trabalhar"; "mais um PC agora o emerson-asus-x"): notebooks com Omarchy (Arch),
+    # i5 4 threads, 11 GB, ~200 GB livres, ffmpeg 9 do sistema (libx264 + .ass). Medido 24/11: 8 s 1080x1920 veryfast
+    # em 3,9 s (asusx) e 4,5 s (itau) — os mais rápidos da lista (HP 9 s), por isso vêm primeiro.
+    "asusx": {"nome": "Notebook Asus X", "modelo": "i5-4200U omarchy", "ip": "100.121.199.93", "notebook": True},
+    "itau": {"nome": "Notebook Itaú", "modelo": "i5-2520M omarchy", "ip": "100.100.73.28", "notebook": True},
     # 11/11 dona ("notebook STI is1442 ligado ao sistema, já pode usar pra processar"): i5 4 núcleos, 16 GB, Mint,
     # ffmpeg 7.0.2 estático em ~/bin. Vem 1º: é bem mais rápido que os celulares. Sem bateria de Termux (fica vazia).
     "sti": {"nome": "Notebook STI", "modelo": "is1442", "ip": "100.98.49.0", "notebook": True},

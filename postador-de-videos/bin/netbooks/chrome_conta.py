@@ -578,10 +578,35 @@ def _proxy_pronto(n):
         return False
 
 
-def abrir(perfil, porta, url="about:blank", espera_trava_s=900, proxy_n=None):
+def _fish_pronto(n):
+    """24/11 dona ("loga os Fish nos outros PCs, mesmo processo do TikTok"; "sim" pra saída nova): o PC1 abre túnel
+    REVERSO da ponte do Fish (fish_audio._subir_ponte: 127.0.0.1:18500+n = IP rnprmtfo-n da conta, sem senha). Confere
+    que responde ANTES de abrir — senão o Chrome sairia pelo IP de casa. Falhou = não abre."""
+    import socket
+    try:
+        socket.create_connection(("127.0.0.1", 18500 + int(n)), timeout=8).close()
+    except Exception:  # noqa: BLE001
+        return False
+    # 25/11 (medido no STI): a 1ª conexão pela ponte leva ~56 s (depois a página inteira em 6 s) — o Chrome desistia
+    # antes (ERR_TIMED_OUT). Esquenta AQUI, antes de abrir o Chrome (até 150 s).
+    import urllib.request
+    op = urllib.request.build_opener(urllib.request.ProxyHandler({"https": f"http://127.0.0.1:{18500 + int(n)}"}))
+    for _ in range(2):
+        try:
+            op.open("https://fish.audio/robots.txt", timeout=150).read(200)
+            break
+        except Exception:  # noqa: BLE001
+            continue
+    return True
+
+
+def abrir(perfil, porta, url="about:blank", espera_trava_s=900, proxy_n=None, proxy_fish=None):
     perfil = "".join(c for c in perfil if c.isalnum() or c in "._-") or "sem_nome"
     if proxy_n is not None and not _proxy_pronto(proxy_n):
         print(f"SEM_PROXY {proxy_n}: o túnel do proxy do PC1 não responde aqui — não abro (nunca pelo IP de casa)")
+        return 6
+    if proxy_fish is not None and not _fish_pronto(proxy_fish):
+        print(f"SEM_PROXY {proxy_fish}: a ponte do Fish do PC1 não responde aqui — não abro (nunca pelo IP de casa)")
         return 6
     g = _gravando()
     if g:  # desktop gravando/em chamada: não usa (o PC1 tenta o próximo)
@@ -654,6 +679,11 @@ def abrir(perfil, porta, url="about:blank", espera_trava_s=900, proxy_n=None):
                              ["--ozone-platform=x11", "--window-position=-3000,0"])  # login: a dona precisa ver
     px = ([f"--proxy-pac-url=http://127.0.0.1:18200/{int(proxy_n)}.pac",
            "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"] if proxy_n is not None else [])
+    if proxy_fish is not None:
+        # 24/11: Chrome do Fish sai INTEIRO pelo IP fixo da conta (fish.audio + login Google + reCAPTCHA no mesmo IP),
+        # igual à fabrica_fish no PC1 (--proxy-server=127.0.0.1:185xx). Nada pela casa.
+        px = [f"--proxy-server=127.0.0.1:{18500 + int(proxy_fish)}",
+              "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"]
     cmd = [*chrome, f"--user-data-dir={PERFIS / perfil}", f"--remote-debugging-port={porta}", *LEVE, *px, *fora, url]
     pid = _lancar(cmd)
     OCUPADO.write_text(json.dumps({"pid": pid, "porta": porta, "perfil": perfil, "desde": time.time(), "login": login}),
@@ -664,6 +694,8 @@ def abrir(perfil, porta, url="about:blank", espera_trava_s=900, proxy_n=None):
                 + (f" pelo proxy {proxy_n}" if proxy_n is not None else ""))
             if proxy_n is not None:
                 print(f"PROXY_OK {int(proxy_n)}", flush=True)
+            if proxy_fish is not None:
+                print(f"PROXY_OK {int(proxy_fish)}", flush=True)
             print(f"PRONTO HOME={BASE.parent if WIN else Path.home()}", flush=True)
             return 0
         if not WIN and pid and not _pid_vivo(pid):
@@ -713,7 +745,9 @@ def estado():
 def main(a):
     sem_espera = "--sem-espera" in a  # ocupado = responde OCUPADO na hora (o PC1 tenta o outro notebook)
     proxy_n = next((x.split("=", 1)[1] for x in a if x.startswith("--proxy-n=")), None)  # 04/11: Chrome pelo proxy
-    a = [x for x in a if x != "--sem-espera" and not x.startswith("--proxy-n=")]
+    # 24/11: Chrome do Fish pela ponte do IP fixo da conta (túnel reverso 18500+n do PC1)
+    proxy_fish = next((x.split("=", 1)[1] for x in a if x.startswith("--proxy-fish=")), None)
+    a = [x for x in a if x != "--sem-espera" and not x.startswith("--proxy-n=") and not x.startswith("--proxy-fish=")]
     # 26/10 (dona: TikTok "vários de uma vez" no PC2): portas 9461–9479 = Chrome EXTRA, com ocupante e entrada próprios;
     # a 9460 segue "uma conta por vez" (postagem, Veo, conferência)
     p = a[2] if len(a) >= 3 and a[0] == "abrir" else a[1] if len(a) >= 2 and a[0] == "fechar" else ""
@@ -724,7 +758,7 @@ def main(a):
         return logar(a[1], a[3] if len(a) > 3 else "https://accounts.google.com")
     if len(a) >= 3 and a[0] == "abrir":
         return abrir(a[1], a[2], a[3] if len(a) > 3 else "about:blank", espera_trava_s=0 if sem_espera else 900,
-                     proxy_n=proxy_n)
+                     proxy_n=proxy_n, proxy_fish=proxy_fish)
     if len(a) >= 2 and a[0] == "fechar":
         return fechar(a[1])
     if a and a[0] == "estado":

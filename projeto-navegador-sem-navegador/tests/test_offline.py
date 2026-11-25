@@ -143,9 +143,10 @@ class TestEmpacotador(unittest.TestCase):
 
 def _enviador_falso(videos_lidos, falhar_final=False):
     """Enviador com a rede trocada por respostas prontas."""
+    # 23/11: desde 13/11 o upload_http._hd usa youtube_http.autorizacao(cookies) (SAPISID 1P/3P)
     sys.modules.setdefault("youtube_http", types.SimpleNamespace(
         sincronizar=lambda s: None, Studio=object, COOKIES_DIR=Path(tempfile.gettempdir()),
-        STUDIO="https://studio.youtube.com", _email=lambda s: s))
+        STUDIO="https://studio.youtube.com", _email=lambda s: s, autorizacao=lambda ck, origem=None: "SAPISIDHASH teste"))
     from services.youtube import upload_http as up
     e = up.Enviador.__new__(up.Enviador)
     e.slug, e.token = "teste", "tok"

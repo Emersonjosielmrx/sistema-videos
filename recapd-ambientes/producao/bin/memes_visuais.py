@@ -6,6 +6,7 @@ insere vídeos, memes e figurinhas na tela"). Copiado do D:\\hipercool-videos\\b
     vergonha, raiva), no máximo 1 por minuto — anime-pipeline._memes_resumo insere no concat.
 Catálogo: config/memes_catalogo.json (o do historias-em-frames); arquivos em workspace/assets/memes_img."""
 import json
+import os
 import random
 import re
 from pathlib import Path
@@ -122,10 +123,18 @@ def emocao(texto):
     return None
 
 
-def escolher(emo, usados, so_com_som=False, rnd=random):
+def escolher(emo, usados, so_com_som=False, rnd=random, texto=None):
     cand = [m for m in catalogo() if m["file"] not in usados
             and (not so_com_som or (m.get("has_audio") and Path(m["file"]).suffix.lower() == ".mp4"
                                     and INTERROMPE_DUR[0] <= float(m.get("duration") or 0) <= INTERROMPE_DUR[1]))]
+    # 23/11: com a frase do narrador, o meme sai pela FICHA (o que a frase pede), não por sorteio dentro da emoção
+    if texto is not None and _contexto_ligado():
+        if triste(texto):  # 24/11 (revisão): cena de morte não cai no sorteio de baixo
+            return None
+        m = _por_contexto(texto, cand, emo, rnd)
+        if m:
+            usados.add(m["file"])
+            return m
     da_emocao = [m for m in cand if any(t.lower() in TAGS.get(emo, []) for t in m.get("tags", []))]
     pool = da_emocao or ([] if so_com_som else cand)
     novos = [m for m in pool if m.get("novo")]  # 21/11 dona: os novos (com fala) primeiro
@@ -133,21 +142,222 @@ def escolher(emo, usados, so_com_som=False, rnd=random):
         pool = novos
     if not pool:
         return None
+    pool = _menos_usados(pool)
     m = rnd.choice(pool)
     usados.add(m["file"])
     return m
 
 
+# ── 23/11 (dona: "usar os melhores memes da forma mais inteligente possível nos vídeos") ─────────────────────────────
+# Antes: a emoção da frase vinha de uma lista de gatilhos e o meme era SORTEADO entre os da mesma emoção (9 dos 20 novos
+# são "deboche": "aham sei" saía depois de uma vitória). 4 dos 20 (01, 08, 12, 14 — confusão/alegria) nunca entravam no
+# meio do vídeo, só no resumo. Agora cada meme novo tem FICHA (memes_novos/fichas.json: expressões da narração que pedem
+# ele + onde nunca entra) e a escolha é por PONTOS: casa com a frase (e a anterior, mais fraco) > casa com a emoção;
+# meme usado nos últimos vídeos perde ponto (histórico em workspace/memes_historico.json); frase de morte/luto = sem meme.
+# MEMES_CONTEXTO=0 volta ao sorteio por emoção (como antes). Nada muda nos arquivos de meme.
+FICHAS = NOVOS_DIR / "fichas.json"
+HISTORICO = RAIZ / "workspace" / "memes_historico.json"
+HIST_VIDEOS = 6  # quantos vídeos para trás contam na penalidade
+TRISTE = ("morreu", "morre", "morte", "morto", "morta", "mortos", "faleceu", "funeral", "enterro", "luto", "velório",
+          "desviver", "deixou de viver", "não sobrou nada", "estourado no meio", "partido ao meio", "viraram comida",
+          "virou comida", "devorado", "devorada", "decapitado", "decapitada", "massacre", "massacrou", "vazio no coração", "coração partido", "desolado", "desolada", "desamparado", "partiu desta", "não sobreviveu", "perdeu a mãe", "perdeu o pai", "orfão", "órfã",
+          "câncer", "doença terminal", "se despediu pela última", "sacrificou", "sacrifício")
+_fichas = None
+_hist_cache = None
+
+
+def _contexto_ligado():
+    import os
+    return os.environ.get("MEMES_CONTEXTO", "1") != "0"
+
+
+def _norm(s):
+    import unicodedata
+    s = unicodedata.normalize("NFD", (s or "").lower())
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return " " + re.sub(r"[^a-z0-9]+", " ", s).strip() + " "
+
+
+def fichas():
+    global _fichas
+    if _fichas is None:
+        try:
+            raw = json.loads(FICHAS.read_text(encoding="utf-8"))
+            _fichas = {k: v for k, v in raw.items() if not k.startswith("_") and isinstance(v, dict)}
+        except (OSError, ValueError, AttributeError):
+            _fichas = {}
+    return _fichas
+
+
+def _ficha(m):
+    return fichas().get(Path(m["file"]).name)
+
+
+TRISTE_PREFIXO = ("assassinad", "suicid", "estupr", "abusad", "abuso", "morr", "mort", "matou", "mataram", "matar",
+                  "faleceu", "falecid")
+
+
+def triste(texto):
+    """Cena de morte/luto/abuso: nenhum meme. Palavra inteira (não pega 'morrendo de rir'); os de TRISTE_PREFIXO
+    valem como começo de palavra (assassinado/assassinada)."""
+    # 24/11 (revisão): "morreu de rir/vergonha", "matou a saudade/fome" não é cena triste
+    t = re.sub(r" (?:morr\w*|matou|mata) (?:de|a) (?:rir|vergonha|saudade|medo|fome|curiosidade|tedio|inveja|raiva) ",
+               " ", _norm(texto))
+    return any(_norm(p) in t for p in TRISTE) or any(" " + p in t for p in TRISTE_PREFIXO)
+
+
+def _casa(texto, termos):
+    """Quantas expressões da lista aparecem no texto (palavra inteira; acento e caixa não contam)."""
+    t = _norm(texto)
+    return sum(1 for termo in termos if _norm(termo) in t)
+
+
+def _forca_ficha(texto, termos):
+    """24/11 (teste a seco): expressão de 2+ palavras ("na verdade", "caiu na armadilha") é específica e vale 2 sozinha;
+    palavra solta ("mentiu", "arrogante") vale 1. Soma. Assim 'claro'/'chegou' soltos não bastam, mas a expressão sim."""
+    t = _norm(texto)
+    return sum((2 if len(_norm(termo).split()) >= 2 and _norm(termo) not in _FRACAS else 1)
+               for termo in termos if _norm(termo) in t)
+
+
+# 24/11 (roteiros reais): expressões de 2 palavras comuns em QUALQUER narração — valem 1 (como palavra solta)
+_FRACAS = {_norm(x) for x in (
+    "era ele", "era ela", "então era", "na verdade", "com certeza", "de fato", "é mesmo", "que coisa", "como sempre",
+    "do nada", "virou um", "agora sim", "lá vem", "mexeu com", "como assim", "não acredito", "tá bom", "que seja",
+    "com raiva", "mais forte", "qualquer um", "eu faria", "não liga", "tanto faz", "está perdido", "jura que",
+    "é claro", "quem diria", "como esperado", "tinha razão", "se acha", "grande coisa", "sério mesmo", "num golpe")}
+
+
+def _historico():
+    global _hist_cache
+    if _hist_cache is None:
+        try:
+            _hist_cache = json.loads(HISTORICO.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _hist_cache = []
+        if not isinstance(_hist_cache, list):
+            _hist_cache = []
+    return _hist_cache
+
+
+def _uso_recente(nome):
+    """0 = não usado nos últimos HIST_VIDEOS vídeos; até 1 = usado no último."""
+    pen = 0.0
+    for i, video in enumerate(reversed(_historico()[-HIST_VIDEOS:])):
+        if nome in (video.get("memes") or []):
+            pen = max(pen, 1.0 - i / HIST_VIDEOS)
+    return pen
+
+
+def _menos_usados(pool):
+    """Do pool, fica só com os menos usados nos últimos vídeos (sorteio continua entre eles)."""
+    if not _contexto_ligado() or len(pool) < 2:
+        return pool
+    menor = min(_uso_recente(Path(m["file"]).name) for m in pool)
+    return [m for m in pool if _uso_recente(Path(m["file"]).name) <= menor + 1e-9]
+
+
+def _pontos(m, texto, anterior, emo):
+    f = _ficha(m)
+    if not f:
+        return None
+    if _casa(texto, f.get("nunca", [])) or _casa(anterior, f.get("nunca", [])):
+        return None
+    h = _forca_ficha(texto, f.get("cabe", []))
+    # 24/11 (revisão): palavra comum solta ("claro", "chegou", "de novo") casava em quase toda frase. Agora 1 expressão
+    # só vale se a emoção da frase bate com a ficha; 2+ expressões valem sozinhas.
+    # 24/11 (roteiro real): ficha com ZERO expressões casadas passava só por ter a mesma emoção da frase ("furioso" ->
+    # "não suporto mais", que não tem "furioso"). Agora precisa casar pelo menos 1 expressão da PRÓPRIA ficha.
+    if h == 0 or (h < 2 and not (emo and f.get("emocao") == emo)):
+        return None
+    p = 3.0 * h  # 24/11: a frase anterior não soma mais (o "foda-se" ia pro "rei teve a ousadia" por "regras" da anterior)
+    if emo and f.get("emocao") == emo:
+        p += 1.5
+    return p
+
+
+def _por_contexto(texto, cand, emo, rnd, anterior=""):
+    if triste(texto) or triste(anterior):
+        return None
+    notas = []
+    for m in cand:
+        p = _pontos(m, texto, anterior, emo)
+        if p is None or p < 1.5:  # nada da ficha e nem a emoção: não é o meme desta frase
+            continue
+        p -= 2.0 * _uso_recente(Path(m["file"]).name)
+        notas.append((p + rnd.random() * 0.3, m))  # desempate leve: mesma frase não dá sempre o mesmo
+    if not notas:
+        return None
+    notas.sort(key=lambda x: -x[0])
+    return notas[0][1] if notas[0][0] > 0 else None
+
+
+def pede_meme(texto, anterior=""):
+    """(emoção, força): força 2 = a frase casa com a ficha de algum meme; 1 = só gatilho de emoção forte; 0 = não."""
+    if triste(texto):
+        return None, 0
+    emo = emocao(texto)
+    if _contexto_ligado() and fichas():
+        hits = max(_forca_ficha(texto, f.get("cabe", [])) for f in fichas().values())
+        if hits >= 2 or (hits and emo):  # 24/11: 1 palavra solta sem emoção na frase não pede meme
+            return emo, 2
+        # 24/11 (roteiro real): "de repente" é narração neutra em recap ("de repente, uma garota aparece"); sozinho
+        # disparava sorteio. Com o contexto ligado, choque SÓ por "de repente" não pede meme.
+        if emo == "choque" and not emocao(re.sub(r"(?i)de repente", " ", texto or "")):
+            return emo, 0
+    return emo, (1 if emo in INTERROMPE else 0)
+
+
+def registrar_uso(workspace, memes):
+    """Guarda quais memes entraram neste vídeo (para o próximo variar). Falha aqui nunca derruba o render."""
+    global _hist_cache
+    try:
+        nomes = sorted({Path(str(m.get("file") if isinstance(m, dict) else m)).name for m in memes if m})
+        if not nomes:
+            return
+        hist = [h for h in _historico() if h.get("video") != str(workspace)]
+        import time
+        hist.append({"video": str(workspace), "quando": time.strftime("%Y-%m-%d %H:%M"), "memes": nomes})
+        HISTORICO.parent.mkdir(parents=True, exist_ok=True)
+        _hist_cache = hist[-50:]  # 24/11: o próximo vídeo do mesmo processo também vê este
+        HISTORICO.write_text(json.dumps(_hist_cache, ensure_ascii=False, indent=1), encoding="utf-8")
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def escolher_interrupcoes(textos, inicio=8, cada=12, rnd=random):
-    """[(índice da frase, meme)] — depois de frase com emoção FORTE, no mínimo `cada` frases (~1 min) entre elas."""
+    """[(índice da frase, meme)] — depois de frase com emoção FORTE, no mínimo `cada` frases (~1 min) entre elas.
+    23/11: com MEMES_CONTEXTO (padrão), a frase também vale quando casa com a ficha de um meme (inclusive os de
+    confusão/alegria que antes nunca entravam), o meme é o que a frase pede e cena de morte/luto fica sem meme."""
     out, usados, ultimo = [], set(), -10 ** 6
+    ctx = _contexto_ligado() and bool(fichas())
     for k, texto in enumerate(textos):
         if k < inicio or k > len(textos) - 4 or k - ultimo < cada:
             continue
-        emo = emocao(texto)
-        if emo not in INTERROMPE:
-            continue
-        m = escolher(emo, usados, so_com_som=True, rnd=rnd)
+        if not ctx:
+            emo = emocao(texto)
+            if emo not in INTERROMPE:
+                continue
+            m = escolher(emo, usados, so_com_som=True, rnd=rnd)
+        else:
+            anterior = textos[k - 1] if k else ""
+            emo, forca = pede_meme(texto, anterior)
+            if forca == 0:
+                continue
+            cand = [m for m in catalogo() if m["file"] not in usados and m.get("has_audio")
+                    and Path(m["file"]).suffix.lower() == ".mp4"
+                    and INTERROMPE_DUR[0] <= float(m.get("duration") or 0) <= INTERROMPE_DUR[1]]
+            m = _por_contexto(texto, cand, emo, rnd, anterior)
+            if m:
+                usados.add(m["file"])
+            # 24/11 (teste com roteiro real): frase que casava com uma ficha cujo meme já foi usado caía no sorteio
+            # ("furioso" sem o "ah morre diabo" virou "não suporto mais"). Agora só o gatilho forte SEM ficha nenhuma
+            # sorteia; casou com ficha e o meme não está livre = sem meme (melhor sem meme que meme errado).
+            # 24/11 (2º roteiro real, 1158 frases): o sorteio por gatilho ("coitado", "de repente") dava 10 de 18 memes,
+            # quase todos fora de hora ("o coitado começa a chorar" -> "mentira hahaha"). Com MEMES_SORTEIO_GATILHO=0
+            # (padrão) só entra meme quando a frase casa com uma ficha; =1 volta o sorteio por gatilho.
+            elif forca == 1 and not triste(anterior) and os.environ.get("MEMES_SORTEIO_GATILHO", "0") == "1":  # gatilho forte sem ficha que case: como antes (sorteio na emoção, menos usados)
+                m = escolher(emo, usados, so_com_som=True, rnd=rnd)
         if m:
             out.append((k, m))
             ultimo = k
@@ -172,7 +382,11 @@ def escolher_imagens(textos, ocupados=(), inicio=8, cada=10, rnd=random):
             continue
         cand = [m for m in imgs if m["file"] not in usados]
         da_emo = [m for m in cand if any(t.lower() in TAGS.get(emo, []) for t in m.get("tags", []))]
-        pool = da_emo or cand
+        # 24/11 (plano F9-E): sem imagem da emoção da frase, era SORTEIO CEGO entre todas; agora fica sem imagem.
+        # MEMES_IMAGEM_SORTEIO=1 volta ao antigo. Frase triste também fica sem imagem.
+        pool = da_emo if (_contexto_ligado() and os.environ.get("MEMES_IMAGEM_SORTEIO", "0") != "1") else (da_emo or cand)
+        if _contexto_ligado() and triste(texto):
+            continue
         if not pool:
             continue
         m = rnd.choice(pool)

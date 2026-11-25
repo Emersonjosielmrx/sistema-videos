@@ -234,6 +234,15 @@ def fazer(item, fila, est):
         _gravar(CFG, cfg)
         st["etapa"] = "config"; salvar()
     if st.get("etapa") == "config":
+        # 23/11: a Página já existe com foto/capa/config; se a postagem normal já pôs reel nela, ou o 1º reel falhou 2x,
+        # ela fica PRONTA (a rodada normal posta). Antes ficava em "config" para sempre e travava a fila da conta inteira
+        # (Cartucho React 22/11 23:45 -> 23/11: 26 Páginas da emersonjosiel02 paradas atrás dela).
+        reg = _ler(BIN.parent / "logs" / "facebook_paginas.json", {})
+        if (reg.get("postados") or {}).get(ch) or st.get("falhas_1reel", 0) >= 2:
+            st["etapa"] = "pronta"; st["pronta"] = datetime.now().isoformat(timespec="seconds"); st.pop("erro", None)
+            st["obs"] = "pronta sem o 1º reel da criação (a rodada normal posta)"; salvar()
+            log(f"   PRONTA (reel fica para a rodada normal): {nome}")
+            return True
         rc, out = rodar("postar_facebook_paginas.py", "--pagina", ch, "--um", timeout=2400)
         ok = " OK " in out
         log("   1º reel: " + next((l for l in out.splitlines() if " OK " in l or " ERRO " in l), out.strip()[-200:])[-200:])
@@ -241,13 +250,23 @@ def fazer(item, fila, est):
         if b:
             parar(est, conta, f"aviso no 1º reel ({b})"); return False
         if not ok:
-            st["erro"] = "1º reel"; salvar()
+            st["erro"] = "1º reel"; st["falhas_1reel"] = st.get("falhas_1reel", 0) + 1; salvar()
             if "nenhum vídeo postável" in out:  # sem estoque: a Página fica pronta, a escada posta quando houver
                 st["etapa"] = "pronta"; st["sem_estoque"] = True; salvar()
             return False
         st["etapa"] = "pronta"; st["pronta"] = datetime.now().isoformat(timespec="seconds"); st.pop("erro", None); salvar()
         log(f"   PRONTA: {nome}")
+        _token_nova(conta)
     return True
+
+
+def _token_nova(conta):
+    """25/11: Página nova já ganha token da API (o token de usuário salvo cobre 'Páginas atuais e futuras')."""
+    try:
+        rc, out = rodar("fb_token_assistido.py", "trocar", conta, timeout=300)
+        log("   token API: " + next((l for l in out.splitlines() if "OK:" in l or "FALTAM" in l), out.strip()[-120:])[:160])
+    except Exception as e:  # noqa: BLE001
+        log(f"   token API não atualizou: {e}")
 
 
 def parar(est, conta, motivo):
@@ -305,8 +324,16 @@ def main():
                            "% { $_.CommandLine }) -join '||'"],
                           capture_output=True, text=True).stdout.strip()
     # conta ocupada = tem rodada de postagem dela agora (a outra conta pode criar: é outro Chrome e outra saída)
-    ocupadas = {c for c in fila["max_dia_por_conta"] if c in ocup or ("postar_facebook_paginas" in ocup and "--conta" not in ocup)
-                or (c == "msenergypara" and "postar_ms_energy" in ocup) or "fb_medir" in ocup}
+    # 23/11: olha CADA processo (antes 1 linha juntava todos: um "--conta" em qualquer processo liberava/travava errado,
+    # e qualquer fb_medir travava as 2 contas -> a criação quase nunca tinha vez). Só trava tudo um processo sem conta.
+    ocupadas = set()
+    for linha in (x for x in ocup.split("||") if x.strip()):
+        donos = {c for c in fila["max_dia_por_conta"] if c in linha}
+        if "postar_ms_energy" in linha:
+            donos.add("msenergypara")
+        if not donos and ("postar_facebook_paginas" in linha or "fb_medir" in linha) and "--pagina" not in linha:
+            donos = set(fila["max_dia_por_conta"])
+        ocupadas |= donos
     if ocupadas and not a.chave:
         for c in ocupadas:  # tira a conta ocupada da vez sem mexer no estado gravado
             est.setdefault("contas", {}).setdefault(c, {})["_ocupada"] = True

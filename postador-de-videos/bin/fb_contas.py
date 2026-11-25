@@ -84,7 +84,12 @@ def abrir(conta, _tentativa=0):
         if f"rnprmtfo-{n}" != c["saida"]:
             raise SystemExit(f"{conta}: saída do cofre rnprmtfo-{n} != configurada {c['saida']}")
         px = fish_audio._subir_ponte(n)
-        _, proc = cofre.abrir(c["email"], extra=(f"--proxy-server=127.0.0.1:{px}",))
+        # 24/11 (noite, pc1.1): Chrome do FB mais leve no PC1 (100% de CPU com render): limita processos de página e
+        # desliga recursos inúteis (iguais ao netbooks/chrome_conta.LEVE). FB_CHROME_PESADO=1 volta ao antigo.
+        leve = () if os.environ.get("FB_CHROME_PESADO") == "1" else (
+            "--renderer-process-limit=3", "--disable-features=Translate,MediaRouter,OptimizationHints",
+            "--disable-component-update", "--mute-audio")
+        _, proc = cofre.abrir(c["email"], extra=(f"--proxy-server=127.0.0.1:{px}",) + leve)
     # 20/11: o Chrome do perfil antigo às vezes leva >20 s pra responder o CDP (ECONNRESET no connect_over_cdp)
     import urllib.request
     for _ in range(120):
@@ -137,7 +142,7 @@ def listar_paginas(ctx):
     achou = {}
     try:
         for url in ("https://www.facebook.com/pages/?category=your_pages", "https://www.facebook.com/bookmarks/pages"):
-            pg.goto(url, wait_until="domcontentloaded", timeout=45000)
+            pg.goto(url, wait_until="domcontentloaded", timeout=120000)  # 23/11: 45 s estourava (proxy + PC1 cheio)
             time.sleep(6)
             for t, h in pg.eval_on_selector_all("a[href]", "els => els.map(e => [e.innerText.trim().split('\\n')[0].slice(0,60), e.href])"):
                 h = h.split("&")[0].split("?__")[0]

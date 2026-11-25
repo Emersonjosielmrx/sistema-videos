@@ -58,8 +58,60 @@ class PrecisaLogin(RuntimeError):
 
 
 # ---------------------------------------------------------------- fábrica de tokens
+# 25/11 dona ("todos workers"; "loga os Fish nos outros"): conta cujo dono é OUTRA máquina (sessoes_remotas\donos.json)
+# usa a fábrica DAQUELA máquina (fabrica_fish_linux.py, porta 9397 lá) por túnel ssh — o Chrome do reCAPTCHA roda lá,
+# não no PC1. A geração (HTTP leve) segue saindo pela ponte rnprmtfo-N da conta = o MESMO IP fixo. Fábrica remota fora
+# = a conta NÃO cai pro Chrome do PC1 (1 conta = 1 máquina): falha e o rodízio passa pra próxima. FISH_REMOTA=0 desliga.
+_TUNEIS = {}
+_FORA = {}  # máquina -> quando falhou (5 min sem tentar de novo)
+
+
+def _dono(email):
+    if os.environ.get("FISH_REMOTA", "1") == "0" or not email:
+        return None
+    try:
+        d = json.loads((AQUI / "sessoes_remotas" / "donos.json").read_text("utf-8"))
+    except (OSError, ValueError):
+        return None
+    m = (d.get(str(email).lower()) or {}).get("maquina")
+    return m if m and m != os.environ.get("FISH_MAQUINA", "pc1") else None
+
+
+def _base(email=None):
+    """URL da fábrica que serve a conta: a local, ou a da máquina dona por túnel (sobe o túnel se preciso)."""
+    maq = _dono(email)
+    if not maq:
+        return FABRICA
+    t = _TUNEIS.get(maq)
+    if t and t[0].poll() is None:
+        return f"http://127.0.0.1:{t[1]}"
+    if time.time() - _FORA.get(maq, 0) < 300:  # máquina fora há < 5 min: nem tenta (cada fala esperaria o ssh de novo)
+        raise RuntimeError(f"fábrica do Fish na máquina {maq} fora (há {int(time.time() - _FORA[maq])} s)")
+    import socket
+    with socket.socket() as so:
+        so.bind(("127.0.0.1", 0))
+        porta = so.getsockname()[1]
+    proc = subprocess.Popen(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ExitOnForwardFailure=yes",
+                             "-o", "ServerAliveInterval=15",
+                             "-N", "-L", f"{porta}:127.0.0.1:9397", maq],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=0x08000000)
+    for _ in range(30):
+        time.sleep(0.5)
+        if proc.poll() is not None:  # ssh caiu (máquina fora/sem rota): não espera os 30 ciclos
+            break
+        try:
+            if requests.get(f"http://127.0.0.1:{porta}/estado", timeout=5).ok:
+                _TUNEIS[maq] = (proc, porta)
+                return f"http://127.0.0.1:{porta}"
+        except requests.RequestException:
+            pass
+    proc.kill()
+    _FORA[maq] = time.time()
+    raise RuntimeError(f"fábrica do Fish na máquina {maq} não responde (a conta {email} é de lá — não abro no PC1)")
+
+
 def _fab(rota, timeout=180, **q):
-    r = requests.get(f"{FABRICA}{rota}", params=q, timeout=timeout)
+    r = requests.get(f"{_base(q.get('conta'))}{rota}", params=q, timeout=timeout)
     d = r.json()
     if r.status_code == 401:
         raise PrecisaLogin(d.get("erro"))
@@ -99,12 +151,17 @@ class FishHTTP:
     def __init__(self, email=None, voz=None):
         self.email = (email or fa.CONTA_PADRAO).lower()
         self.voz = voz or fa.VOZ_PADRAO
-        subir_fabrica()
-        ses = _fab("/sessao", conta=self.email)   # abre/aquece o Chrome da conta na fábrica
+        remota = _dono(self.email)
+        if not remota:
+            subir_fabrica()
+        ses = _fab("/sessao", conta=self.email)   # abre/aquece o Chrome da conta na fábrica (daqui ou da dona)
         self.workspace = ses["workspace"]
         self.ip_n = ses.get("ip_n")
         self.s = requests.Session()
-        self.s.proxies = {"http": ses["proxy"], "https": ses["proxy"]}   # IP fixo da conta, nunca a casa
+        proxy = ses["proxy"]
+        if remota:  # o proxy que a fábrica de lá devolve é a ponte DE LÁ; aqui usa a ponte local do MESMO rnprmtfo-N
+            proxy = f"http://127.0.0.1:{fa._subir_ponte(int(self.ip_n))}"
+        self.s.proxies = {"http": proxy, "https": proxy}   # IP fixo da conta, nunca a casa
         self.s.headers.update({"Authorization": f"Bearer {ses['token']}", "Origin": "https://fish.audio",
                                "Referer": "https://fish.audio/",
                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -182,7 +239,7 @@ class FishHTTP:
 
     def soltar(self):
         """Fecha agora o Chrome desta conta na fábrica."""
-        if _fabrica_no_ar():
+        if _dono(self.email) or _fabrica_no_ar():
             _fab("/soltar", conta=self.email)
 
     def __enter__(self):
@@ -231,6 +288,10 @@ def avisar(texto, chave):
 def aquecer(email):
     """Pede à fábrica para abrir a conta e encher a reserva de tokens EM SEGUNDO PLANO (não espera)."""
     try:
+        if _dono(email):
+            import threading
+            threading.Thread(target=lambda: _fab("/sessao", timeout=300, conta=email), daemon=True).start()
+            return
         subir_fabrica()
         requests.get(f"{FABRICA}/aquecer", params={"conta": email}, timeout=10)
     except Exception:  # noqa: BLE001 — aquecer é adiantamento, não requisito

@@ -136,10 +136,14 @@ class TestCaminhoHTTP(unittest.TestCase):
         self._log = youtube_web_poster.log
         self._loghttp = youtube_web_poster._log_http
         self._mapa = youtube_web_poster.ler_mapa
+        self._kaggle = youtube_web_poster._conta_no_kaggle
         youtube_web_poster._duracao_video = lambda v: 30
         youtube_web_poster.log = lambda m: None
         youtube_web_poster._log_http = lambda m: None
         youtube_web_poster.ler_mapa = lambda: {"canais": {}}  # postar_http default True; não lê o config real
+        # 23/11: desde 14/11 o _subir_http desvia conta do Kaggle (IP fixo) ANTES do Enviador; aqui a conta de teste
+        # não é do Kaggle (sem isto o "na dúvida, não sobe" devolvia None e o teste nem chegava no aviso)
+        youtube_web_poster._conta_no_kaggle = lambda email: False
 
     def tearDown(self):
         for nome, mod in self._mods.items():
@@ -151,6 +155,7 @@ class TestCaminhoHTTP(unittest.TestCase):
         youtube_web_poster.log = self._log
         youtube_web_poster._log_http = self._loghttp
         youtube_web_poster.ler_mapa = self._mapa
+        youtube_web_poster._conta_no_kaggle = self._kaggle
 
     def test_http_para_no_aviso_sem_chrome(self):
         a = types.SimpleNamespace(video="x.mp4", titulo="t", descricao="", tags="", ensaio=False,

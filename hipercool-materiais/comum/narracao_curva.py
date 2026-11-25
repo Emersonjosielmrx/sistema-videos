@@ -270,11 +270,11 @@ def pos_processar(wav, ganho_db=0.0, cauda_s=CAUDA_S):
 # do impacto, vírgula, reticências, o começo mudo do TTS) fica com GAP_MICROCORTE: metade no fim de um trecho falado,
 # metade no começo do outro, com o som original das pontas e crossfade curto. A FALA NÃO ACELERA. Respiração e efeito
 # não são silêncio (ficam). Como o clip dura o que o áudio dura, o vídeo encurta junto; o <wav>.words.json acompanha.
-GAP_MICROCORTE = 0.07       # s de silêncio que sobra em cada pausa (env NARRACAO_GAP_MICROCORTE, 0,03–0,3)
-LIMIAR_SILENCIO_DB = -45.0  # o mesmo do corte de cauda: a fala chega nivelada a -20 LUFS
+GAP_MICROCORTE = 0.09       # 24/11 dona ('cortando o finalzinho das frases'): 0,07 -> 0,09; s de silêncio que sobra em cada pausa (env NARRACAO_GAP_MICROCORTE, 0,03–0,3)
+LIMIAR_SILENCIO_DB = -50.0  # 24/11: -45 -> -50 (cauda fraca da última sílaba não é silêncio); o mesmo do corte de cauda: a fala chega nivelada a -20 LUFS
 
 
-def microcortes(wav, gap_s=None):
+def microcortes(wav, gap_s=None, limiar_db=None):
     """No lugar. Devolve (duração antes, depois) ou None (nada a cortar ou falhou: wav e words.json como vieram)."""
     wav = Path(wav)
     try:
@@ -296,18 +296,30 @@ def microcortes(wav, gap_s=None):
         nq = len(y) // quadro
         mono = y[:nq * quadro].mean(axis=1) / 32768
         db = 10 * np.log10((mono.reshape(nq, quadro) ** 2).mean(axis=1) + 1e-12)
-        som = db > LIMIAR_SILENCIO_DB
+        # 22/11 dona (S2-Pro: 'som de suspiro cortado no meio entre as frases'): limiar_db mais alto trata a
+        # respiração fraca como silêncio — sai inteira em vez de ficar picada
+        som = db > (LIMIAR_SILENCIO_DB if limiar_db is None else limiar_db)
         bordas = np.flatnonzero(np.diff(np.concatenate([[0], som.astype(np.int8), [0]])))
         trechos = [(a * quadro, min(len(y), b * quadro)) for a, b in zip(bordas[::2], bordas[1::2]) if b - a >= 2]
         if not trechos:
             return None
         meio, xf = int(gap * sr / 2), max(1, int(0.006 * sr))
+        # 24/11 dona: folga depois do último som de cada trecho (a cauda da sílaba final estava sendo engolida)
+        cauda = int(float(os.environ.get("MICROCORTE_CAUDA_S", "0.03")) * sr)
         pecas, ini = [], max(0, trechos[0][0] - meio)
+        # 23/11 (revisão da narração): pausa INSERIDA de propósito (silêncio digital >= 0,2 s: a da piada contada e da
+        # pergunta retórica, 0,3-0,55 s) não é colapsada — antes virava 0,04-0,07 s e a piada saía "lida".
+        # MICROCORTE_PROTEGE=0 volta ao corte de tudo.
+        zero = db < -90
+        protege = os.environ.get("MICROCORTE_PROTEGE", "1") != "0"
         for (_a1, b1), (a2, _b2) in zip(trechos, trechos[1:]):
-            if a2 - b1 > 2 * meio + 2 * xf:
-                pecas.append((ini, b1 + meio + xf))
+            q1, q2 = b1 // quadro, a2 // quadro
+            if protege and q2 - q1 >= 20 and zero[q1:q2].mean() > 0.7:
+                continue
+            if a2 - b1 > 2 * meio + 2 * xf + cauda:
+                pecas.append((ini, b1 + meio + xf + cauda))
                 ini = a2 - meio - xf
-        pecas.append((ini, min(len(y), trechos[-1][1] + meio)))
+        pecas.append((ini, min(len(y), trechos[-1][1] + meio + cauda)))
         out, mapa = y[pecas[0][0]:pecas[0][1]], [(pecas[0][0], pecas[0][1], 0)]
         for a, b in pecas[1:]:
             p = y[a:b]

@@ -275,15 +275,24 @@ def lote(lista_json):
                 continue
             a, sr = _ler(w)
             corte = 0.0
-            if str(it.get("versao", "2")) not in ("1", "2"):
+            _tt = it.get("texto_tags") or ""
+            # 23/11 (revisão): o "isso!" gritado e a risada no fim são esticados DE PROPÓSITO — não corta
+            if str(it.get("versao", "2")) not in ("1", "2") and not any(k in _tt for k in ("[shouting]", "[laughing")):
                 a, corte = _cauda_esticada(a, sr)
                 sf.write(str(w), a, sr)
-            cps = len(it["texto"]) / max(len(a) / sr, 0.1)
+            # 23/11: a duração da risada e das pausas das tags não conta como "fala lenta" (a tentativa que riu perdia)
+            import re as _re
+            _desc = 0.45 * len(_re.findall(r"\[(laughing|chuckle)", _tt)) + 0.25 * _tt.count("[short pause]")
+            cps = len(it["texto"]) / max(len(a) / sr - _desc, 0.5)
             pena = abs(cps - float(it.get("cps_alvo") or 17)) / max(1.0, float(it.get("cps_alvo") or 17))
             if it.get("whisper"):
                 pena += 2 * _wer(it["texto"], w)
-            if str(it.get("versao")) == "13":
+            # 24/11 madrugada: réplica cega v2 (47 clipes) — escolher pelo ritmo ganhou/empatou em todos (Virjão 61,4 ->
+            # 66,7; Mike 73,8 -> 74,0; Momo 72,2 -> 72,5; Darkness igual) -> virou o PADRÃO. S2PRO_ESCOLHA=animada volta.
+            if str(it.get("versao")) == "13" and os.environ.get("S2PRO_ESCOLHA", "ritmo") == "animada":
                 pena -= 0.4 * _expressividade(a, sr)  # v13: prefere a tentativa mais animada (variação de energia)
+            # 24/11 (réplica cega: pausas do B 0,59-0,63 x 0,80 com 1 geração só): S2PRO_ESCOLHA=ritmo escolhe só
+            # pela velocidade mais perto do narrador (sem o bônus de "animada", que premia a tentativa sem pausa)
             cand.append((pena, w, corte))
         if cand:
             pena, w, corte = min(cand, key=lambda x: x[0])

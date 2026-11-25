@@ -101,7 +101,32 @@ def vitrine(mp4, side, status):
 _SEM_MEMORIA = ("Cannot allocate memory", "get_buffer() failed", "Out of memory", "out of memory")
 
 
+_CEL = None
+
+
+def _fora_do_pc1(args, timeout):
+    """24/11 dona ("os de produtos também devem fazer em outros PCs; tudo que der, pro PC1 ficar o mais livre"): o
+    ffmpeg vai primeiro pros notebooks/celulares (video-fila\\celulares.rodar_ffmpeg: manda as entradas -i, renderiza
+    lá, traz a saída). Ele RECUSA comando que lê arquivo daqui fora do -i (filtro com caminho, concat, fonte) — aí roda
+    aqui como antes. True = a saída chegou. PRODUTO_FORA_PC1=0 desliga."""
+    global _CEL
+    if os.environ.get("PRODUTO_FORA_PC1", "1") == "0":
+        return False
+    try:
+        if _CEL is None:
+            import importlib.util as _ilu
+            spec = _ilu.spec_from_file_location("celulares", r"D:\video-fila\celulares.py")
+            _CEL = _ilu.module_from_spec(spec)
+            spec.loader.exec_module(_CEL)
+        return bool(_CEL.rodar_ffmpeg(["ffmpeg", "-y", "-v", "error", *[str(a) for a in args]], timeout=timeout,
+                                      rotulo="produto"))
+    except Exception:  # noqa: BLE001 — fora falhou = roda aqui
+        return False
+
+
 def _ff(args, timeout=900):
+    if _fora_do_pc1(args, timeout):
+        return
     # 26/10 15:16: "Cannot allocate memory" com o PC1 sem RAM derrubou o VPS depois de 3 cenas do dono prontas ->
     # falta de memória espera e tenta de novo (até ~6 min) em vez de jogar o vídeo fora
     for tentativa in range(4):

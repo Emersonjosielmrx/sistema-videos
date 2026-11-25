@@ -96,6 +96,27 @@ PERFIS = {
         "json": TELA_JSON,
         "grupo": lambda v: v.get("polegadas"),
     },
+    "roteador": {
+        "url": "https://www.olx.com.br/informatica/conectividade-e-dispositivos-de-rede?q=roteador&opst=2&sp=1&pe={teto}",
+        "teto": 300,
+        "o_que": "roteador Wi-Fi inteiro que funciona (com fonte)",
+        "lixo": r"^\s*(cabo|fonte|antena|suporte|placa|switch|adaptador|kit\b|lote\b)|repetidor|extensor|modem 4g|"
+                r"chip|troco|troca\b",
+        "triagem_extra": "Descarte repetidor/extensor, adaptador USB, switch, modem 4G de chip, cabos, antenas, "
+                         "fontes avulsas, lotes, 'troco'.",
+        "json": """ "e_o_produto": true/false (false se for repetidor, adaptador, switch, cabo, fonte avulsa, lote, modem 4G),
+ "funciona": "sim" | "nao" | "incerto",
+ "marca_modelo": "ex.: TP-Link Archer C6, Mercusys MR30G" ou null,
+ "wifi": "4 (N300)" | "5 (AC)" | "6 (AX)" | "7 (BE)" | null (pelo modelo se o anúncio não diz),
+ "velocidade": "ex.: AC1200, AX1500, N300" ou null,
+ "dual_band": true/false/null,
+ "gigabit": true/false/null (portas LAN de 1000 Mbps),
+ "fonte_inclusa": "sim" | "nao" | "nao_informado",
+ "defeitos": "defeitos declarados ou vazio",
+ "preco_real": número ou null,
+ "resumo": "1 frase com o que importa citando o vendedor" """,
+        "grupo": lambda v: v.get("wifi"),
+    },
     "ps3": {
         "url": "https://www.olx.com.br/games/consoles-de-video-game?q=ps3&opst=2&sp=1&pe={teto}",
         "teto": 1000,

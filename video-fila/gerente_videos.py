@@ -193,15 +193,21 @@ def escrever(itens, outras, feito=None):
                    for x in longos]
     if feito:
         linhas += ["", "## Última limpeza", ""] + [f"- {k}: {n} arquivo(s), {b / 1e9:.2f} GB" for k, (n, b) in feito.items()]
-    INV_MD.write_text("\n".join(linhas) + "\n", "utf-8")
+    # 24/11 (C2): escrita atômica — com disco cheio, write_text truncava o inventário antes de gravar
+    def _atomico(p, txt):
+        tmp = p.with_name(p.name + ".tmp")
+        tmp.write_text(txt, "utf-8")
+        os.replace(tmp, p)
+    _atomico(INV_MD, "\n".join(linhas) + "\n")
     INV_JSON.parent.mkdir(exist_ok=True)
-    INV_JSON.write_text(json.dumps({"em": agora.isoformat(timespec="seconds"), "livre_gb": round(livre, 1),
-                                    "itens": itens, "outras": outras}, ensure_ascii=False), "utf-8")
+    _atomico(INV_JSON, json.dumps({"em": agora.isoformat(timespec="seconds"), "livre_gb": round(livre, 1),
+                                   "itens": itens, "outras": outras}, ensure_ascii=False))
 
 
 def rclone_move_conferido(arq, destino):
     """move UM arquivo pro Drive: rclone move apaga o local só depois de conferir o tamanho lá."""
-    r = subprocess.run([RCLONE, "move", str(arq), destino, "--retries", "5"], capture_output=True, text=True,
+    r = subprocess.run([RCLONE, "move", str(arq), destino, "--retries", "5", "--tpslimit", "4", "--transfers", "2"],
+                       capture_output=True, text=True,
                        timeout=7200, creationflags=0x08000000)
     return r.returncode == 0 and not Path(arq).exists()
 
@@ -268,6 +274,17 @@ def limpar(itens):
 def main():
     if DESLIGA.exists():
         return
+    # 24/11 (noite-disco C1): trava entre rodadas — agendada (2/2 h) + manual se sobrepunham (falha R7 às 19:19 de 23/11)
+    sys.path.insert(0, r"D:\limpeza_c")
+    from trava import Trava
+    with Trava("gerente_videos") as t:
+        if not t.ok:
+            print("gerente_videos: outra rodada em andamento — saindo")
+            return
+        _main()
+
+
+def _main():
     itens, outras = inventario()
     feito = None
     if "--limpar" in sys.argv:

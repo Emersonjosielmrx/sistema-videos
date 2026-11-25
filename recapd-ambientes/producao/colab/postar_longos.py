@@ -116,6 +116,8 @@ def _gravar_estado_trancado(est):
     for n in set(est.pop("presos_soltar", []) + disco.get("presos_soltar", [])):
         if est["presos"].get(n, {}).get("status") == "enviando":
             est["presos"].pop(n, None)
+    # 24/11: a lista de soltura é consumida aqui — não fica gravada pra soltar um preso novo do mesmo vídeo depois
+    est.pop("presos_soltar", None)
     # 14/11 15h20: o título real do jardineiro (lztXRIb2s30) foi gravado à mão e a rodada que já estava rodando voltou
     # a nota "(reposto 03/11 ...)" por cima — título de NOTA na memória perde pro título de verdade do disco.
     tit_disco = {p.get("url"): p.get("titulo") for p in disco.get("postados", [])
@@ -441,6 +443,31 @@ def _subir_1080(video, drive):
     log(f"  1080p ok{' e o Drive ficou em 1080p' if r.returncode == 0 else ' (Drive não atualizou: ' + r.stderr.strip()[-120:] + ')'}")
 
 
+def _md5_igual(arq, drive):
+    """25/11 (Rzoy): o .partial do rclone multi-thread nasce com o TAMANHO FINAL e é preenchido aos pedaços — o teto de
+    90 min matou o download com buracos de zeros (52-53% e 96-98%) e o "mesmo tamanho do Drive" aceitaria o vídeo
+    furado. Agora só aceita com o MD5 igual ao do Drive. Sem MD5 do Drive (falhou a leitura) = não aceita.
+    LONGO_CONFERE_MD5=0 volta a conferir só o tamanho."""
+    if os.environ.get("LONGO_CONFERE_MD5", "1") == "0":
+        return True
+    try:
+        r = subprocess.run([RCLONE, "hashsum", "md5", drive], capture_output=True, text=True, timeout=120)
+        alvo = (r.stdout.split() or [""])[0].lower()
+        if len(alvo) != 32:
+            return False
+        import hashlib
+        h = hashlib.md5()
+        with open(arq, "rb") as f:
+            for bloco in iter(lambda: f.read(8 * 1024 * 1024), b""):
+                h.update(bloco)
+        ok = h.hexdigest() == alvo
+        if not ok:
+            log(f"  {Path(arq).name}: tamanho certo mas MD5 diferente do Drive (download furado) — não uso")
+        return ok
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def _publicar(ficha, d):
     """Baixa e roda o anime_publish. Devolve o caminho do postar.json ou None."""
     pasta = TMP / ficha.name
@@ -456,11 +483,11 @@ def _publicar(ficha, d):
         except Exception:  # noqa: BLE001
             _tam_drive = 0
         if _tam_drive:
-            if video.exists() and video.stat().st_size == _tam_drive:
+            if video.exists() and video.stat().st_size == _tam_drive and _md5_igual(video, d["drive"]):
                 _reusar = True
             else:
                 for _p in pasta.glob(video.name + ".*.partial"):
-                    if _p.stat().st_size == _tam_drive:
+                    if _p.stat().st_size == _tam_drive and _md5_igual(_p, d["drive"]):
                         video.unlink(missing_ok=True)
                         _p.rename(video)
                         _reusar = True
@@ -509,7 +536,7 @@ def _publicar(ficha, d):
             if os.environ.get("LONGO_PARTIAL_OK", "1") == "0" or not tam:
                 return False
             for p in video.parent.glob(video.name + ".*.partial"):
-                if p.stat().st_size == tam:
+                if p.stat().st_size == tam and _md5_igual(p, d["drive"]):
                     video.unlink(missing_ok=True)
                     p.rename(video)
                     log(f"  .partial já completo ({tam / 1e9:.1f} GB) — usado sem baixar de novo")
@@ -967,11 +994,19 @@ def rodada(ver=False):
             # 14/11: erro DEPOIS de mandar o arquivo grande (> LONGO_PRESO_MIN_MIN minutos de envio, padrão 5) = o vídeo
             # pode ter ficado como rascunho no canal: prende a fonte nele (só ele pode tentar de novo) e avisa a dona.
             # LONGO_PRESO_AO_CANAL=0 desliga.
-            if (status not in ("ok", "limite") and os.environ.get("LONGO_PRESO_AO_CANAL", "1") != "0"
+            # 25/11: "parado"/"canal_bloqueado"/"repetido"/"nao_aprovado" = barrado no checar_upload ANTES de abrir o
+            # Studio (nada subiu) — não é "erro depois de subir" (Rzoy ficou preso a 3 canais por causa do
+            # POSTAGEM_DESLIGADA.json, sem nunca chegar ao YouTube).
+            if (status not in ("ok", "limite", "parado", "canal_bloqueado", "repetido", "nao_aprovado")
+                    and os.environ.get("LONGO_PRESO_AO_CANAL", "1") != "0"
                     and (time.time() - t_env) / 60 >= float(os.environ.get("LONGO_PRESO_MIN_MIN", "5"))):
                 est.setdefault("presos", {})[ficha.name] = {"canal": cred, "canal_nome": nome_canal, "status": status,
                                                             "info": str(info)[:160],
                                                             "em": datetime.now().isoformat(timespec="minutes")}
+                # 24/11 (RzoyNcnlIj8: erro 406 min no Fio da Meada 23/11 22:58 e na madrugada foi tentado no inovare
+                # manhwa br e no ForjaReact): um "presos_soltar" velho do mesmo nome soltava o preso na mescla seguinte.
+                # Preso por erro demorado limpa qualquer pedido de soltura pendente dele.
+                est["presos_soltar"] = [n for n in est.get("presos_soltar", []) if n != ficha.name]
                 _gravar_estado(est)
                 log(f"  {ficha.name[:30]}: erro DEPOIS de subir ({(time.time() - t_env) / 60:.0f} min) — pode ter "
                     f"ficado rascunho; preso ao {nome_canal} (não vai pra outro canal)")

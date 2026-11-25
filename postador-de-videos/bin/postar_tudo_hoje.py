@@ -14,6 +14,7 @@ Fontes:
   - recap: D:\\hipercool-materiais\\**\\postar.json  categoria=recap  -> canais manga
   - animes: idem categoria=animes                                   -> canais manga
   - historias: idem categoria=historias  -> Gemini roteia entre canais IA
+  - kit3d: D:\\hipercool-materiais\\historias-em-frames\\*\\postar.json -> canal fixo do postar.json
 
 Uso:
   python postar_tudo_hoje.py --preview            # so planeja, nao posta
@@ -326,6 +327,34 @@ def main():
     if "vo3" in cats:
         itens += coletar_vo3(canais_ia, limite=args.vo3_max, canal_fixo=args.canal_fixo,
                              skip_gemini=args.skip_gemini)
+
+    # kit3d (17/11: canal dentrodascoisas3d): vídeos 3D prontos com canal fixo no postar.json
+    for pj in (MATERIAIS / "historias-em-frames").glob("*/postar.json"):
+        try:
+            d = json.loads(pj.read_text(encoding="utf-8"))
+            if not d.get("pronto") or d.get("posted_url"):
+                continue
+            mp4 = pj.parent / d.get("arquivo", "")
+            if not mp4.exists():
+                continue
+            canal_fixo = (d.get("canais") or [""])[0]
+            if not canal_fixo:
+                continue
+            itens.append({
+                "categoria": "kit3d",
+                "arquivo": str(mp4),
+                "canal_pref": canal_fixo,
+                "canal_pool": [canal_fixo],
+                "titulo": d.get("titulo", "")[:100],
+                "descricao": d.get("descricao", ""),
+                "tags": d.get("tags", []),
+                "thumb": str(pj.parent / d["thumb"]) if d.get("thumb") and (pj.parent / d["thumb"]).exists() else None,
+                "privacy": d.get("privacy", "public"),
+                "postar_json": str(pj),
+                "cache_id": None,
+            })
+        except Exception:
+            pass
 
     from collections import Counter
     print("\n=== INVENTARIO ===")

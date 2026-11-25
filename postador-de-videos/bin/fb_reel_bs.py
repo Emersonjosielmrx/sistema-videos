@@ -16,6 +16,14 @@ LOG = Path(__file__).resolve().parent.parent / "logs"
 COMPOSER = "https://business.facebook.com/latest/reels_composer?asset_id={}"
 
 
+def _foto(pg, caminho):
+    """24/11: o print é só conferência — com o PC1 lento ele estourava 30 s e derrubava o post (vídeo já enviado)."""
+    try:
+        pg.screenshot(path=caminho, timeout=15000)
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def _fechar_avisos(pg):
     for _ in range(3):
         pg.keyboard.press("Escape")
@@ -106,8 +114,32 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
                     raise
                 time.sleep(10)
         time.sleep(12)
-        if "login" in pg.url:
-            return False, "não logado"
+        # 24/11 (noite, robustez.3): checkpoint/"confirme sua identidade" vinha como timeout genérico e só avisava depois de
+        # 3 erros iguais no dia. Agora reconhece pela URL e pelo texto, e avisa NA HORA (1x por conta/motivo na janela).
+        url = (pg.url or "").casefold()
+        humano = None
+        if "/checkpoint" in url or "two_step_verification" in url:
+            humano = "checkpoint do Facebook (confirmar identidade/código)"
+        elif "login" in url:
+            humano = "conta deslogada"
+        else:
+            try:
+                corpo = (pg.inner_text("body", timeout=5000) or "")[:3000].casefold()
+                if any(t in corpo for t in ("confirme sua identidade", "confirm your identity", "insira o código",
+                                            "enter the code", "sua conta foi bloqueada", "your account has been locked")):
+                    humano = "Facebook pedindo confirmação de identidade"
+            except Exception:  # noqa: BLE001
+                pass
+        if humano:
+            try:
+                sys.path.insert(0, r"D:\video-fila")
+                import avisos
+                avisos.enviar(f"🔐 Facebook {nome_pagina}: {humano}. A postagem desta conta parou até alguém resolver "
+                              f"no Chrome da conta (nunca pela casa).", "facebook_paginas", importante=True,
+                              chave=f"fb_humano:{humano}:{asset_id}")
+            except Exception:  # noqa: BLE001
+                pass
+            return False, f"precisa de você: {humano}"
         _fechar_avisos(pg)
         # 21/11: a tela do composer às vezes não monta (caixa "Postar em" não aparece em 15 s -> a MS Energy queimou a
         # fila inteira assim). Recarrega 1x antes de desistir.
@@ -121,20 +153,39 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
             ok_fb, desm, rotulo = _so_facebook(pg, nome_pagina)
         print(f"  postar em: '{rotulo}' (desmarcou {desm})", flush=True)
         if not ok_fb or rotulo.casefold() != nome_pagina.casefold():
-            pg.screenshot(path=str(LOG / f"{tag}_erro_postar_em.png"))
+            _foto(pg, str(LOG / f"{tag}_erro_postar_em.png"))
             return False, f"'Postar em' ficou '{rotulo}' — esperado só '{nome_pagina}'"
         # upload: o botão abre o seletor de arquivo nativo. 20/11: o 1º upload da rodada (Chrome recém-aberto) às vezes
         # não entra no FileChooser e estoura; tenta 2x antes de desistir.
-        enviado = False
+        enviado, ult_erro = False, ""
+        arq = str(Path(video).resolve())
+        # 23/11: prova do dia — todo upload que estourou era de 25-54 MB (mediana 48), todo que passou <= 38 MB. Pelo
+        # proxy o arquivo grande não entra em 90 s. Tempo = 90 s + 6 s por MB (50 MB ~ 6,5 min), teto 10 min.
+        mb = Path(arq).stat().st_size / 1e6
+        t_up = int(min(600, 90 + 6 * mb) * 1000)
         for tent in range(3):  # 21/11: madrugada com PC carregado estoura mais; 3 tentativas, recarregando o composer
             try:
-                with pg.expect_file_chooser(timeout=30000) as fc:
-                    _botao(pg, "Adicionar vídeo").click()
-                fc.value.set_files(str(Path(video).resolve()), timeout=90000)
+                # 23/11: 1º o <input type=file> escondido do composer (não depende do seletor nativo do Windows, que
+                # com o PC1 em 100% não abria a tempo = "FileChooser timeout 3x", a maior causa de falha do dia).
+                # O seletor nativo fica de reserva. FB_UPLOAD_NATIVO=1 volta ao antigo.
+                import os as _os
+                inp = pg.locator("input[type=file][accept*='video'], input[type=file]")
+                if _os.environ.get("FB_UPLOAD_NATIVO") != "1" and inp.count():
+                    inp.first.set_input_files(arq, timeout=t_up)
+                    enviado = True
+                    print(f"  upload pelo campo de arquivo ({mb:.0f} MB)", flush=True)
+                    break
+                bt = _botao(pg, "Adicionar vídeo", "Adicionar video", "Carregar", "Upload")
+                if bt is None:
+                    raise RuntimeError("botão 'Adicionar vídeo' não apareceu")
+                with pg.expect_file_chooser(timeout=45000) as fc:
+                    bt.click()
+                fc.value.set_files(arq, timeout=t_up)
                 enviado = True
                 break
             except Exception as ex:
-                print(f"  upload tent {tent + 1} falhou ({str(ex)[:60]}); recarrego e tento de novo", flush=True)
+                ult_erro = str(ex).splitlines()[0][:80]
+                print(f"  upload tent {tent + 1} falhou ({ult_erro}); recarrego e tento de novo", flush=True)
                 if tent < 2:
                     try:
                         pg.goto(COMPOSER.format(asset_id), wait_until="domcontentloaded", timeout=120000)
@@ -144,7 +195,7 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
                     except Exception:
                         time.sleep(5)
         if not enviado:
-            return False, "upload não entrou (FileChooser timeout 3x)"
+            return False, f"upload não entrou 3x ({ult_erro})"
         print("  vídeo enviado ao seletor", flush=True)
         # texto — a caixa só monta depois que o upload avança; espera até 3 min (MS Energy pela casa demora)
         caixa = pg.locator("[contenteditable=true][role=textbox]").first
@@ -157,7 +208,7 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
             pg.keyboard.insert_text(texto)
             time.sleep(1)
         except Exception:
-            pg.screenshot(path=str(LOG / f"{tag}_sem_caixa_texto.png"))
+            _foto(pg, str(LOG / f"{tag}_sem_caixa_texto.png"))
             print("  aviso: não digitei a legenda (caixa não apareceu); segue sem texto", flush=True)
         # espera o upload terminar (Avançar habilita)
         for i in range(120):
@@ -166,9 +217,9 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
                 break
             time.sleep(5)
         else:
-            pg.screenshot(path=str(LOG / f"{tag}_erro_upload.png"))
+            _foto(pg, str(LOG / f"{tag}_erro_upload.png"))
             return False, "upload não terminou em 10 min"
-        pg.screenshot(path=str(LOG / f"{tag}_1_criar.png"))
+        _foto(pg, str(LOG / f"{tag}_1_criar.png"))
         # Avançar até aparecer Compartilhar/Publicar
         for passo in range(5):  # Criar -> Editar -> Compartilhar: clica Avançar enquanto existir
             b = _botao(pg, "Avançar")
@@ -179,7 +230,7 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
                     break
                 time.sleep(3)
             b.click(); time.sleep(8)
-        pg.screenshot(path=str(LOG / f"{tag}_2_final.png"))
+        _foto(pg, str(LOG / f"{tag}_2_final.png"))
         fim = _botao(pg, "Compartilhar", "Publicar", "Compartilhar agora")
         if not fim:
             return False, "botão Compartilhar não apareceu"
@@ -195,13 +246,13 @@ def postar(ctx, asset_id, nome_pagina, video, texto, tag="fb"):
             if any(x in corpo for x in ("reel compartilhado", "seu reel foi", "publicado", "foi compartilhado",
                                         "está sendo publicado", "sendo processado", "processando seu reel")) \
                     or "reels_composer" not in pg.url:
-                pg.screenshot(path=str(LOG / f"{tag}_3_ok.png"))
+                _foto(pg, str(LOG / f"{tag}_3_ok.png"))
                 return True, "ok"
-        pg.screenshot(path=str(LOG / f"{tag}_3_sem_confirmacao.png"))
+        _foto(pg, str(LOG / f"{tag}_3_sem_confirmacao.png"))
         return False, "sem confirmação depois de Compartilhar (conferir na página)"
     except Exception as e:  # noqa: BLE001
         try:
-            pg.screenshot(path=str(LOG / f"{tag}_erro.png"))
+            _foto(pg, str(LOG / f"{tag}_erro.png"))
         except Exception:
             pass
         return False, f"erro: {e}"[:300]

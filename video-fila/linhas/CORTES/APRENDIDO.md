@@ -1,26 +1,20 @@
-# Regras aprendidas — CORTES (atualizado 23/11 15:47; a sessão da linha aplica no pipeline)
-1. Manter rosto, olhos, boca e ponto focal da ação 100% livres de legendas, tarjas e elementos gráficos.
-2. Confinar títulos, tarjas e avisos na zona segura superior central (y: 150-400), com fonte grande e chamativa para reter nos primeiros 2s.
-3. Cobrir legendas nativas e caracteres estrangeiros com tarja branca limpa e translúcida, sem fundos opacos cortantes ou coloridos.
-4. Fixar legendas dinâmicas palavra-a-palavra exclusivamente na zona segura vertical (y: 150-1580, margens >= 60px), fonte >= 32px, com contorno preto grosso e sem sobreposição.
-5. Exibir estritamente uma palavra ou expressão ativa por vez sincronizada à locução, banindo textos fantasmas, duplicados ou estáticos em conflito.
-6. Abrir o gancho (0-2s) com pergunta forte, conflito explícito, tarja superior chamativa e imagem/ação de alto impacto desde o primeiro frame, simplificando ou removendo excessos textuais estáticos.
-7. Renovar o estímulo visual a cada 1.5s-3.5s com transição acentuada (> 25% de movimento ativo através de zoom/pan contínuo ou troca de corte), banindo cenas estáticas e borrões excessivos.
-8. Sincronizar tomada, ação, legendas e inserção de palavras-chave estritamente com a locução no milissegundo exato, banindo dessincronias e repetições.
-9. Agrupar takes de forma fluida, banindo efeito ping-pong, planos duplicados, congelamentos longos e inserções desconectadas.
-10. Respeitar cronologia estrita da narração baseada no roteiro oficial, mantendo coerência total entre áudio, legendas, tarjas e narração em 1ª pessoa.
-11. Executar 100% das transições por corte seco limpo ou punch-in, banindo clarões, fade branco, filtros saturados e glitches visuais.
-12. Manter geometria original e preencher 100% do quadro em 1080x1920 sem bordas pretas, falhas de crop ou áreas estouradas no branco.
-13. Validar 100% das palavras da legenda e tarjas estritamente contra o roteiro oficial, garantindo quebra palavra-a-palavra correta em português.
-14. Manter movimento e legenda ativos até o último frame, cortando a seco na última sílaba para emendar no loop sem quebras ou sílabas engolidas.
-15. Importar e renderizar overlays e ilustrações exclusivamente em PNG com canal alfa limpo, banindo fundos irregulares ou memes desconectados.
-16. Estruturar camadas estritamente: vídeo base < tarjas de cobertura < cards/B-rolls < legenda dinâmica < tarja de gancho e @, sem excesso de textos conflitantes na mesma cena.
-17. Aumentar brilho, contraste, saturação e nitidez em cenas escuras, trechos turvos ou de baixa variação visual para evitar perda de definição.
-18. Simplificar o encerramento eliminando letreiros múltiplos e CTAs poluídos, mantendo apenas um elemento limpo com respiro adequado para o loop.
-19. Adicionar efeitos sonoros de impacto (woosh ou pop) e elementos gráficos dinâmicos padronizados sincronizados nas palavras-chave do gancho.
-20. Garantir contraste ideal com sombra preta forte, opacidade total e contorno nítido em legendas e stickers sobrepostos a fundos claros, alaranjados ou texturas complexas, evitando cruzar marcações sobre o texto.
-21. Dar destaque gráfico limpo a prints ou textos informativos no fundo com no máximo 2-3 palavras-chave em fonte legível e sem obstruir o centro.
-22. Garantir coerência visual estrita entre o tema central do roteiro e o fundo exibido, banindo mídias genéricas, memes ou cenas reais desconectadas.
-23. Ajustar a altura e opacidade da tarja branca de cobertura para isolar totalmente a legenda original sem invadir elementos visuais adjacentes ou escurecer o tronco/fundo excessivamente.
-24. Garantir espaçamento limpo e alinhamento centralizado sem sobreposição de textos nas telas de encerramento e transições de loop.
-25. Garantir que a primeira palavra da legenda ou do gancho exiba termos fortes e imediatos (como 'UMA NOVIDADE'), evitando palavras soltas que reduzam a retenção.
+# Regras aprendidas — CORTES (atualizado 25/11 11:48; a sessão da linha aplica no pipeline)
+1. Posicionar legendas dinâmicas estritamente na zona segura inferior (y entre 150 e 1580), mantendo margem mínima de 60px das bordas e sem sobreposição a rostos, bocas ou expressões dramáticas.
+2. Garantir contorno preto espesso, alto contraste e fundo translúcido opcional em todas as palavras dinâmicas para legibilidade perfeita sobre fundos complexos, água ou galhadas.
+3. Ajustar o timing e o espaçamento rigoroso das legendas palavra-a-palavra para evitar qualquer sobreposição ou colisão entre linhas consecutivas, tarjas ou caixas secundárias.
+4. Aplicar tarjas brancas de fundo apenas para cobrir legendas queimadas estrangeiras originais da fonte, centralizando-as corretamente na zona segura superior/inferior sem cortar bordas ou textos.
+5. Garantir gancho inicial magnético e de alto impacto nos primeiros 2 segundos com ângulo aberto, visual dinâmico, pergunta ou frase provocativa, evitando cortes abruptos ou inícios genéricos.
+6. Manter o movimento ativo acima de 4% por cena e intensificar zoom dinâmico (ken burns) na última cena para assegurar retenção alta até o loop.
+7. Evitar poluição visual na zona superior e nas lateralidades (mantendo y >= 150), reposicionando alertas, contadores e elementos gráficos para não competir com a legenda central.
+8. Validar e sincronizar perfeitamente cada palavra exibida com o ápice da ação visual e da narração em 1ª pessoa do protagonista, mantendo o tom e gírias brasileiras.
+9. Aplicar tarja de fundo escura ou contorno forte na primeira palavra de gancho (ex: 'GAROTO', 'VIROU') quando o fundo for claro ou houver baixo contraste, garantindo leitura imediata.
+10. Manter todas as legendas rigorosamente afastadas da barra de progresso do YouTube Shorts (respeitando Y máximo de 1580) e evitar cortes em títulos estáticos superiores.
+11. Agrupar e sincronizar a quebra de palavras da legenda exatamente com a cadência da locução, evitando que palavras isoladas fiquem soltas sem contexto visual forte.
+12. Remover ou reposicionar títulos estáticos grandes no topo do quadro (ex: 'CASCUDO IMUNE') quando competirem ou cortarem a borda superior (próximo a y=150), dando respiro à zona segura.
+13. Evitar áreas borradas de censura ou tarjas mal posicionadas que encubram partes importantes da ação na zona inferior, preservando a qualidade visual percebida.
+14. Garantir transições dinâmicas de zoom/pan nos primeiros quadros da cena 1 e micro-zooms em pontos de virada para sustentar o movimento acima de 4% e evitar trechos estáticos.
+15. Garantir que legendas secundárias ou blocos de texto estáticos no rodapé nunca se sobreponham à legenda principal palavra-a-palavra, mantendo unificado e legível o bloco na zona segura.
+16. Evitar sobreposição temporal confusa entre legendas dinâmicas da narração e legendas fixas da fonte que estejam encobertas por tarjas.
+17. Suavizar transições de zoom e pan entre cenas consecutivas para evitar saltos bruscos que prejudiquem o fluxo visual.
+18. Garantir que a última palavra do quadro final fique isolada com destaque máximo e cor contrastante para impulsionar a re-assistência automática (loop).
+19. Ajustar gradação de cor e saturação em trechos excessivamente saturados ou avermelhados para preservar o contraste e a legibilidade da tarja e legenda.

@@ -493,8 +493,11 @@ def baixar(v):
         return Path(v["caminho"])
     CACHE.mkdir(parents=True, exist_ok=True)
     dst = CACHE / f"{hashlib.md5(v['caminho'].casefold().encode()).hexdigest()[:8]}_{v['nome']}"
+    # 24/11: Drive a ~0,2 MB/s (23 MB = 113 s) estourava os 120 s fixos e a rodada do FB passou o dia sem postar.
+    # Prazo = 120 s + 8 s por MB, teto 10 min.
+    prazo = int(min(600, 120 + 8 * (v.get("bytes") or 0) / 1e6))
     r = subprocess.run([RCLONE, "copyto", v["drive"], str(dst), "--retries", "2", "--timeout", "45s", "--contimeout", "20s"],
-                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=prazo)
     if r.returncode or not dst.exists() or dst.stat().st_size != v["bytes"]:
         dst.unlink(missing_ok=True)
         raise RuntimeError(f"nao baixou do Drive {v['drive']}: {(r.stderr or r.stdout).strip()[-300:]}")

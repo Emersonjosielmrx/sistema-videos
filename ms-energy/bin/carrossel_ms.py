@@ -14,6 +14,7 @@ Tarefa MSEnergy_Carrossel (terça, quinta e sábado 12:37, sem janela).
 import argparse
 import io
 import json
+import os
 import random
 import re
 import sys
@@ -487,9 +488,23 @@ def main():
     ap.add_argument("--so-gerar", action="store_true")
     ap.add_argument("--postar")
     a = ap.parse_args()
+    # 23/11: o Instagram pediu CHECKPOINT (verificação) em 20/11 e o carrossel tentou 4x/dia por 3 dias (66 h sem
+    # postar) com aviso "não importante". Checkpoint = só a dona resolve (login no instagram.com). Agora: 24 h sem
+    # tentar + 1 aviso IMPORTANTE. Apagar logs\checkpoint_ig.json = tenta já. MS_CHECKPOINT_PAUSA=0 desliga a pausa.
+    marca = Path(r"D:\ms-energy\logs\checkpoint_ig.json")
+    if marca.exists() and os.environ.get("MS_CHECKPOINT_PAUSA", "1") != "0" and not a.postar:
+        try:
+            ate = json.loads(marca.read_text("utf-8")).get("ate", 0)
+        except (OSError, ValueError):
+            ate = 0
+        if time.time() < ate:
+            log(f"Instagram em CHECKPOINT (verificação pendente da dona) — não tento até "
+                f"{datetime.fromtimestamp(ate):%d/%m %H:%M}; apague {marca.name} depois de verificar")
+            return
     try:
         if a.postar:
             postar(a.postar)
+            marca.unlink(missing_ok=True)
             return
         pronto = None if a.so_gerar else _pendente()
         if pronto:
@@ -499,11 +514,23 @@ def main():
             postar(pasta)
     except Exception as e:  # noqa: BLE001
         log(f"ERRO: {type(e).__name__}: {e}")
+        checkpoint = "checkpoint" in str(e).lower()
         try:
             sys.path.insert(0, r"D:\video-fila")
             import avisos
-            avisos.enviar(f"MS Energy: carrossel do Instagram falhou ({type(e).__name__}: {str(e)[:150]})",
-                          "msenergy-carrossel", importante=False)
+            if checkpoint:
+                ja = marca.exists()
+                marca.write_text(json.dumps({"ate": time.time() + 24 * 3600, "desde": datetime.now().isoformat(
+                    timespec="seconds"), "erro": str(e)[:300]}, ensure_ascii=False), "utf-8")
+                if not ja:
+                    avisos.enviar("MS Energy (CLIENTE): o Instagram da MS Energy pediu VERIFICAÇÃO (checkpoint) e "
+                                  "o carrossel não posta. Precisa da dona: entrar em instagram.com com a conta da MS "
+                                  "Energy e confirmar a identidade. Depois apague D:\\ms-energy\\logs\\checkpoint_ig.json "
+                                  "(ou espere 24 h) — o carrossel pronto sai sozinho.", "msenergy-carrossel",
+                                  importante=True)
+            else:
+                avisos.enviar(f"MS Energy: carrossel do Instagram falhou ({type(e).__name__}: {str(e)[:150]})",
+                              "msenergy-carrossel", importante=False)
         except Exception:  # noqa: BLE001
             pass
         raise

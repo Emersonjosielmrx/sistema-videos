@@ -5,15 +5,20 @@
 # grava os cookies); se não sair em 10 s, taskkill na árvore dele. Chrome sem porta (o pessoal da dona) NUNCA.
 # ffmpeg com mais de -HorasFfmpeg e que não gastou CPU em 30 s = parado -> fecha. Nunca toca em python/pythonw.
 #   powershell -File limpeza_chrome.ps1 [-Horas 3] [-HorasFfmpeg 6] [-Simular]
-param([double]$Horas = 3, [double]$HorasFfmpeg = 6, [double]$MinTravado = 15, [switch]$Simular)
+param([double]$Horas = 3, [double]$HorasFfmpeg = 6, [double]$MinTravado = 15, [double]$MinOrfao = 30, [double]$MinRclone = 30, [double]$MinSsh = 60, [switch]$Simular)
 $PortasFixas = @()  # 19/11: vazio — o vigia do GGMax (9725) agora é sem navegador; Chrome só ~20 s quando o login vence
 $log = Join-Path $PSScriptRoot "logs\limpeza_chrome.log"
 New-Item -ItemType Directory -Force (Split-Path $log) | Out-Null
 function L($m) { $l = "{0:yyyy-MM-dd HH:mm:ss} {1} {2}" -f (Get-Date), $env:COMPUTERNAME, $m; Add-Content -Path $log -Value $l -Encoding UTF8; $l }
 
-$procs = Get-CimInstance Win32_Process
+# 24/11: com o PC1 em 100% uma rodada ficou presa 1 h (WMI sem prazo) e a tarefa não começa outra enquanto ela vive
+# — os órfãos voltaram a acumular. Agora: rodada anterior > 8 min = fechada; WMI com prazo de 60 s.
+Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -OperationTimeoutSec 30 -ErrorAction SilentlyContinue |
+    Where-Object { $_.ProcessId -ne $PID -and $_.CommandLine -match 'limpeza_chrome\.ps1' -and ((Get-Date) - $_.CreationDate).TotalMinutes -gt 8 } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue; L ("rodada anterior travada fechada (pid {0}, desde {1:HH:mm})" -f $_.ProcessId, $_.CreationDate) }
+$procs = Get-CimInstance Win32_Process -OperationTimeoutSec 60 -ErrorAction Stop
 $usos = ($procs | Where-Object { $_.Name -match '^(python|pythonw|node|pwsh|powershell)\.exe$' } | ForEach-Object { $_.CommandLine }) -join ' '
-$livreAntes = [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1)
+$livreAntes = [math]::Round((Get-CimInstance Win32_OperatingSystem -OperationTimeoutSec 20 -ErrorAction SilentlyContinue).FreePhysicalMemory / 1MB, 1)
 $fechados = 0
 # 03/11 (dona: "no PC2 fica um cemitério de Chromes, dezenas abertos"): lá havia 15 Chromes de 31/10-01/11 na MESMA
 # porta 9470. Só 1 escuta a porta (o dono); os outros são restos que nenhum script alcança, mas eram poupados porque
@@ -82,8 +87,12 @@ foreach ($c in ($procs | Where-Object { $_.Name -eq 'chrome.exe' -and $_.Command
     if (-not (Get-Process -Id $c.ProcessId -ErrorAction SilentlyContinue)) { continue }
     $porta = [regex]::Match($c.CommandLine, 'remote-debugging-port=(\d+)').Groups[1].Value
     $h = ((Get-Date) - $c.CreationDate).TotalHours
-    if ($h -lt $Horas) { continue }
     $perfil = [regex]::Match($c.CommandLine, 'user-data-dir="?([^"]+?)"?( --|$)').Groups[1].Value -replace '.*\\', ''
+    # 24/11 (dona: "garanta que não aconteça mais esse travamento"): 13 Chromes do cofre com o processo-pai MORTO e porta
+    # que nenhum script cita ficaram até 4 h (esperavam as -Horas) e levaram o PC1 a 100%. Órfão >= -MinOrfao min = fecha.
+    $paiVivo = $procs | Where-Object { $_.ProcessId -eq $c.ParentProcessId }
+    if ($h -lt $Horas -and ($paiVivo -or $h * 60 -lt $MinOrfao -or $usos -match "(?<!\d)$porta(?!\d)" -or $PortasFixas -contains $porta)) { continue }
+    if ($h -lt $Horas -and (Get-NetTCPConnection -State Established -LocalPort ([int]$porta) -ErrorAction SilentlyContinue)) { continue }  # alguém conectado no CDP agora
     if ($donoDaPorta.ContainsKey($porta) -and $donoDaPorta[$porta] -ne $c.ProcessId) {
         if ($Simular) { L ("[simular] fecharia Chrome RESTO porta {0} (dono e outro) aberto ha {1:N1} h" -f $porta, $h); continue }
         taskkill /PID $c.ProcessId /T /F | Out-Null
@@ -121,4 +130,26 @@ foreach ($f in ($procs | Where-Object { $_.Name -eq 'ffmpeg.exe' })) {
     $fechados++
     L ("fechou ffmpeg parado {0} (aberto ha {1:N1} h, 0 CPU em 30 s)" -f $f.ProcessId, ((Get-Date) - $f.CreationDate).TotalHours)
 }
-if ($fechados) { L ("RAM livre {0} -> {1} GB" -f $livreAntes, [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1)) }
+# 24/11: rclone de consulta curta (cat/lsjson/size/about/ls) com --timeout travou 3 h girando CPU. Cópias/sync longos nunca.
+foreach ($r in ($procs | Where-Object { $_.Name -eq 'rclone.exe' -and $_.CommandLine -match '\s(cat|lsjson|lsf|ls|size|about|md5sum|hashsum)\s' })) {
+    $min = ((Get-Date) - $r.CreationDate).TotalMinutes
+    if ($min -lt $MinRclone) { continue }
+    if ($Simular) { L ("[simular] fecharia rclone travado {0} ({1:N0} min)" -f $r.ProcessId, $min); continue }
+    Stop-Process -Id $r.ProcessId -Force -ErrorAction SilentlyContinue
+    $fechados++
+    L ("fechou rclone travado {0} ({1:N0} min): {2}" -f $r.ProcessId, $min, ($r.CommandLine -replace '.*rclone(\.exe)?"?\s*', '').Substring(0, [Math]::Min(80, ($r.CommandLine -replace '.*rclone(\.exe)?"?\s*', '').Length)))
+}
+# 24/11: 15 ssh para o PC2 (192.168.18.7) presos desde a tarde, com o processo que os abriu já morto. Fecha ssh com
+# pai morto, > -MinSsh min e quase sem CPU. Túnel (-N / -L / -R) NUNCA — esses são de longa duração de propósito.
+$vivosId = @{}; foreach ($x in $procs) { $vivosId[[int]$x.ProcessId] = 1 }
+foreach ($s in ($procs | Where-Object { $_.Name -eq 'ssh.exe' -and $_.CommandLine -notmatch '\s-(N|L|R|D)\b' })) {
+    $min = ((Get-Date) - $s.CreationDate).TotalMinutes
+    if ($min -lt $MinSsh -or $vivosId[[int]$s.ParentProcessId]) { continue }
+    $p = Get-Process -Id $s.ProcessId -ErrorAction SilentlyContinue
+    if (-not $p -or $p.CPU -gt 5) { continue }
+    if ($Simular) { L ("[simular] fecharia ssh preso {0} ({1:N0} min)" -f $s.ProcessId, $min); continue }
+    Stop-Process -Id $s.ProcessId -Force -ErrorAction SilentlyContinue
+    $fechados++
+    L ("fechou ssh preso {0} ({1:N0} min, pai morto): {2}" -f $s.ProcessId, $min, ("$($s.CommandLine)" -replace '.*ssh(\.exe)?"?\s*', '').Substring(0, [Math]::Min(70, ("$($s.CommandLine)" -replace '.*ssh(\.exe)?"?\s*', '').Length)))
+}
+if ($fechados) { L ("RAM livre {0} -> {1} GB" -f $livreAntes, [math]::Round((Get-CimInstance Win32_OperatingSystem -OperationTimeoutSec 20 -ErrorAction SilentlyContinue).FreePhysicalMemory / 1MB, 1)) }

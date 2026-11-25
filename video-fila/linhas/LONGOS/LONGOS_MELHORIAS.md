@@ -585,3 +585,20 @@ dentro da palavra ou pegava o começo da seguinte; muitos itens eram pedaço de 
 - 21/11 15:40 [claude-56/8f] PC2 fora desde ~13h30: ligado e na rede local (192.168.18.7) mas o Tailscale travou (status 'active; relay sao' sem passar nada). Reiniciado o serviço Tailscale pelo IP local (chave id_rsa_pc2) → ssh pc2 voltou. Pausa de 3 falhas tirada (1 delas = Short sem fala, não é defeito do PC2). Longo XTTS trio no ar 15:22: https://youtu.be/Xiw0GwqrJXo
 - 22/11 [claude-56/8f] Legenda fora da voz no 82ge_com_S2Pro: o áudio pronto do Drive (S2-Pro/Qwen3) e o XTTS chegam SEM .words.json → legenda estimada por tamanho, escorrega. anime_segments._tempos_fish agora mede no Whisper (GPU) TODA frase com áudio e sem tempos (antes só as do Fish do site). TEMPOS_TODA_FRASE=0 volta. Junto: o chat da voz já casou áudio↔frase pelo texto (roteiro_audio.txt) em _audio_pronto_do_drive. Pacote --codigo enviado.
 - 22/11 10:50 [claude-56/8f] Escada: 'encheu o teto' comparava com 4 (base) mas o teto real do canal = max_dia do cadastro + rampa (Tech Noturno 3) → nunca enchia, nunca subia (117 prontos parados). rampa_canais usa o teto do postador (RAMPA_TETO_REAL=0 volta); canal punido nunca sobe. Aplicado: Tech Noturno 3→4, Anime Noturno 4→5; HistoriasEmFrames punido (mediana 1). Postagem disparada.
+
+## 24/11 — JÁ FEITO (noite): memes escolhidos pela FICHA (o que a frase pede), não por sorteio
+Dona 23/11: "usar os melhores memes da forma mais inteligente possível nos vídeos". Antes: emoção por lista de gatilhos +
+SORTEIO entre os memes da mesma emoção ("coitado"/"de repente" sorteavam meme até em cena triste; 4 dos 20 novos nunca
+entravam no meio). Agora:
+- `memes_novos\fichas.json` (novo): cada um dos 20 memes novos tem "cabe" (expressões da narração que pedem ESSE meme,
+  minerado de roteiros reais), "nunca" e emoção. `recapd bin\memes_visuais.py` escolhe por pontos (_por_contexto,
+  _forca_ficha: expressão de 2+ palavras vale 2, palavra solta 1, _FRACAS valem 1); sem ficha casando = sem meme.
+- Sorteio por gatilho DESLIGADO (`MEMES_SORTEIO_GATILHO=1` volta). Cena de morte/luto/massacre = sem meme (triste()).
+- Meme usado nos últimos 6 vídeos perde preferência (`workspace\memes_historico.json`, registrar_uso).
+- `anime-pipeline._memes_resumo`: resumo sem repetir meme; série a >= 3 frases do meme do meio; loudnorm no resumo.
+- Desliga tudo: `MEMES_CONTEXTO=0`. Backups: `memes_visuais.py.antes_contexto_23nov` e `.antes_revisao_24nov`;
+  fichas em `D:\video-fila\memes_melhoria\teste\fichas.json.antes_*`. anime-pipeline anterior = cópia D:\github_sistema (23/11 18:44).
+- Teste a seco com 2 roteiros reais (813 e 1158 frases): 10 e 8 memes, todos pela ficha e no momento certo (antes 8 e
+  14, a maioria sorteada fora de hora). Detalhes: `D:\video-fila\memes_melhoria\frentes\F1.md`.
+- FALTA: conferir no 1º longo real renderizado (Kaggle leva memes_img inteira, fichas.json incluso — montar_pacote.py
+  sync sem filtro; precisa o pacote ser atualizado no Drive).

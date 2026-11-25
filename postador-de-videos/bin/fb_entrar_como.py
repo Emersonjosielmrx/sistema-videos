@@ -26,7 +26,15 @@ def entrar_como_cookie(ctx, page_id, nome=None):
         h = pg.content()
         ok = f'"USER_ID":"{page_id}"' in h or (nome and f"No que você está pensando, {nome}?" in pg.inner_text("body"))
         return bool(ok)
-    except Exception:
+    except Exception as ex:
+        # 23/11: o cookie JÁ foi posto; só a CONFERÊNCIA na home estourou o tempo (proxy lento). Antes caía no menu, que
+        # também não abria, e a página era pulada. O composer do Business Suite abre pelo asset_id da Página e o
+        # fb_reel_bs._so_facebook recusa se "Postar em" não for exatamente ela — então seguir é seguro.
+        # FB_COOKIE_ESTRITO=1 volta ao antigo (só segue com a conferência).
+        import os
+        if os.environ.get("FB_COOKIE_ESTRITO") != "1" and "Timeout" in type(ex).__name__ + str(ex):
+            print("   conferência do cookie estourou o tempo; sigo (o composer confere a Página)", flush=True)
+            return True
         return False
     finally:
         pg.close()

@@ -148,6 +148,38 @@ VERSOES["maria"] = dict(
             "Um ar-condicionado inverter incluso: mais conforto, com a energia vindo do próprio sol.",
             _TAIL,
             "Inversor Solis de 4 kW com acompanhamento da geração pelo aplicativo."])
+# 25/11: sistema HIBRIDO 1.000 kWh com 2 valores: sem bateria e com bateria MB48314 (bateria = R$ 24.900, dona).
+# Sem bateria: 12 x 625 W + inversor hibrido Deye 8 kW (aceita bateria depois) = 22.900 (mesma base) + 3.000 do hibrido.
+VERSOES["hibrido1000"] = dict(
+    VERSOES["keyla"], n=12, ger_media=1000, consumo=1000, valor=25900.00, num="P26-1125H",
+    saida="Proposta MS Energy - Sistema Hibrido 1.000 kWh - 12x625W Deye 8k - com e sem bateria MB48314.pdf",
+    cliente="", cliente_doc="", cliente_end="", ligacao="Bifásico", grupo="Grupo B1 – Residencial", minimo=50,
+    inversores=[(1, "INVERSOR HÍBRIDO DEYE 8 kW (SUN-8K-SG)", "Funciona ligado à rede e com bateria · backup automático na falta de energia · Wi-Fi", "DEYE")],
+    inv_curto="Híbrido Deye 8 kW", inv_card="Inversor híbrido: rede + bateria",
+    inv_garantia="Inversor híbrido Deye: conforme garantia do fabricante",
+    cabo_m=50, extras=[],
+    bateria=("BATERIA DE LÍTIO MB48314 (48 V)", "Lítio LiFePO4 · guarda a energia do sol para a noite e para quedas de energia"),
+    opcoes=[("Sem bateria", 25900.00), ("Com bateria MB48314", 25900.00 + 24900.00)],
+    porque=["Gera cerca de 1.000 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "Inversor híbrido: funciona ligado à rede hoje e aceita bateria a qualquer momento, sem trocar nada.",
+            "Com a bateria MB48314, a casa continua com energia quando falta luz da Equatorial (geladeira, iluminação, internet).",
+            "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano).",
+            "Acompanhamento da geração e da carga da bateria pelo aplicativo."])
+# 25/11: 2a proposta separada, com a bateria MINIMA para o hibrido funcionar (48 V 100 Ah ~5 kWh), so o essencial,
+# sem ar-condicionado, por algumas horas. Preco da bateria = estimativa (dona aprova).
+VERSOES["hibrido1000b"] = dict(
+    VERSOES["hibrido1000"], num="P26-1125HB",
+    saida="Proposta MS Energy - Sistema Hibrido 1.000 kWh - 12x625W Deye 8k - com e sem bateria basica 5 kWh.pdf",
+    bateria=("BATERIA DE LÍTIO 48 V 100 Ah (5 kWh) – BÁSICA",
+             "Lítio LiFePO4 · a menor que o inversor aceita · mantém geladeira, lâmpadas, TV e internet por cerca de 8 a 10 horas "
+             "na falta de luz (não segura ar-condicionado)"),
+    opcoes=[("Sem bateria", 25900.00), ("Com bateria básica 5 kWh", 25900.00 + 8900.00)],
+    porque=["Gera cerca de 1.000 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "Inversor híbrido: funciona ligado à rede hoje e aceita bateria a qualquer momento, sem trocar nada.",
+            "Bateria básica de 5 kWh: quando falta luz, mantém o essencial (geladeira, iluminação, TV e internet) por cerca de "
+            "8 a 10 horas. Ar-condicionado e chuveiro ficam de fora.",
+            "Dá para aumentar a bateria depois, sem trocar o inversor.",
+            "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano)."])
 CHAVE = sys.argv[1] if len(sys.argv) > 1 else "solis"
 V = VERSOES[CHAVE]
 SAIDA = os.path.join(AQUI, V["saida"])
@@ -523,12 +555,31 @@ produtos += [
     (f'<img src="{b64("prod_projeto.jpg")}">', "PROJETO DE ENGENHARIA", "Projeto elétrico, ART e homologação na Equatorial", "SV", 1),
     (f'<img src="{b64("prod_instalacao.jpg")}">', "INSTALAÇÃO", "Equipe própria com NR-10 e NR-35", "SV", 1),
 ]
+def bateria_svg():
+    return ('<svg viewBox="0 0 80 80" width="64" height="64"><rect x="14" y="10" width="52" height="62" rx="5" fill="#f4f6f8" stroke="#9aa5b1"/>'
+            '<rect x="20" y="18" width="40" height="8" rx="2" fill="#123b57"/>'
+            + "".join(f'<rect x="24" y="{32+i*9}" width="32" height="6" rx="1.5" fill="{"#1a7f37" if i else "#9aa5b1"}"/>' for i in range(4))
+            + '<path d="M44 20l-6 6h5l-3 5" stroke="#f2a900" stroke-width="1.6" fill="none"/></svg>')
+
+
 linhas_prod = "".join(f'<tr><td class="pimg">{im}</td><td class="pn"><b>{n}</b><br><span class="mut">{d}</span></td>'
                       f'<td>{u}</td><td class="q">{brl(q,0)}</td></tr>' for im, n, d, u, q in produtos)
+if V.get("bateria"):
+    _bn, _bd = V["bateria"]
+    linhas_prod += (f'<tr style="background:#eef7f0"><td class="pimg">{bateria_svg()}</td><td class="pn"><b>{_bn}</b>'
+                    f'<br><span class="mut">{_bd}</span><br><b style="color:#1a7f37">Só na opção com bateria</b></td>'
+                    f'<td>PC</td><td class="q">1</td></tr>')
+if V.get("opcoes"):
+    caixa_preco = '<div class="preco" style="gap:4mm">' + "".join(
+        f'<div><span>{r}</span><b>R$ {brl(v)}</b><small>Material, projeto, homologação e instalação inclusos</small></div>'
+        for r, v in V["opcoes"]) + '</div>'
+else:
+    caixa_preco = (f'<div class="preco"><div><span>Investimento total</span><b>R$ {brl(VALOR)}</b>'
+                   '<small>Material, projeto, homologação e instalação inclusos</small></div></div>')
 pagina(f"""
   {titulo('Os produtos', 'Tudo o que está incluso nesta proposta')}
   <table class="prod"><tr><th></th><th style="text-align:left">Produto</th><th>Unid.</th><th>Qtde</th></tr>{linhas_prod}</table>
-  <div class="preco"><div><span>Investimento total</span><b>R$ {brl(VALOR)}</b><small>Material, projeto, homologação e instalação inclusos</small></div></div>
+  {caixa_preco}
 """)
 
 # --- 5b. pagamento (parcelamento proprio + simulacao de financiamento)
@@ -540,22 +591,23 @@ def pmt(pv, i, n):
     return pv * i / (1 - (1 + i) ** -n) if i else pv / n
 
 
-if V.get("pagamento"):
+def pagina_pagamento(VALOR, rotulo=""):
     meio = VALOR / 2
     p21 = meio / 21
     linhas_fin = "".join(
         f"<tr><td class='pn'><b>{b}</b><br><span class='mut'>{obs}</span></td><td>{n}×</td><td>{brl(i*100,2)}% a.m.</td>"
         f"<td>{car} meses</td><td class='q' style='font-size:11pt'>R$ {brl(pmt(VALOR, i, n))}</td></tr>"
         for b, n, i, car, obs in FINANC)
+    cli_txt = f" · cliente {V['cliente']}" if V['cliente'] else ""
     bloco_fin = (f"""<h2>Simulação de financiamento</h2>
-  <p class="sub" style="margin-bottom:3mm">Valor financiado: R$ {brl(VALOR)} · cliente {V['cliente']}{' · ' + V['cliente_doc'] if V['cliente_doc'] else ''} · no maior prazo de cada linha</p>
+  <p class="sub" style="margin-bottom:3mm">Valor financiado: R$ {brl(VALOR)}{cli_txt}{' · ' + V['cliente_doc'] if V['cliente_doc'] else ''} · no maior prazo de cada linha</p>
   <table class="prod"><tr><th style="text-align:left">Financeira</th><th>Prazo</th><th>Juros</th><th>Carência</th><th>Parcela estimada</th></tr>{linhas_fin}</table>
   <div class="destaque" style="font-size:9.5pt"><b>Parcela estimada:</b> ao submeter à aprovação da financeira, os valores
   podem aumentar dependendo do score de crédito. A taxa final sai da análise feita com o CPF do(a) cliente e pode incluir IOF,
   seguro e tarifas.</div>"""
                  if FINANC else "")
     pagina(f"""
-  {titulo('Formas de pagamento', 'Escolha a que cabe melhor no seu orçamento')}
+  {titulo('Formas de pagamento' + (' – ' + rotulo if rotulo else ''), 'Escolha a que cabe melhor no seu orçamento')}
   <div class="duas" style="grid-template-columns:1fr">
     <div class="box"><h3>{ico('dinheiro',AZUL2,18)} Parcelamento direto MS Energy</h3>
       <p style="margin:1mm 0 2mm">Investimento de <b>R$ {brl(VALOR)}</b> dividido em duas partes:</p>
@@ -573,13 +625,18 @@ if V.get("pagamento"):
   {bloco_fin}
 """)
 
+
+if V.get("pagamento"):
+    for _rot, _val in (V.get("opcoes") or [("", VALOR)]):
+        pagina_pagamento(_val, _rot)
+
 # --- 6. retorno
 linhas_ret = "".join(
     f'<tr><td class="{"inv" if ac < 0 else "luc"}">{"Investimento" if ac < 0 else "Lucro"}</td><td>{a}</td>'
     f"<td>{brl(t)}</td><td>{brl(g,0)}</td><td>{brl(e)}</td><td>{brl(ac)}</td><td>{brl(p)}</td></tr>"
     for a, t, g, e, ac, p in anos)
 pagina(f"""
-  {titulo('Retorno do investimento', 'Quanto o sistema devolve ao longo de 25 anos')}
+  {titulo('Retorno do investimento', 'Quanto o sistema devolve ao longo de 25 anos' + (f' · calculado na opção sem bateria (R$ {brl(VALOR)}); a bateria traz energia na falta de luz, não aumenta a economia na conta' if V.get('opcoes') else ''))}
   <div class="cards c3">
     {card('relogio', PB_TXT, 'Payback: tempo para o sistema se pagar')}
     {card('grafico', f"{brl(TIR*100,1)}% a.a.", 'TIR: rentabilidade ao ano')}

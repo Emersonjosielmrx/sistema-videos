@@ -1,0 +1,61 @@
+{
+  "vereditos": [
+    {
+      "titulo": "Efeitos T5/T6/T7 e impacto lateral NÃO são renderizados desde 01/11 (vivem só no caminho PNG morto)",
+      "valido": true,
+      "motivo": "Confirmado. anime_captions.py:75-87: short_mix padrão '1' manda o Short para o burn_subtitles_ass e retorna; CORTES_FX_CHOQUE só é lido em fx_subtitles.py:1435 (render_subtitles_short), CORTES_MASCOTE só em anime_captions.py:106 (depois do return), CORTES_GANCHO_REMOTION só em anime_gancho.queimar:546 (ramo PNG, anime_captions.py:137); o impacto no ASS é fixo em \\an5\\pos(vw//2, vh*0.42) (fx_subtitles.py:1031). Contei postar.json em D:/hipercool-materiais/animes recap/shorts: fx_choque real 30/10=36, 31/10=68, 01/11=9, depois 0 (só 1 em 06/11) com fx_sort_B 22-132/dia; mascote real 76 em 31/10, 13 em 01/11, depois 0-1.",
+      "correcao": "Detalhe: a linha 1162-1196 citada é a mascote do LONGO (_mascote_eventos.json), não a do CTA do Short — serve de modelo de overlay na mesma passada, mas o porte é novo. _fx_choque exige W,H=720x1280 (fx_subtitles.py:309) e o ASS sobe para 1080 (linha 1131): os PNG precisam de scale no overlay. Testar o porte fora do PC1 (teste_remoto.py --tipo render)."
+    },
+    {
+      "titulo": "Placar fechou T6 (fx_choque=B) e T8/T11 comparando braços placebo; sinal 'raio azul 1,31x' vem só de 28/10-01/11",
+      "valido": true,
+      "motivo": "Confirmado para T6: placar_variantes.py:118-123 usa vdict[nome] e só troca por tu[campo] se _testes_usados.json existir; placar_cortes_testes.json (17/11 20:44) fx_choque B n_medidos=551 'PRONTO PARA DECIDIR'; historico 2026-11-17T20:55 'T6 fechado: B'; sinais_shorts.json fx_choque raio_00d1ff n=52 razao 1,31. Os ~1.100 'B' de 02/11 em diante não tiveram efeito.",
+      "correcao": "T8 (curto) e T11 (ninguem_esperava) NÃO são placebo: mudam roteiro/gancho por env (variantes.aplicar em anime_auto.py:720), não dependem do caminho PNG — tirar do título. Correção do placar: para CAMPO_RENDER, se 'variantes' existe e tu.get(campo) está vazio E pj.get(campo) também, marcar 'nao_renderizado' (o postar.json já grava fx_choque/mascote/gancho_remotion via _usados(), anime_publish.py:582-584, então dá para usar pj[campo] em vez de exigir o arquivo, que nem existe nas pastas antigas: 0 de 244 em 30/10-01/11)."
+    },
+    {
+      "titulo": "Cerca de 40% dos Shorts de 22-23/11 ainda sorteiam testes FECHADOS (curto, fx_choque, ninguem_esperava): config ou código antigo em outra máquina",
+      "valido": true,
+      "motivo": "Os números batem: pastas *_20261122/23 = 219 com 'abertura' (config atual) e 151 com curto/fx_choque/ninguem_esperava no dicionário variantes (curto A=72/B=79). As duas cópias de cortes_ajustes.json no PC1 (producao e github_sistema) têm curto=B, fx_choque=B, ninguem_esperava=A, abertura=abcd. Logo os 151 foram sorteados por uma config antiga em outro lugar.",
+      "correcao": "A causa apontada (_sync_bin.py para o PC2) é palpite sem prova: o arquivo é de 31/07 e o PC2 não necessariamente produz Shorts hoje. Outra hipótese igualmente plausível: pedidos antigos na fila do Kaggle (lote_shorts_kaggle.py:205 copia as envs CORTES_* do momento do envio para o pedido; um pedido enviado antes de 17/11 renderizado em 22/11 sai com o sorteio velho). Primeiro conferir o campo 'enviado' dos pedidos da fila e os logs de cada produtor (sem ssh em rajada); só depois mexer na sincronização. Gravar a máquina de origem no postar.json continua válido (hoje nenhum campo diz)."
+    },
+    {
+      "titulo": "Mascote T7 e gancho Remotion T5 estão 'ab' há 3 semanas sem nenhum vídeo B real",
+      "valido": true,
+      "motivo": "cortes_ajustes.json: mascote='ab', gancho_remotion='ab'. postar.json de 02/11 a 24/11: mascote e gancho_remotion = None em todas as pastas (só 1 masc=B em 06/11 e 1 'fora' em 03/11), com masc_sort_B 4-150/dia. Placar 17/11: 'dados suficientes, sem diferença clara ainda' (esperado entre braços iguais).",
+      "correcao": "Preferir fixar 'A' com linha no historico até o porte (achado 1); ao portar, abrir de novo com contagem só a partir da data do porte."
+    },
+    {
+      "titulo": "'Legenda lateral' está fixada mas não é aplicada, e o próprio placar diz que lateral é PIOR em retenção",
+      "valido": true,
+      "motivo": "placar_cortes_testes.json legenda_impacto: centro pct_ge65=0,36 (n 104) x lateral 0,162 (n 86), p_melhor_que_ref_pct65 lateral=0,023, sugestao \"['lateral'] pior que centro\", nota 'fechado em lateral pelo melhorador em 30/10 04:44 (sem views)'. postar.json 19-24/11: legenda_estilo lateral=900/900, e o ASS centraliza (fx_subtitles.py:1031).",
+      "correcao": "Amostra pequena (86/104) e de antes de 30/10: não é prova forte de que lateral é pior, só de que não é melhor. O ajuste é só de rótulo/registro (não muda vídeo); não reabrir como teste sem a dona."
+    },
+    {
+      "titulo": "Placar dos testes parado desde 17/11: gancho_meio, saudação e fala rápida sem decisão há uma semana",
+      "valido": true,
+      "motivo": "placar_cortes_testes.json/.md com data 17/11 20:44; schtasks sem tarefa com placar/variante/sinais; nenhum .py chama placar_variantes (só comentário em anime_auto.py:718). sinais_shorts.json (_quando 2026-11-22T05:43) saudacao A 1,29 x B 1,2 confere.",
+      "correcao": "Corrigir o placar (achado 2) ANTES de agendar, senão o placar diário repete a leitura placebo dos testes de render e reforça o fechamento errado do T6. Agendar oculto (rodar_oculto.vbs); é só leitura e não é o melhorador pausado."
+    },
+    {
+      "titulo": "Capa: 'pesca' (maior mídia, 1,23x) e negócios/saúde ficam fora do CaparShorts; 71% dos Shorts saem sem capa/1º quadro",
+      "valido": true,
+      "motivo": "capar_shorts.py:33 QUADRO_REAL=('dorama','filme_sem_voz','fatos'); :80-82 filtro por midia; :289-290 tetos 2 e 4. postar.json 19-24/11: pesca=395 de 900, capa_no_inicio False=717. sinais pesca n=62 razao 1,23 (zerado 27). Log capar_shorts.log tem TimeoutExpired de ffprobe/ffmpeg em 23/11 23:50, 23:54 e 24/11 01:22-02:56.",
+      "correcao": "'71% sem capa' está exagerado como dano: capa.jpg existe em quase todas as pastas (151/151 e 218/219 em 22-23/11), e muitos têm _NO_DRIVE.txt (o CaparShorts pula esses de propósito, capar_shorts.py:84). O sinal de pesca (n=62) é de mídia, não de capa. Entrar só como variante 'ab' (capa no 1º quadro x sem), sem subir teto às cegas."
+    },
+    {
+      "titulo": "Tratamento de capa B (receita 'B:drama' 2,0x/1,38x) está desligado: CAPA_TRATAMENTO nunca é definido",
+      "valido": false,
+      "motivo": "O desligamento é decisão explícita da dona e inclui a B: anime_publish.py:257 '01/11 dona: SEMPRE COLORIDAS E NÃO DARK — a C escurecia até 94% de preto e a B tingia; capa sai como gerada'. A proposta supõe que a B não entra na regra, mas o comentário cita a B como motivo. Amostra 9+14 é pequena. Não propor religar."
+    },
+    {
+      "titulo": "Shorts renderizam em 720x1280 e são esticados para 1080: ANIME_RENDER_1080 nunca é ligado",
+      "valido": false,
+      "motivo": "Fatos conferem (fx_assets.py:41-45; ASS escala para 1080 ANTES da legenda, fx_subtitles.py:1127-1131, então o texto do libass já sai em 1080), mas não há prova de dano: nenhum print ou métrica mostrando perda de nitidez ou de retenção. A regra do 1080p é cumprida. Impacto não provado."
+    },
+    {
+      "titulo": "Já ligados por padrão (não propor de novo): hora 21-22 h, delogo, Short curto, 'NINGUÉM ESPERAVA' liberado",
+      "valido": false,
+      "motivo": "Não é achado acionável (a própria proposta diz 'nada a ligar'). E 'curto=B e ninguem_esperava=A já no padrão' é desmentido na prática pelo achado 3: 151 Shorts de 22-23/11 ainda sortearam curto A=72 e ninguem_esperava B=60."
+    }
+  ]
+}

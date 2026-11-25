@@ -29,7 +29,7 @@ _whisper = None
 # 04/11: as solares (clientes reais = prioridade da dona) rodavam ABAIXO do normal (padrão do Agendador, prio 7) e
 # perdiam a CPU pro VS Code/Chrome/lotes: whisper > 600 s e ffmpeg/ffprobe estourando o tempo DEPOIS do clipe do Veo
 # aprovado (Advance 21:53, Globo 22:15 em 03/11). Todo pipeline solar importa este módulo: sobe para ACIMA do normal.
-if __import__("os").name == "nt":
+if __import__("os").name == "nt" and not __import__("os").environ.get("QA_WHISPER_THREADS"):  # filho do whisper fica baixo
     try:
         import ctypes as _ct
         _k = _ct.windll.kernel32
@@ -107,7 +107,9 @@ def _transcrever_agora(v):
     from faster_whisper import WhisperModel
     if _whisper is None:
         try:
-            _whisper = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4, download_root=WHISPER_DIR)
+            import os as _os
+            _whisper = WhisperModel("medium", device="cpu", compute_type="int8",
+                                    cpu_threads=int(_os.environ.get("QA_WHISPER_THREADS", "4")), download_root=WHISPER_DIR)
         except RuntimeError as e:  # memoria apertada (Chrome do Flow aberto): igual ao manhwa-react, 1 thread
             if "mkl_malloc" not in str(e):
                 raise
@@ -145,6 +147,14 @@ def transcrever(v):
                 time.sleep(3)
         t = None
         try:
+            # 24/11 (dona: "esse PC não é tão ruim pra uns navegadores deixarem ele inusável"): na thread, o whisper
+            # que passava do prazo CONTINUAVA rodando escondido (4 núcleos + o modelo medium) até o programa acabar —
+            # o reel_advance chegou a 5,2 GB reservados e o PC1 ficou sem memória. Agora roda num PROCESSO à parte,
+            # em prioridade baixa: estourou o prazo = processo morto e a memória volta na hora. QA_WHISPER_THREAD=1
+            # volta ao jeito antigo.
+            import os
+            if os.environ.get("QA_WHISPER_THREAD") != "1":
+                return _transcrever_processo(v, max(30, fim - time.time()))
             res = {}
 
             def _rodar():
@@ -170,6 +180,84 @@ def transcrever(v):
                 msvcrt.locking(trava.fileno(), msvcrt.LK_UNLCK, 1)
             except OSError:
                 pass
+
+
+_REMOTO_PY = ("import json,sys\n"
+              "from faster_whisper import WhisperModel\n"
+              "m=WhisperModel('medium',device='cpu',compute_type='int8',cpu_threads=4,"
+              "download_root=sys.argv[3])\n"
+              "segs,_=m.transcribe(sys.argv[1],language='pt',word_timestamps=True,vad_filter=True,beam_size=5,"
+              "condition_on_previous_text=False)\n"
+              "json.dump([(w.word.strip(),round(w.start,2),round(w.end,2)) for s in segs for w in (s.words or [])],"
+              "open(sys.argv[2],'w',encoding='utf-8'))\n")
+
+
+def _transcrever_fora(v, prazo):
+    """25/11 (PC1 com 4,6 GB num whisper medium do QA às 07:55 — regra: PC1 só supervisor): transcreve no STI (16 GB,
+    faster_whisper no venv do chatterbox, modelo medium em ~/modelos/whisper). Manda só o vídeo, devolve as palavras.
+    None = não deu (máquina ocupada/fora) -> quem chamou roda aqui como antes. QA_WHISPER_FORA=0 desliga."""
+    import os
+    import uuid
+    if os.environ.get("QA_WHISPER_FORA", "1") == "0":
+        return None
+    host, py = "sti", "~/chatterbox/venv/bin/python"
+    pasta = f"/tmp/qa_whisper_{uuid.uuid4().hex[:8]}"
+    ssh = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", host]
+    try:
+        if subprocess.run(ssh + [f"mkdir -p {pasta}"], capture_output=True, timeout=30).returncode != 0:
+            return None
+        ext = Path(v).suffix or ".mp4"
+        if subprocess.run(["scp", "-q", "-o", "BatchMode=yes", str(v), f"{host}:{pasta}/v{ext}"],
+                          capture_output=True, timeout=300).returncode != 0:
+            return None
+        r = subprocess.run(ssh + [f"cd {pasta} && nice -n 10 {py} - {pasta}/v{ext} {pasta}/p.json ~/modelos/whisper "
+                                  f"&& cat {pasta}/p.json"],
+                           input=_REMOTO_PY, capture_output=True, text=True, timeout=max(60, prazo))
+        if r.returncode != 0 or not r.stdout.strip().startswith("["):
+            return None
+        return [tuple(x) for x in json.loads(r.stdout)]
+    except Exception:  # noqa: BLE001
+        return None
+    finally:
+        try:
+            subprocess.run(ssh + [f"rm -rf {pasta}"], capture_output=True, timeout=30)
+        except Exception:  # noqa: BLE001
+            pass
+
+
+def _transcrever_processo(v, prazo):
+    """Whisper num processo filho (mesmo Python), prioridade abaixo do normal e 2 threads. Passou do prazo = mata.
+    25/11: tenta primeiro FORA do PC1 (_transcrever_fora)."""
+    import os
+    import sys
+    import tempfile
+    fora = _transcrever_fora(v, prazo)
+    if fora is not None:
+        return fora
+    cod = ("import json,sys; sys.path.insert(0, sys.argv[3]); import qa_ms; "
+           "json.dump(qa_ms._transcrever_agora(sys.argv[1]), open(sys.argv[2], 'w', encoding='utf-8'))")
+    fd, saida = tempfile.mkstemp(suffix=".json", prefix="whisper_")
+    os.close(fd)
+    amb = dict(os.environ, QA_WHISPER_THREADS="2", PYTHONUTF8="1")
+    flags = 0x00004000 | 0x08000000 if os.name == "nt" else 0  # BELOW_NORMAL + sem janela
+    p = subprocess.Popen([sys.executable, "-c", cod, str(v), saida, str(Path(__file__).resolve().parent)],
+                         env=amb, creationflags=flags, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    try:
+        _, err = p.communicate(timeout=prazo)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        try:
+            p.communicate(timeout=10)
+        except Exception:  # noqa: BLE001
+            pass
+        Path(saida).unlink(missing_ok=True)
+        raise RuntimeError(f"whisper passou de {int(prazo)} s (processo encerrado, memória liberada)")
+    try:
+        if p.returncode != 0:
+            raise RuntimeError(f"whisper falhou: {(err or b'').decode('utf-8', 'replace')[-200:]}")
+        return [tuple(x) for x in json.loads(Path(saida).read_text("utf-8"))]
+    finally:
+        Path(saida).unlink(missing_ok=True)
 
 
 def fala_confere(esperada, palavras):

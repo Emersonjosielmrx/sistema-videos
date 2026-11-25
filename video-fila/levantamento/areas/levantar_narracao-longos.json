@@ -1,0 +1,115 @@
+{
+ "resumo_area": "Narração dos longos (levantamento 24/11, só leitura). O padrão de config/motor_voz.json é XTTS 8 + S2-Pro 13 misto com teto de 40% e RVC por cima. Só que nenhum longo saiu ainda com a v13: o único misto pronto (RzoyNcnlIj8, 22/11) foi feito com S2-Pro v2, o S2-Pro pegou só 54 de 653 frases (8%) e o vídeo está travado no upload. De 19/11 para cá os longos do motor novo (Fish/XTTS/S2-Pro) têm 0 a 16 views. Os do motor antigo (13 a 17/11) tinham 16 a 204. Nenhum dos novos tem retenção lida no Studio, então ninguém sabe se o motor novo segura mais. O que mais falha: (1) falas de personagem e mascote quase sempre saem com a voz do narrador, porque o Kaggle não tem as vozes, e a CONFERENCIA marca OK mesmo assim; (2) a IA devolve JSON quebrado nas falas e nos ganchos, e o aviso não chega à dona; (3) o QA acha imagem parada de 55 a 62 s e o vídeo é postado do mesmo jeito; (4) um longo de 59 min com 3,4 GB leva 6,7 h para subir e cai no fim. A retenção média dos longos é de 37 a 248 s, ou 0,6 a 4,2% do vídeo, então o que pesa é o começo.",
+ "achados": [
+  {
+   "titulo": "O motor novo da narração não tem medida de retenção e as views caíram",
+   "problema": "Os longos do motor novo, de 19 a 22/11, não têm leitura nenhuma no Studio, e a ficha de postado não diz qual motor narrou. Por isso não dá para provar se o XTTS ou o S2-Pro seguram mais ou menos que o Kitten/RVC. Pelas views, os novos estão bem abaixo dos antigos.",
+   "evidencia": "colab\\views_longos.json (lido 24/11 00:18): motor novo WEmcyeDuSxc 1, dMPo1zvSyCs 0, yOrT3vgoa4U 1, _r_CMoP9Hyw 16, t8tD4RSqdJs 2 (XTTS KkVirjão), Xiw0GwqrJXo 2 (XTTS trio), RhT093bQeNw 3 (S2-Pro Momo). Motor antigo no mesmo canal (Fio da Meada) de 13 a 16/11: AjgJG8HAfLk 204, SPThI7oMKGw 143, ozdALiyIDVY 115. postador _analise\\metricas_studio.json: RhT093bQeNw, t8tD4RSqdJs, Xiw0GwqrJXo, _r_CMoP9Hyw e yOrT3vgoa4U não aparecem. dMPo1zvSyCs tem 'erro: TimeoutError'. Os campos de longos_postados.json['postados'] são nome, vid, canal, canal_nome, url, titulo, em, duracao_s, narradores_modo, seo_versao, estilo_titulo e tags: não há motor_voz.",
+   "proposta": "Gravar motor_voz, versões e % do S2-Pro na ficha de postado. Ler o motor do TESTE_NARRADORES.txt ou do longo_override do render.json; a ficha já tem narradores_modo, então é só acrescentar a chave. Pôr os longos do motor novo na leitura do Studio com dur_media e pct_media. Feito isso, a ronda compara a retenção por motor no mesmo canal. Sem esse número, a escolha XTTS 8 + S2-Pro 13 é só gosto de ouvido.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Os Shorts já gravam motor_voz no postar.json (LONGOS_MELHORIAS.md 19/11 13:25). Nos longos não existe."
+  },
+  {
+   "titulo": "O padrão XTTS 8 + S2-Pro 13 nunca foi produzido: o único misto é v2 e pegou 8% das frases",
+   "problema": "O config diz S2-Pro v13 com teto de 40% desde 23/11, mas o único longo misto pronto usou a v2, com teto de 25%. Nele a detecção de emoção mandou só 54 de 653 frases ao S2-Pro (8%). Quase tudo saiu no XTTS e a parte expressiva que a dona pediu (risada, piada) quase não aparece. O S2-Pro também é caro: 34 min só para montar o llama.cpp e o modelo, e cerca de 53 s por frase.",
+   "evidencia": "config\\motor_voz.json: s2pro_versao '13', _padrao_23nov 'teto 40%'. na_nuvem\\RzoyNcnlIj8_misto_xtts8_s2pro_momo\\TESTE_NARRADORES.txt: motor {'s2pro_versao': '2'}. pipeline.log:89 '[s2pro] llama.cpp + modelo prontos em 2062s'. pipeline.log:178 'modo misto v2: 54/54 frases em 2879s (de 653)'. '[xtts] 597/597 frases em 3105s'. O pipeline foi de 08:48 a 13:41 (4h53). anime_tts.py:1351 teto 0,40 só na v13.",
+   "proposta": "Antes de tratar a v13 como padrão de fato, rodar 1 longo com ela e conferir no log o '[s2pro] modo misto v13: N/M'. A meta é N/M perto de 25 a 40%. Se ficar baixo, as regras _S2_EMO e _s2_tags_v13 (anime_tts.py:1229 e 1362) estão pegando pouco. Para cortar os 34 min de preparo, guardar o build do llama.cpp e o GGUF prontos no dataset ou cache do Kaggle. Não tocar no PC1.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "baixo",
+   "ja_existe": "O modo misto existe (anime_tts.py:1325-1400). O que não existe é longo provado com a v13 nem cache do build."
+  },
+  {
+   "titulo": "As falas de personagem saem com a voz do narrador e a CONFERENCIA marca OK",
+   "problema": "Nos longos XTTS a IA marcou as falas de personagem, mas as vozes dos personagens não estavam na máquina do Kaggle e tudo saiu na voz do narrador. A CONFERENCIA conta só as falas marcadas e mostra OK. A dona fica achando que o vídeo tem elenco de vozes e ele não tem. A troca de narrador, que é o item que mais segura em diálogo, não acontece.",
+   "evidencia": "na_nuvem\\e2nIzNGXvmA_xtts_momo\\CONFERENCIA.md: '✅ | 135 falas marcadas; vozes: sett_lol, rem, bulma...'. No pipeline.log:90-115 do mesmo longo, as 26 vozes dão '[personagem] voz X não está nesta máquina — falas ficam com o narrador'. Contagem nos pipeline.log de 21/11: 82ge1YYkUyA_qwen3 10 vozes faltando, 82ge1YYkUyA_s2pro 16, gJve_WjefZs 17, e2nIzNGXvmA 26. Código em bin\\anime_segments.py:386-391.",
+   "proposta": "(1) Conferir no próximo longo se o _baixar_voz_drive de 23/11 (anime_segments.py:388) resolveu. A prova é o log sem 'não está nesta máquina'. (2) Fazer a linha 'Falas de personagem com outra voz' da CONFERENCIA contar as falas que saíram com outra voz, não as marcadas. Para isso, registrar no render.json as vozes que narraram de verdade.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O download da voz do Drive entrou em 23/11 (anime_segments.py:388, comentário '23/11: o elenco é escolhido aqui dentro'), mas nenhum longo foi feito depois dele. A CONFERENCIA continua contando só as marcadas."
+  },
+  {
+   "titulo": "A IA devolve JSON quebrado e o longo sai sem falas e sem ganchos, sem aviso à dona",
+   "problema": "Quando a IA devolve JSON cortado ou mal formado, o longo sai com 0 falas de personagem e 0 mini-ganchos. O aviso 'faltou' também não sai no Kaggle, porque o módulo avisos não existe lá. A dona não fica sabendo.",
+   "evidencia": "CONFERENCIA de 124 longos em na_nuvem\\*: 36 com 'Falas de personagem ❌ 0 falas marcadas' e 36 com 'Mini-ganchos ❌ 0'. Os logs registram 4x '[longo] falas de personagem: IA falhou (JSONDecodeError)' e 2x 'ganchos: IA falhou (JSONDecodeError)'. RzoyNcnlIj8 pipeline.log: '[claude_client] aviso de 'faltou falas de personagem' não saiu (ModuleNotFoundError)'. Código em bin\\anime-pipeline.py:986-995 (re.search r'\\[.*\\]' + json.loads) e 1286, e bin\\claude_client.py:815-825 (import avisos de D:\\video-fila).",
+   "proposta": "(a) Ao dar JSONDecodeError, aproveitar os objetos completos até o ponto do corte, cortando no último '}' antes do ']', ou pedir à IA em lotes menores. Hoje a_cada_s é 15 (config/longo.json:144), o que pede centenas de falas num único JSON. (b) No Kaggle, gravar o 'faltou' num arquivo da pasta, como o faltou.json que já existe. Do lado do PC1, o postar_longos lê esse arquivo e avisa a dona.",
+   "impacto": "alto",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O registrar_faltou e a cadeia de modelos com rodadas=3 já existem (anime-pipeline.py:982-997). Não existe recuperação de JSON cortado nem aviso que funcione a partir do Kaggle."
+  },
+  {
+   "titulo": "Imagem parada de 55 a 62 s passa no QA e é postada",
+   "problema": "O QA dos longos detecta imagem congelada longa, mas o vídeo é postado mesmo assim. A regra é que só censura trava. Um trecho de 1 min com a imagem parada e só a narração por cima é o ponto clássico em que o público larga o vídeo.",
+   "evidencia": "50 qa.json em na_nuvem\\*: 18 com problema. e2nIzNGXvmA_xtts_momo 'imagem parada 2820–2881 s (61,7 s)'. 8pWoAFAT49w '496–553 s (57,4 s)'. Qet3goTGf0Q '3042–3097 s (55,0 s)'. 65WBxTrMYGQ '169–189 s (19,5 s)'. Quadro preto em LUQDew946Ps, SjQHP-0GKJs, McmTVgI6efk e 65WBxTrMYGQ. colab\\postar_longos.py:339-358 (_avisar_qa): 'avisa e POSTA (regra da dona: só censura trava)'. bin\\qa_video.py:6 freezedetect >= 6 s. render.json de e2nIz entre 2815 e 2885 s tem só 1 marca ('seta').",
+   "proposta": "Não travar a postagem, que é decisão da dona. O caminho é consertar antes do render. Trecho congelado acima de cerca de 15 s ganha zoom/deriva ou troca de cena (painel vizinho da fonte), aproveitando os ANIME_FX_MOV/DERIVA que já existem no perfil. Ou então o QA re-renderiza só esse trecho no Kaggle antes de subir. A ordem é a dona decidir se o limite é 15 s.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "medio",
+   "ja_existe": "O QA e o aviso existem (qa_video.py e _avisar_qa, de 04/11). Não existe conserto automático do trecho congelado."
+  },
+  {
+   "titulo": "A mascote fala com a voz do narrador em todos os longos XTTS",
+   "problema": "A mascote tem uma voz clonada (ANIME_MASCOTE_CLONE) que não está no Kaggle. As falas dela, fora as pausas gravadas, saem na voz do narrador. A CONFERENCIA marca 'Mascote reagindo' como OK.",
+   "evidencia": "Todos os pipeline.log de 21 e 22/11 (82ge1YYkUyA x2, 8fM6Ay7OJho x2, e2nIzNGXvmA, gJve_WjefZs, kxohroSbgS8, RzoyNcnlIj8) têm '[mascote] sem voz clonada da mascote nesta máquina — as falas dela ficam com o narrador'. Código em bin\\anime_segments.py:322-328, que exige VOZES_DIR/clone/clone.pth. RzoyNcnlIj8\\CONFERENCIA.md: '✅ 4 reações'.",
+   "proposta": "Usar o mesmo _baixar_voz_drive de 23/11 (anime_segments.py:348) para o clone da mascote antes da checagem da linha 326. Fazer a CONFERENCIA separar as reações com a voz dela das que saíram com o narrador.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "O download existe só para as vozes de personagem (anime_segments.py:388). A mascote não passa por ele."
+  },
+  {
+   "titulo": "Longo de 3,4 GB leva 6,7 h para subir e falha no fim, travando a fila",
+   "problema": "O longo misto, único do motor padrão, levou 401 min de upload e deu Timeout na tela seguinte. Ficou preso ao Fio da Meada e recomeçou à 01:01. Cada tentativa ocupa o envio por quase 7 h, e o canal VIP fica 1 envio por vez.",
+   "evidencia": "colab\\postar_longos.log [23/11 22:53]: 'envio: 3402 MB em 401 min (normal)' e 'erro: TimeoutError: Locator.wait_for: Timeout 60000ms'. [23/11 22:58]: 'erro DEPOIS de subir (406 min) — pode ter ficado rascunho'. [24/11 01:01]: 'preparando RzoyNcnlIj8_misto_xtts8_s2pro_momo' de novo. Duração em qa.json: 3545,6 s. Taxa média: 3402 MB x 8 / 3545 s = cerca de 7,7 Mbps.",
+   "proposta": "(1) Antes de subir de novo, conferir no Studio pela saída da conta se já existe o rascunho da tentativa anterior (o próprio log avisa). Senão o canal ganha um duplicado. (2) Codificar o longo final em 1080p com cerca de 4 a 5 Mbps (CRF/2 passadas). Fica dentro da regra de 1080p mínimo e corta perto de 40% do upload.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "medio",
+   "ja_existe": "O LONGO_PRESO_AO_CANAL existe (postar_longos.py:970). Não existe checagem de rascunho órfão antes de reenviar nem teto de bitrate do longo."
+  },
+  {
+   "titulo": "A retenção dos longos é de 1 a 4 min: o começo decide e o experimento do resumo está parado",
+   "problema": "A duração média assistida dos longos medidos vai de 37 a 248 s, ou 0,6 a 4,2% do vídeo. Quase todo o público sai nos primeiros minutos, então narração com energia, resumo/gancho e troca de voz no 1º minuto pesam mais que o resto. O experimento resumo_curto_gancho está em 0 x 0 vídeos.",
+   "evidencia": "postador _analise\\metricas_studio.json ret_lista: ylUd-_4-GQ8 dur_media 185,7 s (3,4%), ozdALiyIDVY 248,4 s (4,15%), cIB4X-Q9MIk 70,4 s (2,07%), AjgJG8HAfLk 37,0 s (1,17%), uUqCHE_Dacg 38,0 s (0,59%), DCyOfv2lI2E 52 s (1,72%). D:\\tmp\\ronda_tarde.txt:147 'experimento resumo_curto_gancho: A 0 / B 0 vídeos analisados (precisa 2)'. Os 3 mais assistidos da ronda (linhas 84-86) têm 3:05, 4:08 e 2:09 de média.",
+   "proposta": "Pôr o S2-Pro (frases expressivas) e a troca de voz no resumo de abertura e no 1º minuto, sem espalhar por igual: o teto de 40% concentrado onde o público ainda está. Marcar a variante A/B do resumo no render.json para o experimento andar sem o melhorador, que segue pausado. A comparação sai da leitura do Studio do 1º achado.",
+   "impacto": "alto",
+   "esforco": "medio",
+   "risco": "baixo",
+   "ja_existe": "O resumo de abertura existe (resumo_fim.json, 'Resumo de abertura ✅' em 121 de 124). O experimento A/B existe, mas não tem dados. Não existe regra de colocar o S2-Pro no começo."
+  },
+  {
+   "titulo": "A Fish na nuvem falhava calada e caía no Kitten (0/345)",
+   "problema": "Em 20/11 o Fish do Kaggle narrou 0 frases em longos inteiros e tudo caiu no kitten_tudo. O longo saiu no motor antigo sem ninguém saber. Hoje o padrão é XTTS e esse caso só importa se o Fish voltar. Mas o padrão é o mesmo: a queda para o motor reserva é silenciosa e pode acontecer com o XTTS e o S2-Pro.",
+   "evidencia": "na_nuvem\\iWIgK8o9pxE...\\pipeline.log:50 '[fish nuvem] 0/345 frases em 33s (narrador momo); o resto no kitten_tudo', :743 0/160 e :1066 0/161. ZaWVmJcOjfo 0/25. Bb3C8_mEpUE 0/2.",
+   "proposta": "Fazer a CONFERENCIA ganhar a linha 'Motor de voz: X% no motor pedido'. Ler '[xtts] N/M', '[s2pro] N/M' e '[fish nuvem] N/M' do pipeline.log e marcar ❌ abaixo de 90%, com aviso à dona pelo arquivo da pasta (ver achado 4).",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Para o Fish, o LONGO_SO_FISH_POSTAR barrava a postagem (LONGOS_MELHORIAS 19/11 17:30), mas o postar_xtts_teste o desliga e não há equivalente para o XTTS. A CONFERENCIA não tem linha de motor."
+  },
+  {
+   "titulo": "Os testes solo dão alarme falso de revezamento",
+   "problema": "Os longos de teste 'só Momo', 'só Mike' e afins são solo por pedido da dona, mas a CONFERENCIA marca '❌ Narradores por grupo (sem revezamento)'. Isso polui o placar ('11 de 13') e esconde as falhas de verdade.",
+   "evidencia": "CONFERENCIA de RzoyNcnlIj8, e2nIzNGXvmA_xtts_momo, 82ge1YYkUyA_s2pro e 82ge1YYkUyA_qwen3: '❌ (sem revezamento)'. e2nIzNGXvmA_xtts_momo\\render.json: narradores_modo 'solo'. No total, 29 de 124 conferências falham nesse item.",
+   "proposta": "Quando narradores_modo for 'solo' no render.json, a linha sai como 'n/a', sem ❌.",
+   "impacto": "baixo",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Não encontrei o gerador da CONFERENCIA em producao\\*.py. Ele deve estar no pacote do Kaggle. Não há tratamento de solo."
+  },
+  {
+   "titulo": "A legenda escorrega no XTTS e no S2-Pro: conserto de 22/11 ainda sem prova",
+   "problema": "O XTTS e o S2-Pro não produzem .words.json e a legenda era estimada pelo tamanho do texto, saindo fora da voz. O conserto mede no Whisper (GPU) toda frase sem tempos, mas nenhum longo pós-conserto foi conferido.",
+   "evidencia": "LONGOS_MELHORIAS.md:455 (22/11): 'anime_segments._tempos_fish agora mede no Whisper (GPU) TODA frase com áudio e sem tempos... TEMPOS_TODA_FRASE=0 volta'. O único longo depois disso é o RzoyNcnlIj8, de 22/11 08:48, e o pacote --codigo foi enviado em 22/11 sem hora. Não dá para afirmar se ele já pegou o conserto.",
+   "proposta": "No próximo longo v13, conferir no pipeline.log que o Whisper dos tempos rodou em todas as frases, e ver 2 ou 3 prints com legenda e onda de áudio. Não é para mexer no código: o conserto já existe.",
+   "impacto": "medio",
+   "esforco": "baixo",
+   "risco": "baixo",
+   "ja_existe": "Sim: TEMPOS_TODA_FRASE (22/11). Falta só a prova num longo real."
+  }
+ ]
+}

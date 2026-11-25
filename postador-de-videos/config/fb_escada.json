@@ -1,18 +1,69 @@
 {
  "anime_noturno": {
-  "degrau": 0
+  "degrau": 0,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T12:07:40",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   },
+   {
+    "quando": "2026-11-25T12:07:40",
+    "delta": -1,
+    "motivo": "finish: 368/1390008: Limitamos a frequência com que você pode postar, comentar ou fazer outras coisas em um determinado intervalo de tempo para ajudar a proteger a comunidade contra spam. Você pode te"
+   }
+  ]
  },
  "assistia": {
-  "degrau": 0
+  "degrau": -1,
+  "mudou_em": "2026-11-25T04:43:12",
+  "segurar_ate": "2026-11-27T12:08:05",
+  "historico": [
+   {
+    "quando": "2026-11-25T04:43:12",
+    "delta": -1,
+    "motivo": "finish: 368/1390008: Limitamos a frequência com que você pode postar, comentar ou fazer outras coisas em um determinado intervalo de tempo para ajudar a proteger a comunidade contra spam. Você pode te"
+   }
+  ]
  },
  "curiosidades": {
-  "degrau": 0
+  "degrau": 1,
+  "bonus_dia": "2026-11-24",
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T08:30:30",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "dorama": {
-  "degrau": 0
+  "degrau": 1,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T08:30:30",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "filmes": {
-  "degrau": 0
+  "degrau": 1,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T08:30:30",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "bicho_noturno": {
   "degrau": 0
@@ -27,12 +78,49 @@
   "degrau": 0
  },
  "esporte_noturno": {
-  "degrau": 0
+  "degrau": 1,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T08:30:30",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "cartucho_react": {
-  "degrau": 0
+  "degrau": 1,
+  "segurar_ate": "2026-11-27T12:08:05",
+  "mudou_em": "2026-11-25T08:30:30",
+  "historico": [
+   {
+    "quando": "2026-11-25T08:30:30",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "fio_da_meada": {
+  "degrau": 0
+ },
+ "inovare_manhwa_br": {
+  "bonus_dia": "2026-11-24",
+  "degrau": -1,
+  "mudou_em": "2026-11-25T04:44:28",
+  "segurar_ate": "2026-11-27T12:08:05",
+  "historico": [
+   {
+    "quando": "2026-11-25T04:44:28",
+    "delta": -1,
+    "motivo": "finish: 368/1390008: limite de frequência (spam) — teste manual pela API 04:41"
+   }
+  ]
+ },
+ "forja_react": {
+  "bonus_dia": "2026-11-24"
+ },
+ "mundo_que_nao_existe": {
   "degrau": 0
  }
 }

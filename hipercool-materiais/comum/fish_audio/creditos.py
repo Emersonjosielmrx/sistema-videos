@@ -9,7 +9,7 @@ creditos.json:  {email: {"restantes": int, "lido_em": "AAAA-MM-DDTHH:MM", "renov
     python creditos.py ler <email>     # saldo real dessa conta: HTTP com a sessão guardada (sessoes_fish), sem
                                        # Chrome; só sem sessão guardada abre a página de cobrança
 """
-import json, re, sys, time
+import json, os, re, sys, time
 from datetime import datetime
 from pathlib import Path
 
@@ -129,8 +129,19 @@ def escolher(precisa, excluir=()):
     Devolve (email, estimado) — estimado None = precisa ler antes (renovou/nunca leu). None = nenhuma serve."""
     d = carregar()
     boas, ler_antes = [], []
+    # 25/11: 1 conta = 1 máquina (sessoes_remotas\donos.json). Conta de outra máquina CONTINUA no rodízio do PC1: o
+    # fish_http usa a fábrica DAQUELA máquina (Chrome lá) e o mesmo IP fixo — nunca abre o Chrome dela aqui.
+    # FISH_SO_MINHAS=1 tira do rodízio as contas de outras máquinas (para quando a máquina dona produzir sozinha).
+    try:
+        donos = json.loads((Path(__file__).resolve().parent / "sessoes_remotas" / "donos.json").read_text("utf-8"))
+    except (OSError, ValueError):
+        donos = {}
+    eu = os.environ.get("FISH_MAQUINA", "pc1")
+    so_minhas = os.environ.get("FISH_SO_MINHAS") == "1"
     for email, r in d.items():
         if email in excluir or not r.get("logado"):
+            continue
+        if so_minhas and (donos.get(email) or {}).get("maquina", eu) != eu:
             continue
         e = estimado(r)
         if e is None:

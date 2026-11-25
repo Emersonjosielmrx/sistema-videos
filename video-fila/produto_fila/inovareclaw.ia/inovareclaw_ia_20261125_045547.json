@@ -1,0 +1,146 @@
+{
+ "conta": "inovareclaw.ia",
+ "produto": "inovare_claw",
+ "marca": "Inovare Claw",
+ "titulo": "Delegue as rotinas chatas para um agente de IA",
+ "legenda": "Tarefa repetitiva toma horas do expediente. O Inovare Claw é um agente de IA que executa essas tarefas por você, de forma independente. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Rotina chata? Delegue",
+  "pergunta_cliente": "Passo as rotinas chatas da empresa para a IA executar?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu via a equipe gastar horas do expediente em tarefa repetitiva. Era tempo que não voltava para o negócio.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian small business office, clean desk, natural light",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261125_050005_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Você passa a tarefa para o Inovare Claw. Ele executa de forma independente, do começo ao fim.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "executa de forma independente",
+     "do começo ao fim"
+    ],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Preciso que você cuide da rotina de hoje."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pode ser a tarefa repetitiva de sempre."
+     },
+     {
+      "de": "cliente",
+      "texto": "Combinado. Já comecei a executar."
+     },
+     {
+      "de": "cliente",
+      "texto": "Eu aviso quando terminar."
+     },
+     {
+      "de": "cliente",
+      "texto": "Tarefa concluída."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje a rotina chata fica com o agente, e minha equipe usa o expediente no que importa.",
+    "visual": "imagem",
+    "prompt_en": "standing in a tidy, well lit Brazilian company meeting room, clean table, large window, no people in focus",
+    "cenario_en": "standing in a tidy, well lit Brazilian company meeting room, clean table, large window",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261125_050005_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261125_050005_1.png"
+   }
+  ],
+  "legenda": "Tarefa repetitiva toma horas do expediente. O Inovare Claw é um agente de IA que executa essas tarefas por você, de forma independente. Link no perfil.",
+  "titulo": "Delegue as rotinas chatas para um agente de IA",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "rotina_repetitiva",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 26,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareclaw.ia_20261125_045547\\dono_1.mp4",
+ "duracao_s": 29.54,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-25T07:16:49",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.23,
+   "fala": "Passo as rotinas chatas da empresa para a IA executar?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.23,
+   "fim": 12.91,
+   "fala": "Eu via a equipe gastar horas do expediente em tarefa repetitiva. Era tempo que não voltava para o negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.91,
+   "fim": 19.41,
+   "fala": "Você passa a tarefa para o Inovare Claw. Ele executa de forma independente, do começo ao fim.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.41,
+   "fim": 25.6,
+   "fala": "Hoje a rotina chata fica com o agente, e minha equipe usa o expediente no que importa.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 25.6,
+   "fim": 29.54,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

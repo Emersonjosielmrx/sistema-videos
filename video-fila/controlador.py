@@ -613,7 +613,11 @@ def necessidades(est, estoque_hiper):
             # os cortes CEDEM a vez desta rodada — o laço de prioridade segue pro hipercool/veo normalmente.
             log(f"  cortes: {sem_fonte} — vez cedida ao próximo projeto (balancer)")
         else:
-            if controle.ligado("parceiro", "producao")[0]:
+            # 24/11 dona ("o PC1 só deve fazer o que só tem como fazer nele — o que tem login só aqui; ffmpeg e o resto
+            # vão pros outros PCs disponíveis"): o Short de corte (anime_auto --engine local, render) NÃO roda mais no
+            # PC1 por padrão — PC2, desktop e os notebooks (render dos trechos via celulares.py) fazem. CORTES_NO_PC1=1
+            # devolve o PC1 como reserva.
+            if controle.ligado("parceiro", "producao")[0] and os.environ.get("CORTES_NO_PC1") == "1":
                 add("cortes_pc1", 3, "pc1", "render", "cortes", _cortes_pc1, info)
             add("cortes_pc2", 3, "pc2", "pc2", "cortes", _cortes_pc2, info)
             if controle.ligado("parceiro", "producao")[0]:

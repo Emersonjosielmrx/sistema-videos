@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 23/11/2026 15:41. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 25/11/2026 09:39. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -14,7 +14,7 @@ com backup) ou descartar com motivo. Depois:
 Candidato = o dono não respondeu em 24 h e a nota era >= 7: é sugestão, não ordem. Cuidado com o que já existe
 na produção, com humor/visual que derruba monetização e com marca do parceiro (não copiar marca).
 
-## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (5)
+## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (13)
 
 ### 1. [jeito_de_falar] Estrutura de guia rápido estilo 'checklist binário' (Entidade X -> Requisito A + Requisito B)
 - visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
@@ -51,7 +51,63 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=sVORL2G36OM seg 21.2 (trecho 16bdb1eb.mp4)
 - ids: 16bdb1eb
 
-## B. Candidatos (sem resposta em 24 h): 534 grupo(s), os 40 mais fortes
+### 6. [visual] Corte transversal em perspectiva 'raio-x' mostrando a parte aérea da planta e a camada de compostagem/solo subterrânea simultaneamente
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Usar em ganchos ou explicações científicas/curiosidades de cultivo: gerar ou gravar tomadas divididas em duas camadas (superfície + corte subterrâneo detalhado)
+- por que é novo: Nosso pipeline usa cortes retos ou imagens planas; não temos esse enquadramento visual split/corte geológico de solo mostrando raízes e adubo agindo por baixo da lona plástica
+- exemplos: https://www.youtube.com/watch?v=f9Xxl1 seg 1.3 (trecho 959da680.mp4)
+- ids: 959da680
+
+### 7. [visual] Corte transversal mostrando a camada subterrânea de composto orgânico/húmus sob as árvores
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Utilizar imagens geradas por IA em corte transversal (mockup 2D/3D) para explicar conceitos de agricultura ou biologia de solos em vídeos educativos.
+- por que é novo: Visual revelador de seção transversal (solo + matéria orgânica + raízes) que ilustra processos de permacultura de forma didática e estética.
+- exemplos: https://www.youtube.com/watch?v=f9Xxl1 seg 0.0 (trecho a0910f13.mp4)
+- ids: a0910f13
+
+### 8. [visual] Legenda centralizada e espaçada em maiúsculas com tom dramático/narrativo estilo mini-documentário.
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Aplicar legendas centralizadas em caixa alta com fonte limpa e traçado sutil para conteúdos de narrativa de histórias longas.
+- por que é novo: Usa estilo minimalista de legenda centralizada linha por linha com transição limpa para vídeos em formato estilo 'storytelling/relato real'.
+- exemplos: https://www.youtube.com/watch?v=qmUX6oao2Sw seg 4.8 (trecho 37e73200.mp4)
+- ids: 37e73200
+
+### 9. [efeito] Dupla exposição / overlay translúcido de tela de celular com gráfico sobreposto ao vídeo do Capitólio em movimento
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Aplicar blend mode 'screen' ou opacidade ~60% em vídeos verticais de telas (gráficos, prints, apps) por cima de filmagens temáticas para ilustrar dados sem cortar a dinâmica visual.
+- por que é novo: Não temos nos nossos cortes_fx ou hyperframes um blend mode (screen/add/opacity) mesclando tela de smartphone com app financeiro e o b-roll ao fundo.
+- exemplos: https://www.youtube.com/watch?v=1TgrZsZRMfY seg 1.5 (trecho b11b175a.mp4)
+- ids: b11b175a
+
+### 10. [visual] Dupla exposição / sobreposição de tela com gráfico de celular transparente sobre a fachada do Capitólio americano.
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Aplicar o efeito de sobreposição (blend mode screen/overlay) com baixa opacidade de um gráfico de ações sobre cenas de contexto político ou econômico nos primeiros segundos.
+- por que é novo: Mistura interface de aplicativo de trading sobre imagens de arquivo institucionais/políticas para criar um apelo visual dinâmico e investigativo.
+- exemplos: https://www.youtube.com/watch?v=1TgrZsZRMfY seg 0.0 (trecho a0dae8ab.mp4)
+- ids: a0dae8ab
+
+### 11. [visual] Destaque cromático por segmento em modelo 3D com anel de torção
+- visto em 1 vídeo(s) · nota máx. 7.5 · modelos: claude-sonnet
+- como aplicar: Aplicar tint/máscara bicolor com highlight circular na área de transição quando explicar mecânicas corporais ou fatiamento de objetos técnicos.
+- por que é novo: Usa coloração segmentada (metade salmão / metade cinza) com um anel indicador na junção para explicar visualmente rotação biomecânica independente.
+- exemplos: https://www.youtube.com/watch?v=DqV2fb1-4kU seg 17.9 (trecho 2ffa3111.mp4)
+- ids: 2ffa3111
+
+### 12. [visual] Multiplicação em grid 3D com variações de dano/acessório
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Ao citar dados de porcentagem ou fração populacional, enfileirar modelos idênticos repetidos aplicando variações visuais (ex: curativo) nos itens afetados.
+- por que é novo: Exibe formação de vários clones do modelo 3D em perspectiva isométrica onde alguns elementos têm ataduras/gesso para ilustrar estatística real.
+- exemplos: https://www.youtube.com/watch?v=DqV2fb1-4kU seg 26.2 (trecho 64df9614.mp4)
+- ids: 64df9614
+
+### 13. [visual] Modelo 3D animado demonstrando a física do gato caindo e girando em duas metades (cintura e coluna)
+- visto em 1 vídeo(s) · nota máx. 10 · modelos: gemini
+- como aplicar: Criar ou utilizar animações 3D esquemáticas simples para explicar mecânica, física ou biologia nos nossos vídeos explicativos.
+- por que é novo: Usa simulação 3D didática e limpa para explicar um conceito biomecânico complexo passo a passo.
+- exemplos: https://www.youtube.com/watch?v=DqV2fb1-4kU seg 1.4 (trecho f03b8877.mp4)
+- ids: f03b8877
+
+## B. Candidatos (sem resposta em 24 h): 539 grupo(s), os 40 mais fortes
 
 ### 1. [visual] Gráfico de escala de pH com garrafa e indicador de nível (seta preta apontando para o 7).
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
@@ -270,67 +326,67 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=SDvVwZbXoPU seg 3.1 (trecho e1be19b4.mp4)
 - ids: e1be19b4
 
-### 32. [jeito_de_falar] Narração esportiva empolgada estilo Galvão Bueno aplicada a tema financeiro sério
+### 32. [visual] Efeito visual de transformação de personagem em estátua de vidro/areia após raio
+- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
+- como aplicar: Usar ferramentas de image-to-video combinadas com inpainting/controlnet para gerar a transição do ator preso na areia/vidro.
+- por que é novo: Criação de cenas dramáticas/chocantes com IA integrando personagens soterrados ou transformados em material incomum.
+- exemplos: https://www.youtube.com/watch?v= seg 8.9 (trecho ab5b2229.mp4)
+- ids: ab5b2229
+
+### 33. [jeito_de_falar] Narração esportiva empolgada estilo Galvão Bueno aplicada a tema financeiro sério
 - visto em 1 vídeo(s) · nota máx. 8.5 · modelos: claude-sonnet
 - como aplicar: Roteirizar tópicos densos de finanças/negócios com locução e vocabulário de narração esportiva de clássico de futebol nos primeiros 30-40 segundos.
 - por que é novo: Usa metáforas de futebol ('Haja coração', 'avançando no campo', 'tabela rápida', 'pressão total na área', 'golaço tá armando') para explicar uma operação técnica de M&A entre FIIs, criando contraste cômico e retenção alta sem parecer aula chata.
 - exemplos: https://www.youtube.com/watch?v=GKjI-xCZJx8 seg 2.6 (trecho dbc46ca0.mp3)
 - ids: dbc46ca0
 
-### 33. [piada] Dica final anti-clímax que quebra a lógica do filme com conselho prático da vida real ('Arrume um emprego')
+### 34. [piada] Dica final anti-clímax que quebra a lógica do filme com conselho prático da vida real ('Arrume um emprego')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Em vídeos de 'como sobreviver / como derrotar vilão de filme', fechar com dica realista/moral cômica acompanhada de meme ou homem de terno para gerar humor por quebra de expectativa.
 - por que é novo: Estrutura de roteiro humorístico onde a última dica de sobrevivência em filme de assalto/invasão ignora o perigo imediato e ataca a causa raiz dos personagens serem ladrões.
 - exemplos: https://www.youtube.com/watch?v=uEibbO00qvg seg 28.0 (trecho 19f17dea.mp3)
 - ids: 19f17dea
 
-### 34. [jeito_de_falar] Hook contra-intuitivo de quebra de objeção emocional ('E antes de você sentir raiva ou inveja, vou te mostrar o que isso significa para você')
+### 35. [jeito_de_falar] Hook contra-intuitivo de quebra de objeção emocional ('E antes de você sentir raiva ou inveja, vou te mostrar o que isso significa para você')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Em roteiros polêmicos sobre bilionários, riqueza ou privilégio, estruturar os primeiros 3 segundos desarmando o julgamento moral do espectador para focar na utilidade prática para a vida dele.
 - por que é novo: Nossos scripts de intro focam em curiosidade direta ou choque; antecipar a emoção negativa do espectador (inveja/revolta) e redirecioná-la imediatamente para benefício próprio é uma técnica de retenção que ainda não aplicamos na copywriting.
 - exemplos: https://www.youtube.com/watch?v=JGGdTT7rxdE seg 0.0 (trecho 746b7a80.mp3)
 - ids: 746b7a80
 
-### 35. [visual] Uso de imagens de arquivo reais de eventos e palestras reais (como a Nasdaq/SpaceX) como b-roll de fundo
+### 36. [visual] Uso de imagens de arquivo reais de eventos e palestras reais (como a Nasdaq/SpaceX) como b-roll de fundo
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Integrar trechos curtos de vídeos públicos reais de anúncios ou eventos corporativos ao ilustrar notícias de grandes empresas.
 - por que é novo: Dá autoridade e aspecto jornalístico/documental ao vídeo em vez de usar apenas memes ou imagens genéricas de banco.
 - exemplos: https://www.youtube.com/watch?v=JGGdTT7rxdE seg 9.0 (trecho fa72b2fd.mp4)
 - ids: fa72b2fd
 
-### 36. [visual] Texto com contorno amarelo e fonte arredondada conversacional ('Jennie's skirt blew up...')
+### 37. [visual] Texto com contorno amarelo e fonte arredondada conversacional ('Jennie's skirt blew up...')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Aplicar legenda central com fonte grossa (ex: LuckiestGuy ou Montserrat Black), contorno preto forte e cor amarela.
 - por que é novo: Legenda centralizada chamativa típica de edits virais do TikTok com destaque em cor contrastante.
 - exemplos: https://www.youtube.com/watch?v=kpOcL4dgh80 seg 2.6 (trecho e8cd84ff.mp4)
 - ids: e8cd84ff
 
-### 37. [visual] Texto cursor/destaque humorístico com asteriscos ('*Her shy smile*', '*notice* 👀')
+### 38. [visual] Texto cursor/destaque humorístico com asteriscos ('*Her shy smile*', '*notice* 👀')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Inserir caixas de texto curtas no topo central com asteriscos para narrar o pensamento do editor ou o foco da cena.
 - por que é novo: Adiciona comentário irônico em formato de pensamento/narração interna no topo da tela.
 - exemplos: https://www.youtube.com/watch?v=kpOcL4dgh80 seg 7.7 (trecho 541173a5.mp4)
 - ids: 541173a5
 
-### 38. [visual] Uso de setas coloridas dinâmicas apontando para a boca/comida e círculos vermelhos enfatizando os exageros
+### 39. [visual] Uso de setas coloridas dinâmicas apontando para a boca/comida e círculos vermelhos enfatizando os exageros
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Inserir setas e círculos vermelhos/verdes pontuais para guiar o olhar do espectador para detalhes cômicos em vídeos de reação.
 - por que é novo: Destaca com setas e círculos minimalistas de edição rápida a forma engraçada como os ídolos comem.
 - exemplos: https://www.youtube.com/watch?v=kHe8oWuoU8o seg 1.6 (trecho 0c6db3cc.mp4)
 - ids: 0c6db3cc
 
-### 39. [visual] Infográfico minimalista estilo 2D vetorizado com escala de pH colorida (1 a 14) e ponteiro indicador ao lado do objeto
+### 40. [visual] Infográfico minimalista estilo 2D vetorizado com escala de pH colorida (1 a 14) e ponteiro indicador ao lado do objeto
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Criar templates de infográficos dinâmicos (ex: termômetro, escala de nível, régua comparativa) em fundo com textura sutil e ponteiro animado para momentos explicativos/didáticos dos shorts.
 - por que é novo: Temos recortes de memes e hyperframes com números grandes ou badges, mas não temos overlays infográficos verticais didáticos em estética vetor limpo/sketch para explicar métricas ou comparações técnicas de forma direta.
 - exemplos: https://www.youtube.com/watch?v=MaL4mZoNZ5A seg 27.0 (trecho c10fb495.mp4)
 - ids: c10fb495
 
-### 40. [piada] Conselhos absurdos/literais de sobrevivência contra clichês de terror ('dormir na rua porque não tem porta pra bater', 'tacar fogo na casa')
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Roteirizar shorts com guias de sobrevivência zombando de clichês de animes ou filmes famosos que cobrimos
-- por que é novo: Formato de lista satírica de 'como derrotar [filme/monstro] em 30 segundos' desconstruindo clichês clássicos do gênero com soluções burras/extremas
-- exemplos: https://www.youtube.com/watch?v=p4F3hWc-VUQ seg 4.9 (trecho 25b636e0.mp3)
-- ids: 25b636e0
-
-(+ 494 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+(+ 499 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

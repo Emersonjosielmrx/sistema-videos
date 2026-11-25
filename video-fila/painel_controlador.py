@@ -173,11 +173,36 @@ def _aquecer():
                 except Exception:  # noqa: BLE001
                     pass
             primeira = False
-        time.sleep(15)
+        # 24/11 dona ("o PC1 está sobrecarregado"): 705 s de CPU no dia com o telão aberto recarregando o cache a cada
+        # 15 s. 60 s basta pra um painel de status. PAINEL_AQUECER_S muda.
+        time.sleep(float(os.environ.get("PAINEL_AQUECER_S", "60")))
 
 
 def _lista_processos():
-    """{pid: (minutos, linha de comando)} do PC1, sem escrever no log do controlador; {} se a consulta falhar."""
+    """{pid: (minutos, linha de comando)} do PC1, sem escrever no log do controlador; {} se a consulta falhar.
+    24/11 (dona: PC1 livre pro VS Code): lê pelo psutil, direto do Windows, em vez de abrir um PowerShell novo a cada
+    20 s só pra listar processos. Sem psutil (ou erro) volta pro PowerShell de antes."""
+    try:
+        import psutil
+        import subprocess as _sp
+        agora = time.time()
+        out = {}
+        # só pid+nome de todos (barato); linha de comando e hora só dos python/wscript/cmd (ler a de Chrome custa caro)
+        for p in psutil.process_iter(["pid", "name"]):
+            nome = (p.info.get("name") or "").lower()
+            if not (nome.startswith("python") or nome in ("wscript.exe", "cmd.exe")):
+                continue
+            try:
+                linha = _sp.list2cmdline(p.cmdline() or [])
+                out[p.info["pid"]] = (int((agora - p.create_time()) / 60), linha)
+            except psutil.Error:
+                continue  # morreu entre a lista e a leitura
+        return out
+    except Exception:  # noqa: BLE001
+        return _lista_processos_ps()
+
+
+def _lista_processos_ps():
     import subprocess
     ps = ("Get-CimInstance Win32_Process -Filter \"Name like 'python%' or Name='wscript.exe' or Name='cmd.exe'\" | "
           "ForEach-Object { $m = try { [int]((Get-Date) - $_.CreationDate).TotalMinutes } catch { 0 }; "

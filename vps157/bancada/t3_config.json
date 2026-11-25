@@ -1,0 +1,9 @@
+{
+  "fila": {
+    "max_contas": 41,
+    "pausa_min": 20
+  },
+  "vigia": {
+    "limite_mb": 3200
+  }
+}

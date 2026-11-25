@@ -522,12 +522,26 @@ def main():
     if not args.dry_run:
         # 04/11 15:20: gta-rp_cap1 chegou na fila com o mp4 SEM o índice (moov atom not found — vídeo que não abre;
         # o qa.json era de outro arquivo). Vídeo que o ffprobe não lê não entra na fila do postador.
-        try:
-            _pr = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
-                                  str(video)], capture_output=True, text=True, timeout=60)
-            _dur = float((_pr.stdout or "0").strip() or 0)
-        except Exception:  # noqa: BLE001
-            _dur = 0.0
+        # 24/11 (dona: "por que não postamos mais longos, tem canal com mais de 2 dias"): com o PC1 a 100% o ffprobe de
+        # um longo de 3,4 GB passava dos 60 s -> TimeoutExpired caía no except, _dur=0 e o vídeo BOM era dado como
+        # "QUEBRADO" (RzoyNcnlIj8 23-24/11: 59 min, lia normal depois). Timeout = tenta de novo com mais tempo; só
+        # condena se o ffprobe RESPONDE sem duração. ANIME_PROBE_TIMEOUT muda o 1º prazo.
+        _dur = 0.0
+        for _to in (int(os.environ.get("ANIME_PROBE_TIMEOUT", "120")), 600):
+            try:
+                _pr = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                      str(video)], capture_output=True, text=True, timeout=_to)
+                _dur = float((_pr.stdout or "0").strip() or 0)
+                break
+            except subprocess.TimeoutExpired:
+                print(f"[publish] ffprobe passou de {_to}s (PC ocupado) — tento de novo com mais tempo", flush=True)
+                _dur = -1.0  # timeout: não é prova de vídeo quebrado
+            except Exception:  # noqa: BLE001
+                _dur = 0.0
+                break
+        if _dur == -1.0:
+            raise SystemExit(f"[publish] ffprobe não respondeu a tempo ({video}) — PC ocupado; fica pra próxima rodada "
+                             "(NÃO é vídeo quebrado)")
         if _dur <= 1:
             meta_path.unlink(missing_ok=True)
             raise SystemExit(f"[publish] vídeo QUEBRADO (ffprobe não lê: {video}) — não vai pra fila")

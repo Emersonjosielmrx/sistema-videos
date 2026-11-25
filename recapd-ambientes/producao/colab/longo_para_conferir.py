@@ -78,9 +78,28 @@ def atualizar():
         print("nenhum longo novo sem postar — fica o que está:", atual.name if atual else "(vazio)")
         return atual
     _, nome, d = esc
-    if atual and atual.stem == nome:
+    if atual and atual.stem == nome and os.environ.get("LONGO_CONFERIR_BAIXAR", "0") == "1":
         print("já está aqui:", atual)
         return atual
+    # 24/11 (dona: "vídeo grande não fica no PC, só o link do Drive pra eu ver sem ocupar espaço"): não baixa mais os
+    # 3-10 GB; o LEIA.txt passa a ter o link pra assistir no Drive. LONGO_CONFERIR_BAIXAR=1 volta a baixar.
+    if os.environ.get("LONGO_CONFERIR_BAIXAR", "0") != "1":
+        link = ""
+        try:  # `rclone link` às vezes pendura > 2 min; o ID do lsjson monta o mesmo link (abre logado na conta 32)
+            info = json.loads(subprocess.run([RCLONE, "lsjson", d["drive"]], capture_output=True, text=True,
+                                             timeout=300).stdout)[0]
+            link = f"https://drive.google.com/file/d/{info['ID']}/view" if info.get("ID") else ""
+        except (ValueError, IndexError, KeyError, subprocess.TimeoutExpired):
+            pass
+        for velho in PASTA.glob("*.mp4"):
+            velho.unlink(missing_ok=True)
+        _escrever_leia(nome, d)
+        with (PASTA / "LEIA.txt").open("a", encoding="utf-8") as f:
+            f.write(f"ASSISTIR NO DRIVE (não fica no PC): {link or d['drive']}\n")
+        (PASTA / f"{nome}__ASSISTIR_NO_DRIVE.url").write_text(
+            f"[InternetShortcut]\nURL={link}\n" if link else "", encoding="utf-8")
+        print("link pra conferir:", link or d["drive"])
+        return None
     try:
         tam = json.loads(subprocess.run([RCLONE, "lsjson", d["drive"]], capture_output=True, text=True,
                                         timeout=300).stdout)[0]["Size"]

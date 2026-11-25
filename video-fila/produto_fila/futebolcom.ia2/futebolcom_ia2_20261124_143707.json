@@ -1,0 +1,153 @@
+{
+ "conta": "futebolcom.ia2",
+ "produto": "cardapio_digital",
+ "marca": "Cardápio Digital",
+ "titulo": "Cliente manda oi no WhatsApp e desiste? Veja a solução",
+ "legenda": "Cliente que manda um oi e não recebe resposta costuma desistir. Com o Cardápio Digital, a IA responde as dúvidas na hora e o cliente faz o pedido pelo WhatsApp.\nQuer ver como funciona no seu negócio? Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#cardapiodigital #delivery #restaurante #lanchonete #gestaoderestaurante",
+ "roteiro": {
+  "gancho_tela": "Cliente some no WhatsApp?",
+  "pergunta_cliente": "Perdendo pedido porque o cliente manda um oi e ninguém responde?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "No pico do movimento, o cliente mandava só um oi no WhatsApp, eu não conseguia responder e ele desistia.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the counter of a small Brazilian restaurant, tidy, well lit",
+    "real_tema": "dono de restaurante explicando a dor de perder cliente por demora no WhatsApp",
+    "destaques": [
+     "não conseguia responder",
+     "ele desistia"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261124_143734_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Agora a IA responde o oi na hora, tira as dúvidas e mostra o cardápio com fotos para o cliente pedir.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Seja bem-vindo. Posso te ajudar com alguma dúvida?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Vocês têm opção sem cebola?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Posso explicar os itens do cardápio. Veja as fotos e escolha o que preferir."
+     },
+     {
+      "de": "cliente",
+      "texto": "Beleza, vou olhar o cardápio."
+     },
+     {
+      "de": "empresa",
+      "texto": "Combinado! É só escolher e o pedido segue pelo WhatsApp."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Meu cliente não fica mais esperando, vê o cardápio no celular e o pedido chega direto no meu WhatsApp.",
+    "visual": "imagem",
+    "prompt_en": "standing at a tidy, well lit counter of a small Brazilian burger shop, clean and organized, no people in focus",
+    "cenario_en": "standing at a tidy, well lit counter of a small Brazilian burger shop, clean and organized",
+    "real_tema": "dono de lanchonete falando do resultado: cliente atendido e pedido direto no WhatsApp",
+    "destaques": [
+     "não fica mais esperando",
+     "pedido chega direto"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261124_143734_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261124_143734_1.png"
+   }
+  ],
+  "legenda": "Cliente que manda um oi e não recebe resposta costuma desistir. Com o Cardápio Digital, a IA responde as dúvidas na hora e o cliente faz o pedido pelo WhatsApp.\nQuer ver como funciona no seu negócio? Link no perfil.",
+  "titulo": "Cliente manda oi no WhatsApp e desiste? Veja a solução",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "chama_e_some",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 14,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\futebolcom.ia2_20261124_143707\\dono_1.mp4",
+ "duracao_s": 31.1,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-24T15:13:08",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.75,
+   "fala": "Perdendo pedido porque o cliente manda um oi e ninguém responde?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.75,
+   "fim": 12.43,
+   "fala": "No pico do movimento, o cliente mandava só um oi no WhatsApp, eu não conseguia responder e ele desistia.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.43,
+   "fim": 20.22,
+   "fala": "Agora a IA responde o oi na hora, tira as dúvidas e mostra o cardápio com fotos para o cliente pedir.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.22,
+   "fim": 27.25,
+   "fala": "Meu cliente não fica mais esperando, vê o cardápio no celular e o pedido chega direto no meu WhatsApp.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 27.25,
+   "fim": 31.1,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

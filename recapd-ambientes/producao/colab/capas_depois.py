@@ -24,7 +24,7 @@ FILA = AQUI / "capas_depois.json"
 LOG = AQUI / "capas_depois.log"
 PY_EXTRAS = r"D:\manhwa-react\.venv\Scripts\python.exe"
 EXTRAS = r"D:\postador-de-videos\bin\youtube_studio_extras.py"
-CAPA_MAX_TENTATIVAS = 3
+CAPA_MAX_TENTATIVAS = int(os.environ.get("CAPA_MAX_TENTATIVAS", "8"))  # 24/11: 3 -> 8 (Studio lento com PC1 a 100%; a capa já estava pronta)
 
 
 def log(m):
@@ -32,15 +32,44 @@ def log(m):
         f.write(f"[{datetime.now():%d/%m %H:%M}] {m}\n")
 
 
-def ler():
+def _reserva_padrao():
+    """25/11: a reserva do Studio era o DESKTOP (o mais rápido), mas ele está sendo formatado/offline — capa pronta com
+    Studio lento ficava sem 2ª tentativa. Desktop sem ssh em 8 s = STI (o melhor depois dele)."""
     try:
-        return json.loads(FILA.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8", "desktop", "echo ok"],
+                           capture_output=True, text=True, timeout=15)
+        if "ok" in r.stdout:
+            return "desktop"
+    except Exception:  # noqa: BLE001
+        pass
+    return "sti"
+
+
+def ler():
+    """25/11: a fila de 99 capas virou "[]" em 24/11 20:57 — ler() devolvia [] quando o arquivo estava no meio de uma
+    gravação de OUTRA vaga (2 processos: reserva por canal) e o gravar() seguinte salvava a lista vazia. Agora: arquivo
+    inexistente = [] (fila nova); ilegível = tenta de novo e, se não ler, LEVANTA (nunca grava por cima)."""
+    if not FILA.exists():
         return []
+    for i in range(10):
+        try:
+            return json.loads(FILA.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            time.sleep(0.5 + i * 0.3)
+    raise RuntimeError(f"{FILA.name} ilegível — não mexo na fila (nunca gravar por cima de uma leitura falha)")
 
 
 def gravar(fila):
-    FILA.write_text(json.dumps(fila, ensure_ascii=False, indent=1), encoding="utf-8")
+    """Gravação atômica (arquivo temporário + replace): quem lê no meio vê a versão velha inteira, nunca meia."""
+    tmp = FILA.with_suffix(f".tmp{os.getpid()}")
+    tmp.write_text(json.dumps(fila, ensure_ascii=False, indent=1), encoding="utf-8")
+    for i in range(10):
+        try:
+            os.replace(tmp, FILA)
+            return
+        except PermissionError:  # Windows: outro processo lendo naquele instante
+            time.sleep(0.3)
+    os.replace(tmp, FILA)
 
 
 def registrar(cred, vid, pasta, params, publicar):
@@ -129,7 +158,7 @@ def um(item):
         # 15/11: "Salvar continuou cinza" NÃO era o canal bloqueado — as partes 11 e 14 do Medieval (Fio da Meada,
         # recursos negados) trocaram de capa pelo DESKTOP em 1 tentativa (o recurso negado só barra o teste A/B).
         # Antes de concluir "bloqueado", tenta pelo desktop. CAPA_CINZA_DESKTOP=0 desliga.
-        reserva_c = os.environ.get("CAPA_STUDIO_RESERVA", "desktop")
+        reserva_c = os.environ.get("CAPA_STUDIO_RESERVA", _reserva_padrao())
         if (os.environ.get("CAPA_CINZA_DESKTOP", "1") != "0" and reserva_c
                 and re.search(r"Salvar continuou cinza", res)):
             res = _studio(item["canal"], item["vid"], "--capa", str(capa), maquina=reserva_c)
@@ -148,7 +177,7 @@ def um(item):
             return False
         # 14/11 (JesjRW5uBR0): capa PRONTA e o Studio lento no notebook (timeout) — tenta já pelo desktop (o mais rápido;
         # aplicou em 30 s). CAPA_STUDIO_RESERVA= (vazio) desliga; outro nome troca a máquina.
-        reserva = os.environ.get("CAPA_STUDIO_RESERVA", "desktop")
+        reserva = os.environ.get("CAPA_STUDIO_RESERVA", _reserva_padrao())
         if reserva and re.search(r"Timeout|não abriu|nao abriu", res):
             res = _studio(item["canal"], item["vid"], "--capa", str(capa), maquina=reserva)
             log(f"{item['vid']}: de novo pelo {reserva}: {res}")
@@ -288,12 +317,22 @@ def rodada():
         pend = [x for x in fila if x["estado"] == "pendente" and x["vid"] not in tentados]
         if not pend:
             return
-        res = None
+        res = res_canal = None
         for item in pend:
+            # 24/11 (12 Studios do Fio da Meada abertos juntos -> todos davam "Page.goto Timeout 90000ms" / "página
+            # não abriu"): o Chrome da conta aguenta 1 acesso por vez. Reserva TAMBÉM o canal; canal ocupado = este
+            # item fica pra próxima volta (não conta tentativa). CAPAS_1_POR_CANAL=0 desliga.
+            if os.environ.get("CAPAS_1_POR_CANAL", "1") != "0":
+                res_canal = _reservar("canal_" + str(item.get("canal")))
+                if not res_canal:
+                    continue
             tentados.add(item["vid"])
             res = _reservar(item["vid"])
             if res:
                 break
+            if res_canal:
+                res_canal.unlink(missing_ok=True)
+                res_canal = None
         if not res:
             return
         if vaga:
@@ -305,6 +344,8 @@ def rodada():
             feito = False
         finally:
             res.unlink(missing_ok=True)
+            if res_canal:
+                res_canal.unlink(missing_ok=True)
         _fechar_item(item, feito)
 
 

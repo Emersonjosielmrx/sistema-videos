@@ -1534,8 +1534,8 @@
    "source_url": "https://www.youtube.com/watch?v=n_NwO2_X_5Q"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 2,
   "em": "2026-11-13T16:15"
  },
  {
@@ -1702,8 +1702,8 @@
    "source_url": "https://www.youtube.com/watch?v=mzhXJNkndXI"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 2,
   "em": "2026-11-14T14:52",
   "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-4ae483_cap1_20261107\\capa_c.jpg"
  },
@@ -1820,7 +1820,7 @@
    "source_url": "https://www.youtube.com/watch?v=Tv828JN1ZcM"
   },
   "publicar": false,
-  "estado": "sem_capa",
+  "estado": "canal_encerrado",
   "tentativas": 3,
   "em": "2026-11-14T22:28"
  },
@@ -1869,7 +1869,7 @@
    "source_url": "https://www.youtube.com/watch?v=KAA_csRv7NU"
   },
   "publicar": false,
-  "estado": "sem_capa",
+  "estado": "canal_encerrado",
   "tentativas": 3,
   "em": "2026-11-15T06:26"
  },
@@ -2059,7 +2059,7 @@
    "source_url": "https://www.youtube.com/watch?v=PvkF8Ut-mIM"
   },
   "publicar": false,
-  "estado": "sem_capa",
+  "estado": "feito",
   "tentativas": 3,
   "em": "2026-11-17T01:53"
  },
@@ -2106,8 +2106,8 @@
    "source_url": "https://www.youtube.com/watch?v=0w1FjXmgX0w"
   },
   "publicar": false,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 5,
   "em": "2026-11-17T08:02"
  },
  {
@@ -2266,8 +2266,8 @@
    "source_url": "https://www.youtube.com/watch?v=ZaWVmJcOjfo"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 2,
   "em": "2026-11-20T08:12"
  },
  {
@@ -2289,8 +2289,8 @@
    "source_url": "https://www.youtube.com/watch?v=8fM6Ay7OJho"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 1,
   "em": "2026-11-21T12:26"
  },
  {
@@ -2312,8 +2312,8 @@
    "source_url": "https://www.youtube.com/watch?v=kxohroSbgS8"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 4,
+  "estado": "feito",
+  "tentativas": 1,
   "em": "2026-11-21T15:22"
  },
  {
@@ -2359,8 +2359,32 @@
    "source_url": "https://www.youtube.com/watch?v=gJve_WjefZs"
   },
   "publicar": true,
-  "estado": "sem_capa",
-  "tentativas": 3,
+  "estado": "feito",
+  "tentativas": 2,
   "em": "2026-11-23T01:00"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "75IxznGPk88",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\teste-voz_cap1_20261125",
+  "params": {
+   "anime": "teste-voz",
+   "cap": 1,
+   "texto": "DINHEIRO INFINITO",
+   "cena": "ELE FOI EXPULSO E HUMILHADO mas DESPERTOU o SISTEMA de DINHEIRO infinito e agora é o mais rico",
+   "protagonista": "young adult male protagonist, dark messy hair, intense expression, wearing modern stylish dark clothes, standing in a dark narrow alleyway at night with glowing futuristic black and silver card in hand",
+   "generos": [
+    "acao",
+    "sistema",
+    "vinganca",
+    "fantasia"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=RzoyNcnlIj8"
+  },
+  "publicar": true,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-25T09:18"
  }
 ]

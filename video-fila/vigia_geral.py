@@ -608,6 +608,17 @@ SUBVIGIAS = [
     ("faxina_disco", 24 * 3600, 4,
      ["cmd.exe", "/c", r"D:\veo\venv\Scripts\python.exe D:\video-fila\faxina_disco.py >> "
       r"D:\video-fila\logs\faxina_disco_saida.log 2>&1"]),
+    # 23/11 (dona: "integrar o Facebook com os outros como um sistema só, todos acompanhados pelo vigia, pra eu poder
+    # fechar o chat"): reserva do FacebookVigia — se a tarefa própria parar, o vigia geral roda o mesmo vigia (que agora
+    # também religa ponte de proxy caída e apaga trava morta, via fb_saude). Não roda se já houver um no ar.
+    # 24/11 (noite): o painel :8790 travou parado 2x em 23/11 (vivo, 0% CPU, sem responder). GET com prazo; sem resposta
+    # 2x = mata todas as cópias e sobe 1 (vigia_painel.py).
+    ("painel", 10 * 60, None,
+     ["cmd.exe", "/c", r"D:\veo\venv\Scripts\python.exe D:\video-fila\vigia_painel.py >> "
+      r"D:\video-fila\logs\vigia_painel_saida.log 2>&1"]),
+    ("facebook", 30 * 60, None,
+     ["cmd.exe", "/c", r"set PYTHONUTF8=1&& D:\hipercool-videos\venv\Scripts\python.exe -u "
+      r"D:\postador-de-videos\bin\fb_vigia.py >> D:\postador-de-videos\logs\fb_vigia_cron.log 2>&1"]),
     ("resumo_notebooks", 24 * 3600, 21,
      ["cmd.exe", "/c", r"D:\veo\venv\Scripts\python.exe D:\video-fila\resumo_notebooks.py >> "
       r"D:\video-fila\logs\resumo_notebooks_saida.log 2>&1"]),
@@ -668,12 +679,28 @@ def _studio_rodando():
         return True  # na dúvida não dispara outra fila (a próxima volta tenta de novo)
 
 
+def _cmdlines():
+    try:
+        import psutil
+        out = []
+        for p in psutil.process_iter(["cmdline"]):
+            try:
+                out.append(p.info["cmdline"] or [])
+            except Exception:  # noqa: BLE001
+                continue
+        return out
+    except Exception:  # noqa: BLE001
+        return []
+
+
 def _subvigias(est):
     import subprocess
     feitos = est.setdefault("subvigias", {})
     agora = time.time()
     for nome, intervalo, hora_min, cmd in SUBVIGIAS:
         if agora - feitos.get(nome, 0) < intervalo - 300 or (hora_min is not None and datetime.now().hour < hora_min):
+            continue
+        if nome == "facebook" and any("fb_vigia.py" in " ".join(c) for c in _cmdlines()):
             continue
         if nome == "studio" and _studio_rodando():
             # 04/11: a fila das 08:15 ainda rodava às 09:16 e outra entrou em paralelo (disputando o Chrome do Studio)

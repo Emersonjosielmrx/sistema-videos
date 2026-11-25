@@ -315,7 +315,13 @@ class Trava:
         LOCK = self.lock  # noqa: N806
         self.fila = LOCK.parent / (LOCK.stem + "_fila")
         self.fila.mkdir(parents=True, exist_ok=True)
-        self.senha = self.fila / f"{time.time_ns()}_{os.getpid()}"
+        # 24/11 (dona: "por que não postamos mais longos; veja se não está concorrendo com Shorts"): a fila era por
+        # chegada e o longo (3,4 GB, ~2-6 h) ficava atrás de 24 Shorts (23/11 16h) até estourar o prazo. Longo
+        # (YT_PRIORIDADE=longo, posto pelo main quando tipo=completo) ganha senha "0..." = 1º da fila; o Short que já está
+        # subindo termina normal. YT_LONGO_PRIORIDADE=0 desliga.
+        pre = "0" if (os.environ.get("YT_PRIORIDADE") == "longo"
+                      and os.environ.get("YT_LONGO_PRIORIDADE", "1") != "0") else "1"
+        self.senha = self.fila / f"{pre}{time.time_ns()}_{os.getpid()}"
         self.senha.touch()
         try:
             return self._esperar(LOCK)
@@ -567,7 +573,27 @@ def _fechar_sugestoes(pg):
         pg.wait_for_timeout(600)
     if os.environ.get("YT_REABRE_DIALOGO", "1") != "0" and not _visivel_titulo(pg):
         _reabrir_rascunho(pg)
-    titulo.click(timeout=10000)
+    # 25/11 (Rzoy no Fio da Meada, cPQnT-EZuxE): título VISÍVEL no print mas o clique estourou 10 s (algo por cima —
+    # lista de hashtag/tooltip) e o envio de 3,4 GB morreu a 3% depois de 61 min de cópia, deixando rascunho. Antes de
+    # desistir: tira o mouse, clica no cabeçalho do diálogo (fecha sobreposição sem fechar o diálogo) e força o clique.
+    for i in range(3):
+        try:
+            titulo.click(timeout=10000 if i == 0 else 8000, force=i == 2)
+            return
+        except Exception as e:  # noqa: BLE001
+            if i == 2:
+                raise
+            log(f"  título não aceitou o clique ({type(e).__name__}) — limpo a sobreposição e tento de novo")
+            try:
+                pg.mouse.move(5, 5)
+                cab = pg.locator("ytcp-uploads-dialog #dialog-title, ytcp-uploads-dialog h1").first
+                if cab.is_visible(timeout=1500):
+                    cab.click(timeout=3000)
+            except Exception:  # noqa: BLE001
+                pass
+            pg.wait_for_timeout(1500)
+            if not _visivel_titulo(pg) and os.environ.get("YT_REABRE_DIALOGO", "1") != "0":
+                _reabrir_rascunho(pg)
 
 
 def _visivel_titulo(pg):
@@ -1475,6 +1501,8 @@ def main():
     except Falha as f:
         _fim(f.status, str(f), EXIT_USO)
 
+    if a.tipo == "completo":  # 24/11: longo passa na frente dos Shorts na fila do navegador (Trava)
+        os.environ["YT_PRIORIDADE"] = "longo"
     bloqueio = politica.checar_upload(canal, a.video, a.projeto, a.tipo)
     if bloqueio and not a.ensaio:
         codigo, msg = bloqueio

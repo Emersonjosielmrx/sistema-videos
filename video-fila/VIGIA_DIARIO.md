@@ -351,272 +351,33 @@ STATUS: OK
 - Estado: NADA A FAZER
 STATUS: OK
 
-## 20261119_0023 — TikTok: Postador passava apelido em vez de e-mail ao cofre e recusava contas vivas do Kaggle (pelo painel)
-- Motivo: erro "Chrome ja estava aberto por outro projeto sem o proxy dela" repetido (mundosolar1995 em 17/11 05:11–07:39 e 18/11 03:08/03:21; aulasrevolution em 17/11 14:39). bin\postar_tiktok_auto.py:169 chamava cofre.saida_kaggle com o apelido; o cofre só reconhece o e-mail inteiro (cofre.py:158), devolvia None e caía na trava das linhas 171-174.
-- O que fiz (arquivos): só bin\postar_tiktok_auto.py linha 169: cofre.saida_kaggle(r["cofre"]) passou a cofre.saida_kaggle(cofre.conta(r["cofre"])[0]). Cofre.py não foi mexido.
-- Como conferi: sintaxe do arquivo OK; cofre.conta converte apelido em e-mail; saida_kaggle com apelido = None (defeito) e com e-mail = ponte do IP fixo de cada conta (mundosolar1995 e aulasrevolution). Ainda não vi uma rodada real do TikTok depois da mudança. fabricadeautomacoesia (banida, sem IP fixo) continua sendo recusada de propósito.
-- Como desfazer: botão "Desfazer" no painel (pedido 20261119_002316_8fa0)
-- Estado: PRECISA REVISÃO (falta conferir na próxima rodada do TikTok que mundosolar1995 e aulasrevolution postam agendado)
-## 20261119_0255 — Estoque sem novos candidatos / download falhou no parceiro-producao e proxy Groq fora
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\logs\parceiro_producao.log registrou [2026-11-19 02:39:56] estoque: nada reposto (8/8; sem candidato novo ou download falhou) e no log _parceiro_20261119.log: groq: proxy .webshare.io:80 fora (groq: ProxyError).
-- Causa provável: Instabilidade temporária no proxy Webshare e falta temporária de novos candidatos válidos na fonte de pesca/negócios.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar reconexão do proxy e nova varredura de candidatos).
-- Estado: NADA A FAZER
-## 20261119_0417 — Recap longo no PC1 e parceiro: funcionamento normal com reposição de estoque em 8/8
-- Motivo / O que achei (trecho de log): Processos em Python do ambiente de produção ativos e estáveis. Estoque do parceiro completo em 8/8, com pequenas falhas transitórias de proxy já tratadas pelo rodízio automático.
-- Causa provável: Ciclo normal de operação e controle de fluxo do sistema.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código realizada).
-- Estado: NADA A FAZER
-## 20261119_0555 — Vistoria geral: alimentador longo reiniciado e GPUs em uso normal
-- Motivo / O que achei (trecho de log): Recap longo com alimentador travado (107 min) e reiniciado automaticamente; 17 de 20 GPUs sem conta (aguardando próxima volta de lançamento), contas verificadas 11 de 71. Wise Memory Optimizer rodando normalmente.
-- Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera em JSON/API.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o alimentador já foi reiniciado e o sistema prossegue no fluxo normal).
-- Estado: NADA A FAZER
-## 20261119_0755 — Disco D: com 5.41 GB livres (abaixo do limite de 8 GB)
-- Motivo / O que achei (trecho de log): Get-CimInstance Win32_LogicalDisk mostra D: com 5.41 GB livres (3.26% de 166.01 GB), abaixo do limite mínimo de 8 GB estabelecido para a produção. Os processos de render, melhorador central e alimentadores estão ativos e trabalhando normalmente. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Acúmulo normal de materiais, workspaces e artefatos de render nas filas de produção.
-- CONSERTO PROPOSTO: Nenhum (o sistema possui rotinas automáticas de gerenciamento de espaço e o modo é estritamente de aviso, conforme regra do dono).
-- Estado: PRECISA REVISÃO
-
-## 20261119_1156 — Recap longo com alimentador ativo na pilha e PC2 pausado por falhas no parceiro; contas em uso normal
-- Motivo / O que achei (trecho de log): encher_pilha.log mostra processamento contínuo da pilha de Shorts (com baixadores em paralelo e pausas por timeout em algumas fontes), enquanto parceiro_postar.log relata PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json). Processos de Python ativos e Wise Memory Optimizer rodando normalmente.
-- Causa provável: Ciclo normal de operação do alimentador com pausa de proteção automática no PC2 após falhas consecutivas de Shorts do parceiro, além de timeout em baixadores externos eventuais.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar a pausa automática de proteção do PC2 sem remover arquivos de falha nem interferir nos fluxos).
-- Estado: NADA A FAZER
-STATUS: OK
-## 20261119_1436 — Vistoria geral: disco D: em 7.24 GB livres (abaixo do limite de 8 GB) e proxy Groq com falhas transitórias
-- Motivo / O que achei (trecho de log): Get-CimInstance Win32_LogicalDisk mostra D: com 7.24 GB livres (7.24 GB / 166.01 GB), ligeiramente abaixo do limite mínimo de 8 GB. Logs de parceiro registraram avisos de proxy Webshare/Groq fora (recuperáveis com teste posterior) e WinError 32 pontual em capar_shorts.log. Produção de anime e monitoramento ativos e normais.
-- Causa provável: Acúmulo padrão de arquivos na produção e instabilidade temporária em proxies externos de API.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar limpeza automática do sistema e reconexão de proxy sem modificações manuais).
-- Estado: PRECISA REVISÃO
-## 20261119_1835 — Recap longo com 15 de 23 GPUs sem conta (sem trabalho na fila) e contas verificadas 17 de 77
-- Motivo / O que achei (trecho de log): [19/11 18:35:37] outros projetos: PROBLEMAS: recap longo: 15 de 23 GPUs sem conta (parada: sem trabalho na fila); contas verificadas: 17 de 77. Wise Memory Optimizer rodando (PID 3840). RAM livre em ~6.9 GB.
-- Causa provável: Uso regular e rodízio de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento ou a próxima volta do alimentador.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar o ciclo automático de renovação de cota e liberação pelo próprio sistema, sem modificações manuais).
-- Estado: NADA A FAZER
-STATUS: OK
-## 20261119_1939 — Falha de MemoryError / Broken pipe no parceiro-render durante cobertura do short
-- Motivo / O que achei (trecho de log): `[out#0/rawvideo @ 00000000000c5840] Error writing trailer: Broken pipe` e `Error encoding a frame: Cannot allocate memory` no log workspace/anime/_parceiro_20261119.log.
-- Causa provável: Pico de consumo de memória RAM/vulnerabilidade do FFmpeg ao alocar buffers de vídeo raw durante a etapa de cobertura/delogo do short.
-- CONSERTO PROPOSTO: Adicionar tratamento robusto de exceções de memória e coleta de lixo `gc.collect()` na rotina de cobertura em `bin/anime_auto.py`, assim como otimizar o uso de buffers do FFmpeg.
-- Estado: NADA A FAZER
-## 20261119_2056 — Vistoria de rotina: proxy Webshare com 402, disco D com 6.47 GB livres e retomada bem-sucedida
-- Motivo / O que achei (trecho de log): _parceiro_20261119.log registrou aviso de proxy Webshare (Tunnel connection failed: 402 Payment Required) seguido de pausa automática e retomada via Kaggle / rota alternativa. Disco D: com 6.47 GB livres (abaixo dos 8 GB recomendados). Processo de render/postagem do parceiro operando normalmente.
-- Causa provável: Limite de cota/saldo temporário no proxy Webshare e uso contínuo de espaço em disco na produção.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar a pausa automática de proxy e fluxo normal do sistema sem intervenção manual).
-- Estado: NADA A FAZER
-
-## 20261120_0045 — reel_globo: ffmpeg da montagem passando de 600 s não derruba mais o script (pelo painel)
-- Motivo: em 16/11 (logs\reel_globo.log:8551) o ffmpeg da montagem estourou 600 s com as 2 cenas do Veo já aprovadas; bin\montagem_ms.py:894 não tratava subprocess.TimeoutExpired, o erro subiu até o main() do reel_globo.py e o clipe pago foi perdido. Desde 16/11 não houve novo erro no log (montagens aprovadas e publicadas até 19/11 22:27); o defeito estava no código, não no dia de hoje.
-- O que fiz (arquivos): só bin\montagem_ms.py, linhas 894-900: a chamada subprocess.run(..., timeout=600) ficou dentro de try; no TimeoutExpired grava "[MONTAGEM] ffmpeg passou de 600 s" no log e usa um resultado de falha (returncode -1), que cai nos refazimentos que já existiam (sem SFX, karaokê, sem destaque) e, no fim, em ok=False. Nada mais foi mexido.
-- Como conferi: sintaxe OK; teste de mentira (simulando o TimeoutExpired nas linhas editadas, sem ffmpeg, sem gravar nada em disco) deu returncode -1, ok=False e a linha no log; caminho normal (returncode 0) segue igual. Li gerar_short_veo.py:426-437: se a montagem devolve falha, espera 90 s, tenta mais 1x e, se falhar de novo, avisa "[STOP] montagem falhou — nada vai para a fila" e devolve None (sem postar nada). Ainda não houve rodada real com ffmpeg lento depois da mudança. Não criei .bak por terminal; o backup é o do painel.
-- Como desfazer: botão "Desfazer" no painel (pedido 20261120_004528_80e2)
-- Estado: RESOLVIDO
-## 20261120_0237 — Vistoria do vigia: Recap longo com 18 de 23 GPUs sem conta (aguardando cota/alimentador) e contas verificadas 17 de 77
-- Motivo / O que achei (trecho de log): anime_health_monitor.log e logs correntes indicam contas verificadas 17 de 77, com 18 de 23 GPUs sem conta por falta de trabalho na fila. Alimentador ativo (cliente.py alimentar) no PC1 com pausas automáticas de fluxo. Wise Memory Optimizer rodando (PID 3840) e RAM livre em ~9.1 GB.
-- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento automático ou o próximo ciclo do alimentador.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar o ciclo automático de renovação de cota e liberação pelo próprio sistema, sem modificações manuais).
+## 20261124_2131 — conserto 20261119_002316_8fa0 DESFEITO por revisor antigravity/claude-opus-4-6-thinking
+- voltou D:\postador-de-videos\bin\postar_tiktok_auto.py
+- voltou D:\video-fila\VIGIA_DIARIO.md
+- versão de antes do desfazer guardada em D:\video-fila\estado\painel_ia\20261119_002316_8fa0_depois (pra refazer)
+## 20261125_0251 — parceiro-render: ffprobe/ffmpeg timeout pontual em source.mp4
+- Motivo / O que achei (trecho de log): _parceiro_20261125.log mostra TimeoutExpired em ffprobe/ffmpeg ao verificar ou cobrir source.mp4, recuperado em seguida (atualmente baixando e transcrevendo normalmente pelo Groq).
+- Causa provável: Lentidão momentânea de I/O ou CPU ao manipular o arquivo source.mp4 durante renderizações paralelas.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sistema já possui rotinas de retry automáticas e prosseguiu normalmente).
 - Estado: NADA A FAZER
 STATUS: OK
 
-## 20261120_0336 — Vistoria de rotina: Disco D com 0.82 GB livres e Wise Memory Optimizer ativo
-- Motivo / O que achei (trecho de log): alimentar_pc2.log indica PC2 pausado (3 Shorts seguidos falharam lá — pc2_parceiro_falhou.json); abastecedor_kaggle.log relata 'disparei a faxina_disco.py (oculta) pra liberar espaço' e D: com 0.9 / 0.82 GB livres. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Acúmulo de arquivos temporários, workspaces e materiais na fila de render/produção, aguardando o ciclo automático de faxina em disco.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar as regras do modo, não interferir em processos de disco ou renderização, e aguardar a faxina automática).
-- Estado: NADA A FAZER
-STATUS: REVISAR - Disco D com apenas 0.82 GB livres (abaixo do limite mínimo de 8 GB); faxina_disco.py acionada automaticamente pelo abastecedor.
-## 20261120_0415 — Vigia: guarda do disco D (4.65 GB) e Wise Memory Optimizer ativo
-- Motivo / O que achei (trecho de log): Disco D com 4.65 GB livres, acionado backup_drive e cache do Chrome, apagados 7 trechos velhos do aprendizado. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Uso de espaço por arquivos de trabalho e caches.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — guarda do disco atuando automaticamente).
-- Estado: NADA A FAZER
-
-## 20261120_0515 — parceiro-render: processamento ativo com pausas de yt-dlp e time-outs pontuais de ffmpeg
-- Motivo / O que achei (trecho de log): _parceiro_20261120.log mostra o ciclo do nime_auto.py rodando, discover de canais funcionando, e pequenos timeouts pontuais no ffmpeg/ffprobe (TimeoutExpired: Command '['ffprobe', ...]' timed out after 60 seconds e fmpeg [...] timed out after 180 seconds), além de pausas no Groq/yt-dlp tratadas automaticamente pelo sistema. O processo de render short no Kaggle concluiu e gerou o postar.json corretamente.
-- Causa provável: Sobrecarga temporária de I/O / CPU no Windows fazendo o ffprobe/ffmpeg estourar o timeout e bloqueios transitórios de IP/proxy no Groq/yt-dlp.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sem intervenção no código ou processos).
-- Estado: NADA A FAZER
-## 20261120_0635 — parceiro-render: erro rc=1 no Kaggle ao disparar formato joao_chico em anime-pipeline.py linha 1n- Causa provável: Erro de execução ou traceback na primeira linha do script anime-pipeline.py durante o teste do formato experimental joao_chico no Kaggle.n- Estado: NADA A FAZER
-## 20261120_0635 — parceiro-render: erro rc=1 no Kaggle ao disparar formato joao_chico em anime-pipeline.py
-- Motivo / O que achou: Short 20261120_062235_tm_GrRTBkhk deu erro no Kaggle com rc=1. Trecho de log: Traceback (most recent call last): File "/kaggle/tmp/trab/raiz/D/recapd-ambientes/producao/bin/anime-pipeline.py", line 1
-- Causa provável: Falha transitória ou erro na execução do script anime-pipeline.py no Kaggle ao testar o formato experimental joao_chico.
-- CONSERTO PROPOSTO: Nenhum — falha transitória no Kaggle com formato experimental, mantendo o fluxo normal.
-- Estado: NADA A FAZER
-
-## 20261120_0856 — Vistoria do vigia: Recap longo (alimentador ativo no PC1) e GPUs aguardando cota/trabalho
-- Motivo / O que achei (trecho de log): Logs do recap longo (anime_health_monitor.log, alimentar_pc2.log, encher_pilha.log) indicam que o alimentador (`cliente.py alimentar`) está ativo e operando no PC1, com pausas automáticas de fluxo e reabastecimento de pilha. Contas verificadas (16 de 77) e 15/23 GPUs sem conta aguardando cota/trabalho na fila. Wise Memory Optimizer ativo (PID 3840) e RAM livre em ~5.2 GB.
-- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo, aguardando o reabastecimento automático e a próxima volta do alimentador.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código necessária; operação dentro do fluxo normal).
-- Estado: NADA A FAZER
-
-## 20261120_0957 — Alerta de SSLError temporário no discover_canal (@richan-anime) e recuperação automática via yt-dlp
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\logs\parceiro_producao.log registrou aviso [discover_canal] API do site falhou em https://www.youtube.com/@richan-anime/shorts (SSLError: HTTPSConnectionPool...). O sistema lidou com instabilidades de rede e seguiu postando e processando Shorts com sucesso nas horas seguintes.
-- Causa provável: Instabilidade transitória de DNS/SSL na requisição HTTP com o YouTube, contornada automaticamente com fallback para o yt-dlp.
-- CONSERTO PROPOSTO: Nenhum (comportamento resiliente padrão já implementado e funcional).
-- Estado: NADA A FAZER
-## 20261120_1155 — Vigia: guarda do disco D (4.1 GB) e Wise Memory Optimizer ativo
-- Motivo / O que achei: D: com 4.1 GB livres, disparado backup_drive e cache do Chrome, apaguei 3 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo de arquivos temporários e cache no disco D. | CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — guarda do disco atuando automaticamente). | O que fez: Nenhuma intervenção manual necessária, automações do sistema em execução.
-- Estado: NADA A FAZER
-
-## 20261120_1455 — parceiro-render falhou no Kaggle por erro no Applio/Whisper/clip-vit (rc=1)
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log aponta [kaggle-lote] Short 20261120_144802_6CfVaYeVu1E deu erro no Kaggle: rc=1, applio ok em 195 s, erro em clipe/clip-vit-base do HuggingFace.
-- Causa provável: Instabilidade transitória no download de modelos do HuggingFace ou contenção no worker do Kaggle durante o processamento do Applio/TTS para o formato trio_chaves.
-- CONSERTO PROPOSTO: Nenhum (falha transitória na API/servidor externo do Kaggle/HuggingFace). O sistema gerencia lotes e novas tentativas de renderização automaticamente.
-- Estado: NADA A FAZER
-
-## 20261120_1518 — Vistoria do vigia: Recap longo com alimentador ativo no PC1, 21 de 25 GPUs sem conta e contas verificadas 17 de 79; espaço em disco reduzido (~1.7 GB livres).
-- Motivo / O que achei (trecho de log): Logs do abastecedor kaggle e de monitoramento indicam alimentador ativo no PC1 e contas verificadas (17 de 79), com 21 de 25 GPUs aguardando cota/trabalho na fila e disco D com ~1.7 GB livres (< 6 GB).
-- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo e acúmulo de arquivos temporários, aguardando reabastecimento ou limpeza natural pelo sistema.
-- CONSERTO PROPOSTO: Nenhum. O sistema gere automaticamente as contas e o Wise Memory Optimizer gerencia a RAM, enquanto a rotina própria cuida da limpeza quando necessário.
-- Estado: NADA A FAZER
-
-## 20261120_1615 — Vigia: Webshare 402 Payment Required no proxy e disco D com 4.3 GB
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log: [fetch] download (formato único via proxy) falhou: o download API page: ('Unable to connect to proxy', OSError('Tunnel connection failed: 402 Payment Required')). Disco D: com 4.3 GB livres (abaixo dos 8 GB).
-- Causa provável: Esgotamento temporário de saldo/cota no proxy Webshare (erro 402), fazendo o yt-dlp tentar rota alternativa ou pausar downloads temporariamente.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema lida com bloqueios de proxy e pausas do yt-dlp de forma autônoma através de ytdlp_vez e downloads de emergência).
-- Estado: NADA A FAZER
-
-## 20261120_1917 — Vigia geral: D com 1.21 GB livres, backup_drive e cache executados, Wise Memory Optimizer ativo
-- Motivo / O que achei: D: com 1.21 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D.
-- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
-- Estado: NADA A FAZER
-
-## 20261120_2256 — Vistoria do vigia: Recap longo com alimentador ativo, 20/25 GPUs sem conta e disco D com 5.4 GB livres
-- Motivo / O que achei (trecho de log): Recap longo com 20 de 25 GPUs sem conta (parada: sem trabalho na fila); contas verificadas: 17 de 79. Disco D com ~5.4 GB livres (abaixo do limite ideal de 8 GB). Wise Memory Optimizer rodando (PID 3840).
-- Causa provável: Uso regular e rodízio/expiração de cotas nas contas do Veo/gerador de vídeo e acúmulo natural de arquivos de trabalho, aguardando reabastecimento ou limpeza natural pelo sistema.
-- CONSERTO PROPOSTO: Nenhum (o sistema gere automaticamente as contas, cotas e espaço em disco de forma autônoma).
-- Estado: NADA A FAZER
-## 20261120_2317 — [fetch] download (formato único) falhou: HTTP Error 403: Forbidden (recuperado automaticamente com retry e pausas)
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261120.log: 2026-11-20 23:04:58,893 - WARNING - [fetch] download (formato único) falhou: ERROR: unable to download video data: HTTP Error 403: Forbidden
-- Causa provável: Bloqueio temporário do YouTube por volume de requisições / IP da casa, tratado automaticamente pelo sistema de pausas (ytdlp_vez).
-- CONSERTO PROPOSTO: nenhum
-- Estado: NADA A FAZER
-
-## 20261121_0102 — reserva_status.py passa a ignorar canal retirado (Por Dentro), alerta falso reserva_zero:pordentro (pelo painel)
-- Motivo: o canal Por Dentro foi retirado pela dona em 19/11 (conta removida do cofre; canais_status.json "desativados" id novo_pordentro), mas o rascunho novo_pordentro continuava em canais.json e o medidor o mostrava com 0 agendado e 0 pronto, o que disparava o alerta da vigilância. Não faltava alimentador: dar alimentador seria errado.
-- O que fiz (arquivos): D:\video-fila\reserva_status.py — leitura tolerante da lista "desativados" de canais_status.json (lista ausente ou arquivo ruim = ninguém pulado) e o laço de canais pula quem estiver nela (pelo slug ou pelas creds). Nada mais mudou (canais.json, rede_canais.json e arquivos da vigilância intactos).
-- Como conferi: sintaxe compilou; reserva_status.py rodou e novo_pordentro saiu da tabela, total de 13/32 para 13/31, demais canais com os mesmos números; "resumo" também funciona.
-- Como desfazer: botão "Desfazer" no painel (pedido 20261121_010234_3f69)
-- Obs.: outros canais com 0.0 dias (codigobilhao3d, dentrodascoisas3d, fatochocante, inventoreact, mundoquenaoexiste, esportenoturno) são reais, têm conta e dono, e não fazem parte deste pedido.
-- Estado: RESOLVIDO
-## 20261121_0135 — Parceiro: erro no Kaggle com短-lote no formato madruga_chaves ( 404/rc=1).
-- Motivo / O que achei: O short  (formato ) falhou no Kaggle com  e erro de requisição HTTP 404 ao buscar  no Hugging Face (pesquisa/modelo indisponível ou transiente).
-- Causa provável: Instabilidade temporária da API do Hugging Face ou dependência ausente no ambiente do Kaggle para esse formato de teste ().
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso). O sistema tentará novamente ou o dono ajustará o script do Kaggle se persistir.
-- Estado: NADA A FAZER
-## 20261121_0135 — Parceiro: falha no Kaggle em short no formato madruga_chaves
-- Motivo / O que achei: Trecho do log de `_parceiro_20261121.log`: Short `20261121_012414_0ONNeIWYGr4` falhou no Kaggle com `rc=1` e HTTP 404 do Hugging Face (`openai/clip-vit-base-patch32`).
-- Causa provável: Indisponibilidade transitória ou mudança de endpoint no Hugging Face durante a execução do lote no Kaggle.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso). O pipeline possui tratamento e retentativas automáticas.
-- Estado: NADA A FAZER
-## 20261121_0337 — Vigia do disco: D: com 2.99 GB livres, backup_drive e cache executados, Wise Memory Optimizer ativo
-- Motivo / O que achei (trecho de log): D: com 2.99 GB livres (abaixo do limite mínimo). Processo WiseMemoryOptimizer ativo (PID 3840, ~11.8 MB RSS, RAM livre estável).
-- Causa provável: Acúmulo de arquivos temporários e cache no disco D.
-- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
-- Estado: NADA A FAZER
-## 20261121_0635 — parceiro-render: aviso de falha transiente no Kaggle e erro de roteiro recuperado automaticamente
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261121.log registrou falha pontual no Kaggle (`rc=1` no Short `0ONNeIWYGr4` em 01:27) e aviso de roteiro curto (`roteiro com tempo veio com 2 frases marcadas` em 01:43), ambos recuperados e concluídos com `publish OK`.
-- Causa provável: Instabilidade transitória no pipeline do Kaggle e ajuste automático de roteiro pelo mecanismo de re-tentativa.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema se recuperou sozinho e postou normalmente).
-- Estado: NADA A FAZER
-
-## 20261121_0716 — Recap longo ativo no PC1 e modelo agy/gemini-3-flash padronizado
-- Motivo / O que achei: O recap longo (cliente.py alimentar) e os fluxos do PC1/PC3 rodam regularmente. Verificou-se nos logs que alimentador e render operam nos ciclos normais, com pausas adequadas e controle por logs. Modelo antigo ajustado para ntigravity/gemini-3-flash.
-- Causa provável: Ciclo normal de operação e controle de fluxo do sistema.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código realizada).
-- Estado: NADA A FAZER
-## 20261121_0957 — parceiro-render: transição do Kaggle para render local após espera de GPU e retomada do pipeline
-- Motivo / O que achei (trecho de log): `_parceiro_20261121.log` registrou em 08:18:55 que o Short `20261121_081319_S1B9qKMdNy0` entrou na fila esperando o Kaggle, e em 08:45:39 informou: `20261121_081319_S1B9qKMdNy0: nenhuma GPU pegou em 25 min — renderizo no PC`.
-- Causa provável: Indisponibilidade momentânea ou fila cheia de GPUs no Kaggle, acionando o mecanismo nativo de fallback para renderização local no PC.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o próprio script detecta o timeout de espera da GPU e executa o fallback de renderização local automaticamente).
-- Estado: NADA A FAZER
-## 20261121_1116 — Vistoria geral: recap longo e parceiro ativos com fallback de GPU e espaço em disco controlado
-- Motivo / O que achei (trecho de log): Monitoramento dos logs em `workspace/anime/_parceiro_20261121.log` e do vigia indicou ciclos normais, incluindo transição automática para renderização local após timeout de GPU no Kaggle. Disco D com ~5 GB livres e Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Funcionamento rotineiro do sistema com gerenciamento automático de filas e recursos.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema opera autonomamente e se recupera sozinho).
-- Estado: NADA A FAZER
-
-## 20261121_1817 — Vistoria geral: proxy com aviso 402 temporário, espaço em disco restrito e pipeline operando com recuperação automática
-- Motivo / O que achei (trecho de log): `_parceiro_20261121.log` registrou aviso de proxy Webshare (`Tunnel connection failed: 402 Payment Required`), pausando o yt-dlp por intervalo de segurança. Pipeline continua processando renderizações locais e filas de shorts. Espaço livre no disco D em ~3.0 GB. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Limite temporário de saldo no proxy Webshare e alto volume de arquivos na produção.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema gerencia o intervalo de pausas e o fallback automaticamente).
-- Estado: NADA A FAZER
-
-## 20261122_0210 — TikTok: timeout de espera do botão Publicar aumentado de 120s para 180s (pelo painel)
-- Motivo / O que fiz (arquivos): TikTok dava "NAO CONFIRMADO" em 5 contas em 6h porque o botão Publicar não ficava pronto em 120s (uploads grandes/conexão lenta), o código tentava clicar mesmo assim, falhava, e a sonda nem rodava (posted=False). Editei bin/tiktok_cdp_poster.py:206 (range(60)→range(90) = 180s), linha 210 (guarda estado_final), linha 217 (só clica se estado_final=='on'), linha 230 (log mostra estado do botão na falha). / Como conferi: py_compile OK, sintaxe correta, lógica preservada. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_021032_1b46)
-- Estado: RESOLVIDO
-## 20261122_0229 — canal dentrodascoisas3d/codigobilhao3d: fallback de campo canais do kit3d no rede.py (pelo painel)
-- Motivo / O que fiz (arquivos): 25 vídeos 3D prontos (19 dentrodascoisas3d + 6 codigobilhao3d) mas com 0 agendados porque o kit3d grava "canais" no postar.json e o rede.py procurava "so_canais", caindo no fallback "inventoreact" que nunca tinha vaga. Editei D:\manhwa-react\mr\rede.py:250 — adicionei fallback it3.get("dados", {}).get("canais") entre so_canais e ["inventoreact"]. / Como conferi: sintaxe OK, importação do rede.py OK, teste de fallback com {"dados": {"canais": ["codigobilhao3d"]}} retornou "codigobilhao3d" como esperado. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_022933_3edd)
+## 20261125_0301 — canal fatochocante sem pasta de materiais (pelo painel)
+- Motivo / O que fiz (arquivos): Canal fatochocante criado em 18/11, configurado corretamente em canais.json (alimentadores: parceiro livre) e parceiro.json (ativo, nicho fatos), mas SEM pasta D:\hipercool-materiais\manhwa-react\shorts\fatochocante para o sistema gerar vídeos. Criei a pasta vazia. / Como conferi: ls -la confirmou pasta criada em 25/11 03:01, agora aparece na listagem de shorts junto com os outros 10 canais. / Como desfazer: botão "Desfazer" no painel (pedido 20261125_030105_7c90)
 - Estado: RESOLVIDO
 
-## 20261122_0238 — TikTok: sonda pós-clique sempre roda (até 90s) para confirmar publicação (pelo painel)
-- Motivo / O que fiz (arquivos): D:\postador-de-videos\bin\tiktok_cdp_poster.py:243 — a sonda pós-clique só rodava se posted=True (30 if posted else 0), ignorando a confirmação se o clique retornasse falso ou atrasasse, e 60s era curto para uploads pesados. Mudei linha 243 para range(45) (sonda sempre por até 90s). / Como conferi: python -m py_compile validou sintaxe e compilação sem erros. / Como desfazer: botão "Desfazer" no painel (pedido 20261122_023425_cbbb)
+## 20261125_0304 — canal pordentro: removida entrada fantasma de canais.json (pelo painel)
+- Motivo / O que fiz (arquivos): Canal pordentro retirado pela dona em 19/11 (rede_canais.json:918 status="retirado", canais_status.json:242 em desativados), mas entrada "novo_pordentro" ainda existia em canais.json:1101-1121 com slug/handle/channel_id nulos, gerando alertas da vigilância. Removi completamente as 21 linhas da entrada novo_pordentro de D:\postador-de-videos\config\canais.json. / Como conferi: python validou JSON OK, novo_pordentro não existe mais em canais.json (False), reserva_status.py não lista mais pordentro (5/31 canais na meta, pordentro ausente). / Como desfazer: botão "Desfazer" no painel (pedido 20261125_030430_03c7)
 - Estado: RESOLVIDO
-## 20261122_0300 — Vistoria geral: ffprobe e ffmpeg com timeouts intermitentes por lentidão de I/O e proxy Groq recuperado
-- Motivo / O que achei (trecho de log): Logs do parceiro-render (`_parceiro_20261122.log`) registraram timeouts intermitentes em chamadas de `ffprobe` (verificação de áudio/vídeo) e `ffmpeg` (extração/medida), além de instabilidade momentânea no proxy Groq (resolvida automaticamente). Wise Memory Optimizer ativo (PID 3840) e espaço livre no disco D em ~11.3 GB.
-- Causa provável: Lentidão temporal de I/O no disco/processamento ao inspecionar arquivos de vídeo pesados e latência pontual de rede/proxy.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema lida com os timeouts e prossegue ou tenta novamente de forma autônoma).
-- Estado: NADA A FAZER
-
-## 20261122_0318 — Vistoria geral: PC2 online, Wise Memory Optimizer ativo e proxy Groq recuperado automaticamente
-- Motivo / O que achei (trecho de log): Logs em logs/anime_health_monitor.log mostram que o PC2 voltou a responder online às 02:54, a memória RAM está em ~6.8 GB livres com Wise Memory Optimizer (PID 3840) rodando, e os avisos de proxy Webshare/Groq tratam-se de pausas e fallbacks automáticos normais.
-- Causa provável: Funcionamento autônomo do pipeline e recuperação automática de conexões e rede.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema opera normalmente e se autorrecupera).
-- Estado: NADA A FAZER
-
-## 20261122_0735 — Guarda do disco D (2.6 GB) e otimizador de memória ativo
-- Motivo / O que achei: D: com 2.6 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840). | Causa provável: Acúmulo natural de arquivos de trabalho e temporários no disco D. | CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável). | O que fez: Nenhuma intervenção manual necessária, automações em execução.
-- Estado: NADA A FAZER
-## 20261122_0915 — Recap longo aguardando cota/alimentador PC1 e espaço em disco D abaixo do mínimo
-- Motivo / O que achei (trecho de log): anime_health_monitor.log indica 23 recaps nas últimas 12h, worker online, com avisos de proxy em parceiro_postar.log. Disco D com 6.14 GB livres (abaixo do limite de 8 GB). Contas e GPUs aguardando cota/trabalho no PC1.
-- Causa provável: Consumo regular de cotas do gerador de vídeo/Veo e acúmulo de arquivos de trabalho, necessitando reabastecimento ou limpeza controlada no PC1, e uso de espaço em D.
-- CONSERTO PROPOSTO: Verificar status do alimentador no PC1, liberar RAM se necessário e aguardar o rodízio natural das contas de vídeo/Veo, mantendo espaço em D monitorado.
+## 20261125_0936 — Recap longo: alimentador parado no PC1 e falta de contas verificadas nas GPUs
+- Motivo / O que achei (trecho de log): alimentar_pc2.log mostra que o PC2 está processando Shorts normalmente, mas o alimentador do recap longo (cliente.py alimentar) está parado no PC1 (sem conexão SSH com PC2 há 127 tentativas e ausência de contas Flow/Veo verificadas disponíveis nas 25 GPUs).
+- Causa provável: Conexão SSH perdida com o PC1/PC2 e esgotamento/falta de verificação de contas ativas nas GPUs para os recaps longos.
+- CONSERTO PROPOSTO: Nenhum (Modo Só Aviso). Religar o serviço do alimentador do recap longo no PC1 e renovar/verificar as contas das GPUs no pool correspondente.
 - Estado: PRECISA REVISÃO
-## 20261122_1637 — Vistoria do vigia: Recap longo (alimentador ativo no PC1), 16/25 GPUs sem conta e disco D com 3.3 GB livres
-- Motivo / O que achei (trecho de log): Logs do anime_health_monitor.log indicam trabalhamento e worker do PC2 offline no monitor (ou aguardando), com 16 de 25 GPUs sem conta por falta de trabalho na fila. Disco D com ~3.3 GB livres (abaixo de 8 GB). Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Consumo regular e rodízio/expiração de cotas de contas Veo e acúmulo natural de arquivos de trabalho no disco D.
-- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o sistema gerencia cotas e pausas de forma autônoma).
-- Estado: NADA A FAZER
+## 20261125_1038 — Disco D com espaco critico (4.75 GB livres) e alimentador recap longo/contas GPU
+- Motivo / O que achei (trecho de log): Get-PSDrive D mostra 4.75 GB livres (limite mínimo de 8 GB). Os logs e o histórico indicam alerta de disco cheio, além do alimentador do recap longo e GPUs necessitando de contas ativas.
+- Causa provável: Acúmulo natural de workspaces, caches e materiais na produção, aliado à falta de rotatividade/verificação de contas de GPU.
+- CONSERTO PROPOSTO: Nenhum (Modo Só Aviso). Monitorar o uso do disco D, aguardar a limpeza automática e verificar as contas de GPU / reiniciar o serviço do alimentador do recap longo conforme rotina padrão.
+- Estado: PRECISA REVISÃO
 
-## 20261122_1808 — Guarda do disco D (3.6 GB livres) e Wise Memory Optimizer ativo
-- Motivo / O que achei: D: com 3.6 GB livres, disparado backup_drive e cache do Chrome, apaguei 1 trecho(s) velho(s) do aprendizado. Wise Memory Optimizer ativo (PID 3840).
-- Causa provável: Acúmulo de arquivos temporários e cache no disco D.
-- CONSERTO PROPOSTO: Nenhum (Guarda do disco atuando automaticamente e mantendo operação estável).
-- O que fez: Verificação de rotina do disco e otimizador de memória.
-- Estado: NADA A FAZER
-
-
-## 20261122_1938 — Vigia verificação rotineira concluída: sistema operando normalmente, alertas menores de proxy/groq já recuperados automaticamente e aviso sobre tarefa agendada e cota de parceiro tratada no log.
-- Motivo / O que achei: O monitor de saúde indicou aviso intermitente de proxy na API Groq (já recuperado) e alerta de tarefa agendada (AnimeOcioso) que sofreu timeout no schtasks no momento da varredura, mas o sistema está operando e os logs recentes mostram recuperações automáticas.
-- Causa provável: Instabilidade momentânea de rede/proxy e lentidão pontual do schtasks do Windows.
-- CONSERTO PROPOSTO: Nenhum conserto necessário (modo só aviso; operações automáticas de recuperação funcionaram).
-- Estado: NADA A FAZER
-
-## 20261123_0015 — Vistoria geral: producao ativa, alimentador e render operando, espaco em disco no limite (D: 7.3GB, C: 4.3GB)
-- Motivo / O que achei (trecho de log): Logs em encher_pilha.log e alimentar_pc2.log mostram pilha reabastecida e Shorts sendo gerados e trazidos normalmente (ex: iGAa6z4z7iE, rGirXsFzu24). Wise Memory Optimizer ativo (PID 3840). Disco D com 7.3 GB e C com 4.3 GB (abaixo do limiar ideal de 8/5 GB, exigindo atenção contínua mas sem interrupção imediata).
-- Causa provável: Operação normal de produção e acumulação natural de arquivos/caches nos discos D e C.
-- CONSERTO PROPOSTO: nenhum (modo só aviso; monitorar espaço em disco e fluxo do alimentador).
-- Estado: NADA A FAZER
-
-## 20261123_0057 — dentrodascoisas3d: reserva_status.py não contava vídeos 3D (pelo painel)
-- Motivo / O que fiz (arquivos): Canal dentrodascoisas3d mostrava 0 vídeos prontos, mas existiam 14 vídeos 3D aprovados em D:\hipercool-materiais\historias-em-frames\ com "pronto": true e sem "posted_url". O reserva_status.py processava apenas parceiro/manhwa-react/comentarios, faltava glob para historias-em-frames. Editei D:\video-fila\reserva_status.py:62-73 — adicionei bloco para processar historias-em-frames (glob postar.json, valida pronto/posted_url/mp4 existe, conta em prontos[canal]["kit3d"]). / Como conferi: rodei python D:\video-fila\reserva_status.py — dentrodascoisas3d passou de 0.0 dias para 4.7 dias com 14 prontos {'kit3d': 14}. / Como desfazer: botão "Desfazer" no painel (pedido 20261123_005726_7de9)
-- Estado: RESOLVIDO
-
-## 20261123_0102 — tiktok: aumentado timeout de sonda pós-clique de 90s para 120s (pelo painel)
-- Motivo / O que fiz (arquivos): bin/tiktok_cdp_poster.py:243-272 — erro 'NAO CONFIRMADO: TikTok nao mostrou publicado' ocorria 5x em 6h porque a sonda pós-clique só esperava 90s e não detectava redirecionamento pós-upload. Mudei: (1) range(45) → range(60) = timeout de 90s para 120s; (2) lógica de detecção de saída do /upload com verificação de URL válida (não-erro/não-login); (3) debug a cada 15s mostrando trecho do body quando não detectar confirmação. / Como conferi: python -m py_compile confirmou sintaxe OK. / Como desfazer: botão "Desfazer" no painel (pedido 20261123_010204_579b)
-- Estado: RESOLVIDO
-
-## 20261123_0128 — fatochocante: canal sem alimentador nem entrada no parceiro (pelo painel)
-- Motivo / O que fiz (arquivos): Canal fatochocante (criado 18/11, liberado pela dona com max_dia=1) estava com 0 vídeos agendados e 0 prontos porque: (1) D:\postador-de-videos\config\canais.json:449 tinha "alimentadores": {} vazio, enquanto os outros 28 canais do dono manhwa-react têm {"parceiro": "livre"}; (2) faltava entrada no D:\recapd-ambientes\producao\config\parceiro.json na lista "pt" (tinha 29 canais, fatochocante não estava). Editei: (1) canais.json:449 — mudei alimentadores de {} para {"parceiro": "livre"}; (2) parceiro.json:1970 — adicionei entrada completa do canal (novo_fatochocante, @fatochocante-v4g, nicho fatos, horários 12:00/19:00/21:30, por_dia=1, fila_alvo=7, ativo=true). / Como conferi: (1) python confirmou alimentadores: {'parceiro': 'livre'} no canais.json; (2) python confirmou entrada fatochocante no parceiro.json pt[]; (3) parceiro_diario.py reconheceu o canal (found=True). / Como desfazer: botão "Desfazer" no painel (pedido 20261123_012816_f3ac)
-- Estado: RESOLVIDO
-## 20261123_1016 — Alertas de postagem e RAM/paginação verificados; modo exclusivo de aviso ativo
-- Motivo / O que achei: `parceiro_postar.log` apresentou falha pontual de driver/Playwright e proxy Groq (`Connection.init: Connection closed while reading from the driver`); `capar_shorts.log` registrou `WinError 1455` (arquivo de paginação pequeno / pressão de memória); `anime_health_monitor.log` apontou alimentador e crons restabelecidos.
-- Causa provável: Pico transiente de concorrência e carga de memória no Windows sob uso intenso de Playwright/Chromium pelos postadores.
-- CONSERTO PROPOSTO: Nenhum código deve ser alterado pelo vigia em modo aviso estrito; monitorar liberação automática de RAM pelo Wise Memory Optimizer e rotinas de retomada do worker e filas.
-- Estado: RESOLVIDO
-## 20261123_1117 — Alerta de SSLError temporário no discover_canal em danielarecapsbr e recuperação automática pelo yt-dlp
-- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261123.log registrou o aviso [discover_canal] API do site falhou em https://www.youtube.com/@danielarecapsbr/shorts (SSLError: HTTPSConnectionPool(host='www.youtube.com', port=443): Max retries exceeded...) — uso o yt-dlp. O fallback automático acionou o yt-dlp com sucesso e o sistema continuou operando normalmente nas horas seguintes, utilizando o estoque e gerando novos conteúdos sem interrupções.
-- Causa provável: Instabilidade transitória de DNS/SSL ou flutuação de rede na requisição HTTPS à API do YouTube.
-- CONSERTO PROPOSTO: Nenhum necessário, o mecanismo de resiliência e fallback para o yt-dlp já lida com o erro de forma autônoma.
-- Estado: NADA A FAZER
+STATUS: REVISAR - Disco D com apenas 4.75 GB livres (abaixo dos 8 GB mínimos) e recap longo/GPUs precisando de atenção.

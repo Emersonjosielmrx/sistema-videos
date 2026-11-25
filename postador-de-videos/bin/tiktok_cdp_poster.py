@@ -242,7 +242,10 @@ def post_one_cdp(video_path, port, description):
         })()'''
         for i in range(60):
             time.sleep(2)
-            st = evaluate(browser_ws, sonda, session_id) or {}
+            st = evaluate(browser_ws, sonda, session_id)
+            if not st or not isinstance(st, dict):  # garante que st é dict válido
+                print(f"  [{i*2}s] sonda falhou (evaluate retornou {type(st).__name__})", flush=True)
+                st = {}
             url_atual = st.get('url') or ''
             if (url_atual, st.get('bts')) != ultimo:
                 print(f"  apos clicar: url={url_atual[:70]} botoes={st.get('bts')}", flush=True)
@@ -260,10 +263,9 @@ def post_one_cdp(video_path, port, description):
                 print(f"  → confirmado por redirecionamento: {url_atual[:50]}", flush=True)
                 break
 
-            # Debug: a cada 15s sem confirmação, mostra trecho do body
-            if i > 0 and i % 7 == 0 and not st.get('ok'):
-                body_sample = evaluate(browser_ws, 'document.body.innerText.slice(0, 200)', session_id) or ''
-                print(f"  [{i*2}s] body sample: {body_sample[:100]}", flush=True)
+            # heartbeat a cada 10s (mesmo sem mudança)
+            if i > 0 and i % 5 == 0:  # a cada 10s
+                print(f"  [{i*2}s] aguardando (url:{url_atual[-30:] if url_atual else 'vazio'}, ok:{st.get('ok')}, bts:{len(st.get('bts') or [])})", flush=True)
 
             alvo = next((b for b in st.get('bts') or [] if b.lower() in ('publicar agora', 'postar agora', 'post now', 'publicar', 'postar')), None)
             if alvo:

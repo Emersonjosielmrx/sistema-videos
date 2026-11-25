@@ -50,6 +50,9 @@ def pipe(a, b):
 
 def atender(cli, auth):
     try:
+        # 25/11: cabeçalho do cliente sem prazo + vaga presa = com o Chrome do FB abrindo dezenas de conexões, as 12 vagas
+        # ficavam presas e a ponte parava de atender (2-3x/dia em 23-24/11). Prazo para o cabeçalho; PONTE_ESPERA_CAB_S muda.
+        cli.settimeout(float(os.environ.get("PONTE_ESPERA_CAB_S", "20")))
         cab = b""
         while b"\r\n\r\n" not in cab:
             d = cli.recv(65536)
@@ -62,7 +65,8 @@ def atender(cli, auth):
         linhas = [l for l in linhas if not l.lower().startswith(b"proxy-authorization")]
         linhas.insert(1, b"Proxy-Authorization: Basic " + auth.encode())
         with ABRINDO:  # só a abertura do túnel (CONNECT até a 1ª resposta) entra na fila
-            up = socket.create_connection(UP, timeout=30)
+            up = socket.create_connection(UP, timeout=15)
+            up.settimeout(float(os.environ.get("PONTE_ESPERA_200_S", "8")))  # 25/11: nada dentro da vaga sem prazo
             for s_ in (up, cli):
                 s_.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             up.sendall(b"\r\n".join(linhas) + b"\r\n\r\n" + resto)

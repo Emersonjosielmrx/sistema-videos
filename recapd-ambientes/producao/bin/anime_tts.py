@@ -789,7 +789,7 @@ def _ritmo_fish(wav, voz, texto, i, impactos, n):
                 pass
 
 
-_RISO_TXT = re.compile(r"(?i)\b(k{2,}|(?:ha){2,}h?|(?:he){2,}h?|(?:hu){2,}|rs(?:rs)+|risos?)\b[\s,!.]*")
+_RISO_TXT = re.compile(r"(?i)(?:\b(?:k{2,}|(?:ha){2,}h?|(?:he){2,}h?|(?:hu){2,}|rs(?:rs)+)\b|[(\[]\s*risos?\s*[)\]])[\s,!.]*")
 _LETRA_REPETIDA = re.compile(r"([A-Za-zÀ-ÿ])\1{2,}")
 
 
@@ -1036,7 +1036,7 @@ def _esticar_s_respeito(wav, alvo_s=0.45, texto=None, enfase=None):
     return False
 
 
-_PIADA_CONTADA = re.compile(r"(?i)(\bhein\b|kkk|mentira|brincadeira|particulares|\beu (faria|fazia|aceitaria|toparia|"
+_PIADA_CONTADA = re.compile(r"(?i)(\bhein\b|kkk|mentira|brincadeira|zoeira|t[oô] (zoando|brincando)|particulares|\beu (faria|fazia|aceitaria|toparia|"
                             r"pegaria)\b|com todo respeito)")
 
 
@@ -1306,6 +1306,8 @@ def _s2_tags_v13(texto, est, i):
 def _s2pro_modo():
     if os.environ.get("S2PRO") == "0" or _OUTRA:
         return None, "2"
+    if str(_xtts_versao() or "").startswith("88") and os.environ.get("XTTS88_COM_S2PRO") != "1":
+        return None, "2"  # 25/11: XTTS 88 = um motor só (o treinado); misto com S2-Pro soaria "duas pessoas"
     try:
         ovr = json.loads(os.environ.get("ANIME_LONGO_OVERRIDE") or "{}")
     except ValueError:
@@ -1348,7 +1350,13 @@ def _narrar_s2pro(lines, audio_dir, so=None):
         _EST13 = {}
         # 22/11 dona ("nesses vídeos temos que usar bastante risada, piada e as coisas novas que só o S2-Pro faz"):
         # na v13 o misto manda pro S2-Pro também as frases com reação/risada/intensidade das tags novas, teto 40%
-        teto = max(1, int(len(lines) * (0.40 if versao == "13" else 0.25))) if modo == "misto" else len(lines)
+        # 24/11 dona ("implemente para as próximas obrigatoriamente saírem com as melhorias"): a réplica cega mostrou o
+        # S2-Pro 13 imitando melhor que o XTTS 8 também nas frases NORMAIS (comentário/explicação/leitura) -> teto 70%
+        # e as frases sem emoção também entram (uma sim, uma não, pra misturar os dois motores ao longo do vídeo).
+        # S2PRO_TETO=0.40 + S2PRO_SO_EMOCAO=1 voltam ao de antes.
+        _teto_s2 = float(os.environ.get("S2PRO_TETO", "0.70"))
+        _so_emo = os.environ.get("S2PRO_SO_EMOCAO") == "1"
+        teto = max(1, int(len(lines) * (_teto_s2 if versao == "13" else 0.25))) if modo == "misto" else len(lines)
         for i, line in enumerate(lines):
             if so is not None and i not in so:
                 continue
@@ -1361,6 +1369,8 @@ def _narrar_s2pro(lines, audio_dir, so=None):
             tag = next((t_ for rx, t_ in _S2_EMO if rx.search(texto)), "")
             if modo == "misto" and not tag and versao == "13" and "[" in _s2_tags_v13(texto, {}, 999):
                 tag = "[excited]"  # 22/11: casou só com as tags novas (reação/risada/intensidade) — vai pro S2-Pro
+            if modo == "misto" and not tag and versao == "13" and not _so_emo and i % 2 == 0:
+                tag = "[excited tone]"  # 24/11: frase normal também vai pro S2-Pro (alternada), tom animado da v13
             if modo == "misto" and not tag:
                 continue
             if modo == "misto" and n_emo >= teto:
@@ -1425,16 +1435,27 @@ def _narrar_s2pro(lines, audio_dir, so=None):
             bruto.unlink(missing_ok=True)
             feitos.append(it["i"])
             try:
-                narracao_curva.pos_processar(out, 0.0)
-                # 22/11 v11 (dona: "a S2-Pro não tem os microcortes como o XTTS"): = v8 com corte mais agressivo
-                # (pausa que sobra 0,03 s em vez de 0,07) e 2 passadas
+                # 23/11 (revisão): grito sai mais alto e sussurro/suspiro mais baixo (antes tudo -20 LUFS: a variação de
+                # intensidade sumia). S2PRO_GANHO_TAG=0 desliga.
+                _tt = it.get("texto_tags") or ""
+                _g = 0.0
+                if os.environ.get("S2PRO_GANHO_TAG", "1") != "0":
+                    _g = next((v for k, v in (("[shouting]", 3.0), ("[laughing", 1.0), ("[excited", 1.0),
+                                              ("[whisper", -5.0), ("[sad]", -2.0), ("[sigh]", -2.0)) if k in _tt), 0.0)
+                narracao_curva.pos_processar(out, _g)
+                # 22/11 v11: corte mais agressivo; 23/11: 1 passada (a 2ª não fazia nada) e respiração/riso/suspiro
+                # das tags não é mais tratado como silêncio (-45 dB em vez de -38)
                 if versao in ("11", "12", "13"):
-                    narracao_curva.microcortes(out, 0.04, limiar_db=float(os.environ.get("S2PRO_LIMIAR_DB", "-38")))
-                    narracao_curva.microcortes(out, 0.04, limiar_db=float(os.environ.get("S2PRO_LIMIAR_DB", "-38")))
+                    # 24/11 dona ("cortando o finalzinho das frases"): 0,04 -> 0,06 s e -38 -> -45 dB (-50 com riso/suspiro)
+                    _lim = "-50" if any(k in _tt for k in ("[sigh]", "[chuckle]", "[laughing", "[whisper")) else "-45"
+                    narracao_curva.microcortes(out, float(os.environ.get("S2PRO_GAP", "0.06")),
+                                               limiar_db=float(os.environ.get("S2PRO_LIMIAR_DB", _lim)))
                 else:
                     narracao_curva.microcortes(out)
                 if _tem_respeito_piada(_seguro(lines[it["i"]]), it["i"]):
                     _esticar_s_respeito(out, texto=_seguro(lines[it["i"]]), enfase="tudo")
+                if os.environ.get("XTTS_FIM_SOBE", "1") == "1" and pv.name in FISH_FIM_ST:  # 24/11: ligado (venceu no teste cego v3)
+                    _fim_que_sobe(out, pv.name)  # 24/11: fim que sobe (aprovado no Fish) também no S2-Pro — em TESTE
                 if it["i"] == len(lines) - 1:
                     _aplicar_margem_final(out)
             except Exception as e:  # noqa: BLE001
@@ -1620,6 +1641,36 @@ def _narrar_xtts(lines, audio_dir, so=None):
     versao = _xtts_versao()
     if not versao or _OUTRA:
         return
+    if versao.startswith("88"):
+        # 25/11 dona: nomes PROVISÓRIOS = "88-2".."88-6" (receitas do teste OUVIR_POR_FRASE); "88" sozinho = a OFICIAL
+        # (hoje = 88-4 até a dona escolher). Cada receita só liga as chaves que não vieram de fora (setdefault).
+        _rec = {"88-2": {"XTTS_RVC": "0", "XTTS_SEM_VEL": "1", "XTTS_SEM_CADENCIA": "1", "XTTS_TENTATIVAS": "1"},
+                "88-3": {"XTTS_RVC": "0", "XTTS_SEM_VEL": "1", "XTTS_SEM_CADENCIA": "1"},
+                "88-4": {"XTTS_RVC": "1"},
+                "88-5": {"XTTS_RVC": "0", "XTTS_SEM_VEL": "1", "XTTS_SEM_CADENCIA": "1", "XTTS_TENTATIVAS": "1",
+                         "XTTS_REF_SO_TIPO": "1"},
+                "88-6": {"XTTS_RVC": "1", "XTTS_REF_SO_TIPO": "1"}}
+        _oficial = os.environ.get("XTTS88_OFICIAL", "88-4")
+        for k_, v_ in _rec.get(versao if versao in _rec else _oficial, {}).items():
+            os.environ.setdefault(k_, v_)
+        logging.info(f"[xtts88] receita {versao if versao in _rec else versao + ' (oficial = ' + _oficial + ')'}")
+        versao = "88"
+    if versao == "88":
+        # 25/11 dona: XTTS 88 = XTTS 8 + modelo TREINADO do narrador (vozes/<voz>/xtts_ft/model.pth). Sem treino
+        # NÃO vira XTTS 8 escondido: avisa alto, grava marca e deixa a frase pro próximo motor.
+        _v88 = os.environ.get("VOZ_CLONADA") or ""
+        _ck88 = VOZES_DIR / Path(_v88).name / "xtts_ft"
+        if not (_v88 and (_ck88 / "model.pth").exists()):
+            logging.error(f"[xtts88] {_v88 or 'sem narrador'} NÃO tem modelo treinado em {_ck88} — "
+                          "XTTS 88 exige treino do narrador; treine a voz antes (job_xtts_finetune.py)")
+            try:
+                (Path(audio_dir) / "_XTTS88_SEM_TREINO.json").write_text(
+                    json.dumps({"voz": _v88, "esperado": str(_ck88)}), encoding="utf-8")
+            except OSError:
+                pass
+            return
+        os.environ["XTTS_CKPT"] = str(_ck88)
+        versao = "8"  # mesma receita do 8 (receita 4/5/6 final entra aqui depois da escolha da dona)
     if not _xtts_pronto():
         logging.warning("[xtts] sem ambiente — narração segue no Fish/Kitten")
         return
@@ -1668,7 +1719,7 @@ def _narrar_xtts(lines, audio_dir, so=None):
                                     "24000", refs[0]], capture_output=True)
                 extras = ([sub] if sub and sub != "_todas" else []) + [x for x in ("_piada", "_agudo", "_tensao")
                                                                       if x != sub]
-                if vi == "12" and _PIADA_CONTADA.search(texto):
+                if vi in ("8", "12") and _PIADA_CONTADA.search(texto):  # 23/11: a 8 (padrão) também
                     # 21/11 v12 (dona: "as piadas têm que parecer contadas, não lidas"): frase de piada ouve primeiro
                     # o trecho REAL dele rindo/fazendo piada
                     extras = ["_risada", "_piada"] + [x for x in extras if x not in ("_risada", "_piada")]
@@ -1681,6 +1732,17 @@ def _narrar_xtts(lines, audio_dir, so=None):
                             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{x}.wav"),
                                             "-t", "12", "-ac", "1", "-ar", "24000", str(s12)], capture_output=True)
                         refs.append(str(s12))
+                # 25/11 dona (teste do XTTS fine-tunado): XTTS_REF_SO_TIPO=1 -> a frase ouve SÓ o trecho real do tipo
+                # dela (sem os 30 s da normal nem as extras). XTTS_TIPO_FORCADO="i:_piada,j:_mulher" fixa o tipo (teste).
+                if os.environ.get("XTTS_REF_SO_TIPO") == "1":
+                    forc = dict(x.split(":", 1) for x in (os.environ.get("XTTS_TIPO_FORCADO") or "").split(",") if ":" in x)
+                    tp = forc.get(str(i)) or (sub if sub and sub != "_todas" else "")
+                    if tp and (pv / f"referencia_fish{tp}.wav").exists():
+                        s12 = ad / f"_xtts_ref12{tp}.wav"
+                        if not s12.exists():
+                            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(pv / f"referencia_fish{tp}.wav"),
+                                            "-t", "12", "-ac", "1", "-ar", "24000", str(s12)], capture_output=True)
+                        refs = [str(s12)]
             elif vi in ("5", "6") and sub and sub != "_todas" and (pv / f"referencia_fish{sub}.wav").exists():
                 s15 = ad / f"_xtts_ref15{sub}.wav"
                 if not s15.exists():
@@ -1688,8 +1750,9 @@ def _narrar_xtts(lines, audio_dir, so=None):
                                     "15", "-ac", "1", "-ar", "24000", str(s15)], capture_output=True)
                 refs.append(str(s15))
             itens.append({"texto": texto, "saida": str(ad / f"audio_{i}.xtts_bruto.wav"), "i": i, "refs": refs,
-                          "temp": 0.6 if vi in ("5", "6", "7", "8", "8b", "9", "10", "11", "12") else 0.75,
-                          "cadencia_real": vi in ("8", "8b", "9", "10", "11", "12"), "whisper": vi == "9",
+                          "temp": float(os.environ.get("XTTS_TEMP") or (0.6 if vi in ("5", "6", "7", "8", "8b", "9", "10", "11", "12") else 0.75)),
+                          "cadencia_real": vi in ("8", "8b", "9", "10", "11", "12") and os.environ.get("XTTS_SEM_CADENCIA") != "1",
+                          "whisper": vi == "9",
                           "pergunta_publico": vi in ("8", "11", "12"), "manha": vi == "12",  # 8 = 8b + pergunta retórica do 11
                           "risada": _risada_do_narrador(pv.name, i) if vi == "12" else "", "n": int(os.environ.get("XTTS_TENTATIVAS", "3")),
                           "frase_inteira": vi == "4", "v": vi})
@@ -1723,6 +1786,8 @@ def _narrar_xtts(lines, audio_dir, so=None):
                     _cadencia_quebrada(out)
                 narracao_curva.microcortes(out)
                 forca = 0.5 if vi == "4" else 0.8
+                if os.environ.get("XTTS_SEM_VEL") == "1":  # 25/11: XTTS fine-tunado já tem o ritmo do narrador
+                    forca = 0.0
                 kv = 1 + (_vel_por_frase(_seguro(lines[i]), i) - 1) * forca
                 if _frase_lenta(lines[i]):
                     kv = min(kv, 1.04)
@@ -1735,6 +1800,8 @@ def _narrar_xtts(lines, audio_dir, so=None):
                     # 21/11 v10+: além do S, a ênfase do narrador real ("RES" mais alto, "peito" caindo)
                     _esticar_s_respeito(out, texto=_seguro(lines[i]), enfase=(os.environ.get("XTTS_RESPEITO_ENFASE")
                                         or "tudo") if vi in ("8", "10", "11", "12") else None)  # 8 = 8b + ênfase do respeito do 10
+                if os.environ.get("XTTS_FIM_SOBE", "1") == "1" and pv.name in FISH_FIM_ST:  # 24/11: ligado (venceu no teste cego v3)
+                    _fim_que_sobe(out, pv.name)  # 24/11: fim que sobe (aprovado no Fish) também no XTTS — em TESTE
                 if os.environ.get("XTTS_RVC") == "1":
                     pass  # RVC por cima: ver _rvc_por_cima_do_fish (teste à parte, dona 21/11)
             except Exception as e:  # noqa: BLE001
@@ -1746,6 +1813,11 @@ def _narrar_xtts(lines, audio_dir, so=None):
         if feitos:
             (ad / "_voz_online.json").write_text(json.dumps(
                 {"motor": f"xtts_v{versao}", "frases": sorted(feitos), "total": len(itens)}), encoding="utf-8")
+        try:  # 24/11: prova de QUAL referência foi usada (dona: "tem certeza que tem as melhorias das réplicas?")
+            logging.info("[xtts] referências: " + ", ".join(
+                f"{q.name}={q.stat().st_size}B" for q in sorted(pv.glob("referencia_fish*.wav"))))
+        except Exception:  # noqa: BLE001
+            pass
         logging.info(f"[xtts] {len(feitos)}/{len(itens)} frases em {time.time() - t0:.0f}s (versão {versao}, "
                      f"narrador {pv.name}); o resto no Fish/Kitten")
     except Exception as e:  # noqa: BLE001
