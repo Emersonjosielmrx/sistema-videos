@@ -567,8 +567,8 @@
       "t": 1792871316.4634748
     },
     "pc2": {
-      "resultado": "nao_logou",
-      "t": 1795606768.6576393
+      "resultado": "erro: TimeoutError: BrowserType.connect_over_cdp: Timeout 180000ms exceeded.\nCall log:\n  - <ws preparing> retrieving web",
+      "t": 1795629724.2748952
     },
     "sti": {
       "resultado": "logado @emersonn598",

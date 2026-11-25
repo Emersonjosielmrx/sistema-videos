@@ -9,5 +9,7 @@ echo [%date% %time%] === medir + painel === >> "%LOG%"
 pushd D:\projeto-navegador-sem-navegador
 "%PY%" -u -m services.facebook.medir >> "%LOG%" 2>&1
 popd
+REM 25/11: views pela API (read_insights) - cada conta pela saida dela; o painel so usa se vier de insights
+"%PY%" -u "D:\postador-de-videos\bin\fb_medir_api.py" >> "%LOG%" 2>&1
 "%PY%" -u "D:\postador-de-videos\bin\fb_painel_dados.py" >> "%LOG%" 2>&1
 echo [%date% %time%] fim >> "%LOG%"

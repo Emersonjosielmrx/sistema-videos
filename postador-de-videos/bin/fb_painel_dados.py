@@ -47,6 +47,7 @@ def montar():
 
     por_pag = {}
     for r in medicoes:
+        # 25/11: o campo "views" da API bate com a medição HTTP (Bicho 1231 x 1232) e é mais novo — vale igual
         if r.get("reels"):
             por_pag.setdefault(r["pagina"], []).append(r)
 
@@ -56,6 +57,9 @@ def montar():
         for x in r.get("reels") or []:
             primeira_vista.setdefault(x["id"], r["quando"])
 
+    # 25/11: id do Reel -> "api" (o postador pela API grava o video_id); o resto é Chrome
+    via_por_id = {str(e.get("video_id")): e.get("via", "chrome") for ps in postados.values() for e in ps
+                  if isinstance(e, dict) and e.get("video_id")}
     paginas, videos, serie_geral = [], [], {}
     for chave, p in paginas_cfg.items():
         rs = por_pag.get(chave, [])
@@ -91,7 +95,8 @@ def montar():
             nasc = primeira_vista.get(x["id"], ult["quando"])
             vida = max(_dias(nasc, ult["quando"]), 0.5)
             videos.append({"id": x["id"], "pagina": p.get("nome", chave), "chave": chave, "views": x["views"],
-                           "visto_desde": nasc, "por_dia": round(x["views"] / vida)})
+                           "visto_desde": nasc, "por_dia": round(x["views"] / vida),
+                           "via": via_por_id.get(x["id"], "chrome")})
 
     paginas.sort(key=lambda d: d["views"], reverse=True)
     videos.sort(key=lambda d: d["views"], reverse=True)

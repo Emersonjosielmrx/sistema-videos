@@ -381,3 +381,8 @@ STATUS: OK
 - Estado: PRECISA REVISÃO
 
 STATUS: REVISAR - Disco D com apenas 4.75 GB livres (abaixo dos 8 GB mínimos) e recap longo/GPUs precisando de atenção.
+## 20261125_1555 — Vigia verificação periódica: recap longo, alimentador e GPUs
+- Motivo / O que achei (trecho de log): Analisados os logs recentes (capar_shorts.log, parceiro_postar_auto.log, model_health.json) e verificado que a postagem está DESLIGADA no postador (config/POSTAGEM_DESLIGADA.json) conforme regra do dono. Shorts continuam sendo gerados com capas IA com sucesso. O alimentador do recap longo e a verificação de contas de GPU requerem atenção da equipe/dona.
+- Causa provável: Postagem desativada por configuração padrão do sistema e necessidade de verificação periódica nas contas das GPUs / alimentador longo.
+- CONSERTO PROPOSTO: Nenhum (Modo Só Aviso). Manter o sistema inalterado, respeitar as travas de postagem e relatar o status atual.
+- Estado: NADA A FAZER

@@ -8,9 +8,11 @@ e o corretor conserta até `rodadas`. Fica a versão de MAIOR nota entre a do ed
 Config: config\\produto_lapidar.json -> "editor".
 """
 import json
+import os
 import re
 import shutil
 import subprocess
+import sys
 import time
 from contextlib import contextmanager
 from pathlib import Path
@@ -211,6 +213,20 @@ if (Test-Path trabalhos\\{tid}\\video.mp4) {{ 'RENDER_OK' }}"""
 def _render(tid, pub, out, log=print):
     if _cfg().get("render_pc2", True) and _render_pc2(tid, out, log):
         return True, ""
+    # 25/11 (dona: "os de produtos também devem fazer em outros PCs"): PC2 falhou -> notebook livre pelo despacho
+    # (asusx/itau, Remotion instalado). Só se nenhum der, renderiza no PC1 como antes. PRODUTO_DESPACHO=0 desliga.
+    if os.environ.get("PRODUTO_DESPACHO", "1") != "0":
+        try:
+            sys.path.insert(0, r"D:\video-fila")
+            import despacho
+            ok, motivo = despacho.remotion(REMOTION, tid, pub, out, ["--log=error", "--crf=18", "--concurrency=2"],
+                                           timeout=1800, rotulo=f"produto {tid}")
+            if ok and Path(out).exists():
+                log(f"  [editor] render no notebook (despacho) ok")
+                return True, ""
+            log(f"  [editor] despacho não renderizou ({str(motivo)[:120]}) — renderiza no PC1")
+        except Exception as e:  # noqa: BLE001
+            log(f"  [editor] despacho falhou ({type(e).__name__}: {str(e)[:100]}) — renderiza no PC1")
     # v1 do ccv: --concurrency=2, prazo 20 min, 2ª tentativa
     texto = ""
     for _ in range(2):

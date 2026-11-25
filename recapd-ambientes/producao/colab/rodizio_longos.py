@@ -123,8 +123,27 @@ def _titulo_novo(p, antigo):
     return t[:100] if len(t) > 15 and t.lower() != antigo.lower() else None
 
 
+_MAQ = None
+
+
+def _maquina():
+    """25/11: o rodízio ia SEMPRE pelo desktop (o MacBook, sendo formatado/offline) e falhava. Desktop sem ssh em 8 s =
+    STI (o mais rápido logado nos canais). RODIZIO_MAQUINA força uma máquina."""
+    global _MAQ
+    if os.environ.get("RODIZIO_MAQUINA"):
+        return os.environ["RODIZIO_MAQUINA"]
+    if _MAQ is None:
+        try:
+            r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8", "desktop", "echo ok"],
+                               capture_output=True, text=True, timeout=15)
+            _MAQ = "desktop" if "ok" in r.stdout else "sti"
+        except Exception:  # noqa: BLE001
+            _MAQ = "sti"
+    return _MAQ
+
+
 def _studio(canal, *args):
-    env = {**os.environ, "YT_MAQUINA": os.environ.get("RODIZIO_MAQUINA", "desktop")}
+    env = {**os.environ, "YT_MAQUINA": _maquina()}
     try:
         r = subprocess.run([sys.executable, str(STUDIO), "--canal", canal, *args], capture_output=True, text=True,
                            encoding="utf-8", errors="replace", timeout=900, env=env)

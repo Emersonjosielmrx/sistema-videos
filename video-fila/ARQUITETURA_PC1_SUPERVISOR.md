@@ -194,3 +194,37 @@ parou no botão). Feito: `_md5_igual` (rclone hashsum md5 do Drive x md5 local) 
 - 09:18: RZOY POSTADO no Fio da Meada: https://youtu.be/75IxznGPk88 (3,4 GB em 46 min). Rascunho velho cPQnT-EZuxE (privado, incompleto) continua lá — dona decide apagar.
 - 09:26 ciclo: parceiro 13 Shorts no YouTube hoje (0 em 24/11), TikTok 29 OK no log de hoje, capas 94 feitas / 2 pendentes (mtvUEf6UD8A + a nova do Rzoy), commit PC1 20,6 GB, fábricas Fish ok.
 - 10:08 FIM do acompanhamento: parceiro 15 Shorts hoje, capas 95 feitas / 1 pendente (Rzoy novo), fábricas Fish ok. Pendências da dona: apagar rascunho cPQnT-EZuxE; aprovar voz substituta do Chris (ac63ad94); senha LUKS dos notebooks; logar YouTube nos notebooks rápidos.
+
+## 25/11 tarde — produção de Short e produtos fora do PC1
+
+- Short do parceiro: a narração JÁ sai pelo Fish online (11 falas hoje, voz nova ac63ad94 aprovada pela dona: "Chris novo
+  é muito melhor"). O controlador já manda a produção de parceiro pro PC2 (DISPAROU pc2 várias vezes hoje); `cortes_pc1`
+  só roda com CORTES_NO_PC1=1. A rodada no PC1 de 24/11 11:37 -> 25/11 10:31 (1377 min) foi a última.
+- Remotion órfão no PC1: 2 cadeias (render de produto desde 01:31 e still desde 24/11 19:43) abertas por um bash de
+  chat que morreu — fechadas (taskkill /T só nelas).
+- Produto: `produto/editor.py._render` agora tenta PC2 -> NOTEBOOK pelo despacho.remotion (asusx/itau) -> PC1 só se
+  nenhum der. PRODUTO_DESPACHO=0 desliga. Teste real com inovareclaw_ia_20261125_045547 em andamento.
+- 14:33: TESTE OK — produto inovareclaw renderizado no asusx pelo despacho (1859 s, 18,4 MB, 1080x1920, 29,6 s, quadro
+  conferido). produto/editor.py: PC2 -> notebook -> PC1.
+
+## 25/11 14:30 — CHAVE DO GOOGLE DRIVE VENCIDA (consertado)
+- `rclone` dava "invalid_grant: token expired" em manhwa-drive, conta32 e manhwa-drive-chave desde ~14:00 (o app do
+  Cloud está em "Testando": a autorização vence em 7 dias). A tarefa DriveChaveRenovar falhou 16/11 e 21/11 — causa real:
+  a porta 127.0.0.1:53682 do `rclone authorize` presa (bind) -> "não deu o link". Renovada 14:29, 78 pastas em todos os
+  alvos (PC1 + 3 VPS).
+- drive_chave.py ganhou `diario` (renova só se a última OK tem 4+ dias ou o Drive não responde) e a tarefa passou de
+  5/5 dias para TODO DIA 04:20 -> 3 chances antes de vencer.
+- Dano: postar_longos tirou 2 longos da fila de cortes ("sem cortes no Drive") porque o rclone falhou. Devolvidos
+  (keBJ_bd5oVw HistoriasEmFrames, gJve_WjefZs Fio da Meada; bkp longos_postados.json.bkp_2511_cortes) e o código só tira
+  quando o Drive RESPONDE "não encontrado".
+
+## 25/11 14:40 — PENDÊNCIAS (pedidos da dona x estado)
+Feito e conferido: postagem religada; capas dos longos (96 feitas, 0 pendentes); Fish em STI/asusx/itau (7 contas);
+notebooks sem dormir; render de Short e produto fora do PC1; transcrição da MS no STI; chave do Drive (+ renovação
+diária); voz nova aprovada; senha dos notebooks documentada.
+Falta (minha parte): (1) Instagram sai por IP dividido com o TikTok (fakenews.ia4 + iapro.mentoria no IP 2; regra da
+casa: Instagram 1 conta por IP) — dar IP rnprmtfo livre por conta (livres: 1,2,4,6-13,20,40-49,79,80,86-88);
+(2) levantamento noturno: 12 áreas prontas, plano final nunca escrito; (3) Fish só gera quando o PC1 pede — produtor
+completo de Short nas máquinas; (4) HP/MacBook sem Fish; (5) rodizio_longos preso no desktop.
+Da dona: rascunho cPQnT-EZuxE no Fio da Meada; login do YouTube nos notebooks rápidos; canais em descanso (o médico
+decide sozinho); vinheta do Lemo; teto diário do TikTok.

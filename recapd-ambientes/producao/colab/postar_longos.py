@@ -1204,6 +1204,12 @@ def postar_cortes(ver=False):
         pasta_drive = item["drive"].rsplit("/", 1)[0] + "/cortes_longo"
         r = subprocess.run([RCLONE, "cat", f"{pasta_drive}/cortes.json"], capture_output=True, text=True,
                            encoding="utf-8")
+        # 25/11 (chave do Drive vencida: invalid_grant): rclone FALHOU virava "sem cortes" e tirava o longo da lista
+        # pra sempre (keBJ e gJve saíram assim às 14:14). Agora só sai quando o Drive RESPONDEU que não tem o arquivo.
+        if r.returncode != 0 and not re.search(r"not found|doesn't exist|object not found|directory not found",
+                                               r.stderr or "", re.I):
+            log(f"cortes: {item['nome']}: Drive não respondeu ({(r.stderr or '').strip()[-90:]}) — fica pra próxima")
+            continue
         try:
             cortes = json.loads(r.stdout) if r.returncode == 0 else []
         except ValueError:

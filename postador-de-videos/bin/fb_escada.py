@@ -53,6 +53,15 @@ def teto(chave, pag=None):
     e = _ler(ESTADO, {}).get(chave, {})
     if e.get("segurar_ate") and datetime.now().isoformat() < e["segurar_ate"]:
         return 0
+    # 25/11: repouso é da CONTA (368/distribuição cortada) — vale também para Página criada depois do repouso
+    # (Tech Noturno postou 12:28 com a conta em repouso). Fonte: logs/fb_fila_estado.json contas.<conta>.parada_ate
+    try:
+        conta = pag.get("conta")
+        pa = (_ler(BIN.parent / "logs" / "fb_fila_estado.json", {}).get("contas", {}).get(conta) or {}).get("parada_ate")
+        if conta and pa and datetime.now().isoformat() < pa:
+            return 0
+    except Exception:  # noqa: BLE001
+        pass
     bonus = 1 if e.get("bonus_dia") == datetime.now().strftime("%Y-%m-%d") else 0
     return max(1, min(TETO_MAX + 1, min(TETO_MAX, pag.get("por_dia", 3) + e.get("degrau", 0)) + bonus))
 

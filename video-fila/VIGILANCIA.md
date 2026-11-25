@@ -1,12 +1,13 @@
-# Vigilância 24 h — 2026-11-25T12:00:49
+# Vigilância 24 h — 2026-11-25T16:01:14
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
 ## Alarmes desta volta (17)
+- tiktok: 37 posts até 16:00, normal ~75
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 109 h (limite 60 h)
+- Carrossel MS Energy: sem sucesso há 113 h (limite 60 h)
 - Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h)
-- Rede: reagendar pro horário nobre: sem sucesso há 47 h (limite 30 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 51 h (limite 30 h)
 - canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
@@ -18,17 +19,9 @@
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - _parceiro_20261125.log: mesmo erro 5x
 - _parceiro_20261125.log: mesmo erro 5x
-- celulares: mesmo erro 5x em 6 h
-- celulares: 3 celulares fora do adb
+- celulares: 2 celulares fora do adb
 
 ## Casos abertos (270)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
-- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
-- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] tiktok: mesmo erro 5x em 6 h (-)
-- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] tiktok: mesmo erro 6x em 6 h (-)
 - [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -292,9 +285,15 @@
 - [consertar] canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] tiktok: 37 posts até 13:20, normal ~75 (-)
+- [consertar] celulares: nenhum post OK há 3 h+ (10 ok de 26 hoje, 12 na fila) (-)
+- [consertar] Rede: reagendar pro horário nobre: sem sucesso há 48 h (limite 30 h) (-)
+- [consertar] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] _parceiro_20261125.log: mesmo erro 5x (-)
+- [consertar] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [falso] facebook: mesmo erro 9x em 6 h — - / -
 - [falso] celulares: 5 celulares fora do adb — - / -
 - [falso] instagram: 0 posts até 04:50, normal ~6 — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
@@ -309,6 +308,7 @@
 - [falso] facebook: mesmo erro 5x em 6 h — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 21 casos, nota 14% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/10 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/2 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/1 (voltou 0)

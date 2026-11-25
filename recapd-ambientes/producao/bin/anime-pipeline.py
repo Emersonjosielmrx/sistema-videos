@@ -98,6 +98,16 @@ def run_one(video_path, script_path, orient, out_name, max_panels):
         lines, tempos = _ganchos_longo(lines, tempos, workspace)
         lines, tempos = _falas_personagem(lines, tempos, workspace)
         _marcar_falas_mascote(lines)
+    # 25/11 dona (narração DIVIDIDA entre os PCs): grava o roteiro FINAL (com CTA/resumo/falas já inseridos) com os
+    # mesmos índices dos audio_i.wav. ANIME_SO_ROTEIRO_FINAL=1 para aqui — os PCs narram, depois roda a montagem de
+    # verdade e build_segments reaproveita cada audio_i.wav pronto.
+    try:
+        (workspace / f"roteiro_final_{orient}.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    except OSError:
+        pass
+    if os.environ.get("ANIME_SO_ROTEIRO_FINAL") == "1":
+        logging.info(f"[{orient}] roteiro final gravado ({len(lines)} frases) — parada pedida (ANIME_SO_ROTEIRO_FINAL)")
+        return False
     clips, entries, sfx_durs, word_times = build_segments(video_path, lines, clip_dir,
                                     audio_dir=audio_dir, orient=orient, tempos=tempos)
     if not clips:

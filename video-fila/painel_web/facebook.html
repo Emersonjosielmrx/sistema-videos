@@ -165,6 +165,9 @@ function diagnostico(){
   if(novas.length)out.push(`<b>Páginas novas.</b> ${novas.map(p=>`${p.nome} (${p.idade_dias} dias)`).join(', ')}. Página nova, sem seguidores, ainda está sendo testada pelo Facebook.`);
   const fracas=ativas.filter(p=>p.reels&&p.media<50);
   if(fracas.length)out.push(`<b>Reel fraco mesmo postando.</b> ${fracas.map(p=>`${p.nome} (média ${p.media} por reel)`).join(', ')}. O único vídeo não pegou, e só dá para julgar o tema depois de mais reels.`);
+  {const g={api:[],chrome:[]};D.videos.forEach(v=>(g[v.via==='api'?'api':'chrome']).push(v.por_dia));
+   const m=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0;
+   out.push(`<b>API x Chrome (views por dia de vida):</b> API ${m(g.api)} em ${g.api.length} reels · Chrome ${m(g.chrome)} em ${g.chrome.length} reels. A API começou em 25/11; reels novos ainda estão subindo, e a emersonjosiel02 está com a distribuição cortada desde 24/11 (puxa a média da API para baixo). Comparação justa só depois de alguns dias.`);}
   const ass=ativas.find(p=>p.chave==='assistia');
   if(ass&&ass.reels>=5&&ass.media<150)out.push(`<b>Assist-IA rende menos por reel</b> (média ${ass.media}, contra ${Math.round(D.totais.views/D.totais.reels)} no geral). O tema está certo (vídeos de dinheiro e negócios dos canais Assist-IA, Bilionário Noturno, Lei e Lucro). Dinheiro tem menos público no Reels do que dorama/anime; ela precisa de mais reels por dia para crescer.`);
   const sem=ativas.filter(p=>!p.seguidores);
@@ -192,9 +195,9 @@ function tabVid(){
   const f=$('#fPag').value;
   const vs=D.videos.filter(v=>!f||v.chave===f).sort((a,b)=>{const A=a[ordemV.k],B=b[ordemV.k];return (typeof A==='string'?A.localeCompare(B):A-B)*ordemV.d});
   const max=Math.max(...D.videos.map(v=>v.views))||1;
-  const cols=[['_i','#'],['pagina','Página'],['views','Views'],['por_dia','Views/dia'],['visto_desde','Visto desde'],['id','Reel']];
+  const cols=[['_i','#'],['pagina','Página'],['via','Via'],['views','Views'],['por_dia','Views/dia'],['visto_desde','Visto desde'],['id','Reel']];
   $('#tVid').innerHTML='<thead><tr>'+cols.map(([k,n])=>`<th data-k="${k}" class="${['views','por_dia','_i'].includes(k)?'n':''}">${n}${ordemV.k===k?(ordemV.d<0?' ▾':' ▴'):''}</th>`).join('')+'</tr></thead><tbody>'+
-    vs.map((v,i)=>`<tr><td class="n">${i+1}</td><td>${v.pagina}</td><td class="n"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${fmt(v.views)}<div class="barra"><i style="width:${100*v.views/max}%"></i></div></div></td><td class="n">${fmt(v.por_dia)}</td><td class="sub">${(v.visto_desde||'').slice(8,10)}/${(v.visto_desde||'').slice(5,7)} ${(v.visto_desde||'').slice(11,16)}</td><td><a href="https://www.facebook.com/reel/${v.id}" target="_blank" rel="noopener">abrir</a></td></tr>`).join('')+'</tbody>';
+    vs.map((v,i)=>`<tr><td class="n">${i+1}</td><td>${v.pagina}</td><td><span class="pill ${v.via==='api'?'ok':'cinza'}">${v.via||'chrome'}</span></td><td class="n"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${fmt(v.views)}<div class="barra"><i style="width:${100*v.views/max}%"></i></div></div></td><td class="n">${fmt(v.por_dia)}</td><td class="sub">${(v.visto_desde||'').slice(8,10)}/${(v.visto_desde||'').slice(5,7)} ${(v.visto_desde||'').slice(11,16)}</td><td><a href="https://www.facebook.com/reel/${v.id}" target="_blank" rel="noopener">abrir</a></td></tr>`).join('')+'</tbody>';
   $('#tVid').querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k==='_i'||k==='id')return;ordemV={k,d:ordemV.k===k?-ordemV.d:-1};tabVid()});
 }
 

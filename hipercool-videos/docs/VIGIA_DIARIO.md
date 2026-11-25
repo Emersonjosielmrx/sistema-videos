@@ -529,3 +529,9 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código ou configuração alterado (Modo Só Aviso estrito). Apenas leituras de logs, verificação de processos e registro no diário.
 - CONSERTO PROPOSTO: nenhum.
 - Estado: NADA A FAZER
+## 20261125_1517 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua e normal dos ciclos a cada 20 minutos (último registro às 15:07 "Shorts em pt: canal parado, sai já" e monitoramento da janela de espaço em disco D:). A fila de capítulos em si encontra-se concluída ("fila de capítulos terminada — adicione a próxima obra em config/fila.json"), rodando os ciclos de postagem e gerenciamento de Shorts/idiomas normalmente.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas leitura de logs e verificação de processos.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

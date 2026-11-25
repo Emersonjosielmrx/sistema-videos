@@ -1,4 +1,4 @@
-# prioridade_vscode.ps1 — 15/11 dona: "deixar o PC1 o máximo livre para o VS Code, com prioridade máxima".
+﻿# prioridade_vscode.ps1 — 15/11 dona: "deixar o PC1 o máximo livre para o VS Code, com prioridade máxima".
 # A cada 2 min (tarefa PrioridadeVSCode, oculta): VS Code + Claude Code em ALTA; TODA a produção em ABAIXO DO NORMAL
 # (continua rodando, mas cede CPU quando o VS Code/chat precisa). Desligar: apagar a tarefa ou criar o arquivo
 # D:\video-fila\PRIORIDADE_VSCODE_OFF.
@@ -40,6 +40,9 @@ foreach ($c in $procs) {
     if ($c.Name -eq 'chrome.exe' -and $cl -notmatch '--user-data-dir=') { continue }   # Chrome pessoal da dona
     if ($c.Name -eq 'node.exe' -and $cl -notmatch 'remotion|postador|tiktok|instagram|manhwa|hipercool|video') { continue }
     $p = Get-Process -Id $c.ProcessId -ErrorAction SilentlyContinue
+    # 25/11: ponte de proxy (127.0.0.1:185NN) em BelowNormal levava 4-13 s por pedido com o PC1 ocupado (direto: 1,5 s)
+    # e o Facebook dava timeout/"upload não entrou". Ela quase não gasta CPU: fica em Normal.
+    if ($p -and $cl -match 'ponte_proxy_fixo|ponte_proxy') { $n += Por $p 'Normal'; continue }
     if ($p) { $n += Por $p 'BelowNormal' }
 }
 if ($n -gt 20) { Add-Content $log ("{0:yyyy-MM-dd HH:mm} {1} processos ajustados" -f (Get-Date), $n) }
