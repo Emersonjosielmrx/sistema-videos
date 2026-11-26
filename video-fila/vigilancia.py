@@ -462,8 +462,35 @@ def med_celulares(agora):
     return out
 
 
+def med_ronda(agora):
+    """26/11 dona ("o vigia já faz muitas correções mas está fora de muita coisa"): a RONDA GERAL da Omarchy
+    (claude-central/ronda/ronda.sh, de hora em hora) enxerga o que este vigia não mede (tarefas agendadas com erro,
+    tarefas atrasadas, produção parada por tipo de vídeo, laços parados, notebooks com serviço falho/disco/RAM,
+    Tracebacks novos, Instagram sem post...). Ela grava estado/ronda_achados.json SÓ com o que dá para consertar sem a
+    dona (senha, captcha, celular, conta, VPS de produção ficam de fora, vão só pro Telegram). Aqui eles viram casos
+    normais (mesma dedup, mesmo consertador, mesmo revisor). Arquivo com mais de 3 h = ronda parada = ignora (o cão de
+    guarda RondaCaoGuarda já avisa). VIGIA_RONDA=0 desliga."""
+    if os.environ.get("VIGIA_RONDA", "1") == "0":
+        return []
+    f = BASE / "estado" / "ronda_achados.json"
+    try:
+        if (agora.timestamp() - f.stat().st_mtime) > 3 * 3600:
+            return []
+        dados = json.loads(f.read_text(encoding="utf-8-sig") or "[]")
+    except (OSError, ValueError):
+        return []
+    out = []
+    for a in dados[:30]:
+        if not isinstance(a, dict) or not a.get("chave") or not a.get("titulo"):
+            continue
+        out.append({"chave": "<SEGREDO_REMOVIDO>" + str(a["chave"])[:120], "categoria": "ronda-" + str(a.get("categoria", "geral")),
+                    "projeto": str(a.get("projeto", "geral")), "titulo": str(a["titulo"])[:200],
+                    "evidencia": str(a.get("evidencia", a["titulo"]))[:1500]})
+    return out
+
+
 MEDIDORES = (med_postagem, med_facebook, med_sem_sucesso, med_solar_perdido, med_desktop_parado, med_reserva_zero, med_erro_producao, med_qa_shorts,
-             med_capas_longos, med_qa_longos, med_celulares)
+             med_capas_longos, med_qa_longos, med_celulares, med_ronda)
 
 
 def medir(agora):

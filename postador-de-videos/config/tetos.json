@@ -1064,7 +1064,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-25T20:19:26",
+     "em": "2026-11-26T05:17:57",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1334,8 +1334,8 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-07T18:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-25T12:25:55",
-     "tipo": "sessao_expirada",
+     "em": "2026-11-26T03:21:54",
+     "tipo": "saude_morto",
      "maquina": "pc1"
     },
     "historico": [
@@ -2174,7 +2174,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T18:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-25T19:16:21",
+     "em": "2026-11-26T04:24:46",
      "tipo": "saude_morto",
      "maquina": "x200ma"
     },
@@ -2324,9 +2324,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-03T07:08:15",
     "ultimo_sinal": {
-     "em": "2026-11-13T00:25:01",
+     "em": "2026-11-26T09:17:45",
      "tipo": "saude_morto",
-     "maquina": "pc2"
+     "maquina": "sti"
     },
     "historico": [
      {
@@ -2554,7 +2554,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-26T02:18:58",
+     "em": "2026-11-26T06:18:10",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -3007,7 +3007,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T00:08:22",
     "ultimo_sinal": {
-     "em": "2026-11-25T07:52:57",
+     "em": "2026-11-26T07:27:35",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3152,7 +3152,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T00:08:22",
     "ultimo_sinal": {
-     "em": "2026-11-25T07:35:15",
+     "em": "2026-11-26T07:21:47",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -3397,7 +3397,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-25T07:17:48",
+     "em": "2026-11-26T07:15:58",
      "tipo": "conta_restrita",
      "maquina": "pc1"
     },
@@ -4388,9 +4388,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-26T02:18:58",
+    "em": "2026-11-26T09:17:45",
     "tipo": "saude_morto",
-    "conta": "emersonjosiel2030"
+    "conta": "vendeafiliados3"
    },
    "historico": [
     {

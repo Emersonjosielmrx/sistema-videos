@@ -948,7 +948,8 @@ def _sinal_min(agora, vivos):
 
 
 def main():
-    est = json.loads(EST.read_text()) if EST.exists() else {"avisados": []}
+    # 26/11: estado.json com 0 bytes travou a central de 21 a 26/11
+    est = json.loads(EST.read_text().strip() or '{"avisados": []}') if EST.exists() else {"avisados": []}
     # 03/11 (banimento em lote): a medição de hora em hora consultava TODAS as contas da saída de uma vez — na hermes-prod
     # eram 25 contas pelo MESMO IP, o padrão de multi-conta. Agora só mede a conta na hora de lançar (_lancar_conta).
     if CFG.get("medir_todas"):

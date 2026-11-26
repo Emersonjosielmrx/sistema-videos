@@ -337,12 +337,56 @@ def registrar_uso(workspace, memes):
         pass
 
 
+
+# 26/11 (dona: "memes nos momentos-chave, para o máximo de efeito"): antes, o 1º momento que casava depois do intervalo
+# levava o meme — um momento fraco bloqueava o melhor logo depois (813 frases: frase 10, nota 9, bloqueou a 15, nota
+# 16,5) e gastava o meme (o "bichão" usado na nota 6 não pôde ir na "venceu sem nenhuma dificuldade", nota 16,5);
+# a 2ª metade do vídeo ficava sem meme. Agora: nota de todo par (frase, meme) do vídeo inteiro, e os momentos são
+# escolhidos do MAIOR para o menor, respeitando o intervalo. O mesmo meme pode voltar uma vez se estiver a
+# MEMES_REPETE_LONGE frases (~15 min) e o momento for forte (nota >= MEMES_REPETE_NOTA). MEMES_MOMENTO_OTIMO=0 volta.
+def _escolher_otimo(textos, inicio, cada, rnd):
+    try:
+        longe = int(os.environ.get("MEMES_REPETE_LONGE", "300"))
+        nota_rep = float(os.environ.get("MEMES_REPETE_NOTA", "9"))
+    except ValueError:
+        longe, nota_rep = 300, 9.0
+    cand = [m for m in catalogo() if m.get("has_audio") and Path(m["file"]).suffix.lower() == ".mp4"
+            and INTERROMPE_DUR[0] <= float(m.get("duration") or 0) <= INTERROMPE_DUR[1]]
+    pares = []
+    for k in range(inicio, len(textos) - 3):
+        texto, anterior = textos[k], (textos[k - 1] if k else "")
+        if triste(texto) or triste(anterior):
+            continue
+        emo, forca = pede_meme(texto, anterior)
+        if forca != 2:
+            continue
+        for m in cand:
+            p = _pontos(m, texto, anterior, emo)
+            if p is None or p < 1.5:
+                continue
+            p -= 2.0 * _uso_recente(Path(m["file"]).name)
+            if p > 0:
+                pares.append((p + rnd.random() * 0.3, k, m))
+    pares.sort(key=lambda x: -x[0])
+    escolhidos, usos = {}, {}
+    for p, k, m in pares:
+        if k in escolhidos or any(abs(k - j) < cada for j in escolhidos):
+            continue
+        ks = usos.get(m["file"], [])
+        if ks and (len(ks) >= 2 or p < nota_rep or any(abs(k - j) < longe for j in ks)):
+            continue
+        escolhidos[k] = m
+        usos.setdefault(m["file"], []).append(k)
+    return sorted(escolhidos.items())
+
 def escolher_interrupcoes(textos, inicio=8, cada=12, rnd=random):
     """[(índice da frase, meme)] — depois de frase com emoção FORTE, no mínimo `cada` frases (~1 min) entre elas.
     23/11: com MEMES_CONTEXTO (padrão), a frase também vale quando casa com a ficha de um meme (inclusive os de
     confusão/alegria que antes nunca entravam), o meme é o que a frase pede e cena de morte/luto fica sem meme."""
     out, usados, ultimo = [], set(), -10 ** 6
     ctx = _contexto_ligado() and bool(fichas())
+    if ctx and os.environ.get("MEMES_MOMENTO_OTIMO", "1") != "0" and os.environ.get("MEMES_SORTEIO_GATILHO", "0") != "1":
+        return _escolher_otimo(textos, inicio, cada, rnd)  # 26/11: melhores momentos
     for k, texto in enumerate(textos):
         if k < inicio or k > len(textos) - 4 or k - ultimo < cada:
             continue

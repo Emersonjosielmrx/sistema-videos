@@ -1,0 +1,2008 @@
+{
+ "versao": 1,
+ "gerado": "2026-11-26",
+ "fonte": "claude-central/sistema/montar_catalogo.py",
+ "_leia": "CATALOGO UNICO do sistema (OBRA etapa 1, PLANEJAMENTO_SISTEMA_UNICO.md). Todo projeto, tarefa agendada, log vigiado, pasta de saida e servico fora do PC1 tem UM lugar aqui. Mudou algo no sistema = muda aqui. Validar: python catalogo.py validar. Copia mestre: D:\\sistema\\catalogo\\sistema.json (D:\\video-fila\\sistema e juncao para la)",
+ "categorias": {
+  "A-video": "Vídeo - produção",
+  "B-postagem": "Postagem",
+  "C-infra": "Contas e infra de IA",
+  "D-central": "Central e máquinas",
+  "E-outros": "Outros negócios"
+ },
+ "projetos": {
+  "parceiro": {
+   "nome": "Shorts de recap de parceiros (todos os nichos, voz clonada)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\recapd-ambientes\\producao",
+    "D:\\hipercool-materiais\\animes recap"
+   ],
+   "maquinas": [
+    "pc1",
+    "kaggle",
+    "sti",
+    "asusx",
+    "pc2"
+   ],
+   "tarefas": [
+    "ParceiroKaijinre-Postagem",
+    "ParceiroKaijinre-Producao",
+    "CaparShorts",
+    "CapasDepois",
+    "Cortes_Juri",
+    "GarimparFontes",
+    "GarimparParecidos",
+    "DecisorAB",
+    "MedirCortes",
+    "BuscarFontesCampeas",
+    "MoverShortsPostadosDrive",
+    "ReservaShortsDrive",
+    "DescartarSegurados",
+    "AlimentarPC2",
+    "AlimentarPC3",
+    "ShortsNoSTI",
+    "TrechosNoite",
+    "ReacoesColheita"
+   ],
+   "saida": {
+    "pasta": "D:\\hipercool-materiais\\animes recap\\shorts",
+    "padrao": "*.mp4",
+    "parado_h": 30
+   },
+   "logs": [
+    {
+     "arq": "D:\\recapd-ambientes\\producao\\logs\\parceiro_postar.log",
+     "sucesso": "AGENDADO",
+     "prazo_h": 8
+    },
+    {
+     "arq": "D:\\video-fila\\logs\\alimentar_pc2.log",
+     "sucesso": "PC2 Short PRONTO",
+     "prazo_h": 24,
+     "nome": "Shorts no PC2",
+     "desde": "2026-11-20T14:00"
+    }
+   ],
+   "controle": {
+    "projeto": "parceiro",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "chat_dono": "Melhoria de vídeos longos",
+   "doc": "D:\\video-fila\\HANDOFF_26NOV_0845.md",
+   "depende": [
+    "drive",
+    "kaggle",
+    "fish",
+    "ytdlp"
+   ],
+   "estado": "ativo",
+   "tarefas_detalhe": {
+    "ParceiroKaijinre-Postagem": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\cron_parceiro.bat\" \"postar\""
+    },
+    "ParceiroKaijinre-Producao": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\cron_parceiro.bat\" \"producao\""
+    },
+    "CaparShorts": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 D:\\recapd-ambientes\\producao\\bin\\capar_shorts.py"
+    },
+    "CapasDepois": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\colab\\capas_depois.bat\""
+    },
+    "Cortes_Juri": {
+     "ligada": true,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe D:\\recapd-ambientes\\producao\\bin\\cortes_juri.py rodar"
+    },
+    "GarimparFontes": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe \"D:\\recapd-ambientes\\producao\\colab\\garimpar_fontes.py\""
+    },
+    "GarimparParecidos": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe \"D:\\recapd-ambientes\\producao\\colab\\garimpar_parecidos.py\""
+    },
+    "DecisorAB": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe\" \"-X\" \"utf8\" \"D:\\recapd-ambientes\\producao\\bin\\decisor_ab.py\""
+    },
+    "MedirCortes": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe \"D:\\recapd-ambientes\\producao\\colab\\medir_cortes.py\""
+    },
+    "BuscarFontesCampeas": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\buscar_fontes_campeas.py --buscas 12"
+    },
+    "MoverShortsPostadosDrive": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\hipercool-materiais\\comum\\mover_shorts_postados.py\""
+    },
+    "ReservaShortsDrive": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\comum\\reserva_shorts_drive.py\""
+    },
+    "DescartarSegurados": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\comum\\descartar_segurados.py\""
+    },
+    "AlimentarPC2": {
+     "ligada": true,
+     "cmd": "\"D:\\veo\\venv\\Scripts\\pythonw.exe\" D:\\video-fila\\alimentar_pc2.py"
+    },
+    "AlimentarPC3": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\alimentar_pc3.py"
+    },
+    "ShortsNoSTI": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\disparar_sti.py"
+    },
+    "TrechosNoite": {
+     "ligada": true,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe D:\\video-fila\\trechos_noite.py"
+    },
+    "ReacoesColheita": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\hipercool-materiais\\bin\\reacoes_colheita.bat\""
+    }
+   }
+  },
+  "longos": {
+   "nome": "Vídeos longos (recap longo, Fio da Meada, mascote)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\video-fila\\linhas\\LONGOS",
+    "D:\\recapd-ambientes\\producao\\colab",
+    "D:\\recap_central_casa"
+   ],
+   "maquinas": [
+    "pc1",
+    "kaggle",
+    "hermes-prod"
+   ],
+   "tarefas": [
+    "RecapAlimentar",
+    "RecapCentralCasa",
+    "RecapCentralCasaLiberar",
+    "RecapPostarLongos",
+    "ConferirLongos",
+    "PesarFilaLongos",
+    "MascoteProducao",
+    "EngenhariaReversaFila",
+    "ColetarViewsLongos",
+    "RecapMelhoradorLongo",
+    "PostarMedieval15"
+   ],
+   "controle": {
+    "projeto": "anime",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "chat_dono": "Melhoria de vídeos longos",
+   "doc": "D:\\video-fila\\HANDOFF_26NOV_0845.md",
+   "depende": [
+    "drive",
+    "kaggle",
+    "fish",
+    "ytdlp"
+   ],
+   "estado": "ativo",
+   "logs": [
+    {
+     "arq": "D:\\recapd-ambientes\\producao\\colab\\postar_longos.log",
+     "sucesso": "ok: https",
+     "prazo_h": 36,
+     "nome": "Longos no YouTube"
+    }
+   ],
+   "tarefas_detalhe": {
+    "RecapAlimentar": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe -u cliente.py alimentar https://www.youtube.com/@Manhwa_Fresh/videos"
+    },
+    "RecapCentralCasa": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recap_central_casa\\central.bat\""
+    },
+    "RecapCentralCasaLiberar": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recap_central_casa\\central.bat\" liberar"
+    },
+    "RecapPostarLongos": {
+     "ligada": true,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 D:\\recapd-ambientes\\producao\\colab\\postar_longos.py"
+    },
+    "ConferirLongos": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\linhas\\LONGOS\\conferir_pedidos.bat\""
+    },
+    "PesarFilaLongos": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 D:\\recapd-ambientes\\producao\\colab\\pesar_fila.py"
+    },
+    "MascoteProducao": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\linhas\\LONGOS\\mascote_producao.bat\""
+    },
+    "EngenhariaReversaFila": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\linhas\\LONGOS\\engenharia_reversa_fila.bat\""
+    },
+    "ColetarViewsLongos": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\coletar_views_longos.py"
+    },
+    "RecapMelhoradorLongo": {
+     "ligada": false,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 D:\\recapd-ambientes\\producao\\colab\\melhorador_longo.py"
+    },
+    "PostarMedieval15": {
+     "ligada": false,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe \"D:\\recapd-ambientes\\producao\\colab\\postar_quando_pronta.py\" oLBasz5H1-4 PostarMedieval15"
+    }
+   }
+  },
+  "serie20h": {
+   "nome": "Série de 20 h em partes de 30 min (XTTS 88 + RVC)",
+   "categoria": "A-video",
+   "pastas": [
+    "asusx:~/serie20h"
+   ],
+   "maquinas": [
+    "asusx",
+    "sti"
+   ],
+   "servicos_fora": [
+    "asusx: anime-pipeline.py (sob demanda)",
+    "sti: narração xtts (termostato 88 °C)"
+   ],
+   "chat_dono": "Vozes de personagens para vídeos",
+   "doc": "claude-central/HANDOFF_SERIE20H_26NOV.md",
+   "depende": [
+    "drive"
+   ],
+   "estado": "ativo",
+   "tarefas": [],
+   "logs": [],
+   "tarefas_detalhe": {}
+  },
+  "cortes": {
+   "nome": "Cortes (último vídeo, agente de cortes)",
+   "categoria": "A-video",
+   "estado": "parcial",
+   "pastas": [
+    "D:\\video-fila\\linhas\\CORTES"
+   ],
+   "tarefas": [
+    "Cortes_UltimoVideo",
+    "Cortes_Agente",
+    "Cortes_Melhorador"
+   ],
+   "saida": {
+    "pasta": "D:\\video-fila\\linhas\\CORTES",
+    "padrao": "*.mp4",
+    "parado_h": 0
+   },
+   "obs": "Cortes_UltimoVideo segue ligada (5 min) mas último mp4 é de 27/10; agente/melhorador nunca ligados",
+   "logs": [],
+   "tarefas_detalhe": {
+    "Cortes_UltimoVideo": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\linhas\\CORTES\\ultimo_video.py"
+    },
+    "Cortes_Agente": {
+     "ligada": false,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe D:\\video-fila\\linhas\\CORTES\\agente\\cortes_agente.py rodada"
+    },
+    "Cortes_Melhorador": {
+     "ligada": false,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe D:\\recapd-ambientes\\producao\\bin\\cortes_melhorador.py"
+    }
+   }
+  },
+  "anuncios": {
+   "nome": "Anúncios Reels em Remotion para clientes",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\claude-code-video"
+   ],
+   "tarefas": [
+    "ClaudeCodeVideo"
+   ],
+   "saida": {
+    "pasta": "D:\\claude-code-video\\trabalhos",
+    "padrao": "*.mp4",
+    "parado_h": 24
+   },
+   "clientes": [
+    "MS Energy",
+    "Globo Solar",
+    "Advance/NovoEstrela",
+    "Inovare Claw"
+   ],
+   "doc": "D:\\claude-code-video\\EDITOR.md",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "ClaudeCodeVideo": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\claude-code-video\\cron_auto.bat\""
+    }
+   }
+  },
+  "empresas": {
+   "nome": "Reels/carrossel das empresas (MS Energy, Globo, Advance, Açaí, marcas)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\ms-energy"
+   ],
+   "tarefas": [
+    "MSEnergy_Carrossel",
+    "MSEnergy_PostarFB",
+    "MSEnergy_PostarInsta",
+    "MSEnergy_PostarTikTok",
+    "MSEnergy_VigiaClientes",
+    "MSEnergy_Metricas",
+    "MSEnergy_Gerar",
+    "GloboSolar_Carrossel",
+    "GloboSolar_Reel",
+    "AdvanceSolar_Carrossel",
+    "AdvanceSolar_Carrossel_Hora",
+    "AdvanceSolar_Reel",
+    "Solares_Estoque",
+    "AcaiAprovacao",
+    "Acai_Postar",
+    "EmpresasPastas_Vigia",
+    "Marcas_Carrossel"
+   ],
+   "saida": {
+    "pasta": "D:\\ms-energy",
+    "padrao": "*.mp4",
+    "parado_h": 12
+   },
+   "controle": {
+    "projeto": "msenergy",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "depende": [
+    "instagram-token-msenergycap"
+   ],
+   "estado": "ativo",
+   "logs": [
+    {
+     "arq": "D:\\ms-energy\\logs\\carrossel.log",
+     "sucesso": "PUBLICADO",
+     "prazo_h": 60,
+     "nome": "Carrossel MS Energy"
+    },
+    {
+     "arq": "D:\\ms-energy\\logs\\carrossel_advance.log",
+     "sucesso": "PUBLICADO",
+     "prazo_h": 30,
+     "nome": "Carrossel Advance Solar"
+    },
+    {
+     "arq": "D:\\ms-energy\\logs\\carrossel_globo.log",
+     "sucesso": "PUBLICADO",
+     "prazo_h": 30,
+     "nome": "Carrossel Globo Solar"
+    },
+    {
+     "arq": "D:\\ms-energy\\logs\\reel_advance_cron.log",
+     "sucesso": "PUBLICADO",
+     "prazo_h": 30,
+     "nome": "Reel Advance Solar"
+    },
+    {
+     "arq": "D:\\ms-energy\\logs\\reel_globo_cron.log",
+     "sucesso": "PUBLICADO",
+     "prazo_h": 30,
+     "nome": "Reel Globo Solar"
+    }
+   ],
+   "tarefas_detalhe": {
+    "MSEnergy_Carrossel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_carrossel.bat\""
+    },
+    "MSEnergy_PostarFB": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_postar_fb.bat\""
+    },
+    "MSEnergy_PostarInsta": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_postar_insta.bat\""
+    },
+    "MSEnergy_PostarTikTok": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_postar_tiktok.bat\""
+    },
+    "MSEnergy_VigiaClientes": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_vigia_clientes.bat\""
+    },
+    "MSEnergy_Metricas": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_metricas.bat\""
+    },
+    "MSEnergy_Gerar": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_gerar_ms_energy.bat\" \"2\""
+    },
+    "GloboSolar_Carrossel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_carrossel_globo.bat\""
+    },
+    "GloboSolar_Reel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_reel_globo.bat\""
+    },
+    "AdvanceSolar_Carrossel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_carrossel_advance.bat\""
+    },
+    "AdvanceSolar_Carrossel_Hora": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_carrossel_advance.bat\""
+    },
+    "AdvanceSolar_Reel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_reel_advance.bat\""
+    },
+    "Solares_Estoque": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_estoque_reels.bat\""
+    },
+    "AcaiAprovacao": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\ms-energy\\bin\\acai_aprovacao.py"
+    },
+    "Acai_Postar": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_acai.bat\""
+    },
+    "EmpresasPastas_Vigia": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\ms-energy\\bin\\cron_vigia_pastas.bat\""
+    },
+    "Marcas_Carrossel": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_carrossel_marcas.bat\""
+    }
+   }
+  },
+  "produtos": {
+   "nome": "Vídeos de produtos",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\video-fila\\produto_fila"
+   ],
+   "tarefas": [
+    "Produto_Videos",
+    "MelhoradorProdutos"
+   ],
+   "saida": {
+    "pasta": "D:\\video-fila\\produto_fila",
+    "padrao": "*.mp4",
+    "parado_h": 30
+   },
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "Produto_Videos": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_produto_videos.bat\""
+    },
+    "MelhoradorProdutos": {
+     "ligada": false,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\postador-de-videos\\bin\\cron_melhorador_produtos.bat"
+    }
+   }
+  },
+  "ia-midia": {
+   "nome": "Vídeo/imagem por IA (Veo, Gemini Argo, Flow, Google Imagem)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\veo\\beta",
+    "D:\\gemini-argo",
+    "D:\\flow-imagens"
+   ],
+   "tarefas": [
+    "VigiaFlow",
+    "VigiaCapacidadeFlow",
+    "FecharAvisosFlow",
+    "GoogleImagemVigia",
+    "Veo_Limpeza_Drive",
+    "VeoProducaoDiaria7h",
+    "AgendadorVO3",
+    "CapasRodizio"
+   ],
+   "saida": {
+    "pasta": "D:\\veo\\beta\\videos_pos",
+    "padrao": "*.mp4",
+    "parado_h": 12
+   },
+   "controle": {
+    "projeto": "veo",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "estado": "ativo",
+   "logs": [
+    {
+     "arq": "D:\\gemini-argo\\midia.log",
+     "sucesso": "(imagem|video) OK",
+     "prazo_h": 6,
+     "nome": "Gemini sem navegador (imagem/vídeo)"
+    }
+   ],
+   "tarefas_detalhe": {
+    "VigiaFlow": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\venv\\Scripts\\pythonw.exe\" \"D:\\veo\\beta\\vigia_flow.py\""
+    },
+    "VigiaCapacidadeFlow": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\flow-imagens\\vigia_capacidade.py"
+    },
+    "FecharAvisosFlow": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe \"D:\\flow-imagens\\fechar_avisos.py\""
+    },
+    "GoogleImagemVigia": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe D:\\flow-imagens\\google_imagem.py --vigia"
+    },
+    "Veo_Limpeza_Drive": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\beta\\tarefa_limpeza_drive.bat\""
+    },
+    "VeoProducaoDiaria7h": {
+     "ligada": false,
+     "cmd": "cmd /c \"D:\\veo\\beta\\Veo_START_DIARIO_7H.bat\""
+    },
+    "AgendadorVO3": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\agendar_vo3_auto.bat\""
+    },
+    "CapasRodizio": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe capas_rodizio.py"
+    }
+   }
+  },
+  "controlador": {
+   "nome": "Controlador geral de vídeos (dispara produção nas máquinas)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\video-fila"
+   ],
+   "tarefas": [
+    "ControladorVideos",
+    "EncherPilha",
+    "GerenteVideos",
+    "AtualizarYtDlp"
+   ],
+   "controle": {
+    "projeto": "controlador",
+    "etapas": [
+     "producao"
+    ]
+   },
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "ControladorVideos": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\controlador.py"
+    },
+    "EncherPilha": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\encher_pilha.py"
+    },
+    "GerenteVideos": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\video-fila\\gerente_videos.py\" \"--limpar\""
+    },
+    "AtualizarYtDlp": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\atualizar_ytdlp.py"
+    }
+   }
+  },
+  "manhwa-react": {
+   "nome": "ManhwaReact",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\manhwa-react"
+   ],
+   "tarefas": [
+    "ManhwaReact-Lote",
+    "ManhwaReact-Rede",
+    "ManhwaReact-Comentarios",
+    "BackupDriveVideos"
+   ],
+   "saida": {
+    "pasta": "D:\\manhwa-react",
+    "padrao": "*.mp4",
+    "parado_h": 30
+   },
+   "controle": {
+    "projeto": "manhwa-react",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "ManhwaReact-Lote": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\manhwa-react\\scripts\\lote_noturno.bat\""
+    },
+    "ManhwaReact-Rede": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\manhwa-react\\scripts\\rede_hora_em_hora.bat\""
+    },
+    "ManhwaReact-Comentarios": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\manhwa-react\\scripts\\rede_comentarios.bat\""
+    },
+    "BackupDriveVideos": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\manhwa-react\\scripts\\backup_drive.bat\""
+    }
+   }
+  },
+  "comentarios": {
+   "nome": "Vídeos de comentários",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\videos-comentarios"
+   ],
+   "tarefas": [
+    "ComentariosProducao",
+    "ComentariosPostagem"
+   ],
+   "obs": "só produz quando há pedido",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "ComentariosProducao": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\videos-comentarios\\bin\\producao.py ciclo"
+    },
+    "ComentariosPostagem": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\videos-comentarios\\bin\\producao.py postar"
+    }
+   }
+  },
+  "kit3d": {
+   "nome": "Kit 3D / canais 3D",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\kit3d-producao",
+    "D:\\canais-3d"
+   ],
+   "tarefas": [
+    "Kit3dDiario"
+   ],
+   "obs": "26/11: temas.json vazio (dona precisa acrescentar)",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "Kit3dDiario": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\kit3d-producao\\tools\\diario.bat\""
+    }
+   }
+  },
+  "virjao": {
+   "nome": "Projeto João Lucas Virjão (elementos/transições estilo Virjão/Momo)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\projeto-joao-lucas-virjao",
+    "D:\\sons-transicao"
+   ],
+   "tarefas": [
+    "JoaoLucasVirjaoDrive"
+   ],
+   "chat_dono": "Transições de som e imagem para vídeos",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "JoaoLucasVirjaoDrive": {
+     "ligada": true,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 D:\\projeto-joao-lucas-virjao\\bin\\vigia_drive.py"
+    }
+   }
+  },
+  "vozes": {
+   "nome": "Vozes (Fish, voz clonada, narradores, XTTS)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\hipercool-materiais\\comum\\fish_audio",
+    "D:\\tmp\\xtts88"
+   ],
+   "maquinas": [
+    "pc1",
+    "asusx",
+    "sti"
+   ],
+   "tarefas": [
+    "VigiaTreinoVoz",
+    "VarrerChromesFish",
+    "VozClonadaVigia",
+    "VozClonadaFila",
+    "VozFidelidadePiloto",
+    "VozesNovasVigia"
+   ],
+   "servicos_fora": [
+    "asusx: fabrica-fish (porta 9397, 3 contas)",
+    "sti: fabrica-fish (1 conta)",
+    "hp: fabrica-fish DESLIGADA de propósito (reCAPTCHA recusa, CPU sem SSE4.2)"
+   ],
+   "chat_dono": "Vozes de personagens para vídeos",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "VigiaTreinoVoz": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe D:\\video-fila\\vigia_treino_voz.py"
+    },
+    "VarrerChromesFish": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe\" \"D:\\hipercool-materiais\\comum\\fish_audio\\varrer_chromes_fish.py\""
+    },
+    "VozClonadaVigia": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv_vozes\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\bin\\voz_clonada.py\" vigiar"
+    },
+    "VozClonadaFila": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-materiais\\python\\venv_vozes\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\bin\\voz_clonada.py\" fila --so-material"
+    },
+    "VozFidelidadePiloto": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-materiais\\python\\venv_vozes\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\amostras_voz\\clone2\\fidelidade\\piloto_fidelidade.py\""
+    },
+    "VozesNovasVigia": {
+     "ligada": true,
+     "cmd": "D:\\recapd-ambientes\\producao\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\tmp\\vozes_novas_vigia.py\""
+    }
+   }
+  },
+  "inteligencia": {
+   "nome": "Inteligência (engenharia reversa, tendências, foco de Shorts)",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\video-fila\\engenharia_reversa",
+    "D:\\video-fila\\linhas\\VISUAL"
+   ],
+   "tarefas": [
+    "EngenhariaReversaMedir",
+    "EngenhariaReversaSemanal",
+    "EngenhariaReversaVisual",
+    "ERContinuo",
+    "Tendencias30Dias",
+    "FocoShorts"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "EngenhariaReversaMedir": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\engenharia_reversa\\medir_nossos.bat\""
+    },
+    "EngenhariaReversaSemanal": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\engenharia_reversa\\semanal.bat\""
+    },
+    "EngenhariaReversaVisual": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\linhas\\VISUAL\\visual_fila.bat\""
+    },
+    "ERContinuo": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\engenharia_reversa\\continuo.py"
+    },
+    "Tendencias30Dias": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\video-fila\\tendencias_30dias.py\""
+    },
+    "FocoShorts": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\analise_shorts_foco.py --aplicar"
+    }
+   }
+  },
+  "hipercool": {
+   "nome": "Hipercool (produção antiga)",
+   "categoria": "A-video",
+   "estado": "parcial",
+   "pastas": [
+    "D:\\hipercool-videos"
+   ],
+   "tarefas": [
+    "HipercoolPC2",
+    "HipercoolPostagem",
+    "HipercoolFila",
+    "HipercoolReligarProducao",
+    "HipercoolShorts2h",
+    "HipercoolVigia",
+    "BackupCachesHipercool"
+   ],
+   "controle": {
+    "projeto": "hipercool",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "obs": "produção desligada pela dona em 04/11 (controle.json); postagem e PC2 seguem",
+   "logs": [],
+   "tarefas_detalhe": {
+    "HipercoolPC2": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\fila.py pc2-trazer"
+    },
+    "HipercoolPostagem": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\fila.py postagem"
+    },
+    "HipercoolFila": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\fila.py ciclo"
+    },
+    "HipercoolReligarProducao": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\fila.py ligar"
+    },
+    "HipercoolShorts2h": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe -X utf8 D:\\hipercool-videos\\bin\\shorts_a_cada_2h.py"
+    },
+    "HipercoolVigia": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\vigia_agente.py"
+    },
+    "BackupCachesHipercool": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\backup_caches.py"
+    }
+   }
+  },
+  "historias": {
+   "nome": "Histórias em Frames",
+   "categoria": "A-video",
+   "estado": "parado",
+   "pastas": [
+    "D:\\historias-em-frames",
+    "D:\\hipercool-materiais\\historias-em-frames"
+   ],
+   "tarefas": [
+    "HistoriasEmFrames-Producao"
+   ],
+   "controle": {
+    "projeto": "historias",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "obs": "4 venvs (~12 GB) para projeto parado - etapa 7",
+   "logs": [],
+   "tarefas_detalhe": {
+    "HistoriasEmFrames-Producao": {
+     "ligada": false,
+     "cmd": "D:\\historias-em-frames\\prod\\venv\\Scripts\\pythonw.exe D:\\historias-em-frames\\auto_producer.py"
+    }
+   }
+  },
+  "anime-antigo": {
+   "nome": "Anime recap (pipeline antigo)",
+   "categoria": "A-video",
+   "estado": "parado",
+   "tarefas": [
+    "AnimeOcioso",
+    "AnimeRecapMonitor",
+    "AnimeRecapNoturno",
+    "CollabsYouTube"
+   ],
+   "logs": [],
+   "pastas": [],
+   "tarefas_detalhe": {
+    "AnimeOcioso": {
+     "ligada": false,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\ocioso.py"
+    },
+    "AnimeRecapMonitor": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\cron_anime_monitor.bat\""
+    },
+    "AnimeRecapNoturno": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\recapd-ambientes\\producao\\cron_anime_noturno.bat\""
+    },
+    "CollabsYouTube": {
+     "ligada": false,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\video-fila\\collabs_rodar.py"
+    }
+   }
+  },
+  "fabrica-poses": {
+   "nome": "Fábrica de poses",
+   "categoria": "A-video",
+   "pastas": [
+    "D:\\fabrica-poses"
+   ],
+   "tarefas": [
+    "FabricaPosesNoite"
+   ],
+   "estado": "parcial",
+   "obs": "tarefa ligada mas com gatilho único (última 15/11)",
+   "logs": [],
+   "tarefas_detalhe": {
+    "FabricaPosesNoite": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\fabrica-poses\\noite.py"
+    }
+   }
+  },
+  "youtube": {
+   "nome": "Postagem YouTube (Shorts e longos, recuperação dos canais)",
+   "categoria": "B-postagem",
+   "pastas": [
+    "D:\\postador-de-videos",
+    "D:\\video-fila"
+   ],
+   "tarefas": [
+    "PostagemContinua",
+    "PostadorDeVideos",
+    "AnteciparAgendados",
+    "ReagendarNobre",
+    "MedicoRecuperacao",
+    "RemarcarRedistribuir",
+    "PainelCanais",
+    "DestravarNotebooks",
+    "VigiaTokensAPI"
+   ],
+   "logs": [
+    {
+     "arq": "D:\\video-fila\\logs\\reagendar_nobre.log",
+     "sucesso": "feitos: [1-9]",
+     "prazo_h": 30,
+     "nome": "Rede: reagendar pro horário nobre"
+    }
+   ],
+   "controle": {
+    "projeto": "postador",
+    "etapas": [
+     "producao",
+     "postagem"
+    ]
+   },
+   "servicos_fora": [
+    "hp/sti/x200ma: postador Chrome porta 9460"
+   ],
+   "chat_dono": "Melhoria de vídeos longos",
+   "doc": "D:\\video-fila\\HANDOFF_26NOV_0845.md",
+   "estado": "ativo",
+   "tarefas_detalhe": {
+    "PostagemContinua": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\venv\\Scripts\\python.exe\" \"-X\" \"utf8\" \"D:\\postador-de-videos\\bin\\postagem_continua.py\""
+    },
+    "PostadorDeVideos": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\postar_tudo_auto.bat\""
+    },
+    "AnteciparAgendados": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\antecipar_agendados.bat\""
+    },
+    "ReagendarNobre": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\reagendar_nobre.py --fazer"
+    },
+    "MedicoRecuperacao": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\video-fila\\medico_recuperacao.py\" \"--aplicar\""
+    },
+    "RemarcarRedistribuir": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" -X utf8 D:\\video-fila\\remarcar\\redistribuir.py --executar --lote 12"
+    },
+    "PainelCanais": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\painel_canais.bat\""
+    },
+    "DestravarNotebooks": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\destravar_notebooks.bat\""
+    },
+    "VigiaTokensAPI": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe D:\\postador-de-videos\\bin\\vigia_tokens_api.py"
+    }
+   }
+  },
+  "tiktok": {
+   "nome": "TikTok",
+   "categoria": "B-postagem",
+   "pastas": [
+    "D:\\postador-de-videos"
+   ],
+   "tarefas": [
+    "TikTokRodadaExtra",
+    "TikTok_MedirViews",
+    "VigiaTikTokIP"
+   ],
+   "estado": "ativo",
+   "logs": [
+    {
+     "arq": "D:\\postador-de-videos\\logs\\tiktok_{hoje}.log",
+     "sucesso": "Postados: [1-9]",
+     "prazo_h": 8,
+     "nome": "TikTok"
+    }
+   ],
+   "tarefas_detalhe": {
+    "TikTokRodadaExtra": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\tiktok_rodada_extra.bat\""
+    },
+    "TikTok_MedirViews": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_medir_tiktok.bat\""
+    },
+    "VigiaTikTokIP": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\venv\\Scripts\\python.exe\" \"D:\\postador-de-videos\\bin\\vigia_tiktok_ip.py\""
+    }
+   }
+  },
+  "facebook": {
+   "nome": "Facebook páginas (monetização)",
+   "categoria": "B-postagem",
+   "pastas": [
+    "D:\\postador-de-videos"
+   ],
+   "tarefas": [
+    "FacebookPaginas",
+    "FacebookVigia",
+    "FacebookCriarPaginas",
+    "FacebookContinuar",
+    "FacebookInteligencia",
+    "PainelFacebookViews"
+   ],
+   "logs": [
+    {
+     "arq": "D:\\postador-de-videos\\logs\\facebook_paginas.log",
+     "sucesso": "^OK ",
+     "prazo_h": 14
+    }
+   ],
+   "chat_dono": "Facebook monetização com Google",
+   "doc": "claude-central/HANDOFF_FACEBOOK_26NOV.md",
+   "estado": "ativo",
+   "tarefas_detalhe": {
+    "FacebookPaginas": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_facebook_paginas.bat\""
+    },
+    "FacebookVigia": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_facebook_vigia.bat\""
+    },
+    "FacebookCriarPaginas": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_facebook_criar.bat\""
+    },
+    "FacebookContinuar": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_fb_continuar.bat\""
+    },
+    "FacebookInteligencia": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_facebook_inteligencia.bat\""
+    },
+    "PainelFacebookViews": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\postador-de-videos\\bin\\cron_fb_painel.bat\""
+    }
+   }
+  },
+  "instagram": {
+   "nome": "Instagram (contas de vídeo)",
+   "categoria": "B-postagem",
+   "pastas": [
+    "D:\\postador-de-videos"
+   ],
+   "tarefas": [
+    "InstagramCriarContas",
+    "InstagramMedirSeguidores"
+   ],
+   "estado": "ativo",
+   "logs": [
+    {
+     "arq": "D:\\postador-de-videos\\logs\\instagram_{hoje}.log",
+     "sucesso": "postados [1-9]",
+     "prazo_h": 14,
+     "nome": "Instagram (contas de vídeo)"
+    }
+   ],
+   "tarefas_detalhe": {
+    "InstagramCriarContas": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"-u\" \"D:\\postador-de-videos\\bin\\instagram_criar.py\" \"--proxima\""
+    },
+    "InstagramMedirSeguidores": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\video-fila\\medir_instagram_publico.py"
+    }
+   }
+  },
+  "celulares": {
+   "nome": "Postagem pelos celulares (canal_pronto)",
+   "categoria": "B-postagem",
+   "pastas": [
+    "D:\\projeto celular sub controle"
+   ],
+   "maquinas": [
+    "pc1",
+    "a2",
+    "g20",
+    "a3",
+    "s20",
+    "s20ultra"
+   ],
+   "tarefas": [
+    "CelularesEncher",
+    "FilaCelulares",
+    "EscadaCelulares",
+    "VigiaCelularesIA",
+    "ProxyCelular",
+    "InstalarVigiaCelulares",
+    "NoiteCelulares",
+    "NoiteCelulares9h"
+   ],
+   "saida": {
+    "pasta": "D:\\projeto celular sub controle\\canal_pronto",
+    "padrao": "*.mp4",
+    "parado_h": 8
+   },
+   "logs": [
+    {
+     "arq": "D:\\projeto celular sub controle\\canal_pronto\\noite_encher.log",
+     "sucesso": ": PRONTO",
+     "prazo_h": 6
+    }
+   ],
+   "processos": [
+    "noite_encher.py laco",
+    "noite_encher.py laco_postar",
+    "noite_encher.py laco_conferir"
+   ],
+   "controle": {
+    "projeto": "celulares",
+    "etapas": [
+     "producao"
+    ]
+   },
+   "servicos_fora": [
+    "celulares: vigia_celular.sh (cron 1 min)",
+    "s20ultra: vigia_wifi.sh"
+   ],
+   "chat_dono": "Erro Couldn't connect no WhatsApp",
+   "doc": "claude-central/HANDOFF_CELULARES_26NOV.md",
+   "estado": "ativo",
+   "tarefas_detalhe": {
+    "CelularesEncher": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\canal_pronto\\garantir_noite.py\""
+    },
+    "FilaCelulares": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\fila_celulares.py\" rodar"
+    },
+    "EscadaCelulares": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\canal_pronto\\escada_celulares.py\" volta"
+    },
+    "VigiaCelularesIA": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\vigia_celulares.py\""
+    },
+    "ProxyCelular": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\postador-de-videos\\bin\\proxy_celular.py --vez"
+    },
+    "InstalarVigiaCelulares": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe \"D:\\video-fila\\celulares\\instalar_vigia.py\""
+    },
+    "NoiteCelulares": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\noite_mapear.py\" rodada"
+    },
+    "NoiteCelulares9h": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\projeto celular sub controle\\noite_mapear.py\" rodada"
+    }
+   }
+  },
+  "kaggle": {
+   "nome": "Kaggle (GPUs de render, contas, pool)",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\criador-contas-kaggle",
+    "D:\\hipercool-materiais\\comum\\kaggle_gerente"
+   ],
+   "maquinas": [
+    "pc1",
+    "hermes-prod",
+    "hermes-staging",
+    "hermes-bloqueio"
+   ],
+   "tarefas": [
+    "AbastecedorKaggle",
+    "BalancoKaggle",
+    "GpuKaggleFila",
+    "SincronizarPoolKaggle",
+    "KaggleSaudeContas_0800",
+    "KaggleSaudeContas_2130",
+    "VigiaCruzamentoKaggle",
+    "VigiaRecebersms",
+    "AvisoCredenciais",
+    "WebshareSaude",
+    "KaggleBaixador",
+    "KaggleHoras",
+    "KaggleRecapManter"
+   ],
+   "servicos_fora": [
+    "hermes-prod: recap_central/vps_central.py (cron 5 min, lança kernels)",
+    "VPS: vps_baixador"
+   ],
+   "obs": "LER INCIDENTE_BANIMENTO_02NOV.md antes de qualquer script que fale como conta; KaggleSaudeContas aponta p/ D:\\tmp_logs que sumiu",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "AbastecedorKaggle": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\veo\\venv\\Scripts\\python.exe\" -X utf8 D:\\video-fila\\abastecedor_kaggle.py"
+    },
+    "BalancoKaggle": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\video-fila\\balanco_kaggle.py\""
+    },
+    "GpuKaggleFila": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\bin\\kaggle_conversor.py\" auto"
+    },
+    "SincronizarPoolKaggle": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\recapd-ambientes\\producao\\colab\\sincronizar_pool_kaggle.py"
+    },
+    "KaggleSaudeContas_0800": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\tmp_logs\\kaggle_verificar\\saude_contas.py"
+    },
+    "KaggleSaudeContas_2130": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\tmp_logs\\kaggle_verificar\\saude_contas.py"
+    },
+    "VigiaCruzamentoKaggle": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\hipercool-materiais\\comum\\kaggle_gerente\\vigia_cruzamento.py\""
+    },
+    "VigiaRecebersms": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\criador-contas-kaggle\\sms_vigia.py\""
+    },
+    "AvisoCredenciais": {
+     "ligada": true,
+     "cmd": "\"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe\" \"D:\\projetos-navegador\\credential-factory\\aviso_credenciais.py\" kaggle"
+    },
+    "WebshareSaude": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\hipercool-materiais\\comum\\kaggle_gerente\\webshare_saude.py\""
+    },
+    "KaggleBaixador": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\venv\\Scripts\\python.exe\" \"D:\\recapd-ambientes\\producao\\bin\\kaggle_baixar.py\" \"manter\""
+    },
+    "KaggleHoras": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\video-fila\\kaggle_horas.py\""
+    },
+    "KaggleRecapManter": {
+     "ligada": false,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\recapd-ambientes\\producao\\colab\\kaggle_lancar.py manter"
+    }
+   }
+  },
+  "google-drive": {
+   "nome": "Logins Google, cofre e Drive",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\logins-google",
+    "D:\\tools\\drive_central"
+   ],
+   "tarefas": [
+    "CofreChecar",
+    "DriveChaveConferir",
+    "DriveChaveRenovar",
+    "LimparEspaco_logins-google",
+    "DriveCentral"
+   ],
+   "obs": "DriveCentral parado em captcha 13/11 (dona)",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "CofreChecar": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\logins-google\\cofre.py\" checar"
+    },
+    "DriveChaveConferir": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\comum\\drive_chave.py\" conferir"
+    },
+    "DriveChaveRenovar": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe \"D:\\hipercool-materiais\\comum\\drive_chave.py\" diario"
+    },
+    "LimparEspaco_logins-google": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\logins-google\\limpar_espaco.py\" \"--drive\""
+    },
+    "DriveCentral": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe D:\\tools\\drive_central\\drive_central.py"
+    }
+   }
+  },
+  "ia-gratis": {
+   "nome": "IAs grátis/proxies (Opus-grátis, Genspark, Sonnet web, Gemini Argo, Cline ponte, OmniRoute)",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\opus-gratis-v2-desktop",
+    "D:\\sonnet web",
+    "D:\\gemini-argo",
+    "D:\\cline-ponte"
+   ],
+   "maquinas": [
+    "pc1",
+    "hermes-bloqueio",
+    "hermes-staging",
+    "omarchy"
+   ],
+   "tarefas": [
+    "OpusGratisManter",
+    "ZeladorGenspark",
+    "1min visita diaria",
+    "MonitorOpus",
+    "MonitorSonnet",
+    "SonnetWebMonitor",
+    "ZeladorSonnet",
+    "ArgonManter",
+    "ArgonManterLogon",
+    "ArgonZelador",
+    "MonitorArgon",
+    "ClinePonte"
+   ],
+   "logs": [
+    {
+     "arq": "D:\\gemini-argo\\midia.log",
+     "sucesso": "(imagem|video) OK",
+     "prazo_h": 6
+    }
+   ],
+   "processos": [
+    "genspark_http.py",
+    "gemini_http_proxy.py",
+    "ponte.mjs"
+   ],
+   "servicos_fora": [
+    "hermes-bloqueio(157): omniroute + rodízio de contas (~20 crons), antigravity-cc-proxy, painel-creditos",
+    "hermes-staging: omniroute-remap, omni-vigia",
+    "omarchy: claude-retry-proxy, omniag-contas-barra"
+   ],
+   "chat_dono": "Priorização de contas",
+   "obs": "grupos duplicados a juntar na etapa 5: Sonnet (3), Argon (4), Opus/Genspark (4)",
+   "estado": "ativo",
+   "tarefas_detalhe": {
+    "OpusGratisManter": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\opus-gratis-v2-desktop\\og_manter.py"
+    },
+    "ZeladorGenspark": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\opus-gratis-v2-desktop\\zelador_genspark.py"
+    },
+    "1min visita diaria": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe \"D:\\opus-gratis-v2-desktop\\umin\\visita_diaria.py\""
+    },
+    "MonitorOpus": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe D:\\monitor_opus.py"
+    },
+    "MonitorSonnet": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\sonnet web\\monitor_sonnet.bat\""
+    },
+    "SonnetWebMonitor": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\gemini-argo\\sonnet_web_monitor.bat\""
+    },
+    "ZeladorSonnet": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\sonnet web\\zelador_sonnet.bat\""
+    },
+    "ArgonManter": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\gemini-argo\\argon_manter.py"
+    },
+    "ArgonManterLogon": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\gemini-argo\\argon_manter.py"
+    },
+    "ArgonZelador": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\gemini-argo\\argon_zelador.py"
+    },
+    "MonitorArgon": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" -X utf8 \"D:\\gemini-argo\\monitor_argon.py\""
+    },
+    "ClinePonte": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\cline-ponte\\iniciar.bat\""
+    }
+   }
+  },
+  "nsn": {
+   "nome": "NSN - navegador sem navegador (cookies, banimento, inteligência TikTok)",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\projeto-navegador-sem-navegador"
+   ],
+   "tarefas": [
+    "NSN_Banimento",
+    "NSN_Saude",
+    "NSN_ManterCookies",
+    "NSN_ColherNotebooks",
+    "NSN_Inteligencia"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "NSN_Banimento": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\projeto-navegador-sem-navegador\\tools\\monitor_banimento.py"
+    },
+    "NSN_Saude": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\projeto-navegador-sem-navegador\\tools\\saude.py"
+    },
+    "NSN_ManterCookies": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\veo\\venv\\Scripts\\python.exe\" tools\\manter_cookies.py"
+    },
+    "NSN_ColherNotebooks": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\veo\\venv\\Scripts\\python.exe\" D:\\projeto-navegador-sem-navegador\\tools\\colher_notebooks.py"
+    },
+    "NSN_Inteligencia": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\veo\\venv\\Scripts\\python.exe\" -m relatorios.inteligencia --tiktok"
+    }
+   }
+  },
+  "whatsapp": {
+   "nome": "WhatsApp (ativação, Hermes Call, túnel celular→VPS)",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\whatsapp-notes",
+    "D:\\whatsapp-activator2"
+   ],
+   "maquinas": [
+    "pc1",
+    "hermes-prod",
+    "hermes-staging",
+    "hermes-bloqueio"
+   ],
+   "tarefas": [
+    "TunelCelularVPS"
+   ],
+   "servicos_fora": [
+    "hermes-prod: hermes-call (8080), hermes-ativador-tunel",
+    "hermes-staging: evolution-api, wuzapi, hermes-call-refactor",
+    "hermes-bloqueio(157): whatsapp-activator (Redroid) + 7 redsocks"
+   ],
+   "obs": "26/11: Redroid todos parados; evolution-api reinicia ~6/6 h",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "TunelCelularVPS": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\whatsapp-notes\\tunel_celular_vps.py"
+    }
+   }
+  },
+  "chats-claude": {
+   "nome": "Chats do Claude (sentinela continue, arquivo, prioridade VS Code)",
+   "categoria": "C-infra",
+   "tarefas": [
+    "SentinelaContinue",
+    "SentinelaVigia",
+    "VigiaChats",
+    "ArquivoConversasClaude",
+    "PrioridadeVSCode"
+   ],
+   "servicos_fora": [
+    "omarchy: sentinela-continue, sync-claude, espelho-conversas, garantir-bootcamp (timers)"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "pastas": [],
+   "tarefas_detalhe": {
+    "SentinelaContinue": {
+     "ligada": true,
+     "cmd": "\"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe\" -I D:\\sentinela_disparo.py"
+    },
+    "SentinelaVigia": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -I D:\\sentinela_vigia.py"
+    },
+    "VigiaChats": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\\video-fila\\vigia_chats.ps1"
+    },
+    "ArquivoConversasClaude": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 \"D:\\tools\\arquivo_conversas_claude\\arquivar.py\" --dias 7"
+    },
+    "PrioridadeVSCode": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" powershell -NoProfile -ExecutionPolicy Bypass -File D:\\video-fila\\prioridade_vscode.ps1"
+    }
+   }
+  },
+  "central": {
+   "nome": "Central de vigia, painel e avisos (vigilancia, ronda, painel, Telegram)",
+   "categoria": "D-central",
+   "pastas": [
+    "D:\\sistema",
+    "D:\\video-fila"
+   ],
+   "tarefas": [
+    "VigilanciaSistema",
+    "RondaGeralPC1",
+    "RondaCaoGuarda",
+    "VigiaVideos",
+    "PainelVideos",
+    "PainelTunel",
+    "PlantaoTelegram",
+    "NotificarTelegram",
+    "TelaoChecklist",
+    "SalvarGithub",
+    "SistemaUnificacao"
+   ],
+   "processos": [
+    "painel_controlador.py",
+    "tunel_painel.py"
+   ],
+   "servicos_fora": [
+    "omarchy: ronda-omarchy (30 min), botões R V P C D da barra",
+    "hp/sti: vitrine player.py (8787)"
+   ],
+   "chat_dono": "Chat de projetos ativos",
+   "doc": "claude-central/PAINEL_PROJETOS_ATIVOS.md",
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "VigilanciaSistema": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\veo\\venv\\Scripts\\python.exe\" \"-X\" \"utf8\" \"D:\\video-fila\\vigilancia.py\""
+    },
+    "RondaGeralPC1": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\video-fila\\ronda\\ronda_oculta.vbs"
+    },
+    "RondaCaoGuarda": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\video-fila\\ronda_cao_guarda.py"
+    },
+    "VigiaVideos": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\vigia_geral.py"
+    },
+    "PainelVideos": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\painel_controlador.py"
+    },
+    "PainelTunel": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\tunel_painel.py"
+    },
+    "PlantaoTelegram": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\video-fila\\plantao.py"
+    },
+    "NotificarTelegram": {
+     "ligada": true,
+     "cmd": "D:\\manhwa-react\\.venv\\Scripts\\pythonw.exe D:\\postador-de-videos\\bin\\notificar_telegram.py"
+    },
+    "TelaoChecklist": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\video-fila\\vitrine\\checklist_like.py"
+    },
+    "SalvarGithub": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-materiais\\comum\\salvar_github.py"
+    },
+    "SistemaUnificacao": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\sistema\\catalogo\\analisar_uso.py"
+    }
+   },
+   "obs": "D:\\sistema = lugar unico (catalogo, mapa do vivo, uso real, projetos por junção). sistema_uso instalado nos 7 Pythons (SISTEMA_USO=0 desliga)."
+  },
+  "maquinas": {
+   "nome": "Máquinas (uso, travados, notebooks, desktop, PC3)",
+   "categoria": "D-central",
+   "tarefas": [
+    "MatarTravados",
+    "MedidorPC1",
+    "UsoMaquinas",
+    "AnaliseMaquinas24h",
+    "DesktopVigia",
+    "VigiaDesktop",
+    "LimparWorkspaceMaquinas"
+   ],
+   "processos": [
+    "medidor_pc1.py"
+   ],
+   "controle": {
+    "projeto": "desktop",
+    "etapas": [
+     "producao"
+    ]
+   },
+   "servicos_fora": [
+    "asusx/hp/sti/x200ma: cpu-max, fan_max, mover-para-hd(asusx), saude_min/turbo-vigia(sti), limpeza_chrome(x200ma)"
+   ],
+   "obs": "DesktopVigia x VigiaDesktop duplicados (etapa 5)",
+   "estado": "ativo",
+   "logs": [],
+   "pastas": [],
+   "tarefas_detalhe": {
+    "MatarTravados": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe \"D:\\video-fila\\matar_travados.py\""
+    },
+    "MedidorPC1": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\medidor_pc1.py"
+    },
+    "UsoMaquinas": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe \"D:\\video-fila\\uso_maquinas.py\""
+    },
+    "AnaliseMaquinas24h": {
+     "ligada": true,
+     "cmd": "\"D:\\veo\\venv\\Scripts\\pythonw.exe\" D:\\video-fila\\analise_maquinas.py"
+    },
+    "DesktopVigia": {
+     "ligada": true,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\desktop_vigia.py"
+    },
+    "VigiaDesktop": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\video-fila\\vigia_desktop.bat\""
+    },
+    "LimparWorkspaceMaquinas": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"D:\\video-fila\\limpar_workspace_maquinas.py\""
+    }
+   }
+  },
+  "pc1-saude": {
+   "nome": "Saúde do PC1 (disco, RAM, Chrome, limpeza)",
+   "categoria": "D-central",
+   "pastas": [
+    "D:\\limpeza_c",
+    "D:\\pc-desempenho"
+   ],
+   "tarefas": [
+    "GuardiaoDisco",
+    "GuardiaoFoto",
+    "LimpezaDiariaC",
+    "LiberarRamVigia",
+    "VigiaMemoria",
+    "LimparCacheChrome",
+    "LimpezaChrome",
+    "LimparRelatoriosWindows",
+    "Limpeza source.mp4 anime"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "GuardiaoDisco": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\limpeza_c\\guardiao_vigia.bat"
+    },
+    "GuardiaoFoto": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\limpeza_c\\guardiao_foto.bat\""
+    },
+    "LimpezaDiariaC": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\limpeza_c\\limpeza_diaria.bat\""
+    },
+    "LiberarRamVigia": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\\video-fila\\liberar_ram.ps1 -Vigia"
+    },
+    "VigiaMemoria": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\\pc-desempenho\\vigia_memoria.ps1"
+    },
+    "LimparCacheChrome": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\limpar_cache_chrome.py"
+    },
+    "LimpezaChrome": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\\video-fila\\limpeza_chrome.ps1"
+    },
+    "LimparRelatoriosWindows": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\limpar_relatorios_windows.py"
+    },
+    "Limpeza source.mp4 anime": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\hipercool-materiais\\anime\\limpar_source.py"
+    }
+   }
+  },
+  "vps-producao": {
+   "nome": "VPS de produção (Hermes, loja CAS, n8n, painel-clientes, açaí-lojas, backups)",
+   "categoria": "D-central",
+   "maquinas": [
+    "hermes-prod",
+    "hermes-staging",
+    "hermes-bloqueio"
+   ],
+   "servicos_fora": [
+    "hermes-prod: lucrativa, piper-tts, postgres, painel-clientes, acai-lojas, backups (backup_opus_vps FALHA)",
+    "hermes-staging: loja CAS (~35 containers), n8n v1, cluster-agent/worker, faster-whisper (backup CAS FALHA)",
+    "hermes-bloqueio(157): n8n v2, chatwoot, fluxia, licibot, video-oficina, landings (disco 84%)"
+   ],
+   "estado": "ativo",
+   "tarefas": [],
+   "logs": [],
+   "pastas": [],
+   "tarefas_detalhe": {}
+  },
+  "olx": {
+   "nome": "Buscas OLX → Telegram",
+   "categoria": "E-outros",
+   "pastas": [
+    "D:\\olx-buscas"
+   ],
+   "tarefas": [
+    "BuscasOLX"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "BuscasOLX": {
+     "ligada": true,
+     "cmd": "wscript.exe \"D:\\rodar_oculto.vbs\" \"D:\\olx-buscas\\iniciar.bat\""
+    }
+   }
+  },
+  "painel-clientes": {
+   "nome": "Painel de clientes (Instagram dos clientes)",
+   "categoria": "E-outros",
+   "pastas": [
+    "D:\\painel-clientes"
+   ],
+   "tarefas": [
+    "PainelClientes_Coletar",
+    "PainelClientes_ColetarHTTP"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "PainelClientes_Coletar": {
+     "ligada": true,
+     "cmd": "\"C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe\" \"D:\\painel-clientes\\coletor\\coletar_instagram.py\""
+    },
+    "PainelClientes_ColetarHTTP": {
+     "ligada": true,
+     "cmd": "\"D:\\veo\\venv\\Scripts\\pythonw.exe\" \"D:\\painel-clientes\\coletor\\coletar_instagram_http.py\""
+    }
+   }
+  },
+  "painel-externo": {
+   "nome": "Painel externo (VPS 157)",
+   "categoria": "E-outros",
+   "pastas": [
+    "D:\\vps157"
+   ],
+   "tarefas": [
+    "PainelExterno"
+   ],
+   "estado": "ativo",
+   "logs": [],
+   "tarefas_detalhe": {
+    "PainelExterno": {
+     "ligada": true,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 D:\\vps157\\painel_externo.py"
+    }
+   }
+  },
+  "trader": {
+   "nome": "Trader Binance / Atlas / laboratório",
+   "categoria": "E-outros",
+   "estado": "parado",
+   "pastas": [
+    "D:\\trader_binance"
+   ],
+   "tarefas": [
+    "Atlas - sincronizar",
+    "Atlas - vigia",
+    "Laboratorio - papeis",
+    "Trader Binance - limpeza de dados"
+   ],
+   "servicos_fora": [
+    "hermes-prod: lucrativa (robô ao vivo), laboratorio-papeis timer, atlas.vigia cron"
+   ],
+   "obs": "tarefas do PC1 desligadas; parte roda na hermes-prod",
+   "logs": [],
+   "tarefas_detalhe": {
+    "Atlas - sincronizar": {
+     "ligada": false,
+     "cmd": "wscript \"D:\\trader_binance\\atlas\\rodar_oculto.vbs\" atlas.sincronizar"
+    },
+    "Atlas - vigia": {
+     "ligada": false,
+     "cmd": "wscript \"D:\\trader_binance\\atlas\\rodar_oculto.vbs\" atlas.vigia"
+    },
+    "Laboratorio - papeis": {
+     "ligada": false,
+     "cmd": "wscript.exe \"D:\\trader_binance\\trader_binance\\laboratorio\\papel\\rodar_papeis_oculto.vbs\""
+    },
+    "Trader Binance - limpeza de dados": {
+     "ligada": false,
+     "cmd": "D:\\trader_binance\\atlas\\venv\\Scripts\\pythonw.exe \"D:\\trader_binance\\trader_binance\\deploy\\limpeza_dados.py\""
+    }
+   }
+  },
+  "freelas": {
+   "nome": "Robô 99Freelas",
+   "categoria": "E-outros",
+   "estado": "parado",
+   "pastas": [
+    "D:\\projeto-propostas-freelas"
+   ],
+   "tarefas": [
+    "Propostas99Freelas",
+    "Respostas99FreelasHTTP"
+   ],
+   "logs": [],
+   "tarefas_detalhe": {
+    "Propostas99Freelas": {
+     "ligada": false,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\projeto-propostas-freelas\\99freelas\\robo\\rodada.bat\""
+    },
+    "Respostas99FreelasHTTP": {
+     "ligada": false,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 \"D:\\projeto-propostas-freelas\\99freelas\\robo\\vigia_respostas_http.py\""
+    }
+   }
+  },
+  "melhoradores": {
+   "nome": "Melhoradores/pesquisador (desligados 23/11)",
+   "categoria": "E-outros",
+   "estado": "parado",
+   "tarefas": [
+    "MelhoradorCentral",
+    "SupervisorMelhorador",
+    "CobradorPesquisador",
+    "MotorPesquisador",
+    "VigiaMelhorias",
+    "VigiaGGMax",
+    "AlarmeVendas",
+    "MegaEngageMonitor",
+    "VisualizadorX200",
+    "TrocarVenvUnico"
+   ],
+   "logs": [],
+   "pastas": [],
+   "tarefas_detalhe": {
+    "MelhoradorCentral": {
+     "ligada": false,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\melhorador_central.py --rodar 9"
+    },
+    "SupervisorMelhorador": {
+     "ligada": false,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe D:\\video-fila\\supervisor_melhorador.py"
+    },
+    "CobradorPesquisador": {
+     "ligada": false,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\hipercool-materiais\\pesquisador_melhorias\\cobrador.bat"
+    },
+    "MotorPesquisador": {
+     "ligada": false,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\hipercool-materiais\\pesquisador_melhorias\\motor_pesquisador.bat"
+    },
+    "VigiaMelhorias": {
+     "ligada": false,
+     "cmd": "D:\\manhwa-react\\.venv\\Scripts\\pythonw.exe \"D:\\postador-de-videos\\bin\\vigia_melhorias.py\""
+    },
+    "VigiaGGMax": {
+     "ligada": false,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 \"D:\\video-fila\\vigia_ggmax.py\""
+    },
+    "AlarmeVendas": {
+     "ligada": false,
+     "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 \"D:\\video-fila\\alarme_vendas.py\""
+    },
+    "MegaEngageMonitor": {
+     "ligada": false,
+     "cmd": "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File D:\\projetos-navegador\\_monitor_agent.ps1"
+    },
+    "VisualizadorX200": {
+     "ligada": false,
+     "cmd": "D:\\veo\\venv\\Scripts\\pythonw.exe D:\\video-fila\\visualizador.py enviar"
+    },
+    "TrocarVenvUnico": {
+     "ligada": false,
+     "cmd": "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File D:\\hipercool-materiais\\python\\trocar_venv.ps1"
+    }
+   }
+  }
+ },
+ "avulsas": [
+  "AcompanharNoite21Nov",
+  "AmostraGanchoDona",
+  "LembreteFacebook21Nov",
+  "LembreteKaggleTelefone",
+  "LembreteTikTokIPs",
+  "MandarScriptPC3",
+  "InstalarPC3",
+  "ReLoginAsus",
+  "TikTokSTI_ate8h",
+  "HipercoolReligar_0211",
+  "NSN_CapturaFB_1515",
+  "NSN_CapturaFB_2055",
+  "NSN_CapturaFB_criar_1337",
+  "NSN_CapturaFB_criar_1637",
+  "NSN_CapturaFB_criar_1937",
+  "GeminiChavesRetentativa",
+  "RecapSubirVozes"
+ ],
+ "sistema_re": "^(HP |IObit|MicrosoftEdge|GoogleUpdater|GoogleChrome|RunPlatform|Wise |OneDrive|Opera|S-1-5-|USER_ESRV|AtualizarChrome)"
+}

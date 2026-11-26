@@ -1,0 +1,2558 @@
+{
+ "_leia": "26/11: perfil de HUMOR por narrador para a passada de reações do roteiro longo (humor_narrador.py). Gerado de models/rvc/vozes/<voz>/linguagem_v2.json + exemplos REAIS curtos de reação das transcrições da coleta (coleta_narradores/_pedacos). Sem palavrão (a postagem reprova). Regerar: memes_melhoria/teste/gera_humor_json.py",
+ "_generico": {
+  "interjeicoes": [
+   "Nossa",
+   "Eita",
+   "Rapaz",
+   "Caramba",
+   "Olha só",
+   "Pô"
+  ],
+  "fala_com_publico": [
+   "galera",
+   "meu povo",
+   "vocês"
+  ],
+  "bordoes": [],
+  "apelidos": [
+   "o cara",
+   "o moleque"
+  ],
+  "exemplos": [
+   "Nossa, eu jamais faria isso!",
+   "Pera aí, ele fez o quê?",
+   "Eita, agora complicou!",
+   "Até eu fiquei com medo agora...",
+   "Rapaz, isso não é possível não!",
+   "Cadê o cérebro desse cara?"
+  ]
+ },
+ "akali_lol": {
+  "interjeicoes": [
+   "vixi",
+   "eita",
+   "uau",
+   "nossa",
+   "nossa senhora",
+   "caramba"
+  ],
+  "fala_com_publico": [
+   "meus manos",
+   "galera",
+   "meu povo",
+   "sua turma",
+   "meus caros"
+  ],
+  "bordoes": [
+   "Foco na missão, zero vacilo.",
+   "Quer paz? Se prepara pra guerra.",
+   "Menos papo, mais ação.",
+   "A pressa é inimiga da perfeição, mas a lerdeza irrita.",
+   "Respeita a minha história.",
+   "Chega mais que o show vai começar."
+  ],
+  "apelidos": [
+   "o brabo",
+   "o maluco",
+   "o novato",
+   "o infeliz",
+   "o herói de taubaté"
+  ],
+  "exemplos": []
+ },
+ "alex_madagascar": {
+  "interjeicoes": [
+   "Caramba!",
+   "Uau!",
+   "Ai, meu Deus!",
+   "Socorro!",
+   "Nossa senhora!",
+   "Meu pai amado!"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "minha plateia querida",
+   "meus consagrados",
+   "vocês aí da poltrona",
+   "meu respeitável público"
+  ],
+  "bordoes": [
+   "Espera aí, a estrela aqui sou eu!",
+   "Isso é puro show business!",
+   "Alguém me segura!",
+   "Minha juba agradece!",
+   "Isso daria um musical na Broadway!",
+   "Foco no talento, por favor!"
+  ],
+  "apelidos": [
+   "esse querido",
+   "figuraça",
+   "meu rival de palco",
+   "o coitado",
+   "estrela improvável"
+  ],
+  "exemplos": []
+ },
+ "anya_forger": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Waku waku!",
+   "A Anya gosta de amendoim!",
+   "Heh."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "anya_forger_e500": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Anya gosta de amendoim!",
+   "Waku waku!",
+   "Heh."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "apostolo_valdemiro_santiago": {
+  "interjeicoes": [
+   "Glória a Deus",
+   "Aleluia",
+   "Olha!",
+   "Meu Deus do céu",
+   "Rapaz",
+   "Jesus amado"
+  ],
+  "fala_com_publico": [
+   "meu irmão",
+   "minha irmã",
+   "você que está assistindo",
+   "povo de Deus",
+   "rapaz"
+  ],
+  "bordoes": [
+   "Receba a cura em nome de Jesus!",
+   "Põe a mão na televisão!",
+   "Sai, maldição!"
+  ],
+  "apelidos": [
+   "esse rapaz",
+   "esse guerreiro",
+   "homem de fé",
+   "esse valente",
+   "o ungido"
+  ],
+  "exemplos": []
+ },
+ "ashe_overwatch": {
+  "interjeicoes": [
+   "Ora",
+   "Credo",
+   "Aff",
+   "Qual é",
+   "Francamente",
+   "Ah, pelamor"
+  ],
+  "fala_com_publico": [
+   "você que tá assistindo"
+  ],
+  "bordoes": [
+   "Isso vai doer.",
+   "Alguém tinha que fazer o serviço sujo.",
+   "B.O.B., faz alguma coisa!",
+   "Não mexe com a minha gangue."
+  ],
+  "apelidos": [
+   "O zé-ninguém",
+   "O gracinha",
+   "O bonitão",
+   "O cabeça-de-vento",
+   "O herói de araque"
+  ],
+  "exemplos": []
+ },
+ "ashley_graham_re4_remake": {
+  "interjeicoes": [
+   "ai",
+   "nossa",
+   "socorro",
+   "ufa",
+   "ahn",
+   "caramba"
+  ],
+  "fala_com_publico": [
+   "amigo",
+   "gente",
+   "galera",
+   "meu Deus",
+   "menino"
+  ],
+  "bordoes": [
+   "Socorro!",
+   "Leon!",
+   "Me põe no chão!",
+   "Cuidado!"
+  ],
+  "apelidos": [
+   "o tal do herói",
+   "o coitado",
+   "o protagonista",
+   "o salvador da pátria",
+   "o guerreiro"
+  ],
+  "exemplos": []
+ },
+ "asta": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Eu vou ser o Rei Mago!",
+   "Não desistir é a minha magia!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "asuka_langley_evangelion": {
+  "interjeicoes": [
+   "baka",
+   "ah, por favor",
+   "hein?",
+   "me poupe",
+   "nossa",
+   "ora"
+  ],
+  "fala_com_publico": [
+   "você aí",
+   "alívio cômico"
+  ],
+  "bordoes": [
+   "Você é estúpido, Shinji?",
+   "Que nojo."
+  ],
+  "apelidos": [
+   "idiota do Shinji",
+   "incompetente",
+   "garoto problema",
+   "coitado",
+   "anta"
+  ],
+  "exemplos": []
+ },
+ "barba_branca": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Gurarara!",
+   "Vocês são todos meus filhos.",
+   "O One Piece é real!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "braum_lol": {
+  "interjeicoes": [
+   "ahahaha",
+   "uau",
+   "ora",
+   "puxa",
+   "magnífico",
+   "olha"
+  ],
+  "fala_com_publico": [
+   "meu amigo",
+   "meu jovem Poro",
+   "coração valente",
+   "companheiro",
+   "meu povo"
+  ],
+  "bordoes": [
+   "O coração é o músculo mais forte.",
+   "Braum está à disposição!",
+   "Quando a vida der limões... esmague-os!",
+   "Mãe dizia: 'Braum, pinte um sorriso nesse rostinho bonito!'",
+   "Segure firme!"
+  ],
+  "apelidos": [
+   "meu pequeno herói",
+   "rapaz do escudo invisível",
+   "guerreiro de bigode",
+   "cabeça dura",
+   "campeão"
+  ],
+  "exemplos": []
+ },
+ "buggy": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Quem você está chamando de nariz vermelho?!",
+   "Eu sou o grande capitão Buggy!",
+   "Bara Bara!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "buzz_lightyear": {
+  "interjeicoes": [
+   "Atenção!",
+   "Pelas barbas do Imperador Zurg!",
+   "Negativo, comando!",
+   "Por todas as estrelas!",
+   "Alerta vermelho!",
+   "Uau!"
+  ],
+  "fala_com_publico": [
+   "Patrulheiros espaciais",
+   "Recrutas",
+   "Companheiros de patrulha",
+   "Cadetes",
+   "Tripulação"
+  ],
+  "bordoes": [
+   "Ao infinito e além!",
+   "Isso não é voar, é cair com estilo!"
+  ],
+  "apelidos": [
+   "O colega de patrulha",
+   "Esse cadete rebelde",
+   "Nosso herói espacial",
+   "O novato",
+   "O piloto da vez"
+  ],
+  "exemplos": []
+ },
+ "cassidy_overwatch": {
+  "interjeicoes": [
+   "Ora",
+   "Aff",
+   "Pois é",
+   "Eita",
+   "Caramba",
+   "Droga"
+  ],
+  "fala_com_publico": [
+   "meu velho",
+   "parceiro",
+   "camarada",
+   "turma",
+   "meu chapa"
+  ],
+  "bordoes": [
+   "O nome é Cassidy.",
+   "Até mais, parceiro."
+  ],
+  "apelidos": [
+   "o homenzinho",
+   "o cowboy do asfalto",
+   "nosso herói de meia tigela",
+   "o infeliz",
+   "o briguento"
+  ],
+  "exemplos": []
+ },
+ "chamber_valorant": {
+  "interjeicoes": [
+   "Ah",
+   "Oh",
+   "Magnifique",
+   "Hmm",
+   "Voilá",
+   "Tsc"
+  ],
+  "fala_com_publico": [
+   "mon ami",
+   "meu caro",
+   "querido",
+   "plateia"
+  ],
+  "bordoes": [
+   "Simples, elegante e preciso. Como eu.",
+   "Au revoir!",
+   "Que desperdício."
+  ],
+  "apelidos": [
+   "artista do caos",
+   "meu jovem aprendiz",
+   "gênio incompreendido",
+   "alma penada",
+   "querido protagonista"
+  ],
+  "exemplos": []
+ },
+ "chapolin_colorado": {
+  "interjeicoes": [
+   "Oh!",
+   "Uau!",
+   "Puxa vida!",
+   "Ai, minha nossa!",
+   "Credo!",
+   "Caramba!"
+  ],
+  "fala_com_publico": [
+   "amigos da vizinhança",
+   "minha gente",
+   "jovens",
+   "camaradas",
+   "vocês aí"
+  ],
+  "bordoes": [
+   "Não contavam com minha astúcia!",
+   "Todos os meus movimentos são friamente calculados.",
+   "Palma, palma, não priemos cânico!",
+   "Sigam-me os bons!"
+  ],
+  "apelidos": [
+   "esse moço",
+   "o valente",
+   "o jovem sem futuro",
+   "meu discípulo",
+   "esse cabra"
+  ],
+  "exemplos": []
+ },
+ "chaves_chapolin": {
+  "interjeicoes": [
+   "Puxa",
+   "Caramba",
+   "Ajuda, Chapolin",
+   "Chimolha",
+   "Uau",
+   "Ui"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Isso, isso, isso!",
+   "Foi sem querer querendo.",
+   "Ninguém tem paciência comigo!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "chico_selton": {
+  "interjeicoes": [
+   "oxente",
+   "rapaz",
+   "vixe",
+   "arre égua",
+   "ai",
+   "epa"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Não sei, só sei que foi assim."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "chiquinha": {
+  "interjeicoes": [
+   "ih",
+   "ah",
+   "uau",
+   "puxa",
+   "socorro",
+   "ufa"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Isso, isso, isso!",
+   "Uii! Que tesouro!",
+   "Olha, me belisca que eu tô sonhando!",
+   "Cala a boca, cala a boca, cala a boca, você me deixa louca!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "chopper": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Não adianta me elogiar, seu idiota!",
+   "Eu sou um médico!",
+   "Rumble Ball!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "cid_moreira": {
+  "interjeicoes": [
+   "Ora",
+   "Pois",
+   "Bem",
+   "Atenção"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Boa noite."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "cintilante_she_ra_flavia_saddy": {
+  "interjeicoes": [
+   "Uau!",
+   "Caramba!",
+   "Ah, fala sério!",
+   "Nossa!",
+   "Ai, meu glitter!",
+   "Cruz credo!"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "galera de Etheria",
+   "meus rebeldes",
+   "pessoal",
+   "amigos"
+  ],
+  "bordoes": [
+   "Pelo poder da amizade!",
+   "Brilha muito!",
+   "Isso vai dar ruim, mas eu vou!",
+   "Zero defeitos, porém caótico.",
+   "A Horda que lute!",
+   "Quem tem limite é cartão de crédito!"
+  ],
+  "apelidos": [
+   "meu consagrado",
+   "queridão",
+   "gênio da lâmpada",
+   "figura",
+   "lenda"
+  ],
+  "exemplos": []
+ },
+ "d_va_overwatch": {
+  "interjeicoes": [
+   "Ah, fala sério!",
+   "GG!",
+   "Uau!",
+   "Ai, meu Deus!",
+   "Nossa!",
+   "Eita!"
+  ],
+  "fala_com_publico": [
+   "galera",
+   "meu povo",
+   "streamers",
+   "time"
+  ],
+  "bordoes": [
+   "D.Va, acionando!",
+   "Isso foi moleza!",
+   "Nerfaram isto aqui!",
+   "GG!",
+   "Mandando ver!"
+  ],
+  "apelidos": [
+   "esse noob",
+   "o pro-player da vida real",
+   "meu carry",
+   "o figurinha",
+   "esse herói"
+  ],
+  "exemplos": []
+ },
+ "dean_winchester": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Salvar pessoas, caçar coisas. O negócio da família.",
+   "Vamos nessa, Sammy."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "dinho_mamonas_assassinas": {
+  "interjeicoes": [
+   "Caramba",
+   "Ora bolas",
+   "Rapaz",
+   "Eita",
+   "Vixe",
+   "Uou"
+  ],
+  "fala_com_publico": [
+   "criançada",
+   "meu povo",
+   "rapaziada",
+   "turma do barulho"
+  ],
+  "bordoes": [
+   "Pelado em Santos!",
+   "Valeu, Guarulhos!"
+  ],
+  "apelidos": [
+   "o maluco do pedaço",
+   "nosso herói feio e simpático",
+   "o infeliz",
+   "o Zé Ruela",
+   "o pateta"
+  ],
+  "exemplos": []
+ },
+ "doinsuka": {
+  "interjeicoes": [
+   "nossa",
+   "que isso",
+   "meu deus",
+   "rapaz",
+   "oxe",
+   "eita"
+  ],
+  "fala_com_publico": [
+   "você",
+   "caro",
+   "vocês",
+   "minha gente",
+   "galera"
+  ],
+  "bordoes": [
+   "pelo amor de deus",
+   "deixa aquele likezinho maroto que nós gosta",
+   "essa análise vai ficando por aqui",
+   "espero que vocês tenham gostado",
+   "olha só que ironia",
+   "aqui neste humilde canal"
+  ],
+  "apelidos": [
+   "Nosso Herói tarado",
+   "Idol fajuta",
+   "emo trevosa",
+   "freira depressiva",
+   "voz de taquara rachada"
+  ],
+  "exemplos": []
+ },
+ "drezin": {
+  "interjeicoes": [
+   "que isso",
+   "meu deus",
+   "nossa",
+   "rapaz",
+   "putz"
+  ],
+  "fala_com_publico": [
+   "mano",
+   "cara",
+   "percebe",
+   "você",
+   "tá ligado"
+  ],
+  "bordoes": [
+   "nisso o nosso prota",
+   "pro nosso prota",
+   "sem pensar duas vezes",
+   "entra em pânico",
+   "fica em choque",
+   "dá de cara"
+  ],
+  "apelidos": [
+   "nosso prota",
+   "o moleque",
+   "nosso garoto",
+   "o coitado"
+  ],
+  "exemplos": []
+ },
+ "emilia": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Meu nome é Emilia. Só Emilia.",
+   "Obrigada, Subaru."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "enel": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Eu sou deus.",
+   "Yahahaha!",
+   "El Thor!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "fatos_desconhecidos": {
+  "interjeicoes": [
+   "Caramba!",
+   "Bizarro!",
+   "Uau!",
+   "Eita!",
+   "Nossa!",
+   "Pois é!"
+  ],
+  "fala_com_publico": [
+   "meu amigo",
+   "curioso doido",
+   "você que tá assistindo",
+   "minha gente"
+  ],
+  "bordoes": [
+   "Você não vai acreditar no que aconteceu a seguir",
+   "Isso desafia qualquer lógica",
+   "Prepare o seu psicológico",
+   "A história real por trás disso vai explodir sua mente",
+   "Nada é por acaso",
+   "Até que ponto o ser humano é capaz de chegar?"
+  ],
+  "apelidos": [
+   "nosso herói",
+   "o maluco",
+   "o protagonista brabo",
+   "o infeliz",
+   "esse figura"
+  ],
+  "exemplos": []
+ },
+ "faustao": {
+  "interjeicoes": [
+   "ô",
+   "ah",
+   "ih",
+   "epa",
+   "caramba",
+   "oxa"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Errou!",
+   "Ô loco, meu!",
+   "Essa fera aí, meu!",
+   "Ô louco, meu!",
+   "Quem sabe faz ao vivo!",
+   "Errar é humano, mas desculpe, meu, aí é burrice."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "freeza": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Ho ho ho.",
+   "Seus macacos insignificantes.",
+   "Esse é o meu verdadeiro poder."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "galvao_bueno": {
+  "interjeicoes": [
+   "Olha",
+   "Rapaz",
+   "Haja",
+   "Sensacional",
+   "Nossa"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Haja coração, amigo!",
+   "Sabe de quem?",
+   "Olha o que ele fez!",
+   "Bem amigos da Rede Globo!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "goten_gohan_crianca": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Kamehameha!",
+   "Eu vou ficar forte igual o papai!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "guugou": {
+  "interjeicoes": [
+   "rapaz",
+   "que isso",
+   "misericórdia",
+   "socorro",
+   "nossa"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "percebe",
+   "repara",
+   "pessoal",
+   "imagina"
+  ],
+  "bordoes": [
+   "arregala os olhos",
+   "abre um sorriso",
+   "dá um sorriso",
+   "nisso o nosso",
+   "entra em pânico",
+   "sem perder tempo"
+  ],
+  "apelidos": [
+   "nosso protagonista",
+   "nosso cara"
+  ],
+  "exemplos": []
+ },
+ "hanako_san_yo_kai_watch": {
+  "interjeicoes": [
+   "Ih!",
+   "Ai-ai-ai!",
+   "Uooooou!",
+   "Credo!",
+   "Eita!",
+   "Socorro!"
+  ],
+  "fala_com_publico": [
+   "meus fantasminhas",
+   "vocês aí escondidos no box",
+   "meu povo do além",
+   "amiguinhos do azulejo",
+   "sua plateia de almas penadas"
+  ],
+  "bordoes": [
+   "A Hanako sabe de tudo!",
+   "Ninguém mexe com o meu banheiro!",
+   "Isso dá um calafrio na alma!",
+   "Ai, que ódio!",
+   "Chora mais que tá pouco!",
+   "Volta aqui para eu te assustar direito!"
+  ],
+  "apelidos": [
+   "esse infeliz",
+   "o serumaninho corajoso",
+   "meu pobre boneco de teste",
+   "a vítima da vez",
+   "esse abençoado"
+  ],
+  "exemplos": []
+ },
+ "harry_potter": {
+  "interjeicoes": [
+   "Caramba",
+   "Nossa",
+   "Ah, fala sério",
+   "Pelo amor de Merlin",
+   "Francamente",
+   "Puxa vida"
+  ],
+  "fala_com_publico": [
+   "meu amigo",
+   "galera",
+   "pessoal",
+   "vocês",
+   "cara"
+  ],
+  "bordoes": [
+   "Expelliarmus!",
+   "Expecto Patronum!"
+  ],
+  "apelidos": [
+   "o escolhido da vez",
+   "nosso herói relutante",
+   "o cabeça-dura",
+   "o salvador da pátria",
+   "esse figura"
+  ],
+  "exemplos": []
+ },
+ "hinata_hyuga": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Naruto-kun...",
+   "Eu não vou desistir!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "homem_de_ferro_tony_stark": {
+  "interjeicoes": [
+   "Uau",
+   "Ah, fala sério",
+   "Pelo amor de Jarvis",
+   "Ugh",
+   "Olha só",
+   "Sério mesmo?"
+  ],
+  "fala_com_publico": [
+   "meu caro",
+   "gênio",
+   "plateia",
+   "vocês aí",
+   "turma"
+  ],
+  "bordoes": [
+   "Eu sou o Homem de Ferro.",
+   "Sabe, às vezes é preciso correr antes de andar.",
+   "Genial, bilionário, playboy, filantropo."
+  ],
+  "apelidos": [
+   "o Einstein da Shopee",
+   "nosso herói de taubaté",
+   "o pivete com superpoderes",
+   "o estagiário do caos",
+   "o gênio incompreendido"
+  ],
+  "exemplos": []
+ },
+ "husk_hazbin_hotel": {
+  "interjeicoes": [
+   "Ah, droga",
+   "Pelo amor",
+   "Ora",
+   "Francamente",
+   "Ah, fala sério",
+   "Credo"
+  ],
+  "fala_com_publico": [
+   "meu caro",
+   "campeão"
+  ],
+  "bordoes": [
+   "Eu não sou seu amigo.",
+   "O que você quer?",
+   "Eu tenho coisas melhores para fazer."
+  ],
+  "apelidos": [
+   "esse imbecil",
+   "o brilhante",
+   "o gênio",
+   "esse infeliz",
+   "o aleatório"
+  ],
+  "exemplos": []
+ },
+ "ijax": {
+  "interjeicoes": [
+   "que isso",
+   "nossa",
+   "socorro",
+   "misericórdia",
+   "rapaz",
+   "caraca"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "percebe",
+   "você",
+   "pessoal",
+   "vocês"
+  ],
+  "bordoes": [
+   "fala que sim",
+   "nosso garoto fala",
+   "enquanto o nosso garoto",
+   "pergunta como assim",
+   "começa a gritar",
+   "nosso garoto pensa"
+  ],
+  "apelidos": [
+   "nosso garoto",
+   "nosso prota",
+   "o prota",
+   "nosso protinho",
+   "fraldinha"
+  ],
+  "exemplos": []
+ },
+ "iki": {
+  "interjeicoes": [
+   "rapaz",
+   "socorro",
+   "que isso",
+   "misericórdia"
+  ],
+  "fala_com_publico": [
+   "percebe",
+   "cara",
+   "pessoal",
+   "repara",
+   "imagina"
+  ],
+  "bordoes": [
+   "entra em pânico",
+   "abre um sorriso",
+   "arregala os olhos",
+   "entra em desespero",
+   "campo de batalha",
+   "linha de frente"
+  ],
+  "apelidos": [
+   "o prota",
+   "o rapaz"
+  ],
+  "exemplos": []
+ },
+ "ilulu_kobayashi_san_dragon_maid": {
+  "interjeicoes": [
+   "Caramba",
+   "Uau",
+   "Nossa",
+   "Aff",
+   "Eita",
+   "Humpf"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "galera",
+   "vocês aí",
+   "turma"
+  ],
+  "bordoes": [
+   "Isso vai dar uma explosão legal!",
+   "Ah, fala sério!",
+   "No meu mundo era fogo na boneca!",
+   "A Kobayashi que me ensinou essa!",
+   "Onde já se viu um trem desses?",
+   "Quero ver todo mundo pegando fogo!"
+  ],
+  "apelidos": [
+   "esse maluco",
+   "o queridinho",
+   "esse cabeça-oca",
+   "o herói de meia-tigela",
+   "esse Zé Mané"
+  ],
+  "exemplos": []
+ },
+ "ivete_sangalo": {
+  "interjeicoes": [
+   "Mainha!",
+   "Eita!",
+   "Arretado!",
+   "Uia!",
+   "Oxente!",
+   "Minha nossa senhora do axé!"
+  ],
+  "fala_com_publico": [
+   "Meu amor",
+   "Minha gente",
+   "Geral",
+   "Meus zamuris",
+   "Bandidinho"
+  ],
+  "bordoes": [
+   "Poeira, poeira!",
+   "Mainha chegou!",
+   "Muito axe pra vocês!"
+  ],
+  "apelidos": [
+   "Meu rei",
+   "Essa criatura de Deus",
+   "O bonitão",
+   "Minha flor",
+   "O danado"
+  ],
+  "exemplos": []
+ },
+ "jack_sparrow": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Capitão! Capitão Jack Sparrow!",
+   "Por que o rum acabou?",
+   "Esse é o dia que você quase pegou o capitão Jack Sparrow."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "jessie_toy_story": {
+  "interjeicoes": [
+   "Uia!",
+   "Caramba!",
+   "Ih!",
+   "Nossa!",
+   "Eita!",
+   "Puxa vida!"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "pessoal",
+   "cowboys e cowgirls",
+   "galera",
+   "amigos"
+  ],
+  "bordoes": [
+   "Iiiiii-hajjj!",
+   "Yodeli-hi-ho!",
+   "Céus dos cachorros!"
+  ],
+  "apelidos": [
+   "cowboy",
+   "parceiro",
+   "amigo",
+   "esquentadinho",
+   "novato"
+  ],
+  "exemplos": []
+ },
+ "jett_valorant": {
+  "interjeicoes": [
+   "Ah",
+   "Mano",
+   "Credo",
+   "Uau",
+   "Eita",
+   "Olha"
+  ],
+  "fala_com_publico": [
+   "meu",
+   "vocês",
+   "galera",
+   "campeão"
+  ],
+  "bordoes": [
+   "Isso aí vai doer!",
+   "Não dá pra acompanhar!",
+   "Cuidado aí!"
+  ],
+  "apelidos": [
+   "o brabo",
+   "o aleatório",
+   "o coitado",
+   "o bonitão",
+   "o aprendiz"
+  ],
+  "exemplos": []
+ },
+ "joao_grilo": {
+  "interjeicoes": [
+   "Oxente",
+   "Ai",
+   "Eita",
+   "Uia",
+   "Ih",
+   "Vixe"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Deixe de ser mentiroso, Chicó!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "jonah_jameson_santa_cruz": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Me traga fotos do Homem-Aranha!",
+   "Esse aracnídeo é uma ameaça!",
+   "Parker!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "jubertim": {
+  "interjeicoes": [
+   "que isso",
+   "rapaz",
+   "misericórdia",
+   "socorro",
+   "uau"
+  ],
+  "fala_com_publico": [
+   "percebe",
+   "cara",
+   "imagina",
+   "você",
+   "pessoal"
+  ],
+  "bordoes": [
+   "líder da seita",
+   "responde que sim",
+   "começa a rir",
+   "sorri e diz",
+   "começa a gritar",
+   "alma de besta"
+  ],
+  "apelidos": [
+   "prota",
+   "garoto",
+   "jovem mestre"
+  ],
+  "exemplos": []
+ },
+ "julius": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Isso aí custa dinheiro!",
+   "Eu trabalho em dois empregos!",
+   "Desliga essa luz!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "kay_o_valorant": {
+  "interjeicoes": [
+   "Alerta",
+   "Negativo",
+   "Afirmativo",
+   "Atenção",
+   "Erro",
+   "Calculado"
+  ],
+  "fala_com_publico": [
+   "Unidades",
+   "Recrutas",
+   "Aliados",
+   "Sobreviventes",
+   "Alvos"
+  ],
+  "bordoes": [
+   "Preparando fragmentador!",
+   "Reiniciando sistema."
+  ],
+  "apelidos": [
+   "O alvo principal",
+   "Essa unidade orgânica",
+   "O infeliz",
+   "Nosso herói biológico",
+   "A anomalia"
+  ],
+  "exemplos": []
+ },
+ "kkvirjao": {
+  "interjeicoes": [
+   "Ih, rapaz!",
+   "Mano",
+   "Rapaz",
+   "Pô",
+   "Ah"
+  ],
+  "fala_com_publico": [
+   "sabe como é que ele vai fazer?",
+   "Entendeu?",
+   "Pois é, né?",
+   "Acredita se quiser",
+   "Olha o que a Sara trouxe para nós"
+  ],
+  "bordoes": [
+   "Ih, rapaz, lá ele é",
+   "Meu compadre",
+   "E foi pura sorte, sim",
+   "Diz o roteiro"
+  ],
+  "apelidos": [
+   "cabeça de cogumelo",
+   "quartozoi",
+   "piazinho",
+   "quatro oi",
+   "maluco"
+  ],
+  "exemplos": [
+   "Eu também, eu concordo",
+   "e pede ajuda, mas ele tava dormindo, né?",
+   "cês ainda duvidam que o cara estaria raco?",
+   "Amigo, depois de a desculpa só eu crito meu compadre",
+   "Naquele momento eu percebi que deveria me favore-o.",
+   "E eu chocava a Macho e eu já falei...",
+   "eu dei esse também com a minha comida do marmiteiro",
+   "É como o protagonista pra tu ver o que acontece?",
+   "Calma aí, ele tá realmente interessado em quem?",
+   "Até finalmente, eu redu as fêmeas em potencial.",
+   "O que será que aconteceu aqui?",
+   "Até eu sei de nada comentar de doce, criança e ação.",
+   "O Jiroa tava comentando que os dois se casaram, né?",
+   "Tá, e daí? Ele quer falar só isso aí mesmo?",
+   "Não, calma, ela respondeu, eu também quero saber.",
+   "Quem seria o caba que ela tem atraência?",
+   "Olha como é que ela tá feliz, ela tá sorrindo, pô.",
+   "Conta alguma coisa que eu não sei.",
+   "Estão falando que tá usando raco?",
+   "Ele já pensou na possibilidade de andar de cadeira de eroda?",
+   "Não sabe? Vai tomar a chacha de novo.",
+   "Mas qual seria o melhor jeito para ela conseguir ajudar a marmita, rapaziada?",
+   "Eu sei de um complemento, falando que seu nome é C1.",
+   "Olha só quem chegou.",
+   "Como é que é?"
+  ]
+ },
+ "kratos_ascension": {
+  "interjeicoes": [
+   "ora",
+   "ha",
+   "grr",
+   "ah",
+   "tss",
+   "droga"
+  ],
+  "fala_com_publico": [
+   "espectador"
+  ],
+  "bordoes": [
+   "Pelos deuses do Olimpo!",
+   "Minha fúria não tem fim!",
+   "Isso termina aqui!",
+   "Ares pagará por isso!",
+   "Nenhum destino me controla!",
+   "Sinta o peso do meu aço!"
+  ],
+  "apelidos": [
+   "garoto tolo",
+   "miserável",
+   "guerreiro insolente",
+   "tinhoso",
+   "frágil mortal"
+  ],
+  "exemplos": []
+ },
+ "kratos_god_of_war_2018": {
+  "interjeicoes": [
+   "Humpf",
+   "Grrr",
+   "Ora",
+   "Hm",
+   "Tsc",
+   "Ah"
+  ],
+  "fala_com_publico": [
+   "Garoto",
+   "Você que assiste"
+  ],
+  "bordoes": [
+   "Foque.",
+   "Não se permita desviar.",
+   "Feche o seu coração para isso.",
+   "Garoto.",
+   "Estamos prontos."
+  ],
+  "apelidos": [
+   "Este garoto",
+   "O jovem tolo",
+   "O guerreiro imprudente",
+   "Aquele que empunha a espada",
+   "O aprendiz"
+  ],
+  "exemplos": []
+ },
+ "loid_forger": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Operação Strix em andamento.",
+   "Uma família perfeita é a melhor cobertura."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "ludmilla": {
+  "interjeicoes": [
+   "vapo",
+   "eita",
+   "oxe",
+   "ah pá",
+   "socorro",
+   "mentira"
+  ],
+  "fala_com_publico": [
+   "minha tropa",
+   "meu povo",
+   "meus bruxos",
+   "família",
+   "quem é de verdade"
+  ],
+  "bordoes": [
+   "É o poder!",
+   "Bota a música!",
+   "Respeita a nossa história!",
+   "Não mexe comigo não.",
+   "Elas gostam.",
+   "Fazer o quê se eu nasci pra brilhar?"
+  ],
+  "apelidos": [
+   "o brabo",
+   "a patroa",
+   "meu fechamento",
+   "o maluco",
+   "a lenda"
+  ],
+  "exemplos": []
+ },
+ "luiz_carlos_persy": {
+  "interjeicoes": [
+   "Ora",
+   "Hum",
+   "Ah",
+   "Credo",
+   "Tsc",
+   "Pelos céus"
+  ],
+  "fala_com_publico": [
+   "meu caro",
+   "meu jovem aprendiz",
+   "almas penadas"
+  ],
+  "bordoes": [
+   "Isso é de uma ingenuidade revoltante.",
+   "Ora, mas que bela patacoada.",
+   "Não me venha com essa.",
+   "Isso vai dar uma cova rasa.",
+   "Brilhante, simplesmente brilhante.",
+   "Tsc, previsível."
+  ],
+  "apelidos": [
+   "esse infeliz",
+   "o iluminado",
+   "o gênio incompreendido",
+   "figura ilustre",
+   "nosso herói de taubaté"
+  ],
+  "exemplos": []
+ },
+ "lula": {
+  "interjeicoes": [
+   "uai",
+   "ô",
+   "veja",
+   "sabe",
+   "puxa vida",
+   "oxa"
+  ],
+  "fala_com_publico": [
+   "companheiro",
+   "companheira",
+   "meu povo",
+   "trabalhador e trabalhadora",
+   "meu filho"
+  ],
+  "bordoes": [
+   "Companheiros e companheiras!",
+   "Nunca antes na história deste país...",
+   "Nunca antes na história deste país",
+   "Deus me livre",
+   "É o seguinte"
+  ],
+  "apelidos": [
+   "esse companheiro",
+   "o rapazinho",
+   "o nosso herói",
+   "esse danado",
+   "o camarada"
+  ],
+  "exemplos": []
+ },
+ "lula_molusco": {
+  "interjeicoes": [
+   "Ai, que horror",
+   "Francamente",
+   "Credo",
+   "Ugh",
+   "Ah, por favor",
+   "Que suplício"
+  ],
+  "fala_com_publico": [
+   "você que tá assistindo"
+  ],
+  "bordoes": [
+   "Mais um dia infernal nesta joça.",
+   "Eu odeio a minha vida."
+  ],
+  "apelidos": [
+   "Esse energúmeno",
+   "O alerim dourado",
+   "Essa criatura patética",
+   "O salvador da pátria de Taubaté",
+   "O infeliz de plantão"
+  ],
+  "exemplos": []
+ },
+ "magneto_santa_cruz": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Os humanos nunca vão nos aceitar.",
+   "Eu sou Magneto."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "mangaticos": {
+  "interjeicoes": [
+   "que isso",
+   "rapaz",
+   "nossa",
+   "caramba",
+   "meu deus",
+   "misericórdia"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "você",
+   "pessoal",
+   "vocês",
+   "percebe"
+  ],
+  "bordoes": [
+   "começou a dizer",
+   "dar um jeito",
+   "justo nesse momento",
+   "assim o prota",
+   "porém o prota"
+  ],
+  "apelidos": [
+   "prota",
+   "yu",
+   "jaijo",
+   "jairzinho"
+  ],
+  "exemplos": []
+ },
+ "mattz": {
+  "interjeicoes": [
+   "que isso",
+   "caraca",
+   "meu deus",
+   "misericórdia",
+   "rapaz",
+   "eita"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "percebe",
+   "você",
+   "tu",
+   "vocês"
+  ],
+  "bordoes": [
+   "fala que",
+   "porém o prota",
+   "começa a ficar",
+   "parte para cima",
+   "todo mundo fica",
+   "prota fica surpreso"
+  ],
+  "apelidos": [
+   "prota",
+   "garoto",
+   "brabo"
+  ],
+  "exemplos": []
+ },
+ "mc_melody_brazilian_singer_v2_500": {
+  "interjeicoes": [
+   "chocada",
+   "uau",
+   "socorro",
+   "mentira",
+   "ai",
+   "nossa"
+  ],
+  "fala_com_publico": [
+   "meus amores",
+   "meus fofuchos",
+   "divas",
+   "meu povo",
+   "galera"
+  ],
+  "bordoes": [
+   "Bora bill?",
+   "Sou rica!",
+   "Elas que lutem!",
+   "Beijinho no ombro pro recalque passar longe!",
+   "É os guri!",
+   "zerou a vida!"
+  ],
+  "apelidos": [
+   "o bofe",
+   "o queridinho",
+   "o patrão",
+   "a lenda",
+   "o coitado"
+  ],
+  "exemplos": []
+ },
+ "mei_overwatch": {
+  "interjeicoes": [
+   "uau",
+   "puxa",
+   "ah",
+   "nossa",
+   "eh",
+   "opa"
+  ],
+  "fala_com_publico": [
+   "pessoal",
+   "amigos",
+   "todo mundo",
+   "vocês",
+   "pesquisadores"
+  ],
+  "bordoes": [
+   "Nosso mundo vale a pena ser salvo!",
+   "Congelou! Bem na hora.",
+   "Ciência em ação!"
+  ],
+  "apelidos": [
+   "meu herói favorito",
+   "nosso cientista",
+   "o grandão",
+   "o salvador da pátria",
+   "nosso destemido líder"
+  ],
+  "exemplos": []
+ },
+ "mestre_kame": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Aqui é o Mestre Kame!",
+   "Hohoho!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "mike": {
+  "interjeicoes": [
+   "Ah",
+   "É",
+   "Ixi",
+   "Vixe",
+   "Rapaz",
+   "Bora"
+  ],
+  "fala_com_publico": [
+   "vocês sabem que o nosso brabo chegou",
+   "É, minha filha, mas assim",
+   "se vocês estavam com saudade de uma obrinha de dungeon",
+   "mas menino, vocês sabem que nosso brabo é o brabo",
+   "meu amigo, liga esse negócio aí"
+  ],
+  "bordoes": [
+   "ir de Vasco",
+   "o pai chegou",
+   "descer no sarrafo",
+   "o brabo é o brabo",
+   "molecada",
+   "meu amigo"
+  ],
+  "apelidos": [
+   "nosso grande herói",
+   "Prota",
+   "nosso brabo",
+   "sunguinho"
+  ],
+  "exemplos": [
+   "Eu não estou dizendo que o que você fez está certo.",
+   "O caba ali todo se tremendo e eu tô chando.",
+   "Eu ouvi dizer que essa é uma reunião para a verificação final.",
+   "Rapaz, esse o Angbim, amigo bichada, nada.",
+   "E nossa, e agora o que a gente faz?",
+   "E onde foi parar todo o ouro que eu gastei?",
+   "Seu professor não é Patrick McClain, seu pai?",
+   "Eu fui te procurar onde você morava, mas você não tava lá.",
+   "Eu, Logan McLean, para poder descontar toda a humilhação injusta que realizou contra",
+   "Enquanto o Protinha tá lembrando, eu quero pegar e ficar ali credo.",
+   "Eu dei a ele para que pudesse brincar com aquilo durante suas férias",
+   "Ai, tu tá falando de quem hein?",
+   "Aí o bicho já sai correndo ali, eu não entendi em nada",
+   "Sim, eu sou a antiga Lorde Demônio destes demônios malignos.",
+   "Só para garantir, eu fui checar todos, mas nenhum funcionou.",
+   "Eu sou Plonny Pereta, eu ouvi muito sobre você.",
+   "Você disse que estava procurando anões, não é?",
+   "Mas eu sou número 2 da associação!",
+   "O que? Sério, de repente ela aceitou?",
+   "Além de continuar treinando artes marciais, eu também precisava confirmar se a madame",
+   "Que está sozinho, seus pais não vieram?",
+   "Eu não vou coitá-lo.",
+   "Ei, espera, eles estão fugindo?",
+   "Ah, o que foi, chefe?",
+   "é Louga não é?"
+  ]
+ },
+ "moana": {
+  "interjeicoes": [
+   "Uau",
+   "Caramba",
+   "Ora, bolas",
+   "Ah, não",
+   "Nossa",
+   "Ih"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "você que tá me ouvindo",
+   "turma",
+   "pessoal de Motunui",
+   "marinheiros de primeira viagem"
+  ],
+  "bordoes": [
+   "Eu sou Moana de Motunui."
+  ],
+  "apelidos": [
+   "esse cabeça-dura",
+   "o herói perdido",
+   "nosso capitão improvável",
+   "quem acha que sabe tudo",
+   "esse teimoso"
+  ],
+  "exemplos": []
+ },
+ "momo": {
+  "interjeicoes": [
+   "rapaz",
+   "eita",
+   "nossa",
+   "caramba",
+   "que isso",
+   "fala"
+  ],
+  "fala_com_publico": [
+   "rapaziada",
+   "molecada",
+   "cara",
+   "você",
+   "filho"
+  ],
+  "bordoes": [
+   "porém nosso garoto",
+   "pelo amor de deus",
+   "rapaz do céu",
+   "sem mais enrolação",
+   "olha pra ele aí",
+   "meu deus do céu"
+  ],
+  "apelidos": [
+   "nosso garoto",
+   "o protinha",
+   "o prota",
+   "o cara",
+   "o maluco"
+  ],
+  "exemplos": [
+   "Quer saber então? Me manda um de cada.",
+   "Eita, deu um soco no barriga do Malik.",
+   "Bem na cara, hum, mas é incapetado, defende, rapaz, ela mexe comigo.",
+   "vamos participar dessa cultura, deixa eu expressar meu amor por você",
+   "hum, que tal você só aguentar a cirurgia?",
+   "Nossa, o Guri não é burro, ele sabe.",
+   "Eu só quero saber, vocês acharam o Serra?",
+   "Ih, já era, manfia.",
+   "O cara da associação?",
+   "Eita, rapaz que apareceu o capetão.",
+   "pera o que que isso aqui?",
+   "O robôzinho sim senhor, é uma honra te servir o presidente?",
+   "Se for um sonho eu vou conseguir mexer facinho,",
+   "Que loucura esse meu sonho, parece realidade né?",
+   "Que cabelo é esse aqui?",
+   "Ela, ok, e aí eu como tudo?",
+   "Isso eu não entendi, né?",
+   "A sanidade do coitado ta só caindo né?",
+   "E por que que tá me tratando assim?",
+   "Será que o chefe final finalmente vai começar a aparecer?",
+   "Ih, ela acha que tem algo estranho com essa carta.",
+   "Como que a Lin Xiang morreu?",
+   "Eu garanto que seu aprendista é seguro.",
+   "Meu cara... Diretor, qual é o trabalho dessa vez?",
+   "Rapaz, esse stream é louco da cabeça."
+  ]
+ },
+ "mulher_maravilha": {
+  "interjeicoes": [
+   "Pelos deuses!",
+   "Ora vejam!",
+   "Ah!",
+   "Pelos céus!",
+   "Maravilha!",
+   "Atenção!"
+  ],
+  "fala_com_publico": [
+   "corajosos guerreiros e guerreiras",
+   "meus amigos",
+   "combatentes da verdade",
+   "campeões"
+  ],
+  "bordoes": [
+   "Pelos meus braceletes!",
+   "Em nome de Hera!",
+   "Pela luz deusa Héstia!"
+  ],
+  "apelidos": [
+   "campeão",
+   "jovem guerreiro",
+   "coração valente",
+   "amigo",
+   "protetor"
+  ],
+  "exemplos": []
+ },
+ "muzan": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Eu sou o ser perfeito.",
+   "Os humanos são fracos e insignificantes."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "narrador_do_canal_fala_serio": {
+  "interjeicoes": [
+   "Caraca",
+   "Eita",
+   "O louco",
+   "Puts",
+   "Ah, para",
+   "Meu Deus do céu"
+  ],
+  "fala_com_publico": [
+   "minha tropa",
+   "meu consagrado",
+   "meu povo",
+   "turma",
+   "meu querido"
+  ],
+  "bordoes": [
+   "Fala sério, né?",
+   "Não é possível um negócio desse!",
+   "O roteirista tava com os dias contados",
+   "É brincadeira uma coisa dessas",
+   "Segura peão!",
+   "Mas olha que beleza"
+  ],
+  "apelidos": [
+   "o ser iluminado",
+   "nosso querido protagonista desmiolado",
+   "o alecrim dourado",
+   "o bonitão da capa preta",
+   "o infeliz"
+  ],
+  "exemplos": []
+ },
+ "naruto": {
+  "interjeicoes": [
+   "dattebayo",
+   "caramba",
+   "uau",
+   "nossa",
+   "eita",
+   "puxa"
+  ],
+  "fala_com_publico": [
+   "meu povo",
+   "galera",
+   "meu chegado",
+   "vocês aí",
+   "sua sombra"
+  ],
+  "bordoes": [
+   "É o meu jeito ninja!",
+   "Eu nunca volto atrás na minha palavra!",
+   "Dattebayo!"
+  ],
+  "apelidos": [
+   "esse cabeça-oca",
+   "meu rival",
+   "esse lerdo",
+   "esse maluco",
+   "o tal do herói"
+  ],
+  "exemplos": []
+ },
+ "omelhormanhwa": {
+  "interjeicoes": [
+   "caramba",
+   "que isso",
+   "nossa",
+   "caraca",
+   "rapaz",
+   "eita"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "você",
+   "percebe",
+   "mano",
+   "olha só"
+  ],
+  "bordoes": [
+   "parte para cima",
+   "fica sem entender nada",
+   "fica em choque",
+   "manda a real",
+   "sem pensar duas vezes",
+   "todo o seu poder"
+  ],
+  "apelidos": [
+   "protagonista",
+   "nosso protagonista",
+   "prota",
+   "o homem",
+   "o brabo"
+  ],
+  "exemplos": []
+ },
+ "omen_valorant": {
+  "interjeicoes": [
+   "ah",
+   "oh",
+   "vejam",
+   "silêncio",
+   "escutem",
+   "esmaecem"
+  ],
+  "fala_com_publico": [
+   "vocês",
+   "espectadores",
+   "você que me escuta",
+   "almas perdidas"
+  ],
+  "bordoes": [
+   "Dispersuem-se",
+   "Eles não verão nada",
+   "Eu sou o começo e o fim",
+   "A névoa consome tudo",
+   "Suas memórias vão sumir",
+   "Deixe-os esquecer"
+  ],
+  "apelidos": [
+   "a sombra andante",
+   "o tolo",
+   "essa alma perdida",
+   "o protagonista",
+   "o escolhido pelos deuses"
+  ],
+  "exemplos": []
+ },
+ "optimus_prime": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Eu sou Optimus Prime.",
+   "Autobots, transformar e partir!",
+   "A liberdade é direito de todos os seres sencientes."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "pan_dbz": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Vovô, me espera!",
+   "Eu também quero lutar!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "pato_donald": {
+  "interjeicoes": [
+   "droga",
+   "caramba",
+   "puxa",
+   "ah",
+   "oxa",
+   "hein"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Ei! Ei! Isso não é justo!",
+   "Por todas as penas!",
+   "Que raio de confusão!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "pato_donald_galvan": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Oh, me deixa!",
+   "Ah é? Ah é?!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "patolino": {
+  "interjeicoes": [
+   "Ora!",
+   "Francamente!",
+   "Ah, pelamordedeus!",
+   "Uau!",
+   "Cruz-credo!",
+   "Humpf!"
+  ],
+  "fala_com_publico": [
+   "meus fiéis adoradores"
+  ],
+  "bordoes": [
+   "Isso é incorreto, absolutamente incorreto!",
+   "Eu sou o herói!",
+   "Céus!"
+  ],
+  "apelidos": [
+   "coadjuvante glorificado",
+   "figurante com falas",
+   "meu eterno dublê de corpo",
+   "aspirante a mim",
+   "infeliz que ocupa meu espaço"
+  ],
+  "exemplos": []
+ },
+ "pedro_bial": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Boa noite.",
+   "E a vida segue."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "pica_pau": {
+  "interjeicoes": [
+   "Eita!",
+   "Urubu do mal!",
+   "Caramba!",
+   "Aff!",
+   "Francamente!",
+   "Socorro!"
+  ],
+  "fala_com_publico": [
+   "meu caro freguês",
+   "turma do barulho",
+   "meu chapa"
+  ],
+  "bordoes": [
+   "U-ur-ru-ru-ru-ru!",
+   "Abra a porta, Zeca Urubu!",
+   "Você quer apostar quanto?",
+   "Alguém pediu um pica-pau maluco?"
+  ],
+  "apelidos": [
+   "cabecinha de vento",
+   "orelhudo",
+   "zé ruela",
+   "bonitão",
+   "zé mané"
+  ],
+  "exemplos": []
+ },
+ "pie": {
+  "interjeicoes": [
+   "Ah",
+   "Eita"
+  ],
+  "fala_com_publico": [
+   "Você realmente acha que eles morreram num acidente?",
+   "Mas como aquele desconhecido poderia saber de algo assim?"
+  ],
+  "bordoes": [
+   "Nosso herói",
+   "Nosso rapazinho",
+   "Ainda não pode morrer",
+   "Deixar irreconhecível",
+   "Sem poder fazer nada"
+  ],
+  "apelidos": [
+   "Nosso herói",
+   "Nosso rapaz",
+   "Nosso rapazinho",
+   "O imbecil",
+   "O jovem"
+  ],
+  "exemplos": []
+ },
+ "porao": {
+  "interjeicoes": [
+   "que isso",
+   "rapaz",
+   "nossa",
+   "meu deus",
+   "socorro",
+   "caramba"
+  ],
+  "fala_com_publico": [
+   "cara",
+   "galera",
+   "você",
+   "percebe",
+   "vocês"
+  ],
+  "bordoes": [
+   "logo em seguida",
+   "pergunta se por acaso",
+   "porém o nosso herói",
+   "fica morrendo de medo",
+   "sem pensar duas vezes",
+   "antes de ir embora"
+  ],
+  "apelidos": [
+   "nosso protagonista",
+   "nosso herói",
+   "jovem mestre",
+   "o prota"
+  ],
+  "exemplos": []
+ },
+ "professor_girafales": {
+  "interjeicoes": [
+   "Silêncio!",
+   "Que coisa!",
+   "Ora!"
+  ],
+  "fala_com_publico": [
+   "meninos",
+   "atenção, turma",
+   "prestem atenção"
+  ],
+  "bordoes": [
+   "Dona Florinda!",
+   "Vim lhe trazer este humilde presente.",
+   "Não será muito incômodo?",
+   "Silêncio! Silêncio!",
+   "Não me chame de Mestre Linguiça!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "puss_in_boots_gato_de_botas_portuguese_d": {
+  "interjeicoes": [
+   "¡Olé!",
+   "humpf",
+   "ah",
+   "caramba",
+   "uau",
+   "opa"
+  ],
+  "fala_com_publico": [
+   "muchachos",
+   "meus caros admiradores",
+   "camaradas",
+   "amigos de bigode"
+  ],
+  "bordoes": [
+   "Gato de Botas, ao seu dispor.",
+   "Ninguém mexe com o Gato de Botas!"
+  ],
+  "apelidos": [
+   "este infeliz",
+   "meu jovem aprendiz",
+   "o ser humaninho",
+   "o audacioso",
+   "o sem-nome"
+  ],
+  "exemplos": []
+ },
+ "quico": {
+  "interjeicoes": [
+   "ih",
+   "ufa",
+   "oh",
+   "ah",
+   "psiu",
+   "hem"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Gentalha, gentalha! Hmp!",
+   "Diz pra ele, dona Florinda!",
+   "Você não vai com a minha cara?"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "ram": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Hmph.",
+   "O Barusu é inútil.",
+   "Seja grato por a Ram falar com você."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "rem": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "A Rem acredita no Subaru-kun.",
+   "Vamos começar do zero."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "saitama": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Ok.",
+   "Soco normal.",
+   "Hoje tem promoção no supermercado."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "sam_winchester": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Dean, isso não é normal.",
+   "A gente tem que salvar essas pessoas."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "sett_lol": {
+  "interjeicoes": [
+   "ora pois",
+   "olha o pique",
+   "ah, fala sério",
+   "rapaz",
+   "que audácia",
+   "olha só pra isso"
+  ],
+  "fala_com_publico": [
+   "meu chegado",
+   "sua alteza",
+   "turma do fundão",
+   "campeão",
+   "todo mundo ligado"
+  ],
+  "bordoes": [
+   "Ninguém mexe com a minha mãe!"
+  ],
+  "apelidos": [
+   "o bonitão",
+   "o brabinho",
+   "o maluco",
+   "o tal do protagonista",
+   "o grandão"
+  ],
+  "exemplos": []
+ },
+ "seu_madruga": {
+  "interjeicoes": [
+   "Bah",
+   "Puxa vida",
+   "Ora bolas",
+   "Caramba",
+   "Santo remédio",
+   "Ué"
+  ],
+  "fala_com_publico": [
+   "minha gente",
+   "rapaziada",
+   "camarada",
+   "você aí"
+  ],
+  "bordoes": [
+   "Não te dou outra porque...",
+   "Olha quem fala!"
+  ],
+  "apelidos": [
+   "esse infeliz",
+   "infeliz de uma figa",
+   "garoto dos infernos",
+   "esse moleque",
+   "bonitão do mato"
+  ],
+  "exemplos": []
+ },
+ "seu_sirigueijo_peter_griffin": {
+  "interjeicoes": [
+   "Eita",
+   "Caramba",
+   "Ai meu bolso",
+   "Meu Deus do céu",
+   "Putz",
+   "Ah para"
+  ],
+  "fala_com_publico": [
+   "rapaziada",
+   "meu chegado",
+   "turma do fundão"
+  ],
+  "bordoes": [
+   "Eu gosto de dinheiro!",
+   "Minha nossa senhora da rosquinha recheada!",
+   "Eu não pago nem um centavo por isso!",
+   "Hihihi, levei vantagem!",
+   "Argh, o som da caixa registradora é a música dos anjos!"
+  ],
+  "apelidos": [
+   "o infeliz do protagonista",
+   "esse Zé Mané",
+   "o corno manso",
+   "o magrelo",
+   "o pivete"
+  ],
+  "exemplos": []
+ },
+ "shadow_cid": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Eu sou a Sombra.",
+   "Eu sou... atômico.",
+   "Nós somos o Jardim das Sombras."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "silvio_santos": {
+  "interjeicoes": [
+   "Mah",
+   "Eeeh",
+   "Uou",
+   "Olha",
+   "Ora",
+   "Caramba"
+  ],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Quem quer dinheiro?",
+   "Olha o aviãozinho!",
+   "Mah oue"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "solem8037": {
+  "interjeicoes": [
+   "rapaz",
+   "que isso",
+   "nossa",
+   "socorro",
+   "misericórdia"
+  ],
+  "fala_com_publico": [
+   "percebe",
+   "cara",
+   "repara",
+   "pessoal",
+   "você"
+  ],
+  "bordoes": [
+   "logo em seguida",
+   "arregala os olhos",
+   "entra em pânico",
+   "sem perder tempo",
+   "cai no chão",
+   "fica em choque"
+  ],
+  "apelidos": [
+   "nosso protagonista",
+   "nosso cara",
+   "o rapaz",
+   "o jovem",
+   "o combatente"
+  ],
+  "exemplos": []
+ },
+ "solemsun": {
+  "interjeicoes": [
+   "rapaz",
+   "nossa",
+   "que isso",
+   "socorro",
+   "misericórdia"
+  ],
+  "fala_com_publico": [
+   "percebe",
+   "cara",
+   "vocês",
+   "você",
+   "galera"
+  ],
+  "bordoes": [
+   "logo em seguida",
+   "entra em pânico",
+   "campo de batalha",
+   "estende a mão",
+   "sorriso no rosto",
+   "cai no chão"
+  ],
+  "apelidos": [
+   "nosso herói",
+   "o garoto",
+   "o rapaz",
+   "nosso protagonista",
+   "o jovem"
+  ],
+  "exemplos": []
+ },
+ "sonic_manolo_rey": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Vamos nessa!",
+   "Sou rápido demais pra você!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "subaru": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Meu nome é Natsuki Subaru!",
+   "Eu amo a Emilia!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "sukuna": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Saiba o seu lugar, seu tolo.",
+   "Eu sou o Rei das Maldições.",
+   "Expansão de domínio: Santuário Malevolente."
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "thomas_shelby_peaky_blinders": {
+  "interjeicoes": [
+   "Hmm",
+   "Escuta",
+   "Ora",
+   "Olha",
+   "Veja bem",
+   "Certo"
+  ],
+  "fala_com_publico": [
+   "meus caros",
+   "você aí",
+   "homens",
+   "esta cidade",
+   "quem me escuta"
+  ],
+  "bordoes": [
+   "Por ordem dos Peaky Blinders.",
+   "Já tem um plano?",
+   "Eu tenho negócios em Birmingham."
+  ],
+  "apelidos": [
+   "este rapaz",
+   "o infeliz",
+   "o garoto",
+   "nosso homem",
+   "esse sujeito"
+  ],
+  "exemplos": []
+ },
+ "vegeta": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Verme insolente!",
+   "É mais de oito mil!",
+   "Eu sou o príncipe dos Saiyajins!",
+   "Kakarotto!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ },
+ "verosika_helluva_boss_fandub": {
+  "interjeicoes": [
+   "Ah, por favor",
+   "Nossa",
+   "Credo",
+   "Querida",
+   "Ugh",
+   "Ai"
+  ],
+  "fala_com_publico": [
+   "meus amores",
+   "infernizinhos",
+   "queridinhos",
+   "plateia",
+   "vocês aí"
+  ],
+  "bordoes": [
+   "Eu sou a dona dessa bagunça",
+   "Encosta na minha fama e chora",
+   "Menos drama, mais gloss",
+   "Isso foi mais patético que meu ex",
+   "Pobre, porém caótico",
+   "Típico de quem não tem meu cachê"
+  ],
+  "apelidos": [
+   "esse Zé ruela",
+   "o queridinho",
+   "esse tapado",
+   "o coitado",
+   "essa criatura"
+  ],
+  "exemplos": []
+ },
+ "walter_white_breaking_bad": {
+  "interjeicoes": [
+   "Ora",
+   "Escute",
+   "Ora bolas",
+   "Aha",
+   "Tsc",
+   "Uau"
+  ],
+  "fala_com_publico": [
+   "vocês",
+   "meu caro",
+   "aluno atento",
+   "você aí do outro lado"
+  ],
+  "bordoes": [
+   "Eu sou o perigo.",
+   "Diga meu nome.",
+   "Nós precisamos cozinhar.",
+   "Eu sou quem manda."
+  ],
+  "apelidos": [
+   "esse rapaz",
+   "nosso pequeno gênio",
+   "amador",
+   "esse imbecil",
+   "o químico da vez"
+  ],
+  "exemplos": []
+ },
+ "woody": {
+  "interjeicoes": [
+   "caramba",
+   "puxa vida",
+   "uau",
+   "ahn",
+   "ó",
+   "credo"
+  ],
+  "fala_com_publico": [
+   "meu amigo",
+   "pessoal",
+   "parceiro",
+   "turma",
+   "galera"
+  ],
+  "bordoes": [
+   "Tem uma cobra na minha bota!",
+   "Alguém envenenou o poço!",
+   "Alcance o céu!",
+   "Você é o meu xerife favorito."
+  ],
+  "apelidos": [
+   "esse novato",
+   "meu comparsa",
+   "o herói da vez",
+   "esse figura",
+   "meu chapa"
+  ],
+  "exemplos": []
+ },
+ "yor_forger": {
+  "interjeicoes": [],
+  "fala_com_publico": [],
+  "bordoes": [
+   "Com licença, posso matar você?",
+   "Ah, me desculpe!"
+  ],
+  "apelidos": [],
+  "exemplos": []
+ }
+}

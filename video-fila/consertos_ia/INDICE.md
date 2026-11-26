@@ -1716,3 +1716,7 @@
 - 2026-11-26 01:10 | propor | OK | CONSERTO PEDIDO PELA VIGILÂNCIA. PROBLEMA: Facebook Mistérios Noturnos: 0 Reels hoje EVIDÊNCIA: logs\facebook_paginas.js → [20261126_000136_12cf.md](20261126_000136_12cf.md)
 - 2026-11-26 01:14 | propor | REVISAR | CONSERTO PEDIDO PELA VIGILÂNCIA. PROBLEMA: canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal  → [20261126_000138_e131.md](20261126_000138_e131.md)
 - 2026-11-26 01:16 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): celulares: 6 vídeos esperando conferência da troca da @ EVIDÊNCIA: pedidos em est → [20261126_005054_98e3.md](20261126_005054_98e3.md)
+- 2026-11-26 11:23 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20) EVIDÊNCIA: Achado pel → [20261126_112050_8fcf.md](20261126_112050_8fcf.md)
+- 2026-11-26 11:26 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20) EVIDÊNCIA: Achado pel → [20261126_112050_7ea5.md](20261126_112050_7ea5.md)
+- 2026-11-26 11:29 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40) EVIDÊNCIA: Achado pela R → [20261126_112050_4aa5.md](20261126_112050_4aa5.md)
+- 2026-11-26 11:36 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] MAQUINA: !! DISCO C QUASE CHEIO EVIDÊNCIA: Achado pela RONDA GERAL (D:\vi → [20261126_113040_1142.md](20261126_113040_1142.md)

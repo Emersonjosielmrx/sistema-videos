@@ -76,7 +76,7 @@
   "chaves",
   "chaves_chapolin"
  ],
- "cursor": 939,
+ "cursor": 944,
  "videos": [
   {
    "pid": "20261026_111528_5-vQopGwQ8Y",
@@ -1931,6 +1931,16 @@
     "mike",
     "seu_madruga"
    ]
+  },
+  {
+   "pid": "20261126_095728_eoyI3tVsj5w",
+   "vozes": [
+    "momo",
+    "mike",
+    "ijax",
+    "jubertim",
+    "galvao_bueno"
+   ]
   }
  ],
  "_obs": [
@@ -2031,5 +2041,5 @@
   "jubertim"
  ],
  "_prioridade_fish": "19/11 dona via claude-f1: próximos longos com narradores top no Fish (momo, mike primeiro). cliente._narradores_por_grupo põe estes na frente e tira quem não tem referencia_fish (LONGO_SO_FISH=0 desliga).",
- "_modo": "dupla"
+ "_modo": "so_primarios"
 }

@@ -602,3 +602,42 @@ entravam no meio). Agora:
   14, a maioria sorteada fora de hora). Detalhes: `D:\video-fila\memes_melhoria\frentes\F1.md`.
 - FALTA: conferir no 1º longo real renderizado (Kaggle leva memes_img inteira, fichas.json incluso — montar_pacote.py
   sync sem filtro; precisa o pacote ser atualizado no Drive).
+
+
+## 26/11 — JÁ FEITO: 17 memes aprovados pela dona + memes nos MELHORES momentos
+- Dona revisou Desktop\memes_pt e aprovou 17 (números 21 a 37 em memes_novos; 3 cortados por passarem de 12 s:
+  21 delícia 3,4 s, 29 tá tranquilo 3,3 s, 33 ai papai 5,7 s). Catálogo dos longos: 20 -> 37 memes, cada um com ficha.
+  31 "mas que porra é essa" e 32 "e o pix nada" (palavrão) + 35/36/37 (só som) = ficha resumo=false: entram no meio,
+  NUNCA na abertura (memes_visuais.fora_do_resumo + anime-pipeline._memes_resumo). Testado: nome com "porra" não
+  dispara o filtro de palavrão da postagem. MEMES_PALAVRAO=0 tira os de palavrão. Emoção dos 21+ vem da ficha.
+- Escolha pelos MELHORES momentos (memes_visuais._escolher_otimo): antes o 1º momento que casava levava o meme e
+  bloqueava/gastava o melhor logo depois; agora nota de todo par frase x meme no vídeo inteiro, escolhe do maior para o
+  menor respeitando o intervalo; meme pode repetir 1x a >= 300 frases se nota >= 9. Roteiros reais: nota total 81->126 e
+  92->116; os momentos mais fortes (venceu sem dificuldade 16,5; primo mimado furioso 16,5) agora entram.
+  Desliga: MEMES_MOMENTO_OTIMO=0. Ajustes: MEMES_REPETE_LONGE, MEMES_REPETE_NOTA.
+- Backups: memes_visuais.py/anime-pipeline.py .antes_aprovados_26nov e .antes_otimo_26nov; memes.json/fichas.json
+  .antes_aprovados_26nov. Subido ao Drive do Kaggle (rclone check 0 diferenças). Scripts: memes_melhoria\teste.
+- FALTA: conferir no 1º longo real. Ideia pendente: meme depois do DESFECHO quando a frase seguinte conclui a ação
+  ("tenta mandar uma lapada" -> meme só depois de "o prota desvia e bota pra correr").
+
+
+## 26/11 — JÁ FEITO: narrador REAGE ao vivo (humor do Virjão/Momo)
+Dona: "elementos dos vídeos do Virjão ou Momo que ainda não tem — analise e implemente da melhor maneira".
+Análise (fala real x nossos roteiros, por mil palavras): D:\video-fila\memes_melhoria\ANALISE_HUMOR_VIRJAO_MOMO.md.
+Nossos longos saíam como texto lido: 1ª pessoa 0,2 (Momo 13,7), pergunta 1 (11-18), '!' e '...' ZERO em todos,
+"Sinceramente, esse cara não aprende, né?" 3x no mesmo vídeo, a piada de virada pedida nunca saía, "nosso garoto" 7,7/mil.
+- bin\humor_narrador.py (novo) + bin\humor_narradores.json (perfil de 107 narradores, sem palavrão). Chamado em
+  anime_script.rewrite_longo_com_tempo antes de guardar no cache: SÓ roteiro novo, SÓ anime/manhwa.
+  1) tira comentário repetido; 2) 'Sinceramente,'/'Cá entre nós,'... com teto de usos; 3) 'nosso garoto' no máximo 1 a
+  cada 40 frases (o resto vira 'o prota'/'o protinha', nunca 'o cara'); 4) a IA SUGERE reações curtas (1ª pessoa,
+  pergunta incrédula, imitação, piada de virada, piada recorrente com placar, golpe) e temperos (interjeição + '!' numa
+  frase de impacto); o CÓDIGO confere: sem palavrão, sem ofender o público, sem cena triste (morrer de medo/rir não
+  conta), sem repetir, sem começar igual, espaçado, dentro do teto de frases. Reação entra depois da frase, com o mesmo
+  segundo. Fatos e ordem não mudam.
+- Teste real (300 frases do Virjão): 10 reações + 8 temperos; '!' 0 -> 2,9/mil, pergunta 0,7 -> 2,5, interjeição
+  2,5 -> 4,0. Ainda abaixo dos reais de propósito (começar sem cansar).
+- Desliga: HUMOR_POLIR=0 (tudo) ou HUMOR_DEDUP / HUMOR_ABERTURAS / HUMOR_APELIDO / HUMOR_REACOES = 0.
+  Ajuste de quantidade: HUMOR_CADA (14) e HUMOR_TEMPERO_CADA (20) — menor = mais reações.
+- Backup: anime_script.py.antes_humor_26nov. Subido ao Drive do Kaggle (rclone check 0 diferenças). Testes em
+  memes_melhoria\teste\humor.
+- FALTA: ouvir o 1º longo novo. Roteiro que já estava no cache não muda (só os novos).

@@ -1029,6 +1029,16 @@ def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
                         "uso o normal")
         return [], []
     frases, tempos = _tirar_abertura_vazia(frases, tempos)
+    # 26/11 dona ("elementos dos vídeos do Virjão/Momo que ainda não tem; analise e implemente"): o narrador REAGE ao
+    # vivo (1ª pessoa, pergunta incrédula, interjeição, '!', piada de virada, piada recorrente), sem comentário repetido
+    # e sem "nosso garoto" em toda frase. Só em roteiro NOVO (o do cache não muda). bin/humor_narrador.py;
+    # HUMOR_POLIR=0 desliga tudo (chaves de cada passo no topo do arquivo).
+    if os.environ.get("HUMOR_POLIR", "1") != "0":
+        try:
+            import humor_narrador
+            frases, tempos = humor_narrador.polir(frases, tempos)
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[script] passada de humor falhou ({type(e).__name__}: {e}) — roteiro segue sem ela")
     logging.info(f"[script] roteiro longo com tempo: {len(frases)} frases ({sem_marca} bloco(s) sem marca, "
                  f"espalhados no trecho), {tempos[0]:.0f}s..{tempos[-1]:.0f}s")
     _cache_put(chave_cache, target_lines, [f"[{t}s] {f}" for t, f in zip(tempos, frases)])

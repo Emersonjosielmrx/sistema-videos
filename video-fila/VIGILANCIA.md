@@ -1,11 +1,11 @@
-# Vigilância 24 h — 2026-11-26T03:50:53
+# Vigilância 24 h — 2026-11-26T11:50:39
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (13)
+## Alarmes desta volta (17)
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 125 h (limite 60 h)
-- Rede: reagendar pro horário nobre: sem sucesso há 62 h (limite 30 h)
+- Carrossel MS Energy: sem sucesso há 133 h (limite 60 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 70 h (limite 30 h)
 - canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
@@ -16,11 +16,12 @@
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - celulares: 2 celulares fora do adb
+- [ronda] MAQUINA: !! DISCO C QUASE CHEIO
+- [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20)
+- [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40)
+- [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20)
 
-## Casos abertos (260)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (261)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -278,8 +279,13 @@
 - [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] celulares: 6 vídeos esperando conferência da troca da @ (-)
+- [consertar] [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20) (-)
+- [consertar] [ronda] MAQUINA: !! DISCO C QUASE CHEIO (-)
 
 ## Últimos fechados
+- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
 - [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
 - [falso] facebook: mesmo erro 5x em 6 h — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
@@ -287,7 +293,6 @@
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [sem_mudanca] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
 - [sem_mudanca] Carrossel Advance Solar: sem sucesso há 183 h (limite 30 h) — gemini-4-argon / -
 - [sem_mudanca] Carrossel Globo Solar: sem sucesso há 182 h (limite 30 h) — gemini-4-argon / -
 - [sem_mudanca] Facebook Anime Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -

@@ -100,15 +100,12 @@ Nada importante acima de y=150 nem abaixo de y=1580; margens laterais de 60 px. 
 ## Aprendido dos verificadores (26/10 — os defeitos que mais derrubaram a nota; evite JÁ na 1ª versão)
 - GANCHO VISUAL em 0–2 s: proibido aspecto de slide corporativo, ritmo estático ou foto parada com texto sobreposto (nada congelado nos primeiros 2,0 s). Zero caixas de texto, containers, molduras, badges, pílulas, selos, widgets, mockups ou títulos secundários antes de 2,0 s (0% de elementos concorrentes). A cena 1 / gancho DEVE ter push-in contínuo de câmera/container cobrindo toda a composição (scale 1.0 → >= 1.18 nos primeiros 2,0 s) para retenção imediata. O texto da dor DEVE ser o ÚNICO elemento textual de destaque (2 a 4 palavras, fonte >= 72 px com palavra-chave na cor da marca, entrando entre 0,1 s e 0,3 s com impacto <Surgir como="pop|carimbo"> ou <Impacto>), renderizado diretamente sobre a cena sem caixa ou fundo de slide, mantendo drift residual (scale 1.0 → 1.06). O gancho foca 100% na dor com estritamente 3 camadas dinâmicas: (1) fundo com push-in contínuo obrigatório (scale 1.0 → >= 1.15); (2) apresentador animado com <RecorteVivo como="aproximar|saltar"> ou Parallax ativo (deslocamento >= 40 px) em movimento contínuo; e (3) o texto gigante da dor limpo. Telas de celular, cards de produto, badges e elementos da solução só entram após 2,0 s (da Cena 2 em diante).
 - NADA parado mais de ~1,5 s e MOVIMENTO CONTÍNUO (mínimo 5% de variação): troca de texto e legenda NÃO conta
-  como movimento de cena. TODA cena (sem exceção, da Cena 1 ao encerramento) e tela de simulação/mockup DEVE ter
-  push-in constante de câmera/container cobrindo a cena inteira (scale 1.0 → 1.10..1.15) ou pan contínuo do início ao fim;
-  listas fazem scroll contínuo e mensagens entram na fala. PROIBIDO congelar após a entrada (0% de elementos estáticos):
-  100% dos elementos gráficos, cards informativos e recorte do apresentador DEVEM manter micro-movimento residual
-  contínuo obrigatório durante toda a sua permanência em tela após surgirem (escala progressiva linear scale 1.0 → 1.05..1.08,
-  deslocamento suave de 15–30 px ou envolvidos em <Flutuar> y ±8 px; proibido clamp estático pós-entrada que gere
-  quadros idênticos, garantindo taxa de movimento contínua >= 5%). Apresentador recortado nunca fica estático.
-  No encerramento com CTA e terço final nada para: container geral com push-in (scale 1.0 → 1.15..1.20) e o botão de CTA
-  DEVE pulsar continuamente (<Pulsar> scale 1.0 ↔ 1.08 a cada 1,0 s) da entrada até o último frame.
+  como movimento de cena. Toda cena longa e tela de simulação/mockup DEVE ter push-in constante de câmera/container
+  (scale 1.0 → 1.10..1.15) ou pan contínuo do início ao fim; listas fazem scroll contínuo e mensagens entram na fala.
+  PROIBIDO congelar após a entrada: 100% dos elementos gráficos, cards e recorte do apresentador DEVEM manter
+  movimento residual contínuo durante toda a permanência em tela (drift/push-in de scale 1.0 → 1.05..1.08, deslocamento
+  suave de 15–30 px ou <Flutuar> y ±8 px). Apresentador recortado nunca fica estático. O botão de CTA e o terço final
+  nunca param: o botão DEVE pulsar continuamente (<Pulsar> scale 1.0 ↔ 1.08 a cada 1,0 s) da entrada até o último frame.
 - VARIE o layout entre cenas: não repita o mesmo molde (pílula + título + card central) em todas. Alterne celular
   inclinado em 3D, tela dividida, card de lado, foto cheia com texto grande, etc.
 - ROSTOS 100% LIVRES: nenhum card informativo, texto, título, legenda, badge, selo ou mockup pode sobrepor rosto ou

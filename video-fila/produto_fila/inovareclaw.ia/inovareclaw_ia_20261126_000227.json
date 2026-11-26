@@ -1,0 +1,147 @@
+{
+ "conta": "inovareclaw.ia",
+ "produto": "inovare_claw",
+ "marca": "Inovare Claw",
+ "titulo": "Preciso saber programar para usar um agente de IA?",
+ "legenda": "Você não precisa entender de programação para ter um agente de IA trabalhando por você. O Inovare Claw executa tarefas de verdade, e você segue cuidando do seu negócio. Link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Agente de IA sem complicação",
+  "pergunta_cliente": "Quero uma IA trabalhando por mim, mas não entendo nada de tecnologia?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Muito dono de negócio quer usar inteligência artificial, mas trava na ideia de que precisa saber programar.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the counter of a tidy, well lit small Brazilian office, professional look",
+    "real_tema": "medo de precisar de conhecimento técnico",
+    "destaques": [],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261126_000313_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Inovare Claw já vem pronto. Eu passo a tarefa e o agente executa por mim.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting at a clean desk in a bright, tidy Brazilian small business office",
+    "real_tema": "agente pronto que executa tarefas",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso de ajuda com uma tarefa da loja."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pode me passar o que precisa. Eu cuido disso."
+     },
+     {
+      "de": "cliente",
+      "texto": "Organize isso para mim, por favor."
+     },
+     {
+      "de": "empresa",
+      "texto": "Certo, já estou executando a tarefa."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261126_000313_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261126_000313_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Eu não precisei aprender nada técnico. Hoje o agente trabalha sozinho e eu cuido do meu negócio.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit Brazilian small shop with organized shelves, professional look",
+    "real_tema": "resultado: tempo livre sem conhecimento técnico",
+    "destaques": [],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261126_000313_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovareclaw.ia_20261126_000313_1.png"
+   }
+  ],
+  "legenda": "Você não precisa entender de programação para ter um agente de IA trabalhando por você. O Inovare Claw executa tarefas de verdade, e você segue cuidando do seu negócio. Link no perfil.",
+  "titulo": "Preciso saber programar para usar um agente de IA?",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "precisa_programar",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 38,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovareclaw.ia_20261126_000227\\dono_3.mp4",
+ "duracao_s": 33.34,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-26T02:00:37",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 6.24,
+   "fala": "Quero uma IA trabalhando por mim, mas não entendo nada de tecnologia?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 6.24,
+   "fim": 14.07,
+   "fala": "Muito dono de negócio quer usar inteligência artificial, mas trava na ideia de que precisa saber programar.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 14.07,
+   "fim": 21.9,
+   "fala": "O Inovare Claw já vem pronto. Eu passo a tarefa e o agente executa por mim.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 21.9,
+   "fim": 29.39,
+   "fala": "Eu não precisei aprender nada técnico. Hoje o agente trabalha sozinho e eu cuido do meu negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 29.39,
+   "fim": 33.34,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.0,
+   "diretor": 6.0
+  },
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

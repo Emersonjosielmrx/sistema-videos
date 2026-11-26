@@ -404,3 +404,21 @@ STATUS: OK## 20261125_2156 � Vigia noturno: recap longo alimentador parado, GP
 - Causa prov�vel: Falta de contas ativas e rotina do alimentador inativa; arquivos de recurso comum modificados em hipercool/historias.
 - CONSERTO PROPOSTO: python D:\hipercool-materiais\bin\recursos.py subir narracao_curva.py --de hipercool (e --de historias); religar o alimentador do recap longo via python cliente.py alimentar ou reiniciar a rotina conforme o procedimento padr�o.
 - Estado: PRECISA REVIS�O
+## 20261126_0455 — Recap longo: alimentador parado no PC1 e contas Veo/GPUs sem conta livre
+- Motivo / O que achei (trecho de log): Logs mostram postagem do parceiro ativa, mas `anime_auto.py` / alimentador não estão rodando ativamente no PC1, e constam 25 de 25 GPUs sem conta livre/verificada no sistema Veo (10 contas verificadas de 87).
+- Causa provável: Ausência de processo ativo do alimentador de longos no PC1 e esgotamento temporário das contas livres verificadas para geração.
+- CONSERTO PROPOSTO: Nenhum (modo exclusivo de aviso, conforme instrução vigente). Religar o alimentador via comando padrão se autorizado pela dona ou aguardar rotina de renovação de créditos.
+- Estado: PRECISA REVISÃO
+
+## 20261126_0955 — Sincronizacao de ytdlp_vez.py e verificacao de rotinas do vigia
+- Motivo / O que achei (trecho de log): Solicitado pelo comando de chamada para sincronizar o arquivo comum ytdlp_vez.py entre hipercool e recapd através do script 
+ecursos.py. Executado com sucesso a subida e consolidação dos arquivos compartilhados.
+- Causa provável: Divergência ou necessidade de atualização pontual em ytdlp_vez.py entre os projetos irmãos.
+- CONSERTO PROPOSTO: python D:\hipercool-materiais\bin\recursos.py subir ytdlp_vez.py --de hipercool (e --de recapd) (já executado e sincronizado com sucesso).
+- Estado: RESOLVIDO
+
+## 20261126_1057 — Recap longo alimentador parado e GPUs sem conta verificada
+- Motivo / O que achei (trecho de log): Logs do workspace e do anime_health_monitor indicam que o alimentador de recap longo (cliente.py alimentar) no PC1 está inativo e constam 20 de 25 GPUs sem conta livre/verificada (com 15 contas verificadas de um total de 87).
+- Causa provável: Ausência de processo ativo do alimentador de longos no PC1 e esgotamento temporário ou falta de liberação automática de contas verificadas para o sistema Veo/GPUs.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos via comando padrão na máquina correspondente e aguardar a renovação/liberação automática das contas do sistema Veo.
+- Estado: PRECISA REVISÃO

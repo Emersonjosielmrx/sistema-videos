@@ -34,7 +34,7 @@ def _proxies():
 
 
 def main():
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if sys.stdout: sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     reuso = json.loads((POST / "config" / "reuso_plataformas.json").read_text("utf-8"))
     contas = list((reuso.get("instagram") or {}).get("contas") or {})
     pausas = json.loads((POST / "config" / "instagram_pausas.json").read_text("utf-8"))

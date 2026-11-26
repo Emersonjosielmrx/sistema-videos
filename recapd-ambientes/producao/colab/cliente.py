@@ -881,7 +881,8 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
     import yt_dlp
     anime_auto = _projeto()
     import ytdlp_vez
-    est = json.loads(ALIMENTAR_LOG.read_text(encoding="utf-8-sig")) if ALIMENTAR_LOG.exists() else {"falhas": {}}
+    # 26/11: arquivo com 0 bytes (PC desligado no meio da escrita) travou o alimentar de 21 a 26/11
+    est = json.loads(ALIMENTAR_LOG.read_text(encoding="utf-8-sig").strip() or '{"falhas": {}}') if ALIMENTAR_LOG.exists() else {"falhas": {}}
     # batida logo ao começar: o vigia mede o travamento pela data deste arquivo (sem isto ele matava o recém-religado)
     ALIMENTAR_LOG.write_text(json.dumps(est, ensure_ascii=False, indent=1), encoding="utf-8")
     # 03/11: o YouTube barrou a lista ("Sign in to confirm you're not a bot") e o alimentar morria AQUI, antes de

@@ -2,22 +2,22 @@
 
 | Página | Seguidores | Reels | Views (soma) | Ganho desde a anterior | Medido |
 |---|---|---|---|---|---|
-| Dorama Noturno | 4 | 8 | 2844 | +0 | 2026-11-26 03:15 |
-| Mistérios Noturnos | 7 | 9 | 2487 | -1130 | 2026-11-26 03:15 |
-| Anime Noturno | 0 | 9 | 1969 | +0 | 2026-11-26 03:15 |
-| Bicho Noturno | 1 | 5 | 1672 | +2 | 2026-11-26 03:15 |
-| Fio da Meada | 0 | 7 | 1514 | +1 | 2026-11-26 03:15 |
-| Invento React | 2 | 4 | 1498 | +0 | 2026-11-26 03:15 |
-| Esporte Noturno | 1 | 6 | 1462 | +0 | 2026-11-26 03:15 |
-| Curiosidades Noturnas | 6 | 9 | 1359 | -4787 | 2026-11-26 03:15 |
-| Assist-IA Investimentos | 0 | 9 | 1197 | -1376 | 2026-11-26 03:15 |
-| Cartucho React | 0 | 4 | 959 | +0 | 2026-11-26 03:15 |
-| Forja React | 0 | 6 | 950 | +0 | 2026-11-26 03:15 |
-| Filme Noturno | 0 | 5 | 936 | +0 | 2026-11-26 03:15 |
-| Inovare Manhwa Thai | 0 | 3 | 754 | +212 | 2026-11-26 03:15 |
-| Comédia Noturna | 1 | 5 | 687 | +0 | 2026-11-26 03:15 |
-| Inovare Manhwa Hindi | 0 | 3 | 506 | -1459 | 2026-11-26 03:15 |
-| Inovare Manhwa BR | 1 | 1 | 381 | +0 | 2026-11-26 03:15 |
+| Dorama Noturno | 4 | 8 | 2844 | +0 | 2026-11-26 11:13 |
+| Mistérios Noturnos | 7 | 10 | 2521 | -1123 | 2026-11-26 11:13 |
+| Bicho Noturno | 1 | 6 | 2015 | +20 | 2026-11-26 11:13 |
+| Anime Noturno | 0 | 9 | 1970 | +0 | 2026-11-26 11:13 |
+| Invento React | 2 | 5 | 1702 | +79 | 2026-11-26 11:13 |
+| Fio da Meada | 0 | 8 | 1631 | +70 | 2026-11-26 11:13 |
+| Esporte Noturno | 1 | 6 | 1462 | +0 | 2026-11-26 11:13 |
+| Curiosidades Noturnas | 6 | 9 | 1359 | -4787 | 2026-11-26 11:13 |
+| Assist-IA Investimentos | 0 | 9 | 1197 | -1376 | 2026-11-26 11:13 |
+| Forja React | 0 | 7 | 1112 | +161 | 2026-11-26 11:13 |
+| Comédia Noturna | 1 | 6 | 977 | +103 | 2026-11-26 11:13 |
+| Cartucho React | 0 | 4 | 959 | +0 | 2026-11-26 11:13 |
+| Filme Noturno | 0 | 5 | 936 | +0 | 2026-11-26 11:13 |
+| Inovare Manhwa Hindi | 1 | 4 | 561 | -2590 | 2026-11-26 11:13 |
+| Inovare Manhwa BR | 1 | 1 | 382 | +0 | 2026-11-26 11:13 |
+| Inovare Manhwa Thai | 0 | 4 | 53 | -1625 | 2026-11-26 11:13 |
 | Cena React | 0 | 1 | 6 | +1 | 2026-11-20 12:24 |
-| Mundo Que Não Existe | 4 | 3 | 3 | -3047 | 2026-11-26 03:15 |
-| Tech Noturno | 0 | 0 | 0 | +0 | 2026-11-26 03:15 |
+| Mundo Que Não Existe | 4 | 4 | 3 | -3149 | 2026-11-26 11:13 |
+| Tech Noturno | 0 | 0 | 0 | +0 | 2026-11-26 11:13 |

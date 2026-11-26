@@ -1,0 +1,15 @@
+# /mnt/win-bootcamp/claude-central/ronda/ignorar_vigia.txt  (vai para D:\video-fila\ronda\ignorar_vigia.txt)
+# Achados da ronda que NAO devem virar conserto automatico no vigilancia.py (ja consertado esperando proxima execucao,
+# falso alarme conhecido, ou decisao da dona). 1 trecho por linha (texto simples, comparado com o titulo). Revisar 1x/dia.
+# --- consertados 26/11 09:45, esperam o proximo horario da tarefa (tirar daqui depois que rodarem ok) ---
+1min visita diaria
+CofreChecar
+ZeladorGenspark
+InstagramMedirSeguidores
+# --- falsos alarmes conhecidos (26/11) ---
+Marcas_Carrossel
+TikTok_MedirViews
+Produto_Videos
+ShortsNoSTI
+casper-md5check
+systemd-networkd-wait-online

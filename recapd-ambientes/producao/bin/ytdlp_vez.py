@@ -15,7 +15,10 @@ Dentro da vez, chamar vez() de novo no mesmo processo não espera (não trava a 
 """
 import contextlib
 import json
-import msvcrt
+try:
+    import msvcrt
+except ImportError:  # 26/11: no STI (Linux) a copia comum sobrescrevia o patch
+    import msvcrt_linux as msvcrt
 import os
 import sys
 import threading
