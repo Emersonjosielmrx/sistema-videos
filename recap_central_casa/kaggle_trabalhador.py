@@ -135,7 +135,8 @@ def preparar_applio():
     """Voz clonada (25/10): com GPU, instala o Applio do PC num ambiente PRÓPRIO (o pip dele troca numpy/torch e
     quebraria o render) + o nosso pipeline.py + contentvec/rmvpe/fcpe. Sem GPU ou falhou = longo sem clone."""
     global _APPLIO_OK, _APPLIO_MSG
-    if subprocess.run(["nvidia-smi"], capture_output=True).returncode != 0:
+    import shutil as _sh  # 15/11: na VPS (CPU, Kaggle banido) não existe nvidia-smi — FileNotFoundError matava o worker
+    if not _sh.which("nvidia-smi") or subprocess.run(["nvidia-smi"], capture_output=True).returncode != 0:
         _APPLIO_MSG = "sem GPU"
         print("sem GPU: longo sem voz clonada", flush=True)
         return
@@ -164,6 +165,78 @@ def preparar_applio():
             print(f"kokoro-onnx não instalou ({r.stderr[-200:]}) — base Kokoro cai pra Francisca", flush=True)
         else:
             os.environ["KOKORO_NUVEM"] = "1"  # o anime_tts só usa a base Kokoro com isto (o amb herda o os.environ)
+        # 18/11 (dona: modo de voz p3 = Kokoro/Francisca/Piper em longos e curtos): a 3ª base. --no-deps: só precisa
+        # do onnxruntime (já veio com o kokoro-onnx) e do pathvalidate; não mexe no torch do Applio. O anime_tts só usa
+        # o Piper se o import funcionar (_piper_pronto); falhou = o vídeo sai no p1, sem erro.
+        r = subprocess.run([str(APPLIO_VENV / "bin" / "pip"), "install", "-q", "--no-deps", "piper-tts==1.8.0",
+                            "pathvalidate"], capture_output=True, text=True, timeout=900)
+        if r.returncode != 0:
+            print(f"piper-tts não instalou ({r.stderr[-200:]}) — modo de voz cai pro p1", flush=True)
+        # 18/11 dona ("vamos começar com o padrão"): modo kitten_tudo = Kitten 2 com a voz pronta "Portuguese" em
+        # todas as frases + RVC do narrador por cima. Só com GPU (em CPU leva ~30 min por frase). Ambiente próprio
+        # (o pip do kittenml troca pacotes; junto do Applio quebraria o RVC), igual ao job de testes de voz. O
+        # anime_tts só usa o Kitten com KITTEN_NUVEM=1; falhou aqui = o vídeo sai no p3 (Kokoro/Francisca/Piper).
+        if os.environ.get("KITTEN", "1") != "0" and shutil.which("nvidia-smi") and subprocess.run(
+                ["nvidia-smi"], capture_output=True).returncode == 0:
+            try:
+                kv = Path("/tmp/venvs_voz/kitten2")
+                if not (kv / "bin" / "python").exists():
+                    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "virtualenv"], check=False,
+                                   timeout=600)
+                    subprocess.run([sys.executable, "-m", "virtualenv", "--system-site-packages", str(kv)],
+                                   check=True, capture_output=True, timeout=600)
+                r = subprocess.run([str(kv / "bin" / "python"), "-m", "pip", "install", "-q", "kittenml",
+                                    "soundfile"], capture_output=True, text=True, timeout=3600)
+                if r.returncode == 0 and subprocess.run([str(kv / "bin" / "python"), "-c", "import kittenml"],
+                                                        capture_output=True, timeout=300).returncode == 0:
+                    os.environ["KITTEN_NUVEM"] = "1"
+                    print("Kitten 2 pronto (modo de voz kitten_tudo)", flush=True)
+                else:
+                    print(f"kittenml não instalou ({(r.stderr or '')[-200:]}) — modo de voz fica no p3", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(f"Kitten 2 falhou ({type(e).__name__}: {str(e)[-200:]}) — modo de voz fica no p3", flush=True)
+        # 19/11 dona ("o Fish do Kaggle é melhor que todos os outros; a partir de agora é o padrão"): Fish Speech 1.5 em
+        # ambiente próprio Python 3.11 (uv) com torch/torchaudio 2.4.1 TRAVADOS (torchaudio 2.9+ tirou
+        # list_audio_backends e o fish-speech quebra) + portaudio (o pyaudio é dependência e não compila sem ele).
+        # Receita provada no job de teste de 19/11 (fila_teste_voz/fish_speech_1911c: 5/5 falas, ~7 s cada).
+        # O anime_tts usa com FISH_NUVEM=1 + referencia_fish.wav do narrador; falhou aqui = Kitten/p3 como antes.
+        if os.environ.get("FISH", "1") != "0" and shutil.which("nvidia-smi") and subprocess.run(
+                ["nvidia-smi"], capture_output=True).returncode == 0:
+            try:
+                t_f = time.time()
+                fs = Path("/tmp/fish-speech")
+                fv = Path("/tmp/venvs_voz/fish_py311_t241")
+                fpy = fv / "bin" / "python"
+                if not fs.exists():
+                    subprocess.run(["git", "clone", "-q", "--depth", "1", "--branch", "v1.5.1",
+                                    "https://github.com/fishaudio/fish-speech.git", str(fs)], check=True,
+                                   capture_output=True, timeout=900)
+                if not fpy.exists():
+                    subprocess.run(["bash", "-c", "apt-get update -qq && apt-get install -y -qq portaudio19-dev"],
+                                   capture_output=True, timeout=900)
+                    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "uv"], check=True, timeout=600)
+                    subprocess.run([sys.executable, "-m", "uv", "venv", "--python", "3.11", str(fv)], check=True,
+                                   capture_output=True, timeout=900)
+                    subprocess.run([sys.executable, "-m", "uv", "pip", "install", "--python", str(fpy), "-e", str(fs),
+                                    "huggingface_hub", "soundfile", "torch==2.4.1", "torchaudio==2.4.1"],
+                                   check=True, capture_output=True, timeout=3600)
+                ck = fs / "checkpoints" / "fish-speech-1.5"
+                if not (ck / "model.pth").exists():
+                    subprocess.run([str(fpy), "-c", "from huggingface_hub import snapshot_download as d; "
+                                    f"d('fishaudio/fish-speech-1.5', local_dir={str(ck)!r})"], check=True,
+                                   capture_output=True, timeout=1800)
+                if subprocess.run([str(fpy), "-c", "import sys; sys.path.insert(0, '/tmp/fish-speech'); "
+                                   "import torchaudio; torchaudio.list_audio_backends(); "
+                                   "from fish_speech.inference_engine import TTSInferenceEngine"],
+                                  capture_output=True, timeout=600).returncode == 0:
+                    os.environ["FISH_NUVEM"] = "1"
+                    os.environ["FISH_VENV"] = str(fpy)
+                    print(f"Fish Speech pronto em {time.time() - t_f:.0f}s (narração padrão)", flush=True)
+                else:
+                    print("Fish Speech instalou mas não importa — narração fica no Kitten/p3", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(f"Fish Speech falhou ({type(e).__name__}: {str(e)[-200:]}) — narração fica no Kitten/p3",
+                      flush=True)
         patch =RAIZ / "D/hipercool-materiais/tools/applio/rvc/infer/pipeline.py"
         if patch.exists():
             shutil.copyfile(patch, APPLIO_DIR / "rvc" / "infer" / "pipeline.py")
@@ -295,6 +368,33 @@ def _progresso(pid, titulo, local, log, parar):
             print(f"progresso falhou: {e}", flush=True)
 
 
+_PUXADOR = []
+
+
+def _puxador_de_codigo():
+    """22/11 dona ("trocar as peças do carro em movimento: o Kaggle vai pegando no Drive conforme precisa, sem
+    atrasar o vídeo"): thread em segundo plano que, a cada 3 min, copia só os .py/.json NOVOS de bin e config do Drive
+    pra pasta de produção. Cada etapa do longo que roda em processo próprio (S2-Pro, XTTS, RVC, legenda...) já abre
+    a versão nova. Um rclone por vez, nice, nunca para o vídeo. PUXADOR_CODIGO=0 desliga."""
+    if _PUXADOR or os.environ.get("PUXADOR_CODIGO", "1") == "0":
+        return
+    import threading
+
+    def loop():
+        while True:
+            time.sleep(180)
+            for parte in ("bin", "config"):
+                try:
+                    subprocess.run(["nice", "-n", "15", str(RC), "--config", str(CONF), "copy", "--update",
+                                    "--include", "*.py", "--include", "*.json",
+                                    f"manhwa-drive:colab_recap/raiz/D/recapd-ambientes/producao/{parte}",
+                                    str(PRODUCAO / parte)], capture_output=True, timeout=600)
+                except Exception:  # noqa: BLE001 — puxador nunca derruba o vídeo
+                    pass
+    _PUXADOR.append(threading.Thread(target=loop, daemon=True))
+    _PUXADOR[0].start()
+
+
 def fazer(pid, gpu=None):
     local = TRABALHO / pid
     shutil.rmtree(local, ignore_errors=True)
@@ -306,6 +406,7 @@ def fazer(pid, gpu=None):
             print(f"[{_agora()}] {pid}: original não baixou: {e}", flush=True)
     for parte in ("bin", "config", "secrets"):  # código novo do PC
         rc("copy", f"manhwa-drive:colab_recap/raiz/D/recapd-ambientes/producao/{parte}", str(PRODUCAO / parte))
+    _puxador_de_codigo()
     # 29/10: as gravações da mascote (e o texto de cada uma) crescem todo dia (tarefa MascoteProducao); antes só
     # vinham quando a GPU ligava e o longo saía sem a pausa com a voz dela
     try:
@@ -397,8 +498,11 @@ def fazer(pid, gpu=None):
         try:
             destino_voz = RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz
             # 26/10: vozes ficam num cache único do Drive (colab_recap/vozes/<voz>); pedido antigo ainda traz a dele
+            # 25/11: vozes/<voz>/xtts_ft = modelo XTTS 88 treinado (1,8-5,6 GB) — só baixa se o pedido for 88
+            _quer88 = str((pedido.get("longo_override") or {}).get("xtts_versao") or "").startswith("88")
+            _sem88 = [] if _quer88 else ["--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**"]
             try:
-                rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(destino_voz))
+                rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(destino_voz), *_sem88)
             except RuntimeError:
                 pass
             if not (destino_voz / f"{voz}.pth").exists():
@@ -412,14 +516,15 @@ def fazer(pid, gpu=None):
             for v in pedido.get("vozes_lista") or []:
                 dv = RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v
                 try:
-                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(dv))
+                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(dv), *_sem88)
                 except RuntimeError:
                     pass
                 if (dv / f"{v}.pth").exists() and (dv / f"{v}.index").exists():
                     lista.append(v)
             for v in pedido.get("vozes_extra") or []:  # 28/10: vozes de personagem (anime-pipeline._falas_personagem)
                 try:
-                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v))
+                    rc("copy", f"manhwa-drive:colab_recap/vozes/{v}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / v),
+                       "--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**")  # 25/11: personagem não usa o 88
                 except RuntimeError:
                     print(f"[{_agora()}] {pid}: voz de personagem {v} não baixou — essas falas ficam com o narrador",
                           flush=True)
@@ -634,7 +739,8 @@ def fazer_comentario(pid):
     cfg = json.loads((local / "pedido.json").read_text(encoding="utf-8"))
     for voz in {f["voz"] for f in cfg["falas"]}:
         try:
-            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz))
+            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz),
+               "--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**")  # 25/11: comentários não usam o 88
         except RuntimeError:
             pass
     cache = COM_DIR / "tmp" / cfg["cache"]
@@ -730,9 +836,11 @@ def fazer_short(pid):
     shutil.rmtree(local, ignore_errors=True)
     rc("copy", f"{FILA_SH}/{pid}", str(local))
     ped = json.loads((local / "pedido.json").read_text(encoding="utf-8"))
+    _q88 = str((ped.get("longo_override") or {}).get("xtts_versao") or ped.get("xtts_versao") or "").startswith("88")
     for voz in ped.get("vozes") or []:
         try:
-            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz))
+            rc("copy", f"manhwa-drive:colab_recap/vozes/{voz}", str(RAIZ / "D/hipercool-materiais/models/rvc/vozes" / voz),
+               *([] if _q88 else ["--exclude", "xtts_ft/**", "--exclude", "xtts_ft_completo_5gb/**"]))  # 25/11
         except RuntimeError:
             pass
     env_ped = {k: str(v) for k, v in (ped.get("env") or {}).items()}
@@ -756,7 +864,7 @@ def fazer_short(pid):
     videos = sorted(local.rglob("final_anime_short*.mp4"))
     if rcod == 0 and videos and videos[0].stat().st_size > 300_000:
         rc("copyto", str(videos[0]), f"{FILA_SH}/{pid}/video.mp4")
-        for extra in ("marcas_visuais.json", "_testes_usados.json"):
+        for extra in ("marcas_visuais.json", "_testes_usados.json", "_voz_online.json"):  # 19/11: motor da voz
             for p in local.rglob(extra):
                 rc("copyto", str(p), f"{FILA_SH}/{pid}/{extra}")
                 break
@@ -903,6 +1011,63 @@ def fazer_treino(pid):
         shutil.rmtree(APPLIO_DIR / "logs" / f"{voz}_v4", ignore_errors=True)
 
 
+FILA_TV = "manhwa-drive:colab_recap/fila_teste_voz"
+
+
+def lote_teste_voz():
+    """17/11 dona ("use essa conta com proxy pra acelerar os testes"): testes de voz/motor na GPU (fila_teste_voz).
+    Pedido = plano.json + ref.wav + modelos/ + source.mp4 + job_teste_voz.py; devolve saida/ (áudios + video.mp4).
+    1 por chamada (produção alterna, como o treino). TESTE_VOZ=0 desliga."""
+    if not _APPLIO_OK or os.environ.get("TESTE_VOZ", "1") == "0":
+        return
+    try:
+        pids = sorted(p.rstrip("/") for p in rc("lsf", FILA_TV, "--dirs-only").split())
+    except RuntimeError:
+        return
+    for pid in pids:
+        if time.time() - INICIO > SESSAO_MAX_S - 1.5 * 3600:
+            return
+        try:
+            nomes = set(rc("lsf", f"{FILA_TV}/{pid}").split())
+            if "job_teste_voz.py" not in nomes or not _livre(nomes):
+                continue
+            eu = {"desde": _agora(), "por": QUEM}
+            _marcar(None, "tv.json", eu, destino=f"{FILA_TV}/{pid}/em_andamento_{QUEM}.json")
+            time.sleep(15)
+            if any(n.startswith("em_andamento_") and n != f"em_andamento_{QUEM}.json"
+                   for n in rc("lsf", f"{FILA_TV}/{pid}").split()):
+                rc("deletefile", f"{FILA_TV}/{pid}/em_andamento_{QUEM}.json")
+                continue
+
+            def _um(p=pid):
+                local = TRABALHO / "tv" / p
+                shutil.rmtree(local, ignore_errors=True)
+                t0 = time.time()
+                try:
+                    rc("copy", f"{FILA_TV}/{p}", str(local))
+                    r = subprocess.run([str(APPLIO_VENV / "bin" / "python"), str(local / "job_teste_voz.py"),
+                                        str(local), str(APPLIO_DIR)], capture_output=True, text=True,
+                                       timeout=4 * 3600)
+                    if (local / "saida").exists():
+                        rc("copy", str(local / "saida"), f"{FILA_TV}/{p}/saida")
+                    ok = r.returncode == 0 and (local / "saida" / "video.mp4").exists()
+                    _marcar(None, "tv.json", {"fim": _agora(), "segundos": int(time.time() - t0), "por": QUEM,
+                                              **({} if ok else {"erro": (r.stderr or r.stdout or "")[-1500:]})},
+                            destino=f"{FILA_TV}/{p}/{'pronto' if ok else 'erro'}.json")
+                    print(f"[{_agora()}] teste de voz {p}: {'OK' if ok else 'ERRO'} em {int(time.time() - t0)} s",
+                          flush=True)
+                finally:
+                    try:
+                        rc("deletefile", f"{FILA_TV}/{p}/em_andamento_{QUEM}.json")
+                    except RuntimeError:
+                        pass
+                    shutil.rmtree(local, ignore_errors=True)
+            _ocupado(_um)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[{_agora()}] teste de voz {pid}: falhou ({type(e).__name__}: {str(e)[-200:]})", flush=True)
+
+
 def lote_treino():
     """Pedidos de retreino livres (1 por vez; precisa do Applio)."""
     if not _APPLIO_OK:
@@ -1008,13 +1173,14 @@ def loop_curto():
     _gpu_paralela, Shorts idem); sai depois de OCIOSO_MAX_S sem nada (GPU parada gasta cota)."""
     while time.time() - INICIO < LIMITE_S:
         _marcar(None, f"vivo_{QUEM}.json", {"em": _agora(), "applio": _APPLIO_OK, "applio_msg": _APPLIO_MSG,
-                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "papel": "curto"},
+                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "fish": os.environ.get("FISH_NUVEM") == "1", "papel": "curto"},
                 destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
         antes = _TRAB["ultimo"]
         # 10/11 dona ("treino de voz precisa de alguns Kaggle de prioridade antes de continuar a produção"): treino
         # PRIMEIRO; sem treino na fila não muda nada (Shorts/comentários seguem). TREINO_PRIORIDADE=0 = como antes.
         if os.environ.get("TREINO_PRIORIDADE", "1") != "0":
             lote_treino()
+        lote_teste_voz()  # 17/11: testes de voz/motor (curtos, ~10-30 min) antes da produção
         lote_comentarios()
         lote_shorts()
         if os.environ.get("TREINO_PRIORIDADE", "1") == "0":
@@ -1091,7 +1257,7 @@ def loop_duplo():
     print(f"[{_agora()}] 2 longos por sessão (CPU de um enquanto o outro narra na outra GPU)", flush=True)
     while True:
         _marcar(None, f"vivo_{QUEM}.json", {"em": _agora(), "applio": _APPLIO_OK, "applio_msg": _APPLIO_MSG,
-                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "limite_h": _LIM_H,
+                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "fish": os.environ.get("FISH_NUVEM") == "1", "limite_h": _LIM_H,
                                             "longos": sorted(ativos)},
                 destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
         # 10/11 dona: treino de voz antes do longo — só com a sessão livre (não briga com render em curso)
@@ -1138,6 +1304,35 @@ def loop_duplo():
     print("limite da sessão: saindo pro PC relançar", flush=True)
 
 
+
+# 19/11 dona ("temos 15 Kaggle; deixe esse 15 o tempo todo baixando, exclusivo, até terminar os downloads das vozes"):
+# a conta nesta lista só faz a fila_teste_voz (originais das vozes) em sequência; fila vazia = volta ao curto normal.
+# 20/11 dona: as 2 contas novas do desktop (p55, p56) ficam pros testes de narrador do outro chat
+VOZ_EXCLUSIVA = {"marinarocha15380", "paulolima42653"}  # 21/11: marinaramos94615 volta pra produção (estava presa em teste de voz ocupando a vaga de longo)
+
+
+def loop_voz_exclusiva():
+    vazio = 0
+    while time.time() - INICIO < LIMITE_S and vazio < 3:
+        _marcar(None, f"vivo_{QUEM}.json", {"em": _agora(), "applio": _APPLIO_OK, "papel": "voz_exclusiva",
+                                            "fish": os.environ.get("FISH_NUVEM") == "1"},
+                destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
+        antes = _TRAB["ultimo"]
+        lote_teste_voz()
+        if _TRAB["ultimo"] == antes:
+            vazio += 1
+            time.sleep(120)
+        else:
+            vazio = 0
+    # 20/11: as contas SÓ de teste de narrador não vão pros Shorts (ficariam presas até 12 h longe dos testes): saem
+    # e a central relança quando a fila_teste_voz tiver pedido. VOZ_SO_TESTE=0 volta ao curto.
+    if QUEM in {"marinarocha15380", "paulolima42653"} and os.environ.get("VOZ_SO_TESTE", "1") != "0":
+        print(f"[{_agora()}] voz exclusiva: fila de vozes vazia — saio (conta só de teste)", flush=True)
+        return
+    print(f"[{_agora()}] voz exclusiva: fila de vozes vazia — volto ao curto", flush=True)
+    return loop_curto()
+
+
 def loop():
     TRABALHO.mkdir(exist_ok=True)
     _TRAB["ultimo"] = time.time()  # a preparação (Applio/Kokoro) não conta como ociosa
@@ -1145,6 +1340,8 @@ def loop():
         _soltar_os_meus()
     except RuntimeError as e:
         print(f"soltar marcas velhas falhou: {e}", flush=True)
+    if QUEM in VOZ_EXCLUSIVA:
+        return loop_voz_exclusiva()
     if PAPEL == "curto":
         return loop_curto()
     if PAPEL != "longo":  # sessão sem papel (antiga): mantém a linha paralela de antes
@@ -1153,7 +1350,7 @@ def loop():
         return loop_duplo()
     while time.time() - INICIO < LIMITE_S:
         _marcar(None, f"vivo_{QUEM}.json", {"em": _agora(), "applio": _APPLIO_OK, "applio_msg": _APPLIO_MSG,
-                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "limite_h": _LIM_H},
+                                            "kokoro": os.environ.get("KOKORO_NUVEM") == "1", "fish": os.environ.get("FISH_NUVEM") == "1", "limite_h": _LIM_H},
                 destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
         if os.environ.get("TREINO_PRIORIDADE", "1") != "0":  # 10/11 dona: treino de voz antes do longo
             lote_treino()
@@ -1189,7 +1386,10 @@ _COTA_H = float(os.environ.get("TRAB_COTA_H") or 0)
 if _COTA_H > 0:
     SESSAO_MAX_S = min(SESSAO_MAX_S, _COTA_H * 3600 - 900)
     LIMITE_S = min(LIMITE_S, SESSAO_MAX_S)
-S_POR_FRASE = float(os.environ.get("TRAB_S_POR_FRASE", "24"))  # medido 29/10: Top Fighter 894 frases em 4h44 (19 s) + folga
+# 19/11 (claude, dona: "faça tudo que precisar"): longo com Fish na GPU mediu ~29 s/frase (46LkpAILgrQ: 758 frases em
+# 6 h — Fish 2 h + legenda 1h40) e a estimativa de 24 s deixou o longo PRONTO ser cortado pelas 12 h antes de subir.
+# Com FISH_NUVEM=1 o padrão vira 32 s. TRAB_S_POR_FRASE continua mandando se vier.
+S_POR_FRASE = float(os.environ.get("TRAB_S_POR_FRASE") or "32")  # 19/11: Fish é o padrão (FISH_NUVEM só liga depois, l.231)  # medido 29/10: Top Fighter 894 frases em 4h44 (19 s) + folga
 # 02/11: GPU parada também gasta a cota da semana. Sem longo, Short nem comentário por este tempo = sai (a central só
 # relança quando aparece trabalho). Só no Kaggle (na VPS LIMITE_S é infinito).
 OCIOSO_MAX_S = float(os.environ.get("TRAB_OCIOSO_MIN", "20")) * 60
@@ -1238,7 +1438,9 @@ def _bx_baixar(p):
     d.mkdir(parents=True)
     t0 = time.time()
     fmt = f"bv*[aspect_ratio<0.9][width<={mh}]+ba/bv*[height<={mh}]+ba/b[height<={mh}]/b"
-    r = subprocess.run([sys.executable, "-m", "yt_dlp", url, "-f", fmt, "-S", "res,vcodec:h264",
+    # 24/11 dona (vídeo de 20 h em partes de 30 min): "trecho": "HH:MM:SS-HH:MM:SS" baixa só aquele pedaço
+    extra = ["--download-sections", "*" + str(p["trecho"])] if p.get("trecho") else []
+    r = subprocess.run([sys.executable, "-m", "yt_dlp", url, "-f", fmt, "-S", "res,vcodec:h264", *extra,
                         "--merge-output-format", "mp4", "-o", str(d / "source.%(ext)s"), "--no-warnings",
                         "--no-playlist"], capture_output=True, text=True, timeout=1800)
     video = next((f for f in d.glob("source.*") if f.suffix.lower() in (".mp4", ".mkv", ".webm")), None)

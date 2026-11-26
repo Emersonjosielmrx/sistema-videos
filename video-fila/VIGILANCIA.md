@@ -1,14 +1,11 @@
-# Vigilância 24 h — 2026-11-25T20:11:03
+# Vigilância 24 h — 2026-11-26T03:50:53
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (19)
-- tiktok: 37 posts até 20:10, normal ~76
+## Alarmes desta volta (13)
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 118 h (limite 60 h)
-- Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h)
-- TikTok: sem sucesso há 9 h (limite 8 h)
-- Rede: reagendar pro horário nobre: sem sucesso há 55 h (limite 30 h)
+- Carrossel MS Energy: sem sucesso há 125 h (limite 60 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 62 h (limite 30 h)
 - canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
@@ -18,15 +15,9 @@
 - canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- _parceiro_20261125.log: mesmo erro 5x
-- _parceiro_20261125.log: mesmo erro 5x
-- celulares: nenhum post OK há 3 h+ (13 ok de 34 hoje, 12 na fila)
 - celulares: 2 celulares fora do adb
 
-## Casos abertos (269)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] tiktok: mesmo erro 5x em 6 h (-)
-- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (260)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -51,27 +42,22 @@
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] Carrossel Advance Solar: sem sucesso há 183 h (limite 30 h) (-)
-- [consertar] Carrossel Globo Solar: sem sucesso há 182 h (limite 30 h) (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] _parceiro_20261120.log: mesmo erro 5x (-)
+- [revisar] _parceiro_20261120.log: mesmo erro 5x (gemini-4-argon)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 16 h (limite 6 h) (-)
 - [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] Facebook Anime Noturno: mesmo erro 3x em 6 h (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] tiktok: 0 posts até 00:30, normal ~9 (-)
-- [consertar] Facebook Anime Noturno: mesmo erro 3x em 6 h (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 22 h (limite 6 h) (-)
 - [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -79,7 +65,7 @@
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] tiktok: mesmo erro 6x em 6 h (-)
+- [consertar] tiktok: mesmo erro 6x em 6 h (gemini-4-argon)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 28 h (limite 6 h) (-)
@@ -89,7 +75,6 @@
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] Shorts no PC2: sem sucesso há 24 h (limite 24 h) (-)
 - [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 34 h (limite 6 h) (-)
 - [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -104,7 +89,6 @@
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] Facebook Filme Noturno: 0 Reels hoje (-)
 - [duplicado] Facebook Bicho Noturno: 0 Reels hoje (-)
-- [consertar] Facebook Mistérios Noturnos: 0 Reels hoje (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -134,7 +118,7 @@
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (gemini-4-argon)
 - [consertar] Facebook Filme Noturno: mesmo erro 3x em 6 h (-)
 - [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] Facebook Dorama Noturno: mesmo erro 3x em 6 h (-)
@@ -293,26 +277,27 @@
 - [consertar] celulares: 2 celulares fora do adb (-)
 - [consertar] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] celulares: 6 vídeos esperando conferência da troca da @ (-)
 
 ## Últimos fechados
-- [falso] instagram: 0 posts até 04:50, normal ~6 — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] celulares: 5 celulares fora do adb — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] instagram: 0 posts até 05:10, normal ~7 — - / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
 - [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
 - [falso] facebook: mesmo erro 5x em 6 h — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
+- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
+- [sem_mudanca] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
+- [sem_mudanca] Carrossel Advance Solar: sem sucesso há 183 h (limite 30 h) — gemini-4-argon / -
+- [sem_mudanca] Carrossel Globo Solar: sem sucesso há 182 h (limite 30 h) — gemini-4-argon / -
+- [sem_mudanca] Facebook Anime Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -
+- [sem_mudanca] Facebook Anime Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -
+- [sem_mudanca] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
+- [sem_mudanca] Shorts no PC2: sem sucesso há 24 h (limite 24 h) — gemini-4-argon / -
+- [sem_mudanca] Facebook Mistérios Noturnos: 0 Reels hoje — gemini-4-argon / -
 
 ## Placar dos consertadores
-- **gemini-4-argon**: 21 casos, nota 14% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/10 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/2 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/1 (voltou 0)
+- **gemini-4-argon**: 24 casos, nota 12% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/11 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0)
 - **gemini/gemini-4-hydrogen**: 1 casos, nota 0% — postagem-tiktok: 0/1 (voltou 0)
 - **cw/claude-sonnet-5-5**: 32 casos, nota 6% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0), qualidade-longo: 0/4 (voltou 0)
 - **kr/claude-sonnet-4.5**: 2 casos, nota 100% — capa-longo: 1/1 (voltou 0), solar-montagem: 1/1 (voltou 0)

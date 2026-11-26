@@ -1,13 +1,13 @@
-# Teste gradual de formatos e vozes — 25/11 18:35
+# Teste gradual de formatos e vozes — 26/11 03:36
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 790.0 de 1504 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 804.5 de 1546 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | voz:cintilante_she_ra_flavia_saddy | testando | 60 | 0 | 0 | 40 | 30 | 22.0/37 | 0.59 | 18 | 48% (13) | 59/0 | 0 |
-| voz:moana | testando | 13 | 0 | 0 | 7 | 6 | 20.0/32 | 0.62 | 510 | 40% (5) | 13/0 | 0 |
+| voz:moana | promovido | 13 | 0 | 0 | 7 | 7 | 21.0/33 | 0.63 | 278 | 49% (6) | 13/0 | 0 |
 | voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 4 | 11.5/25 | 0.46 | 903 | 53% (2) | 9/0 | 0 |
 | voz:chamber_valorant | promovido | 2 | 0 | 0 | 1 | 1 | 10.0/15 | 0.65 | 1091 | 36% (1) | 2/0 | 0 |
 | formato:chaves_chiquinha | testando | 24 | 0 | 0 | 14 | 10 | 5.5/13 | 0.43 | 53 | 47% (5) | 22/0 | 0 |
@@ -18,19 +18,19 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | formato:escolinha | testando | 5 | 0 | 0 | 4 | 3 | 3.0/4 | 0.67 | 16 | 28% (1) | 5/0 | 0 |
 | formato:videocassetadas | testando | 2 | 0 | 0 | 2 | 2 | 1.5/4 | 0.42 | 9 | - | 2/0 | 0 |
 | voz:chaves_chapolin | testando | 8 | 0 | 0 | 6 | 4 | 2.5/4 | 0.58 | 18 | 38% (1) | 8/0 | 0 |
-| voz:naruto | testando | 7 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 6/0 | 1 |
+| voz:naruto | testando | 7 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 6/0 | 0 |
 | voz:pato_donald | testando | 3 | 0 | 0 | 3 | 3 | 1.0/4 | 0.33 | 9 | - | 3/0 | 0 |
 | formato:cameo_interrupcao | testando | 3 | 0 | 0 | 2 | 2 | 1.0/3 | 0.40 | 31 | - | 2/0 | 0 |
+| formato:fofoca | testando | 12 | 0 | 0 | 5 | 3 | 2.0/3 | 0.60 | 1218 | 61% (2) | 8/0 | 0 |
 | formato:madruga_chaves | testando | 11 | 1 | 0 | 3 | 3 | 2.0/3 | 0.60 | 986 | 70% (2) | 6/0 | 0 |
 | voz:aracy_top_therm | testando | 2 | 0 | 0 | 2 | 2 | 1.5/3 | 0.50 | 13 | - | 2/0 | 0 |
 | voz:bills | testando | 3 | 0 | 0 | 3 | 3 | 1.0/3 | 0.40 | 6 | 81% (1) | 3/0 | 0 |
-| voz:cell | testando | 3 | 0 | 0 | 3 | 3 | 3.0/3 | 0.80 | 1204 | 45% (2) | 3/0 | 0 |
+| voz:cell | testando | 3 | 0 | 0 | 3 | 3 | 3.0/3 | 0.80 | 1204 | 45% (3) | 3/0 | 0 |
 | voz:chico_selton | testando | 3 | 0 | 0 | 3 | 3 | 2.5/3 | 0.70 | 1043 | 44% (2) | 3/0 | 0 |
 | voz:husk_hazbin_hotel | testando | 6 | 0 | 0 | 4 | 3 | 2.0/3 | 0.60 | 1272 | 58% (3) | 6/0 | 0 |
 | voz:mestre_kame | testando | 3 | 0 | 0 | 3 | 3 | 2.0/3 | 0.60 | 17 | 44% (1) | 3/0 | 0 |
-| voz:quico | testando | 5 | 0 | 0 | 5 | 2 | 2.5/3 | 0.70 | 1783 | 44% (3) | 5/0 | 0 |
+| voz:quico | testando | 5 | 0 | 0 | 5 | 2 | 2.5/3 | 0.70 | 1783 | 56% (4) | 5/0 | 0 |
 | formato:chaves_quico | testando | 7 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 3/0 | 0 |
-| formato:fofoca | testando | 12 | 0 | 0 | 5 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 8/0 | 0 |
 | formato:transmissao | testando | 1 | 0 | 0 | 1 | 1 | 0.0/2 | 0.25 | 3 | - | 1/0 | 0 |
 | voz:homem_de_ferro_tony_stark | testando | 3 | 0 | 0 | 3 | 2 | 1.0/2 | 0.50 | 2113 | 60% (2) | 3/0 | 0 |
 | voz:jett_valorant | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 1317 | 51% (1) | 2/0 | 0 |
@@ -40,7 +40,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2007 | 49% (2) | 2/0 | 0 |
 | voz:ram | testando | 2 | 0 | 0 | 1 | 1 | 0.5/2 | 0.38 | 0 | - | 2/0 | 0 |
 | voz:seu_madruga | testando | 2 | 0 | 0 | 2 | 1 | 1.0/2 | 0.50 | 83 | 35% (1) | 2/0 | 0 |
-| formato:trio_chaves | testando | 4 | 0 | 0 | 1 | 1 | 0.5/1 | 0.50 | 0 | - | 2/0 | 0 |
+| formato:trio_chaves | testando | 4 | 0 | 0 | 2 | 1 | 0.5/1 | 0.50 | 0 | - | 2/0 | 0 |
 | voz:alex_madagascar | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 8 | - | 1/0 | 0 |
 | voz:ashe_overwatch | testando | 1 | 0 | 0 | 0 | 0 | 0.0/1 | 0.33 | - | - | 1/0 | 0 |
 | voz:ashley_graham_re4_remake | testando | 3 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1741 | 61% (1) | 3/0 | 0 |

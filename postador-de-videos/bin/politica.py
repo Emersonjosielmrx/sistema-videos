@@ -582,6 +582,11 @@ def cota_restante(canal, projeto=None):
         return 0
     livre = cfg["max_uploads_por_canal_dia"] + _extra_rampa(canal) - uploads_hoje(canal, regs)
     res = _reserva(canal, projeto)
+    # 25/11: canal punido (teto 1) com reserva 1 ficava com cota 0 o dia todo até LIBERA_RESERVA — mesma regra do
+    # horario_publicacao: teto <= reserva = sem reserva. RESERVA_COM_TETO_BAIXO=1 volta.
+    if res and res >= cfg["max_uploads_por_canal_dia"] + _extra_rampa(canal) \
+            and os.environ.get("RESERVA_COM_TETO_BAIXO") != "1":
+        res = 0
     if res and agora().strftime("%H:%M") < LIBERA_RESERVA:  # depois disso a vaga de upload do dono que sobrou é livre
         dono, hoje = reservado_para(canal), agora().date()
         do_dono = sum(1 for r in regs if _dt(r["ts"]).date() == hoje and _do_canal(r, canal) and r.get("projeto") == dono)
@@ -633,6 +638,12 @@ def horario_publicacao(canal, pedido=None, projeto=None):
     tz = _hora_local(canal, x).tzinfo
     teto = teto_canal(canal, cfg)
     res = _reserva(canal, projeto, x)
+    # 25/11 (Vendas que Escalam/Imóvel/Lei e Lucro/Bilionário: parceiro mandado pra 05/01): canal PUNIDO tem teto 1 e
+    # reserva_dono 1 -> teto - reserva = 0 em TODO dia, o laço andava 40 dias e devolvia janeiro/fevereiro. Com o teto
+    # igual ou menor que a reserva, a vaga do dia é de quem tiver vídeo primeiro (o dono continua podendo usar).
+    # RESERVA_COM_TETO_BAIXO=1 volta a guardar.
+    if res and res >= teto and os.environ.get("RESERVA_COM_TETO_BAIXO") != "1":
+        res = 0
     dono = reservado_para(canal) if res else None
     do_dono = [t for t in (_dt(r.get("publish_at")) or _dt(r["ts"]) for r in regs if r.get("projeto") == dono) if t] \
         if res else []

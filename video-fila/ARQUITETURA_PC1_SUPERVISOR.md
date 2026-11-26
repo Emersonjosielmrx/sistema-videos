@@ -248,3 +248,49 @@ decide sozinho); vinheta do Lemo; teto diário do TikTok.
     sem ganchos). Subido pro Kaggle (montar_pacote --codigo, conferido no Drive).
 - HP: Fish NÃO funciona — reCAPTCHA Enterprise recusa (HTTP 400 "verification failed" 6/6); CPU AMD Turion sem SSE4.2.
   Contas devolvidas ao PC1, fábrica desligada lá. Fish fica em STI/asusx/itau.
+
+## 25/11 noite — "analise todas as melhorias e poste o máximo de vídeos" (dona)
+CAUSA Nº 1 DE POUCO VÍDEO: a CENTRAL-RESERVA do DESKTOP. O vigia de lá (D:\ferramentas\central-reserva\VIGIA.ps1, a
+cada 2 min) RECRIAVA o POSTAGEM_DESLIGADA.json no PC1 sempre que o achava ligado (11:31 e 20:25 de hoje) — o desktop se
+dizia central desde 23/11 22:26, mas o D: de lá está com 0,2 GB e as tarefas Central-* não subiam nada. Feito (pelo ssh
+desktop2222): tarefas \CentralReserva\ DESATIVADAS, CENTRAL_AQUI.json -> .devolvido_25nov_pc1, postagem DESLIGADA no
+desktop, PC1 religado (POSTAGEM_DESLIGADA.json.devolvido_25nov_2150). Não copiei .json do desktop pro PC1 (o PC1 mudou
+estado desde 23/11; o DEVOLVER copiaria por cima). Proteção nova: controlador._central_reserva_orfa — botão da
+central-reserva + desktop sem ssh 2 rodadas = PC1 religa sozinho e avisa (CENTRAL_RESERVA_AUTO=0 desliga).
+Medido: 1.645 Shorts de parceiro PRONTOS; 377 presos em 17 canais travados pelo YouTube; capacidade dos 21 vivos = 54/dia
+(4 fortes com teto 7-8; 12 punidos 1/dia; 3 em descanso 0/dia pelo médico).
+- parceiro_diario: _origem_drive lê também _MOVIDOS_PARA_DRIVE.txt (o gerente de vídeos anota assim) — 23 prontos
+  "sem video.mp4 — pulado" voltam a postar.
+- parceiro_diario: canal com "usar": false no youtube_navegador.json (Fato Chocante, conta nova esperando a dona) é
+  pulado antes de baixar do Drive (cada rodada perdia 2-4 min). PARCEIRO_PULA_SEM_NAVEGADOR=0 volta.
+- TikTok: 58 OK hoje. 27 de 58 contas pausadas (19 "MORTA" em 12/11 por 0 views em 7 dias) — e a medição diária não lê
+  mais as pausadas, então nunca voltam. Despausar = postar em IP compartilhado: decisão da dona.
+- 25/11 22:30 dona "sim": (1) TikTok: 18 das 19 contas "MORTA" de 12/11 religadas (campo pausada -> pausada_antes_25nov;
+  bkp reuso_plataformas.json.bkp_25nov_despausar). murilodoctor192 FICA pausada: é conta VIVA do Kaggle. (2) Fato
+  Chocante: youtube_navegador.json usar=true (bkp .bkp_25nov_fato); conta nova: captcha/confirmação = parar.
+  (3) Estoque dos 17 canais travados: NÃO movido — todo canal vivo pt já tem 10 a 110 dias de estoque (o limite é o teto
+  de cada canal, 1/dia nos punidos, não a falta de vídeo); esportes/jogos/animais não têm canal vivo. Mover só aumenta
+  quando nascer canal vivo desses nichos.
+- 25/11 23:30 — Shorts AGENDADOS A MESES: 12 Shorts de parceiro em canais vivos abrem entre 30/12 e 15/02 (ForjaReact
+  14/02, Bilionário/Clínica/Empresário 15/02...) + 21 do Dorama Noturno (travado) em dez. Causa: o parceiro conta só os
+  próprios agendados; o postador conta os de TODOS os projetos e, no canal punido (1/dia), empurrava pro próximo dia
+  livre -> meses. Conserto: parceiro_diario não agenda se o horário efetivo passa de DIAS_FRENTE+1 (8 dias); o canal
+  sai da rodada e tenta depois. PARCEIRO_TETO_LONGE=0 volta. Os 12 já agendados NÃO foram mexidos (mudar data no Studio
+  de vídeo já aceito = arriscado; antecipar_agendados.py só puxa o PRÓXIMO do canal) — eles abrem sozinhos nas datas.
+- 25/11 23:15 — Fato Chocante: 1ª tentativa falhou "perfil do navegador não está logado" (conta nova phikhanh141173).
+  usar=false de novo até a dona logar: python D:\logins-google\cofre.py logar phikhanh141173. A tentativa prendeu a
+  rodada ~30 min (os canais fortes ficaram pra 23:18).
+- 25/11 23:55 — CAUSA REAL dos agendados a meses: canal PUNIDO tem teto 1 e reserva_dono 1 (vaga guardada pro
+  manhwa-react) -> teto - reserva = 0 em todo dia; politica.horario_publicacao andava 40 dias e devolvia jan/fev, e a
+  cota_restante ficava 0 até 23h. Conserto em politica.py (horario_publicacao + cota_restante): teto <= reserva = sem
+  reserva (a vaga é de quem tiver vídeo primeiro). RESERVA_COM_TETO_BAIXO=1 volta. Teste: Vendas/Imóvel/Lei e
+  Lucro/Bilionário/Empresário passaram de 05/01 para 26-27/11. test_advertencias 12/12 ok.
+- 26/11 00:30 — o conserto da reserva funcionou (Filme Noturno, punido, pegou vaga 26/11 21:05 em vez de 05/01), mas o
+  envio falhou: "Hashtags sugeridas" abertas DENTRO da caixa do título -> _escrever esperou 60 s e desistiu com o vídeo
+  já enviado (rascunho privado "1795663138 video" no Filme Noturno; print logs\yt_web\20261126_002411_falha_filmenoturno).
+  youtube_web_poster._escrever agora tenta 3x (fecha a sugestão pelo cabeçalho; Escape só com lista aberta; 3ª com force).
+  PENDENTE DONA: rascunhos privados incompletos a apagar — Fio da Meada cPQnT-EZuxE e o "1795663138 video" do Filme Noturno.
+- 26/11 02:13 cron noite: postagem ligada; 12 AGENDADO desde 21:46 (canais punidos voltaram: Forja/Fio/Assist/Empresário/Clínica/Imóvel/Vendas pra 26-28/11); Lei e Lucro 01:49 falhou ANTES do arquivo entrar (sem rascunho); sti/asusx Fish ok, itau sem rede; Drive ok (78); commit 18,9 GB; desktop offline.
+- 26/11 02:52 cron: postagem ligada; 14 AGENDADO 01-02h, 0 Traceback; longos/capas sem erro novo; controlador ok; Fish sti/asusx ok, itau fora da rede; Drive ok; commit 21,4 GB.
+- 26/11 03:22 cron: postagem ligada; 6 AGENDADO 02-03h, sem erro; TikTok 30 OK hoje; controlador ok; Fish sti/asusx ok, itau fora; commit 18,2 GB.
+- 26/11 03:52 cron: postagem ligada; 1 AGENDADO 03h (inovare br no limite diário até 09:41; Mistérios segurado: vídeo decolando +4459/6h); TikTok 33 OK; longo subindo 03:45; Fish sti/asusx ok, itau fora; Drive ok; commit 17,2 GB.

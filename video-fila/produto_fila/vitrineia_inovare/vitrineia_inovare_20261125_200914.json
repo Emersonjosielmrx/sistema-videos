@@ -1,0 +1,150 @@
+{
+ "conta": "vitrineia_inovare",
+ "produto": "vitrine_ia",
+ "marca": "Vitrine IA",
+ "titulo": "Um bot com todo o conhecimento da sua loja",
+ "legenda": "O Vitrine IA absorve as informações do seu catálogo e se torna um bot com todo o conhecimento da sua loja. Ele atende, recomenda e vende. Quer ver como funciona? Link no perfil. 🛍️\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Seu bot conhece sua loja",
+  "pergunta_cliente": "Cliente pergunta sobre um produto e você demora a responder?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Todo dia chegam perguntas sobre os produtos da loja, e eu não conseguia responder todas a tempo.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the counter of a tidy, well lit small Brazilian clothing store, organized shelves in the background",
+    "real_tema": "",
+    "destaques": [
+     "perguntas sobre os produtos",
+     "não conseguia responder"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261125_201133_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O sistema absorve as informações do seu catálogo. Assim, vira um bot com todo o conhecimento da sua loja.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "informações do seu catálogo"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Olá! Vocês têm esse modelo em outras cores?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Temos sim. Posso te mostrar as opções disponíveis?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode! Qual você recomenda para o dia a dia?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Para o dia a dia, esse modelo é uma ótima escolha. Quer que eu separe o seu?"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje o bot atende, recomenda e vende com o conhecimento da minha loja, e eu cuido do resto.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the counter of a tidy, well lit small Brazilian clothing store, organized shelves in the background",
+    "real_tema": "",
+    "destaques": [
+     "atende, recomenda e vende",
+     "conhecimento da minha loja"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261125_201133_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261125_201133_1.png"
+   }
+  ],
+  "legenda": "O Vitrine IA absorve as informações do seu catálogo e se torna um bot com todo o conhecimento da sua loja. Ele atende, recomenda e vende. Quer ver como funciona? Link no perfil. 🛍️",
+  "titulo": "Um bot com todo o conhecimento da sua loja",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "como_funciona_treino",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 130,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\vitrineia_inovare_20261125_200914\\dono_3.mp4",
+ "duracao_s": 31.47,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-25T20:46:15",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.63,
+   "fala": "Cliente pergunta sobre um produto e você demora a responder?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.63,
+   "fim": 12.46,
+   "fala": "Todo dia chegam perguntas sobre os produtos da loja, e eu não conseguia responder todas a tempo.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.46,
+   "fim": 20.14,
+   "fala": "O sistema absorve as informações do seu catálogo. Assim, vira um bot com todo o conhecimento da sua loja.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.14,
+   "fim": 27.53,
+   "fala": "Hoje o bot atende, recomenda e vende com o conhecimento da minha loja, e eu cuido do resto.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.53,
+   "fim": 31.47,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.25,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 6.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 2,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

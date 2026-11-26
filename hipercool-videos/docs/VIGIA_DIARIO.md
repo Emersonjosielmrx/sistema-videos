@@ -535,3 +535,11 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas leitura de logs e verificação de processos.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261126_0341 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo ila_postagem.log registra ciclos contínuos a cada 20 minutos (último às 03:27 "Shorts em pt: canal parado, sai já" e janelas de espaço em disco). O ila_ciclo.log mostra execuções regulares e o 
+efazer_caps.log mostra histórico recente de processamento de capítulos. Nenhum travamento crítico identificado.
+- O que fiz: Nenhum código alterado (Modo Só Aviso).
+- CONSERTO PROPOSTO: Nenhum.
+- Estado: NADA A FAZER

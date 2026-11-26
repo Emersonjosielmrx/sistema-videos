@@ -951,12 +951,33 @@ def lingua_nasce_morta():
     return os.environ.get("PREFERE_PT", "1") != "0"
 
 
+def _origem_drive(x):
+    """Caminho no Drive do video.mp4 deste Short. 25/11: o gerente de vídeos (registro_drive.py) anota em
+    _MOVIDOS_PARA_DRIVE.txt ("data  video.mp4  (MB)  ->  manhwa-drive:..."), não no _NO_DRIVE.txt da reserva — 23
+    Shorts prontos ficavam "sem video.mp4 — pulado" pra sempre. Lê os dois."""
+    pasta = x["pj"].parent
+    nd = pasta / "_NO_DRIVE.txt"
+    if nd.exists():
+        t = nd.read_text(encoding="utf-8").strip()
+        if t:
+            return t.splitlines()[0].strip()
+    mv = pasta / "_MOVIDOS_PARA_DRIVE.txt"
+    if mv.exists():
+        for linha in reversed(mv.read_text(encoding="utf-8", errors="ignore").splitlines()):
+            m = re.search(r"\s" + re.escape(x["mp4"].name) + r"\s.*?->\s*(\S+:\S.*?)\s*$", linha)
+            if m:
+                return m.group(1).strip()
+    return None
+
+
 def _trazer_do_drive(x, nome):
     """Traz de volta do Drive o video.mp4 de UM Short da reserva (reserva_shorts_drive.py deixa _NO_DRIVE.txt com o
     caminho). True se o arquivo está no lugar. 12/11 dona: "pode mandar as reservas pro Drive"."""
     no_drive = x["pj"].parent / "_NO_DRIVE.txt"
     try:
-        origem = no_drive.read_text(encoding="utf-8").strip()
+        origem = _origem_drive(x)
+        if not origem:
+            raise FileNotFoundError("sem caminho do Drive")
         subprocess.run([r"D:\tools\rclone.exe", "copyto", origem, str(x["mp4"]), "--retries", "3"],
                        capture_output=True, timeout=900, creationflags=0x08000000)
     except Exception as e:  # noqa: BLE001
@@ -1395,6 +1416,17 @@ def postar(args):
         if bloq:
             log(f"{nome}: bloqueado no postador ({bloq}) — pulando")
             continue
+        # 25/11: canal com "usar": false no youtube_navegador.json (conta nova esperando a dona aprovar a 1ª postagem,
+        # ex.: Fato Chocante) trazia o vídeo do Drive TODA rodada (2-4 min) só pra ouvir "upload por API está proibido".
+        # Pula antes. PARCEIRO_PULA_SEM_NAVEGADOR=0 volta.
+        if os.environ.get("PARCEIRO_PULA_SEM_NAVEGADOR", "1") != "0":
+            try:
+                if not pol._usar_navegador(canal["id"]) and pol.politica().get("proibido_postar_por_api"):
+                    if not so_urgente:
+                        log(f"{nome}: canal sem navegador liberado (usar=false — aprovação da dona) — pulando")
+                    continue
+            except Exception:  # noqa: BLE001
+                pass
         # a vaga do dono do canal já sai de pol.cota_restante(canal, "parceiro") (cadastro único, 18/10); reservar mais
         # uma aqui impedia deixar os de amanhã programados hoje (dono 18/10: "hoje mesmo fazer os de amanhã")
         minimo = 1
@@ -1497,7 +1529,7 @@ def postar(args):
             # rodada ainda subindo") e o disco enchia de novo. Agora o vídeo da reserva continua valendo como pronto e
             # só o ESCOLHIDO volta do Drive, na hora de subir (_trazer_do_drive, mais abaixo).
             def _na_reserva(y):
-                return (not y["mp4"].exists() and (y["pj"].parent / "_NO_DRIVE.txt").exists()
+                return (not y["mp4"].exists() and _origem_drive(y) is not None
                         and os.environ.get("RESERVA_VOLTA_DO_DRIVE", "1") != "0")
             for x in [x for x in prontos if not x["mp4"].exists() and not _na_reserva(x)]:  # 22/10: o marcar_aprovacao derrubava a rodada inteira
                 log(f"{nome}: {x['pj'].parent.name} está pronto mas sem {x['mp4'].name} — pulado")
@@ -1602,6 +1634,16 @@ def postar(args):
                     continue
             # 1 h longe dos vídeos do canal (de qualquer projeto) + teto do dia de lá com a vaga do dono guardada
             quando = pol.horario_publicacao(canal, alvo, PROJETO) or alvo
+            # 25/11 (ForjaReact 14/02, Bilionário 15/02, Clínica 15/02): o parceiro só conta os PRÓPRIOS agendados
+            # ("meus"); o postador conta os de todos os projetos. Canal punido (1/dia) com vídeo de outro projeto ->
+            # o postador empurrava pro próximo dia livre e o Short abria 2-3 MESES depois (vídeo parado, fonte gasta,
+            # canal sem nada nos dias de perto). Passou de DIAS_FRENTE + 1 = não sobe agora; o canal sai desta rodada.
+            # PARCEIRO_TETO_LONGE=0 volta ao jeito antigo.
+            if (os.environ.get("PARCEIRO_TETO_LONGE", "1") != "0"
+                    and quando - datetime.now().astimezone() > timedelta(days=DIAS_FRENTE + 1)):
+                log(f"{nome}: a vaga cairia em {quando.astimezone(tz):%d/%m} (o postador já tem a semana cheia de "
+                    f"outros projetos) — não agenda tão longe; tenta na próxima rodada")
+                break
             tit = x["d"].get("titulo") or x["pj"].parent.name
             if args.ensaio:
                 log(f"[ensaio] {nome}: {x['pj'].parent.name} -> {quando.astimezone(tz):%d/%m %H:%M} lá | {tit[:70]}")

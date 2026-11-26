@@ -169,7 +169,7 @@ def download_video(url, out_dir, max_height=720):
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
             motivo = _motivo_ytdlp(e)
             logging.warning(f"[fetch] download (formato único{' via proxy' if px else ''}) falhou: {motivo}")
-            if ytdlp_vez.bloqueio(motivo):
+            if ytdlp_vez.bloqueio(motivo) or (px and "402 payment required" in motivo.lower()):  # 26/11: 402 = proxy sem banda, troca
                 if px:
                     ytdlp_vez.proxy_ruim(px, motivo)
                     px = ytdlp_vez.proxy_url()
@@ -191,7 +191,7 @@ def download_video(url, out_dir, max_height=720):
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
         motivo = _motivo_ytdlp(e)
         logging.error(f"[fetch] download falhou: {motivo}")
-        if ytdlp_vez.bloqueio(motivo):
+        if ytdlp_vez.bloqueio(motivo) or (px and "402 payment required" in motivo.lower()):  # 26/11: 402 = proxy sem banda
             if px:
                 ytdlp_vez.proxy_ruim(px, motivo)
             else:

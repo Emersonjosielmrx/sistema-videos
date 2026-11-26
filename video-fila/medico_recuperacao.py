@@ -158,6 +158,12 @@ def main():
             continue
         v_ontem = d["ganho"].get(ontem, ult[-1])
         pct = v_ontem / media
+        # 25/11 dona: "todos os dias estão menos vendo esses canais, então tem só que comparar sempre com o dia
+        # anterior" — a leitura principal é ONTEM x ANTEONTEM (o % da média de antes do ban fica só de referência).
+        v_ante = d["ganho"].get((agora - timedelta(days=2)).date().isoformat())
+        dia_pct = (v_ontem / v_ante - 1) if v_ante else None
+        dia_txt = ("novo" if dia_pct is None else
+                   f"{dia_pct:+.0%} {'🟢' if dia_pct >= 0.10 else ('🔴' if dia_pct <= -0.10 else '⚪')}")
         tend = "↗" if len(ult) >= 2 and ult[-1] > ult[0] * 1.3 else ("↘" if len(ult) >= 2 and ult[-1] < ult[0] * 0.7 else "→")
         cid = s2id.get(_norm(s)) or s2id.get(_norm(d["nome"]))
         n_tot, n_nob = tot.get(cid, 0), nob.get(cid, 0)
@@ -194,8 +200,10 @@ def main():
                         "views_antes": round(sum(ult) / len(ult)), "media_pre_ban": round(media),
                         "aplicado": aplicar})
             novas.append(dec)
-        linhas.append(f"| {d['nome'][:24]} | {media:,.0f} | {' / '.join(f'{x:,}' for x in ult)} | {pct:.0%} {tend} | "
-                      f"{sit} | {n_nob}/{n_tot} | {acao} |".replace(",", "."))
+        linhas.append((dia_pct if dia_pct is not None else -9,
+                       f"| {d['nome'][:24]} | {(v_ante if v_ante is not None else 0):,} | {v_ontem:,} | {dia_txt} | "
+                       f"{' / '.join(f'{x:,}' for x in ult)} | {pct:.0%} | {sit} | {n_nob}/{n_tot} | {acao} |"
+                       .replace(",", ".")))
 
     # 23/11: alavanca NOVA (sem placar ainda) vai só em METADE dos canais elegíveis; a outra metade fica de CONTROLE
     # (mesma medição, sem mexer) — senão "melhorou" pode ser só o tempo passando. Alterna pela ordem de tamanho.
@@ -279,8 +287,13 @@ def main():
         EST.write_text(json.dumps(est, ensure_ascii=False, indent=1), "utf-8")
 
     out = [f"# 🩺 Médico da recuperação — {agora:%d/%m %H:%M}" + ("" if aplicar else " (ensaio)"), "",
-           "| Canal | Antes (média/dia) | Últimos 3 dias | Ontem x antes | Situação | Nobre 7 d | Decisão |",
-           "|---|---:|---|---:|---|---:|---|", *linhas, ""]
+           "Leitura principal (dona 25/11): **ontem x anteontem** — 🟢 subiu 10%+, 🔴 caiu 10%+, ⚪ igual. "
+           "O % da média de antes do ban fica só de referência.", "",
+           "| Canal | Anteontem | Ontem | Ontem x anteontem | Últimos 3 dias | % da média pré-ban | Situação | Nobre 7 d | "
+           "Decisão |",
+           "|---|---:|---:|---:|---|---:|---|---:|---|", *[l for _, l in sorted(linhas, key=lambda t: -t[0])], "",
+           f"**Resumo:** {sum(1 for x, _ in linhas if x >= 0.10)} subiram, {sum(1 for x, _ in linhas if x <= -0.10)} "
+           f"caíram, {sum(1 for x, _ in linhas if -0.10 < x < 0.10)} iguais (ontem x anteontem).", ""]
     out += ["## Decisões desta rodada", *(f"- {x['canal']}: **{x['alavanca']}** — {x['motivo']}" +
                                        ("" if aplicar else " _(ensaio, não aplicado)_") for x in novas)] \
         if novas else ["## Decisões desta rodada", "- nenhuma"]

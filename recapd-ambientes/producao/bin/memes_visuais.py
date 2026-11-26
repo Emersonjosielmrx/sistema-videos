@@ -81,7 +81,11 @@ def _novos():
     out = []
     for m in lista:
         arq = NOVOS_DIR / m["arquivo"]
-        emo = EMOCAO_NOVOS.get(m["arquivo"][:2])
+        ficha = fichas().get(m["arquivo"]) or {}
+        # 26/11: os memes aprovados em 26/11 (numero 21 em diante) nao estao em EMOCAO_NOVOS: a emocao vem da ficha
+        emo = EMOCAO_NOVOS.get(m["arquivo"][:2]) or ficha.get("emocao")
+        if ficha.get("palavrao") and os.environ.get("MEMES_PALAVRAO", "1") == "0":
+            continue  # 26/11: MEMES_PALAVRAO=0 tira os memes com palavrao na fala (padrao: entram, a dona aprovou)
         if arq.exists() and emo and not meme_proibido(arq):
             out.append({"file": str(arq), "kind": "video", "duration": m.get("dur"), "has_audio": True,
                         "desc": m.get("frase", ""), "tags": TAGS.get(emo, [])[:1], "ok": True, "novo": True})
@@ -191,6 +195,14 @@ def fichas():
 
 def _ficha(m):
     return fichas().get(Path(m["file"]).name)
+
+
+def fora_do_resumo(nome):
+    # 26/11: meme com palavrao na fala ou so de som (ficha resumo=false) nao entra na ABERTURA do video
+    try:
+        return (fichas().get(str(nome)) or {}).get("resumo") is False
+    except Exception:  # noqa: BLE001
+        return False
 
 
 TRISTE_PREFIXO = ("assassinad", "suicid", "estupr", "abusad", "abuso", "morr", "mort", "matou", "mataram", "matar",

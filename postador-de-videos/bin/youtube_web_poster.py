@@ -513,8 +513,28 @@ def _idioma(pg):
 
 def _escrever(pg, seletor, texto):
     caixa = pg.locator(seletor).first
-    caixa.wait_for(state="visible", timeout=60000)
-    caixa.click()
+    # 26/11 (Filme Noturno 00:24, print falha_filmenoturno: título ainda "1795663138 video" e as "Hashtags sugeridas"
+    # abertas DENTRO da caixa): a espera de 60 s pelo "visível" estourava com o vídeo já enviado = rascunho privado.
+    # Agora espera menos, fecha a sugestão (clique no cabeçalho do diálogo) e tenta de novo; 3ª vez com force.
+    for i in range(3):
+        try:
+            caixa.wait_for(state="visible", timeout=60000 if i == 0 else 15000)
+            caixa.click(timeout=10000, force=i == 2)
+            break
+        except Exception as e:  # noqa: BLE001
+            if i == 2:
+                raise
+            log(f"  campo {seletor.split()[0]} não aceitou ({type(e).__name__}) — fecho a sugestão e tento de novo")
+            try:
+                pg.mouse.move(5, 5)
+                b = pg.locator("ytcp-uploads-dialog tp-yt-paper-dialog, ytcp-uploads-dialog #dialog").first \
+                    .bounding_box(timeout=3000)
+                if b:
+                    pg.mouse.click(b["x"] + 24, b["y"] + 24)
+                pg.keyboard.press("Escape") if pg.locator("tp-yt-iron-dropdown:visible").count() else None
+            except Exception:  # noqa: BLE001
+                pass
+            pg.wait_for_timeout(1500)
     pg.keyboard.press("Control+A")
     pg.keyboard.press("Delete")
     pg.keyboard.insert_text(texto)

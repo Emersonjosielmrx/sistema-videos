@@ -83,3 +83,11 @@ Atualizado 25/11/2026. Escrito para outro chat (ou a dona) refazer sem começar 
 | `fb_reel_api.py teste <chave>` | posta 1 Reel pela API numa Página |
 | `fb_medir_api.py [chaves]` | mede views/seguidores pela API |
 | `fb_saude.py` | religa ponte caída, apaga trava morta |
+
+## H) O que rende (análise 25/11, 78-85 Reels — refazer com mais dados)
+- Hora: 18-21 h = 427 views/Reel; 12-18 h = 398; 00-08 h = 330; 21-24 h = 190 (pior). -> `NOBRE = (18, 21)`.
+- Espaçamento 30-60 min pareceu melhor, mas só 5 Reels: mantido o mínimo de 15 min.
+- Duração e "?" na legenda: diferença só na MÉDIA (1-2 virais); pela mediana 4-16% — não mudou o seletor.
+- Volume: todas as Páginas têm 10+ dias de estoque (Hindi 10, Mundo 13, Forja 14); repõe sozinho.
+- API x Chrome: mesma conta rende igual. 0 view = conta com distribuição cortada, não a API.
+- Relatórios: D:\tmp\fbrel\noite\melhoria_*.md

@@ -712,7 +712,11 @@ def _memes_resumo(clips, sfx_durs, workspace):
         novos_dir = next((d for d in (pasta.parent / "memes_novos",
                                       Path(r"D:\hipercool-materiais\memes_para_escolher_5l8a")) if d.exists()), None)
         if novos_dir:
-            nv = [p for p in sorted(novos_dir.glob("*.mp4")) if not meme_proibido(p)
+            try:  # 26/11: ficha resumo=false (palavrao / so som) nao entra na abertura
+                from memes_visuais import fora_do_resumo as _fora_resumo
+            except Exception:  # noqa: BLE001
+                _fora_resumo = lambda _n: False  # noqa: E731
+            nv = [p for p in sorted(novos_dir.glob("*.mp4")) if not meme_proibido(p) and not _fora_resumo(p.name)
                   and 0 < (video_duration(str(p)) or 0) <= MEME_RESUMO_MAX_S]
             if nv:
                 pool = nv

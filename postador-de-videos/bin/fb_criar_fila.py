@@ -46,6 +46,17 @@ def _gravar(p, d):
         d = json.loads(json.dumps(d))
         for c in d.get("contas", {}).values():
             c.pop("_ocupada", None)
+        # 26/11: o criador relia o estado no começo e regravava tudo no fim -> apagava o repouso de 48 h gravado por fora
+        # (emersonjosiel02 voltou a 25/11 10:45 e criou Página às 02:45 em repouso). Nunca DIMINUI parada_ate do disco.
+        try:
+            disco = json.loads(Path(p).read_text(encoding="utf-8")).get("contas", {})
+            for nome, c in d.get("contas", {}).items():
+                pd = (disco.get(nome) or {}).get("parada_ate")
+                if pd and (not c.get("parada_ate") or c["parada_ate"] < pd):
+                    c["parada_ate"] = pd
+                    c["motivo"] = (disco.get(nome) or {}).get("motivo", c.get("motivo"))
+        except (OSError, ValueError):
+            pass
     tmp = Path(p).with_suffix(".tmp")
     tmp.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     os.replace(tmp, p)

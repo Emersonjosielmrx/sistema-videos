@@ -1164,11 +1164,22 @@ def sec_recuperacao():
             p = ref / media
             est = "✅ recuperado" if p >= 0.7 else ("🟡 parcial" if p >= 0.3 else "🔴 restrito")
         nome = prim[(s, dias[-1])][2]
-        linhas.append((media, f"| {nome[:24]} | {media:,.0f} | {'—' if g_ontem is None else f'{g_ontem:,.0f}'} | "
-                              f"{est} |".replace(",", ".")))
+        # 25/11 dona: "comparar sempre com o dia anterior" — ontem x anteontem é a leitura principal
+        g_ante = ganho.get((agora - timedelta(days=2)).strftime("%Y-%m-%d"))
+        if g_ontem is not None and g_ante:
+            dp = g_ontem / g_ante - 1
+            dia = f"{dp:+.0%} {'🟢' if dp >= 0.10 else ('🔴' if dp <= -0.10 else '⚪')}"
+        else:
+            dp, dia = None, "—"
+        linhas.append((dp if dp is not None else -9,
+                       f"| {nome[:24]} | {'—' if g_ante is None else f'{g_ante:,.0f}'} | "
+                       f"{'—' if g_ontem is None else f'{g_ontem:,.0f}'} | {dia} | {media:,.0f} | {est} |"
+                       .replace(",", ".")))
     linhas.sort(key=lambda x: -x[0])
-    out = ["## 🩺 Recuperação dos canais vivos (views/dia x antes dos banimentos 12-16/11)",
-           "| Canal | Antes (média/dia) | Ontem (fechado) | Situação |", "|---|---:|---:|---|"]
+    out = ["## 🩺 Recuperação dos canais vivos — ontem x anteontem (dona 25/11)",
+           f"- {sum(1 for x, _ in linhas if x >= 0.10)} subiram, {sum(1 for x, _ in linhas if x <= -0.10)} caíram, "
+           f"{sum(1 for x, _ in linhas if -0.10 < x < 0.10)} iguais (🟢 +10% ou mais, 🔴 -10% ou mais)",
+           "| Canal | Anteontem | Ontem | Ontem x anteontem | Média pré-ban | Situação |", "|---|---:|---:|---:|---:|---|"]
     out += [l for _, l in linhas]
     n = Counter(l.rsplit("|", 2)[-2].strip() for _, l in linhas)
     out.append("- Hoje só fecha amanhã de madrugada (o YouTube atualiza o total de views 1x por dia, entre 00h e 06h).")

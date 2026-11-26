@@ -399,4 +399,8 @@ STATUS: OK
 - CONSERTO PROPOSTO: Nenhum (Modo S� Aviso ativo). Manter o monitoramento e respeitar as configura��es vigentes.
 - Estado: RESOLVIDO
 
-STATUS: OK
+STATUS: OK## 20261125_2156 � Vigia noturno: recap longo alimentador parado, GPUs sem conta e narracao_curva.py
+- Motivo / O que achei: Recap longo com alimentador (cliente.py alimentar) parado no PC1, 25 de 25 GPUs sem conta verificada, e diverg�ncias no comum/narracao_curva.py apontadas pelo vigia_geral.
+- Causa prov�vel: Falta de contas ativas e rotina do alimentador inativa; arquivos de recurso comum modificados em hipercool/historias.
+- CONSERTO PROPOSTO: python D:\hipercool-materiais\bin\recursos.py subir narracao_curva.py --de hipercool (e --de historias); religar o alimentador do recap longo via python cliente.py alimentar ou reiniciar a rotina conforme o procedimento padr�o.
+- Estado: PRECISA REVIS�O
