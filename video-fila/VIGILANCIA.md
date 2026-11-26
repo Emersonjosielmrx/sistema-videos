@@ -1,67 +1,25 @@
-# Vigilância 24 h — 2026-11-26T11:50:39
+# Vigilância 24 h — 2026-11-26T19:50:47
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (17)
+## Alarmes desta volta (15)
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 133 h (limite 60 h)
-- Rede: reagendar pro horário nobre: sem sucesso há 70 h (limite 30 h)
-- canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal bichonoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- Carrossel MS Energy: sem sucesso há 141 h (limite 60 h)
+- Shorts no PC2: sem sucesso há 27 h (limite 24 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 78 h (limite 30 h)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal gamenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- celulares: 2 celulares fora do adb
-- [ronda] MAQUINA: !! DISCO C QUASE CHEIO
 - [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20)
 - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40)
 - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20)
+- [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 26 19:18)
+- [ronda] TAREFAS COM ERRO: MSEnergy_PostarInsta (0x1, 26 16:40)
+- [ronda] TAREFAS COM ERRO: PainelExterno (0x1, 26 19:19)
+- [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
+- [ronda] TAREFAS COM ERRO: VigiaCelularesIA (0x41306, 26 16:35)
+- [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): LogarColab
+- [ronda] x200ma: [x200ma] !! FORA
 
-## Casos abertos (261)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [revisar] _parceiro_20261120.log: mesmo erro 5x (gemini-4-argon)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 16 h (limite 6 h) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] tiktok: 0 posts até 00:30, normal ~9 (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] Gemini sem navegador (imagem/vídeo): sem sucesso há 22 h (limite 6 h) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (243)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -283,23 +241,45 @@
 - [consertar] [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40) (-)
 - [consertar] [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20) (-)
 - [consertar] [ronda] MAQUINA: !! DISCO C QUASE CHEIO (-)
+- [consertar] [ronda] TAREFAS COM ERRO: ColetarViewsLongos (0x41306, 26 13:11) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: VigiaVideos (0x1, 26 13:15) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: ComentariosProducao (0x1, 26 12:52) (-)
+- [consertar] [ronda] PRODUCAO DE VIDEO: !! QUARENTENA EM USO (voltar com quarentena.py --voltar): D:\trader_binance\trader_binance\deploy\exportar_historico.py (-)
+- [consertar] Shorts no PC2: sem sucesso há 24 h (limite 24 h) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: ComentariosProducao (0x8007042B, 26 16:52) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: DriveChaveConferir (0x41306, 26 17:54) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: ManhwaReact-Rede (0x8007042B, 26 17:17) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: MSEnergy_PostarInsta (0x1, 26 16:40) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: SalvarGithub (0xFFFFFFFF, 26 16:00) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: Solares_Estoque (0x8007042B, 26 17:16) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: UsoMaquinas (0x41306, 26 18:05) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: ClinePonte (0x1, 26 18:15) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: FacebookVigia (0x1, 26 18:20) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: LimpezaChrome (0x41306, 26 18:05) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: ManhwaReact-Rede (0x1, 26 18:17) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: Solares_Estoque (0x1, 26 18:16) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 26 19:18) (-)
+- [vigia_rodando] [ronda] TAREFAS COM ERRO: PainelExterno (0x1, 26 19:19) (-)
+- [vigia_rodando] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): LogarColab (-)
+- [vigia_rodando] [ronda] x200ma: [x200ma] !! FORA (-)
 
 ## Últimos fechados
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
-- [falso] facebook: mesmo erro 5x em 6 h — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [sem_mudanca] Carrossel Advance Solar: sem sucesso há 183 h (limite 30 h) — gemini-4-argon / -
-- [sem_mudanca] Carrossel Globo Solar: sem sucesso há 182 h (limite 30 h) — gemini-4-argon / -
-- [sem_mudanca] Facebook Anime Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -
-- [sem_mudanca] Facebook Anime Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -
-- [sem_mudanca] canal novo_pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
-- [sem_mudanca] Shorts no PC2: sem sucesso há 24 h (limite 24 h) — gemini-4-argon / -
-- [sem_mudanca] Facebook Mistérios Noturnos: 0 Reels hoje — gemini-4-argon / -
+- [falso] [ronda] TAREFAS COM ERRO: ArquivarDrive (0x41306, 26 16:49) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: NSN_ManterCookies (0x8007042B, 26 17:11) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: NSN_Saude (0x8007042B, 26 17:13) — - / -
+- [falso] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): ArquivarDrive — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VarrerChromesFish (0x1, 26 17:58) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VigiaChats (0x41306, 26 17:55) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: EscadaCelulares (0x8007042B, 26 17:10) — - / -
+- [falso] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): JanelaMudancaMadrugada — - / -
+- [falso] [ronda] TAREFAS COM ERRO: RecapCentralCasa (0x1, 26 18:07) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VigiaMemoria (0x41306, 26 18:03) — - / -
+- [falso] [ronda] asusx: + echo '[hp] !! FORA' — - / -
+- [falso] [ronda] TAREFAS COM ERRO: PainelFacebookViews (0x8007042B, 26 17:13) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: PrioridadeVSCode (0x41306, 26 18:02) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VigiaCelularesIA (0x41306, 26 16:35) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: CelularesEncher (0x1, 26 18:04) — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 24 casos, nota 12% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/11 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0)

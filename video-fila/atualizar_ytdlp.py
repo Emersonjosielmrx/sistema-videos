@@ -13,8 +13,8 @@ BASE = Path(__file__).resolve().parent
 LOG = BASE / "atualizar_ytdlp.log"
 _SEM_JANELA = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 PYTHONS = {
-    "pc1": [(r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe", ["yt-dlp"]),
-            (r"D:\recapd-ambientes\producao\venv\Scripts\python.exe", ["yt-dlp", "edge-tts"])],
+    "pc1": [(r"D:\veo\venv\Scripts\python.exe", ["yt-dlp"]),
+            (r"D:\veo\venv\Scripts\python.exe", ["yt-dlp", "edge-tts"])],
     "pc2": [(r"C:\Users\Emerson-IA\AppData\Local\Programs\Python\Python313\python.exe", ["yt-dlp"]),
             (r"C:\recapd-e-animes\venv\Scripts\python.exe", ["yt-dlp", "edge-tts"])],
 }

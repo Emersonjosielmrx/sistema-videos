@@ -645,7 +645,7 @@
     "base": 90,
     "nivel": 5,
     "teto": 165,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-24T16:08:48",
     "ultimo_sinal": {
@@ -1064,7 +1064,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-26T05:17:57",
+     "em": "2026-11-26T12:17:30",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1249,9 +1249,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-06T02:07:56",
     "ultimo_sinal": {
-     "em": "2026-11-25T14:17:59",
+     "em": "2026-11-26T15:17:22",
      "tipo": "saude_morto",
-     "maquina": "acer"
+     "maquina": "sti"
     },
     "historico": [
      {
@@ -2554,7 +2554,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-26T06:18:10",
+     "em": "2026-11-26T14:17:50",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -2963,11 +2963,11 @@
    },
    "inovaremanhwaverse5": {
     "base": 90,
-    "nivel": 5,
-    "teto": 165,
+    "nivel": 6,
+    "teto": 180,
     "estado": "subindo",
     "desde": "2026-11-20T13:08:06",
-    "ultimo_degrau": "2026-11-25T18:07:59",
+    "ultimo_degrau": "2026-11-26T18:09:38",
     "ultimo_sinal": null,
     "historico": [
      {
@@ -2994,6 +2994,11 @@
       "em": "2026-11-25T18:07:59",
       "o_que": "24 h sem sinal: sobe 1 degrau (150 → 165)",
       "teto": 165
+     },
+     {
+      "em": "2026-11-26T18:09:38",
+      "o_que": "24 h sem sinal: sobe 1 degrau (165 → 180)",
+      "teto": 180
      }
     ]
    }
@@ -4388,9 +4393,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-26T09:17:45",
+    "em": "2026-11-26T15:17:22",
     "tipo": "saude_morto",
-    "conta": "vendeafiliados3"
+    "conta": "gameoftroneskingsroadbrasil"
    },
    "historico": [
     {

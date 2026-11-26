@@ -44,6 +44,22 @@ CONF = Path(os.environ["RCLONE_CONF"]) if os.environ.get("RCLONE_CONF") else nex
 RC = BASE / "rclone"
 FILA = "manhwa-drive:colab_recap/fila"
 FILA_SRC = "manhwa-drive:colab_recap/fila_src"
+# 26/11 dona ("vamos usar essa exclusiva pros testes que estamos fazendo; fila prioritária de teste; se a fila ficar
+# ociosa por X ela roda os vídeos normais; quando precisar testar ela volta, não pega mais produção"): conta em
+# TESTE_EXCLUSIVA (papel "teste" no pool da central) faz PRIMEIRO a fila_teste (pedido + source.mp4 na mesma pasta; o
+# final volta pra mesma pasta). Fila de teste vazia há TRAB_TESTE_OCIOSO_MIN (15) = pega 1 longo da produção por vez;
+# entre um longo e outro olha a fila de teste de novo (teste chegou = não pega mais produção). Código de teste: o que
+# estiver em fila_teste_codigo/bin é copiado POR CIMA do bin da produção só nos pedidos de teste.
+FILA_TESTE = "manhwa-drive:colab_recap/fila_teste"
+FILA_TESTE_CODIGO = "manhwa-drive:colab_recap/fila_teste_codigo"
+TESTE_EXCLUSIVA = {"carlabarbosa94254", "carlaramos27719"}  # 26/11 15h: 2ª conta de teste (IP 24)
+_FILAS_PRODUCAO = (FILA, FILA_SRC)
+
+
+def _usar_fila(teste):
+    """Troca as filas globais (proximo/fazer/_marcar leem FILA e FILA_SRC na hora da chamada)."""
+    global FILA, FILA_SRC
+    FILA, FILA_SRC = (FILA_TESTE, FILA_TESTE) if teste else _FILAS_PRODUCAO
 os.environ["RCLONE_DRIVE_USE_TRASH"] = "false"
 RAIZ = BASE / "raiz"
 PRODUCAO = RAIZ / "D/recapd-ambientes/producao"
@@ -279,6 +295,13 @@ def proximo():
         # 02/11 (revisão sonnet): conta cortada por cota no meio do longo deixa a marca e agora fica "sem cota" até
         # sexta (não volta pra soltar). Sessão do Kaggle dura <= 12 h: marca com mais de 12,5 h é de sessão morta.
         nomes = _soltar_abandonadas(FILA, pid, set(rc("lsf", f"{FILA}/{pid}").split()), "longo", limite_s=45000)
+        if _livre(nomes) and FILA == FILA_TESTE:  # 26/11 15h: pedido de teste com dono ("conta_teste") só pra ele
+            try:
+                dono = json.loads(rc("cat", f"{FILA}/{pid}/pedido.json")).get("conta_teste")
+            except (RuntimeError, ValueError):
+                dono = None
+            if dono and dono != QUEM:
+                continue
         if _livre(nomes) and _pegar(pid):
             return pid
     return None
@@ -406,7 +429,13 @@ def fazer(pid, gpu=None):
             print(f"[{_agora()}] {pid}: original não baixou: {e}", flush=True)
     for parte in ("bin", "config", "secrets"):  # código novo do PC
         rc("copy", f"manhwa-drive:colab_recap/raiz/D/recapd-ambientes/producao/{parte}", str(PRODUCAO / parte))
-    _puxador_de_codigo()
+    if FILA == FILA_TESTE:  # 26/11: pedido de teste — o código de teste (se houver) por cima do da produção
+        try:
+            rc("copy", f"{FILA_TESTE_CODIGO}/bin", str(PRODUCAO / "bin"))
+        except RuntimeError:
+            pass
+    else:
+        _puxador_de_codigo()
     # 29/10: as gravações da mascote (e o texto de cada uma) crescem todo dia (tarefa MascoteProducao); antes só
     # vinham quando a GPU ligava e o longo saía sem a pausa com a voz dela
     try:
@@ -1333,6 +1362,54 @@ def loop_voz_exclusiva():
     return loop_curto()
 
 
+TESTE_OCIOSO_S = float(os.environ.get("TRAB_TESTE_OCIOSO_MIN", "15")) * 60
+
+
+def loop_teste():
+    """26/11: conta exclusiva de testes (ver FILA_TESTE). Teste sempre primeiro; fila de teste parada há
+    TESTE_OCIOSO_S = 1 longo da produção por vez. Nada em nenhuma das duas = sai (não gasta a cota de GPU); a central
+    relança quando chegar pedido de teste."""
+    ocioso_desde = time.time()
+    while time.time() - INICIO < LIMITE_S:
+        _marcar(None, f"vivo_{QUEM}.json", {"em": _agora(), "applio": _APPLIO_OK, "applio_msg": _APPLIO_MSG,
+                                            "fish": os.environ.get("FISH_NUVEM") == "1", "papel": "teste",
+                                            "limite_h": _LIM_H},
+                destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
+        _usar_fila(True)
+        try:
+            pid = proximo()
+            if pid and not _cabe(pid):
+                _soltar(pid)
+                _DEIXADOS.add(pid)
+                print(f"[{_agora()}] teste {pid}: não cabe no que resta da sessão — fica pra próxima", flush=True)
+                pid = None
+            if pid:
+                print(f"[{_agora()}] teste {pid}: começando (fila de teste tem prioridade)", flush=True)
+                _TRAB["nao_coube"] = False
+                _ocupado(fazer, pid)
+                ocioso_desde = time.time()
+                continue
+        finally:
+            _usar_fila(False)
+        if time.time() - ocioso_desde >= TESTE_OCIOSO_S:
+            pid = proximo()
+            if pid and not _cabe(pid):
+                _soltar(pid)
+                _DEIXADOS.add(pid)
+                pid = None
+            if pid:
+                print(f"[{_agora()}] fila de teste parada há {(time.time() - ocioso_desde) / 60:.0f} min — faço 1 longo "
+                      f"da produção ({pid}); depois olho os testes de novo", flush=True)
+                _ocupado(fazer, pid)
+                continue
+            if LIMITE_S != float("inf") and time.time() - _TRAB["ultimo"] > OCIOSO_MAX_S + TESTE_OCIOSO_S:
+                print(f"[{_agora()}] teste: nada na fila de teste nem na produção — saio pra não gastar a cota",
+                      flush=True)
+                break
+        time.sleep(60)
+    print("teste: fim da sessão", flush=True)
+
+
 def loop():
     TRABALHO.mkdir(exist_ok=True)
     _TRAB["ultimo"] = time.time()  # a preparação (Applio/Kokoro) não conta como ociosa
@@ -1340,6 +1417,15 @@ def loop():
         _soltar_os_meus()
     except RuntimeError as e:
         print(f"soltar marcas velhas falhou: {e}", flush=True)
+    if QUEM in TESTE_EXCLUSIVA or PAPEL == "teste":  # 26/11: conta só de testes (fila_teste primeiro)
+        _usar_fila(True)
+        try:
+            _soltar_os_meus()
+        except RuntimeError as e:
+            print(f"soltar marcas velhas (teste) falhou: {e}", flush=True)
+        finally:
+            _usar_fila(False)
+        return loop_teste()
     if QUEM in VOZ_EXCLUSIVA:
         return loop_voz_exclusiva()
     if PAPEL == "curto":

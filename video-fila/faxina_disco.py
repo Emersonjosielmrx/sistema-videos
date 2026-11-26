@@ -50,9 +50,9 @@ VELHOS_EXTRA = [(Path(r"D:\postador-de-videos\logs\yt_web"), 7),  # prints de ca
                 (Path(os.path.expandvars(r"%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache")), 0),  # driver refaz
                 (Path(r"C:\Program Files (x86)\Google\GoogleUpdater\crx_cache"), 3)]  # instalador já aplicado
 PLAYWRIGHT = Path(os.path.expandvars(r"%LOCALAPPDATA%\ms-playwright"))  # junção pra D:\caches\ms-playwright
-PYTHONS = [r"D:\hipercool-materiais\python\venv\Scripts\python.exe",
+PYTHONS = [r"D:\veo\venv\Scripts\python.exe",
            r"D:\hipercool-materiais\python\venv_vozes\Scripts\python.exe",
-           r"D:\recapd-ambientes\producao\venv\Scripts\python.exe",
+           r"D:\veo\venv\Scripts\python.exe",
            os.path.expandvars(r"%LOCALAPPDATA%\Programs\Python\Python313\python.exe")]
 
 

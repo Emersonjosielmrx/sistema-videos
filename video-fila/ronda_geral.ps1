@@ -165,3 +165,8 @@ $hoAgora = @(Get-ChildItem 'D:\video-fila\HANDOFF_*.md','D:\projeto celular sub 
 # 18) OBRA sistema unico: uso real x catalogo (vivos, mortos candidatos, tarefas prontas para o Python unico)
 $env:SISTEMA_USO = '0'
 & D:\veo\venv\Scripts\python.exe -X utf8 D:\sistema\catalogo\analisar_uso.py --ronda 2>&1 | ForEach-Object { "$_" }
+
+# 19) OBRA etapas 2-4: o que esta segurado (motivos.py), maquinas (lista unica), codigo comum (vinculos)
+& D:\veo\venv\Scripts\python.exe -X utf8 D:\sistema\catalogo\motivos.py --resumo 2>&1 | ForEach-Object { "$_" }
+& D:\veo\venv\Scripts\python.exe -X utf8 D:\sistema\catalogo\maquinas.py --conferir 2>&1 | ForEach-Object { "$_" }
+& D:\veo\venv\Scripts\python.exe -X utf8 D:\sistema\catalogo\comum.py --conferir 2>&1 | ForEach-Object { "$_" }

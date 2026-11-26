@@ -184,6 +184,21 @@ def _kaggle(slug):
         return True
 
 
+def _reagendar_http(en, video, novo):
+    """26/11 OBRA: desde ~23/11 o Studio recusa metadata_update com flowType MDE_FLOW_TYPE_EDIT + scheduledPublishing
+    (0 reagendados em 78 h). Tenta o EDIT; recusado, tenta pelo mesmo fluxo do ENVIO (MDE_FLOW_TYPE_UPLOAD, que agenda
+    normal todo dia). REAGENDAR_SO_EDIT=1 volta ao antigo."""
+    sp = {"set": {"timeSec": str(novo), "privacy": "PUBLIC"}}
+    try:
+        en._metadados(video, flowType="MDE_FLOW_TYPE_EDIT", scheduledPublishing=sp)
+        return
+    except RuntimeError as e:
+        if os.environ.get("REAGENDAR_SO_EDIT") == "1":
+            raise
+        log(f"   EDIT recusado ({str(e)[:80]}) - tento pelo fluxo do envio")
+    en._metadados(video, scheduledPublishing=sp)
+
+
 def main():
     if sys.stdout is None:
         sys.stdout = open(os.devnull, "w", encoding="utf-8")
@@ -226,8 +241,7 @@ def main():
                     log(f"{rot} — pulado (o Studio mostra outro horário: "
                         f"{datetime.fromtimestamp(v['agendado_para']):%d/%m %H:%M})")
                     continue
-                en._metadados(o["video"], flowType="MDE_FLOW_TYPE_EDIT",
-                              scheduledPublishing={"set": {"timeSec": str(novo), "privacy": "PUBLIC"}})
+                _reagendar_http(en, o["video"], novo)
                 ok = False
                 for espera in (2, 4, 6):
                     time.sleep(espera)

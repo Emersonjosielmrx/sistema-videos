@@ -1275,7 +1275,8 @@
     "WebshareSaude",
     "KaggleBaixador",
     "KaggleHoras",
-    "KaggleRecapManter"
+    "KaggleRecapManter",
+    "LogarColab"
    ],
    "servicos_fora": [
     "hermes-prod: recap_central/vps_central.py (cron 5 min, lança kernels)",
@@ -1336,6 +1337,10 @@
     "KaggleRecapManter": {
      "ligada": false,
      "cmd": "D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\recapd-ambientes\\producao\\colab\\kaggle_lancar.py manter"
+    },
+    "LogarColab": {
+     "ligada": true,
+     "cmd": "D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe -X utf8 \"D:\\recapd-ambientes\\producao\\colab\\logar_colab_contas.py\""
     }
    }
   },
@@ -1353,7 +1358,7 @@
     "LimparEspaco_logins-google",
     "DriveCentral"
    ],
-   "obs": "DriveCentral parado em captcha 13/11 (dona)",
+   "obs": "DriveCentral parado em captcha 13/11 (dona) | 26/11 19h30: COFRE DO OMARCHY (~/cofre-local/cofre_lx.py, contas.json, perfis/) = contas Google logadas no Chromium do Omarchy, cada uma pelo IP fixo rnprmtfo-N (reusa Navegador/ponte do ~/kaggle-criador-local). Comeca com as 9 do Colab (LIVRES do abrir_colab_teste.py). Doc: ~/cofre-local/LEIA_PRIMEIRO.md",
    "estado": "ativo",
    "logs": [],
    "tarefas_detalhe": {
@@ -1377,7 +1382,11 @@
      "ligada": true,
      "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\hipercool-materiais\\python\\venv\\Scripts\\pythonw.exe D:\\tools\\drive_central\\drive_central.py"
     }
-   }
+   },
+   "maquinas": [
+    "pc1",
+    "omarchy"
+   ]
   },
   "ia-gratis": {
    "nome": "IAs grátis/proxies (Opus-grátis, Genspark, Sonnet web, Gemini Argo, Cline ponte, OmniRoute)",
@@ -1426,7 +1435,7 @@
     "omarchy: claude-retry-proxy, omniag-contas-barra"
    ],
    "chat_dono": "Priorização de contas",
-   "obs": "grupos duplicados a juntar na etapa 5: Sonnet (3), Argon (4), Opus/Genspark (4)",
+   "obs": "grupos duplicados a juntar na etapa 5: Sonnet (3), Argon (4), Opus/Genspark (4) | 26/11: SonnetWebMonitor DESLIGADA, juntada na MonitorSonnet (monitor_sonnet_unico.py)",
    "estado": "ativo",
    "tarefas_detalhe": {
     "OpusGratisManter": {
@@ -1605,7 +1614,9 @@
     "NotificarTelegram",
     "TelaoChecklist",
     "SalvarGithub",
-    "SistemaUnificacao"
+    "SistemaUnificacao",
+    "TrocaPythonVerificar",
+    "GuardaEstado"
    ],
    "processos": [
     "painel_controlador.py",
@@ -1662,7 +1673,15 @@
     },
     "SistemaUnificacao": {
      "ligada": true,
-     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\sistema\\catalogo\\analisar_uso.py"
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\sistema\\catalogo\\diario.bat"
+    },
+    "TrocaPythonVerificar": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\sistema\\catalogo\\trocar_python.py --verificar"
+    },
+    "GuardaEstado": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs D:\\veo\\venv\\Scripts\\pythonw.exe -X utf8 D:\\sistema\\catalogo\\guarda_estado.py"
     }
    },
    "obs": "D:\\sistema = lugar unico (catalogo, mapa do vivo, uso real, projetos por junção). sistema_uso instalado nos 7 Pythons (SISTEMA_USO=0 desliga)."
@@ -1866,7 +1885,7 @@
   "trader": {
    "nome": "Trader Binance / Atlas / laboratório",
    "categoria": "E-outros",
-   "estado": "parado",
+   "estado": "parcial",
    "pastas": [
     "D:\\trader_binance"
    ],
@@ -1879,7 +1898,7 @@
    "servicos_fora": [
     "hermes-prod: lucrativa (robô ao vivo), laboratorio-papeis timer, atlas.vigia cron"
    ],
-   "obs": "tarefas do PC1 desligadas; parte roda na hermes-prod",
+   "obs": "tarefas do PC1 desligadas, MAS D:\\trader_binance\\trader_binance\\deploy\\exportar_historico.py ainda roda (visto 26/11 13:59, Python313, chamado de fora do agendador) -> saiu da quarentena; parte roda na hermes-prod",
    "logs": [],
    "tarefas_detalhe": {
     "Atlas - sincronizar": {
@@ -1904,9 +1923,7 @@
    "nome": "Robô 99Freelas",
    "categoria": "E-outros",
    "estado": "parado",
-   "pastas": [
-    "D:\\projeto-propostas-freelas"
-   ],
+   "pastas": [],
    "tarefas": [
     "Propostas99Freelas",
     "Respostas99FreelasHTTP"
@@ -1921,7 +1938,8 @@
      "ligada": false,
      "cmd": "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\pythonw.exe -X utf8 \"D:\\projeto-propostas-freelas\\99freelas\\robo\\vigia_respostas_http.py\""
     }
-   }
+   },
+   "obs": "26/11: pasta D:\\projeto-propostas-freelas ARQUIVADA no Drive (conta32:arquivo-pc1/obra-26nov/sistema/quarentena/projeto-propostas-freelas); voltar com arquivar_drive.py --voltar"
   },
   "melhoradores": {
    "nome": "Melhoradores/pesquisador (desligados 23/11)",
@@ -2002,7 +2020,11 @@
   "NSN_CapturaFB_criar_1637",
   "NSN_CapturaFB_criar_1937",
   "GeminiChavesRetentativa",
-  "RecapSubirVozes"
+  "RecapSubirVozes",
+  "AbrirLoginDrive2039",
+  "JanelaMudanca",
+  "JanelaMudancaMadrugada",
+  "ArquivarDrive"
  ],
  "sistema_re": "^(HP |IObit|MicrosoftEdge|GoogleUpdater|GoogleChrome|RunPlatform|Wise |OneDrive|Opera|S-1-5-|USER_ESRV|AtualizarChrome)"
 }

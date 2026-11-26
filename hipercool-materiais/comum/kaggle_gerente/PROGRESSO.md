@@ -145,3 +145,6 @@ longos e vozes; mas a postagem e o Veo e os locais (produção) não podem parar
 - PC1: `D:\recapd-ambientes\producao\config\shorts_kaggle.json` `ligado: false` (abastecedor_kaggle não manda Short).
 - Shorts continuam nos PCs locais e a postagem segue normal.
 - Voltar: `pausar_curto: false` + `ligado: true`.
+
+## 26/11 14:50 — fila 1,5 h + 401 repetido para e avisa (chat das vozes)
+Ver MUDANCA_FILA_401_26NOV.md (mesma pasta). Publicado nas 4 centrais com backup .antes_fila_401_2611. As 4 centrais tem versoes DIFERENTES do vps_central (ver tabela no doc).

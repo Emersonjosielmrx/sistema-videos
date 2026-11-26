@@ -410,8 +410,8 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
     PY = sys.executable  # o mesmo python que roda anime_auto.py
     if not Path(PY).exists():
         for _py in (
-            r"D:\recapd-ambientes\producao\venv\Scripts\python.exe",
-            r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe",
+            r"D:\veo\venv\Scripts\python.exe",
+            r"D:\veo\venv\Scripts\python.exe",
             r"C:\Users\Emerson-IA\AppData\Local\Programs\Python\Python313\python.exe",
         ):
             if Path(_py).exists():

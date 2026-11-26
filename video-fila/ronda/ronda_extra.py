@@ -80,3 +80,36 @@ try:
         print(f"  !! balanco do Kaggle parado ha {idade:.0f} h (tarefa BalancoKaggle)")
 except (OSError, ValueError, KeyError) as e:
     print(f"  !! kaggle: nao li {bk} ({e})")
+
+# ---------- 3) arquivos de ESTADO vazios ou quebrados (incidente 21/11: 2 JSON com 0 byte travaram o Recap 5 dias) ----------
+PASTAS_ESTADO = [r"D:\video-fila\estado", r"D:\video-fila", r"D:\recap_central_casa", r"D:\recapd-ambientes\producao\colab",
+                 r"D:\recapd-ambientes\producao\config", r"D:\postador-de-videos\config", r"D:\postador-de-videos\logs",
+                 r"D:\projeto celular sub controle\canal_pronto", r"D:\hipercool-materiais\comum", r"D:\ms-energy\config",
+                 r"D:\gemini-argo", r"D:\sonnet web", r"D:\opus-gratis-v2-desktop", r"D:\criador-contas-kaggle", r"D:\manhwa-react\config"]
+ruins = []
+for pasta in PASTAS_ESTADO:
+    try:
+        nomes = os.listdir(pasta)
+    except OSError:
+        continue
+    for n in nomes:
+        if not n.lower().endswith(".json"):
+            continue
+        f = os.path.join(pasta, n)
+        try:
+            if not os.path.isfile(f) or (time.time() - os.path.getmtime(f)) > 30 * 86400:
+                continue
+            tam = os.path.getsize(f)
+            if tam == 0:
+                ruins.append(f"{f} (0 byte)")
+                continue
+            if tam < 5_000_000:
+                with open(f, encoding="utf-8-sig") as fh:
+                    json.load(fh)
+        except ValueError as e:
+            ruins.append(f"{f} (JSON quebrado: {str(e)[:60]})")
+        except OSError:
+            pass
+print(f"[ESTADO] arquivos .json de controle conferidos em {len(PASTAS_ESTADO)} pastas | vazios/quebrados: {len(ruins)}")
+for r in ruins[:15]:
+    print(f"  !! ESTADO QUEBRADO (pode travar o projeto; restaurar de .bak/.anterior): {r}")

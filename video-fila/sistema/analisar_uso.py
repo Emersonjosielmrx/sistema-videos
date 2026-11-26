@@ -60,7 +60,10 @@ tem = {}
 todos = sorted({e for d in por_main.values() for e in d["ext"]})
 if todos:
     prog = ("import importlib.util,json,sys\n"
-            "print(json.dumps({m: importlib.util.find_spec(m) is not None for m in json.loads(sys.argv[1])}))")
+            "def ok(m):\n"
+            "    try:\n        return importlib.util.find_spec(m) is not None\n"
+            "    except Exception:\n        return False\n"
+            "print(json.dumps({m: ok(m) for m in json.loads(sys.argv[1])}))")
     try:
         r = subprocess.run([r"D:\veo\venv\Scripts\python.exe", "-c", prog, json.dumps(todos)], capture_output=True,
                            text=True, timeout=300, env={**os.environ, "SISTEMA_USO": "0"},
@@ -79,7 +82,7 @@ for pid, p in CAT["projetos"].items():
             tarefas.append({"tarefa": nome, "projeto": pid, "situacao": "sem uso registrado ainda"})
             continue
         py = set().union(*(d["py"] for _, d in usos))
-        ext = set().union(*(d["ext"] for _, d in usos))
+        ext = {e for e in set().union(*(d["ext"] for _, d in usos)) if not e.endswith("__mypyc") and not e.startswith("_")}
         no_principal = all(x.startswith(PRINCIPAL) for x in py)
         faltam = sorted(e for e in ext if not tem.get(e, False))
         if no_principal:
@@ -100,7 +103,23 @@ res = {"gerado": time.strftime("%Y-%m-%d %H:%M"), "dias_de_uso": dias_com_dado, 
        "vivos_reais": len(carregados), "vivo_so_em_uso": vivo_so_em_uso, "mortos": mortos, "tarefas": tarefas, "contagem": cont}
 (MAPA / "unificacao.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
 
+# quarentena: algo carregou arquivo de pasta que foi para a quarentena? (caminho antigo continua valendo pela juncao)
+em_q = []
+try:
+    qi = json.loads(Path(r"D:\sistema\quarentena\INDICE.json").read_text(encoding="utf-8"))
+    origs = [(e["original"].lower().rstrip("\\") + "\\", e["em"]) for e in qi if not e.get("voltou")]
+    for j in linhas:
+        for a in j.get("locais", []) + [j.get("main", "")]:
+            for o, em in origs:
+                if a.lower().startswith(o) and j.get("t", "") > em.replace("T", " "):
+                    em_q.append(a)
+except (OSError, ValueError):
+    pass
+res["quarentena_em_uso"] = sorted(set(em_q))
+
 if "--ronda" in sys.argv:
+    for a in sorted(set(em_q))[:10]:
+        print(f"  !! QUARENTENA EM USO (voltar com quarentena.py --voltar): {a}")
     print(f"[UNIFICACAO] {dias_com_dado} dia(s) de uso real, {len(linhas)} processos | vivos reais {len(carregados)} |"
           f" mortos candidatos {len(mortos)} | python: " + ", ".join(f"{k} {v}" for k, v in sorted(cont.items())))
     sys.exit(0)

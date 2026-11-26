@@ -992,6 +992,19 @@ def buscar_parceiro_pc3():
                    f"try {{ [int]((Get-Date) - (Get-Item -LiteralPath '{logpc3}' -ErrorAction Stop).LastWriteTime)"
                    f".TotalMinutes }} catch {{ -1 }}", timeout=60)
     linhas = [x.strip() for x in txt.splitlines() if x.strip()]
+    # 26/11 OBRA: PC3 DESLIGADO -> sem resposta -> parado=-1 -> "ainda fazendo" PARA SEMPRE (ficou 34 h preso no
+    # kMHxKGf2E7U). Sem resposta e com o pedido ha mais de PC3_FORA_H horas (padrao 6): libera a vaga (o Short volta
+    # para outra maquina). PC3_FORA_H=0 desliga.
+    if not linhas:
+        try:
+            horas = (datetime.now() - datetime.fromisoformat(est.get("inicio", ""))).total_seconds() / 3600
+        except ValueError:
+            horas = 0
+        lim = float(os.environ.get("PC3_FORA_H", "6"))
+        if lim and horas > lim:
+            log(f"[!] PC3 fora do ar e o Short {vid} pedido ha {horas:.0f} h - libero a vaga (volta para outra maquina)")
+            EST_PC3.unlink(missing_ok=True)
+            return False
     if "True" not in linhas[:1]:
         parado = int(linhas[1]) if len(linhas) > 1 and linhas[1].lstrip("-").isdigit() else -1
         if parado <= 90:

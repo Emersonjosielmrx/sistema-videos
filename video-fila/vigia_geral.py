@@ -467,6 +467,24 @@ def _escalar(est, lado, motivo, detalhe, texto):
         return None
     projeto = "hipercool" if lado == "hipercool" else (
         "cortes" if re.search(r"(?i)recap|parceiro|anime", motivo) else "geral")
+    # 26/11 OBRA sistema unico (dona: "o mesmo vigia vigia tudo"): o conserto NAO e mais pedido daqui. O achado vai
+    # para o vigilancia.py (med_ronda le estado/vigia_geral_achados.json), que e o UNICO cerebro: dedup, consertador,
+    # revisor e teto diario num lugar so (antes os 2 podiam consertar a mesma coisa). VIGIA_GERAL_DIRETO=1 volta.
+    if os.environ.get("VIGIA_GERAL_DIRETO", "0") != "1":
+        arq = Path(r"D:\video-fila\estado\vigia_geral_achados.json")
+        try:
+            lst = json.loads(arq.read_text(encoding="utf-8")) if arq.exists() else []
+        except ValueError:
+            lst = []
+        chave = re.sub(r"\d+", "N", f"{lado}:{detalhe}")[:110]
+        lst = [x for x in lst if x.get("chave") != chave][-29:]
+        lst.append({"chave": chave, "categoria": f"vigia-geral-{projeto}", "projeto": projeto,
+                    "titulo": f"[vigia_geral] {detalhe[:180]}", "em": datetime.now().isoformat(timespec="seconds"),
+                    "evidencia": f"MOTIVO DO VIGIA:\n{motivo[:1500]}\n\nDIAGNOSTICO DO GEMINI:\n{proposta[:1200]}"})
+        arq.write_text(json.dumps(lst, ensure_ascii=False, indent=1), encoding="utf-8")
+        est["escalados"] = feitos + [f"{hoje} vigilancia:{chave[:40]}"]
+        log(f"achado passado ao vigilancia.py (cerebro unico): {chave[:80]}")
+        return "vigilancia"
     try:
         import painel_ia
         job = painel_ia.pedir("consertar", f"Conserte (achado pelo vigia): {detalhe[:600]}", projeto=projeto,

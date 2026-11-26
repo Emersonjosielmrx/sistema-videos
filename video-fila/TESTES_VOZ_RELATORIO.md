@@ -1,8 +1,8 @@
-# Teste gradual de formatos e vozes — 26/11 09:35
+# Teste gradual de formatos e vozes — 26/11 18:35
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 804.5 de 1558 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 815.5 de 1575 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -10,14 +10,14 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:moana | promovido | 13 | 0 | 0 | 7 | 7 | 21.0/33 | 0.63 | 278 | 49% (6) | 13/0 | 0 |
 | voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 4 | 11.5/25 | 0.46 | 903 | 53% (2) | 9/0 | 0 |
 | voz:chamber_valorant | promovido | 2 | 0 | 0 | 1 | 1 | 10.0/15 | 0.65 | 1091 | 36% (1) | 2/0 | 0 |
-| formato:chaves_chiquinha | testando | 24 | 0 | 0 | 14 | 10 | 5.5/13 | 0.43 | 53 | 47% (5) | 22/0 | 0 |
+| formato:chaves_chiquinha | testando | 24 | 0 | 0 | 14 | 10 | 5.5/13 | 0.43 | 53 | 47% (6) | 22/0 | 0 |
 | formato:joao_chico | testando | 7 | 0 | 0 | 4 | 3 | 3.0/6 | 0.50 | 13 | 19% (1) | 4/0 | 0 |
 | formato:show_do_milhao | testando | 4 | 0 | 0 | 4 | 4 | 2.0/5 | 0.43 | 123 | 66% (2) | 4/0 | 0 |
+| voz:chaves_chapolin | testando | 8 | 0 | 0 | 6 | 5 | 2.5/5 | 0.50 | 2 | 38% (1) | 8/0 | 0 |
 | voz:chiquinha | testando | 6 | 0 | 0 | 6 | 5 | 2.0/5 | 0.43 | 1011 | 36% (4) | 6/0 | 0 |
 | voz:woody | testando | 5 | 0 | 0 | 4 | 4 | 3.0/5 | 0.57 | 1378 | 59% (2) | 5/0 | 0 |
 | formato:escolinha | testando | 5 | 0 | 0 | 4 | 3 | 3.0/4 | 0.67 | 16 | 28% (1) | 5/0 | 0 |
 | formato:videocassetadas | testando | 2 | 0 | 0 | 2 | 2 | 1.5/4 | 0.42 | 9 | - | 2/0 | 0 |
-| voz:chaves_chapolin | testando | 8 | 0 | 0 | 6 | 4 | 2.5/4 | 0.58 | 18 | 38% (1) | 8/0 | 0 |
 | voz:naruto | testando | 7 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 6/0 | 0 |
 | voz:pato_donald | testando | 3 | 0 | 0 | 3 | 3 | 1.0/4 | 0.33 | 9 | - | 3/0 | 0 |
 | formato:cameo_interrupcao | testando | 3 | 0 | 0 | 2 | 2 | 1.0/3 | 0.40 | 31 | - | 2/0 | 0 |

@@ -31,7 +31,7 @@ EST = BASE / "estado" / "plantao.json"
 TRAVA = BASE / "estado" / "plantao.lock"
 LOG = BASE / "estado" / "plantao.log"
 FILA_VIGIA = Path(r"D:\hipercool-videos\workspace\vigia_perguntas.jsonl")
-VIGIA = [r"D:\hipercool-videos\venv\Scripts\python.exe", "-X", "utf8", r"D:\hipercool-videos\bin\vigia_telegram.py",
+VIGIA = [r"D:\veo\venv\Scripts\python.exe", "-X", "utf8", r"D:\hipercool-videos\bin\vigia_telegram.py",
          "--fila"]
 SEM_JANELA = 0x08000000
 

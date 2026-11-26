@@ -16,8 +16,10 @@ if sys.stdout:
 
 RAIZ = Path(r"D:\sistema")
 CAT = json.loads(Path(r"D:\video-fila\sistema\sistema.json").read_text(encoding="utf-8-sig"))
-NOMES_CAT = {"A-video": "A-video-producao", "B-postagem": "B-postagem", "C-infra": "C-contas-e-ias",
-             "D-central": "D-central-e-maquinas", "E-outros": "E-outros-negocios"}
+# 26/11 (dona): agrupar mais - VIDEO (producao + postagem) numa pasta principal; outros negocios (99freelas, OLX...)
+# em outra; contas/IAs e central/maquinas cada um na sua. Parado fica no grupo dele com sufixo __PARADO.
+NOMES_CAT = {"A-video": "1-VIDEO", "B-postagem": "1-VIDEO", "C-infra": "2-CONTAS-E-IAS",
+             "D-central": "3-CENTRAL-E-MAQUINAS", "E-outros": "4-OUTROS-NEGOCIOS"}
 
 
 def e_juncao(p):
@@ -37,13 +39,21 @@ def juncao(link, alvo):
 
 criados, erros, esperados = 0, [], set()
 for pid, p in CAT["projetos"].items():
-    grupo = "parados" if p.get("estado") == "parado" else "projetos"
-    base = RAIZ / grupo / NOMES_CAT.get(p["categoria"], p["categoria"]) / pid
+    sub = "1-producao" if p["categoria"] == "A-video" else "2-postagem" if p["categoria"] == "B-postagem" else ""
+    base = RAIZ / NOMES_CAT.get(p["categoria"], p["categoria"]) / sub / (pid + ("__PARADO" if p.get("estado") == "parado" else ""))
     base.mkdir(parents=True, exist_ok=True)
     esperados.add(str(base).lower())
     for pasta in p.get("pastas", []):
         if not re.match(r"^[A-Za-z]:\\", pasta) or not Path(pasta).exists():
             continue
+        if e_juncao(pasta):  # ja_mudada: a pasta real agora mora dentro de D:\sistema; a visao e ela mesma
+            try:
+                alvo = os.readlink(pasta).replace("\\\\?\\", "")
+            except OSError:
+                alvo = ""
+            if alvo.lower().startswith("d:\\sistema"):
+                esperados.add(alvo.lower())
+                continue
         nome = re.sub(r"[^\w\-]+", "_", pasta[3:]).strip("_") or "raiz"
         link = base / nome
         esperados.add(str(link).lower())
@@ -65,9 +75,23 @@ for pid, p in CAT["projetos"].items():
 
 # tira juncoes de projeto que saiu do catalogo / mudou de estado (so juncoes; pasta real nunca)
 removidos = 0
-for grupo in ("projetos", "parados"):
-    for cat_dir in (RAIZ / grupo).glob("*"):
-        for proj in cat_dir.glob("*"):
+def _projs():
+    for g in set(NOMES_CAT.values()):
+        for x in (RAIZ / g).glob("*"):
+            if x.name in ("1-producao", "2-postagem"):
+                yield from x.glob("*")
+            else:
+                yield x
+    for velho in ("projetos", "parados"):  # layout antigo (26/11 manha): so juncoes + _PROJETO.txt
+        for c in (RAIZ / velho).glob("*"):
+            yield from c.glob("*")
+
+
+if True:
+    for proj in list(_projs()):
+        if True:
+            if not proj.is_dir() or e_juncao(proj):
+                continue
             for item in proj.iterdir():
                 if e_juncao(item) and str(item).lower() not in esperados:
                     os.rmdir(item)
@@ -83,3 +107,16 @@ for grupo in ("projetos", "parados"):
 print(f"juncoes criadas: {criados} | removidas: {removidos} | erros: {len(erros)}")
 for e in erros:
     print("  ", e)
+
+# remove as pastas vazias do layout antigo
+for velho in ("projetos", "parados"):
+    for c in sorted((RAIZ / velho).glob("**/*"), key=lambda x: -len(str(x))):
+        try:
+            if c.is_dir() and not e_juncao(c) and not any(c.iterdir()):
+                c.rmdir()
+        except OSError:
+            pass
+    try:
+        (RAIZ / velho).rmdir()
+    except OSError:
+        pass

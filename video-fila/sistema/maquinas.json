@@ -1,0 +1,236 @@
+{
+ "_leia": "LISTA UNICA DE MAQUINAS (OBRA etapa 3, 26/11/2026). Fonte para ronda e para conferir os ssh config da Omarchy e do PC1 (maquinas.py --conferir). Mudou IP/usuario = muda aqui.",
+ "maquinas": {
+  "a2": {
+   "hostname": "100.92.36.34",
+   "user": "u0_a189",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular A2",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "a2-wifi": {
+   "hostname": "192.168.18.50",
+   "user": "u0_a189",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular A2",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "wifi casa"
+  },
+  "a3": {
+   "hostname": "100.87.168.9",
+   "user": "u0_a108",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular A3",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "a3-wifi": {
+   "hostname": "192.168.18.165",
+   "user": "u0_a108",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular A3",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "wifi casa"
+  },
+  "asus": {
+   "hostname": "100.122.115.57",
+   "user": "emerson-asus-eepc",
+   "port": 22,
+   "tipo": "linux",
+   "papel": "notebook (fora)",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "asusx": {
+   "hostname": "100.121.199.93",
+   "user": "emerson",
+   "port": 22,
+   "tipo": "linux",
+   "papel": "render série/montagem, Fish, armazém (Omarchy/Arch)",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "desktop": {
+   "hostname": "100.73.7.19",
+   "user": "Emerson",
+   "port": 2223,
+   "tipo": "windows",
+   "papel": "PC3 da dona (grava; só produção leve)",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "desktop2222": {
+   "hostname": "100.73.7.19",
+   "user": "Emerson",
+   "port": 2222,
+   "tipo": "windows",
+   "papel": "PC3 porta alternativa",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "g20": {
+   "hostname": "100.75.139.24",
+   "user": "u0_a274",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular G20",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "g20-wifi": {
+   "hostname": "192.168.18.66",
+   "user": "u0_a274",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular G20",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "wifi casa"
+  },
+  "hermes-bloqueio": {
+   "hostname": "157.173.207.22",
+   "user": "root",
+   "port": 22,
+   "tipo": "vps",
+   "papel": "VPS 157: OmniRoute + contas, LiciBot, Fluxia, n8n v2, Redroid/WhatsApp",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "hermes-prod": {
+   "hostname": "62.171.128.241",
+   "user": "root",
+   "port": 22,
+   "tipo": "vps",
+   "papel": "VPS: Hermes Call, lucrativa, recap_central (lança Kaggle), painel-clientes, açaí, backups",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "hermes-staging": {
+   "hostname": "209.145.60.53",
+   "user": "root",
+   "port": 22,
+   "tipo": "vps",
+   "papel": "VPS: loja CAS, n8n v1, evolution, cluster, faster-whisper, omniroute-remap",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "hp": {
+   "hostname": "100.123.69.41",
+   "user": "emerson-hp-pavili",
+   "port": 22,
+   "tipo": "linux",
+   "papel": "vitrine/telão, postador (Fish desligado)",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "itau": {
+   "hostname": "100.90.133.57",
+   "user": "emerson-itau",
+   "port": 22,
+   "tipo": "linux",
+   "papel": "notebook FORMATADO - falta a dona ligar SSH e autorizar a chave",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico",
+   "obs": "formatado 25-26/11; IP antigo 100.100.73.28 (emerson-itau antigo) aposentado"
+  },
+  "pc1": {
+   "hostname": "100.118.234.102",
+   "user": "Haylla",
+   "port": 22,
+   "tipo": "windows",
+   "papel": "servidor principal (Windows): tarefas, postagem, vigia, ronda",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "pc2": {
+   "hostname": "100.125.7.77",
+   "user": "Emerson-IA",
+   "port": 22,
+   "tipo": "windows",
+   "papel": "hipercool (só com a dona)",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "s20": {
+   "hostname": "100.117.134.73",
+   "user": "u0_a256",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular S20",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "s20-wifi": {
+   "hostname": "192.168.18.28",
+   "user": "u0_a256",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular S20",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "wifi casa"
+  },
+  "s20ultra": {
+   "hostname": "100.103.218.7",
+   "user": "u0_a303",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular S20ULTRA",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "s20ultra-wifi": {
+   "hostname": "192.168.18.41",
+   "user": "u0_a303",
+   "port": 8022,
+   "tipo": "celular",
+   "papel": "celular S20ULTRA",
+   "acesso_omarchy": false,
+   "acesso_pc1": true,
+   "rede": "wifi casa"
+  },
+  "sti": {
+   "hostname": "100.98.49.0",
+   "user": "emerson-sti-st",
+   "port": 22,
+   "tipo": "linux",
+   "papel": "narração xtts, Fish, Shorts no STI, vitrine, postador",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  },
+  "x200ma": {
+   "hostname": "100.87.195.108",
+   "user": "emerson",
+   "port": 2222,
+   "tipo": "linux",
+   "papel": "postador (pouca RAM)",
+   "acesso_omarchy": true,
+   "acesso_pc1": true,
+   "rede": "tailscale/publico"
+  }
+ }
+}

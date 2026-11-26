@@ -609,7 +609,7 @@ def _trabalho_pendente(papel=None):
     total = 0
     # 10/11: fila_treino (retreino de voz) também é trabalho do "curto" — sem isso a central não lançava conta pro treino
     filas = {"longo": (FILA,), "curto": (f"{BASE}/fila_shorts", f"{BASE}/fila_comentarios", f"{BASE}/fila_treino"),
-             "treino": (f"{BASE}/fila_treino",)}.get(
+             "treino": (f"{BASE}/fila_treino",), "teste": (f"{BASE}/fila_teste",)}.get(
         papel, (FILA, f"{BASE}/fila_shorts", f"{BASE}/fila_comentarios", f"{BASE}/fila_treino"))
     for fila in filas:
         try:
@@ -623,7 +623,7 @@ def _trabalho_pendente(papel=None):
             return None
         pastas = {}
         # marca de sessão morta conta como livre (o trabalhador solta ela): longo > 12,5 h, Short/comentário > 2 h
-        limite = 45000 if fila == FILA else 7200
+        limite = 45000 if fila in (FILA, f"{BASE}/fila_teste") else 7200
         agora = datetime.now(timezone.utc)
         for i in json.loads(r.stdout or "[]"):
             if "/" in i["Path"]:
@@ -879,6 +879,61 @@ def manter_slots(est):
     return resumos
 
 
+
+def manter_teste(est):
+    """26/11 dona ("vamos usar essa exclusiva pros testes; fila prioritária de teste; se ficar ociosa por X roda os
+    vídeos normais; quando precisar testar ela volta"): cada conta de papel "teste" no pool tem UMA vaga própria, fora
+    das NUM_GPUS da produção (não tira vaga de ninguém). 15h: mais de uma conta de teste = uma vaga por conta, no
+    máximo 1 lançamento por volta (regra de 10/11). Lança quando há pedido na fila_teste OU longo na fila da produção
+    (o trabalhador faz teste primeiro). Mesmas travas: a conta fala só pelo proxy_fixo dela (_pela_saida/_guarda_ip)."""
+    contas = [c for c in CONTAS if _papel(c) == "teste"]
+    if not contas:
+        return None
+    vagas = est.setdefault("vagas_teste", {})
+    velha = est.pop("vaga_teste", None)  # formato antigo (1 vaga só)
+    if velha and velha.get("conta"):
+        vagas.setdefault(velha["conta"], {"lancado_em": velha.get("lancado_em")})
+    agora = datetime.now(timezone.utc)
+    estados, lancou, pend = [], False, None
+    for conta in contas:
+        user = conta["username"]
+        v = vagas.get(user)
+        if v:
+            s = kg(conta, "kernels", "status", _kernel_id(conta))
+            print(f"teste: status {user} (lançada {str(v.get('lancado_em'))[11:16]}): {' '.join(str(s).split())[-160:]}",
+                  flush=True)
+            if "running" in s or "queued" in s:
+                est.setdefault("ultimo_uso", {})[user] = agora.isoformat(timespec="seconds")
+                estados.append(f"{user}: {'rodando' if 'running' in s else 'na fila do Kaggle'}")
+                continue
+            if s == "proxy webshare sem resposta" or s.startswith("bloqueado:") or _erro_auth(s):
+                estados.append(f"{user}: sem resposta — mantém")
+                continue
+            if "error" in s and v.get("lancado_em") and not _deu_sinal_desde(user, v["lancado_em"]):
+                est.setdefault("ruins", {})[user] = {"motivo": "teste: erro sem sinal de vida",
+                                                     "em": agora.isoformat(timespec="seconds")}
+            vagas.pop(user, None)
+        if lancou:
+            estados.append(f"{user}: espera a próxima volta (1 lançamento por volta)")
+            continue
+        if _esta_ruim(est, user, agora) or _saida_queimada(conta):
+            estados.append(f"{user}: descansando/recusada")
+            continue
+        if pend is None:
+            pend = (_trabalho_pendente("teste"), _trabalho_pendente("longo"))
+        if not pend[0] and not pend[1]:
+            estados.append(f"{user}: parada (sem teste nem longo)")
+            continue
+        if _lancar_conta(conta, est, "teste") is None:
+            estados.append(f"{user}: não lançou")
+            continue
+        vagas[user] = {"lancado_em": agora.isoformat(timespec="seconds")}
+        est.setdefault("ultimo_uso", {})[user] = agora.isoformat(timespec="seconds")
+        lancou = True
+        estados.append(f"{user}: lançada (teste={pend[0]}, longo={pend[1]})")
+    return "; ".join(estados)
+
+
 ENTRADA = AQUI / "entrada"
 FILA_SRC = CFG.get("fila_src", "manhwa-drive:colab_recap/fila_src")
 
@@ -955,6 +1010,12 @@ def main():
     if CFG.get("medir_todas"):
         medir_cotas(est)
     if CFG.get("so_gpus"):  # central de outra saída: só as GPUs das contas dela
+        try:  # 26/11: vaga da conta de testes (fora das GPUs da produção)
+            st_teste = manter_teste(est)
+            if st_teste:
+                print("vaga de teste:", st_teste, flush=True)
+        except Exception as e:  # noqa: BLE001 — teste nunca derruba a central
+            print(f"vaga de teste falhou ({type(e).__name__}: {e})", flush=True)
         resumos = manter_slots(est)
         EST.write_text(json.dumps(est))
         tmp = AQUI / f"gpus_{SAIDA}.json"

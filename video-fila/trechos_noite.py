@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
-PY = r"D:\recapd-ambientes\producao\venv\Scripts\python.exe"
+PY = r"D:\veo\venv\Scripts\python.exe"
 SAIDA = Path(r"D:\hipercool-materiais\amostras_voz\trechos_icones")
 ORDEM = ["woody", "homem_de_ferro_tony_stark", "patolino", "lula", "naruto", "patrick_estrela",
          "seu_sirigueijo_peter_griffin", "harry_potter", "dinho_mamonas_assassinas", "thomas_shelby_peaky_blinders",

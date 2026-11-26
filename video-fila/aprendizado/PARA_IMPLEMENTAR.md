@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 26/11/2026 03:12. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 26/11/2026 15:35. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -14,7 +14,7 @@ com backup) ou descartar com motivo. Depois:
 Candidato = o dono não respondeu em 24 h e a nota era >= 7: é sugestão, não ordem. Cuidado com o que já existe
 na produção, com humor/visual que derruba monetização e com marca do parceiro (não copiar marca).
 
-## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (13)
+## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (12)
 
 ### 1. [jeito_de_falar] Estrutura de guia rápido estilo 'checklist binário' (Entidade X -> Requisito A + Requisito B)
 - visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
@@ -30,77 +30,70 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 2.5 (trecho 159b89de.mp4)
 - ids: 159b89de
 
-### 3. [visual] Popup PiP centralizado/inferior com bordas bem arredondadas (squircle) e contorno branco grosso
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Criar template de moldura squircle com stroke branco de 6-8px para fazer fade/pop-in no centro-inferior da tela ao introduzir rostos citados pelo narrador sem cobrir todo o vídeo
-- por que é novo: Nosso acervo de hyperframes e memes não tem esse card flutuante arredondado com borda sólida branca para ilustrar personagens citados (como o técnico/dirigente)
-- exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 7.4 (trecho 188e2265.mp4)
-- ids: 188e2265
-
-### 4. [visual] Miniaturas flutuantes redondas com borda branca mostrando fotos dos jogadores/técnicos citados (ex: Nuno Espírito Santo, escalação em campo)
+### 3. [visual] Miniaturas flutuantes redondas com borda branca mostrando fotos dos jogadores/técnicos citados (ex: Nuno Espírito Santo, escalação em campo)
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
 - como aplicar: Adicionar assets de fotos de jogadores/clubes dentro de um container circular com borda branca grossa e sombra projetada (drop shadow) flutuando dinamicamente na tela quando forem mencionados.
 - por que é novo: Uso de imagens recortadas em círculos com borda branca e sombra suave flutuando para ilustrar o contexto da história sem ocupar a tela inteira.
 - exemplos: https://www.youtube.com/watch?v=TaBrCh6Je4o seg 2.5
 - ids: 4dd92ea1
 
-### 5. [visual] Uso de painel de controle industrial (botão de acionamento) em close-up para marcar o início de uma ação mecânica pesada.
+### 4. [visual] Uso de painel de controle industrial (botão de acionamento) em close-up para marcar o início de uma ação mecânica pesada.
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Inserir shots de close-up operando botões, alavancas ou telas touch em vídeos de processos industriais ou tecnologia antes de uma reviravolta ou corte dinâmico.
 - por que é novo: Mostra a interação física humana direta com o comando da máquina de forma imersiva e tátil, o que gera expectativa para a ação.
 - exemplos: https://www.youtube.com/watch?v=sVORL2G36OM seg 21.2 (trecho 16bdb1eb.mp4)
 - ids: 16bdb1eb
 
-### 6. [visual] Corte transversal em perspectiva 'raio-x' mostrando a parte aérea da planta e a camada de compostagem/solo subterrânea simultaneamente
+### 5. [visual] Corte transversal em perspectiva 'raio-x' mostrando a parte aérea da planta e a camada de compostagem/solo subterrânea simultaneamente
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Usar em ganchos ou explicações científicas/curiosidades de cultivo: gerar ou gravar tomadas divididas em duas camadas (superfície + corte subterrâneo detalhado)
 - por que é novo: Nosso pipeline usa cortes retos ou imagens planas; não temos esse enquadramento visual split/corte geológico de solo mostrando raízes e adubo agindo por baixo da lona plástica
 - exemplos: https://www.youtube.com/watch?v=f9Xxl1 seg 1.3 (trecho 959da680.mp4)
 - ids: 959da680
 
-### 7. [visual] Corte transversal mostrando a camada subterrânea de composto orgânico/húmus sob as árvores
+### 6. [visual] Corte transversal mostrando a camada subterrânea de composto orgânico/húmus sob as árvores
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
 - como aplicar: Utilizar imagens geradas por IA em corte transversal (mockup 2D/3D) para explicar conceitos de agricultura ou biologia de solos em vídeos educativos.
 - por que é novo: Visual revelador de seção transversal (solo + matéria orgânica + raízes) que ilustra processos de permacultura de forma didática e estética.
 - exemplos: https://www.youtube.com/watch?v=f9Xxl1 seg 0.0 (trecho a0910f13.mp4)
 - ids: a0910f13
 
-### 8. [visual] Legenda centralizada e espaçada em maiúsculas com tom dramático/narrativo estilo mini-documentário.
+### 7. [visual] Legenda centralizada e espaçada em maiúsculas com tom dramático/narrativo estilo mini-documentário.
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
 - como aplicar: Aplicar legendas centralizadas em caixa alta com fonte limpa e traçado sutil para conteúdos de narrativa de histórias longas.
 - por que é novo: Usa estilo minimalista de legenda centralizada linha por linha com transição limpa para vídeos em formato estilo 'storytelling/relato real'.
 - exemplos: https://www.youtube.com/watch?v=qmUX6oao2Sw seg 4.8 (trecho 37e73200.mp4)
 - ids: 37e73200
 
-### 9. [efeito] Dupla exposição / overlay translúcido de tela de celular com gráfico sobreposto ao vídeo do Capitólio em movimento
+### 8. [efeito] Dupla exposição / overlay translúcido de tela de celular com gráfico sobreposto ao vídeo do Capitólio em movimento
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Aplicar blend mode 'screen' ou opacidade ~60% em vídeos verticais de telas (gráficos, prints, apps) por cima de filmagens temáticas para ilustrar dados sem cortar a dinâmica visual.
 - por que é novo: Não temos nos nossos cortes_fx ou hyperframes um blend mode (screen/add/opacity) mesclando tela de smartphone com app financeiro e o b-roll ao fundo.
 - exemplos: https://www.youtube.com/watch?v=1TgrZsZRMfY seg 1.5 (trecho b11b175a.mp4)
 - ids: b11b175a
 
-### 10. [visual] Dupla exposição / sobreposição de tela com gráfico de celular transparente sobre a fachada do Capitólio americano.
+### 9. [visual] Dupla exposição / sobreposição de tela com gráfico de celular transparente sobre a fachada do Capitólio americano.
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
 - como aplicar: Aplicar o efeito de sobreposição (blend mode screen/overlay) com baixa opacidade de um gráfico de ações sobre cenas de contexto político ou econômico nos primeiros segundos.
 - por que é novo: Mistura interface de aplicativo de trading sobre imagens de arquivo institucionais/políticas para criar um apelo visual dinâmico e investigativo.
 - exemplos: https://www.youtube.com/watch?v=1TgrZsZRMfY seg 0.0 (trecho a0dae8ab.mp4)
 - ids: a0dae8ab
 
-### 11. [visual] Destaque cromático por segmento em modelo 3D com anel de torção
+### 10. [visual] Destaque cromático por segmento em modelo 3D com anel de torção
 - visto em 1 vídeo(s) · nota máx. 7.5 · modelos: claude-sonnet
 - como aplicar: Aplicar tint/máscara bicolor com highlight circular na área de transição quando explicar mecânicas corporais ou fatiamento de objetos técnicos.
 - por que é novo: Usa coloração segmentada (metade salmão / metade cinza) com um anel indicador na junção para explicar visualmente rotação biomecânica independente.
 - exemplos: https://www.youtube.com/watch?v=DqV2fb1-4kU seg 17.9 (trecho 2ffa3111.mp4)
 - ids: 2ffa3111
 
-### 12. [visual] Multiplicação em grid 3D com variações de dano/acessório
+### 11. [visual] Multiplicação em grid 3D com variações de dano/acessório
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
 - como aplicar: Ao citar dados de porcentagem ou fração populacional, enfileirar modelos idênticos repetidos aplicando variações visuais (ex: curativo) nos itens afetados.
 - por que é novo: Exibe formação de vários clones do modelo 3D em perspectiva isométrica onde alguns elementos têm ataduras/gesso para ilustrar estatística real.
 - exemplos: https://www.youtube.com/watch?v=DqV2fb1-4kU seg 26.2 (trecho 64df9614.mp4)
 - ids: 64df9614
 
-### 13. [visual] Modelo 3D animado demonstrando a física do gato caindo e girando em duas metades (cintura e coluna)
+### 12. [visual] Modelo 3D animado demonstrando a física do gato caindo e girando em duas metades (cintura e coluna)
 - visto em 1 vídeo(s) · nota máx. 10 · modelos: gemini
 - como aplicar: Criar ou utilizar animações 3D esquemáticas simples para explicar mecânica, física ou biologia nos nossos vídeos explicativos.
 - por que é novo: Usa simulação 3D didática e limpa para explicar um conceito biomecânico complexo passo a passo.

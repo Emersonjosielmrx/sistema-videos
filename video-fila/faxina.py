@@ -383,7 +383,7 @@ def regra_postados_ja(simular):
         return 0
     antes = _livre_gb("D:\\")
     try:
-        subprocess.run([r"D:\manhwa-react\.venv\Scripts\python.exe", r"D:\manhwa-react\scripts\backup_drive.py"],
+        subprocess.run([r"D:\veo\venv\Scripts\python.exe", r"D:\manhwa-react\scripts\backup_drive.py"],
                        capture_output=True, timeout=3 * 3600, creationflags=SEM_JANELA,
                        env=dict(os.environ, PYTHONUTF8="1"))
     except Exception as e:  # noqa: BLE001

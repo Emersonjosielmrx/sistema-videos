@@ -2992,3 +2992,72 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - robos_desastrad_20261121_175438_prop.mp4
   - robos_desastrad_20261121_175438_punch.mp4
   - super_slow_ia_20261116_040229_punch.mp4
+
+## 2026-11-26 17:28 — 322 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (322 MB) — 65 arquivos:
+  - alienigenas_20261125_232913_final.mp4
+  - alienigenas_20261125_232913_imp.mp4
+  - alienigenas_20261125_232913_intro.mp4
+  - alienigenas_20261125_232913_prop.mp4
+  - alienigenas_20261125_232913_punch.mp4
+  - cassetadas_ia_20261125_153332_final.mp4
+  - cassetadas_ia_20261125_153332_imp.mp4
+  - cassetadas_ia_20261125_153332_intro.mp4
+  - cassetadas_ia_20261125_153332_prop.mp4
+  - cassetadas_ia_20261125_153332_punch.mp4
+  - cassetadas_ia_20261126_053654_final.mp4
+  - cassetadas_ia_20261126_053654_imp.mp4
+  - cassetadas_ia_20261126_053654_intro.mp4
+  - cassetadas_ia_20261126_053654_prop.mp4
+  - cassetadas_ia_20261126_053654_punch.mp4
+  - corpo_humano_20261126_035702_final.mp4
+  - corpo_humano_20261126_035702_imp.mp4
+  - corpo_humano_20261126_035702_intro.mp4
+  - corpo_humano_20261126_035702_prop.mp4
+  - corpo_humano_20261126_035702_punch.mp4
+  - e_se..._20261125_202838_final.mp4
+  - e_se..._20261125_202838_imp.mp4
+  - e_se..._20261125_202838_intro.mp4
+  - e_se..._20261125_202838_prop.mp4
+  - e_se..._20261125_202838_punch.mp4
+  - fatos_bizarros_20261126_060303_final.mp4
+  - fatos_bizarros_20261126_060303_imp.mp4
+  - fatos_bizarros_20261126_060303_intro.mp4
+  - fatos_bizarros_20261126_060303_prop.mp4
+  - fatos_bizarros_20261126_060303_punch.mp4
+  - fofos_e_absurdo_20261125_222643_final.mp4
+  - fofos_e_absurdo_20261125_222643_imp.mp4
+  - fofos_e_absurdo_20261125_222643_intro.mp4
+  - fofos_e_absurdo_20261125_222643_prop.mp4
+  - fofos_e_absurdo_20261125_222643_punch.mp4
+  - humor_de_ia_20261126_002627_final.mp4
+  - humor_de_ia_20261126_002627_imp.mp4
+  - humor_de_ia_20261126_002627_intro.mp4
+  - humor_de_ia_20261126_002627_prop.mp4
+  - humor_de_ia_20261126_002627_punch.mp4
+  - motivacao_ia_20261125_205420_final.mp4
+  - motivacao_ia_20261125_205420_imp.mp4
+  - motivacao_ia_20261125_205420_intro.mp4
+  - motivacao_ia_20261125_205420_prop.mp4
+  - motivacao_ia_20261125_205420_punch.mp4
+  - recordes_mundia_20261125_213837_final.mp4
+  - recordes_mundia_20261125_213837_imp.mp4
+  - recordes_mundia_20261125_213837_intro.mp4
+  - recordes_mundia_20261125_213837_prop.mp4
+  - recordes_mundia_20261125_213837_punch.mp4
+  - stand-up_ia_20261125_231241_final.mp4
+  - stand-up_ia_20261125_231241_imp.mp4
+  - stand-up_ia_20261125_231241_intro.mp4
+  - stand-up_ia_20261125_231241_prop.mp4
+  - stand-up_ia_20261125_231241_punch.mp4
+  - super_slow_ia_20261125_204337_final.mp4
+  - super_slow_ia_20261125_204337_imp.mp4
+  - super_slow_ia_20261125_204337_intro.mp4
+  - super_slow_ia_20261125_204337_prop.mp4
+  - super_slow_ia_20261125_204337_punch.mp4
+  - transformacao_20261126_034653_final.mp4
+  - transformacao_20261126_034653_imp.mp4
+  - transformacao_20261126_034653_intro.mp4
+  - transformacao_20261126_034653_prop.mp4
+  - transformacao_20261126_034653_punch.mp4

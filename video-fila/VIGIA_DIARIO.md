@@ -422,3 +422,17 @@ ecursos.py. Executado com sucesso a subida e consolidação dos arquivos compart
 - Causa provável: Ausência de processo ativo do alimentador de longos no PC1 e esgotamento temporário ou falta de liberação automática de contas verificadas para o sistema Veo/GPUs.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos via comando padrão na máquina correspondente e aguardar a renovação/liberação automática das contas do sistema Veo.
 - Estado: PRECISA REVISÃO
+## 20261126_1355 � Alerta sobre modelo agy/gemini-3.8-flash-high inexistente
+- Motivo / O que achei (trecho de log) / Causa prov�vel / CONSERTO PROPOSTO / O que fez (s� se liberado; backup)
+  - Motivo: Verifica��o do gateway OmniRoute e arquivos de configura��o indicam que o modelo `agy/gemini-3.8-flash-high` foi descontinuado e substitu�do por `antigravity/gemini-3-flash` (conforme registrado no painel e hist�rico de melhorias).
+  - Trecho de log / Refer�ncia: `bin/claude_client.py` e hist�rico de gateway indicam que modelos com sufixo `3.8-flash-high` n�o existem mais no gateway.
+  - Causa prov�vel: Altera��o no cat�logo de modelos do gateway OmniRoute.
+  - CONSERTO PROPOSTO: Verificar se h� ocorr�ncias residuais de `agy/gemini-3.8-flash-high` em arquivos de configura��o ou scripts de chamada e padronizar para `antigravity/gemini-3-flash`. Como estou no MODO S� AVISO, nenhum arquivo foi alterado.
+- Estado: NADA A FAZER
+
+## 20261126_1703 — Recap longo: alimentador parado no PC1 e GPUs sem conta verificada
+- Motivo / O que achei: O alimentador de longos (`cliente.py alimentar`) no PC1 está inativo e há 25 de 25 GPUs sem conta livre/verificada (com 10 contas verificadas de um total de 87).
+- Causa provável: Ausência de processo ativo do alimentador no PC1 e esgotamento temporário das contas livres verificadas no sistema Veo.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 via comando padrão e aguardar liberação/renovação de contas verificadas no Veo.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com alimentador parado no PC1 e GPUs sem conta verificada; religar alimentador e verificar contas do Veo.

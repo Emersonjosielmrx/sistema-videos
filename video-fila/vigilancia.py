@@ -175,14 +175,36 @@ def med_desktop_parado(agora):
     return []
 
 
+def _travados_youtube():
+    """slugs/nomes (minusculo, sem espaco) dos canais em contas_travadas.json - tipo removido/identidade/strike."""
+    try:
+        d = json.loads(Path(r"D:\postador-de-videos\config\contas_travadas.json").read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        return set()
+    out = set()
+    for k, v in d.items():
+        if k.startswith("_") or not isinstance(v, dict):
+            continue
+        for x in (k, v.get("nome", "")):
+            x = re.sub(r"[^a-z0-9]", "", str(x).lower())
+            if x:
+                out.add(x)
+    return out
+
+
 def med_reserva_zero(agora):
     try:
-        r = subprocess.run([r"D:\hipercool-materiais\python\venv\Scripts\python.exe", str(BASE / "reserva_status.py")],
+        r = subprocess.run([r"D:\veo\venv\Scripts\python.exe", str(BASE / "reserva_status.py")],
                            capture_output=True, text=True, timeout=300, encoding="utf-8", errors="replace",
                            creationflags=0x08000000)
     except Exception:  # noqa: BLE001
         return []
     zerados = re.findall(r"^\s*0\.0 dias\s+(\S+).*agendados=\s*0\s+prontos=\s*0", r.stdout, re.M)
+    # 26/11 OBRA sistema unico: canal REMOVIDO/TRAVADO pelo YouTube (contas_travadas.json, a mesma lista que o
+    # postador e o motivos.py usam) nao pode postar -> nao e alarme. VIGIA_RESERVA_TRAVADOS=1 volta a cobrar.
+    if os.environ.get("VIGIA_RESERVA_TRAVADOS", "0") != "1":
+        trav = _travados_youtube()
+        zerados = [c for c in zerados if re.sub(r"[^a-z0-9]", "", re.sub(r"^novo_", "", c.lower())) not in trav]
     return [{"chave": f"reserva_zero:{c}", "categoria": "reserva-canal", "projeto": "cortes",
              "titulo": f"canal {c} com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)",
              "evidencia": "reserva_status.py: " + c} for c in zerados]
@@ -472,13 +494,24 @@ def med_ronda(agora):
     guarda RondaCaoGuarda já avisa). VIGIA_RONDA=0 desliga."""
     if os.environ.get("VIGIA_RONDA", "1") == "0":
         return []
-    f = BASE / "estado" / "ronda_achados.json"
-    try:
-        if (agora.timestamp() - f.stat().st_mtime) > 3 * 3600:
-            return []
-        dados = json.loads(f.read_text(encoding="utf-8-sig") or "[]")
-    except (OSError, ValueError):
-        return []
+    dados = []
+    # 26/11: alem da ronda, os achados do vigia_geral.py (que virou sensor) entram aqui
+    for f, idade_max in ((BASE / "estado" / "ronda_achados.json", 3 * 3600),
+                         (BASE / "estado" / "vigia_geral_achados.json", 6 * 3600)):
+        try:
+            if (agora.timestamp() - f.stat().st_mtime) > idade_max:
+                continue
+            itens = json.loads(f.read_text(encoding="utf-8-sig") or "[]")
+        except (OSError, ValueError):
+            continue
+        for a in itens:
+            if isinstance(a, dict) and a.get("em"):
+                try:
+                    if (agora - datetime.fromisoformat(a["em"])).total_seconds() > idade_max:
+                        continue
+                except ValueError:
+                    pass
+            dados.append(a)
     out = []
     for a in dados[:30]:
         if not isinstance(a, dict) or not a.get("chave") or not a.get("titulo"):

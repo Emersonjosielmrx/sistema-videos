@@ -35,6 +35,20 @@ def carregar_contas():
     return contas
 
 
+def _tempo_upload(video_path):
+    """26/11: espera proporcional ao tamanho: ~0,25 MB/s no pior caso + 60 s, entre 180 s e 1500 s."""
+    import os as _os
+    fixo = _os.environ.get("IG_UPLOAD_TIMEOUT_FIXO")
+    if fixo:
+        return int(fixo)
+    try:
+        mb = _os.path.getsize(str(video_path)) / 1e6
+    except OSError:
+        return 180
+    return int(min(1500, max(180, mb / 0.25 + 60)))
+
+
+
 def _upload_litterbox(video_path):
     import subprocess
     r = subprocess.run([
@@ -43,7 +57,7 @@ def _upload_litterbox(video_path):
         "-F", "time=24h",
         "-F", f"fileToUpload=@{video_path}",
         "https://litterbox.catbox.moe/resources/internals/api.php"
-    ], capture_output=True, text=True, timeout=180)
+    ], capture_output=True, text=True, timeout=_tempo_upload(video_path))
     if r.returncode == 0:
         url = r.stdout.strip()
         if url.startswith("https://"):
@@ -57,7 +71,7 @@ def _upload_uguu(video_path):
         "curl.exe", "-s",
         "-F", f"files[]=@{video_path}",
         "https://uguu.se/upload"
-    ], capture_output=True, text=True, timeout=180)
+    ], capture_output=True, text=True, timeout=_tempo_upload(video_path))
     if r.returncode == 0:
         try:
             data = json.loads(r.stdout)
@@ -74,7 +88,7 @@ def _upload_tmpfiles(video_path):
         "curl.exe", "-s",
         "-F", f"file=@{video_path}",
         "https://tmpfiles.org/api/v1/upload"
-    ], capture_output=True, text=True, timeout=180)
+    ], capture_output=True, text=True, timeout=_tempo_upload(video_path))
     if r.returncode == 0:
         try:
             data = json.loads(r.stdout)
