@@ -59,3 +59,16 @@ fila 2 h solta sem descanso, conta fora 6 h e volta depois. 8/8 OK na versão da
 - p76 `marinamartin14948` (telefone ok 26/11 21:15, IP 166.0.102.60 / rnprmtfo-76) = 2ª conta EXCLUSIVA de testes
   (papel "teste") no kaggle_pool da casa; anotada em saidas_usadas.json (p76). Já RODANDO com GPU na vaga de teste
   desde 21:27 (a carlabarbosa94254 está na fila do Kaggle). carlaramos27719 segue verificada=false (pediu selfie).
+
+## 27/11 08:40 — contas de teste: fila de voz + porta do Webshare
+- A conta de teste rodava com GPU mas o loop_teste do kaggle_trabalhador SÓ olhava a fila_teste (vídeo) e a produção:
+  os 13 testes de voz (fila_teste_voz) nunca andavam. Agora loop_teste faz 1 lote_teste_voz() por volta, antes da
+  fila_teste (TESTE_VOZ_NA_CONTA_TESTE=0 desliga). E a central conta fila_teste_voz como trabalho de "teste"
+  (lança a conta de teste também sem longo). Publicado na casa (D:\recap_central_casa = junção p/
+  D:\sistema\1-VIDEO\1-producao\longos\recap_central_casa) e no colab do PC1; backups .antes_voz_na_teste_2711.
+- Fila reordenada: avalia88_* -> zz_avalia88_* (por último); cega_coleta_mike (v1 antiga) cancelada (erro.json).
+- Proxy: p.webshare.io:80 dá "502 Bad Gateway"/timeout do PC1; a porta 45.39.15.202:6632 do mesmo plano funciona.
+  As 2 contas de teste passaram para http://<USUARIO>:<SEGREDO_REMOVIDO>@45.39.15.202:6632 (backup kaggle_pool.json.antes_gateway_2711).
+  A trava de IP usa o "-N" (não muda). Testado (ipv4.webshare.io): -76 sai 166.0.102.60 = IP do cadastro, OK.
+  **ATENÇÃO: -28 (carlabarbosa94254) hoje sai por 185.72.240.55, NÃO pelo IP do cadastro 91.123.10.38** — o Webshare
+  trocou o IP do proxy 28. Dona decide se segue usando essa conta.

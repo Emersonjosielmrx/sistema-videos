@@ -333,3 +333,8 @@ Medido: 1.645 Shorts de parceiro PRONTOS; 377 presos em 17 canais travados pelo 
 - 26/11 21:15 - OBRA mudanca antecipada (dona autorizou perder minutos): +10 pastas em D:\sistema (34/35; flow-imagens 03:10). Postagem pausada 20:58-21:10 e religada (176/176). Pontes cairam ~8 min (religadas por ssh morrem com a conexao) -> religadas pela tarefa ReligarPontes, mesmos IPs. janela_mudanca.ps1 agora guarda/para/religa as pontes sozinha e o limite e relativo (JANELA_MIN).
 
 - 27/11 05:10 - OBRA: ronda nao repete alarme de tarefa encerrada a forca pela janela de mudanca (le D:\sistema\mapa\mudanca.log); 12 falsos sumiram. Janela 03:10: flow-imagens seguiu presa, encerrada a mao 03:18, tudo religado (34/35 pastas em D:\sistema). Webshare IP fixo com 502 desde ~02h (dona).
+
+- 27/11 09:10 - PROXIES GRATIS (EM TESTE): novo comum D:\sistema\comum\proxies_gratis.py (pool de listas publicas, aviso [PROXY GRATIS - EM TESTE], renova A CADA ERRO, sem tarefa). ytdlp_vez.py usa quando a Webshare toda esta fora da roda (bak em D:\proxies-gratis\bak). Desligar: PROXY_GRATIS=0. Catalogo: projeto proxies-gratis (estado teste). Doc D:\proxies-gratis\LEIA_PRIMEIRO.md
+- 27/11 09h: limpeza script por script: 946 scripts mortos em D:\sistema2 (mesmo caminho); tarefa RedeLimpeza 10 min devolve o que fizer falta; diario 06:30 repete (limpar_scripts.py). 
+
+- 27/11 11:10 - PROXIES GRATIS: tarefa ProxiesGratisTeste a cada 3 h (re-testa a lista, limpa invalidos, 27 fontes, confere internet antes, trava unica com a renovacao por erro); listas vivos_todos + vivos_youtube. Catalogo proxies-gratis (tarefa + log teste.log). Doc D:\proxies-gratis\LEIA_PRIMEIRO.md

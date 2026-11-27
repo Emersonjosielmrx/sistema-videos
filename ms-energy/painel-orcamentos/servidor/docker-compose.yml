@@ -1,0 +1,22 @@
+# /opt/orcamentos-ms/servidor/docker-compose.yml
+services:
+  orcamentos:
+    build: .
+    image: orcamentos-ms:1
+    container_name: orcamentos-ms
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8101:8101"   # só o Traefik (127.0.0.1) fala com ele
+    environment:
+      - URL_PUBLICA=https://orcamentos.opus-sem-limites.com.br
+    volumes:
+      - ./dados:/app/dados
+      - ./app.py:/app/app.py:ro
+      - ./motor.py:/app/motor.py:ro
+      - ./web:/app/web:ro
+      - ./img:/app/img:ro
+    shm_size: "256m"
+    mem_limit: 1g
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }

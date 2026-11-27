@@ -1,0 +1,20 @@
+# /opt/traefik-config/dynamic/orcamentos.yml — rota do painel de orçamentos MS Energy
+http:
+  routers:
+    orcamentos-http:
+      rule: "Host(`orcamentos.opus-sem-limites.com.br`)"
+      service: orcamentos-svc
+      entryPoints:
+        - web
+    orcamentos:
+      rule: "Host(`orcamentos.opus-sem-limites.com.br`)"
+      service: orcamentos-svc
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: le
+  services:
+    orcamentos-svc:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8101/"

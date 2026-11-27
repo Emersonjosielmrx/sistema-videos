@@ -85,11 +85,33 @@ def _proxies():
     return []
 
 
+def _pg():
+    r"""Pool de proxies GRATIS (EM TESTE, 27/11). So existe no PC1 (D:\sistema\comum); no STI/Linux fica None."""
+    try:
+        if r"D:\sistema\comum" not in sys.path:
+            sys.path.append(r"D:\sistema\comum")
+        import proxies_gratis
+        return proxies_gratis
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _gratis_url():
+    if os.environ.get("PROXY_GRATIS", "1") == "0":  # PROXY_GRATIS=0 desliga o reforco gratis
+        return None
+    pg = _pg()
+    try:
+        return pg.proxy("ytdlp_vez") if pg else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def proxy_url():
-    """Um proxy da rotação (http://<USUARIO>:<SEGREDO_REMOVIDO>@host:porta) ou None (sem lista = comportamento antigo, direto)."""
+    """Um proxy da rotação (http://<USUARIO>:<SEGREDO_REMOVIDO>@host:porta) ou None (sem lista = comportamento antigo, direto).
+    27/11: Webshare toda fora da roda (ou sem lista) -> proxy gratis EM TESTE (_gratis_url)."""
     todos = _proxies()
     if not todos:
-        return None
+        return _gratis_url()
     try:
         est = json.loads(PROXY_ESTADO.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -97,7 +119,15 @@ def proxy_url():
     import hashlib
     agora = time.time()
     ruins = {k: v for k, v in (est.get("ruins") or {}).items() if v > agora}
-    vivos = [p for p in todos if hashlib.md5(p.encode()).hexdigest()[:12] not in ruins] or todos
+    vivos = [p for p in todos if hashlib.md5(p.encode()).hexdigest()[:12] not in ruins]
+    if not vivos:
+        # 27/11 (dono: "vamos usar os gratis pra tudo, com aviso que estao em teste"): Webshare inteira fora da roda
+        # -> proxy publico gratis (D:\sistema\comum\proxies_gratis.py, avisa "[PROXY GRATIS - EM TESTE]").
+        # Sem gratis vivo = comportamento antigo (gira a Webshare mesmo assim).
+        px_gratis = _gratis_url()
+        if px_gratis:
+            return px_gratis
+        vivos = todos
     i = int(est.get("i", -1)) + 1
     try:
         PROXY_ESTADO.write_text(json.dumps({"i": i, "ruins": ruins}), encoding="utf-8")
@@ -110,6 +140,13 @@ def proxy_ruim(url, motivo=""):
     """Tira o proxy da roda por PROXY_RUIM_MIN (bloqueio/timeout é do PROXY, não do IP da casa — não pausar o PC)."""
     if not url:
         return
+    pg = _pg()
+    try:
+        if pg and pg.e_gratis(url):  # 27/11: erro de proxy gratis vai para o pool dele (renova a lista a cada erro)
+            pg.ruim(url, motivo)
+            return
+    except Exception:  # noqa: BLE001
+        pass
     import hashlib
     try:
         est = json.loads(PROXY_ESTADO.read_text(encoding="utf-8"))

@@ -1,0 +1,42 @@
+# prints.py — roda DENTRO do contêiner (docker exec): tira prints do painel para conferência visual.
+import asyncio, json, re, sqlite3
+from playwright.async_api import async_playwright
+B = "http://127.0.0.1:8101"
+senha = re.search(r"senha: (\S+)", open("/app/dados/CREDENCIAIS_INICIAIS.txt").read()).group(1)
+OUT = "/app/dados/_prints"
+import os; os.makedirs(OUT, exist_ok=True)
+async def main():
+    async with async_playwright() as p:
+        b = await p.chromium.launch(args=["--no-sandbox"])
+        ctx = await b.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=1)
+        pg = await ctx.new_page()
+        await pg.goto(B + "/"); await pg.wait_for_timeout(1500); await pg.screenshot(path=f"{OUT}/01_login.png")
+        await pg.fill("input[name=usuario]", "admin"); await pg.fill("input[name=senha]", senha); await pg.click("button.pri")
+        await pg.wait_for_timeout(1500)
+        r = await pg.request.post(B + "/api/orcamentos", data={"dados": {"cliente_nome": "Raimundo Nonato Ferreira de Souza", "cliente_tel": "(91) 98469-8653", "cliente_cidade": "Capitão Poço – PA", "consumo": 1100, "extras": [{"id": "ar12", "qtd": 1}], "status": "enviado"}})
+        o1 = await r.json()
+        r = await pg.request.post(B + "/api/orcamentos", data={"dados": {"cliente_nome": "Keyla Mayra dos Santos", "cliente_doc": "55019722200", "consumo": 500, "tipo": "hibrido", "baterias": [{"id": "basica5"}, {"id": "mb48314"}], "extras": [{"id": "ar12", "qtd": 1}, {"id": "poste", "qtd": 1}], "status": "negociando"}})
+        o2 = await r.json(); print("o2", r.status, str(o2)[:600])
+        await pg.goto(B + "/#/painel"); await pg.wait_for_timeout(2000); await pg.screenshot(path=f"{OUT}/02_painel.png", full_page=True)
+        await pg.goto(B + f"/#/orcamento/{o2['id']}"); await pg.wait_for_timeout(2000); await pg.screenshot(path=f"{OUT}/03_editor_cliente.png")
+        await pg.click(".passo[data-i='2']"); await pg.wait_for_timeout(1500); await pg.screenshot(path=f"{OUT}/04_editor_sistema.png", full_page=True)
+        await pg.click(".passo[data-i='3']"); await pg.wait_for_timeout(1200); await pg.screenshot(path=f"{OUT}/05_editor_itens.png", full_page=True)
+        await pg.click(".passo[data-i='4']"); await pg.wait_for_timeout(1500); await pg.screenshot(path=f"{OUT}/06_editor_preco.png", full_page=True)
+        await pg.goto(B + "/#/orcamentos"); await pg.wait_for_timeout(1800); await pg.screenshot(path=f"{OUT}/07_lista.png")
+        await pg.click(f"[data-abrir='{o1['id']}']"); await pg.wait_for_timeout(1500); await pg.screenshot(path=f"{OUT}/08_detalhe.png")
+        await pg.goto(B + "/#/simulador"); await pg.wait_for_timeout(2000); await pg.screenshot(path=f"{OUT}/09_simulador.png")
+        await pg.goto(B + "/#/catalogo"); await pg.wait_for_timeout(1500); await pg.screenshot(path=f"{OUT}/10_catalogo.png")
+        await pg.goto(B + "/#/vendedores"); await pg.wait_for_timeout(1200); await pg.screenshot(path=f"{OUT}/11_vendedores.png")
+        m = await b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=1, is_mobile=True, has_touch=True, storage_state=await ctx.storage_state())
+        mp = await m.new_page(); await mp.goto(B + "/#/painel"); await mp.wait_for_timeout(2000); await mp.screenshot(path=f"{OUT}/12_celular_painel.png")
+        await mp.goto(B + "/#/novo"); await mp.wait_for_timeout(1500); await mp.screenshot(path=f"{OUT}/13_celular_novo.png")
+        pub = await b.new_context(viewport={"width": 1280, "height": 900})
+        pp = await pub.new_page(); await pp.goto(o2["link"].replace("https://orcamentos.opus-sem-limites.com.br", B)); await pp.wait_for_timeout(2500); await pp.screenshot(path=f"{OUT}/14_link_cliente.png")
+        pdf = await pg.request.get(B + f"/api/orcamentos/{o2['id']}/pdf"); open(f"{OUT}/proposta_keyla_teste.pdf", "wb").write(await pdf.body())
+        await b.close()
+    # limpa os dados de teste (apaga de vez e zera o contador do mês)
+    c = sqlite3.connect("/app/dados/banco.sqlite")
+    c.execute("DELETE FROM eventos"); c.execute("DELETE FROM orcamentos"); c.execute("DELETE FROM config WHERE chave LIKE 'seq_%'"); c.commit()
+    for f in os.listdir("/app/dados/pdf"): os.remove("/app/dados/pdf/" + f)
+    print("ok", sorted(os.listdir(OUT)))
+asyncio.run(main())

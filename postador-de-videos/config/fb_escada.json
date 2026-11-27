@@ -66,17 +66,34 @@
   ]
  },
  "bicho_noturno": {
-  "degrau": 0
+  "degrau": 1,
+  "mudou_em": "2026-11-27T08:30:56",
+  "historico": [
+   {
+    "quando": "2026-11-27T08:30:56",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "misterios_noturnos": {
   "degrau": 0,
   "viral_desde": "2026-11-26T18:41:15"
  },
  "inventoreact": {
-  "degrau": 0
+  "degrau": 1,
+  "mudou_em": "2026-11-27T08:30:56",
+  "historico": [
+   {
+    "quando": "2026-11-27T08:30:56",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "comedia_noturna": {
-  "degrau": 0
+  "degrau": 0,
+  "viral_desde": "2026-11-27T08:22:36"
  },
  "esporte_noturno": {
   "degrau": 1,
@@ -103,7 +120,15 @@
   ]
  },
  "fio_da_meada": {
-  "degrau": 0
+  "degrau": 1,
+  "mudou_em": "2026-11-27T08:30:56",
+  "historico": [
+   {
+    "quando": "2026-11-27T08:30:56",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "inovare_manhwa_br": {
   "bonus_dia": "2026-11-24",
@@ -119,7 +144,16 @@
   ]
  },
  "forja_react": {
-  "bonus_dia": "2026-11-24"
+  "bonus_dia": "2026-11-24",
+  "degrau": 1,
+  "mudou_em": "2026-11-27T08:30:56",
+  "historico": [
+   {
+    "quando": "2026-11-27T08:30:56",
+    "delta": 1,
+    "motivo": "encheu o teto, sem bloqueio"
+   }
+  ]
  },
  "mundo_que_nao_existe": {
   "degrau": 0,
@@ -142,7 +176,6 @@
   "viral_desde": "2026-11-26T20:00:10"
  },
  "manhwa_thai": {
-  "degrau": 0,
-  "viral_desde": "2026-11-26T09:26:14"
+  "degrau": 0
  }
 }

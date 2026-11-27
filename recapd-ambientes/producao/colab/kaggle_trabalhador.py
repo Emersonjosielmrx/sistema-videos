@@ -1375,6 +1375,18 @@ def loop_teste():
                                             "fish": os.environ.get("FISH_NUVEM") == "1", "papel": "teste",
                                             "limite_h": _LIM_H},
                 destino=f"manhwa-drive:colab_recap/vivo_{QUEM}.json")
+        # 27/11: a conta de teste também faz a fila de TESTES DE VOZ (fila_teste_voz: XTTS 88, treinos de narrador,
+        # réplicas) — antes ela só olhava a fila_teste de vídeo e os 13 testes de voz ficaram parados com a conta
+        # rodando. 1 teste de voz por volta, antes da fila_teste. TESTE_VOZ_NA_CONTA_TESTE=0 desliga.
+        if os.environ.get("TESTE_VOZ_NA_CONTA_TESTE", "1") != "0":
+            _antes_tv = _TRAB["ultimo"]
+            try:
+                lote_teste_voz()
+            except Exception as e:  # noqa: BLE001 — teste de voz nunca derruba a vaga de teste
+                print(f"[{_agora()}] teste de voz falhou ({type(e).__name__}: {str(e)[-150:]})", flush=True)
+            if _TRAB["ultimo"] != _antes_tv:
+                ocioso_desde = time.time()
+                continue
         _usar_fila(True)
         try:
             pid = proximo()

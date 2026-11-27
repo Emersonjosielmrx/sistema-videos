@@ -1,0 +1,1 @@
+foreach($n in "HipercoolPC2","HipercoolPostagem","MSEnergy_VigiaClientes","ShortsNoSTI"){ $t=Get-ScheduledTask $n; $i=$t|Get-ScheduledTaskInfo; "$n | $($i.LastRunTime) | $($t.Actions[0].Execute) $($t.Actions[0].Arguments)" }

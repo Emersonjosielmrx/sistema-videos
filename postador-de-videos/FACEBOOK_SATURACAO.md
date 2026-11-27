@@ -1,6 +1,6 @@
 # Saturação do perfil no Facebook (fb_saturacao.py)
 
-Atualizado 26/11 20:00. Regra: mediana de views dos Reels dos últimos 3 dias < 40% da 1ª semana (com >= 15 Reels nos dois) = perfil saturando -> para de criar Páginas.
+Atualizado 27/11 08:30. Regra: mediana de views dos Reels dos últimos 3 dias < 40% da 1ª semana (com >= 15 Reels nos dois) = perfil saturando -> para de criar Páginas.
 
 ## emersonjosiel02
 - Páginas ativas: 8 | Reels medidos: 51
@@ -9,15 +9,15 @@ Atualizado 26/11 20:00. Regra: mediana de views dos Reels dos últimos 3 dias < 
 
 | Lote de Páginas (ordem de criação) | Mediana de views por Reel | Reels |
 |---|---|---|
-| Páginas 1-5 | 228 | 40 |
+| Páginas 1-5 | 230 | 40 |
 | Páginas 6-10 | 252 | 11 |
 
 ## mundosolar1995
-- Páginas ativas: 9 | Reels medidos: 69
-- Mediana 1ª semana: 231 | últimos 3 dias: 232 (57 Reels)
+- Páginas ativas: 9 | Reels medidos: 76
+- Mediana 1ª semana: 253.0 | últimos 3 dias: 254.5 (64 Reels)
 - **ok**
 
 | Lote de Páginas (ordem de criação) | Mediana de views por Reel | Reels |
 |---|---|---|
-| Páginas 1-5 | 258 | 44 |
-| Páginas 6-10 | 37 | 25 |
+| Páginas 1-5 | 262 | 47 |
+| Páginas 6-10 | 209 | 29 |

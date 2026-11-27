@@ -25,9 +25,13 @@ LIM_DISCO=85; LIM_TEMP=90; LIM_RAM_MB=500
 
 rodar() {
 echo "########## PC1"
-if ! timeout 300 powershell.exe -NoProfile -ExecutionPolicy Bypass -File 'D:\video-fila\ronda_geral.ps1' 2>&1 | filtro; then
-  echo "!! ronda_geral.ps1 falhou"
-fi
+# 27/11: saida vai para ARQUIVO e nao para pipe: o adb server que a ronda liga depois de um reinicio herda a saida e
+# segurava o pipe aberto para sempre (ronda travou 10:58). Com arquivo, o timeout encerra e a leitura termina.
+PSOUT="$AQUI/ronda_geral_saida.tmp"
+timeout 300 powershell.exe -NoProfile -ExecutionPolicy Bypass -File 'D:\video-fila\ronda_geral.ps1' </dev/null >"$PSOUT" 2>&1
+rc=$?
+filtro < "$PSOUT"
+[ $rc -ne 0 ] && echo "!! ronda_geral.ps1 falhou (rc=$rc$([ $rc -eq 124 ] && echo ', passou de 5 min'))"
 
 echo "########## NOTEBOOKS"
 for h in asusx hp sti x200ma itau asus; do

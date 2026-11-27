@@ -2001,6 +2001,37 @@
      "cmd": "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File D:\\hipercool-materiais\\python\\trocar_venv.ps1"
     }
    }
+  },
+  "proxies-gratis": {
+   "nome": "Proxies gratis (listas publicas) - EM TESTE",
+   "categoria": "C-infra",
+   "pastas": [
+    "D:\\proxies-gratis"
+   ],
+   "maquinas": [
+    "pc1"
+   ],
+   "tarefas": [
+    "ProxiesGratisTeste"
+   ],
+   "servicos_fora": [],
+   "obs": "27/11 dono: usar os gratis 'pra tudo, com aviso que estao em teste'; renovar a cada erro; e auto teste a cada X h limpando os invalidos. Comum D:\\sistema\\comum\\proxies_gratis.py (aviso [PROXY GRATIS - EM TESTE]). Tarefa ProxiesGratisTeste a cada 3 h (re-testa a lista + 27 fontes publicas; confere internet antes; trava unica com a renovacao por erro). Ligado em ytdlp_vez.py so quando a Webshare toda esta fora da roda. Desligar: PROXY_GRATIS=0 e desabilitar a tarefa. NUNCA para conta logada. Doc: D:\\proxies-gratis\\LEIA_PRIMEIRO.md",
+   "estado": "teste",
+   "logs": [
+    {
+     "arq": "D:\\proxies-gratis\\teste.log",
+     "sucesso": "OK teste",
+     "prazo_h": 8,
+     "nome": "Teste de proxies gratis (a cada 3 h)",
+     "desde": "2026-11-27T12:00"
+    }
+   ],
+   "tarefas_detalhe": {
+    "ProxiesGratisTeste": {
+     "ligada": true,
+     "cmd": "wscript.exe D:\\rodar_oculto.vbs \"D:\\veo\\venv\\Scripts\\pythonw.exe\" -X utf8 D:\\proxies-gratis\\testar_listas.py 60 --agendado"
+    }
+   }
   }
  },
  "avulsas": [
@@ -2025,7 +2056,8 @@
   "JanelaMudanca",
   "JanelaMudancaMadrugada",
   "ArquivarDrive",
-  "ReligarPontes"
+  "ReligarPontes",
+  "RedeLimpeza"
  ],
  "sistema_re": "^(HP |IObit|MicrosoftEdge|GoogleUpdater|GoogleChrome|RunPlatform|Wise |OneDrive|Opera|S-1-5-|USER_ESRV|AtualizarChrome)"
 }

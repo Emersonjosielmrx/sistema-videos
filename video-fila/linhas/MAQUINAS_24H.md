@@ -1,5 +1,10 @@
 
 
+🖥️ Máquinas nas últimas 24 h (27/11 08:05) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
+• PC2: sem dados (ssh: connect to host 100.125.7.77 port 22: Connection timed out)
+⚠️ PC1: trabalhando 57% do tempo (CPU média 70%, RAM 44%, ffmpeg em 35%), parado 13%; medidor só cobriu 75% do dia
+• DESKTOP: sem dados (ssh: connect to host 100.73.7.19 port 2223: Connection timed out)
+
 🖥️ Máquinas nas últimas 24 h (26/11 08:05) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
 • PC2: sem dados (ssh: connect to host 100.125.7.77 port 22: Connection timed out)
 ⚠️ PC1: trabalhando 77% do tempo (CPU média 83%, RAM 53%, ffmpeg em 58%), parado 4%; medidor só cobriu 63% do dia

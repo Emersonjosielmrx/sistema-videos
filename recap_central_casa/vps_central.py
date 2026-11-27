@@ -641,7 +641,7 @@ def _trabalho_pendente(papel=None):
     total = 0
     # 10/11: fila_treino (retreino de voz) também é trabalho do "curto" — sem isso a central não lançava conta pro treino
     filas = {"longo": (FILA,), "curto": (f"{BASE}/fila_shorts", f"{BASE}/fila_comentarios", f"{BASE}/fila_treino"),
-             "treino": (f"{BASE}/fila_treino",), "teste": (f"{BASE}/fila_teste",)}.get(
+             "treino": (f"{BASE}/fila_treino",), "teste": (f"{BASE}/fila_teste", f"{BASE}/fila_teste_voz")}.get(  # 27/11: voz conta como teste
         papel, (FILA, f"{BASE}/fila_shorts", f"{BASE}/fila_comentarios", f"{BASE}/fila_treino"))
     for fila in filas:
         try:
@@ -655,7 +655,7 @@ def _trabalho_pendente(papel=None):
             return None
         pastas = {}
         # marca de sessão morta conta como livre (o trabalhador solta ela): longo > 12,5 h, Short/comentário > 2 h
-        limite = 45000 if fila in (FILA, f"{BASE}/fila_teste") else 7200
+        limite = 45000 if fila in (FILA, f"{BASE}/fila_teste", f"{BASE}/fila_teste_voz") else 7200
         agora = datetime.now(timezone.utc)
         for i in json.loads(r.stdout or "[]"):
             if "/" in i["Path"]:

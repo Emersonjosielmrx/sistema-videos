@@ -472,3 +472,10 @@ STATUS: REVISAR - Recap longo com alimentador de longos parado no PC1; religar R
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 e verificar a conectividade e status dos daemons de render no PC2.
 - Estado: PRECISA REVISÃO
 STATUS: REVISAR - Recap longo com alimentador travado; verificar PC2 e rotinas de longos.
+
+## 20261127_1115 — Recap longo sem GPUs com conta verificada e alimentador inativo
+- Motivo / O que achei: O recap longo está com 25 de 25 GPUs sem conta livre/verificada (contas verificadas: 10 de 87), além de alimentador de longos necessitando de verificação no PC1 e de conferência nos daemons do PC2.
+- Causa provável: Escassez temporária de contas livres verificadas e paradas nas rotinas de distribuição de longo e render.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Aguardar a rotação/renovação de cotas de contas verificadas no sistema Veo e verificar o status do alimentador de longos no PC1 e daemons no PC2.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com 25 de 25 GPUs sem conta verificada e alimentador inativo; verificar cotas no Veo e rotinas no PC1/PC2.

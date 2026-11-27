@@ -180,6 +180,17 @@ VERSOES["hibrido1000b"] = dict(
             "8 a 10 horas. Ar-condicionado e chuveiro ficam de fora.",
             "Dá para aumentar a bateria depois, sem trocar o inversor.",
             "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano)."])
+# 27/11: Raimundo 1.100 kWh + 1 central de ar; mesmo sistema do Melck 1.100 (23.900) + 4.000 pela central (padrao Celso/Maria).
+VERSOES["raimundo"] = dict(
+    VERSOES["melck"], valor=27900.00, num="P26-1127",
+    saida="Proposta MS Energy - Raimundo Nonato Ferreira de Souza - 1.100 kWh - 14x625W Solis 8k.pdf",
+    cliente="RAIMUNDO NONATO FERREIRA DE SOUZA", cliente_doc="", cliente_end="",
+    extras=[(_AR, _AR_D, "PC", 1, "ar")],
+    porque=["Gera cerca de 1.100 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "14 painéis de 625 W (8,75 kWp): menos painéis para a mesma energia, menos peso e menos furos no telhado.",
+            "Um ar-condicionado inverter incluso: mais conforto, com a energia vindo do próprio sol.",
+            _TAIL,
+            "Inversor Solis de 8 kW com acompanhamento da geração pelo aplicativo."])
 CHAVE = sys.argv[1] if len(sys.argv) > 1 else "solis"
 V = VERSOES[CHAVE]
 SAIDA = os.path.join(AQUI, V["saida"])
