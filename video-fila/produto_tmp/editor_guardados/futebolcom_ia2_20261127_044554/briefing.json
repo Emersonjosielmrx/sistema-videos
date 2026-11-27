@@ -1,0 +1,486 @@
+{
+ "marca": "Cardápio Digital",
+ "produto": "Cardápio Digital",
+ "publico": "donos de restaurante, lanchonete, açaiteria, pizzaria e delivery",
+ "fatos": [
+  "Cardapio digital para restaurante e lanchonete com pedido pelo WhatsApp e atendimento com IA",
+  "Cardápio digital com pedido no WhatsApp",
+  "O cliente vê o cardápio com fotos no celular e faz o pedido direto pelo WhatsApp, com a IA respondendo dúvidas na hora."
+ ],
+ "cliente_real": false,
+ "cores": {
+  "marca": "#E11D48",
+  "apoio": "#FACC15",
+  "fundo_escuro": "#31060F",
+  "destaque": "#E11D48",
+  "texto_sobre_marca": "#FFFFFF"
+ },
+ "arroba": "@futebolcom.ia2",
+ "convite": "Chame no direct",
+ "convite_voz": "Chame a gente no direct.",
+ "titulo": "Do primeiro oi ao pedido fechado no WhatsApp",
+ "gancho_tela": "Do primeiro oi ao pedido fechado",
+ "duracao_s": 30.85,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.26,
+   "tipo": "pergunta",
+   "fala": "Cliente manda um oi e some sem fazer o pedido?",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_0.jpg"
+  },
+  {
+   "n": 1,
+   "ini": 3.91,
+   "fim": 11.69,
+   "tipo": "dono",
+   "fala": "Eu via o cliente mandar um oi, esperar a resposta e desistir antes de escolher o que pedir.",
+   "rotulo": "O problema",
+   "conversa": null,
+   "video": "dono_1.mp4"
+  },
+  {
+   "n": 2,
+   "ini": 11.34,
+   "fim": 19.52,
+   "tipo": "dono",
+   "fala": "Hoje o cliente recebe o link, vê as fotos dos pratos, tira dúvidas com a IA e pede.",
+   "rotulo": "Como funciona",
+   "conversa": null,
+   "video": "dono_2.mp4"
+  },
+  {
+   "n": 3,
+   "ini": 19.17,
+   "fim": 27.35,
+   "tipo": "dono",
+   "fala": "O pedido é confirmado no próprio WhatsApp, e eu deixo de perder venda enquanto a cozinha trabalha.",
+   "rotulo": "O resultado",
+   "conversa": null,
+   "video": "dono_3.mp4"
+  },
+  {
+   "n": 4,
+   "ini": 27.0,
+   "fim": 30.85,
+   "tipo": "cartao",
+   "fala": "Chame a gente no direct.",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_4.jpg"
+  }
+ ],
+ "palavras": [
+  {
+   "p": "Cliente",
+   "ini": 0.316,
+   "fim": 0.687,
+   "cena": 0
+  },
+  {
+   "p": "manda",
+   "ini": 0.698,
+   "fim": 0.976,
+   "cena": 0
+  },
+  {
+   "p": "um",
+   "ini": 0.988,
+   "fim": 1.126,
+   "cena": 0
+  },
+  {
+   "p": "oi",
+   "ini": 1.138,
+   "fim": 1.323,
+   "cena": 0
+  },
+  {
+   "p": "e",
+   "ini": 1.335,
+   "fim": 1.381,
+   "cena": 0
+  },
+  {
+   "p": "some",
+   "ini": 1.393,
+   "fim": 1.728,
+   "cena": 0
+  },
+  {
+   "p": "sem",
+   "ini": 1.74,
+   "fim": 1.925,
+   "cena": 0
+  },
+  {
+   "p": "fazer",
+   "ini": 1.937,
+   "fim": 2.238,
+   "cena": 0
+  },
+  {
+   "p": "o",
+   "ini": 2.249,
+   "fim": 2.284,
+   "cena": 0
+  },
+  {
+   "p": "pedido",
+   "ini": 2.295,
+   "fim": 2.816,
+   "cena": 0
+  },
+  {
+   "p": "Eu",
+   "ini": 4.788,
+   "fim": 5.368,
+   "cena": 1
+  },
+  {
+   "p": "via",
+   "ini": 5.368,
+   "fim": 5.568,
+   "cena": 1
+  },
+  {
+   "p": "o",
+   "ini": 5.508,
+   "fim": 5.628,
+   "cena": 1
+  },
+  {
+   "p": "cliente",
+   "ini": 5.628,
+   "fim": 5.968,
+   "cena": 1
+  },
+  {
+   "p": "mandar",
+   "ini": 5.968,
+   "fim": 6.188,
+   "cena": 1
+  },
+  {
+   "p": "um",
+   "ini": 6.188,
+   "fim": 6.388,
+   "cena": 1
+  },
+  {
+   "p": "oi,",
+   "ini": 6.388,
+   "fim": 7.148,
+   "cena": 1
+  },
+  {
+   "p": "esperar",
+   "ini": 7.588,
+   "fim": 7.708,
+   "cena": 1
+  },
+  {
+   "p": "a",
+   "ini": 7.708,
+   "fim": 8.008,
+   "cena": 1
+  },
+  {
+   "p": "resposta",
+   "ini": 8.008,
+   "fim": 8.368,
+   "cena": 1
+  },
+  {
+   "p": "e",
+   "ini": 8.368,
+   "fim": 8.888,
+   "cena": 1
+  },
+  {
+   "p": "desistir",
+   "ini": 8.888,
+   "fim": 9.668,
+   "cena": 1
+  },
+  {
+   "p": "antes",
+   "ini": 9.668,
+   "fim": 10.008,
+   "cena": 1
+  },
+  {
+   "p": "de",
+   "ini": 10.008,
+   "fim": 10.188,
+   "cena": 1
+  },
+  {
+   "p": "escolher",
+   "ini": 10.188,
+   "fim": 10.448,
+   "cena": 1
+  },
+  {
+   "p": "o",
+   "ini": 10.448,
+   "fim": 10.548,
+   "cena": 1
+  },
+  {
+   "p": "que",
+   "ini": 10.548,
+   "fim": 10.708,
+   "cena": 1
+  },
+  {
+   "p": "pedir.",
+   "ini": 10.708,
+   "fim": 10.888,
+   "cena": 1
+  },
+  {
+   "p": "Hoje",
+   "ini": 12.278,
+   "fim": 12.918,
+   "cena": 2
+  },
+  {
+   "p": "o",
+   "ini": 12.918,
+   "fim": 13.038,
+   "cena": 2
+  },
+  {
+   "p": "cliente",
+   "ini": 13.038,
+   "fim": 13.498,
+   "cena": 2
+  },
+  {
+   "p": "recebe",
+   "ini": 13.498,
+   "fim": 13.758,
+   "cena": 2
+  },
+  {
+   "p": "o",
+   "ini": 13.758,
+   "fim": 13.918,
+   "cena": 2
+  },
+  {
+   "p": "link,",
+   "ini": 13.918,
+   "fim": 14.178,
+   "cena": 2
+  },
+  {
+   "p": "vê",
+   "ini": 14.538,
+   "fim": 14.638,
+   "cena": 2
+  },
+  {
+   "p": "as",
+   "ini": 14.638,
+   "fim": 14.818,
+   "cena": 2
+  },
+  {
+   "p": "fotos",
+   "ini": 14.818,
+   "fim": 15.118,
+   "cena": 2
+  },
+  {
+   "p": "dos",
+   "ini": 15.118,
+   "fim": 15.398,
+   "cena": 2
+  },
+  {
+   "p": "pratos,",
+   "ini": 15.398,
+   "fim": 16.018,
+   "cena": 2
+  },
+  {
+   "p": "tira",
+   "ini": 16.438,
+   "fim": 16.538,
+   "cena": 2
+  },
+  {
+   "p": "dúvidas",
+   "ini": 16.538,
+   "fim": 17.038,
+   "cena": 2
+  },
+  {
+   "p": "com",
+   "ini": 17.038,
+   "fim": 17.258,
+   "cena": 2
+  },
+  {
+   "p": "a",
+   "ini": 17.258,
+   "fim": 17.418,
+   "cena": 2
+  },
+  {
+   "p": "IA",
+   "ini": 17.418,
+   "fim": 17.718,
+   "cena": 2
+  },
+  {
+   "p": "e",
+   "ini": 17.718,
+   "fim": 18.118,
+   "cena": 2
+  },
+  {
+   "p": "pede.",
+   "ini": 18.118,
+   "fim": 18.518,
+   "cena": 2
+  },
+  {
+   "p": "O",
+   "ini": 19.891,
+   "fim": 20.351,
+   "cena": 3
+  },
+  {
+   "p": "pedido",
+   "ini": 20.351,
+   "fim": 20.691,
+   "cena": 3
+  },
+  {
+   "p": "é",
+   "ini": 20.691,
+   "fim": 20.951,
+   "cena": 3
+  },
+  {
+   "p": "confirmado",
+   "ini": 20.951,
+   "fim": 21.511,
+   "cena": 3
+  },
+  {
+   "p": "no",
+   "ini": 21.511,
+   "fim": 21.751,
+   "cena": 3
+  },
+  {
+   "p": "próprio",
+   "ini": 21.751,
+   "fim": 22.031,
+   "cena": 3
+  },
+  {
+   "p": "WhatsApp,",
+   "ini": 22.031,
+   "fim": 22.631,
+   "cena": 3
+  },
+  {
+   "p": "e",
+   "ini": 22.631,
+   "fim": 23.331,
+   "cena": 3
+  },
+  {
+   "p": "eu",
+   "ini": 23.331,
+   "fim": 23.571,
+   "cena": 3
+  },
+  {
+   "p": "deixo",
+   "ini": 23.571,
+   "fim": 23.971,
+   "cena": 3
+  },
+  {
+   "p": "de",
+   "ini": 23.971,
+   "fim": 24.091,
+   "cena": 3
+  },
+  {
+   "p": "perder",
+   "ini": 24.091,
+   "fim": 24.411,
+   "cena": 3
+  },
+  {
+   "p": "venda",
+   "ini": 24.411,
+   "fim": 25.071,
+   "cena": 3
+  },
+  {
+   "p": "enquanto",
+   "ini": 25.071,
+   "fim": 25.411,
+   "cena": 3
+  },
+  {
+   "p": "a",
+   "ini": 25.411,
+   "fim": 25.611,
+   "cena": 3
+  },
+  {
+   "p": "cozinha",
+   "ini": 25.611,
+   "fim": 25.951,
+   "cena": 3
+  },
+  {
+   "p": "trabalha.",
+   "ini": 25.951,
+   "fim": 26.451,
+   "cena": 3
+  },
+  {
+   "p": "Chame",
+   "ini": 27.496,
+   "fim": 27.832,
+   "cena": 4
+  },
+  {
+   "p": "a",
+   "ini": 27.844,
+   "fim": 27.901,
+   "cena": 4
+  },
+  {
+   "p": "gente",
+   "ini": 27.913,
+   "fim": 28.225,
+   "cena": 4
+  },
+  {
+   "p": "no",
+   "ini": 28.237,
+   "fim": 28.33,
+   "cena": 4
+  },
+  {
+   "p": "direct",
+   "ini": 28.341,
+   "fim": 28.931,
+   "cena": 4
+  }
+ ]
+}

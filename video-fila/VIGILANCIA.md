@@ -1,44 +1,27 @@
-# Vigilância 24 h — 2026-11-27T04:00:52
+# Vigilância 24 h — 2026-11-27T07:50:41
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (28)
-- facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 149 h (limite 60 h)
-- Shorts no PC2: sem sucesso há 35 h (limite 24 h)
-- Rede: reagendar pro horário nobre: sem sucesso há 87 h (limite 30 h)
+## Alarmes desta volta (17)
+- tiktok: mesmo erro 18x em 6 h
+- tiktok: mesmo erro 11x em 6 h
+- Carrossel MS Energy: sem sucesso há 153 h (limite 60 h)
+- Shorts no PC2: sem sucesso há 39 h (limite 24 h)
+- Rede: reagendar pro horário nobre: sem sucesso há 90 h (limite 30 h)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- celulares: mesmo erro 12x em 6 h
-- [ronda] TAREFAS COM ERRO: ArgonZelador (0xFFFFFFFF, 27 03:08)
-- [ronda] TAREFAS COM ERRO: ArquivarDrive (0x41306, 26 21:30)
-- [ronda] TAREFAS COM ERRO: ClaudeCodeVideo (0xFFFFFFFF, 27 03:00)
-- [ronda] TAREFAS COM ERRO: ColetarViewsLongos (0xFFFFFFFF, 27 03:11)
-- [ronda] TAREFAS COM ERRO: ControladorVideos (0xFFFFFFFF, 27 03:10)
-- [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20)
-- [ronda] TAREFAS COM ERRO: EngenhariaReversaMedir (0xFFFFFFFF, 27 02:56)
-- [ronda] TAREFAS COM ERRO: EscadaCelulares (0xFFFFFFFF, 27 03:10)
-- [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40)
-- [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20)
-- [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 27 02:58)
-- [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 27 03:06)
+- celulares: mesmo erro 8x em 6 h
+- [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
+- [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
+- [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
+- [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 27 07:18)
+- [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 27 07:06)
 - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
 - [ronda] TAREFAS COM ERRO: MSEnergy_PostarFB (0x1, 26 20:05)
-- [ronda] TAREFAS COM ERRO: NSN_ManterCookies (0xFFFFFFFF, 27 03:11)
-- [ronda] TAREFAS COM ERRO: PostagemContinua (0xFFFFFFFF, 27 03:08)
-- [ronda] TAREFAS COM ERRO: RecapAlimentar (0xFFFFFFFF, 27 03:07)
-- [ronda] TAREFAS COM ERRO: RecapCentralCasa (0xFFFFFFFF, 27 03:12)
 - [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
-- [ronda] TAREFAS COM ERRO: VigiaTreinoVoz (0x1, 27 02:48)
-- [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 38 h (limite 30 h)
+- [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 42 h (limite 30 h)
 - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
 
-## Casos abertos (214)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (207)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -241,29 +224,28 @@
 - [consertar] [ronda] TAREFAS COM ERRO: ArquivarDrive (0x41306, 26 21:30) (-)
 - [consertar] [ronda] TAREFAS COM ERRO: FacebookCriarPaginas (0x41306, 27 01:05) (-)
 - [consertar] [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4 (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: ArgonZelador (0xFFFFFFFF, 27 03:08) (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: ClaudeCodeVideo (0xFFFFFFFF, 27 03:00) (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: EscadaCelulares (0xFFFFFFFF, 27 03:10) (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: NSN_ManterCookies (0xFFFFFFFF, 27 03:11) (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: RecapCentralCasa (0xFFFFFFFF, 27 03:12) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: NSN_ManterCookies (0xFFFFFFFF, 27 03:11) (-)
 - [consertar] [ronda] TAREFAS COM ERRO: VigiaTreinoVoz (0x1, 27 02:48) (-)
+- [consertar] tiktok: mesmo erro 5x em 6 h (-)
+- [consertar] [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10) (-)
+- [consertar] [ronda] TAREFAS COM ERRO: JoaoLucasVirjaoDrive (0x1, 27 06:19) (-)
 
 ## Últimos fechados
-- [sem_mudanca] Facebook Dorama Noturno: mesmo erro 3x em 6 h — gemini-4-argon / -
-- [sem_mudanca] TikTok: sem sucesso há 8 h (limite 8 h) — gemini-4-argon / -
-- [sem_mudanca] Facebook Bicho Noturno: 0 Reels hoje — gemini-4-argon / -
-- [sem_mudanca] Facebook Comédia Noturna: 0 Reels hoje — gemini-4-argon / -
-- [sem_mudanca] Gemini sem navegador (imagem/vídeo): sem sucesso há 6 h (limite 6 h) — gemini-4-argon / -
-- [sem_mudanca] celulares: laço laco_conferir do noite_encher não está rodando — gemini-4-argon / -
-- [sem_mudanca] Facebook Assist-IA Investimentos: 0 Reels hoje — gemini-4-argon / -
-- [falso] Instagram (contas de vídeo): sem sucesso há 9999 h (limite 14 h) — - / -
-- [falso] [ronda] hp: [hp] !! FORA — - / -
-- [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] [ronda] TAREFAS COM ERRO: RecapAlimentar (0xFFFFFFFF, 27 03:07) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: ControladorVideos (0xFFFFFFFF, 27 03:10) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: ColetarViewsLongos (0xFFFFFFFF, 27 03:11) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: PostagemContinua (0xFFFFFFFF, 27 03:08) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: ArgonZelador (0xFFFFFFFF, 27 03:08) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: ClaudeCodeVideo (0xFFFFFFFF, 27 03:00) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: EscadaCelulares (0xFFFFFFFF, 27 03:10) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: RecapCentralCasa (0xFFFFFFFF, 27 03:12) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VigiaChats (0x41306, 27 06:10) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: LimpezaChrome (0x41306, 27 06:05) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: PrioridadeVSCode (0x41306, 27 06:12) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: VigiaMemoria (0x41306, 27 06:13) — - / -
+- [falso] [ronda] asusx: [asusx] !! FORA — - / -
+- [falso] [ronda] sti: [sti] !! FORA — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 27 casos, nota 11% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/14 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0)

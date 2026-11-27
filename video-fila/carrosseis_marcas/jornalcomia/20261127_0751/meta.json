@@ -1,0 +1,30 @@
+{
+ "conta": "jornalcomia",
+ "marca": "Jornal com IA",
+ "capa": "Como a IA verifica informações?",
+ "slides": [
+  {
+   "titulo": "Cruzamento de fontes",
+   "texto": "Modelos comparam dados de várias publicações quase instantaneamente, identificando contradições básicas antes de apresentar qualquer relato final como fato consistente."
+  },
+  {
+   "titulo": "Análise de contexto",
+   "texto": "Algoritmos leem o histórico temporal dos acontecimentos para evitar que frases antigas pareçam novidades fora de sua época original de circulação."
+  },
+  {
+   "titulo": "Rastreio de origem",
+   "texto": "Sistemas modernos analisam o caminho digital da publicação, verificando de onde surgiu o primeiro registro daquele acontecimento no ambiente online."
+  },
+  {
+   "titulo": "Apoio ao olhar humano",
+   "texto": "A máquina não substitui o julgamento crítico, mas serve como filtro inicial veloz para organizar pilhas gigantescas de relatos diários."
+  }
+ ],
+ "legenda": "Entender como a tecnologia processa o fluxo diário de novidades ajuda a consumir conteúdos com mais clareza.\nAcompanhe o Jornal com IA para explorar os bastidores dessa evolução técnica.",
+ "gerado_em": "2026-11-27T07:54:34",
+ "postado": {
+  "como": "reel de slides",
+  "msg": "http",
+  "em": "2026-11-27T07:55:17"
+ }
+}

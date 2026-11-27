@@ -1,0 +1,156 @@
+{
+ "conta": "futebolcom.ia2",
+ "produto": "cardapio_digital",
+ "marca": "Cardápio Digital",
+ "titulo": "Do primeiro oi ao pedido fechado no WhatsApp",
+ "legenda": "Do primeiro oi até o pedido fechado: o cliente vê as fotos dos pratos, tira dúvidas com a IA e confirma tudo pelo WhatsApp. 🍽️ Quer ver como funciona no seu negócio? Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#cardapiodigital #delivery #restaurante #lanchonete #gestaoderestaurante",
+ "roteiro": {
+  "gancho_tela": "Do primeiro oi ao pedido fechado",
+  "pergunta_cliente": "Cliente manda um oi e some sem fazer o pedido?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu via o cliente mandar um oi, esperar a resposta e desistir antes de escolher o que pedir.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the counter of a small Brazilian restaurant, tidy, well lit, clean counter, warm light",
+    "real_tema": "dor do cliente que desiste no primeiro oi",
+    "destaques": [
+     "esperar a resposta",
+     "desistir antes de escolher"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261127_044703_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje o cliente recebe o link, vê as fotos dos pratos, tira dúvidas com a IA e pede.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit small Brazilian restaurant dining area, clean tables in the background",
+    "real_tema": "caminho do cliente do link ao pedido",
+    "destaques": [
+     "vê as fotos"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi, vocês têm cardápio?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Temos sim! Veja o cardápio com fotos."
+     },
+     {
+      "de": "cliente",
+      "texto": "Esse prato vem com acompanhamento?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Vem sim! Posso anotar o seu pedido?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode anotar, quero esse."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261127_044703_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261127_044703_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "O pedido é confirmado no próprio WhatsApp, e eu deixo de perder venda enquanto a cozinha trabalha.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the tidy, well lit pickup counter of a small Brazilian restaurant, kitchen softly visible behind",
+    "real_tema": "resultado: pedido confirmado no WhatsApp sem perder venda",
+    "destaques": [
+     "confirmado no próprio WhatsApp",
+     "deixo de perder venda"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261127_044703_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261127_044703_1.png"
+   }
+  ],
+  "legenda": "Do primeiro oi até o pedido fechado: o cliente vê as fotos dos pratos, tira dúvidas com a IA e confirma tudo pelo WhatsApp. 🍽️ Quer ver como funciona no seu negócio? Link no perfil.",
+  "titulo": "Do primeiro oi ao pedido fechado no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "fluxo_completo",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 60,
+  "tentativas_roteiro": 4
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\futebolcom.ia2_20261127_044554\\dono_3.mp4",
+ "duracao_s": 30.85,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-27T05:20:00",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 3.91,
+   "fala": "Cliente manda um oi e some sem fazer o pedido?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 3.91,
+   "fim": 11.34,
+   "fala": "Eu via o cliente mandar um oi, esperar a resposta e desistir antes de escolher o que pedir.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.34,
+   "fim": 19.17,
+   "fala": "Hoje o cliente recebe o link, vê as fotos dos pratos, tira dúvidas com a IA e pede.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 19.17,
+   "fim": 27.0,
+   "fala": "O pedido é confirmado no próprio WhatsApp, e eu deixo de perder venda enquanto a cozinha trabalha.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.0,
+   "fim": 30.85,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.0,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 4.0,
+   "diretor": 5.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

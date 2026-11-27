@@ -28,7 +28,7 @@ OK_CODIGOS = {0, 267009, 267011, 2147946720, -2147020576}  # 0 | rodando | nunca
 INCONCLUSIVO = {267014}
 
 
-def ps(cmd, timeout=90):
+def ps(cmd, timeout=int(os.environ.get("TROCA_PS_TIMEOUT", "300"))):  # 27/11: 90 s estourava com o PC1 em 100%
     r = subprocess.run(["powershell", "-NoProfile", "-Command", "[Console]::OutputEncoding=[Text.Encoding]::UTF8;" + cmd],
                        capture_output=True, timeout=timeout, creationflags=SEM_JANELA, env={**os.environ, "SISTEMA_USO": "0"})
     return r.returncode, r.stdout.decode("utf-8", "replace"), r.stderr.decode("utf-8", "replace")

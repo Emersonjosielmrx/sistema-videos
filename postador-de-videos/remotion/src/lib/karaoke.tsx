@@ -62,7 +62,7 @@ export const Karaoke: React.FC<Props> = ({
     const isQuebraCena = k > 0 && Boolean(bs[k - 1][bs[k - 1].length - 1].quebraApos || b[0].quebraAntes);
     const ini = isQuebraCena ? b[0].ini : b[0].ini - 0.1;
     const proxIsQuebra = k + 1 < bs.length && Boolean(b[b.length - 1].quebraApos || bs[k + 1][0].quebraAntes);
-    const fim = k + 1 < bs.length ? (proxIsQuebra ? bs[k + 1][0].ini : bs[k + 1][0].ini - 0.1) : b[b.length - 1].fim + 2.0;
+    const fim = k + 1 < bs.length ? (proxIsQuebra ? Math.min(b[b.length - 1].fim + 0.4, bs[k + 1][0].ini - 0.05) : bs[k + 1][0].ini - 0.1) : b[b.length - 1].fim + 2.0;
     return t >= ini && t < fim;
   });
   if (i < 0) return null;
@@ -70,7 +70,7 @@ export const Karaoke: React.FC<Props> = ({
   const isQuebraCenaAtual = i > 0 && Boolean(bs[i - 1][bs[i - 1].length - 1].quebraApos || blocoAtual[0].quebraAntes);
   const blocoIni = isQuebraCenaAtual ? blocoAtual[0].ini : blocoAtual[0].ini - 0.1;
   const proxIsQuebraAtual = i + 1 < bs.length && Boolean(blocoAtual[blocoAtual.length - 1].quebraApos || bs[i + 1][0].quebraAntes);
-  const blocoFim = i + 1 < bs.length ? (proxIsQuebraAtual ? bs[i + 1][0].ini : bs[i + 1][0].ini - 0.1) : blocoAtual[blocoAtual.length - 1].fim + 2.0;
+  const blocoFim = i + 1 < bs.length ? (proxIsQuebraAtual ? Math.min(blocoAtual[blocoAtual.length - 1].fim + 0.4, bs[i + 1][0].ini - 0.05) : bs[i + 1][0].ini - 0.1) : blocoAtual[blocoAtual.length - 1].fim + 2.0;
   return (
     <div
       style={{

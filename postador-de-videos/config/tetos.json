@@ -1064,7 +1064,7 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-15T05:08:39",
     "ultimo_sinal": {
-     "em": "2026-11-27T02:19:11",
+     "em": "2026-11-27T05:17:12",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -1330,7 +1330,7 @@
     "base": 90,
     "nivel": 6,
     "teto": 180,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-07T18:07:57",
     "ultimo_sinal": {
@@ -2554,7 +2554,7 @@
     "desde": "2026-10-30T10:07:57",
     "ultimo_degrau": "2026-11-05T13:08:06",
     "ultimo_sinal": {
-     "em": "2026-11-27T01:20:19",
+     "em": "2026-11-27T04:17:07",
      "tipo": "saude_morto",
      "maquina": "acer"
     },
@@ -2845,13 +2845,13 @@
     "base": 90,
     "nivel": 6,
     "teto": 180,
-    "estado": "subindo",
+    "estado": "segurando",
     "desde": "2026-11-19T17:08:00",
     "ultimo_degrau": "2026-11-26T23:07:58",
     "ultimo_sinal": {
-     "em": "2026-11-25T22:20:14",
+     "em": "2026-11-27T04:17:07",
      "tipo": "saude_morto",
-     "maquina": "pc2"
+     "maquina": "acer"
     },
     "historico": [
      {
@@ -2932,6 +2932,11 @@
      {
       "em": "2026-11-26T23:07:58",
       "o_que": "24 h sem sinal: sobe 1 degrau (165 → 180)",
+      "teto": 180
+     },
+     {
+      "em": "2026-11-27T05:07:57",
+      "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
       "teto": 180
      }
     ]
@@ -4398,7 +4403,7 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-27T02:19:11",
+    "em": "2026-11-27T05:17:12",
     "tipo": "saude_morto",
     "conta": "filmescomia00"
    },

@@ -454,3 +454,21 @@ STATUS: REVISAR - Recap longo com 25 de 25 GPUs sem conta verificada e alimentad
 - Causa provável: Processo do alimentador de longos parado no PC1 ou necessidade de religamento da rotina de alimentação de recap longo.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 via comando padrão (`python bin/cliente.py alimentar` ou rotina equivalente) conforme solicitado na chamada do vigia.
 - Estado: PRECISA REVISÃO
+## 20261127_0515 � Recap longo sem GPUs com conta verificada e alimentador pendente
+- Motivo / O que achei: Contas do Veo sem conta livre/verificada (10 de 87 verificadas, 25/25 GPUs sem conta), alimentador de longos exigindo verifica��o no PC1.
+- Causa prov�vel: Limita��o de cotas e contas em exaust�o nas inst�ncias do Flow/Veo.
+- CONSERTO PROPOSTO: Nenhum (Modo s� aviso ativo). Aguardar renova��o das cotas das contas verificadas ou reabrir via painel do Flow no PC1.
+- Estado: PRECISA REVIS�O
+
+## 20261127_0642 — Recap longo: alimentador (cliente.py alimentar) não está rodando no PC1
+- Motivo / O que achei: O monitor de saúde indica que o alimentador de longos (`cliente.py alimentar`) não está rodando no PC1, com tarefas de parceiro diário e render nas filas exigindo atenção e relogamento de rotinas.
+- Causa provável: Processo do alimentador de longos parado no PC1 e necessidade de religamento de rotinas de alimentação de recap longo.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 via comando padrão (`python bin/cliente.py alimentar`) e conferir o status das instâncias de render e postagem.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com alimentador de longos parado no PC1; religar RecapAlimentar e verificar rotinas.
+## 20261127_0656 — Recap longo: alimentador travado (50 min sem dar a volta) reiniciado
+- Motivo / O que achei: O alerta indicou que o recap longo estava com o alimentador travado (50 min sem dar a volta), com PC2 não respondendo nos daemons (100.125.7.77:8772, 192.168.18.7:8771) e sem novos recaps nas últimas 12h.
+- Causa provável: Congestionamento ou pausa temporária nas instâncias do alimentador de longos e daemons do PC2.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 e verificar a conectividade e status dos daemons de render no PC2.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com alimentador travado; verificar PC2 e rotinas de longos.

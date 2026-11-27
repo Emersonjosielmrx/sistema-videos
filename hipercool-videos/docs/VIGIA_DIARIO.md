@@ -550,3 +550,11 @@ efazer_caps.log mostra histórico recente de processamento de capítulos. Nenhum
 - O que fiz: Nenhum código alterado (Modo Só Aviso, conforme regras do projeto). Apenas verificação dos logs e registro no diário.
 - CONSERTO PROPOSTO: nenhum.
 - Estado: NADA A FAZER
+
+## 20261127_0415 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo ila_postagem.log registra ciclos contínuos e normais a cada 20 minutos (último às 19:06 "Shorts em pt: canal parado, sai já" e métricas). O ila_ciclo.log mostra execuções regulares com a mensagem padrão de fila de capítulos concluída ("fila de capítulos terminada — adicione a próxima obra em config/fila.json"). Houve apenas um detalhe pontual de caminho absoluto de workspace/tmp apontando para diretório anterior em hp_common.py devido à movimentação do repositório, mas sem impacto nos ciclos de postagem.
+- O que fiz: Nenhum código ou configuração alterado (Modo Só Aviso estrito). Apenas leituras de logs, verificação de status da fila e processos.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER
+

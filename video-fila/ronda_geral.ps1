@@ -24,11 +24,22 @@ if (Test-Path 'D:\postador-de-videos\config\POSTAGEM_DESLIGADA.json') { "[POSTAG
 # ignorados: 0 ok | 0x41301 rodando | 0x41303 nunca rodou | 0x800710E0 pulou porque ja estava rodando
 $ok = @(0, 267009, 267011, -2147020576, 2147946720)
 $ruins = @()
+# janelas de mudanca (inicio..fim+5min) lidas do log, para nao culpar tarefa encerrada pela pausa
+$janelas = @()
+$ini = $null
+foreach ($ln in (Get-Content D:\sistema\mapa\mudanca.log -ErrorAction SilentlyContinue)) {
+  if ($ln -match '^(\d\d/\d\d \d\d:\d\d:\d\d) .*(JANELA (MADRUGADA|DE MUDANCA): inicio)') { $ini = [datetime]::ParseExact($agora.Year.ToString() + '/' + $matches[1], 'yyyy/dd/MM HH:mm:ss', $null) }
+  elseif ($ini -and $ln -match '^(\d\d/\d\d \d\d:\d\d:\d\d) .*(fim|encerrada)') { $janelas += ,@($ini.AddMinutes(-2), [datetime]::ParseExact($agora.Year.ToString() + '/' + $matches[1], 'yyyy/dd/MM HH:mm:ss', $null).AddMinutes(5)); $ini = $null }
+}
 foreach ($t in (Get-ScheduledTask | Where-Object { $_.TaskPath -notlike '\Microsoft*' -and $_.State -ne 'Disabled' })) {
   if ($t.TaskName -match '^(HP |IObit|Microsoft|Google|RunPlatform|Wise)') { continue }
   $i = Get-ScheduledTaskInfo -TaskName $t.TaskName -TaskPath $t.TaskPath
   if (-not $i.LastRunTime -or $i.LastRunTime.Year -lt 2000) { continue }
   if (($agora - $i.LastRunTime).TotalHours -gt 48) { continue }
+  # 27/11: 0xFFFFFFFF/0x8007042B = encerrada a forca (janela de mudanca / desligamento do PC). Se a tarefa ainda tem
+  # proxima execucao e foi morta dentro de uma janela registrada em D:\sistema\mapa\mudanca.log, nao e defeito dela.
+  $forca = @(-1, 4294967295, -2147023829, 2147943467)
+  if ($forca -contains $i.LastTaskResult -and $janelas | Where-Object { $i.LastRunTime -ge $_[0] -and $i.LastRunTime -le $_[1] }) { continue }
   if ($ok -notcontains $i.LastTaskResult) { $ruins += ("{0} (0x{1:X}, {2})" -f $t.TaskName, $i.LastTaskResult, $i.LastRunTime.ToString('dd HH:mm')) }
 }
 "[TAREFAS COM ERRO] {0}" -f $ruins.Count
