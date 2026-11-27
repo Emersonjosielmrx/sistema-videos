@@ -346,3 +346,6 @@ Medido: 1.645 Shorts de parceiro PRONTOS; 377 presos em 17 canais travados pelo 
 - 27/11 15h: maquinas fora da roda de render sem editar codigo: D:\video-fila\estado\maquinas_fora.txt (asusx formatando, itau desligado) lido pelo celulares.py (.bak_27nov_fora). arquivar_drive NAO leva mais a quarentena inteira (quebrava juncoes: 79 consertadas 15h10, incl. recapd producao workspace\tmp) e roda juncoes.py logo apos cada remocao (.bak_27nov_quarentena). 
 
 - 27/11 15:30 - CADEADO IP PAGO: D:\sistema\comum\cadeado_pagos.py (rnprmtfo so Kaggle; liberar N pelo dono). ponte_proxy_fixo.py recusada -> FAILBACK gratis proxies_gratis.saida (GitHub -> Webshare gratis). ytdlp_vez: GitHub primeiro. Linha paga saiu do proxies.txt -> secrets\proxy_pago_kaggle.txt. Desligar: CADEADO_PAGOS=0. Doc D:\proxies-gratis\LEIA_PRIMEIRO.md
+- 27/11 17h45: SincronizarPoolKaggle acao refeita (wscript sem vbs); KaggleSaudeContas_0800/2130 e IObit desligadas (programa nao existe; log em D:\sistema\mapa\tarefas_corrigidas.log); venv_imgutils no Drive. 
+- 27/11 18h: documento D:\limpeza_c\EM_OBSERVACAO.md + lista D:\sistema\mapa\EM_OBSERVACAO_lista.md.  
+- 27/11 19h30: videos-comentarios producao.py usa o yt-dlp do Python principal (o do Python313 do usuario perdeu yt_dlp em 25/11); .bak_27nov_ytdlp.  

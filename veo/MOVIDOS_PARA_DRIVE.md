@@ -3061,3 +3061,70 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - transformacao_20261126_034653_intro.mp4
   - transformacao_20261126_034653_prop.mp4
   - transformacao_20261126_034653_punch.mp4
+
+## 2026-11-27 17:10 — 344 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (344 MB) — 63 arquivos:
+  - aulas_ia_20261126_065410_final.mp4
+  - aulas_ia_20261126_065410_imp.mp4
+  - aulas_ia_20261126_065410_intro.mp4
+  - aulas_ia_20261126_065410_prop.mp4
+  - aulas_ia_20261126_065410_punch.mp4
+  - cassetadas_ia_20261126_204836_imp.mp4
+  - cassetadas_ia_20261126_204836_intro.mp4
+  - cassetadas_ia_20261126_204836_prop.mp4
+  - cassetadas_ia_20261126_204836_punch.mp4
+  - cerebro_digital_20261126_202718_imp.mp4
+  - cerebro_digital_20261126_202718_intro.mp4
+  - cerebro_digital_20261126_202718_prop.mp4
+  - cerebro_digital_20261126_202718_punch.mp4
+  - corpo_humano_20261127_090835_final.mp4
+  - corpo_humano_20261127_090835_imp.mp4
+  - corpo_humano_20261127_090835_intro.mp4
+  - corpo_humano_20261127_090835_prop.mp4
+  - corpo_humano_20261127_090835_punch.mp4
+  - curiosidades_ia_20261126_115549_final.mp4
+  - curiosidades_ia_20261126_115549_imp.mp4
+  - curiosidades_ia_20261126_115549_intro.mp4
+  - curiosidades_ia_20261126_115549_prop.mp4
+  - curiosidades_ia_20261126_115549_punch.mp4
+  - dicas_financeir_20261126_191614_final.mp4
+  - dicas_financeir_20261126_191614_imp.mp4
+  - dicas_financeir_20261126_191614_intro.mp4
+  - dicas_financeir_20261126_191614_prop.mp4
+  - dicas_financeir_20261126_191614_punch.mp4
+  - fatos_bizarros_20261127_110814_final.mp4
+  - fatos_bizarros_20261127_110814_imp.mp4
+  - fatos_bizarros_20261127_110814_intro.mp4
+  - fatos_bizarros_20261127_110814_prop.mp4
+  - fatos_bizarros_20261127_110814_punch.mp4
+  - fofos_e_absurdo_20261127_025706_final.mp4
+  - fofos_e_absurdo_20261127_025706_imp.mp4
+  - fofos_e_absurdo_20261127_025706_intro.mp4
+  - fofos_e_absurdo_20261127_025706_prop.mp4
+  - fofos_e_absurdo_20261127_025706_punch.mp4
+  - mitos_vs_verdad_20261116_065211_final.mp4
+  - mitos_vs_verdad_20261116_065211_imp.mp4
+  - mitos_vs_verdad_20261116_065211_intro.mp4
+  - mitos_vs_verdad_20261116_065211_prop.mp4
+  - mitos_vs_verdad_20261116_065211_punch.mp4
+  - robos_desastrad_20261116_070423_final.mp4
+  - robos_desastrad_20261116_070423_imp.mp4
+  - robos_desastrad_20261116_070423_intro.mp4
+  - robos_desastrad_20261116_070423_prop.mp4
+  - robos_desastrad_20261116_070423_punch.mp4
+  - segredos_do_oce_20261126_113616_final.mp4
+  - segredos_do_oce_20261126_113616_imp.mp4
+  - segredos_do_oce_20261126_113616_intro.mp4
+  - segredos_do_oce_20261126_113616_prop.mp4
+  - segredos_do_oce_20261126_113616_punch.mp4
+  - transformacao_20261126_155512_final.mp4
+  - transformacao_20261126_155512_imp.mp4
+  - transformacao_20261126_155512_intro.mp4
+  - transformacao_20261126_155512_prop.mp4
+  - transformacao_20261126_155512_punch.mp4
+  - transformacao_20261127_051611_final.mp4
+  - transformacao_20261127_051611_imp.mp4
+  - transformacao_20261127_051611_intro.mp4
+  - transformacao_20261127_051611_prop.mp4
+  - transformacao_20261127_051611_punch.mp4

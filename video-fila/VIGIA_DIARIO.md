@@ -479,3 +479,14 @@ STATUS: REVISAR - Recap longo com alimentador travado; verificar PC2 e rotinas d
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Aguardar a rotação/renovação de cotas de contas verificadas no sistema Veo e verificar o status do alimentador de longos no PC1 e daemons no PC2.
 - Estado: PRECISA REVISÃO
 STATUS: REVISAR - Recap longo com 25 de 25 GPUs sem conta verificada e alimentador inativo; verificar cotas no Veo e rotinas no PC1/PC2.
+## 20261127_1735 — Recap longo: 25/25 GPUs sem conta verificada e alimentador pendente
+- Motivo / O que achei: O recap longo apresenta 25 de 25 GPUs sem conta livre/verificada (contas verificadas totais: 10 de 87), além de restrições de cotas e contas em exaustão na API do Veo/Flow.
+- Causa provável: Escassez temporária de cotas nas contas verificadas e limite de requisições atingido.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Aguardar a renovação automática das cotas ou reavaliar o cooldown das contas verificadas no sistema.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com 25/25 GPUs sem conta verificada; aguardar renovação das cotas no sistema Veo/Flow.
+## 20261127_1915 � status da VPS ileg�vel e proxy groq temporariamente fora
+- Motivo / O que achei (trecho de log): anime_health_monitor.log mostra "groq: proxy .webshare.io:80 fora (groq: ProxyError) -> testa de novo"; status geral monitorado sem falhas criticas nos processos principais.
+- Causa prov�vel: Instabilidade tempor�ria no proxy webshare ou timeout de rede na VPS.
+- CONSERTO PROPOSTO: nenhum (falha transit�ria de proxy/rede resolvida automaticamente pelo retry).
+- Estado: NADA A FAZER

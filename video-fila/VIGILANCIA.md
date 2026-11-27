@@ -1,23 +1,23 @@
-# Vigilância 24 h — 2026-11-27T15:50:42
+# Vigilância 24 h — 2026-11-27T19:50:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (11)
+## Alarmes desta volta (13)
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 161 h (limite 60 h)
+- Carrossel MS Energy: sem sucesso há 165 h (limite 60 h)
+- Longos no YouTube: sem sucesso há 40 h (limite 36 h)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- celulares: nenhum post OK há 3 h+ (10 ok de 26 hoje, 11 na fila)
+- celulares: 3 celulares fora do adb
 - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
-- [ronda] TAREFAS COM ERRO: EngenhariaReversaFila (0x1, 27 15:00)
-- [ronda] TAREFAS COM ERRO: EngenhariaReversaMedir (0x1, 27 14:56)
+- [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20)
 - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
 - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
 - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
-- [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
 - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
+- [ronda] asusx: [asusx] !! FORA
 
-## Casos abertos (202)
-- [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (201)
 - [duplicado] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -217,10 +217,10 @@
 - [consertar] celulares: laço laco_postar do noite_encher não está rodando (-)
 - [consertar] [ronda] TAREFAS COM ERRO: EngenhariaReversaFila (0x1, 27 15:00) (-)
 - [consertar] [ronda] TAREFAS COM ERRO: EngenhariaReversaMedir (0x1, 27 14:56) (-)
-- [vigia_rodando] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) (-)
+- [consertar] [ronda] asusx: [asusx] !! FORA (-)
+- [consertar] [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20) (-)
 
 ## Últimos fechados
-- [falso] [ronda] TAREFAS COM ERRO: ClaudeCodeVideo (0xFFFFFFFF, 27 03:00) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: EscadaCelulares (0xFFFFFFFF, 27 03:10) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: RecapCentralCasa (0xFFFFFFFF, 27 03:12) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: VigiaChats (0x41306, 27 06:10) — - / -
@@ -235,6 +235,7 @@
 - [falso] celulares: laço laco_conferir do noite_encher não está rodando — - / -
 - [falso] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): ProxiesGratisTeste — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 27 casos, nota 11% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/14 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0)

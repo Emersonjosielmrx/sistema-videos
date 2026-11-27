@@ -37,7 +37,10 @@ LOG = PROJETO / "logs" / "producao.log"
 ESTOQUE_MAX = 4          # vídeos prontos ainda não postados
 POSTAR_ATE_H = 36        # só sobe se a vaga de publicação for nas próximas 36 h (o resto fica no estoque)
 RAM_MIN_GB = 3.0
-YTDLP = shutil.which("yt-dlp") or r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\Scripts\yt-dlp.exe"
+# 27/11: o yt-dlp.exe do Python313 do usuario perdeu o pacote yt_dlp (25/11) e o shutil.which achava ELE primeiro.
+# Agora usa o do Python principal (D:\veo\venv, tem yt_dlp); o which fica de reserva.
+YTDLP = (r"D:\veo\venv\Scripts\yt-dlp.exe" if os.path.exists(r"D:\veo\venv\Scripts\yt-dlp.exe")
+         else shutil.which("yt-dlp") or r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\Scripts\yt-dlp.exe")
 
 ELENCO = ["chaves_chapolin", "quico", "chiquinha", "seu_madruga", "professor_girafales", "faustao", "silvio_santos",
           "chapolin_colorado", "galvao_bueno", "cid_moreira", "bob_esponja", "lula_molusco", "seu_sirigueijo_peter_griffin",

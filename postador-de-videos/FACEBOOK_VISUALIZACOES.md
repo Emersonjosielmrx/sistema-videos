@@ -2,22 +2,22 @@
 
 | Página | Seguidores | Reels | Views (soma) | Ganho desde a anterior | Medido |
 |---|---|---|---|---|---|
-| Bicho Noturno | 3 | 10 | 3699 | +2 | 2026-11-27 15:13 |
-| Invento React | 2 | 9 | 3138 | +1 | 2026-11-27 15:13 |
-| Fio da Meada | 0 | 10 | 2903 | +156 | 2026-11-27 15:13 |
-| Dorama Noturno | 4 | 10 | 2844 | +0 | 2026-11-27 15:13 |
-| Inovare Manhwa Thai | 0 | 8 | 2217 | +3 | 2026-11-27 15:13 |
-| Mistérios Noturnos | 10 | 10 | 2097 | -289 | 2026-11-27 15:13 |
-| Anime Noturno | 0 | 10 | 1978 | +0 | 2026-11-27 15:13 |
-| Forja React | 1 | 10 | 1878 | +88 | 2026-11-27 15:13 |
-| Comédia Noturna | 4 | 8 | 1643 | +137 | 2026-11-27 15:13 |
-| Esporte Noturno | 1 | 8 | 1463 | +0 | 2026-11-27 15:13 |
-| Curiosidades Noturnas | 6 | 9 | 1359 | +0 | 2026-11-27 15:13 |
-| Assist-IA Investimentos | 0 | 9 | 1198 | +0 | 2026-11-27 15:13 |
-| Inovare Manhwa Hindi | 2 | 8 | 1113 | +12 | 2026-11-27 15:13 |
-| Cartucho React | 0 | 6 | 963 | +3 | 2026-11-27 15:13 |
-| Filme Noturno | 0 | 7 | 936 | +0 | 2026-11-27 15:13 |
-| Mundo Que Não Existe | 10 | 8 | 569 | +85 | 2026-11-27 15:13 |
-| Inovare Manhwa BR | 1 | 2 | 382 | +0 | 2026-11-27 15:13 |
+| Bicho Noturno | 3 | 10 | 3658 | -335 | 2026-11-27 19:13 |
+| Fio da Meada | 0 | 10 | 3200 | +238 | 2026-11-27 19:13 |
+| Invento React | 2 | 10 | 3102 | -144 | 2026-11-27 19:13 |
+| Inovare Manhwa Thai | 0 | 8 | 2466 | -1722 | 2026-11-27 19:13 |
+| Dorama Noturno | 4 | 10 | 2345 | -499 | 2026-11-27 19:13 |
+| Mistérios Noturnos | 10 | 10 | 2275 | -5422 | 2026-11-27 19:13 |
+| Forja React | 1 | 10 | 1844 | -311 | 2026-11-27 19:13 |
+| Anime Noturno | 0 | 10 | 1548 | -430 | 2026-11-27 19:13 |
+| Esporte Noturno | 1 | 10 | 1463 | +0 | 2026-11-27 19:13 |
+| Curiosidades Noturnas | 6 | 9 | 1360 | -4788 | 2026-11-27 19:13 |
+| Inovare Manhwa Hindi | 2 | 10 | 1321 | -2612 | 2026-11-27 19:13 |
+| Assist-IA Investimentos | 0 | 10 | 1198 | -1376 | 2026-11-27 19:13 |
+| Cartucho React | 0 | 7 | 1189 | +2 | 2026-11-27 19:13 |
+| Filme Noturno | 0 | 9 | 936 | +0 | 2026-11-27 19:13 |
+| Comédia Noturna | 4 | 8 | 936 | -2853 | 2026-11-27 19:13 |
+| Inovare Manhwa BR | 1 | 3 | 382 | +0 | 2026-11-27 19:13 |
+| Mundo Que Não Existe | 12 | 9 | 309 | -6856 | 2026-11-27 19:13 |
 | Cena React | 0 | 1 | 6 | +1 | 2026-11-20 12:24 |
-| Tech Noturno | 0 | 1 | 0 | +0 | 2026-11-27 15:13 |
+| Tech Noturno | 0 | 3 | 0 | +0 | 2026-11-27 19:13 |

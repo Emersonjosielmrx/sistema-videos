@@ -1,12 +1,12 @@
-# Teste gradual de formatos e vozes — 27/11 15:35
+# Teste gradual de formatos e vozes — 27/11 18:35
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 827.0 de 1603 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 831.0 de 1608 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| voz:cintilante_she_ra_flavia_saddy | testando | 60 | 0 | 0 | 40 | 30 | 22.0/37 | 0.59 | 18 | 48% (13) | 59/0 | 0 |
+| voz:cintilante_she_ra_flavia_saddy | testando | 60 | 0 | 0 | 41 | 30 | 22.0/37 | 0.59 | 18 | 48% (13) | 59/0 | 0 |
 | voz:moana | promovido | 13 | 0 | 0 | 7 | 7 | 21.0/33 | 0.63 | 278 | 49% (6) | 13/0 | 0 |
 | voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 4 | 11.5/25 | 0.46 | 903 | 53% (2) | 9/0 | 0 |
 | voz:chamber_valorant | promovido | 2 | 0 | 0 | 1 | 1 | 10.0/15 | 0.65 | 1091 | 36% (1) | 2/0 | 0 |

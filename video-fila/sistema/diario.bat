@@ -15,4 +15,6 @@ echo ===== %date% %time% >> %L%
 %PY% D:\sistema\catalogo\limpar_scripts.py --aplicar >> %L% 2>&1
 %PY% D:\sistema\catalogo\limpar_scripts.py --drive >> %L% 2>&1
 %PY% D:\sistema\catalogo\juncoes.py --aplicar >> %L% 2>&1
+%PY% D:\sistema\catalogo\levantar_nao_codigo.py >> %L% 2>&1
+%PY% D:\sistema\catalogo\em_observacao.py >> %L% 2>&1
 %PY% D:\sistema\catalogo\catalogo.py md > D:\sistema\catalogo\CATALOGO.md 2>&1

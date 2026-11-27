@@ -36,7 +36,7 @@ CODIGO = "manhwa-drive:colab_recap/colab_codigo/kaggle_trabalhador.py"
 LIVRES = {"filmescomia1": 27, "fabricadeautomacoes0": 25, "fabricadeautomacoesia": 26, "inovaremanhwaverseesp": 31,
           "jogoscomia": 34, "jornalcomia": 35, "solarmundo195": 71, "vendeafiliados3": 5, "entrevistacomia": 23}
 # 26/11: sem "Continuar"/"OK" soltos — o aviso do Gemini também tem "Continuar" (e a caixa do Gemini roubava o foco)
-CLIQUES = ("Executar mesmo assim", "Run anyway", "Reconectar", "Reconnect", "Estou aqui", "I'm here")
+CLIQUES = ("Ligar sem GPU", "Connect without GPU", "Executar mesmo assim", "Run anyway", "Reconectar", "Reconnect", "Estou aqui", "I'm here")
 
 
 def log(m):
@@ -145,8 +145,8 @@ def main(apelido):
     n = LIVRES[apelido]
     email = f"{apelido}@gmail.com"
     _, e = cofre.conta(apelido)
-    if cofre._cdp_vivo(e["porta"]):  # aberta por outro caminho (talvez sem o IP fixo): fecha e reabre pelo IP certo
-        cofre._fechar_porta(e["porta"])
+    if cofre._cdp_vivo(e["porta"]):  # 27/11: ja aberta = NAO fecha a forca (derrubou a filmescomia1 em 26/11); para
+        sys.exit(f"{apelido}: Chrome ja aberto na porta {e['porta']} - feche ele antes (nao fecho a forca)")
     pp = ponte(n)
     flags = [f"--proxy-server=http://127.0.0.1:{pp}", "--proxy-bypass-list=<-loopback>",
              "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"]

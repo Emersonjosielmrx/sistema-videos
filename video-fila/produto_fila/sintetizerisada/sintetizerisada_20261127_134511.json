@@ -1,0 +1,156 @@
+{
+ "conta": "sintetizerisada",
+ "produto": "agenda_ia",
+ "marca": "Agenda IA",
+ "titulo": "Agenda IA: sem conflito de horário no WhatsApp",
+ "legenda": "Quando dois clientes pedem o mesmo horário, a Agenda IA organiza tudo direto no WhatsApp, sem conflito e sem duplo agendamento. Atendimento 24 horas para você focar nos clientes. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Dois clientes, um só horário?",
+  "pergunta_cliente": "Dois clientes pedem o mesmo horário no WhatsApp. Quem fica com a vaga?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Antes, dois clientes pediam o mesmo horário ao mesmo tempo, e eu perdia tempo desfazendo a confusão.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the tidy, well lit reception counter of a small Brazilian clinic",
+    "real_tema": "dono relata o problema do duplo agendamento",
+    "destaques": [
+     "mesmo horário",
+     "desfazendo a confusão"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261127_134538_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Hoje a IA agenda direto no WhatsApp e não deixa dois clientes ficarem com o mesmo horário.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a clean, well lit counter of a small Brazilian beauty salon, tidy and professional",
+    "real_tema": "dono explica como a IA evita conflito de horário",
+    "destaques": [
+     "agenda direto no WhatsApp",
+     "mesmo horário"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi! Tem horário amanhã às 15h?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Esse horário já foi reservado. Tenho 15h30 ou 16h. Qual prefere?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode ser 16h."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pronto, seu horário das 16h está confirmado!"
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261127_134538_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261127_134538_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Minha agenda fica organizada, sem duplo agendamento, e eu atendo com tranquilidade enquanto a IA trabalha 24 horas.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit Brazilian barbershop, clean counter, professional look",
+    "real_tema": "dono mostra o resultado: agenda organizada 24h",
+    "destaques": [
+     "sem duplo agendamento",
+     "IA trabalha 24 horas"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261127_134538_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261127_134538_1.png"
+   }
+  ],
+  "legenda": "Quando dois clientes pedem o mesmo horário, a Agenda IA organiza tudo direto no WhatsApp, sem conflito e sem duplo agendamento. Atendimento 24 horas para você focar nos clientes. Link no perfil.",
+  "titulo": "Agenda IA: sem conflito de horário no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "fim_duplo_agendamento",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 25,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\sintetizerisada_20261127_134511\\dono_3.mp4",
+ "duracao_s": 31.86,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-27T14:19:41",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.64,
+   "fala": "Dois clientes pedem o mesmo horário no WhatsApp. Quem fica com a vaga?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.64,
+   "fim": 13.01,
+   "fala": "Antes, dois clientes pediam o mesmo horário ao mesmo tempo, e eu perdia tempo desfazendo a confusão.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 13.01,
+   "fim": 20.04,
+   "fala": "Hoje a IA agenda direto no WhatsApp e não deixa dois clientes ficarem com o mesmo horário.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.04,
+   "fim": 27.87,
+   "fala": "Minha agenda fica organizada, sem duplo agendamento, e eu atendo com tranquilidade enquanto a IA trabalha 24 horas.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.87,
+   "fim": 31.86,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.0,
+   "diretor": 5.0
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}
