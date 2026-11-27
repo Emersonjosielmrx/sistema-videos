@@ -436,3 +436,15 @@ ecursos.py. Executado com sucesso a subida e consolidação dos arquivos compart
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 via comando padrão e aguardar liberação/renovação de contas verificadas no Veo.
 - Estado: PRECISA REVISÃO
 STATUS: REVISAR - Recap longo com alimentador parado no PC1 e GPUs sem conta verificada; religar alimentador e verificar contas do Veo.
+## 20261126_2217 � Recap longo: PREVIA 7min momo com TUDO novo 24/11 com erro na fila
+- Motivo / O que achei: O pedido "PREVIA 7min momo com TUDO novo 24/11" apresenta erro na fila de render/produ��o, com o alimentador de longos no PC1 inativo e verifica��o de contas/recursos.
+- Causa prov�vel: Falta de processo ativo do alimentador de longos no PC1 e esgotamento tempor�rio ou falta de contas livres verificadas para o fluxo Veo.
+- CONSERTO PROPOSTO: Nenhum (Modo s� aviso ativo). Religar o alimentador de longos no PC1 via comando padr�o e aguardar libera��o/renova��o de contas verificadas no sistema Veo.
+- Estado: PRECISA REVIS�O
+
+## 20261126_2315 — Recap longo: 25 de 25 GPUs sem conta verificada e alimentador inativo
+- Motivo / O que achei: O relatório de status indica recap longo com 25 de 25 GPUs sem conta livre/verificada (contas verificadas: 10 de 87), além de alimentador de longos necessitando de verificação no PC1.
+- Causa provável: Escassez temporária de contas livres verificadas e paradas nas rotinas de distribuição de longo.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Aguardar a rotação/renovação de cotas de contas verificadas no sistema Veo e verificar o status do alimentador de longos no PC1.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Recap longo com 25 de 25 GPUs sem conta verificada e alimentador inativo; verificar cotas no Veo.

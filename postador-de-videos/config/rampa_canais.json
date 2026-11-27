@@ -5,7 +5,7 @@
       "bonus_dia": "2026-11-17",
       "ultima_mudanca": "2026-11-14T21:12:15-03:00",
       "motivo": "desceu: rende pouco (mediana 5 em 48 h) — vagas vão pros canais fortes",
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_assistiainvestimentos": {
       "extra": 0,
@@ -20,7 +20,7 @@
     },
     "novo_bichonoturno": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "ultima_mudanca": "2026-11-15T21:12:48-03:00",
       "motivo": "desceu: rende pouco (mediana 22 em 48 h) — vagas vão pros canais fortes"
     },
@@ -29,7 +29,7 @@
       "bonus_dia": "2026-11-17",
       "ultima_mudanca": "2026-11-14T21:12:15-03:00",
       "motivo": "desceu: rende pouco (mediana 6 em 48 h) — vagas vão pros canais fortes",
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_universo_ia_d6s": {
       "extra": 0,
@@ -70,18 +70,18 @@
       "bonus_dia": "2026-11-17",
       "ultima_mudanca": "2026-11-17T13:23:49-03:00",
       "motivo": "desceu: pegou 'limite diário' do YouTube",
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "limite_em": "2026-11-17T13:23:49-03:00"
     },
     "novo_doramanoturno": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "ultima_mudanca": "2026-11-24T01:23:37-03:00",
       "motivo": "desceu: rende pouco (mediana 3 em 48 h) — vagas vão pros canais fortes"
     },
     "novo_esportenoturno": {
       "extra": 5,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "ultima_mudanca": "2026-11-14T21:12:15-03:00",
       "motivo": "subiu (canal forte, mediana 1267 em 48 h, 1 degrau/dia): encheu o teto 8"
     },
@@ -120,7 +120,7 @@
     },
     "novo_gamenoturno": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "ultima_mudanca": "2026-11-06T05:47:28-03:00",
       "motivo": "desceu: pegou 'limite diário' do YouTube"
     },
@@ -144,25 +144,24 @@
       "bonus_negado": "2026-11-24T12",
       "ultima_mudanca": "2026-11-26T03:23:15-03:00",
       "motivo": "desceu: pegou 'limite diário' do YouTube",
-      "bonus_dia": "2026-11-26",
+      "bonus_dia": "2026-11-27",
       "limite_em": "2026-11-26T03:23:15-03:00",
       "liberado": "2026-11-19T01:17:47-03:00",
       "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_inovareq8l": {
-      "extra": 4,
+      "extra": 5,
       "bonus_negado": "2026-11-24T00",
-      "ultima_mudanca": "2026-11-22T14:22:07-03:00",
-      "motivo": "22/11 dona: liberar mais vídeos nos canais que rendem",
-      "bonus_dia": "2026-11-26",
-      "viral_desde": "2026-11-26T15:48:54-03:00"
+      "ultima_mudanca": "2026-11-26T21:26:31-03:00",
+      "motivo": "subiu (canal forte, mediana 997 em 48 h, 1 degrau/dia): encheu o teto 7",
+      "bonus_dia": "2026-11-27"
     },
     "novo_inovareu8b": {
       "extra": 3,
       "bonus_negado": "2026-11-24T00",
       "ultima_mudanca": "2026-11-26T10:17:39-03:00",
       "motivo": "desceu: pegou 'limite diário' do YouTube",
-      "bonus_dia": "2026-11-26",
+      "bonus_dia": "2026-11-27",
       "limite_em": "2026-11-26T10:17:39-03:00"
     },
     "novo_ia_agora_h3n": {
@@ -170,11 +169,11 @@
       "bonus_dia": "2026-11-17",
       "ultima_mudanca": "2026-11-19T21:22:50-03:00",
       "motivo": "subiu (canal forte, mediana 1105 em 48 h, 1 degrau/dia): encheu o teto 5",
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_manhwareact_ia": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "ultima_mudanca": "2026-11-11T02:31:57-03:00",
       "motivo": "desceu: pegou 'limite diário' do YouTube",
       "bonus_dia": "2026-11-17"
@@ -182,11 +181,11 @@
     "novo_mundoquenaoexiste": {
       "extra": 0,
       "bonus_dia": "2026-11-04",
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_manhwanoturno": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_ia_sem_limites_h4b": {
       "extra": 1,
@@ -212,45 +211,45 @@
     },
     "GtuH5ezUK8eBaC60": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "nYsAKUb3DbR1QOEm": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "7zpNZNll2jlBnQ0J": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "bonus_dia": "2026-11-12"
     },
     "TkfzifstYEoG4jKg": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "q3mik36FjtTgFkNC": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "8ROQmZVjbpwiwMoX": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "UYjkdFO3V3kjmKU5": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "bonus_dia": "2026-11-16"
     },
     "novo_inovaremanhwaverse": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "0RW4rz4ekPpkPcZx": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T19"
+      "bonus_negado": "2026-11-27T00"
     },
     "GG97QQt8lmyv0dDG": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     },
     "novo_empresariointeligenteia": {
       "extra": 0,
@@ -262,13 +261,12 @@
       "punido": "2026-11-20T23:15:47-03:00"
     },
     "novo_clinicalucrativaia": {
-      "extra": 0,
-      "bonus_negado": "2026-11-23T10",
-      "ultima_mudanca": "2026-11-20T23:01:53-03:00",
-      "motivo": "desceu: PUNIDO agora (mediana 10 nos Shorts de 1-4 dias) — vagas vão pros canais que rendem",
+      "extra": 1,
+      "bonus_negado": "2026-11-27T00",
+      "ultima_mudanca": "2026-11-26T21:26:31-03:00",
+      "motivo": "subiu (LIBERADO pelo YouTube, 1 degrau/dia): encheu o teto 1",
       "liberado": "2026-11-19T01:17:21-03:00",
-      "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia",
-      "punido": "2026-11-20T23:15:47-03:00"
+      "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_imovelemfoco": {
       "extra": 0,
@@ -284,13 +282,12 @@
       "descanso_feito": "2026-11-26"
     },
     "novo_vendasqueescalam": {
-      "extra": 0,
-      "bonus_negado": "2026-11-23T10",
-      "ultima_mudanca": "2026-11-20T23:01:53-03:00",
-      "motivo": "desceu: PUNIDO agora (mediana 0 nos Shorts de 1-4 dias) — vagas vão pros canais que rendem",
+      "extra": 1,
+      "bonus_negado": "2026-11-27T00",
+      "ultima_mudanca": "2026-11-26T21:26:31-03:00",
+      "motivo": "subiu (LIBERADO pelo YouTube, 1 degrau/dia): encheu o teto 1",
       "liberado": "2026-11-19T01:17:21-03:00",
-      "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia",
-      "punido": "2026-11-20T23:15:47-03:00"
+      "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_leielucro": {
       "extra": 0,
@@ -323,27 +320,27 @@
     },
     "novo_dentrodascoisas3d": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "liberado": "2026-11-19T01:17:21-03:00",
       "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_fatochocante": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "liberado": "2026-11-19T01:17:21-03:00",
       "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_pordentro": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20",
+      "bonus_negado": "2026-11-27T00",
       "liberado": "2026-11-19T01:17:21-03:00",
       "liberado_nota": "dona 29/10: verificado no YouTube, longos + mais Shorts; sobe 1 degrau/dia até 12/dia"
     },
     "novo_codigobilhao3d": {
       "extra": 0,
-      "bonus_negado": "2026-11-26T20"
+      "bonus_negado": "2026-11-27T00"
     }
   },
   "_leia": "Degraus EXTRAS de upload por canal (bin/rampa_canais.py; soma ao teto da política em teto_canal/cota_restante). Sobe com dados, desce na hora se pegar 'limite diário'. Não editar à mão: use python bin/rampa_canais.py --subir/--zerar.",
-  "_avaliado_em": "2026-11-26"
+  "_avaliado_em": "2026-11-27"
 }

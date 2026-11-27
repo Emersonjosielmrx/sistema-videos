@@ -1,0 +1,9 @@
+{
+ "ok": false,
+ "error": "rc=1",
+ "segundos": 172,
+ "voz_clonada": null,
+ "applio": "ok em 174 s",
+ "log": "2026-11-27 01:48:23,415 - INFO - [preparo] sem roteiro (/kaggle/tmp/trab/trabalho/00_PREVIA_20261124_141921_kkvirjao/roteiro.txt) — transcrevendo e roteirizando aqui\n2026-11-27 01:48:30,018 - INFO - [preparo] libs CUDA pro Whisper: libcublas.so.12, libcublasLt.so.12, libcudnn.so.9, libcudnn_cnn.so.9, libcudnn_ops.so.9\n2026-11-27 01:48:30,407 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main \"HTTP/1.1 200 OK\"\n2026-11-27 01:48:31,168 - INFO - Processing audio with duration 06:59.994\n2026-11-27 01:48:31,790 - INFO - Detected language 'hi' with probability 0.98\n2026-11-27 01:49:54,993 - INFO - [preparo] Whisper small (GPU) (T4 núcleos): 143 trechos, língua hi, até 418s, em 87s\n2026-11-27 01:49:55,032 - ERROR - [script] transcrição parece vazia ou sem texto real (só ruído/símbolos). Abortando.\n2026-11-27 01:49:55,032 - ERROR - [script] roteiro com 0 frase(s) pra 63 pedidas — falha, não narra\n2026-11-27 01:49:55,032 - INFO - [preparo] roteiro FALHOU: ? frases sem tempo (alvo 63, original 7 min) — PREVIA 7min kkvirjao com TUDO novo 24/11\n2026-11-27 01:49:55,789 - ERROR - [preparo] roteiro não ficou pronto — vídeo não sai\n",
+ "por": "marinamartin14948"
+}

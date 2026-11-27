@@ -22,13 +22,13 @@ echo [%date% %time%] Fim postar_tudo_hoje (exit %ERRORLEVEL%) >> D:\postador-de-
 
 REM --- Etapa 2a: DESLIGADA 19/10 — limpar_veo agora e feita pelo controlador geral (D:\video-fila\controlador.py) ---
 REM echo [%date% %time%] Inicio limpar_veo >> D:\postador-de-videos\logs\postar_auto.log
-REM D:\manhwa-react\.venv\Scripts\python.exe D:\postador-de-videos\bin\limpar_veo.py --drive --max 40 > D:\postador-de-videos\logs\limpar_veo_%date:~6,4%%date:~3,2%%date:~0,2%.log 2>&1
+REM D:\veo\venv\Scripts\python.exe D:\postador-de-videos\bin\limpar_veo.py --drive --max 40 > D:\postador-de-videos\logs\limpar_veo_%date:~6,4%%date:~3,2%%date:~0,2%.log 2>&1
 REM echo [%date% %time%] Fim limpar_veo (exit %ERRORLEVEL%) >> D:\postador-de-videos\logs\postar_auto.log
 
 REM --- Etapa 2b: REDE de canais (manhwareact.py rede): 1 video/dia por canal ativo (config
 ede_canais.json), agente por canal, melhor horario ---
 echo [%date% %time%] Inicio manhwa-react publicar >> D:\postador-de-videos\logs\postar_auto.log
-D:\manhwa-react\.venv\Scripts\python.exe D:\manhwa-react\manhwareact.py rede > D:\postador-de-videos\logs\manhwa_react_%date:~6,4%%date:~3,2%%date:~0,2%.log 2>&1
+D:\veo\venv\Scripts\python.exe D:\manhwa-react\manhwareact.py rede > D:\postador-de-videos\logs\manhwa_react_%date:~6,4%%date:~3,2%%date:~0,2%.log 2>&1
 echo [%date% %time%] Fim manhwa-react publicar (exit %ERRORLEVEL%) >> D:\postador-de-videos\logs\postar_auto.log
 
 REM --- Etapa 3: TikTok CDP (o script abre o Chrome de cada conta so na hora do post e fecha; 15/10) ---

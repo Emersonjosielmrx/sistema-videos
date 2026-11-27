@@ -24,7 +24,7 @@ BIN = Path(__file__).resolve().parent
 sys.path.insert(0, str(BIN))
 LOG = BIN.parent / "logs" / "fb_vigia.log"
 EST = BIN.parent / "logs" / "fb_vigia.json"
-PY = r"D:\hipercool-videos\venv\Scripts\python.exe"
+PY = r"D:\veo\venv\Scripts\python.exe"
 TRAVADA_MIN = 45  # 21/11: rodada com várias Páginas leva 25+ min postando de verdade; 18 matava rodada viva
 SIMULAR = "--simular" in sys.argv
 

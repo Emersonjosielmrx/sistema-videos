@@ -48,3 +48,14 @@ fila 2 h solta sem descanso, conta fora 6 h e volta depois. 8/8 OK na versão da
 - As 11 contas com 401: gerar token novo de cada uma **pela saída dela** (ou confirmar banimento no navegador do cofre
   pela saída da conta). Depois `vps_central.py liberar <conta>`.
 - As 5 contas em fila: soltam sozinhas com a regra nova (1,5 h); o Kaggle decide quando dá a GPU.
+
+## 26/11 ~22:50 — casa reaplicada + 2ª conta de teste
+- A central da CASA foi trocada por outro chat às 15:01 (vaga de teste com várias contas) e VOLTOU à regra antiga
+  (fila 6 h + descanso 12 h; sem 401 repetido). Reapliquei as mudanças por cima dessa versão nova (aplicar_mudancas.py,
+  8/8 testes OK): casa = 419a10c5 (backup vps_central.py.antes_fila_401_v2_2611). VPS seguem com as mudanças:
+  staging/bloqueio e3d0b3d5, prod 0ba7eeb5.
+- **Quem mexer no vps_central de qualquer central: aplique em cima da versão que está LÁ (nunca copie de outra
+  central — cada uma tem funções próprias) e rode `python aplicar_mudancas.py <entrada> <saida>` + teste_logica.py.**
+- p76 `marinamartin14948` (telefone ok 26/11 21:15, IP 166.0.102.60 / rnprmtfo-76) = 2ª conta EXCLUSIVA de testes
+  (papel "teste") no kaggle_pool da casa; anotada em saidas_usadas.json (p76). Já RODANDO com GPU na vaga de teste
+  desde 21:27 (a carlabarbosa94254 está na fila do Kaggle). carlaramos27719 segue verificada=false (pediu selfie).

@@ -11,7 +11,5 @@ Get-CimInstance Win32_Process -Filter "Name='chrome.exe'" | ?{ $_.CommandLine -m
 Start-Sleep 20
 L ('Chrome do cofre fechado normalmente; restantes: ' + @(Get-CimInstance Win32_Process -Filter "Name='chrome.exe'" | ?{ $_.CommandLine -match 'logins-google' }).Count)
 # reaproveita a janela de dia com limite 04:30
-(Get-Content -Raw D:\sistema\catalogo\janela_mudanca.ps1) -replace 'AddHours\(17\)\.AddMinutes\(30\)', 'AddHours(4).AddMinutes(30)' | Set-Content -Encoding UTF8 D:\sistema\mapa\_janela_madrugada_tmp.ps1
-& powershell -NoProfile -ExecutionPolicy Bypass -File D:\sistema\mapa\_janela_madrugada_tmp.ps1
-Remove-Item D:\sistema\mapa\_janela_madrugada_tmp.ps1
+& powershell -NoProfile -ExecutionPolicy Bypass -File D:\sistema\catalogo\janela_mudanca.ps1
 L '===== JANELA MADRUGADA: fim'

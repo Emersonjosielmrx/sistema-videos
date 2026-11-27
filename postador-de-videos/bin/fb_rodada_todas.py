@@ -8,7 +8,7 @@ from pathlib import Path
 
 BIN = Path(__file__).resolve().parent
 CFG = BIN.parent / "config" / "facebook_paginas.json"
-PY = r"D:\hipercool-videos\venv\Scripts\python.exe"
+PY = r"D:\veo\venv\Scripts\python.exe"
 if sys.stdout:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 

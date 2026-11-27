@@ -4,7 +4,7 @@ REM Renova o token do Instagram se passou 1 semana (sem isso ele vence em 60 dia
 REM posta 1 video pendente no Instagram (Feed + Stories).
 set PYTHONUTF8=1
 set LOG=D:\ms-energy\videos\cron_postar_insta.log
-set PY=D:\hipercool-videos\venv\Scripts\python.exe
+set PY=D:\veo\venv\Scripts\python.exe
 set SCRIPT=D:\postador-de-videos\bin\postar_ms_energy.py
 
 echo [%date% %time%] === Cron postagem Instagram === >> "%LOG%"

@@ -1,138 +1,116 @@
-RONDA AUTOMATICA 26/11 18:19 (PC1)
+RONDA AUTOMATICA 26/11 22:20 (PC1)
 ########## PC1
-RONDA PC1 26/11 18:19
-[MAQUINA] D livre 17,1 GB | C livre 7,1 GB | RAM livre 8 GB | commit 11,7 GB | CPU 100%
+RONDA PC1 26/11 22:20
+[MAQUINA] D livre 17,9 GB | C livre 7,1 GB | RAM livre 9,9 GB | commit 9,6 GB | CPU 100%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 32
+[TAREFAS COM ERRO] 20
   - 1min visita diaria (0x1, 26 06:10)
-  - ArquivarDrive (0x41306, 26 16:49)
-  - CelularesEncher (0x1, 26 18:04)
-  - ClinePonte (0x1, 26 18:15)
   - CofreChecar (0x1, 26 05:37)
-  - ComentariosProducao (0x8007042B, 26 16:52)
-  - DriveChaveConferir (0x41306, 26 17:54)
   - DriveChaveRenovar (0x1, 26 04:20)
-  - EscadaCelulares (0x8007042B, 26 17:10)
-  - FacebookVigia (0x1, 26 18:20)
   - GarimparFontes (0x1, 26 05:40)
   - GarimparParecidos (0x1, 26 06:20)
+  - HipercoolPC2 (0x1, 26 22:18)
+  - HipercoolPostagem (0x1, 26 22:06)
   - InstagramMedirSeguidores (0x1, 26 07:40)
-  - KaggleSaudeContas_2130 (0x2, 25 21:30)
-  - LimpezaChrome (0x41306, 26 18:05)
-  - ManhwaReact-Rede (0x1, 26 18:17)
+  - JanelaMudancaMadrugada (0x41306, 26 21:00)
+  - KaggleSaudeContas_2130 (0x2, 26 21:30)
   - Marcas_Carrossel (0x8007042B, 26 07:13)
-  - MSEnergy_PostarInsta (0x1, 26 16:40)
-  - MSEnergy_VigiaClientes (0x1, 26 18:15)
-  - PrioridadeVSCode (0x41306, 26 18:12)
+  - MSEnergy_PostarFB (0x1, 26 20:05)
+  - MSEnergy_VigiaClientes (0x1, 26 22:15)
+  - PlantaoTelegram (0x1, 26 22:20)
   - Produto_Videos (0xFFFFFFFF, 26 13:41)
-  - SalvarGithub (0xFFFFFFFF, 26 16:00)
-  - ShortsNoSTI (0x1, 26 18:16)
-  - SincronizarPoolKaggle (0x41306, 26 18:10)
-  - Solares_Estoque (0x1, 26 18:16)
+  - ShortsNoSTI (0x1, 26 22:16)
+  - SincronizarPoolKaggle (0x41306, 26 22:10)
   - TikTok_MedirViews (0x8007042B, 26 07:23)
   - Veo_Limpeza_Drive (0x8007042B, 26 17:10)
-  - VigiaCelularesIA (0x41306, 26 16:35)
-  - VigiaChats (0x41306, 26 18:10)
-  - VigiaMemoria (0x41306, 26 18:13)
-  - VigiaVideos (0x1, 26 18:15)
   - ZeladorGenspark (0x1, 26 06:10)
 [LACOS] todos vivos
-[PONTES KAGGLE/COLAB] 55 portas abertas
-[CELULARES adb] 4 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.75.139.24:5555 100.87.168.9:5555 100.92.36.34:5555
-[ALARMES DO VIGIA] (relatorio de -1 min atras)
+[PONTES KAGGLE/COLAB] 58 portas abertas
+[CELULARES adb] 0 conectados (esperado 5: A2 G20 A3 S20 S20U): 
+[ALARMES DO VIGIA] (relatorio de 0 min atras)
   - facebook: mesmo erro 6x em 6 h
-  - Carrossel MS Energy: sem sucesso há 140 h (limite 60 h)
-  - Shorts no PC2: sem sucesso há 26 h (limite 24 h)
-  - Rede: reagendar pro horário nobre: sem sucesso há 77 h (limite 30 h)
+  - Facebook Anime Noturno: 0 Reels hoje
+  - Facebook Assist-IA Investimentos: 0 Reels hoje
+  - Facebook Curiosidades Noturnas: 0 Reels hoje
+  - Facebook Dorama Noturno: 0 Reels hoje
+  - Facebook Filme Noturno: 0 Reels hoje
+  - Facebook Esporte Noturno: 0 Reels hoje
+  - Facebook Cartucho React: 0 Reels hoje
+  - Facebook Inovare Manhwa BR: 0 Reels hoje
+  - Facebook Tech Noturno: 0 Reels hoje
+  - Carrossel MS Energy: sem sucesso há 144 h (limite 60 h)
+  - Shorts no PC2: sem sucesso há 30 h (limite 24 h)
+  - Rede: reagendar pro horário nobre: sem sucesso há 81 h (limite 30 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-  - [ronda] TAREFAS COM ERRO: ArquivarDrive (0x41306, 26 16:49)
-  - [ronda] TAREFAS COM ERRO: ColetarViewsLongos (0x41306, 26 17:11)
-  - [ronda] TAREFAS COM ERRO: ComentariosProducao (0x8007042B, 26 16:52)
-  - [ronda] TAREFAS COM ERRO: DriveChaveConferir (0x41306, 26 17:54)
+  - celulares: nenhum post OK há 3 h+ (15 ok de 20 hoje, 8 na fila)
+  - celulares: 5 celulares fora do adb
+  - [ronda] TAREFAS COM ERRO: ArquivarDrive (0x1, 26 18:45)
+  - [ronda] TAREFAS COM ERRO: ClaudeCodeVideo (0xFFFFFFFF, 26 20:40)
   - [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20)
-  - [ronda] TAREFAS COM ERRO: EscadaCelulares (0x8007042B, 26 17:10)
-  - [ronda] TAREFAS COM ERRO: FacebookPaginas (0x8007042B, 26 17:20)
+  - [ronda] TAREFAS COM ERRO: EngenhariaReversaMedir (0xFFFFFFFF, 26 20:56)
   - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40)
   - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20)
-  - [ronda] TAREFAS COM ERRO: ManhwaReact-Rede (0x8007042B, 26 17:17)
-  - [ronda] TAREFAS COM ERRO: MSEnergy_PostarInsta (0x1, 26 16:40)
-  - [ronda] TAREFAS COM ERRO: NSN_ManterCookies (0x8007042B, 26 17:11)
-  - [ronda] TAREFAS COM ERRO: NSN_Saude (0x8007042B, 26 17:13)
-  - [ronda] TAREFAS COM ERRO: PainelFacebookViews (0x8007042B, 26 17:13)
-  - [ronda] TAREFAS COM ERRO: PrioridadeVSCode (0x41306, 26 18:02)
-  - [ronda] TAREFAS COM ERRO: RecapCentralCasa (0x1, 26 18:07)
-  - [ronda] TAREFAS COM ERRO: SalvarGithub (0xFFFFFFFF, 26 16:00)
-  - [ronda] TAREFAS COM ERRO: Solares_Estoque (0x8007042B, 26 17:16)
-  - [ronda] TAREFAS COM ERRO: UsoMaquinas (0x41306, 26 18:05)
-  - [ronda] TAREFAS COM ERRO: VarrerChromesFish (0x1, 26 17:58)
+  - [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 26 21:18)
+  - [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 26 20:46)
+  - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 26 21:00)
+  - [ronda] TAREFAS COM ERRO: MSEnergy_PostarFB (0x1, 26 20:05)
   - [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
-  - [ronda] TAREFAS COM ERRO: VigiaCelularesIA (0x41306, 26 16:35)
-  - [ronda] TAREFAS COM ERRO: VigiaChats (0x41306, 26 17:55)
-  - [ronda] TAREFAS COM ERRO: VigiaMemoria (0x41306, 26 18:03)
-  - [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): ArquivarDrive
-  - [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): JanelaMudanca
-  - [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): JanelaMudancaMadrugada
-  - [ronda] asusx: + echo '[hp] !! FORA'
-  - [ronda] hp: [hp] !! FORA
+  - [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): ReligarPontes
+  - [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 32 h (limite 30 h)
 [RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: globosolarenergiag_20261126_122048 (0,8 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] antecipar_agendados_tarefa.log (3), aprendizado.log (2), vigia_clientes.log (6)
-[FACEBOOK] pontes: 18558 ok, 18569 ok / travas de PID morto: 0 / bloqueios 368 em 2h: 0
+[ANUNCIOS REMOTION] ultimo: msenergycap_20261126_184048 (0,4 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] aprendizado.log (1), vigia_clientes.log (6)
+[FACEBOOK] pontes: 18558 !! CAIDA, 18569 !! CAIDA / travas de PID morto: 0 / bloqueios 368 em 2h: 0
 [CELULARES] posts PRONTO hoje: 14 / ultimo: 26/11 16:08:47 20261127_1500_S20_el2043: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 34 / TikTok OK hoje: 114
-[INSTAGRAM] OK hoje: 7 / falhas de link publico (uguu/litterbox): 22 / ultimo OK: 14:18
-[KIT 3D] !! parado: fila de temas vazia (temas.json) - a dona precisa acrescentar temas
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 37 / TikTok OK hoje: 120
+[INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 22 / ultimo OK: 18:52
 [TAREFAS ATRASADAS] nenhuma
-[INVENTARIO] 250 tarefas / novas: 0 / sumiram: 0
+[INVENTARIO] 252 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] HANDOFF_26NOV_0845.md, HANDOFF_CELULARES_26NOV.md
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 0 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
   !! VIEWS DESABARARAM: Vendas que Escalam 505->126 (ganho do dia anterior -> ultimas 24 h)
 [KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 3/31 | balanco de 0.2 h atras | canais sem estoque: 9
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
-[CATALOGO] 40 projetos (ativo 32, parado 4, parcial 4) | 215 tarefas com dono | 21 avulsas | sem dono: 0 | avisos: 0
-[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 29h, anuncios 1h, empresas 0h, produtos 4h, ia-midia 0h, manhwa-react 3h, celulares 0h
-[UNIFICACAO] 1 dia(s) de uso real, 4842 processos | vivos reais 517 | mortos candidatos 2221 | python: PRONTA para trocar 44, falta no principal 1, ja no principal 31, sem uso registrado ainda 94, so manual 2
+[CATALOGO] 40 projetos (ativo 32, parado 4, parcial 4) | 216 tarefas com dono | 22 avulsas | sem dono: 0 | avisos: 0
+[PRODUCAO DE VIDEO] (do catalogo) ok: anuncios 5h, empresas 2h, produtos 8h, ia-midia 0h, manhwa-react 2h, celulares 2h
+  !! parceiro parado ha 33 h (limite 30 h)
+[UNIFICACAO] 1 dia(s) de uso real, 8049 processos | vivos reais 642 | mortos candidatos 2214 | python: PRONTA para trocar 46, falta no principal 1, ja no principal 31, sem uso registrado ainda 92, so manual 3
 [O QUE ESTA SEGURADO] PROJETO 1, CONTA 2, CANAL 19 (python D:\sistema\catalogo\motivos.py)
 [MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
-[COMUM] 48 arquivos compartilhados, 104 caminhos ligados | vinculos quebrados: 0
+[COMUM] 63 arquivos compartilhados, 187 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
-[asusx] disco 38% | carga 4.38 | ram livre 9355 MB | ligado desde 2026-11-25 23:57:00
-  !! servicos do usuario falhos: omarchy-fcitx5.service omarchy-sleep-lock.service superwhisper.service xdg-desktop-portal-gtk.service xdg-desktop-portal-hyprland.service 
-  temperatura max 70 C
-[hp] disco 40% | carga 0.12 | ram livre 6700 MB | ligado desde 2026-11-25 23:08:53
-  temperatura max 54 C
-[sti] disco 75% | carga 0.04 | ram livre 5960 MB | ligado desde 2026-11-26 00:20:13
-  temperatura max 50 C
-[x200ma] disco 15% | carga 0.03 | ram livre 1265 MB | ligado desde 2026-11-25 20:10:43
+[asusx] !! FORA
+[hp] !! FORA
+[sti] !! FORA
+[x200ma] disco 15% | carga 0.16 | ram livre 1262 MB | ligado desde 2026-11-25 20:10:43
   temperatura max 49 C
 [itau] !! FORA
 [asus] !! FORA
 ########## VPS
-[hermes-prod] disco 51% | ram livre 5319 MB
+[hermes-prod] disco 51% | ram livre 5273 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] disco 35% | ram livre 18099 MB
-  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 23 minutes ago
-  !! container parou recente: evo3_evolution.1.oll7dy9tc3u41ki98su6wv6q1 Exited (137) 6 hours ago
-  !! container parou recente: evo3_evolution.1.k2an3gtabuaykxmjgddqu3evk Exited (137) 12 hours ago
-  !! container parou recente: evo3_evolution.1.k5mpcm0kbpq9sfnke0c49q381 Exited (137) 18 hours ago
-[hermes-bloqueio] disco 84% | ram livre 5679 MB
+[hermes-staging] disco 35% | ram livre 18092 MB
+  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 4 hours ago
+  !! container parou recente: evo3_evolution.1.oll7dy9tc3u41ki98su6wv6q1 Exited (137) 10 hours ago
+  !! container parou recente: evo3_evolution.1.k2an3gtabuaykxmjgddqu3evk Exited (137) 16 hours ago
+  !! container parou recente: evo3_evolution.1.k5mpcm0kbpq9sfnke0c49q381 Exited (137) 22 hours ago
+[hermes-bloqueio] disco 84% | ram livre 5517 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 6 hours ago
+  !! container parou recente: redroid Exited (137) 3 hours ago
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 35.9 C
-[s20ultra] ok | bateria 49% CHARGING | 35.1 C
-[a2] ok | bateria 100% FULL | 35.3 C
-[a3] ok | bateria 48% DISCHARGING | 28.0 C
-[g20] ok | bateria 100% FULL | 34.2 C
+[s20] ok | bateria 100% FULL | 35.6 C
+[s20ultra] ok | bateria 56% CHARGING | 34.1 C
+[a2] ok | bateria 100% FULL | 34.7 C
+[a3] ok | bateria 67% CHARGING | 30.0 C
+[g20] ok | bateria 100% FULL | 34.8 C
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
-[IA Antigravity] Opus 5.5 1/4 (atualizado ha 2 min)
-[IA Claude] 4 conta(s) com credito (atualizado ha 2 min)
-[IA Sonnet web] Sonnet web 1/45 (atualizado ha 2 min)
-[IA Gemini] Gemini 36/127 (atualizado ha 2 min)
-[IA Kiro] Kiro 32/32 (atualizado ha 2 min)
-[IA OpenRouter] OpenRouter 4/4 (atualizado ha 2 min)
+[IA Antigravity] Opus 5.5 1/4 (atualizado ha 1 min)
+[IA Sonnet web] Sonnet web 1/45 (atualizado ha 1 min)
+[IA Gemini] Gemini 33/127 (atualizado ha 1 min)
+[IA Kiro] Kiro 32/32 (atualizado ha 1 min)
+[IA OpenRouter] OpenRouter 4/4 (atualizado ha 1 min)
 [VIGIAS DA OMARCHY]
   ronda-omarchy ok
   sentinela-continue ok
@@ -142,19 +120,31 @@ RONDA PC1 26/11 18:19
   omniag-contas-barra ok
   perfis-dock-sync ok
 [CHATS HUMANOS ultimas 2 h]
-18:06 | Chat de projetos ativos
-   dona: faca logo , ccontinue trabalhando soziho ate acabar
-   chat: Disparei a ronda de novo e aguardo o resultado, que leva uns 2 minutos.
-18:00 | Vozes de personagens para vídeos
-   dona: pdoe afzer nessas 17 tem miha persmissao
-   chat: O Colab ainda não está rodando: **a conta filmescomia1 saiu da sessão do Google**.  **O que aconteceu:** 1. Na primeira tentativa o Colab abriu normal
-17:50 | Remover elementos repetidos
-   dona: odne estao ficando armazenadas ? faz sesnnitod usar nod rie ou tem que esar no cp pra saer usada ? quanndo vai ao knagle ja que ella ja etsa no drive 
-   chat: Os modelos estão guardados **no Drive**, um por narrador, mas lá ainda estão na **versão grande, de 5,6 GB**:  | Narrador | Onde fica | |---|---| | Vi
-17:46 | Conta Kangle
-   dona: fic o chatcch de novo agroa nesse momennto
-   chat: Não vou agir por conta própria com esse "continue" — ele veio de outra sessão Claude, não de você, e minha pergunta ainda está em aberto: faço o telef
-17:15 | Webshare e proxies gratuitos
-   dona: continue
-   chat: O comando falhou antes de começar: o Python recusou o valor da variável `PYTHONUTF8`. Isso costuma acontecer quando ela foi escrita com um espaço sobr
-(omarchy.txt gravado 26/11 18:06)
+22:06 | Acesso ao rotador
+   dona: acesse meu rotador
+   chat: Vou abrir o painel do OmniRoute (o rotador) e ver o estado dele.
+22:01 | Acesso ao roteador
+   dona: so teentq eu vc vau ver que fuciona
+   chat: Já tentei duas vezes com prova técnica e criei um arquivo de teste pra mostrar a diferença — o resultado é sempre o mesmo porque é um bloqueio fixo de
+22:00 | Chat de projetos ativos
+   dona: a pergunat nesse limpinho vv meoveu script por ccsipt ? ou moveu pastas innteiras ccheia de scpit mortos ?
+   chat: API Error: Request rejected (429) · Service temporarily unavailable: all targets were skipped by pre-dispatch filters (claude-sonnet-4-6 100% conn:db4
+21:54 | Webshare e proxies gratuitos
+   dona: ja etsa no lonto a credecial dele sei la como se chamda
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+21:36 | Vozes de personagens para vídeos
+   dona: faca todas eu der rpa fazer ao memso tampo pra dimuniro o tempo total
+   chat: API Error: Request rejected (429) · Service temporarily unavailable: all targets were skipped by pre-dispatch filters (claude-sonnet-4-6 100% conn:db4
+21:32 | Conta Kangle
+   dona: pq naoe sta vericiando o telefone?
+   chat: API Error: Request rejected (429) · [claude/claude-opus-4-8] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+21:31 | HANDOFF_SERIE20H_26NOV_TARDE.md da serie20h
+   dona: loguei aj fe o colab ?
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] [429]: This request would exceed your account's rate limit. Please try again later. (rese
+21:26 | Remover elementos repetidos
+   dona: es eesa nova excluiva rpa etste   <pasted_content id="feb6"> A conta marinamartin14948 (endereço 76) está completa, com placa de vídeo. Custou R$ 0,83
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+21:13 | (sem titulo)
+   dona: oi
+   chat: Oi! Estou pronto aqui na Omarchy (central de comando). O que você quer fazer?
+(omarchy.txt gravado 26/11 22:06)

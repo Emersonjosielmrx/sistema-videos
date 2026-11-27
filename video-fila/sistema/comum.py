@@ -40,9 +40,19 @@ def md5(p):
 def varrer():
     raizes = sorted({x.rstrip("\\") for p in CAT["projetos"].values() if p.get("estado") != "parado"
                      for x in p.get("pastas", []) if re.match(r"^[Dd]:\\", x) and os.path.isdir(x)})
-    grupos, vistos = {}, set()
+    # 26/11: pastas de projeto PARADO (e o que estiver dentro delas) ficam fora, mesmo dentro de outra raiz
+    parados = [os.path.normcase(os.path.realpath(x)) for p in CAT["projetos"].values() if p.get("estado") == "parado"
+               for x in p.get("pastas", []) if re.match(r"^[Dd]:\\", x) and os.path.exists(x)]
+    grupos, vistos, vistos_ino = {}, set(), set()
     for raiz in raizes:
         for dp, dn, fn in os.walk(raiz):
+            rdp = os.path.normcase(os.path.realpath(dp))
+            if rdp.startswith(os.path.normcase(r"d:\sistema\comum")):
+                dn[:] = []
+                continue
+            if any(rdp == x or rdp.startswith(x + "\\") for x in parados) or "__parado" in rdp:
+                dn[:] = []
+                continue
             if FORA.search(dp + "\\") or e_juncao(dp):
                 dn[:] = []
                 continue
@@ -51,17 +61,26 @@ def varrer():
                 if not f.endswith(".py") or f in ("__init__.py", "sitecustomize.py"):
                     continue
                 a = os.path.join(dp, f)
-                k = os.path.normcase(a)
+                k = os.path.normcase(os.path.realpath(a))  # 26/11: depois da mudanca a mesma pasta tem 2 nomes
                 if k in vistos:
                     continue
                 vistos.add(k)
                 try:
+                    st = os.stat(a)
+                    ident = (st.st_dev, st.st_ino)  # 26/11: hardlink = MESMO arquivo -> conta 1 vez
+                    if ident in vistos_ino:
+                        continue
+                    vistos_ino.add(ident)
                     grupos.setdefault((f, md5(a)), []).append(a)
                 except OSError:
                     pass
     # so compartilha o que esta em 2+ PROJETOS diferentes (1o nivel do disco): codigo comum de verdade
-    def topo(x):
-        return x.split("\\")[1].lower()
+    def topo(x):  # projeto de verdade = 1o nivel do caminho ORIGINAL (D:\\<projeto>), nao o nome dentro de D:\\sistema
+        r = os.path.realpath(x).lower()
+        partes = r.split("\\")
+        if len(partes) > 4 and partes[1] == "sistema":
+            return partes[4] if partes[2].startswith("1-") else partes[3]
+        return partes[1]
     return {k: v for k, v in grupos.items() if len(v) > 1 and len({topo(x) for x in v}) > 1}
 
 

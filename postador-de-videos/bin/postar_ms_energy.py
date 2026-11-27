@@ -43,7 +43,7 @@ FB_PAGE = "https://www.facebook.com/mundosolarenergia/"
 FB_ASSET_ID = "495542104245364"  # id da página MS energy no Business Suite (asset_id)
 FB_PORT = 9401
 
-PY_EXE = Path(r"D:\hipercool-videos\venv\Scripts\python.exe")
+PY_EXE = Path(r"D:\veo\venv\Scripts\python.exe")
 
 # TikTok @energia.solar.da (dono 19/10: o MS Energy posta todo dia, com o conteudo dele). Internet de casa, sem o proxy
 # da Webshare: empresa local, o publico tem que ser do Brasil.

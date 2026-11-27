@@ -5,7 +5,7 @@ REM emersonjosiel02 e as Paginas da mundosolar1995 nunca recebiam Reel. MS Energ
 REM --horario: posta so nas Paginas atrasadas pelo relogio + 1 no horario nobre 21-22 h. Trava por conta (lock) no script.
 set PYTHONUTF8=1
 set LOG=D:\postador-de-videos\logs\facebook_paginas.log
-set PY=D:\hipercool-videos\venv\Scripts\python.exe
+set PY=D:\veo\venv\Scripts\python.exe
 echo [%date% %time%] === Reels nas Paginas (rodada da hora) === >> "%LOG%"
 "%PY%" -u "D:\postador-de-videos\bin\fb_rodada_todas.py" >> "%LOG%" 2>&1
 echo [%date% %time%] exit=%ERRORLEVEL% >> "%LOG%"

@@ -20,7 +20,7 @@ BIN = Path(__file__).resolve().parent
 LOGS = BIN.parent / "logs"
 CFG = BIN.parent / "config" / "facebook_paginas.json"
 PONTE = r"D:\recapd-ambientes\producao\colab\ponte_proxy_fixo.py"
-PYW = r"D:\hipercool-videos\venv\Scripts\pythonw.exe"
+PYW = r"D:\veo\venv\Scripts\pythonw.exe"
 SEM_JANELA = 0x08000000
 
 

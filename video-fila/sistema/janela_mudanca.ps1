@@ -6,10 +6,21 @@ $PY = 'C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe'
 $LOG = 'D:\sistema\mapa\mudanca.log'
 function L($m){ Add-Content -Encoding UTF8 $LOG ((Get-Date -f 'dd/MM HH:mm:ss') + ' ' + $m) }
 $env:SISTEMA_USO = '0'
-$limite = (Get-Date).Date.AddHours(17).AddMinutes(30)
+# 26/11: limite = agora + JANELA_MIN (padrao 75 min) - antes era hora fixa do dia e, disparada depois dela, nao movia nada
+$min = [int]($env:JANELA_MIN); if(-not $min){ $min = 75 }
+$limite = (Get-Date).AddMinutes($min)
 L '===== JANELA DE MUDANCA: inicio'
 try {
   & powershell -NoProfile -ExecutionPolicy Bypass -File D:\sistema\catalogo\pausa.ps1 -Pausar | Out-Null
+  # 26/11 21h: pontes/servicos permanentes seguram as pastas. Salva a linha EXATA de cada um (mesma linha = mesmo IP),
+  # para e, no fim, religa pela TAREFA ReligarPontes (processo aberto por ssh/janela morre junto com ela).
+  $pad = 'ponte_proxy_fixo\.py|gemini_http_proxy\.py|genspark_http\.py|tunel_painel\.py|ponte\.mjs'
+  $pp = Get-CimInstance Win32_Process | ?{ $_.CommandLine -match $pad -and $_.Name -match 'python|node' }
+  $ids = $pp | %{ $_.ProcessId }
+  $pp | ?{ $ids -notcontains $_.ParentProcessId } | %{ [pscustomobject]@{ cmd = $_.CommandLine } } | ConvertTo-Json | Set-Content -Encoding UTF8 D:\sistema\mapa\pontes_salvas.json
+  L ('pontes salvas e paradas: ' + @($pp).Count)
+  $pp | %{ Stop-Process -Id $_.ProcessId -Force }
+  Get-CimInstance Win32_Process -Filter "Name='cmd.exe'" | ?{ $_.CommandLine -match 'cline-ponte' } | %{ Stop-Process -Id $_.ProcessId -Force }
   $semMudar = 0
   while((Get-Date) -lt $limite){
     $saida = & $PY -X utf8 D:\sistema\catalogo\mudar_para_sistema.py --aplicar 2>&1
@@ -25,6 +36,8 @@ try {
   }
 } finally {
   & powershell -NoProfile -ExecutionPolicy Bypass -File D:\sistema\catalogo\pausa.ps1 -Retomar | Out-Null
+  Start-ScheduledTask ReligarPontes; Start-Sleep 45
+  L ('pontes religadas pela tarefa ReligarPontes: ' + @(Get-CimInstance Win32_Process | ?{ $_.CommandLine -match 'ponte_proxy_fixo|gemini_http_proxy|genspark_http|tunel_painel|ponte\.mjs' }).Count)
   & $PY -X utf8 D:\sistema\catalogo\montar_pasta_unica.py 2>&1 | %{ L ("  montar: " + $_) }
   & $PY -X utf8 D:\sistema\catalogo\catalogo.py validar 2>&1 | select -last 1 | %{ L ("  catalogo: " + $_) }
   L '===== JANELA DE MUDANCA: fim (tudo religado)'

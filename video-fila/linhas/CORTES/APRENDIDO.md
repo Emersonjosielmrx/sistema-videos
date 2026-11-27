@@ -1,8 +1,8 @@
-# Regras aprendidas — CORTES (atualizado 26/11 17:09; a sessão da linha aplica no pipeline)
-1. Posicionar legendas dinâmicas estritamente na zona segura inferior (y entre 150 e 1580), mantendo margem lateral mínima de 60px.
+# Regras aprendidas — CORTES (atualizado 26/11 23:16; a sessão da linha aplica no pipeline)
+1. Posicionar legendas dinâmicas estritamente na zona segura inferior (y entre 150 e 1580), mantendo margem lateral mínima de 60px e evitando sobreposição a balões de fala.
 2. Garantir contorno preto espesso, alto contraste e fundo translúcido ou tarja sólida escura em todas as palavras, utilizando letras maiúsculas e tamanho mínimo de 32px.
 3. Ajustar timing, espaçamento e quebra rigorosa de palavras com a locução palavra-a-palavra para formar unidades de sentido completas e coerentes sem truncamentos.
-4. Aplicar tarjas escuras ou brancas com opacidade reforçada apenas para isolar legendas de fundos complexos ou cobrir legendas queimadas da fonte, sem sobreposição excessiva.
+4. Aplicar tarjas escuras ou brancas com opacidade reforçada apenas para isolar legendas de fundos complexos ou cobrir legendas queimadas da fonte, sem cobrir elementos importantes ou personagens.
 5. Garantir gancho inicial magnético, intrigante e em formato de pergunta direta nos primeiros 1.5 a 2 segundos com zoom-in dinâmico imediato, cor vibrante e borda grossa na primeira palavra.
 6. Manter o movimento visual ativo acima de 25% por cena com zoom dinâmico contínuo (ken burns), pan ou micro-zooms suaves e transições dinâmicas para evitar painéis estáticos.
 7. Garantir transições de zoom ou pan suaves entre legendas e evitar estagnação visual ou índices de mudança de imagem abaixo de 10% nos quadros finais.

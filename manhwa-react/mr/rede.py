@@ -469,7 +469,11 @@ def rebrand(cfg, item, canal):
     """Cobre o @ antigo do canto superior direito (desfoque) e escreve o @ do canal de destino. Cache por (video, canal)."""
     dst = _work(cfg, "rede_marca", f"{_seguro(item['id'])}__{canal['slug']}.mp4")
     if dst.exists() and dst.stat().st_mtime >= item["mp4"].stat().st_mtime:
-        return dst
+        try:  # 27/11: cópia pela metade (ffmpeg falhou em 23/11, "moov atom not found") não serve — refaz
+            ffprobe_json(cfg, dst)
+            return dst
+        except RuntimeError:
+            log(f"marca: copia ilegivel, refazendo: {dst.name}")
     info = ffprobe_json(cfg, item["mp4"])
     vs = next(s for s in info["streams"] if s["codec_type"] == "video")
     W, H = int(vs["width"]), int(vs["height"])

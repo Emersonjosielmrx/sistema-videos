@@ -57,6 +57,13 @@ ALVOS = [
 ]
 
 
+# 26/11: alvos extras escolhidos depois (D:\sistema\mapa\arquivar_alvos.json: [[pasta, motivo], ...]) - mesmas checagens
+try:
+    ALVOS += [tuple(x) for x in json.loads(Path(r"D:\sistema\mapa\arquivar_alvos.json").read_text(encoding="utf-8"))]
+except (OSError, ValueError):
+    pass
+
+
 def e_juncao(p):
     try:
         return bool(os.stat(p, follow_symlinks=False).st_file_attributes & 0x400)

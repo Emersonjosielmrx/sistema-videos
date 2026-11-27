@@ -611,7 +611,7 @@ def retroativo(estado, semanas=3):
 VIGIA_FILA = Path(r"D:\hipercool-videos\workspace\vigia_perguntas.jsonl")
 VIGIA_SCRIPT = Path(r"D:\hipercool-videos\bin\vigia_telegram.py")
 MONITOR_OPUS = r"D:\monitor_opus.py"
-MONITOR_OPUS_PY = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
+MONITOR_OPUS_PY = r"D:\veo\venv\Scripts\python.exe"
 MONITOR_ARGON = r"D:\gemini-argo\monitor_argon.py"  # 27/10: "argon" no Telegram = cota do Argon agora
 CREDITO_55 = r"D:\gemini-argo\credito_opus55.py"  # 27/10: "5.5" = crédito do Opus 5.5 (contas CC)
 # 27/10 (dona: "ponha os 3 no bot opus"): comandos de crédito, lidos no bot geral E no bot do Opus; a resposta sai no
@@ -635,7 +635,7 @@ def _encaminhar_vigia(texto, message_id, resposta_a_texto=None, bot=None):
     log(f"vigia: encaminhado '{texto[:80]}' (mid={message_id})")
     try:
         subprocess.Popen(
-            [r"D:\hipercool-videos\venv\Scripts\python.exe", "-X", "utf8", str(VIGIA_SCRIPT), "--fila"],
+            [r"D:\veo\venv\Scripts\python.exe", "-X", "utf8", str(VIGIA_SCRIPT), "--fila"],
             cwd=r"D:\hipercool-videos", creationflags=0x08000000,
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception as ex:  # noqa: BLE001

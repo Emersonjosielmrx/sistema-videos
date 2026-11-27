@@ -4,7 +4,7 @@ REM sempre atualizado. 1) mede por HTTP (services.facebook.medir, cada conta pel
 REM 2) gera D:\video-fila\painel_web\fb_views.json (fb_painel_dados.py, so le arquivos). O botao do painel roda esta tarefa.
 set PYTHONUTF8=1
 set LOG=D:\postador-de-videos\logs\fb_painel.log
-set PY=D:\hipercool-videos\venv\Scripts\python.exe
+set PY=D:\veo\venv\Scripts\python.exe
 echo [%date% %time%] === medir + painel === >> "%LOG%"
 pushd D:\projeto-navegador-sem-navegador
 "%PY%" -u -m services.facebook.medir >> "%LOG%" 2>&1
