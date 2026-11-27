@@ -1,101 +1,96 @@
-RONDA AUTOMATICA 27/11 09:20 (PC1)
+RONDA AUTOMATICA 27/11 14:20 (PC1)
 ########## PC1
-RONDA PC1 27/11 09:21
-[MAQUINA] D livre 23,3 GB | C livre 16,9 GB | RAM livre 7,1 GB | commit 19,2 GB | CPU 100%
+RONDA PC1 27/11 14:20
+[MAQUINA] D livre 21,9 GB | C livre 16,8 GB | RAM livre 9 GB | commit 10 GB | CPU 100%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 15
+[TAREFAS COM ERRO] 10
   - BuscarFontesCampeas (0x1, 27 06:10)
-  - ColetarViewsLongos (0x41306, 27 09:11)
   - GarimparFontes (0x1, 27 05:40)
   - GarimparParecidos (0x1, 27 06:20)
-  - HipercoolPC2 (0x1, 27 09:18)
-  - HipercoolPostagem (0x1, 27 09:06)
   - JanelaMudancaMadrugada (0x41306, 27 03:10)
   - KaggleSaudeContas_0800 (0x2, 27 08:00)
   - KaggleSaudeContas_2130 (0x2, 26 21:30)
-  - MSEnergy_PostarFB (0x1, 26 20:05)
-  - MSEnergy_VigiaClientes (0x1, 27 09:15)
-  - Produto_Videos (0x41306, 27 04:41)
-  - ShortsNoSTI (0x1, 27 09:16)
-  - SincronizarPoolKaggle (0x41306, 27 09:10)
+  - MSEnergy_VigiaClientes (0x1, 27 14:15)
+  - ShortsNoSTI (0x1, 27 14:16)
+  - SincronizarPoolKaggle (0x41306, 27 14:10)
   - Veo_Limpeza_Drive (0x8007042B, 26 17:10)
 [LACOS] todos vivos
-[PONTES KAGGLE/COLAB] 64 portas abertas
-[CELULARES adb] 2 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.87.168.9:5555
+[PONTES KAGGLE/COLAB] 59 portas abertas
+[CELULARES adb] 4 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.75.139.24:5555 100.87.168.9:5555 100.92.36.34:5555
 [ALARMES DO VIGIA] (relatorio de 0 min atras)
-  - tiktok: mesmo erro 18x em 6 h
-  - tiktok: mesmo erro 11x em 6 h
-  - tiktok: mesmo erro 5x em 6 h
   - facebook: mesmo erro 6x em 6 h
-  - Carrossel MS Energy: sem sucesso há 155 h (limite 60 h)
-  - Shorts no PC2: sem sucesso há 41 h (limite 24 h)
+  - Carrossel MS Energy: sem sucesso há 160 h (limite 60 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-  - celulares: 3 celulares fora do adb
+  - celulares: nenhum post OK há 3 h+ (7 ok de 21 hoje, 11 na fila)
   - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
   - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
   - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
-  - [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 27 08:18)
-  - [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 27 08:06)
   - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
-  - [ronda] TAREFAS COM ERRO: MSEnergy_PostarFB (0x1, 26 20:05)
   - [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
-  - [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 43 h (limite 30 h)
   - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
+  - [ronda] asusx: !! RAM LIVRE ABAIXO DE 500 MB (89 MB)
 [RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (0,3 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] antecipar_agendados_tarefa.log (2), aprendizado.log (1), estoque_reels.log (2), vigia_clientes.log (5)
+[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (5,3 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] aprendizado.log (1), estoque_reels.log (2), vigia_clientes.log (6)
 [FACEBOOK] pontes: 18558 ok, 18569 ok / travas de PID morto: 0 / bloqueios 368 em 2h: 0
-[CELULARES] posts PRONTO hoje: 5 / ultimo: 27/11 02:36:12 20261128_1500_S20_el2043: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 22 / TikTok OK hoje: 45
+[CELULARES] posts PRONTO hoje: 6 / ultimo: 27/11 09:28:13 20261128_1030_A3_el2054: PRONTO 
+  !! nenhum post de celular ha mais de 4 h
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 28 / TikTok OK hoje: 87
 [INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 06:01
+  !! Instagram sem post OK ha mais de 6 h
 [TAREFAS ATRASADAS] nenhuma
-  !! TAREFA NOVA no PC1 (incluir na lista mestra): RedeLimpeza
-[INVENTARIO] 253 tarefas / novas: 1 / sumiram: 0
+[INVENTARIO] 255 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] 
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 2 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2267->7125
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2267->9614, Anime Noturno 336->1021
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
   !! VIEWS DESABARARAM: Empresário Inteligente IA 766->22 (ganho do dia anterior -> ultimas 24 h)
 [KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 2/31 | balanco de 0.2 h atras | canais sem estoque: 9
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
+[CATALOGO] 41 projetos (ativo 32, parado 4, parcial 4, teste 1) | 217 tarefas com dono | 24 avulsas | sem dono: 0 | avisos: 0
+[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 0h, empresas 0h, produtos 0h, ia-midia 0h, manhwa-react 1h, celulares 2h
+  !! anuncios sem nenhum mp4
+[UNIFICACAO] 2 dia(s) de uso real, 21309 processos | vivos reais 814 | mortos candidatos 2206 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
+[O QUE ESTA SEGURADO] PROJETO 1, CANAL 19 (python D:\sistema\catalogo\motivos.py)
+[MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
+[COMUM] 71 arquivos compartilhados, 167 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
-[asusx] disco 42% | carga 7.66 | ram livre 95 MB | ligado desde 2026-11-25 23:57:00
-  !! RAM LIVRE ABAIXO DE 500 MB (95 MB)
+[asusx] disco 42% | carga 9.28 | ram livre 2352 MB | ligado desde 2026-11-25 23:57:00
   !! servicos do usuario falhos: gnome-keyring-daemon.service omarchy-fcitx5.service omarchy-sleep-lock.service superwhisper.service xdg-desktop-portal-gtk.service gnome-keyring-daemon.socket 
-  temperatura max 71 C
-[hp] disco 40% | carga 0.17 | ram livre 6697 MB | ligado desde 2026-11-25 23:08:54
-  temperatura max 53 C
-[sti] !! FORA
-[x200ma] disco 15% | carga 0.44 | ram livre 1262 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 74 C
+[hp] disco 40% | carga 0.04 | ram livre 6920 MB | ligado desde 2026-11-25 23:08:54
   temperatura max 52 C
+[sti] disco 77% | carga 0.26 | ram livre 6475 MB | ligado desde 2026-11-26 00:20:13
+  temperatura max 52 C
+[x200ma] disco 15% | carga 0.03 | ram livre 1269 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 50 C
 [itau] !! FORA
-[asus] !! FORA
+[asus] disco 9% | carga 0.32 | ram livre 1029 MB | ligado desde 2026-11-27 12:12:25
+  temperatura max 79 C
 ########## VPS
-[hermes-prod] disco 52% | ram livre 5259 MB
+[hermes-prod] disco 52% | ram livre 5232 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] disco 36% | ram livre 17013 MB
-  !! container parou recente: evo3_evolution.1.goyxwxfiyfq1piobabe1lo9np Exited (137) 3 hours ago
-  !! container parou recente: evo3_evolution.1.1mshaf3idwp0hed6ik5xa5lvk Exited (137) 9 hours ago
-  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 15 hours ago
-  !! container parou recente: evo3_evolution.1.oll7dy9tc3u41ki98su6wv6q1 Exited (137) 21 hours ago
-[hermes-bloqueio] disco 86% | ram livre 4849 MB
+[hermes-staging] disco 36% | ram livre 16975 MB
+  !! container parou recente: evo3_evolution.1.yofpvj29w9g53uy8i2zjnr55j Exited (137) 2 hours ago
+  !! container parou recente: evo3_evolution.1.goyxwxfiyfq1piobabe1lo9np Exited (137) 8 hours ago
+  !! container parou recente: evo3_evolution.1.1mshaf3idwp0hed6ik5xa5lvk Exited (137) 14 hours ago
+  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 20 hours ago
+[hermes-bloqueio] disco 86% | ram livre 4941 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 3 hours ago
+  !! container parou recente: redroid Exited (137) 24 minutes ago
   !! VPS hermes-bloqueio DISCO ACIMA DE 85% (86%)
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 35.8 C
-[s20ultra] ok | bateria 83% CHARGING | 33.9 C
-[a2] ok | bateria 100% FULL | 35.2 C
-[a3] ok | bateria 30% DISCHARGING | 32.0 C | !! BATERIA BAIXA FORA DA TOMADA
-[g20] ok | bateria 100% FULL | 33.8 C
+[s20] ok | bateria 100% FULL | 37.6 C
+[s20ultra] ok | bateria 87% CHARGING | 35.8 C
+[a2] ok | bateria 100% FULL | 37.2 C
+[a3] ok | bateria 9% DISCHARGING | 35.0 C | !! BATERIA BAIXA FORA DA TOMADA
+[g20] ok | bateria 100% CHARGING | 36.2 C
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
 [IA 1min] 1min 8/19 (atualizado ha 5 min)
 [IA Antigravity] Opus 5.5 1/4 (atualizado ha 5 min)
-[IA Claude] 4 conta(s) com credito (atualizado ha 5 min)
-[IA Sonnet web] Sonnet web 1/45 (atualizado ha 5 min)
-[IA Fable] 0 conta(s) com credito (atualizado ha 5 min)
-[IA Gemini] Gemini 29/127 (atualizado ha 5 min)
-[IA Kiro] Kiro 32/32 (atualizado ha 5 min)
+[IA Claude] 2 conta(s) com credito (atualizado ha 5 min)
+[IA Gemini] Gemini 20/127 (atualizado ha 5 min)
+[IA Kiro] Kiro 31/31 (atualizado ha 5 min)
 [IA OpenRouter] OpenRouter 4/4 (atualizado ha 5 min)
 [VIGIAS DA OMARCHY]
   ronda-omarchy ok
@@ -106,31 +101,22 @@ RONDA PC1 27/11 09:21
   omniag-contas-barra ok
   perfis-dock-sync ok
 [CHATS HUMANOS ultimas 2 h]
-09:06 | Conta Kangle
-   dona: mudou o ip da conta con fira se eesta valida aidan o tokem
-   chat: Deu muito erro (o proxy engasgou). Vou refazer com calma, uma de cada vez:
-09:06 | Chat de projetos ativos
-   dona: masi a ideis era justamnet limapr se vc meve apsast innetnnas nao funconna pra nnao perder o trabalho basta mdur  a pasta para sistema2 e srica uma no
-   chat: Sobre sua pergunta: **movi pastas inteiras, não script por script.** Elas ainda levam junto os scripts mortos que estão dentro.  **O que já foi feito:
-09:06 | Webshare e proxies gratuitos
-   dona: vamos trabalha netao ccom esses gartis mesmo, connsegue adicoanr eles no pool ?
-   chat: Encontrei um detalhe meu: o Windows trocou as quebras de linha do catálogo. O conteúdo está certo, mas corrijo o formato para ficar igual ao original.
-09:05 | Remover elementos repetidos
-   dona: sim se ele troccu e mlehro aidna agroa veja se acc conntas paradas rodam
-   chat: Às 09:04 o vigia não conseguiu conectar no PC1: a conexão expirou. Pode ser uma queda rápida da rede ou o PC1 ocupado. O vigia tenta de novo na próxim
-09:02 | Logos da MS Energy
-   dona: faza um paiel para os meus vendenndores da emrpesa faerrem seus orcamenntos o mairo e mais bonito e mais moderno possivel visul abseado nno hermes caa
-   chat: Reiniciado. Rodo o teste completo de novo, agora com limite de tempo em cada chamada.
-09:02 | Vozes de personagens para vídeos
-   dona: tudo pronto ?
-   chat: A **sti caiu da rede** por volta das 9h. Ela aparece como desligada e não responde nem a ping.  Não consigo ver de longe se foi **superaquecimento**, 
-08:56 | coolab google
-   dona: quanl comta ?
-   chat: O Colab está rodando na conta **filmescomia1**, que está logada aqui no cofre do notebook e sai sempre pela internet própria dela.  Foi nela que saíra
-08:50 | Acesso ao rotador
-   dona: tem como ele repeir apeans o ipv4 ? vc pode trocar o software de ou alterra ?
-   chat: **Repetir só o IPv4: não dá com esse aparelho.** Ele repete tudo junto e não tem opção para bloquear o IPv6. Isso vale tanto no modo repetidor quanto 
-08:09 | Acesso ao roteador
+14:06 | Chat de projetos ativos
    dona: ?
-   chat: API Error: 502 [claude/claude-opus-5-5] Provider returned empty content (reset after 5m). This is a server-side issue, usually temporary — try again i
-(omarchy.txt gravado 27/11 09:06)
+   chat: O laço novo começou às 14h02 e ainda não conferiu nenhum vídeo. Enquanto espero, vejo por que 10 cópias de segurança das trocas de Python sumiram.
+14:06 | Remover elementos repetidos
+   dona: mais oque pedi rpa vc rrodaar foi ass vesoes 7    8 9 etc ja quee sta rodando as correcoes nao e ruim masi a ideia e ra produzir melhroras
+   chat: A troca de código na fabricadeautomacoesia está confirmada. O vigia da fila continua ligado e me avisa quando Mike, Momo e os testes de melhoria começ
+14:06 | Conta Kangle
+   dona: ?
+   chat: Funcionou: o navegador saiu por **193.176.99.159**, que é exatamente o IP fixo N=1 da lista limpa. O exit 1 foi só da limpeza no fim (sem efeito). Ago
+14:06 | Vozes de personagens para vídeos
+   dona: continue tentando no s2 ultra
+   chat: O instalador do S20 Ultra está rodando: está carregando o PyTorch para conferir se o XTTS abre, o que no celular leva alguns minutos. Te aviso quando 
+14:05 | Regra anti-recusa no CLAUDE.md
+   dona: enquanto isso ja facca o sistema de rotacao via proxy com os proxys gartso tannto os nvos qeu forma acrecemntados hoje de git hub ccomo os de gratis w
+   chat: Achei o material de hoje. Vou ler o que já foi montado para integrar em vez de duplicar.
+14:04 | Webshare e proxies gratuitos
+   dona: nalsie se algum dddddddos ips antigggos da cconnta apga aidan funncciona exetpo os que estao na nova lista
+   chat: A busca ampla no PC1 ainda não terminou. Vou direto aos arquivos que eu sei que guardam IPs antigos da conta paga, com as portas: a auditoria dos 100 
+(omarchy.txt gravado 27/11 14:06)

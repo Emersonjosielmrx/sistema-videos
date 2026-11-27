@@ -1,10 +1,9 @@
 [IA 1min] 1min 8/19 (atualizado ha 5 min)
-[IA Antigravity] Opus 5.5 1/4; Opus 4.6 1/19 (atualizado ha 5 min)
+[IA Antigravity] Opus 5.5 1/4 (atualizado ha 5 min)
 [IA Claude] 5 h; Semana (atualizado ha 5 min)
   !! IA Claude: nenhuma conta com credito
-[IA Sonnet web] Sonnet web 3/45 (atualizado ha 5 min)
-[IA Gemini] Gemini 26/127 (atualizado ha 5 min)
-[IA Kiro] Kiro 32/32 (atualizado ha 5 min)
+[IA Gemini] Gemini 17/127 (atualizado ha 5 min)
+[IA Kiro] Kiro 31/31 (atualizado ha 5 min)
 [IA OpenRouter] OpenRouter 4/4 (atualizado ha 5 min)
 [VIGIAS DA OMARCHY]
   ronda-omarchy ok
@@ -15,37 +14,28 @@
   omniag-contas-barra ok
   perfis-dock-sync ok
 [CHATS HUMANOS ultimas 2 h]
-11:35 | Remover elementos repetidos
-   dona: quantas conats tem ? da rpa suar um pra cada teste assim sai masi rapido
-   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
-11:34 | Chat de projetos ativos
-   dona: ok ja pdoemos coclaor eles nod rive e documnetar ? assims e der eero e rpecisar pdoer sem cahdos no drive mais cconfira o meljhro psosivel eeles ants 
-   chat: API Error: Request rejected (429) · Service temporarily unavailable: all targets were skipped by pre-dispatch filters (claude-sonnet-4-6 100% conn:db4
-11:34 | Regra anti-recusa no CLAUDE.md
-   dona: afz um etste de capaccidade em relcao aos modleos qu temos sonnte web 5.5 e o gydrogen e gemini 3.8 sendo como foi feito  aultma vez um etste de conse
-   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
-11:31 | Vozes de personagens para vídeos
-   dona: ve se o pc2 ja apareccce
-   chat: API Error: Request rejected (429) · Service temporarily unavailable: all targets were skipped by pre-dispatch filters (claude-opus-4-6-thinking 100% c
-11:30 | Conta Kangle
-   dona: mudou o ip da conta con fira se eesta valida aidan o tokem
-   chat: Resumo do que descobri hoje, que é o mais importante:  **O problema não é o jeito de criar as contas — é o IP.** A conta `marinamartin14948` foi banid
-11:28 | Webshare e proxies gratuitos
-   dona: analsie outros ips gratsiq eu possamos sua  eetste se estao validos, e se nao etsteoue ssejs tetse e bom criar um auto etste tb que ficcque de x em x 
-   chat: O teste automático está funcionando: a tarefa rodou sozinha no PC1, sem janela e sem erro, e volta a rodar a cada 3 horas. A próxima rodada é às 12h. 
-11:22 | Logos da MS Energy
-   dona: os ar condiciaonnod nao levem os 15 por cento so o material que elva a mais e solccoaue so 10 pro ccendo memso neles de forma invisuvel e aos ar estao
-   chat: As duas mudanças estão no ar em **https://orcamentos.opus-sem-limites.com.br**. Testei como o Luiz e conferi as telas pelos prints, no computador e no
-11:15 | Canal e DNS do roteador
+15:35 | Meet travando
+   dona: veja se nao  o meu dns
+   chat: Não é o DNS. Testei, e ele responde rápido:  | Servidor DNS | Tempo de resposta | |---|---| | Roteador (o que o notebook usa) | 4 a 14 ms | | Quad9 | 
+15:32 | Desempenho dos três sistemas
+   dona: nao e o etste de chate e o teste como pc worker  ele bai processar videos etc e abrir chomes
+   chat: Entendido: o que vale é o teste de worker, que já foi feito. Vou parar o teste de chats e soltar a fábrica do Fish.
+15:28 | Webshare e proxies gratuitos
+   dona: ccollab so deve usar a gratsi,, postador de videos so rpa usatr as gratsi b, so o kangel deve usar as pagas em resumo ja deixe cucuetado ha naos er qu
+   chat: Os IPs pagos estão trancados para uso só do Kaggle, e o resto do sistema sai pelos grátis: primeiro as listas do GitHub e, se falharem, o Webshare grá
+15:23 | Chat de projetos ativos
+   dona: faca logo essas duas que seria so mes 12
+   chat: A produção de vídeo está rodando de novo. O que tinha parado era o PC2, que ficou fora da rede e voltou a fazer Shorts às 14h53.  **Máquinas:** - **Ti
+15:22 | Conta Kangle
+   dona: ?
+   chat: A conta nova está criada, e desta vez no **IP fixo limpo só dela** (193.176.99.159) — o esquema que deve resolver o ban.  **Nova conta (IP dedicado):*
+15:14 | Remover elementos repetidos
+   dona: o collab fica vico emsmo se apcabem seus toeks a utomacoa ja faz isso certo ?
+   chat: Você está certo em parte. **O Colab fica vivo sozinho**, porque a automação roda aqui no Omarchy, fora de qualquer chat. Mas tem dois buracos que deix
+14:59 | teste de modelos
+   dona: comoe sta indo os testes ?
+   chat: No momento não há nenhum teste rodando. As duas rodadas terminaram, com uma exceção: o **Flint** ficou sem nota no teste difícil, porque eu interrompi
+14:56 | Vozes de personagens para vídeos
    dona: [Request interrupted by user]
-   chat: Achei o visual real do Hermes: fundo escuro com verde esmeralda, fonte Inter e ícones Lucide. Vou ler o restante do estilo para copiar os componentes.
-10:13 | Repetidor de rede
-   dona: aj esta o mais rapdo possivel ?
-   chat: Sim. Pelas configurações, ele já está no máximo. Medi de novo agora e deu entre **49 e 61 Mbps** pelo repetidor, sem perder nenhum pacote. O primeiro 
-10:01 | Acesso ao rotador
-   dona: analise todas as possibilidea pra faer ele fuccioanr como eu quero trocando o sofware ou cosia parecidda
-   chat: API Error: 502 [claude/claude-opus-5-5] Provider returned empty content (reset after 5m). This is a server-side issue, usually temporary — try again i
-09:49 | coolab google
-   dona: quanl comta ?
-   chat: O Colab está rodando na conta **filmescomia1**, que está logada aqui no cofre do notebook e sai sempre pela internet própria dela.  Foi nela que saíra
-(omarchy.txt gravado 27/11 11:36)
+   chat: Sim, pode formatar a asusx.  - Não tem nada rodando nela. A parte 29 terminou e subiu às 14h40. - O backup no Drive terminou às 14h43, na pasta `backu
+(omarchy.txt gravado 27/11 15:36)

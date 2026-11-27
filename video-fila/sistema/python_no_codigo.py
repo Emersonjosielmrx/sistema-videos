@@ -87,6 +87,10 @@ def candidatos():
                 continue
             # pacotes: o do proprio arquivo e os dos .py que ele chama (para .bat)
             chamados = {fl} | {x.lower() for x in re.findall(r"[A-Za-z]:\\[^\"'\r\n]+?\.py", txt)}
+            # 27/11: script chamado SO PELO NOME (ex.: AQUI / "conferir_arroba.py") tambem conta - o noite_encher perdeu o
+            # rapidocr porque o conferir_arroba.py (que roda com PY_OCR) nao entrava nesta conta
+            chamados |= {os.path.join(pasta, m).lower() for m in re.findall(r"[\w\-]+\.py", txt)
+                         if os.path.isfile(os.path.join(pasta, m))}
             p = set().union(*(pac.get(c, set()) for c in chamados))
             out.append((f, txt, p, chamados))
     return out
@@ -107,7 +111,7 @@ def aplicar(fazer):
     feitos = 0
     so = [x.lower() for x in sys.argv[sys.argv.index("--so") + 1].split(",")] if "--so" in sys.argv else None
     for f, txt, pac, chamados in cands:
-        if f in d and d[f].get("estado") == "trocado":
+        if f in d and d[f].get("estado") in ("trocado", "voltou", "fica"):  # 27/11: "fica" = marcado a mao, nunca trocar
             continue
         if so and not any(x in f.lower() for x in so):
             continue

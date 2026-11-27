@@ -84,7 +84,7 @@ def buscar_tema(q, rx):
         print(f"busca '{q}' falhou ({type(e).__name__})", flush=True)
         return []
     out = []
-    for e in ents:
+    for e in [x for x in ents if x]:  # 27/11: yt-dlp devolve None p/ video indisponivel
         vid, t = e.get("id"), e.get("title") or ""
         dur, views = (e.get("duration") or 0) / 60, e.get("view_count") or 0
         if not vid or len(vid) != 11 or gf.ADULTO.search(t) or not re.search(rx, t, re.I):

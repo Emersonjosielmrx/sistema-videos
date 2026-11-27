@@ -1,8 +1,8 @@
-# Teste gradual de formatos e vozes — 27/11 09:35
+# Teste gradual de formatos e vozes — 27/11 15:35
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 823.0 de 1593 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 827.0 de 1603 Shorts medidos passaram da mediana do canal (taxa 0.52). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -32,7 +32,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:quico | testando | 5 | 0 | 0 | 5 | 2 | 2.5/3 | 0.70 | 1783 | 56% (4) | 5/0 | 0 |
 | formato:chaves_quico | testando | 7 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 3/0 | 0 |
 | formato:transmissao | testando | 1 | 0 | 0 | 1 | 1 | 0.0/2 | 0.25 | 3 | - | 1/0 | 0 |
-| voz:homem_de_ferro_tony_stark | testando | 3 | 0 | 0 | 3 | 2 | 1.0/2 | 0.50 | 2113 | 60% (2) | 3/0 | 0 |
+| voz:homem_de_ferro_tony_stark | testando | 3 | 0 | 0 | 3 | 2 | 1.0/2 | 0.50 | 2113 | 42% (3) | 3/0 | 0 |
 | voz:jett_valorant | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 1317 | 51% (1) | 2/0 | 0 |
 | voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 53% (1) | 2/0 | 0 |

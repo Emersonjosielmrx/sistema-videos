@@ -19,7 +19,7 @@
 
 AQUI=/d/video-fila/ronda
 SSHQ="-o ConnectTimeout=8 -o BatchMode=yes -o LogLevel=ERROR"
-PY="/c/Users/Haylla/AppData/Local/Programs/Python/Python313/python.exe"
+PY="/d/veo/venv/Scripts/python.exe"  # 27/11 obra: Python principal (antes Python313 do usuario; volta = ronda_pc1.sh.bak_obra_py)
 filtro() { tr -d '\r' | grep -v -i -E 'post-quantum|store now|may need to be upgraded'; }
 LIM_DISCO=85; LIM_TEMP=90; LIM_RAM_MB=500
 

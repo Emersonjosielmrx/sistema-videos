@@ -70,6 +70,13 @@ HOSTS = {
     #          "ram_min": 0.6},
     # 12/11: Redmi A3 testado — xfade 8 s 1080x1920 passou de 200 s (G20 = 23 s): lento demais pro render; só o vigia
 }
+# 27/11 dona: MAQUINAS FORA DA RODA (formatando/desligadas) sem editar codigo: 1 nome por linha em
+# D:\video-fila\estado\maquinas_fora.txt (ex.: asusx, itau). Apagar a linha = volta. Quem usa HOSTS ja confere 'in HOSTS'.
+try:
+    for _h in {l.split('#')[0].strip().lower() for l in (BASE / 'estado' / 'maquinas_fora.txt').read_text(encoding='utf-8').splitlines()} - {''}:
+        HOSTS.pop(_h, None)
+except OSError:
+    pass
 # Regras de vaga. 04/11 (dona: "vão trabalhar acima da temperatura, o local é quente; não tem problema se der pau, são
 # velhos e descartáveis, só servem pra isso"): SEM limite de temperatura — só aparece no painel. None = desligado.
 TEMP_MAX = None          # °C da bateria (termux-battery-status)

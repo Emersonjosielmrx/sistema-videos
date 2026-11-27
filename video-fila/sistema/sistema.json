@@ -2003,7 +2003,7 @@
    }
   },
   "proxies-gratis": {
-   "nome": "Proxies gratis (listas publicas) - EM TESTE",
+   "nome": "Proxies: gratis (EM TESTE) + cadeado dos IPs pagos",
    "categoria": "C-infra",
    "pastas": [
     "D:\\proxies-gratis"
@@ -2015,7 +2015,7 @@
     "ProxiesGratisTeste"
    ],
    "servicos_fora": [],
-   "obs": "27/11 dono: usar os gratis 'pra tudo, com aviso que estao em teste'; renovar a cada erro; e auto teste a cada X h limpando os invalidos. Comum D:\\sistema\\comum\\proxies_gratis.py (aviso [PROXY GRATIS - EM TESTE]). Tarefa ProxiesGratisTeste a cada 3 h (re-testa a lista + 27 fontes publicas; confere internet antes; trava unica com a renovacao por erro). Ligado em ytdlp_vez.py so quando a Webshare toda esta fora da roda. Desligar: PROXY_GRATIS=0 e desabilitar a tarefa. NUNCA para conta logada. Doc: D:\\proxies-gratis\\LEIA_PRIMEIRO.md",
+   "obs": "27/11 dono: usar os gratis 'pra tudo, com aviso que estao em teste'; renovar a cada erro; e auto teste a cada X h limpando os invalidos. Comum D:\\sistema\\comum\\proxies_gratis.py (aviso [PROXY GRATIS - EM TESTE]). Tarefa ProxiesGratisTeste a cada 3 h (re-testa a lista + 27 fontes publicas; confere internet antes; trava unica com a renovacao por erro). Ligado em ytdlp_vez.py so quando a Webshare toda esta fora da roda. Desligar: PROXY_GRATIS=0 e desabilitar a tarefa. NUNCA para conta logada. Doc: D:\\proxies-gratis\\LEIA_PRIMEIRO.md | 27/11 15h30 CADEADO: IP pago (rnprmtfo) so Kaggle (D:\\sistema\\comum\\cadeado_pagos.py; log D:\\sistema\\estado\\cadeado_pagos.log; liberar N pelo dono). Resto sai pelo FAILBACK proxies_gratis.saida (GitHub -> Webshare gratis). Linha paga so em secrets\\proxy_pago_kaggle.txt. Desligar: CADEADO_PAGOS=0.",
    "estado": "teste",
    "logs": [
     {
@@ -2024,6 +2024,13 @@
      "prazo_h": 8,
      "nome": "Teste de proxies gratis (a cada 3 h)",
      "desde": "2026-11-27T12:00"
+    },
+    {
+     "arq": "D:\\sistema\\estado\\cadeado_pagos.log",
+     "sucesso": "",
+     "prazo_h": 0,
+     "nome": "Recusas do cadeado de IP pago (so leitura)",
+     "desde": "2026-11-27T15:30"
     }
    ],
    "tarefas_detalhe": {
@@ -2057,7 +2064,8 @@
   "JanelaMudancaMadrugada",
   "ArquivarDrive",
   "ReligarPontes",
-  "RedeLimpeza"
+  "RedeLimpeza",
+  "MudarNoBoot"
  ],
  "sistema_re": "^(HP |IObit|MicrosoftEdge|GoogleUpdater|GoogleChrome|RunPlatform|Wise |OneDrive|Opera|S-1-5-|USER_ESRV|AtualizarChrome)"
 }

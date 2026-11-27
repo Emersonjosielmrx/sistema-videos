@@ -101,7 +101,7 @@ def main():
             break
     novos = 0
     for q, l in termos:
-        for e in buscar(q):
+        for e in [x for x in buscar(q) if x]:  # 27/11: yt-dlp devolve None p/ video indisponivel
             cid = e.get("channel_id") or e.get("uploader_id")
             nome = e.get("channel") or e.get("uploader") or ""
             if not cid or cid.lower() in ja_fontes or (e.get("uploader_id") or "").lower() in ja_fontes:

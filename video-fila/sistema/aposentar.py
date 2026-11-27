@@ -10,6 +10,7 @@
 #   python aposentar.py          diz o veredito de cada alvo      python aposentar.py --aplicar
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -18,7 +19,7 @@ from pathlib import Path
 if sys.stdout:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SEM_JANELA = getattr(subprocess, "CREATE_NO_WINDOW", 0)
-DIAS = 7
+DIAS = int(os.environ.get("APOSENTAR_DIAS", "7"))  # 27/11: dona mandou adiantar ("faca logo") -> APOSENTAR_DIAS=2
 ALVOS = [  # (pasta, o que e) - os 2 que ficam para sempre: D:\veo\venv (principal) e venv_vozes (vozes/GPU)
     (r"D:\hipercool-videos\venv", "Python do hipercool"),
     (r"D:\hipercool-materiais\python\venv", "Python do hipercool-materiais"),
@@ -86,7 +87,37 @@ def veredito(pasta, n_dias, regs, cmds, txt, procs):
         return "EM USO (processo rodando agora)"
     if pl in txt or pr in txt:
         return "EM USO (codigo vivo cita o caminho)"
+    m = montado_por_partes(pasta)
+    if m:
+        return f"EM USO (codigo monta o caminho por partes: {m})"
     return "OK"
+
+
+def montado_por_partes(pasta):
+    """27/11: fila.py faz PY = PROJECT / "venv" / ... (sem o caminho inteiro escrito) -> a checagem de texto nao via.
+    Procura o NOME da pasta do venv como texto solto ("venv", 'venv_imgutils', \\venv\\, /venv/) nos .py/.bat/.ps1 do
+    projeto dono (pasta-mae do venv e as 2 acima), fora de venvs, sistema2 e backups."""
+    nome = os.path.basename(pasta.rstrip("\\"))
+    if not re.match(r"^\.?venv", nome, re.I):
+        return ""
+    pat = re.compile(r"[\"'\\/]" + re.escape(nome) + r"[\"'\\/]", re.I)
+    mae = os.path.dirname(pasta.rstrip("\\"))
+    raizes = {mae, os.path.dirname(mae)}
+    for raiz in raizes:
+        if not os.path.isdir(raiz) or len(raiz) <= 3:
+            continue
+        for dp, dn, fn in os.walk(raiz):
+            dn[:] = [d for d in dn if not re.match(r"^(\.?venv.*|site-packages|node_modules|__pycache__|\.git|_?bak.*|_?backup.*)$", d, re.I)]
+            for f in fn:
+                if not f.lower().endswith((".py", ".bat", ".ps1", ".cmd", ".vbs")) or ".bak" in f.lower():
+                    continue
+                c = os.path.join(dp, f)
+                try:
+                    if pat.search(open(c, encoding="utf-8", errors="ignore").read()):
+                        return c
+                except OSError:
+                    pass
+    return ""
 
 
 def main(aplicar):

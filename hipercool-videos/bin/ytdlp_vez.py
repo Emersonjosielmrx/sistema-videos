@@ -108,8 +108,14 @@ def _gratis_url():
 
 def proxy_url():
     """Um proxy da rotação (http://<USUARIO>:<SEGREDO_REMOVIDO>@host:porta) ou None (sem lista = comportamento antigo, direto).
-    27/11: Webshare toda fora da roda (ou sem lista) -> proxy gratis EM TESTE (_gratis_url)."""
-    todos = _proxies()
+    27/11 tarde (dono: "Webshare esta muito saturada; failback com os gratis do GitHub e depois os gratis da Webshare"):
+    ORDEM = 1o proxy publico do GitHub (pool testado, aviso [PROXY GRATIS - EM TESTE]); 2o Webshare GRATIS (a roda abaixo,
+    sem o IP pago rnprmtfo - cadeado: pago e so do Kaggle). YTDLP_GITHUB_PRIMEIRO=0 volta a ordem antiga."""
+    if os.environ.get("YTDLP_GITHUB_PRIMEIRO", "1") != "0":
+        px_gratis = _gratis_url()
+        if px_gratis:
+            return px_gratis
+    todos = [p for p in _proxies() if "rnprmtfo" not in p]
     if not todos:
         return _gratis_url()
     try:

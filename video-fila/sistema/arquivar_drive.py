@@ -26,7 +26,9 @@ DIAS_PARADA = 14
 
 # (pasta, motivo). So entra aqui o que foi conferido como sobra; o --plano ainda checa uso antes de mexer.
 ALVOS = [
-    (r"D:\sistema\quarentena", "quarentena da obra: backups/testes/diag/tmp com 14+ dias sem uso e projetos parados (trader voltou)"),
+    # 27/11: a QUARENTENA NAO vai mais inteira ao Drive - as juncoes do quarentena.py apontam para ela (pastas tmp que os
+    # programas ainda usam); levar tudo quebrava HipercoolPostagem/Recap. Ela fica no PC1 (e pequena; a volta e instantanea).
+    # (r"D:\sistema\quarentena", "quarentena da obra ..."),
     (r"D:\_recuperacao de HD", "recuperacao de HD de outubro"),
     (r"D:\SteamLibrary", "biblioteca Steam vazia"),
     (r"D:\AUDITORIA_MELHORIAS_20261015", "auditoria de 15/10"),
@@ -151,6 +153,14 @@ def remover(p):
     shutil.rmtree(p, onerror=onerr)
 
 
+def _juncoes():
+    try:
+        subprocess.run([sys.executable, "-X", "utf8", r"D:\sistema\catalogo\juncoes.py", "--aplicar"], capture_output=True,
+                       timeout=1800, creationflags=SEM_JANELA)
+    except Exception as e:  # noqa: BLE001
+        print("   !! juncoes.py falhou:", e)
+
+
 def aplicar(so_plano):
     V, cmds, procs = usos()
     reg = ler()
@@ -173,12 +183,18 @@ def aplicar(so_plano):
             print(f"   !! copia/conferencia falhou, NAO removi: {out[-200:]}")
             continue
         remover(p)
+        _juncoes()  # 27/11: na hora, nao no fim (o envio seguinte pode levar 1 h e as juncoes ficavam quebradas)
         reg.append({"origem": p, "drive": dest, "mb": round(tam / 1e6, 1), "em": time.strftime("%Y-%m-%dT%H:%M:%S"),
                     "motivo": motivo})
         salvar(reg)
         livre += tam
         print(f"   ARQUIVADA no Drive e conferida -> removida do PC1")
     print(f"candidatos: {total / 1e9:.2f} GB | liberado agora: {livre / 1e9:.2f} GB")
+    if livre:  # 27/11: pasta que tinha JUNCAO apontando para ela (quarentena) saiu -> juncao vira pasta vazia (juncoes.py)
+        r = subprocess.run([sys.executable, "-X", "utf8", r"D:\sistema\catalogo\juncoes.py", "--aplicar"],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=1800,
+                           creationflags=SEM_JANELA)
+        print("juncoes:", (r.stdout or r.stderr).strip().splitlines()[-1:] )
 
 
 def voltar(orig):
