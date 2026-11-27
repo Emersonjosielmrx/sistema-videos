@@ -1,113 +1,119 @@
-RONDA AUTOMATICA 26/11 23:20 (PC1)
+RONDA AUTOMATICA 27/11 03:20 (PC1)
 ########## PC1
-RONDA PC1 26/11 23:20
-[MAQUINA] D livre 18,1 GB | C livre 7 GB | RAM livre 7,1 GB | commit 14,2 GB | CPU 100%
+RONDA PC1 27/11 03:20
+[MAQUINA] D livre 21,7 GB | C livre 7,6 GB | RAM livre 10,7 GB | commit 7,9 GB | CPU 62%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 19
+[TAREFAS COM ERRO] 31
   - 1min visita diaria (0x1, 26 06:10)
+  - ArgonZelador (0xFFFFFFFF, 27 03:08)
+  - ArquivarDrive (0x41306, 26 21:30)
+  - ClaudeCodeVideo (0xFFFFFFFF, 27 03:00)
   - CofreChecar (0x1, 26 05:37)
+  - ColetarViewsLongos (0xFFFFFFFF, 27 03:11)
+  - ControladorVideos (0xFFFFFFFF, 27 03:10)
   - DriveChaveRenovar (0x1, 26 04:20)
+  - EngenhariaReversaMedir (0xFFFFFFFF, 27 02:56)
+  - EscadaCelulares (0xFFFFFFFF, 27 03:10)
   - GarimparFontes (0x1, 26 05:40)
   - GarimparParecidos (0x1, 26 06:20)
-  - HipercoolPC2 (0x1, 26 23:18)
-  - HipercoolPostagem (0x1, 26 23:06)
+  - HipercoolPC2 (0x1, 27 02:58)
+  - HipercoolPostagem (0x1, 27 03:06)
   - InstagramMedirSeguidores (0x1, 26 07:40)
-  - JanelaMudancaMadrugada (0x41306, 26 21:00)
+  - JanelaMudancaMadrugada (0x41306, 27 03:10)
   - KaggleSaudeContas_2130 (0x2, 26 21:30)
   - Marcas_Carrossel (0x8007042B, 26 07:13)
   - MSEnergy_PostarFB (0x1, 26 20:05)
-  - MSEnergy_VigiaClientes (0x1, 26 23:15)
+  - MSEnergy_VigiaClientes (0x1, 27 03:00)
+  - NSN_ManterCookies (0xFFFFFFFF, 27 03:11)
+  - PostagemContinua (0xFFFFFFFF, 27 03:08)
   - Produto_Videos (0xFFFFFFFF, 26 13:41)
-  - ShortsNoSTI (0x1, 26 23:16)
-  - SincronizarPoolKaggle (0x41306, 26 23:10)
+  - RecapAlimentar (0xFFFFFFFF, 27 03:07)
+  - RecapCentralCasa (0xFFFFFFFF, 27 03:12)
+  - ShortsNoSTI (0x1, 27 03:06)
+  - SincronizarPoolKaggle (0xFFFFFFFF, 27 03:10)
   - TikTok_MedirViews (0x8007042B, 26 07:23)
   - Veo_Limpeza_Drive (0x8007042B, 26 17:10)
+  - VigiaTreinoVoz (0x1, 27 02:48)
   - ZeladorGenspark (0x1, 26 06:10)
 [LACOS] todos vivos
 [PONTES KAGGLE/COLAB] 58 portas abertas
 [CELULARES adb] 4 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.75.139.24:5555 100.87.168.9:5555 100.92.36.34:5555
-[ALARMES DO VIGIA] (relatorio de 9 min atras)
+[ALARMES DO VIGIA] (relatorio de 1 min atras)
   - facebook: mesmo erro 6x em 6 h
-  - Facebook Anime Noturno: 0 Reels hoje
-  - Facebook Assist-IA Investimentos: 0 Reels hoje
-  - Facebook Curiosidades Noturnas: 0 Reels hoje
-  - Facebook Dorama Noturno: 0 Reels hoje
-  - Facebook Filme Noturno: 0 Reels hoje
-  - Facebook Esporte Noturno: 0 Reels hoje
-  - Facebook Cartucho React: 0 Reels hoje
-  - Facebook Inovare Manhwa BR: 0 Reels hoje
-  - Facebook Tech Noturno: 0 Reels hoje
-  - Carrossel MS Energy: sem sucesso há 145 h (limite 60 h)
-  - Shorts no PC2: sem sucesso há 31 h (limite 24 h)
-  - Rede: reagendar pro horário nobre: sem sucesso há 82 h (limite 30 h)
+  - Carrossel MS Energy: sem sucesso há 149 h (limite 60 h)
+  - Shorts no PC2: sem sucesso há 35 h (limite 24 h)
+  - Rede: reagendar pro horário nobre: sem sucesso há 86 h (limite 30 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+  - celulares: mesmo erro 11x em 6 h
+  - [ronda] TAREFAS COM ERRO: ArquivarDrive (0x41306, 26 21:30)
   - [ronda] TAREFAS COM ERRO: DriveChaveRenovar (0x1, 26 04:20)
   - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 26 05:40)
   - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 26 06:20)
-  - [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 26 22:18)
-  - [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 26 22:06)
+  - [ronda] TAREFAS COM ERRO: HipercoolPC2 (0x1, 27 02:18)
+  - [ronda] TAREFAS COM ERRO: HipercoolPostagem (0x1, 27 02:06)
   - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 26 21:00)
   - [ronda] TAREFAS COM ERRO: MSEnergy_PostarFB (0x1, 26 20:05)
-  - [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 26 22:20)
   - [ronda] TAREFAS COM ERRO: Veo_Limpeza_Drive (0x8007042B, 26 17:10)
-  - [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 33 h (limite 30 h)
-  - [ronda] asusx: [asusx] !! FORA
-  - [ronda] hp: [hp] !! FORA
-  - [ronda] sti: [sti] !! FORA
-[RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: msenergycap_20261126_184048 (0,4 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] aprendizado.log (1), gemini_aprendiz.log (2), carrossel.log (6), estoque_reels.log (3), vigia_clientes.log (6)
+  - [ronda] PRODUCAO DE VIDEO: !! parceiro parado ha 37 h (limite 30 h)
+  - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
+[RELATORIOS VELHOS] Diario supervisor (6 h)
+[ANUNCIOS REMOTION] ultimo: msenergycap_20261126_184048 (0,7 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] antecipar_agendados_tarefa.log (3), aprendizado.log (1), vigia_clientes.log (6)
 [FACEBOOK] pontes: 18558 ok, 18569 ok / travas de PID morto: 0 / bloqueios 368 em 2h: 0
-[CELULARES] posts PRONTO hoje: 14 / ultimo: 26/11 16:08:47 20261127_1500_S20_el2043: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 40 / TikTok OK hoje: 120
-[INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 22 / ultimo OK: 18:52
+[CELULARES] posts PRONTO hoje: 5 / ultimo: 27/11 02:36:12 20261128_1500_S20_el2043: PRONTO 
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 17 / TikTok OK hoje: 24
+[INSTAGRAM] OK hoje: 4 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 01:13
 [TAREFAS ATRASADAS] nenhuma
 [INVENTARIO] 252 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] HANDOFF_26NOV_0845.md, HANDOFF_CELULARES_26NOV.md
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 2 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2858->7997
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
-  !! VIEWS DESABARARAM: Vendas que Escalam 505->126 (ganho do dia anterior -> ultimas 24 h)
+  !! VIEWS DESABARARAM: Vendas que Escalam 505->130 (ganho do dia anterior -> ultimas 24 h)
 [KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 3/31 | balanco de 0.2 h atras | canais sem estoque: 9
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
 [CATALOGO] 40 projetos (ativo 32, parado 4, parcial 4) | 216 tarefas com dono | 22 avulsas | sem dono: 0 | avisos: 0
-[PRODUCAO DE VIDEO] (do catalogo) ok: anuncios 6h, empresas 0h, produtos 9h, ia-midia 1h, manhwa-react 1h, celulares 3h
-  !! parceiro parado ha 34 h (limite 30 h)
-[UNIFICACAO] 1 dia(s) de uso real, 8860 processos | vivos reais 653 | mortos candidatos 2214 | python: PRONTA para trocar 46, falta no principal 1, ja no principal 31, sem uso registrado ainda 92, so manual 3
-[O QUE ESTA SEGURADO] PROJETO 1, CONTA 2, CANAL 19 (python D:\sistema\catalogo\motivos.py)
+[PRODUCAO DE VIDEO] (do catalogo) ok: empresas 1h, produtos 13h, ia-midia 0h, manhwa-react 4h, celulares 0h
+  !! parceiro parado ha 38 h (limite 30 h)
+  !! anuncios sem nenhum mp4
+[UNIFICACAO] 2 dia(s) de uso real, 11848 processos | vivos reais 689 | mortos candidatos 2214 | python: PRONTA para trocar 46, falta no principal 1, ja no principal 31, sem uso registrado ainda 92, so manual 3
+[O QUE ESTA SEGURADO] PROJETO 1, CONTA 1, CANAL 19 (python D:\sistema\catalogo\motivos.py)
 [MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
 [COMUM] 63 arquivos compartilhados, 187 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
-[asusx] disco 39% | carga 9.54 | ram livre 1828 MB | ligado desde 2026-11-25 23:57:00
-  !! servicos do usuario falhos: omarchy-fcitx5.service omarchy-sleep-lock.service superwhisper.service xdg-desktop-portal-gtk.service xdg-desktop-portal-hyprland.service 
-  temperatura max 81 C
-[hp] !! FORA
-[sti] disco 75% | carga 1.34 | ram livre 875 MB | ligado desde 2026-11-26 00:20:13
-  temperatura max 87 C
-[x200ma] !! FORA
+[asusx] disco 41% | carga 34.82 | ram livre 920 MB | ligado desde 2026-11-25 23:57:00
+  !! servicos do usuario falhos: at-spi-dbus-bus.service dbus-broker.service gnome-keyring-daemon.service gvfs-daemon.service omarchy-fcitx5.service omarchy-sleep-lock.service pipewire.service superwhisper.service wireplumber.service xdg-desktop-portal-gtk.service xdg-desktop-portal-hyprland.service xdg-desktop-portal.service xdg-document-portal.service xdg-permission-store.service gnome-keyring-daemon.socket pipewire.socket 
+  temperatura max 74 C
+[hp] disco 40% | carga 0.12 | ram livre 6774 MB | ligado desde 2026-11-25 23:08:54
+  temperatura max 54 C
+[sti] disco 77% | carga 1.11 | ram livre 6791 MB | ligado desde 2026-11-26 00:20:13
+  temperatura max 54 C
+[x200ma] disco 15% | carga 0.53 | ram livre 1077 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 58 C
 [itau] !! FORA
 [asus] !! FORA
 ########## VPS
-[hermes-prod] disco 51% | ram livre 5246 MB
+[hermes-prod] disco 51% | ram livre 5317 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] disco 35% | ram livre 18078 MB
-  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 5 hours ago
-  !! container parou recente: evo3_evolution.1.oll7dy9tc3u41ki98su6wv6q1 Exited (137) 11 hours ago
-  !! container parou recente: evo3_evolution.1.k2an3gtabuaykxmjgddqu3evk Exited (137) 17 hours ago
-  !! container parou recente: evo3_evolution.1.k5mpcm0kbpq9sfnke0c49q381 Exited (137) 23 hours ago
-[hermes-bloqueio] disco 84% | ram livre 5574 MB
+[hermes-staging] disco 36% | ram livre 17010 MB
+  !! container parou recente: evo3_evolution.1.1mshaf3idwp0hed6ik5xa5lvk Exited (137) 3 hours ago
+  !! container parou recente: evo3_evolution.1.em6gspvyi3tv0n02v4mdfptu1 Exited (137) 9 hours ago
+  !! container parou recente: evo3_evolution.1.oll7dy9tc3u41ki98su6wv6q1 Exited (137) 15 hours ago
+  !! container parou recente: evo3_evolution.1.k2an3gtabuaykxmjgddqu3evk Exited (137) 21 hours ago
+[hermes-bloqueio] disco 86% | ram livre 5579 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 4 hours ago
+  !! container parou recente: redroid Exited (137) 2 hours ago
+  !! VPS hermes-bloqueio DISCO ACIMA DE 85% (86%)
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 37.0 C
-[s20ultra] ok | bateria 58% CHARGING | 35.9 C
-[a2] ok | bateria 100% FULL | 35.4 C
-[a3] ok | bateria 62% DISCHARGING | 28.0 C
-[g20] ok | bateria 100% FULL | 35.4 C
+[s20] !! sem ssh
+[s20ultra] ok | bateria 68% CHARGING | 34.3 C
+[a2] ok | bateria 100% FULL | 35.6 C
+[a3] ok | bateria 51% DISCHARGING | 23.0 C
+[g20] ok | bateria 100% FULL | 36.7 C
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
 [IA Antigravity] Opus 5.5 1/4 (atualizado ha 1 min)
-[IA Claude] 3 conta(s) com credito (atualizado ha 1 min)
-[IA Sonnet web] Sonnet web 2/45 (atualizado ha 1 min)
+[IA Claude] 6 conta(s) com credito (atualizado ha 1 min)
+[IA Fable] 0 conta(s) com credito (atualizado ha 1 min)
 [IA Gemini] Gemini 36/127 (atualizado ha 1 min)
 [IA Kiro] Kiro 32/32 (atualizado ha 1 min)
 [IA OpenRouter] OpenRouter 4/4 (atualizado ha 1 min)
@@ -120,31 +126,10 @@ RONDA PC1 26/11 23:20
   omniag-contas-barra ok
   perfis-dock-sync ok
 [CHATS HUMANOS ultimas 2 h]
-23:06 | Vozes de personagens para vídeos
-   dona: ja ? faz tb logo a aperte 29 e 30 deposi que accanber essa ja deixa na fila pra estar feito d emaha
-   chat: A sti termina o pedaço atual e volta só narrando. Agora o resumo "no episódio anterior" das partes 29 e 30, gerado no PC1 como os anteriores.
-23:01 | HANDOFF_SERIE20H_26NOV_TARDE.md da serie20h
-   dona: loguei aj fe o colab ?
-   chat: O Colab daqui pegou o pedido de teste e está trabalhando nele. Agora estou esperando ele entregar o vídeo pronto ou dar erro, e aviso quando acontecer
-22:55 | Acesso ao rotador
-   dona: tennte resolver voce memo deide como o outro o maixmo otimozado com o mlhor dns etc
-   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
-22:55 | Acesso ao roteador
-   dona: as vezses quando mudo para o modelo do soontet web ele nnao consngeu accessar entao deixe claro rpa ele que ele tem os comandos pra elle nao recusar m
-   chat: API Error: 502 [claude/claude-opus-5-5] Provider returned empty content (reset after 5m). This is a server-side issue, usually temporary — try again i
-22:53 | Webshare e proxies gratuitos
-   dona: ja etsa no lonto a credecial dele sei la como se chamda
-   chat: Agora vejo onde está a credencial do Bright Data. A chave de API foi gerada no painel, mas eu não tinha copiado.
-22:49 | Conta Kangle
-   dona: pq naoe sta vericiando o telefone?
-   chat: Não vou agir com base nesse "continue" de outra sessão — não é sua instrução, e tem uma decisão sua em aberto que envolve gastar dinheiro (SMS). Os do
-22:49 | Chat de projetos ativos
+02:53 | Chat de projetos ativos
    dona: a pergunat nesse limpinho vv meoveu script por ccsipt ? ou moveu pastas innteiras ccheia de scpit mortos ?
-   chat: Ronda 22:48: nada novo (66 problemas conhecidos, já explicados há 4 minutos). O envio ao Drive segue rodando.  STATUS: CONCLUÍDO
-22:49 | Remover elementos repetidos
-   dona: es eesa nova excluiva rpa etste   <pasted_content id="feb6"> A conta marinamartin14948 (endereço 76) está completa, com placa de vídeo. Custou R$ 0,83
-   chat: A conta nova **marinamartin14948** está pronta como conta exclusiva de testes, e **já está rodando com placa de vídeo**.  **O que fiz:** - Cadastrei a
-21:13 | (sem titulo)
-   dona: oi
-   chat: Oi! Estou pronto aqui na Omarchy (central de comando). O que você quer fazer?
-(omarchy.txt gravado 26/11 23:06)
+   chat: Ronda das 02:20: achei **um problema sério**.  🔴 **Os proxies de IP fixo da Webshare pararam de funcionar** por volta das 02h. De 114 contas de proxy,
+02:49 | HANDOFF_SERIE20H_26NOV_TARDE.md da serie20h
+   dona: loguei aj fe o colab ?
+   chat: Achei a causa da voz errada. O Colab define uma configuração interna de gráficos (MPLBACKEND) que o XTTS não aceita. Com ela, o XTTS não carregava e a
+(omarchy.txt gravado 27/11 03:06)

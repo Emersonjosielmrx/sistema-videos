@@ -18,8 +18,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:14",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-27T04:15"
   },
   {
    "email": "emersonjosiel2030@gmail.com",
@@ -39,8 +38,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:14",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-27T04:15"
   },
   {
    "email": "comoseriasecomia@gmail.com",
@@ -81,8 +79,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:14",
-   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
+   "sem_cota_ate": "2026-11-27T04:16"
   },
   {
    "email": "inovaremanhwaverseesp@gmail.com",
@@ -123,7 +120,8 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:35"
+   "sem_cota_ate": "2026-11-27T04:36",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "solarmundo195@gmail.com",
@@ -164,7 +162,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:14",
+   "sem_cota_ate": "2026-11-27T04:24",
    "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
@@ -185,7 +183,8 @@
    "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by SSLError(SSLEOFE",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:35"
+   "sem_cota_ate": "2026-11-27T04:36",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "aulacomia@gmail.com",
@@ -199,13 +198,14 @@
     "erros": 326,
     "seg_total": 28588.3
    },
-   "volta_exata": true,
+   "volta_exata": false,
    "voltou_em": "2026-11-17T01:37",
    "ultimo_erro": "HTTPSConnectionPool(host='gemini.google.com', port=443): Max retries exceeded with url: /app (Caused by NameResolutionEr",
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:37"
+   "sem_cota_ate": "2026-11-27T04:41",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "aulasrevolution@gmail.com",
@@ -243,7 +243,7 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T02:36"
+   "sem_cota_ate": "2026-11-27T05:36"
   },
   {
    "email": "filmescomia1@gmail.com",
@@ -291,13 +291,13 @@
    "email": "murilodoctor192@gmail.com",
    "apelido": "murilodoctor192",
    "bloqueada": false,
-   "ultimo_uso": "2026-11-25T03:31",
-   "erros_seguidos": 0,
+   "ultimo_uso": "2026-11-27T00:37",
+   "erros_seguidos": 1,
    "cookies_vistos_em": "<SEGREDO_REMOVIDO>",
    "volta_exata": false,
    "stats": {
     "ok": 17,
-    "erros": 31,
+    "erros": 32,
     "seg_total": 508.1
    },
    "ultimo_erro": "murilodoctor192: ressincronização pelo cofre falhou (conta deslogada?)",
@@ -324,7 +324,8 @@
    "ultimo_erro": "emersonjosiel1995: ressincronização pelo cofre falhou (conta deslogada?)",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T02:12"
+   "sem_cota_ate": "2026-11-27T02:12",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "mentoriaiapro@gmail.com",
@@ -344,7 +345,8 @@
    "ultimo_erro": "mentoriaiapro: ressincronização pelo cofre falhou (conta deslogada?)",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T01:36"
+   "sem_cota_ate": "2026-11-27T01:36",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "e4487017@gmail.com",
@@ -448,7 +450,8 @@
    "cookies_novos_em": "<SEGREDO_REMOVIDO>",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T02:07"
+   "sem_cota_ate": "2026-11-27T02:07",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "empressinovare@gmail.com",
@@ -468,7 +471,8 @@
    "voltou_em": "2026-11-16T04:49",
    "confirmar_volta": true,
    "espera_min": 180,
-   "sem_cota_ate": "2026-11-27T03:24"
+   "sem_cota_ate": "2026-11-27T03:24",
+   "cookies_mortos_ate": "<SEGREDO_REMOVIDO>"
   },
   {
    "email": "fabiovideoseducativos@gmail.com",

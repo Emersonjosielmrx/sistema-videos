@@ -448,3 +448,9 @@ STATUS: REVISAR - Recap longo com alimentador parado no PC1 e GPUs sem conta ver
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Aguardar a rotação/renovação de cotas de contas verificadas no sistema Veo e verificar o status do alimentador de longos no PC1.
 - Estado: PRECISA REVISÃO
 STATUS: REVISAR - Recap longo com 25 de 25 GPUs sem conta verificada e alimentador inativo; verificar cotas no Veo.
+
+## 20261127_0000 — Recap longo: alimentador (cliente.py alimentar) não está rodando no PC1
+- Motivo / O que achei: O monitor de saúde indica que o alimentador de longos (`cliente.py alimentar`) não está rodando no PC1, e a tarefa agendada `RecapAlimentar` registrou código de saída 2147946720 (ou equivalente a estado inativo/falha de execução).
+- Causa provável: Processo do alimentador de longos parado no PC1 ou necessidade de religamento da rotina de alimentação de recap longo.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Religar o alimentador de longos no PC1 via comando padrão (`python bin/cliente.py alimentar` ou rotina equivalente) conforme solicitado na chamada do vigia.
+- Estado: PRECISA REVISÃO
