@@ -490,3 +490,8 @@ STATUS: REVISAR - Recap longo com 25/25 GPUs sem conta verificada; aguardar reno
 - Causa prov�vel: Instabilidade tempor�ria no proxy webshare ou timeout de rede na VPS.
 - CONSERTO PROPOSTO: nenhum (falha transit�ria de proxy/rede resolvida automaticamente pelo retry).
 - Estado: NADA A FAZER
+## 20261127_2335 � Vendas que Escalam falhou por timeout ao abrir o YouTube Studio para upload
+- Motivo / O que achei (trecho de log): [2026-11-27 23:32:15] Vendas que Escalam: n�o subiu sem-obra-53a51c_cap1_20261120 (erro: Error: Page.goto: net::ERR_TIMED_OUT at https://studio.youtube.com/channel/UCdKG9omHV8Nf_DpKk-M_AMg/videos/upload?d=ud&hl=pt-BR)
+- Causa prov�vel: Lentid�o ou instabilidade moment�nea na conex�o/rede ao carregar a p�gina do YouTube Studio para upload do v�deo.
+- CONSERTO PROPOSTO: Nenhum (Modo S� Aviso - aguardar pr�xima execu��o do parceiro_diario.py ou verificar estabilidade da rede se persistir).
+- Estado: NADA A FAZER

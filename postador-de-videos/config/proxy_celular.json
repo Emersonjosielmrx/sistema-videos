@@ -3,9 +3,16 @@
  "mb_dia": 300,
  "aceitar_igual_casa": false,
  "estado": {
-  "atualizado": "2026-11-27T19:59:00",
-  "celular_alcancavel": false,
-  "tunel": false,
+  "atualizado": "2026-11-27T23:59:00",
+  "celular_alcancavel": true,
+  "tunel": true,
+  "ip": "191.36.137.38",
+  "ip_casa": "191.36.137.38",
+  "igual_casa": true,
+  "operadora": "Alternativa Telecom",
+  "movel": false,
+  "pais": "BR",
+  "cidade": "Paragominas",
   "mb_hoje": 0
  },
  "uso_mb": {}

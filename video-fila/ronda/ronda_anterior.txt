@@ -1,23 +1,27 @@
-RONDA AUTOMATICA 27/11 18:20 (PC1)
+RONDA AUTOMATICA 27/11 22:20 (PC1)
 ########## PC1
-RONDA PC1 27/11 18:20
-[MAQUINA] D livre 22,1 GB | C livre 16,1 GB | RAM livre 10,2 GB | commit 8,4 GB | CPU 28%
+RONDA PC1 27/11 22:20
+[MAQUINA] D livre 18,6 GB | C livre 16 GB | RAM livre 9,7 GB | commit 8,8 GB | CPU 21%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 6
+[TAREFAS COM ERRO] 7
   - BuscarFontesCampeas (0x1, 27 06:10)
   - GarimparFontes (0x1, 27 05:40)
   - GarimparParecidos (0x1, 27 06:20)
   - JanelaMudancaMadrugada (0x41306, 27 03:10)
-  - MSEnergy_VigiaClientes (0x1, 27 18:15)
-  - ShortsNoSTI (0x1, 27 18:16)
+  - MSEnergy_VigiaClientes (0x1, 27 22:15)
+  - PlantaoTelegram (0x1, 27 22:19)
+  - ShortsNoSTI (0x1, 27 22:16)
 [LACOS] todos vivos
-[PONTES KAGGLE/COLAB] 59 portas abertas
+[PONTES KAGGLE/COLAB] 58 portas abertas
 [CELULARES adb] 2 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.92.36.34:5555
-[ALARMES DO VIGIA] (relatorio de 10 min atras)
+[ALARMES DO VIGIA] (relatorio de 9 min atras)
   - facebook: mesmo erro 6x em 6 h
-  - Carrossel MS Energy: sem sucesso há 164 h (limite 60 h)
-  - Longos no YouTube: sem sucesso há 38 h (limite 36 h)
+  - Facebook Comédia Noturna: 0 Reels hoje
+  - Carrossel MS Energy: sem sucesso há 168 h (limite 60 h)
+  - Longos no YouTube: sem sucesso há 42 h (limite 36 h)
+  - Instagram (contas de vídeo): sem sucesso há 16 h (limite 14 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+  - celulares: nenhum post OK há 3 h+ (10 ok de 26 hoje, 11 na fila)
   - celulares: 3 celulares fora do adb
   - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
   - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
@@ -26,65 +30,59 @@ RONDA PC1 27/11 18:20
   - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
   - [ronda] asusx: [asusx] !! FORA
 [RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (9,3 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] antecipar_agendados_tarefa.log (2), tiktok_notebooks.log (2), aprendizado.log (1), gemini_aprendiz.log (2), estoque_reels.log (1), vigia_clientes.log (6)
-[FACEBOOK] pontes: 18558 ok, 18569 ok / travas de PID morto: 0 / bloqueios 368 em 2h: 0
+[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (13,3 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] estoque_reels.log (1), vigia_clientes.log (6)
+[FACEBOOK] pontes: 18558 !! CAIDA, 18569 !! CAIDA / travas de PID morto: 0 / bloqueios 368 em 2h: 0
 [CELULARES] posts PRONTO hoje: 8 / ultimo: 27/11 15:24:34 20261128_2105_A2_el2042: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 34 / TikTok OK hoje: 102
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 35 / TikTok OK hoje: 114
 [INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 06:01
   !! Instagram sem post OK ha mais de 6 h
 [TAREFAS ATRASADAS] nenhuma
 [INVENTARIO] 255 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] 
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2409->8077
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 0 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2409->8077
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
 [KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 2/31 | balanco de 0.2 h atras | canais sem estoque: 9
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
 [CATALOGO] 41 projetos (ativo 32, parado 4, parcial 4, teste 1) | 217 tarefas com dono | 24 avulsas | sem dono: 0 | avisos: 0
-[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 4h, empresas 0h, produtos 2h, ia-midia 0h, manhwa-react 1h, celulares 2h
+[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 1h, empresas 0h, produtos 6h, ia-midia 2h, manhwa-react 1h, celulares 6h
   !! anuncios sem nenhum mp4
-[UNIFICACAO] 2 dia(s) de uso real, 25485 processos | vivos reais 849 | mortos candidatos 2206 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
+[UNIFICACAO] 2 dia(s) de uso real, 29165 processos | vivos reais 856 | mortos candidatos 2205 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
 [O QUE ESTA SEGURADO] PROJETO 1, CANAL 19 (python D:\sistema\catalogo\motivos.py)
 [MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
 [COMUM] 71 arquivos compartilhados, 167 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
 [asusx] !! FORA
-[hp] disco 40% | carga 0.13 | ram livre 6676 MB | ligado desde 2026-11-25 23:08:54
-  temperatura max 46 C
-[sti] disco 82% | carga 0.78 | ram livre 6321 MB | ligado desde 2026-11-26 00:20:13
+[hp] disco 40% | carga 0.16 | ram livre 6674 MB | ligado desde 2026-11-25 23:08:53
   temperatura max 47 C
-[x200ma] disco 15% | carga 0.11 | ram livre 1286 MB | ligado desde 2026-11-25 20:10:43
-  temperatura max 45 C
+[sti] disco 82% | carga 0.02 | ram livre 6293 MB | ligado desde 2026-11-26 00:20:13
+  temperatura max 42 C
+[x200ma] disco 16% | carga 0.38 | ram livre 1248 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 46 C
 [itau] !! FORA
-[asus] disco 9% | carga 0.01 | ram livre 1035 MB | ligado desde 2026-11-27 12:12:25
-  temperatura max 75 C
+[asus] disco 9% | carga 0.00 | ram livre 1028 MB | ligado desde 2026-11-27 12:12:25
+  temperatura max 72 C
 ########## VPS
-[hermes-prod] disco 52% | ram livre 5245 MB
+[hermes-prod] disco 52% | ram livre 5224 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] disco 36% | ram livre 16982 MB
-  !! container parou recente: evo3_evolution.1.n4kk047fblm02pzr4d0nd5lvm Exited (137) 21 minutes ago
-  !! container parou recente: evo3_evolution.1.yofpvj29w9g53uy8i2zjnr55j Exited (137) 6 hours ago
-  !! container parou recente: evo3_evolution.1.goyxwxfiyfq1piobabe1lo9np Exited (137) 12 hours ago
-  !! container parou recente: evo3_evolution.1.1mshaf3idwp0hed6ik5xa5lvk Exited (137) 18 hours ago
-[hermes-bloqueio] disco 86% | ram livre 5220 MB
+[hermes-staging] !! NAO RESPONDE
+[hermes-bloqueio] disco 86% | ram livre 5373 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 4 hours ago
+  !! container parou recente: redroid Exited (137) 2 hours ago
   !! VPS hermes-bloqueio DISCO ACIMA DE 85% (86%)
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 32.0 C
-[s20ultra] ok | bateria 100% FULL | 30.6 C
-[a2] ok | bateria 100% FULL | 30.2 C
+[s20] ok | bateria 100% FULL | 31.6 C
+[s20ultra] ok | bateria 100% FULL | 30.2 C
+[a2] ok | bateria 100% FULL | 30.3 C
 [a3] !! sem ssh
 [g20] !! sem ssh
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
-[IA 1min] 1min 8/19 (atualizado ha 5 min)
-[IA Antigravity] Opus 5.5 1/4 (atualizado ha 5 min)
-[IA Claude] 5 h; Semana (atualizado ha 5 min)
-  !! IA Claude: nenhuma conta com credito
-[IA Gemini] Gemini 17/127 (atualizado ha 5 min)
-[IA Kiro] Kiro 31/31 (atualizado ha 5 min)
-[IA OpenRouter] OpenRouter 4/4 (atualizado ha 5 min)
+[IA 1min] 1min 8/19 (atualizado ha 2 min)
+[IA Antigravity] Opus 5.5 1/4 (atualizado ha 2 min)
+[IA Gemini] Gemini 20/127 (atualizado ha 2 min)
+[IA Kiro] Kiro 31/31 (atualizado ha 2 min)
+[IA OpenRouter] OpenRouter 4/4 (atualizado ha 2 min)
 [VIGIAS DA OMARCHY]
   ronda-omarchy ok
   sentinela-continue ok
@@ -94,29 +92,28 @@ RONDA PC1 27/11 18:20
   omniag-contas-barra ok
   perfis-dock-sync ok
 [CHATS HUMANOS ultimas 2 h]
-15:35 | Meet travando
-   dona: veja se nao  o meu dns
-   chat: Não é o DNS. Testei, e ele responde rápido:  | Servidor DNS | Tempo de resposta | |---|---| | Roteador (o que o notebook usa) | 4 a 14 ms | | Quad9 | 
-15:32 | Desempenho dos três sistemas
-   dona: nao e o etste de chate e o teste como pc worker  ele bai processar videos etc e abrir chomes
-   chat: Entendido: o que vale é o teste de worker, que já foi feito. Vou parar o teste de chats e soltar a fábrica do Fish.
-15:28 | Webshare e proxies gratuitos
-   dona: ccollab so deve usar a gratsi,, postador de videos so rpa usatr as gratsi b, so o kangel deve usar as pagas em resumo ja deixe cucuetado ha naos er qu
-   chat: Os IPs pagos estão trancados para uso só do Kaggle, e o resto do sistema sai pelos grátis: primeiro as listas do GitHub e, se falharem, o Webshare grá
-15:23 | Chat de projetos ativos
-   dona: faca logo essas duas que seria so mes 12
-   chat: A produção de vídeo está rodando de novo. O que tinha parado era o PC2, que ficou fora da rede e voltou a fazer Shorts às 14h53.  **Máquinas:** - **Ti
-15:22 | Conta Kangle
-   dona: ?
-   chat: A conta nova está criada, e desta vez no **IP fixo limpo só dela** (193.176.99.159) — o esquema que deve resolver o ban.  **Nova conta (IP dedicado):*
-15:14 | Remover elementos repetidos
-   dona: o collab fica vico emsmo se apcabem seus toeks a utomacoa ja faz isso certo ?
-   chat: Você está certo em parte. **O Colab fica vivo sozinho**, porque a automação roda aqui no Omarchy, fora de qualquer chat. Mas tem dois buracos que deix
-14:59 | teste de modelos
-   dona: comoe sta indo os testes ?
-   chat: No momento não há nenhum teste rodando. As duas rodadas terminaram, com uma exceção: o **Flint** ficou sem nota no teste difícil, porque eu interrompi
-14:56 | Vozes de personagens para vídeos
-   dona: [Request interrupted by user]
-   chat: Sim, pode formatar a asusx.  - Não tem nada rodando nela. A parte 29 terminou e subiu às 14h40. - O backup no Drive terminou às 14h43, na pasta `backu
-(omarchy.txt gravado 27/11 15:36)
-  !! parte da Omarchy velha ha 165 min (Omarchy desligada ou timer ronda-omarchy parado)
+21:57 | Conta Kangle
+   dona: [Request interrupted by user for tool use]
+   chat: O criador completo **já está pronto e funcionando no PC1** — com criação de conta (`conta_completa.py`) E verificação de telefone (`tel_verificar.py`)
+21:57 | Vozes de personagens para vídeos
+   dona: ok ja deixe ela pra afzer os proximos renders, a parte que eiram pronats qeu eu nao vi achoq eu de 26 em diantee elas representam qual tempod o video 
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+21:57 | HD mecânico nos PCs
+   dona: qual seria hoje o meljro dos pcs da rede rpa colcoar mais um hd soq eu mecannico ccomo o asus ja tem ? o pc 2 e aus nao da seria ou o itau ou sti ou h
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+21:57 | Remover elementos repetidos
+   dona: loguei na emersonjosielmrx ja via saundo essa que e abre  aproxima
+   chat: Fechei o Chrome e apaguei o perfil. **Não use a `emersonjosielmrx` no Colab.**  **Por quê:** essa conta Google é a dona de uma **conta do Kaggle ainda
+21:57 | Chat de projetos ativos
+   dona: ok tem algum conta que de rpa aproveitar que sobou alem da de fial de testa qeue sta rodanndo cconfira com cuidado
+   chat: Conferi as 87 contas do Kaggle que estão na central do servidor hermes-prod. Nenhuma está viva com segurança para aproveitar. Fiz isso só lendo os reg
+21:57 | Barra do orrchy
+   dona: falta adiconnar as areas de trabalho como la so rtme 1 e a o visal aidna e muito diferente
+   chat: As 2 horas de trabalho na barra terminaram, e o agendamento está todo apagado.  **O que ficou igual ao Omarchy:** - **Esquerda:** menu, áreas de traba
+21:57 | Desempenho dos três sistemas
+   dona: ha nao ser que seja rpa moitorrar os 2 pode ser por 24h de um eme um nmuieto e depois mdua rpa trinta soziho
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] [429]: This request would exceed your account's rate limit. Please try again later. (rese
+21:57 | Webshare e proxies gratuitos
+   dona: refacca etao de maieira masi confiavel masi nao so isos com um etste osso usado coais dos chats aqui emsmo maisdificeis ccom muio cconestxto simulando
+   chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
+(omarchy.txt gravado 27/11 22:00)

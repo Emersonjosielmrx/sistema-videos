@@ -1839,3 +1839,8 @@
 - 2026-11-27 15:51 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) EVIDÊNCIA: A → [20261127_155042_e240.md](20261127_155042_e240.md)
 - 2026-11-27 17:33 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] asusx: [asusx] !! FORA EVIDÊNCIA: Achado pela RONDA GERAL (D:\video-fila\ → [20261127_173041_8c74.md](20261127_173041_8c74.md)
 - 2026-11-27 19:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20) EVIDÊNCIA: Achado pela  → [20261127_193102_3a03.md](20261127_193102_3a03.md)
+- 2026-11-27 20:01 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): Instagram (contas de vídeo): sem sucesso há 14 h (limite 14 h) EVIDÊNCIA: D:\post → [20261127_200043_8cef.md](20261127_200043_8cef.md)
+- 2026-11-27 21:02 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): facebook: mesmo erro 6x em 6 h EVIDÊNCIA: logs\facebook_20261127.log: upload não  → [20261127_210043_6373.md](20261127_210043_6373.md)
+- 2026-11-27 21:52 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) EVIDÊNCIA: A → [20261127_215044_14a0.md](20261127_215044_14a0.md)
+- 2026-11-27 22:02 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): Facebook Comédia Noturna: 0 Reels hoje EVIDÊNCIA: logs\facebook_paginas.json sem  → [20261127_220042_a376.md](20261127_220042_a376.md)
+- 2026-11-27 22:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 27 22:19) EVIDÊNCIA: Achado pela  → [20261127_223045_6e40.md](20261127_223045_6e40.md)

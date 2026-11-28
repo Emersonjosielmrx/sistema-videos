@@ -1,28 +1,24 @@
-# Vigilância 24 h — 2026-11-27T19:50:40
+# Vigilância 24 h — 2026-11-27T23:50:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (13)
+## Alarmes desta volta (14)
 - facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 165 h (limite 60 h)
-- Longos no YouTube: sem sucesso há 40 h (limite 36 h)
+- Facebook Comédia Noturna: 0 Reels hoje
+- Carrossel MS Energy: sem sucesso há 169 h (limite 60 h)
+- Longos no YouTube: sem sucesso há 44 h (limite 36 h)
+- Instagram (contas de vídeo): sem sucesso há 18 h (limite 14 h)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- celulares: nenhum post OK há 3 h+ (10 ok de 26 hoje, 11 na fila)
 - celulares: 3 celulares fora do adb
 - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
-- [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20)
 - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
 - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
 - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
 - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
 - [ronda] asusx: [asusx] !! FORA
+- [ronda] x200ma: !! RAM LIVRE ABAIXO DE 500 MB (376 MB)
 
-## Casos abertos (201)
-- [duplicado] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal codigobilhao3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (196)
 - [duplicado] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal mundoquenaoexiste com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal esportenoturno com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -221,11 +217,6 @@
 - [consertar] [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20) (-)
 
 ## Últimos fechados
-- [falso] [ronda] TAREFAS COM ERRO: EscadaCelulares (0xFFFFFFFF, 27 03:10) — - / -
-- [falso] [ronda] TAREFAS COM ERRO: RecapCentralCasa (0xFFFFFFFF, 27 03:12) — - / -
-- [falso] [ronda] TAREFAS COM ERRO: VigiaChats (0x41306, 27 06:10) — - / -
-- [falso] [ronda] TAREFAS COM ERRO: LimpezaChrome (0x41306, 27 06:05) — - / -
-- [falso] [ronda] TAREFAS COM ERRO: PrioridadeVSCode (0x41306, 27 06:12) — - / -
 - [falso] [ronda] TAREFAS COM ERRO: VigiaMemoria (0x41306, 27 06:13) — - / -
 - [falso] [ronda] asusx: [asusx] !! FORA — - / -
 - [falso] [ronda] sti: [sti] !! FORA — - / -
@@ -236,6 +227,11 @@
 - [falso] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): ProxiesGratisTeste — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
 - [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
+- [falso] Instagram (contas de vídeo): sem sucesso há 14 h (limite 14 h) — - / -
+- [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
+- [falso] Facebook Comédia Noturna: 0 Reels hoje — - / -
+- [falso] [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 27 22:19) — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 27 casos, nota 11% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/14 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0)

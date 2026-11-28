@@ -1,29 +1,29 @@
-# Os nossos Shorts medidos — 27/11 19:28
+# Os nossos Shorts medidos — 27/11 23:26
 
-Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 321, não elegíveis 414, sem dado 25. Elegível = o feed deu o lote de teste (Fable ER_01).
+Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 319, não elegíveis 416, sem dado 25. Elegível = o feed deu o lote de teste (Fable ER_01).
 
 ## 1. O feed mostrou x não mostrou
 
 ### Geral
 
-| medida | elegível (n 321) | não elegível (n 414) |
+| medida | elegível (n 319) | não elegível (n 416) |
 |---|---|---|
-| dur | 41.60 | 45.65 |
+| dur | 41.30 | 45.65 |
 | cortes_s | 0.51 | 0.44 |
 | cortes_2s | 1.00 | 1.00 |
 | primeiro_corte | 1.83 | 1.57 |
-| maior_plano_s | 6.33 | 6.70 |
+| maior_plano_s | 6.33 | 6.71 |
 | vol_2s | -16.40 | -16.60 |
 | vol_dif | 0.40 | 0.30 |
 | silencio_ini_s | 0.00 | 0.00 |
-| pct_media | 53.95 | 53.88 |
+| pct_media | 53.95 | 54.12 |
 
 ### Elegível (A) x não elegível (B) — no MESMO canal (23 canais)
 
 | medida | mediana da diferença (A − B) | canais A maior / A menor |
 |---|---|---|
 | dur | +0.25 | 12 / 10 |
-| cortes_s | +0.07 | 17 / 6 |
+| cortes_s | +0.08 | 17 / 6 |
 | cortes_2s | +0.00 | 7 / 4 |
 | primeiro_corte | -0.23 | 10 / 13 |
 | maior_plano_s | -0.44 | 8 / 14 |
@@ -36,17 +36,17 @@ Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 321, não elegív
 
 ### Geral
 
-| medida | 2º lote (n 114) | 1º lote (n 207) |
+| medida | 2º lote (n 113) | 1º lote (n 206) |
 |---|---|---|
-| dur | 27.55 | 54.30 |
+| dur | 26.80 | 53.10 |
 | cortes_s | 0.41 | 0.54 |
 | cortes_2s | 0.00 | 1.00 |
-| primeiro_corte | 1.69 | 1.87 |
-| maior_plano_s | 7.04 | 6.00 |
-| vol_2s | -16.45 | -16.40 |
-| vol_dif | 0.45 | 0.40 |
+| primeiro_corte | 1.67 | 1.89 |
+| maior_plano_s | 7.00 | 5.96 |
+| vol_2s | -16.50 | -16.40 |
+| vol_dif | 0.50 | 0.40 |
 | silencio_ini_s | 0.00 | 0.00 |
-| pct_media | 82.82 | 44.14 |
+| pct_media | 82.72 | 43.96 |
 
 ### 2º lote (A) x 1º lote (B) — no MESMO canal (19 canais)
 
@@ -68,7 +68,7 @@ Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 321, não elegív
 |---|---|---|---|
 | 0–20 s | 64 | 47% | 99.17 |
 | 20–30 s | 166 | 43% | 68.8 |
-| 30–45 s | 165 | 49% | 55.61 |
-| 45–60 s | 106 | 40% | 46.42 |
-| 60–90 s | 149 | 47% | 42.614999999999995 |
-| 90–999 s | 110 | 34% | 32.95 |
+| 30–45 s | 165 | 49% | 53.95 |
+| 45–60 s | 106 | 40% | 46.78 |
+| 60–90 s | 149 | 47% | 41.730000000000004 |
+| 90–999 s | 110 | 33% | 32.425 |

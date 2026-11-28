@@ -1,5 +1,10 @@
 # Incidente: 14 contas do Kaggle banidas em 02/11/2026 — o que aconteceu e a regra que não se quebra
 
+> **27/11/2026 - 4 banimentos (02, 09, 14 e 27/11).** O 4o NAO foi cruzamento de IP: foi a central testando uma conta
+> atras da outra quando cada uma dava 401 (a trava de 1 por volta so contava sucesso). Regra nova: 1 TENTATIVA por volta;
+> recusa em 2+ contas no dia = pausa e avisa. Ver a secao "4o banimento" no fim.
+
+
 Leia antes de mexer em QUALQUER conta (Kaggle, Google, TikTok, Instagram, Webshare, qualquer pool de contas).
 
 ## A regra (dona, desde 29/10, repetida em 02/11 e 03/11)
@@ -177,3 +182,20 @@ central.log), sem falar com o Kaggle por nenhuma conta.
 - Precaução extra (não foi causa): vps_central._escolher dá 2 h de descanso por conta quando há outra livre
   (KAGGLE_DESCANSO_MIN=0 desliga). A central já escolhia a conta usada há mais tempo (rodízio).
 - "Até agora" = 3 dias de observação. Acompanhar: banimento aparece como 401 "supply KAGGLE_API_TOKEN" no central.log.
+
+## 4o banimento - 27/11/2026 (analise 27/11 22h, SO LEITURA de arquivos da central; nada falou com o Kaggle)
+**O que se viu (central.log da hermes-prod):** os 401 vieram em ONDA ao longo do dia 27/11: 01:08 (3 contas), 01:58 (5),
+13:14 (3), 14:05 (5) e 20:58->21:03 (10 contas em 30 s: emersonjosiel2036, renatasouza78947, paulocosta72168,
+brunoteixeir12646, alinesouza9554, rezaulkarimul355, aulasrevolution, filmescomia00, carlasouza20613, marinalima89421).
+Antes disso 16 contas ja tinham 401 repetido (paradas de vez). Ate 20:58: 10 contas ok, 19 GPUs.
+**IP: nenhum cruzamento.** ip_uso.json: cada uma das 10 falou pelo IP proprio (rnprmtfo-4, 15, 51, 53, 54, 79, 81, 83, 88,
+100), nenhum IP com 2 contas. A trava _guarda_ip funcionou. Inclui contas Proton do criador (bruno, carla, marina...) que ate
+19/11 nunca tinham caido.
+**FALHA ACHADA (causa provavel do espalhamento):** em vps_central.py, o laco de lancamento tem KAGGLE_LANCA_POR_VOLTA=1, mas
+a contagem `lancadas` so sobe quando o lancamento DA CERTO. Quando a conta escolhida da 401 em _medir_uma, a funcao devolve
+None e o laco pega a PROXIMA conta na mesma volta, e a proxima... = varredura de todas as contas em segundos (o padrao "um
+dono, muitas contas" que causou o 1o e o 2o banimento). Cada conta nova banida dispara a varredura nas outras.
+**Conserto proposto (NAO aplicado, VPS de producao, precisa do OK da dona):** depois de 1 resposta 401 numa volta, parar de
+lancar naquela volta (contar a tentativa, nao so o sucesso); e com 2+ contas com 401 no mesmo dia, pausar a central e avisar.
+**Para a dona:** conferir no site (pela saida da propria conta, nunca de casa) 1 conta, ex. rezaulkarimul355; se aparecer
+"suspended or banned", tratar as 26 como mortas e so criar novas pelo criador (Proton, IP novo) depois do conserto.
