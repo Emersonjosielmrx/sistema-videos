@@ -37,8 +37,8 @@
    "implementador": [
     "gemini-4-argon",
     "cw/claude-sonnet-5-5",
-    "ag-hydrogen",
     "agy/gemini-3.8-flash-high",
+    "ag-hydrogen",
     "argon-pro"
    ]
   },
@@ -78,5 +78,6 @@
  "_fable_30out": "30/10 00h (Fable): agy/gemini-3.8-flash-high no FIM de cada papel do conjunto argon — só entra quando Argon, Sonnet web e Argon Pro falharem (29/10 23:59 os 3 falharam e os Cortes ficaram sem decisão). Ordem da dona mantida. Desfazer: modelos_central.json.antes_fallback_30out",
  "kiro_liberado": true,
  "_dona_30out": "dona 30/10 09:40: 'não adianta usar Gemini 3.1 como failback do Argon pois usam as mesmas cotas; o Argon, o Sonnet web, aí pode colocar o Kiro Sonnet 4.5, depois o Gemini 3.8 e o Argon Pro de volta' -> todos os papéis do conjunto argon nessa ordem; kiro_liberado=true (o central e as linhas deixam o Kiro passar). Antes: modelos_central.json.antes_kiro_30out",
- "_hydrogen_18nov": "18/11 dona: Hydrogen (ag-hydrogen) logo ANTES do Gemini 3.8 só no papel implementador (conserto de código curto: 37/37 x 22/37 do 3.8). Argon/Sonnet seguem na frente (16/16 na tarefa difícil, onde o Hydrogen tirou 8/16). Antes: modelos_central.json.bak-antes-hydrogen-18nov"
+ "_hydrogen_18nov": "18/11 dona: Hydrogen (ag-hydrogen) logo ANTES do Gemini 3.8 só no papel implementador (conserto de código curto: 37/37 x 22/37 do 3.8). Argon/Sonnet seguem na frente (16/16 na tarefa difícil, onde o Hydrogen tirou 8/16). Antes: modelos_central.json.bak-antes-hydrogen-18nov",
+ "_hydrogen_28nov": "28/11 (relatorio 27/11): Hydrogen entregou 0/14 na caixa do recap (429 'credentials cooling down') x Gemini 3.8 9/11 -> Hydrogen passa para DEPOIS do Gemini 3.8 no implementador (continua na lista). Antes: modelos_central.json.bak_28nov_hydrogen"
 }

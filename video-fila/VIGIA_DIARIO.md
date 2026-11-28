@@ -495,3 +495,8 @@ STATUS: REVISAR - Recap longo com 25/25 GPUs sem conta verificada; aguardar reno
 - Causa prov�vel: Lentid�o ou instabilidade moment�nea na conex�o/rede ao carregar a p�gina do YouTube Studio para upload do v�deo.
 - CONSERTO PROPOSTO: Nenhum (Modo S� Aviso - aguardar pr�xima execu��o do parceiro_diario.py ou verificar estabilidade da rede se persistir).
 - Estado: NADA A FAZER
+## 20261128_0335 � Mist�rios Noturnos: timeout no YouTube Studio ao tentar postar sem-obra-12390e_cap1_20261127
+- Motivo / O que achei (`parceiro_postar.log`): `[2026-11-28 03:17:34] Mist�rios Noturnos: n�o subiu sem-obra-12390e_cap1_20261127 (erro: Error: Page.goto: net::ERR_TIMED_OUT at https://studio.youtube.com/channel/UCJTNPiJJax_YdwqdKVb6r8w/videos/upload?d=ud&hl=pt-BR)`
+- Causa prov�vel: Instabilidade de rede ou lentid�o tempor�ria no carregamento da p�gina de upload do YouTube Studio (`ERR_TIMED_OUT`).
+- CONSERTO PROPOSTO: Nenhum c�digo precisa ser alterado pois o erro de rede/timeout no YouTube Studio � transit�rio e o script j� trata ou pula na pr�xima rodada; se persistir, reexecutar manualmente com `D:\veo\venv\Scripts\python.exe bin\parceiro_diario.py postar`.
+- Estado: NADA A FAZER

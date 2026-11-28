@@ -349,3 +349,5 @@ Medido: 1.645 Shorts de parceiro PRONTOS; 377 presos em 17 canais travados pelo 
 - 27/11 17h45: SincronizarPoolKaggle acao refeita (wscript sem vbs); KaggleSaudeContas_0800/2130 e IObit desligadas (programa nao existe; log em D:\sistema\mapa\tarefas_corrigidas.log); venv_imgutils no Drive. 
 - 27/11 18h: documento D:\limpeza_c\EM_OBSERVACAO.md + lista D:\sistema\mapa\EM_OBSERVACAO_lista.md.  
 - 27/11 19h30: videos-comentarios producao.py usa o yt-dlp do Python principal (o do Python313 do usuario perdeu yt_dlp em 25/11); .bak_27nov_ytdlp.  
+- 28/11 00h30: ANALISE_CANAIS_PUNIDOS_28NOV.md - so_nobre nunca aplicado de verdade (politica.py empurra p/ 1o slot do dia seguinte; conserto pronto em D:\sistema\mapa\politica_nobre_PRONTO.py, aplicar 10-17h); canais punidos com Shorts agendados ate fev/2027.  
+- 28/11 00h30: Kaggle central 1 tentativa/volta + pausa 401; TikTok 3 contas pausadas; Hydrogen depois do Gemini 3.8; AplicarNobre28nov 10:05. 

@@ -1,81 +1,83 @@
-RONDA AUTOMATICA 27/11 22:20 (PC1)
+RONDA AUTOMATICA 28/11 02:20 (PC1)
 ########## PC1
-RONDA PC1 27/11 22:20
-[MAQUINA] D livre 18,6 GB | C livre 16 GB | RAM livre 9,7 GB | commit 8,8 GB | CPU 21%
+RONDA PC1 28/11 02:20
+[MAQUINA] D livre 17,5 GB | C livre 16 GB | RAM livre 9,4 GB | commit 8,9 GB | CPU 35%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 7
+[TAREFAS COM ERRO] 6
   - BuscarFontesCampeas (0x1, 27 06:10)
   - GarimparFontes (0x1, 27 05:40)
   - GarimparParecidos (0x1, 27 06:20)
   - JanelaMudancaMadrugada (0x41306, 27 03:10)
-  - MSEnergy_VigiaClientes (0x1, 27 22:15)
-  - PlantaoTelegram (0x1, 27 22:19)
-  - ShortsNoSTI (0x1, 27 22:16)
+  - MSEnergy_VigiaClientes (0x1, 28 02:15)
+  - ShortsNoSTI (0x1, 28 02:16)
 [LACOS] todos vivos
 [PONTES KAGGLE/COLAB] 58 portas abertas
 [CELULARES adb] 2 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.92.36.34:5555
 [ALARMES DO VIGIA] (relatorio de 9 min atras)
   - facebook: mesmo erro 6x em 6 h
-  - Facebook Comédia Noturna: 0 Reels hoje
-  - Carrossel MS Energy: sem sucesso há 168 h (limite 60 h)
-  - Longos no YouTube: sem sucesso há 42 h (limite 36 h)
-  - Instagram (contas de vídeo): sem sucesso há 16 h (limite 14 h)
+  - Carrossel MS Energy: sem sucesso há 172 h (limite 60 h)
+  - Longos no YouTube: sem sucesso há 46 h (limite 36 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-  - celulares: nenhum post OK há 3 h+ (10 ok de 26 hoje, 11 na fila)
   - celulares: 3 celulares fora do adb
   - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
   - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
   - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
   - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
+  - [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): AplicarNobre28nov
   - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
   - [ronda] asusx: [asusx] !! FORA
 [RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (13,3 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] estoque_reels.log (1), vigia_clientes.log (6)
+[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (17,3 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] vigia_clientes.log (6), lote_noturno.log (1)
 [FACEBOOK] pontes: 18558 !! CAIDA, 18569 !! CAIDA / travas de PID morto: 0 / bloqueios 368 em 2h: 0
-[CELULARES] posts PRONTO hoje: 8 / ultimo: 27/11 15:24:34 20261128_2105_A2_el2042: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 35 / TikTok OK hoje: 114
-[INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 06:01
-  !! Instagram sem post OK ha mais de 6 h
+[CELULARES] posts PRONTO hoje: 7 / ultimo: 28/11 02:15:18 20261129_1800_A2_el2042: PRONTO 
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 21 / TikTok OK hoje: 20
+[INSTAGRAM] OK hoje: 4 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 00:28
 [TAREFAS ATRASADAS] nenhuma
-[INVENTARIO] 255 tarefas / novas: 0 / sumiram: 0
+[INVENTARIO] 256 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] 
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 0 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, inovare manhwa br 2409->8077
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
-[KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 2/31 | balanco de 0.2 h atras | canais sem estoque: 9
+  !! VIEWS DESABARARAM: Mistérios Noturnos 9337->1768 (ganho do dia anterior -> ultimas 24 h)
+[KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 1/22 | balanco de 0.2 h atras | canais sem estoque: 2
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
-[CATALOGO] 41 projetos (ativo 32, parado 4, parcial 4, teste 1) | 217 tarefas com dono | 24 avulsas | sem dono: 0 | avisos: 0
-[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 1h, empresas 0h, produtos 6h, ia-midia 2h, manhwa-react 1h, celulares 6h
+[CATALOGO] 41 projetos (ativo 32, parado 4, parcial 4, teste 1) | 217 tarefas com dono | 24 avulsas | sem dono: 1 | avisos: 1
+  !! AVISO catalogo: TAREFA SEM DONO no catalogo (ligada): AplicarNobre28nov
+[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 6h, empresas 1h, produtos 10h, ia-midia 0h, manhwa-react 5h, celulares 0h
   !! anuncios sem nenhum mp4
-[UNIFICACAO] 2 dia(s) de uso real, 29165 processos | vivos reais 856 | mortos candidatos 2205 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
+[UNIFICACAO] 3 dia(s) de uso real, 34414 processos | vivos reais 859 | mortos candidatos 2205 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
 [O QUE ESTA SEGURADO] PROJETO 1, CANAL 19 (python D:\sistema\catalogo\motivos.py)
 [MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
 [COMUM] 71 arquivos compartilhados, 167 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
 [asusx] !! FORA
-[hp] disco 40% | carga 0.16 | ram livre 6674 MB | ligado desde 2026-11-25 23:08:53
-  temperatura max 47 C
-[sti] disco 82% | carga 0.02 | ram livre 6293 MB | ligado desde 2026-11-26 00:20:13
-  temperatura max 42 C
-[x200ma] disco 16% | carga 0.38 | ram livre 1248 MB | ligado desde 2026-11-25 20:10:43
-  temperatura max 46 C
+[hp] disco 40% | carga 0.21 | ram livre 6664 MB | ligado desde 2026-11-25 23:08:54
+  temperatura max 53 C
+[sti] disco 82% | carga 0.15 | ram livre 6657 MB | ligado desde 2026-11-27 23:48:32
+  temperatura max 49 C
+[x200ma] disco 17% | carga 3.80 | ram livre 1284 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 58 C
 [itau] !! FORA
-[asus] disco 9% | carga 0.00 | ram livre 1028 MB | ligado desde 2026-11-27 12:12:25
-  temperatura max 72 C
+[asus] disco 9% | carga 0.01 | ram livre 1030 MB | ligado desde 2026-11-27 12:12:25
+  temperatura max 71 C
 ########## VPS
-[hermes-prod] disco 52% | ram livre 5224 MB
+[hermes-prod] disco 52% | ram livre 5249 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] !! NAO RESPONDE
-[hermes-bloqueio] disco 86% | ram livre 5373 MB
+[hermes-staging] disco 36% | ram livre 16968 MB
+  !! container parou recente: evo3_evolution.1.34f88unutqwu07ln0w3qy0pr9 Exited (137) 2 hours ago
+  !! container parou recente: evo3_evolution.1.n4kk047fblm02pzr4d0nd5lvm Exited (137) 8 hours ago
+  !! container parou recente: evo3_evolution.1.yofpvj29w9g53uy8i2zjnr55j Exited (137) 14 hours ago
+  !! container parou recente: evo3_evolution.1.goyxwxfiyfq1piobabe1lo9np Exited (137) 20 hours ago
+[hermes-bloqueio] disco 86% | ram livre 5235 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 2 hours ago
+  !! container parou recente: redroid Exited (137) 6 hours ago
   !! VPS hermes-bloqueio DISCO ACIMA DE 85% (86%)
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 31.6 C
-[s20ultra] ok | bateria 100% FULL | 30.2 C
-[a2] ok | bateria 100% FULL | 30.3 C
-[a3] !! sem ssh
+[s20] ok | bateria 100% FULL | 36.5 C
+[s20ultra] ok | bateria 100% FULL | 35.0 C
+[a2] ok | bateria 100% FULL | 36.6 C
+[a3] ok | bateria 65% DISCHARGING | 28.0 C
 [g20] !! sem ssh
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
 [IA 1min] 1min 8/19 (atualizado ha 2 min)
@@ -117,3 +119,4 @@ RONDA PC1 27/11 22:20
    dona: refacca etao de maieira masi confiavel masi nao so isos com um etste osso usado coais dos chats aqui emsmo maisdificeis ccom muio cconestxto simulando
    chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
 (omarchy.txt gravado 27/11 22:00)
+  !! parte da Omarchy velha ha 261 min (Omarchy desligada ou timer ronda-omarchy parado)

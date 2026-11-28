@@ -75,9 +75,13 @@ def medir():
         desativ = {d.get("id") for d in json.loads(Path(r"D:\postador-de-videos\config\canais_status.json").read_text(encoding="utf-8")).get("desativados") or []}
     except (OSError, ValueError):
         desativ = set()
+    try:  # 28/11: canal que o YouTube removeu (contas_travadas, tipo "removido") também não conta
+        removidos = {k for k, x in json.loads(Path(r"D:\postador-de-videos\config\contas_travadas.json").read_text(encoding="utf-8")).items() if (x or {}).get("tipo") == "removido"}
+    except (OSError, ValueError, AttributeError):
+        removidos = set()
     linhas = []
     for slug, v in cad.items():
-        if v.get("dono") in FORA or slug in desativ or desativ & set(v.get("creds") or []):
+        if v.get("dono") in FORA or slug in desativ or slug in removidos or desativ & set(v.get("creds") or []):
             continue
         c, _ = pol.achar_canal((v.get("creds") or [slug])[0])
         try:
