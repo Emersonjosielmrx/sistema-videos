@@ -1,82 +1,75 @@
-RONDA AUTOMATICA 28/11 03:20 (PC1)
+RONDA AUTOMATICA 28/11 07:20 (PC1)
 ########## PC1
-RONDA PC1 28/11 03:20
-[MAQUINA] D livre 17,3 GB | C livre 16 GB | RAM livre 10,3 GB | commit 8,9 GB | CPU 100%
+RONDA PC1 28/11 07:20
+[MAQUINA] D livre 21,9 GB | C livre 17,1 GB | RAM livre 10,4 GB | commit 9,6 GB | CPU 62%
 [POSTAGEM] ligada
-[TAREFAS COM ERRO] 6
-  - BuscarFontesCampeas (0x1, 27 06:10)
-  - GarimparFontes (0x1, 27 05:40)
-  - GarimparParecidos (0x1, 27 06:20)
+[TAREFAS COM ERRO] 3
   - JanelaMudancaMadrugada (0x41306, 27 03:10)
-  - MSEnergy_VigiaClientes (0x1, 28 03:15)
-  - ShortsNoSTI (0x1, 28 03:16)
+  - MSEnergy_VigiaClientes (0x1, 28 07:15)
+  - ShortsNoSTI (0x1, 28 07:16)
 [LACOS] todos vivos
-[PONTES KAGGLE/COLAB] 58 portas abertas
+[PONTES KAGGLE/COLAB] 62 portas abertas
 [CELULARES adb] 2 conectados (esperado 5: A2 G20 A3 S20 S20U): 100.117.134.73:5555 100.92.36.34:5555
 [ALARMES DO VIGIA] (relatorio de 9 min atras)
-  - facebook: mesmo erro 6x em 6 h
-  - Carrossel MS Energy: sem sucesso há 173 h (limite 60 h)
-  - Longos no YouTube: sem sucesso há 47 h (limite 36 h)
+  - tiktok: mesmo erro 6x em 6 h
+  - Carrossel MS Energy: sem sucesso há 177 h (limite 60 h)
+  - Longos no YouTube: sem sucesso há 51 h (limite 36 h)
   - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
   - celulares: 3 celulares fora do adb
-  - [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
-  - [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
-  - [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
   - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
+  - [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 28 06:19)
   - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
   - [ronda] asusx: [asusx] !! FORA
-[RELATORIOS] todos frescos
-[ANUNCIOS REMOTION] ultimo: advance_novoestrela_20261127_070103 (18,3 h atras)
-[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] antecipar_agendados_tarefa.log (2), vigia_clientes.log (5)
+[RELATORIOS VELHOS] Diario supervisor (7 h)
+[ANUNCIOS REMOTION] ultimo: msenergycap_20261126_184048 (0,1 h atras)
+[LOGS COM TRACEBACK no fim do log (mexidos na ultima hora)] tiktok_notebooks.log (2), gemini_aprendiz.log (1), vigia_clientes.log (5)
 [FACEBOOK] pontes: 18558 ok, 18569 ok / travas de PID morto: 0 / bloqueios 368 em 2h: 0
 [CELULARES] posts PRONTO hoje: 8 / ultimo: 28/11 02:29:59 20261129_2105_A2_el2042: PRONTO 
-[SUPERVISOR] Shorts parceiro AGENDADO hoje: 24 / TikTok OK hoje: 31
-[INSTAGRAM] OK hoje: 4 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 00:28
+[SUPERVISOR] Shorts parceiro AGENDADO hoje: 25 / TikTok OK hoje: 66
+[INSTAGRAM] OK hoje: 8 / falhas de link publico (uguu/litterbox): 0 / ultimo OK: 05:04
 [TAREFAS ATRASADAS] nenhuma
 [INVENTARIO] 256 tarefas / novas: 0 / sumiram: 0
 [HANDOFFS 24h no PC1] 
-[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945
+[VIEWS 24h x 24h antes] 42 canais medidos | coleta de 1 h atras | subiram: ManhwaReact 437->1833, Bicho Noturno 1173->2900, Manhwa Noturno 1103->2945, Anime Noturno 416->1459
   !! VIEWS DESABARARAM: Game Noturno 1025->86 (ganho do dia anterior -> ultimas 24 h)
-  !! VIEWS DESABARARAM: Mistérios Noturnos 9337->1768 (ganho do dia anterior -> ultimas 24 h)
-  !! VIEWS DESABARARAM: Clínica Lucrativa IA 833->241 (ganho do dia anterior -> ultimas 24 h)
 [KAGGLE] GPUs curto 0/43 | longo 0/11 | reserva na meta 1/22 | balanco de 0.2 h atras | canais sem estoque: 2
   !! NENHUMA GPU do Kaggle rodando
 [ESTADO] arquivos .json de controle conferidos em 15 pastas | vazios/quebrados: 0
 [CATALOGO] 41 projetos (ativo 32, parado 4, parcial 4, teste 1) | 217 tarefas com dono | 24 avulsas | sem dono: 1 | avisos: 1
   !! AVISO catalogo: TAREFA SEM DONO no catalogo (ligada): AplicarNobre28nov
-[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 1h, empresas 2h, produtos 11h, ia-midia 0h, manhwa-react 6h, celulares 0h
+[PRODUCAO DE VIDEO] (do catalogo) ok: parceiro 5h, empresas 6h, produtos 0h, ia-midia 0h, manhwa-react 1h, celulares 4h
   !! anuncios sem nenhum mp4
-[UNIFICACAO] 3 dia(s) de uso real, 35698 processos | vivos reais 859 | mortos candidatos 2205 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
+[UNIFICACAO] 3 dia(s) de uso real, 40843 processos | vivos reais 860 | mortos candidatos 2205 | python: PRONTA para trocar 65, falta no principal 1, ja no principal 35, sem uso registrado ainda 69, so manual 4
 [O QUE ESTA SEGURADO] PROJETO 1, CANAL 19 (python D:\sistema\catalogo\motivos.py)
 [MAQUINAS] 23 na lista unica | ssh config desta maquina: 22 conferidas | diferentes: 0
 [COMUM] 71 arquivos compartilhados, 167 caminhos ligados | vinculos quebrados: 0
 ########## NOTEBOOKS
 [asusx] !! FORA
-[hp] disco 40% | carga 0.23 | ram livre 6685 MB | ligado desde 2026-11-25 23:08:53
+[hp] disco 40% | carga 0.06 | ram livre 6692 MB | ligado desde 2026-11-25 23:08:54
+  temperatura max 54 C
+[sti] disco 82% | carga 0.28 | ram livre 6608 MB | ligado desde 2026-11-27 23:48:32
   temperatura max 53 C
-[sti] disco 82% | carga 0.07 | ram livre 6643 MB | ligado desde 2026-11-27 23:48:32
-  temperatura max 49 C
-[x200ma] disco 17% | carga 1.14 | ram livre 596 MB | ligado desde 2026-11-25 20:10:43
-  temperatura max 56 C
+[x200ma] disco 17% | carga 0.69 | ram livre 679 MB | ligado desde 2026-11-25 20:10:43
+  temperatura max 54 C
 [itau] !! FORA
-[asus] disco 9% | carga 0.01 | ram livre 1028 MB | ligado desde 2026-11-27 12:12:25
-  temperatura max 71 C
+[asus] disco 9% | carga 0.26 | ram livre 1030 MB | ligado desde 2026-11-27 12:12:25
+  temperatura max 72 C
 ########## VPS
-[hermes-prod] disco 52% | ram livre 5232 MB
+[hermes-prod] disco 52% | ram livre 5269 MB
   !! backup_v2.log: [backup] ERRO: container infra_postgres não encontrado
-[hermes-staging] disco 36% | ram livre 17043 MB
-  !! container parou recente: evo3_evolution.1.34f88unutqwu07ln0w3qy0pr9 Exited (137) 3 hours ago
-  !! container parou recente: evo3_evolution.1.n4kk047fblm02pzr4d0nd5lvm Exited (137) 9 hours ago
-  !! container parou recente: evo3_evolution.1.yofpvj29w9g53uy8i2zjnr55j Exited (137) 15 hours ago
-  !! container parou recente: evo3_evolution.1.goyxwxfiyfq1piobabe1lo9np Exited (137) 21 hours ago
-[hermes-bloqueio] disco 86% | ram livre 5346 MB
+[hermes-staging] disco 36% | ram livre 16999 MB
+  !! container parou recente: evo3_evolution.1.lzjmlpqc87p94x40kt9d0tv8a Exited (137) About an hour ago
+  !! container parou recente: evo3_evolution.1.34f88unutqwu07ln0w3qy0pr9 Exited (137) 7 hours ago
+  !! container parou recente: evo3_evolution.1.n4kk047fblm02pzr4d0nd5lvm Exited (137) 13 hours ago
+  !! container parou recente: evo3_evolution.1.yofpvj29w9g53uy8i2zjnr55j Exited (137) 19 hours ago
+[hermes-bloqueio] disco 86% | ram livre 5515 MB
   !! servico falho: systemd-networkd-wait-online.service
-  !! container parou recente: redroid Exited (137) 23 minutes ago
+  !! container parou recente: redroid Exited (137) 4 hours ago
   !! VPS hermes-bloqueio DISCO ACIMA DE 85% (86%)
 ########## CELULARES
-[s20] ok | bateria 100% FULL | 36.6 C
-[s20ultra] ok | bateria 100% FULL | 34.4 C
-[a2] ok | bateria 100% FULL | 35.7 C
+[s20] ok | bateria 100% FULL | 37.6 C
+[s20ultra] ok | bateria 100% FULL | 35.2 C
+[a2] ok | bateria 100% FULL | 35.4 C
 [a3] !! sem ssh
 [g20] !! sem ssh
 ########## OMARCHY (creditos das IAs, vigias, chats - gravado pela Omarchy)
@@ -119,4 +112,4 @@ RONDA PC1 28/11 03:20
    dona: refacca etao de maieira masi confiavel masi nao so isos com um etste osso usado coais dos chats aqui emsmo maisdificeis ccom muio cconestxto simulando
    chat: API Error: Request rejected (429) · [claude/claude-opus-5-5] All claude accounts have exhausted their quota (cached quota state, no upstream attempt; 
 (omarchy.txt gravado 27/11 22:00)
-  !! parte da Omarchy velha ha 321 min (Omarchy desligada ou timer ronda-omarchy parado)
+  !! parte da Omarchy velha ha 561 min (Omarchy desligada ou timer ronda-omarchy parado)

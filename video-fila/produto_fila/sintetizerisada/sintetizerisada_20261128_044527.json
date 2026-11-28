@@ -1,0 +1,157 @@
+{
+ "conta": "sintetizerisada",
+ "produto": "agenda_ia",
+ "marca": "Agenda IA",
+ "titulo": "Agenda IA: horário concorrido sem duplo agendamento",
+ "legenda": "Horário concorrido não precisa virar confusão. A Agenda IA agenda, confirma e reagenda direto no WhatsApp, sem conflito e sem duplo agendamento. Link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Horário concorrido sem confusão",
+  "pergunta_cliente": "Dois clientes querem o mesmo horário e você perde a vez?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Quando dois clientes pedem a mesma vaga, eu preciso escolher um deles e explicar a troca ao outro.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at the reception desk of a tidy, well lit Brazilian beauty salon",
+    "real_tema": "",
+    "destaques": [
+     "mesma vaga",
+     "explicar a troca"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261128_044553_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A IA mostra só os horários livres no WhatsApp, e a vaga ocupada some para os outros clientes.",
+    "visual": "veo",
+    "prompt_en": "a busy small Brazilian barbershop in the late afternoon, barber working on a client seen from the side, warm light, cinematic, realistic commercial photography",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "horários livres",
+     "vaga ocupada some"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Tem horário amanhã às 15h?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Tenho às 15h e às 16h30. Qual prefere?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode ser às 15h."
+     },
+     {
+      "de": "empresa",
+      "texto": "Agendado! Vou confirmar com você amanhã cedo."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, obrigado!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje a agenda trabalha vinte e quatro horas, sem duplo agendamento, e eu atendo com tranquilidade.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit Brazilian clinic reception, calm and confident",
+    "real_tema": "",
+    "destaques": [
+     "sem duplo agendamento",
+     "atendo com tranquilidade"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261128_044553_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261128_044553_1.png"
+   }
+  ],
+  "legenda": "Horário concorrido não precisa virar confusão. A Agenda IA agenda, confirma e reagenda direto no WhatsApp, sem conflito e sem duplo agendamento. Link no perfil.",
+  "titulo": "Agenda IA: horário concorrido sem duplo agendamento",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "conflito_de_horarios_duvida",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 25,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\sintetizerisada_20261128_044527\\dono_3.mp4",
+ "duracao_s": 32.51,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-28T05:11:00",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.6,
+   "fala": "Dois clientes querem o mesmo horário e você perde a vez?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.6,
+   "fim": 12.44,
+   "fala": "Quando dois clientes pedem a mesma vaga, eu preciso escolher um deles e explicar a troca ao outro.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.44,
+   "fim": 20.69,
+   "fala": "A IA mostra só os horários livres no WhatsApp, e a vaga ocupada some para os outros clientes.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 20.69,
+   "fim": 28.52,
+   "fala": "Hoje a agenda trabalha vinte e quatro horas, sem duplo agendamento, e eu atendo com tranquilidade.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.52,
+   "fim": 32.51,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 6.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

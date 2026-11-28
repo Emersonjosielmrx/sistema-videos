@@ -565,3 +565,9 @@ efazer_caps.log mostra histórico recente de processamento de capítulos. Nenhum
 - O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
 - CONSERTO PROPOSTO: nenhum.
 - Estado: NADA A FAZER
+## 20261128_0502 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos e normais a cada 20 minutos (último às 04:46:21 "Shorts em pt: canal parado, sai já"). O processo roda sem interrupções críticas ou travamentos de sistema.
+- O que fiz: Nenhum código alterado (Modo Só Aviso, conforme regras do dono). Registro efetuado no diário.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

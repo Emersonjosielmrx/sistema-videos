@@ -1860,3 +1860,5 @@
 - 2026-11-28 00:42 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): TikTok: sem sucesso há 9999 h (limite 8 h) EVIDÊNCIA: D:\postador-de-videos\logs\ → [20261128_001055_3d14.md](20261128_001055_3d14.md)
 - 2026-11-28 01:33 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): Aplic → [20261128_013047_3de5.md](20261128_013047_3de5.md)
 - 2026-11-28 03:03 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): facebook: mesmo erro 6x em 6 h EVIDÊNCIA: logs\facebook_20261128.log: upload não  → [20261128_030100_41ea.md](20261128_030100_41ea.md)
+- 2026-11-28 04:02 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) EVIDÊNCIA: A → [20261128_040044_1c83.md](20261128_040044_1c83.md)
+- 2026-11-28 06:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 28 06:19) EVIDÊNCIA: Achado pela  → [20261128_063044_6abf.md](20261128_063044_6abf.md)

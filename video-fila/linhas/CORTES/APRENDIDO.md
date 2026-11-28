@@ -1,4 +1,4 @@
-# Regras aprendidas — CORTES (atualizado 28/11 02:49; a sessão da linha aplica no pipeline)
+# Regras aprendidas — CORTES (atualizado 28/11 04:17; a sessão da linha aplica no pipeline)
 1. Posicionar legendas dinâmicas exclusivamente na zona segura inferior (y 150-1580), mantendo margem lateral mínima de 60px e contorno preto espesso.
 2. Garantir gancho inicial magnético começando diretamente com uma pergunta aberta, reveladora ou conflito forte nos primeiros 2 segundos, sem marcas ou círculos poluentes.
 3. Manter o movimento visual ativo acima de 25% por cena com zoom dinâmico contínuo (ken burns), pan ou cortes de transição rápidos, evitando quadros estáticos.
@@ -20,4 +20,4 @@
 19. Sincronizar estritamente as tarjas textuais e legendas com os ingredientes, ações e imagens reais que aparecem exatamente no quadro exibido, evitando divergências.
 20. Garantir fluidez perfeita e emenda contínua da frase de fechamento diretamente na primeira frase do vídeo para garantir a coesão do loop automático de retenção.
 21. Remover ou cobrir totalmente legendas e tarjas em inglês nativas da fonte original (queimadas na imagem) aplicando tarjas pretas ou crops adequados.
-22. Ajustar levemente a posição vertical de palavras destacadas para que nunca encubram tarjas de censura, blurs ou elementos essenciais da mão e rosto do personagem.
+22. Ajustar a margem lateral e o alinhamento das legendas inferiores (respeitando o limite mínimo de 60px) para evitar cortes de caracteres nas extremidades.

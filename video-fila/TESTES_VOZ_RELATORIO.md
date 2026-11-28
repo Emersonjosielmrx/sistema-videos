@@ -1,4 +1,4 @@
-# Teste gradual de formatos e vozes — 28/11 03:35
+# Teste gradual de formatos e vozes — 28/11 06:35
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 

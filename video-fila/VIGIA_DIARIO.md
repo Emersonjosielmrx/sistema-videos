@@ -500,3 +500,18 @@ STATUS: REVISAR - Recap longo com 25/25 GPUs sem conta verificada; aguardar reno
 - Causa prov�vel: Instabilidade de rede ou lentid�o tempor�ria no carregamento da p�gina de upload do YouTube Studio (`ERR_TIMED_OUT`).
 - CONSERTO PROPOSTO: Nenhum c�digo precisa ser alterado pois o erro de rede/timeout no YouTube Studio � transit�rio e o script j� trata ou pula na pr�xima rodada; se persistir, reexecutar manualmente com `D:\veo\venv\Scripts\python.exe bin\parceiro_diario.py postar`.
 - Estado: NADA A FAZER
+## 20261128_0455 — status da VPS ilegível e timeout no YouTube Studio (Mistérios Noturnos)
+- Motivo / O que achei (trecho de log): anime_health_monitor.log / parceiro_postar.log mostram erro transiente de rede / timeout ao abrir o YouTube Studio para o canal Mistérios Noturnos e testes com proxy groq; status geral sem falhas críticas nos processos principais de render/longos que exijam intervenção manual imediata.
+- Causa provável: Instabilidade momentânea de conexão de rede ou lentidão no carregamento do YouTube Studio / proxy webshare.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo; falhas transitórias de rede no YouTube Studio e proxy são recuperadas automaticamente pelos retries das próximas rodadas).
+- Estado: NADA A FAZER
+## 20261128_0555 — Verificação de rotinas e instabilidades de rede no YouTube Studio
+- Motivo / O que achei: Logs recentes de parceiro_postar.log e anime_health_monitor.log registram apenas falhas transitórias de timeout de rede (ERR_TIMED_OUT) ao carregar o YouTube Studio para o canal Mistérios Noturnos e Vendas que Escalam, sem erros críticos de render ou longos travados.
+- Causa provável: Oscilação momentânea de rede ou lentidão no carregamento das páginas de upload do YouTube Studio.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo; erros transitórios de rede no YouTube Studio recuperam-se nas próximas rodadas automáticas).
+- Estado: NADA A FAZER
+## 20261128_0715 — Modelo agy/gemini-3.8-flash-high descontinuado / verificação de logs e postagem
+- Motivo / O que achei (trecho de log): nime_health_monitor.log e parceiro_postar.log mostram operação normal dos recaps nas últimas 12h, com pequenos timeouts transitórios de rede (ERR_TIMED_OUT) no YouTube Studio e aviso de modelo descontinuado (gy/gemini-3.8-flash-high) conforme notificação inicial da sessão.
+- Causa provável: Alteração/descontinuação de modelos de texto no gateway OmniRoute e instabilidades de rede passageiras no YouTube Studio.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo). Caso necessário atualizar referências de modelos descontinuados em in/claude_client.py ou arquivos de configuração para ntigravity/gemini-3-flash.
+- Estado: NADA A FAZER

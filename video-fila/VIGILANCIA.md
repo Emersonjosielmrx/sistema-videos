@@ -1,24 +1,18 @@
-# Vigilância 24 h — 2026-11-28T03:50:41
+# Vigilância 24 h — 2026-11-28T07:50:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (12)
+## Alarmes desta volta (8)
 - tiktok: mesmo erro 6x em 6 h
-- facebook: mesmo erro 6x em 6 h
-- Carrossel MS Energy: sem sucesso há 173 h (limite 60 h)
-- Longos no YouTube: sem sucesso há 48 h (limite 36 h)
+- Carrossel MS Energy: sem sucesso há 177 h (limite 60 h)
+- Longos no YouTube: sem sucesso há 52 h (limite 36 h)
 - canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - celulares: 3 celulares fora do adb
-- [ronda] TAREFAS COM ERRO: BuscarFontesCampeas (0x1, 27 06:10)
-- [ronda] TAREFAS COM ERRO: GarimparFontes (0x1, 27 05:40)
-- [ronda] TAREFAS COM ERRO: GarimparParecidos (0x1, 27 06:20)
 - [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10)
 - [ronda] PRODUCAO DE VIDEO: !! anuncios sem nenhum mp4
 - [ronda] asusx: [asusx] !! FORA
 
-## Casos abertos (184)
-- [duplicado] canal inventoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
-- [duplicado] canal animescomia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+## Casos abertos (182)
 - [duplicado] canal dicasfinanceirasdaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal comedianoturna com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [duplicado] canal cartuchoreact com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -203,8 +197,6 @@
 - [consertar] [ronda] TAREFAS COM ERRO: FacebookPaginas (0x1, 27 19:20) (-)
 
 ## Últimos fechados
-- [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
-- [falso] Facebook Comédia Noturna: 0 Reels hoje — - / -
 - [falso] [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 27 22:19) — - / -
 - [dona] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — gemini-4-argon / -
 - [sem_mudanca] Facebook Invento React: 0 Reels hoje — gemini-4-argon / -
@@ -218,6 +210,8 @@
 - [falso] TikTok: sem sucesso há 9999 h (limite 8 h) — - / -
 - [falso] [ronda] TAREFAS ATRASADAS: !! TAREFA NOVA no PC1 (incluir na lista mestra): AplicarNobre28nov — - / -
 - [falso] facebook: mesmo erro 6x em 6 h — - / -
+- [falso] [ronda] TAREFAS COM ERRO: JanelaMudancaMadrugada (0x41306, 27 03:10) — - / -
+- [falso] [ronda] TAREFAS COM ERRO: PlantaoTelegram (0x1, 28 06:19) — - / -
 
 ## Placar dos consertadores
 - **gemini-4-argon**: 31 casos, nota 10% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/17 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/3 (voltou 0), postagem-solares: 0/1 (voltou 0), solar-montagem: 1/1 (voltou 0), postagem-tiktok: 0/2 (voltou 0), sem-sucesso-longos: 0/1 (voltou 0)

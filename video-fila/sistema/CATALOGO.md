@@ -27,8 +27,9 @@
 | C | **chats-claude** — Chats do Claude (sentinela continue, arquivo, prioridade VS Code) | ativo | 5/5 | — | 0 | — |
 | C | **google-drive** — Logins Google, cofre e Drive | ativo | 5/5 | — | 0 | — |
 | C | **ia-gratis** — IAs grátis/proxies (Opus-grátis, Genspark, Sonnet web, Gemini Argo, Cline ponte, OmniRoute) | ativo | 11/12 | — | 1 | Priorização de contas |
-| C | **kaggle** — Kaggle (GPUs de render, contas, pool) | ativo | 11/14 | — | 0 | — |
+| C | **kaggle** — Kaggle (GPUs de render, contas, pool) | ativo | 9/14 | — | 0 | — |
 | C | **nsn** — NSN - navegador sem navegador (cookies, banimento, inteligência TikTok) | ativo | 5/5 | — | 0 | — |
+| C | **proxies-gratis** — Proxies: gratis (EM TESTE) + cadeado dos IPs pagos | teste | 1/1 | — | 2 | — |
 | C | **whatsapp** — WhatsApp (ativação, Hermes Call, túnel celular→VPS) | ativo | 1/1 | — | 0 | — |
 | D | **central** — Central de vigia, painel e avisos (vigilancia, ronda, painel, Telegram) | ativo | 13/13 | — | 0 | Chat de projetos ativos |
 | D | **maquinas** — Máquinas (uso, travados, notebooks, desktop, PC3) | ativo | 7/7 | — | 0 | — |
